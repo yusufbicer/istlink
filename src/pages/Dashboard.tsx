@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { useAuth } from '@/lib/auth';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
@@ -9,6 +9,10 @@ import Overview from '@/components/dashboard/Overview';
 import Suppliers from '@/components/dashboard/Suppliers';
 import Orders from '@/components/dashboard/Orders';
 import Shipping from '@/components/dashboard/Shipping';
+import Products from '@/components/dashboard/Products';
+import Analytics from '@/components/dashboard/Analytics';
+import Tracking from '@/components/dashboard/Tracking';
+import Settings from '@/components/dashboard/Settings';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -34,10 +38,18 @@ const Dashboard = () => {
       return <Orders />;
     } else if (path === '/dashboard/shipping') {
       return <Shipping />;
+    } else if (path === '/dashboard/products') {
+      return <Products />;
+    } else if (path === '/dashboard/analytics') {
+      return <Analytics />;
+    } else if (path === '/dashboard/tracking') {
+      return <Tracking />;
+    } else if (path === '/dashboard/settings') {
+      return <Settings />;
     }
     
-    // Default to Overview or allow child routes via Outlet
-    return <Outlet />;
+    // Default to Overview if no matching path
+    return <Overview />;
   };
 
   if (!user) {

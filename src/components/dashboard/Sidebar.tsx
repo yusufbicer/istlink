@@ -21,7 +21,10 @@ import {
   LayoutDashboardIcon,
   LogOutIcon,
   BarChart3Icon, 
-  MapPinIcon
+  MapPinIcon,
+  BoxesIcon,
+  CreditCardIcon,
+  StickyNoteIcon
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -69,7 +72,19 @@ const Sidebar = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   
-                  {/* Conditional navigation based on user role */}
+                  {/* Users/Customers - for Admin and Suppliers */}
+                  {(user?.role === "admin" || user?.role === "supplier") && (
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild isActive={isActive("/dashboard/users")}>
+                        <Link to="/dashboard/users">
+                          <UsersIcon className="w-5 h-5" />
+                          <span>{user?.role === "admin" ? "All Users" : "My Customers"}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )}
+                  
+                  {/* Suppliers - for Buyers and Admins */}
                   {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/suppliers")}>
@@ -86,6 +101,38 @@ const Sidebar = () => {
                       <Link to="/dashboard/orders">
                         <ClipboardListIcon className="w-5 h-5" />
                         <span>Orders</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  
+                  {/* Notes - for all users */}
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={isActive("/dashboard/notes")}>
+                      <Link to="/dashboard/notes">
+                        <StickyNoteIcon className="w-5 h-5" />
+                        <span>Order Notes</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  
+                  {/* Consolidations - for Admin and Buyers */}
+                  {(user?.role === "buyer" || user?.role === "admin") && (
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild isActive={isActive("/dashboard/consolidations")}>
+                        <Link to="/dashboard/consolidations">
+                          <BoxesIcon className="w-5 h-5" />
+                          <span>Consolidations</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )}
+                  
+                  {/* Payment Info - visible to all users */}
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={isActive("/dashboard/payments")}>
+                      <Link to="/dashboard/payments">
+                        <CreditCardIcon className="w-5 h-5" />
+                        <span>Payment Info</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

@@ -13,6 +13,10 @@ import Products from '@/components/dashboard/Products';
 import Analytics from '@/components/dashboard/Analytics';
 import Tracking from '@/components/dashboard/Tracking';
 import Settings from '@/components/dashboard/Settings';
+import Users from '@/components/dashboard/Users';
+import Notes from '@/components/dashboard/Notes';
+import Consolidations from '@/components/dashboard/Consolidations';
+import Payments from '@/components/dashboard/Payments';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -46,6 +50,14 @@ const Dashboard = () => {
       return <Tracking />;
     } else if (path === '/dashboard/settings') {
       return <Settings />;
+    } else if (path === '/dashboard/users') {
+      return <Users />;
+    } else if (path === '/dashboard/notes') {
+      return <Notes />;
+    } else if (path === '/dashboard/consolidations') {
+      return <Consolidations />;
+    } else if (path === '/dashboard/payments') {
+      return <Payments />;
     }
     
     // Default to Overview if no matching path

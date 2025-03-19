@@ -34,6 +34,11 @@ const App = () => (
             <Route path="/dashboard/analytics" element={<Dashboard />} />
             <Route path="/dashboard/tracking" element={<Dashboard />} />
             <Route path="/dashboard/settings" element={<Dashboard />} />
+            {/* New routes */}
+            <Route path="/dashboard/users" element={<Dashboard />} />
+            <Route path="/dashboard/notes" element={<Dashboard />} />
+            <Route path="/dashboard/consolidations" element={<Dashboard />} />
+            <Route path="/dashboard/payments" element={<Dashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

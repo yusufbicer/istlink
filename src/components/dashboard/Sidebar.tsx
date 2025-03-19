@@ -61,7 +61,7 @@ const Sidebar = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild active={isActive("/dashboard")}>
+                    <SidebarMenuButton asChild isActive={isActive("/dashboard")}>
                       <Link to="/dashboard">
                         <LayoutDashboardIcon className="w-5 h-5" />
                         <span>Dashboard</span>
@@ -72,7 +72,7 @@ const Sidebar = () => {
                   {/* Conditional navigation based on user role */}
                   {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild active={isActive("/dashboard/suppliers")}>
+                      <SidebarMenuButton asChild isActive={isActive("/dashboard/suppliers")}>
                         <Link to="/dashboard/suppliers">
                           <UsersIcon className="w-5 h-5" />
                           <span>Suppliers</span>
@@ -82,7 +82,7 @@ const Sidebar = () => {
                   )}
                   
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild active={isActive("/dashboard/orders")}>
+                    <SidebarMenuButton asChild isActive={isActive("/dashboard/orders")}>
                       <Link to="/dashboard/orders">
                         <ClipboardListIcon className="w-5 h-5" />
                         <span>Orders</span>
@@ -92,7 +92,7 @@ const Sidebar = () => {
                   
                   {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild active={isActive("/dashboard/shipping")}>
+                      <SidebarMenuButton asChild isActive={isActive("/dashboard/shipping")}>
                         <Link to="/dashboard/shipping">
                           <TruckIcon className="w-5 h-5" />
                           <span>Shipping</span>
@@ -103,7 +103,7 @@ const Sidebar = () => {
 
                   {user?.role === "supplier" && (
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild active={isActive("/dashboard/products")}>
+                      <SidebarMenuButton asChild isActive={isActive("/dashboard/products")}>
                         <Link to="/dashboard/products">
                           <PackageIcon className="w-5 h-5" />
                           <span>Products</span>
@@ -122,7 +122,7 @@ const Sidebar = () => {
                 <SidebarGroupContent>
                   <SidebarMenu>
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild active={isActive("/dashboard/analytics")}>
+                      <SidebarMenuButton asChild isActive={isActive("/dashboard/analytics")}>
                         <Link to="/dashboard/analytics">
                           <BarChart3Icon className="w-5 h-5" />
                           <span>Analytics</span>
@@ -130,7 +130,7 @@ const Sidebar = () => {
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild active={isActive("/dashboard/tracking")}>
+                      <SidebarMenuButton asChild isActive={isActive("/dashboard/tracking")}>
                         <Link to="/dashboard/tracking">
                           <MapPinIcon className="w-5 h-5" />
                           <span>Tracking</span>
@@ -149,7 +149,7 @@ const Sidebar = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild active={isActive("/dashboard/settings")}>
+                    <SidebarMenuButton asChild isActive={isActive("/dashboard/settings")}>
                       <Link to="/dashboard/settings">
                         <SettingsIcon className="w-5 h-5" />
                         <span>Settings</span>

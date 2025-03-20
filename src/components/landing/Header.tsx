@@ -19,6 +19,15 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Smooth scroll function for anchor links
+  const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'py-3 bg-white/80 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent'
@@ -26,30 +35,45 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/5f42e8b7-62b8-4bd7-a62c-26d9a0e5e938.png" 
-              alt="Groop Logo" 
-              className="h-12 w-auto"
-            />
+            <div className="flex items-center">
+              <div className="flex items-center justify-center">
+                <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M30 5C16.2 5 5 16.2 5 30C5 43.8 16.2 55 30 55C43.8 55 55 43.8 55 30C55 16.2 43.8 5 30 5Z" fill="#2563EB"/>
+                  <path d="M34 18C27.4 18 22 23.4 22 30C22 36.6 27.4 42 34 42C40.6 42 46 36.6 46 30C46 23.4 40.6 18 34 18Z" fill="white"/>
+                  <path d="M26 24C21.6 24 18 27.6 18 32C18 36.4 21.6 40 26 40C30.4 40 34 36.4 34 32C34 27.6 30.4 24 26 24Z" fill="#1E40AF"/>
+                  <path d="M20 30C16.7 30 14 32.7 14 36C14 39.3 16.7 42 20 42C23.3 42 26 39.3 26 36C26 32.7 23.3 30 20 30Z" fill="white"/>
+                </svg>
+                <div className="ml-3">
+                  <span className="font-bold text-xl text-gray-900">Groop</span>
+                  <span className="block text-xs text-gray-500">Complexity Consolidated</span>
+                </div>
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
-              Home
-            </Link>
-            <Link to="/#features" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            <button 
+              onClick={() => scrollToSection('features')}
+              className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
+            >
               Features
-            </Link>
-            <Link to="/#how-it-works" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('how-it-works')}
+              className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
+            >
               How It Works
-            </Link>
+            </button>
             <Link to="/blog" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
               Blog
             </Link>
-            <Link to="/#pricing" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            <button 
+              onClick={() => scrollToSection('pricing')}
+              className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
+            >
               Pricing
-            </Link>
+            </button>
           </div>
 
           {/* CTA Buttons */}
@@ -93,27 +117,18 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg animate-slide-down">
             <div className="flex flex-col py-4 px-6 space-y-4">
-              <Link 
-                to="/" 
+              <button 
+                onClick={() => scrollToSection('features')}
                 className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                to="/#features" 
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Features
-              </Link>
-              <Link 
-                to="/#how-it-works" 
+              </button>
+              <button 
+                onClick={() => scrollToSection('how-it-works')}
                 className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 How It Works
-              </Link>
+              </button>
               <Link 
                 to="/blog" 
                 className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2"
@@ -121,13 +136,12 @@ const Header = () => {
               >
                 Blog
               </Link>
-              <Link 
-                to="/#pricing" 
+              <button 
+                onClick={() => scrollToSection('pricing')}
                 className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Pricing
-              </Link>
+              </button>
               
               <div className="pt-2 border-t border-gray-100">
                 {user ? (

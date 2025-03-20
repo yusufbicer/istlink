@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
+import BlogManagement from "./pages/BlogManagement";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/dashboard/notes" element={<Dashboard />} />
             <Route path="/dashboard/consolidations" element={<Dashboard />} />
             <Route path="/dashboard/payments" element={<Dashboard />} />
+            <Route path="/dashboard/blog-management" element={<BlogManagement />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

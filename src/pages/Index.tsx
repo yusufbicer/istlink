@@ -1,9 +1,10 @@
-
 import { useEffect } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
 import Features from '@/components/landing/Features';
 import Footer from '@/components/landing/Footer';
+import { BookOpenIcon, ArrowRightIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   // Scroll to section if hash is present in URL
@@ -67,6 +68,95 @@ const Index = () => {
                   Monitor your consolidated shipment in real-time and receive your products with a single bill of lading.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Blog Preview Section */}
+        <section id="blog" className="py-20 bg-gray-50">
+          <div className="container mx-auto px-6">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
+                Our Blog
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Latest Insights & News
+              </h2>
+              <p className="text-xl text-gray-600">
+                Stay updated with the latest trends and tips in cross-border commerce.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              {/* Blog Post 1 */}
+              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
+                <div className="h-48 overflow-hidden">
+                  <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-sm text-gray-500">May 15, 2023</span>
+                    <span className="mx-2 text-gray-300">•</span>
+                    <span className="text-sm text-blue-600">Shipping</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Understanding Turkish Export Regulations in 2023</h3>
+                  <p className="text-gray-600 mb-4">
+                    A comprehensive guide to navigating the complex export regulations for goods leaving Turkey.
+                  </p>
+                  <a href="#" className="text-blue-600 font-medium hover:text-blue-700">
+                    Read More →
+                  </a>
+                </div>
+              </div>
+              
+              {/* Blog Post 2 */}
+              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
+                <div className="h-48 overflow-hidden">
+                  <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-sm text-gray-500">April 28, 2023</span>
+                    <span className="mx-2 text-gray-300">•</span>
+                    <span className="text-sm text-blue-600">Consolidation</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">5 Ways to Reduce Shipping Costs with Consolidation</h3>
+                  <p className="text-gray-600 mb-4">
+                    Learn how businesses are saving up to 40% on shipping costs by implementing strategic consolidation techniques.
+                  </p>
+                  <a href="#" className="text-blue-600 font-medium hover:text-blue-700">
+                    Read More →
+                  </a>
+                </div>
+              </div>
+              
+              {/* Blog Post 3 */}
+              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
+                <div className="h-48 overflow-hidden">
+                  <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-sm text-gray-500">April 10, 2023</span>
+                    <span className="mx-2 text-gray-300">•</span>
+                    <span className="text-sm text-blue-600">Success Story</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Case Study: How Company XYZ Optimized Their Supply Chain</h3>
+                  <p className="text-gray-600 mb-4">
+                    Real-world example of how a furniture retailer transformed their Turkish imports with our consolidation services.
+                  </p>
+                  <a href="#" className="text-blue-600 font-medium hover:text-blue-700">
+                    Read More →
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-center">
+              <Link to="/blog" className="inline-flex items-center px-6 py-3 bg-white border border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                View All Articles
+                <ArrowRightIcon className="ml-2 h-4 w-4" />
+              </Link>
             </div>
           </div>
         </section>

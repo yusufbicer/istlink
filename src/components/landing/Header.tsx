@@ -26,9 +26,11 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-              ShipSync
-            </span>
+            <img 
+              src="/lovable-uploads/5f42e8b7-62b8-4bd7-a62c-26d9a0e5e938.png" 
+              alt="Groop Logo" 
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -41,6 +43,9 @@ const Header = () => {
             </Link>
             <Link to="/#how-it-works" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
               How It Works
+            </Link>
+            <Link to="/blog" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              Blog
             </Link>
             <Link to="/#pricing" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
               Pricing
@@ -108,6 +113,13 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 How It Works
+              </Link>
+              <Link 
+                to="/blog" 
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
               </Link>
               <Link 
                 to="/#pricing" 

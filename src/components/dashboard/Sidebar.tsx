@@ -52,9 +52,11 @@ const Sidebar = () => {
             {/* Brand Logo */}
             <div className="px-6">
               <Link to="/dashboard" className="flex items-center">
-                <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-                  ShipSync
-                </span>
+                <img 
+                  src="/lovable-uploads/5f42e8b7-62b8-4bd7-a62c-26d9a0e5e938.png" 
+                  alt="Groop Logo" 
+                  className="h-10 w-auto"
+                />
               </Link>
             </div>
             

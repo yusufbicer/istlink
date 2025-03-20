@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Table, 
@@ -40,7 +40,9 @@ import {
   MailIcon, 
   MoreHorizontalIcon, 
   PlusIcon, 
-  SearchIcon 
+  SearchIcon,
+  TrashIcon,
+  PencilIcon
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 
@@ -55,6 +57,11 @@ const initialPayments = [
     status: "paid",
     method: "bank_transfer",
     reference: "INV-12345",
+    supplierId: "1",
+    supplierName: "Textile Masters Co.",
+    buyerId: "3",
+    buyerName: "Fashion Retailer Inc.",
+    orderIds: ["ORD-1234", "ORD-1235"],
     details: {
       bankName: "Global Bank",
       accountNumber: "XXXX-XXXX-XXXX-1234",
@@ -73,6 +80,11 @@ const initialPayments = [
     status: "paid",
     method: "credit_card",
     reference: "INV-12346",
+    supplierId: "2",
+    supplierName: "Bosphorus Tech",
+    buyerId: "4",
+    buyerName: "Gadget World",
+    orderIds: ["ORD-1237", "ORD-1238"],
     details: {
       cardType: "Visa",
       lastFourDigits: "4567",
@@ -91,6 +103,11 @@ const initialPayments = [
     status: "pending",
     method: "bank_transfer",
     reference: "INV-12347",
+    supplierId: "1",
+    supplierName: "Textile Masters Co.",
+    buyerId: "5",
+    buyerName: "Retail Chain Inc.",
+    orderIds: ["ORD-1236"],
     details: {
       bankName: "Global Bank",
       accountNumber: "XXXX-XXXX-XXXX-1234",
@@ -104,8 +121,8 @@ const initialPayments = [
 
 // Mock consolidations without payment
 const consolidationsWithoutPayment = [
-  { id: "CONS-004", name: "Holiday Collection", total: 4800 },
-  { id: "CONS-005", name: "Office Supplies", total: 1250 }
+  { id: "CONS-004", name: "Holiday Collection", total: 4800, supplierIds: ["1"], buyerId: "3" },
+  { id: "CONS-005", name: "Office Supplies", total: 1250, supplierIds: ["2"], buyerId: "4" }
 ];
 
 const Payments = () => {
@@ -124,14 +141,38 @@ const Payments = () => {
       swiftCode: ""
     }
   });
+  const [editingPayment, setEditingPayment] = useState<any>(null);
 
-  // Filter payments based on search
-  const filteredPayments = payments.filter(payment =>
-    payment.consolidationId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    payment.consolidationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    payment.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    payment.reference.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filter payments based on search and user role
+  const filteredPayments = payments.filter(payment => {
+    const matchesSearch = 
+      payment.consolidationId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      payment.consolidationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      payment.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      payment.reference.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      payment.orderIds.some(id => id.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    // Admin can see all payments
+    if (user?.role === "admin") {
+      return matchesSearch;
+    }
+    
+    // Supplier can only see payments related to their orders
+    if (user?.role === "supplier") {
+      // For demo purposes, supplier with id 1 is "Textile Masters Co." and supplier with id 2 is "Bosphorus Tech"
+      const supplierIdToFilter = user.name.includes("Supplier") ? "1" : "2";
+      return matchesSearch && payment.supplierId === supplierIdToFilter;
+    }
+    
+    // Buyer can only see their own payments
+    if (user?.role === "buyer") {
+      // For demo purposes, buyer with id 3 is "Fashion Retailer Inc." and buyer with id 4 is "Gadget World"
+      const buyerIdToFilter = user.name.includes("Buyer") ? "3" : "4";
+      return matchesSearch && payment.buyerId === buyerIdToFilter;
+    }
+    
+    return false;
+  });
 
   // Format date
   const formatDate = (dateString: string | null) => {
@@ -204,6 +245,11 @@ const Payments = () => {
       method: newPayment.method,
       reference: newPayment.reference || `INV-${Date.now().toString().slice(-5)}`,
       details: newPayment.details,
+      supplierId: selectedConsolidation.supplierIds[0],
+      supplierName: selectedConsolidation.supplierIds[0] === "1" ? "Textile Masters Co." : "Bosphorus Tech",
+      buyerId: selectedConsolidation.buyerId,
+      buyerName: selectedConsolidation.buyerId === "3" ? "Fashion Retailer Inc." : "Gadget World",
+      orderIds: [`ORD-${Math.floor(Math.random() * 1000 + 1240)}`],
       createdAt: new Date().toISOString(),
       paidAt: null
     };
@@ -226,6 +272,33 @@ const Payments = () => {
     toast({
       title: "Payment Info Added",
       description: `Payment information has been added for ${selectedConsolidation.name}.`
+    });
+  };
+
+  // Update payment (admin only)
+  const handleUpdatePayment = () => {
+    if (!editingPayment) return;
+    
+    const updatedPayments = payments.map(payment => 
+      payment.id === editingPayment.id ? { ...payment, ...editingPayment } : payment
+    );
+    
+    setPayments(updatedPayments);
+    setEditingPayment(null);
+    
+    toast({
+      title: "Payment Updated",
+      description: "The payment information has been successfully updated."
+    });
+  };
+
+  // Delete payment (admin only)
+  const handleDeletePayment = (id: string) => {
+    setPayments(payments.filter(payment => payment.id !== id));
+    
+    toast({
+      title: "Payment Deleted",
+      description: "The payment information has been successfully deleted."
     });
   };
 
@@ -253,6 +326,8 @@ const Payments = () => {
           <p className="text-muted-foreground">
             {user?.role === "admin" 
               ? "Manage payment information for consolidations" 
+              : user?.role === "supplier"
+              ? "View payment information for orders you've supplied"
               : "View payment information for your shipments"}
           </p>
         </div>
@@ -419,7 +494,7 @@ const Payments = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-2xl">{payments.length}</CardTitle>
+            <CardTitle className="text-2xl">{filteredPayments.length}</CardTitle>
             <CardDescription>Total Payments</CardDescription>
           </CardHeader>
           <CardContent>
@@ -433,13 +508,13 @@ const Payments = () => {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-2xl">
-              ${payments.filter(p => p.status === "paid").reduce((total, p) => total + p.amount, 0).toLocaleString()}
+              ${filteredPayments.filter(p => p.status === "paid").reduce((total, p) => total + p.amount, 0).toLocaleString()}
             </CardTitle>
             <CardDescription>Total Paid</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="text-sm text-muted-foreground">
-              {payments.filter(p => p.status === "paid").length} payments completed
+              {filteredPayments.filter(p => p.status === "paid").length} payments completed
             </div>
           </CardContent>
         </Card>
@@ -447,13 +522,13 @@ const Payments = () => {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-2xl">
-              ${payments.filter(p => p.status === "pending").reduce((total, p) => total + p.amount, 0).toLocaleString()}
+              ${filteredPayments.filter(p => p.status === "pending").reduce((total, p) => total + p.amount, 0).toLocaleString()}
             </CardTitle>
             <CardDescription>Pending Payments</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="text-sm text-muted-foreground">
-              {payments.filter(p => p.status === "pending").length} payments awaiting processing
+              {filteredPayments.filter(p => p.status === "pending").length} payments awaiting processing
             </div>
           </CardContent>
         </Card>
@@ -463,7 +538,9 @@ const Payments = () => {
         <CardHeader>
           <CardTitle>Payment Information</CardTitle>
           <CardDescription>
-            View and manage payment details for consolidations
+            {user?.role === "admin" 
+              ? "Manage payment details for consolidations" 
+              : "View payment details for your orders"}
           </CardDescription>
         </CardHeader>
         <CardContent className="p-0">
@@ -472,10 +549,15 @@ const Payments = () => {
               <TableRow>
                 <TableHead>ID</TableHead>
                 <TableHead>Consolidation</TableHead>
+                {(user?.role === "admin" || user?.role === "supplier") && (
+                  <TableHead>Buyer</TableHead>
+                )}
+                {(user?.role === "admin" || user?.role === "buyer") && (
+                  <TableHead>Supplier</TableHead>
+                )}
                 <TableHead>Amount</TableHead>
                 <TableHead>Method</TableHead>
-                <TableHead>Reference</TableHead>
-                <TableHead>Date</TableHead>
+                <TableHead>Related Orders</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
@@ -493,10 +575,23 @@ const Payments = () => {
                         </span>
                       </div>
                     </TableCell>
+                    {(user?.role === "admin" || user?.role === "supplier") && (
+                      <TableCell>{payment.buyerName}</TableCell>
+                    )}
+                    {(user?.role === "admin" || user?.role === "buyer") && (
+                      <TableCell>{payment.supplierName}</TableCell>
+                    )}
                     <TableCell>${payment.amount.toLocaleString()}</TableCell>
                     <TableCell>{formatPaymentMethod(payment.method)}</TableCell>
-                    <TableCell>{payment.reference}</TableCell>
-                    <TableCell>{formatDate(payment.paidAt || payment.createdAt)}</TableCell>
+                    <TableCell>
+                      <div className="flex flex-wrap gap-1">
+                        {payment.orderIds.map(orderId => (
+                          <Badge key={orderId} variant="outline" className="text-xs">
+                            {orderId}
+                          </Badge>
+                        ))}
+                      </div>
+                    </TableCell>
                     <TableCell>{getStatusBadge(payment.status)}</TableCell>
                     <TableCell className="text-right">
                       <Dialog>
@@ -544,6 +639,17 @@ const Payments = () => {
                               <div>
                                 <h4 className="text-sm font-medium mb-1">Payment Date</h4>
                                 <p className="text-sm">{formatDate(payment.paidAt)}</p>
+                              </div>
+                            </div>
+
+                            <div>
+                              <h4 className="text-sm font-medium mb-1">Related Orders</h4>
+                              <div className="flex flex-wrap gap-1 mt-1">
+                                {payment.orderIds.map(orderId => (
+                                  <Badge key={orderId} variant="outline">
+                                    {orderId}
+                                  </Badge>
+                                ))}
                               </div>
                             </div>
                             
@@ -595,6 +701,112 @@ const Payments = () => {
                         </DialogContent>
                       </Dialog>
                       
+                      {user?.role === "admin" && (
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <PencilIcon className="h-4 w-4" />
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>Edit Payment</DialogTitle>
+                              <DialogDescription>
+                                Update payment information
+                              </DialogDescription>
+                            </DialogHeader>
+                            
+                            <div className="grid gap-4 py-4">
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="edit-reference" className="text-right">
+                                  Reference
+                                </Label>
+                                <Input 
+                                  id="edit-reference" 
+                                  className="col-span-3"
+                                  defaultValue={payment.reference}
+                                  onChange={(e) => setEditingPayment({
+                                    ...payment,
+                                    reference: e.target.value
+                                  })}
+                                />
+                              </div>
+                              
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="edit-method" className="text-right">
+                                  Payment Method
+                                </Label>
+                                <select 
+                                  id="edit-method" 
+                                  className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                  defaultValue={payment.method}
+                                  onChange={(e) => setEditingPayment({
+                                    ...payment,
+                                    method: e.target.value
+                                  })}
+                                >
+                                  <option value="bank_transfer">Bank Transfer</option>
+                                  <option value="credit_card">Credit Card</option>
+                                  <option value="wire_transfer">Wire Transfer</option>
+                                  <option value="paypal">PayPal</option>
+                                </select>
+                              </div>
+                              
+                              {(payment.method === "bank_transfer" || (!editingPayment || editingPayment.method === "bank_transfer")) && (
+                                <>
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="edit-bank" className="text-right">
+                                      Bank Name
+                                    </Label>
+                                    <Input 
+                                      id="edit-bank" 
+                                      className="col-span-3"
+                                      defaultValue={payment.details.bankName}
+                                      onChange={(e) => setEditingPayment({
+                                        ...payment,
+                                        details: {
+                                          ...payment.details,
+                                          bankName: e.target.value
+                                        }
+                                      })}
+                                    />
+                                  </div>
+                                  
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="edit-account" className="text-right">
+                                      Account Number
+                                    </Label>
+                                    <Input 
+                                      id="edit-account" 
+                                      className="col-span-3"
+                                      defaultValue={payment.details.accountNumber}
+                                      onChange={(e) => setEditingPayment({
+                                        ...payment,
+                                        details: {
+                                          ...payment.details,
+                                          accountNumber: e.target.value
+                                        }
+                                      })}
+                                    />
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                            
+                            <DialogFooter>
+                              <DialogClose asChild>
+                                <Button variant="outline" onClick={() => setEditingPayment(null)}>
+                                  Cancel
+                                </Button>
+                              </DialogClose>
+                              <Button onClick={handleUpdatePayment}>
+                                Save Changes
+                              </Button>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
+                      )}
+                      
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="ghost" size="icon">
@@ -623,6 +835,13 @@ const Payments = () => {
                               Send Payment Proof
                             </DropdownMenuItem>
                           )}
+                          
+                          {user?.role === "admin" && (
+                            <DropdownMenuItem onClick={() => handleDeletePayment(payment.id)} className="text-red-500">
+                              <TrashIcon className="h-4 w-4 mr-2" />
+                              Delete Payment
+                            </DropdownMenuItem>
+                          )}
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
@@ -630,7 +849,7 @@ const Payments = () => {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center py-10 text-muted-foreground">
+                  <TableCell colSpan={user?.role === "admin" ? 9 : 8} className="text-center py-10 text-muted-foreground">
                     No payment information found matching your criteria
                   </TableCell>
                 </TableRow>

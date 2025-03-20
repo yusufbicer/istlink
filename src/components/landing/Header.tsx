@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -36,12 +37,26 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                {/* New logo with target icon */}
-                <img 
-                  src="/lovable-uploads/c54ea081-3739-4310-84b7-46b867d21148.png" 
-                  alt="Groop Logo" 
-                  className="h-14 w-auto"
-                />
+                {/* New modern and futuristic logo */}
+                <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="60" height="60" rx="16" fill="url(#paint0_linear)" />
+                  <path d="M18 42V18H30C36.6 18 42 23.4 42 30C42 36.6 36.6 42 30 42H18Z" fill="white" fillOpacity="0.9" />
+                  <path d="M30 24C27.2 24 25 26.2 25 29C25 31.8 27.2 34 30 34C32.8 34 35 31.8 35 29C35 26.2 32.8 24 30 24Z" fill="url(#paint1_linear)" />
+                  <defs>
+                    <linearGradient id="paint0_linear" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#4F46E5" />
+                      <stop offset="1" stopColor="#7C3AED" />
+                    </linearGradient>
+                    <linearGradient id="paint1_linear" x1="25" y1="24" x2="35" y2="34" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#4F46E5" />
+                      <stop offset="1" stopColor="#7C3AED" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div className="ml-3">
+                  <span className="font-bold text-xl text-gray-900">Groop</span>
+                  <span className="block text-xs text-gray-500">Complexity Consolidated</span>
+                </div>
               </div>
             </div>
           </Link>

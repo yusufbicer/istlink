@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import { 
   Sidebar as ShadcnSidebar, 
@@ -54,11 +55,16 @@ const Sidebar = () => {
               <Link to="/dashboard" className="flex items-center">
                 <div className="flex items-center">
                   <div className="flex items-center justify-center">
-                    <img 
-                      src="/lovable-uploads/c54ea081-3739-4310-84b7-46b867d21148.png" 
-                      alt="Groop Logo" 
-                      className="h-12 w-auto"
-                    />
+                    <svg width="32" height="32" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M30 5C16.2 5 5 16.2 5 30C5 43.8 16.2 55 30 55C43.8 55 55 43.8 55 30C55 16.2 43.8 5 30 5Z" fill="#2563EB"/>
+                      <path d="M34 18C27.4 18 22 23.4 22 30C22 36.6 27.4 42 34 42C40.6 42 46 36.6 46 30C46 23.4 40.6 18 34 18Z" fill="white"/>
+                      <path d="M26 24C21.6 24 18 27.6 18 32C18 36.4 21.6 40 26 40C30.4 40 34 36.4 34 32C34 27.6 30.4 24 26 24Z" fill="#1E40AF"/>
+                      <path d="M20 30C16.7 30 14 32.7 14 36C14 39.3 16.7 42 20 42C23.3 42 26 39.3 26 36C26 32.7 23.3 30 20 30Z" fill="white"/>
+                    </svg>
+                    <div className="ml-2">
+                      <span className="font-bold text-base text-gray-900">Groop</span>
+                      <span className="block text-xs text-gray-500">Complexity Consolidated</span>
+                    </div>
                   </div>
                 </div>
               </Link>

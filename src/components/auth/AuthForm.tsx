@@ -35,7 +35,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         await login(email, password);
         toast({
           title: "Login successful",
-          description: "Welcome back!",
+          description: "Welcome back to GROOP!",
         });
       } else {
         await register(name, email, password, role);
@@ -140,10 +140,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
                   <RadioGroupItem value="supplier" id="supplier" />
                   <Label htmlFor="supplier" className="cursor-pointer">Supplier</Label>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="admin" id="admin" />
-                  <Label htmlFor="admin" className="cursor-pointer">Admin</Label>
-                </div>
               </RadioGroup>
             </div>
           )}
@@ -178,12 +174,41 @@ const AuthForm = ({ type }: AuthFormProps) => {
           )}
         </div>
 
+        {/* Demo accounts */}
         {type === 'login' && (
           <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-xs text-gray-500 mb-2 text-center">Admin Login:</p>
-            <div className="text-xs text-center">
-              <p>Email: <span className="font-medium">admin@example.com</span></p>
-              <p>Password: <span className="font-medium">admin123</span></p>
+            <p className="text-xs text-gray-500 mb-2 text-center">Demo Accounts:</p>
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <div 
+                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setEmail('buyer@example.com');
+                  setPassword('password');
+                }}
+              >
+                <div className="font-medium">Buyer</div>
+                <div className="text-gray-500">buyer@example.com</div>
+              </div>
+              <div 
+                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setEmail('supplier@example.com');
+                  setPassword('password');
+                }}
+              >
+                <div className="font-medium">Supplier</div>
+                <div className="text-gray-500">supplier@example.com</div>
+              </div>
+              <div 
+                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setEmail('admin@example.com');
+                  setPassword('password');
+                }}
+              >
+                <div className="font-medium">Admin</div>
+                <div className="text-gray-500">admin@example.com</div>
+              </div>
             </div>
           </div>
         )}

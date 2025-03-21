@@ -4,7 +4,8 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/lib/auth";
-import { BellIcon, SearchIcon } from "lucide-react";
+import { BellIcon, SearchIcon, Zap, Atom } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +19,7 @@ import {
 const Header = () => {
   const { user, logout } = useAuth();
   const [greeting, setGreeting] = useState('');
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const hours = new Date().getHours();
@@ -36,11 +38,11 @@ const Header = () => {
         <div className="flex items-center">
           <SidebarTrigger className="mr-4 md:hidden" />
           
-          <div className="hidden md:block">
-            <h1 className="text-xl font-semibold">
+          <div className="hidden md:block max-w-[calc(100vw-250px)] overflow-hidden pr-2">
+            <h1 className="text-xl font-semibold truncate">
               {greeting}, {user?.name.split(' ')[0]}
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground truncate">
               Here's what's happening with your account today.
             </p>
           </div>

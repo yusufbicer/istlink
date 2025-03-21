@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { 
   Card, 
@@ -22,7 +21,7 @@ import {
   FormLabel, 
   FormMessage 
 } from "@/components/ui/form";
-import { Label } from "@/components/ui/label"; // Added Label import
+import { Label } from "@/components/ui/label";
 import { 
   PackageIcon, 
   PlusIcon, 
@@ -37,6 +36,15 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Product } from "@/types/supabase";
 
+type ProductFormValues = {
+  name: string;
+  description: string;
+  price: string;
+  sku: string;
+  category: string;
+  stock: string;
+};
+
 const Products = () => {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -46,8 +54,7 @@ const Products = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
-  // Form setup
-  const form = useForm({
+  const form = useForm<ProductFormValues>({
     defaultValues: {
       name: '',
       description: '',
@@ -58,15 +65,12 @@ const Products = () => {
     }
   });
   
-  // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         let query = supabase.from('products').select('*');
         
-        // If the user is a supplier, only fetch their products
         if (user?.role === 'supplier') {
-          // First, find the supplier record for this user
           const { data: supplierData } = await supabase
             .from('suppliers')
             .select('id')
@@ -98,10 +102,8 @@ const Products = () => {
     fetchProducts();
   }, [user, toast]);
   
-  // Add product function
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: ProductFormValues) => {
     try {
-      // First, get the supplier ID
       const { data: supplierData, error: supplierError } = await supabase
         .from('suppliers')
         .select('id')
@@ -111,7 +113,6 @@ const Products = () => {
       if (supplierError) throw supplierError;
       
       if (!supplierData?.id) {
-        // Create a supplier record if it doesn't exist
         const { data: newSupplier, error: createError } = await supabase
           .from('suppliers')
           .insert({
@@ -122,7 +123,6 @@ const Products = () => {
           
         if (createError) throw createError;
         
-        // Now create the product with the new supplier ID
         const { error } = await supabase
           .from('products')
           .insert({
@@ -136,7 +136,6 @@ const Products = () => {
           
         if (error) throw error;
       } else {
-        // Create the product with the existing supplier ID
         const { error } = await supabase
           .from('products')
           .insert({
@@ -151,7 +150,6 @@ const Products = () => {
         if (error) throw error;
       }
       
-      // Refresh the products list
       const { data: updatedProducts } = await supabase
         .from('products')
         .select('*');
@@ -175,14 +173,12 @@ const Products = () => {
     }
   };
 
-  // Cancel function for the form
   const handleCancel = () => {
     setShowAddForm(false);
     form.reset();
     setSelectedImage(null);
   };
 
-  // Handle image upload
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !e.target.files[0]) return;
     
@@ -193,14 +189,12 @@ const Products = () => {
     setIsUploading(true);
     
     try {
-      // Upload image to storage
       const { error: uploadError } = await supabase.storage
         .from('products')
         .upload(fileName, file);
         
       if (uploadError) throw uploadError;
       
-      // Get public URL
       const { data: { publicUrl } } = supabase.storage
         .from('products')
         .getPublicUrl(fileName);
@@ -222,7 +216,6 @@ const Products = () => {
     }
   };
 
-  // Only suppliers can add products
   const canAddProducts = user?.role === 'supplier' || user?.role === 'admin';
 
   return (

@@ -134,7 +134,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
               <RadioGroup value={role} onValueChange={(value) => setRole(value as UserRole)} className="flex gap-4">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="buyer" id="buyer" />
-                  <Label htmlFor="buyer" className="cursor-pointer">Buyer</Label>
+                  <Label htmlFor="buyer" className="cursor-pointer">Customer</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="supplier" id="supplier" />
@@ -186,7 +186,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
                   setPassword('password');
                 }}
               >
-                <div className="font-medium">Buyer</div>
+                <div className="font-medium">Customer</div>
                 <div className="text-gray-500">buyer@example.com</div>
               </div>
               <div 

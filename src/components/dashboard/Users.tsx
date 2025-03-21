@@ -111,11 +111,11 @@ const Users = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold">
-            {user?.role === "admin" ? "All Users" : "My Customers"}
+            {user?.role === "admin" ? "All Customers" : "My Customers"}
           </h1>
           <p className="text-muted-foreground">
             {user?.role === "admin" 
-              ? "Manage all users and customers in the system" 
+              ? "Manage all customers in the system" 
               : "View and manage your customer accounts"}
           </p>
         </div>
@@ -124,7 +124,7 @@ const Users = () => {
           <div className="relative flex-1 min-w-[200px]">
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              placeholder="Search users..."
+              placeholder="Search customers..."
               className="pl-9"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -136,14 +136,14 @@ const Users = () => {
               <DialogTrigger asChild>
                 <Button>
                   <UserPlusIcon className="mr-2 h-4 w-4" />
-                  Add User
+                  Add Customer
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Add New User</DialogTitle>
+                  <DialogTitle>Add New Customer</DialogTitle>
                   <DialogDescription>
-                    Enter user details to create a new account
+                    Enter customer details to create a new account
                   </DialogDescription>
                 </DialogHeader>
                 
@@ -174,7 +174,7 @@ const Users = () => {
                       id="role" 
                       className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      <option value="buyer">Buyer</option>
+                      <option value="buyer">Customer</option>
                       <option value="supplier">Supplier</option>
                       <option value="admin">Admin</option>
                     </select>
@@ -182,7 +182,7 @@ const Users = () => {
                 </div>
                 
                 <DialogFooter>
-                  <Button type="submit">Create User</Button>
+                  <Button type="submit">Create Customer</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
@@ -195,13 +195,13 @@ const Users = () => {
           <CardHeader className="pb-2">
             <CardTitle className="text-2xl">{filteredUsers.length}</CardTitle>
             <CardDescription>
-              {user?.role === "admin" ? "Total Users" : "Total Customers"}
+              {user?.role === "admin" ? "Total Customers" : "My Customers"}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold flex items-center text-blue-600">
               <UsersIcon className="mr-2 h-4 w-4" />
-              <span>{user?.role === "admin" ? "Users" : "Customers"}</span>
+              <span>Customers</span>
             </div>
           </CardContent>
         </Card>
@@ -229,7 +229,7 @@ const Users = () => {
           </CardHeader>
           <CardContent>
             <div className="text-sm text-muted-foreground">
-              Avg. {Math.round(filteredUsers.reduce((sum, user) => sum + user.orders, 0) / filteredUsers.length)} orders per user
+              Avg. {Math.round(filteredUsers.reduce((sum, user) => sum + user.orders, 0) / filteredUsers.length)} orders per customer
             </div>
           </CardContent>
         </Card>
@@ -237,10 +237,10 @@ const Users = () => {
       
       <Card>
         <CardHeader>
-          <CardTitle>{user?.role === "admin" ? "All Users" : "My Customers"}</CardTitle>
+          <CardTitle>{user?.role === "admin" ? "All Customers" : "My Customers"}</CardTitle>
           <CardDescription>
             {user?.role === "admin" 
-              ? "Manage users and their access to the system" 
+              ? "Manage customers and their access to the system" 
               : "View and manage your customer relationships"}
           </CardDescription>
         </CardHeader>
@@ -285,7 +285,7 @@ const Users = () => {
               {filteredUsers.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-10 text-muted-foreground">
-                    No users found matching your criteria
+                    No customers found matching your criteria
                   </TableCell>
                 </TableRow>
               )}

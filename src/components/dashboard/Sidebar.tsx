@@ -88,7 +88,7 @@ const Sidebar = () => {
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/users")}>
                         <Link to="/dashboard/users">
                           <UsersIcon className="w-5 h-5" />
-                          <span>{user?.role === "admin" ? "All Users" : "My Customers"}</span>
+                          <span>{user?.role === "admin" ? "All Customers" : "My Customers"}</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>

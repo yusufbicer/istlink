@@ -34,9 +34,16 @@ import {
   ClipboardListIcon,
   ReplyIcon,
   UserIcon,
-  UserCircleIcon
+  UserCircleIcon,
+  MoreHorizontal
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
 
 const initialNotes = [
   {
@@ -432,226 +439,238 @@ const Notes = () => {
                       <Badge>{note.replies.length}</Badge>
                     </TableCell>
                     <TableCell className="text-right">
-                      <Dialog>
-                        <DialogTrigger asChild>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
                           <Button variant="ghost" size="icon">
-                            <EyeIcon className="h-4 w-4" />
+                            <MoreHorizontal className="h-4 w-4" />
                           </Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-2xl">
-                          <DialogHeader>
-                            <DialogTitle>{note.title}</DialogTitle>
-                            <DialogDescription>
-                              {note.orderId} • Added by {note.createdBy} on {formatDate(note.createdAt)}
-                            </DialogDescription>
-                          </DialogHeader>
-                          
-                          <div className="py-4 space-y-4">
-                            <div className="bg-gray-50 p-4 rounded-lg">
-                              <div className="flex items-center justify-between mb-2">
-                                <div className="flex items-center gap-2">
-                                  <UserCircleIcon className="h-5 w-5 text-blue-600" />
-                                  <span className="font-medium">{note.createdBy}</span>
-                                  {getRoleBadge(note.createdByRole)}
-                                </div>
-                                <span className="text-sm text-muted-foreground">{formatDate(note.createdAt)}</span>
-                              </div>
-                              <p className="text-sm leading-6">{note.content}</p>
-                            </div>
-                            
-                            {note.replies.length > 0 && (
-                              <div className="space-y-3 pl-6 border-l-2 border-gray-200">
-                                <h4 className="text-sm font-medium">Replies</h4>
-                                
-                                {note.replies.map(reply => (
-                                  <div key={reply.id} className="bg-gray-50 p-3 rounded-lg">
-                                    <div className="flex items-center justify-between mb-2">
-                                      <div className="flex items-center gap-2">
-                                        <UserIcon className="h-4 w-4 text-blue-600" />
-                                        <span className="font-medium">{reply.createdBy}</span>
-                                        {getRoleBadge(reply.createdByRole)}
-                                      </div>
-                                      <div className="flex items-center gap-2">
-                                        <span className="text-xs text-muted-foreground">{formatDate(reply.createdAt)}</span>
-                                        {canModify(reply.createdBy, reply.createdByRole) && (
-                                          <Button 
-                                            variant="ghost" 
-                                            size="icon" 
-                                            className="h-6 w-6"
-                                            onClick={() => handleDeleteReply(note.id, reply.id)}
-                                          >
-                                            <TrashIcon className="h-3 w-3 text-red-500" />
-                                          </Button>
-                                        )}
-                                      </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="bg-white">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                                <EyeIcon className="h-4 w-4 mr-2" />
+                                <span>View</span>
+                              </DropdownMenuItem>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-2xl">
+                              <DialogHeader>
+                                <DialogTitle>{note.title}</DialogTitle>
+                                <DialogDescription>
+                                  {note.orderId} • Added by {note.createdBy} on {formatDate(note.createdAt)}
+                                </DialogDescription>
+                              </DialogHeader>
+                              
+                              <div className="py-4 space-y-4">
+                                <div className="bg-gray-50 p-4 rounded-lg">
+                                  <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center gap-2">
+                                      <UserCircleIcon className="h-5 w-5 text-blue-600" />
+                                      <span className="font-medium">{note.createdBy}</span>
+                                      {getRoleBadge(note.createdByRole)}
                                     </div>
-                                    <p className="text-sm">{reply.content}</p>
+                                    <span className="text-sm text-muted-foreground">{formatDate(note.createdAt)}</span>
                                   </div>
-                                ))}
+                                  <p className="text-sm leading-6">{note.content}</p>
+                                </div>
+                                
+                                {note.replies.length > 0 && (
+                                  <div className="space-y-3 pl-6 border-l-2 border-gray-200">
+                                    <h4 className="text-sm font-medium">Replies</h4>
+                                    
+                                    {note.replies.map(reply => (
+                                      <div key={reply.id} className="bg-gray-50 p-3 rounded-lg">
+                                        <div className="flex items-center justify-between mb-2">
+                                          <div className="flex items-center gap-2">
+                                            <UserIcon className="h-4 w-4 text-blue-600" />
+                                            <span className="font-medium">{reply.createdBy}</span>
+                                            {getRoleBadge(reply.createdByRole)}
+                                          </div>
+                                          <div className="flex items-center gap-2">
+                                            <span className="text-xs text-muted-foreground">{formatDate(reply.createdAt)}</span>
+                                            {canModify(reply.createdBy, reply.createdByRole) && (
+                                              <Button 
+                                                variant="ghost" 
+                                                size="icon" 
+                                                className="h-6 w-6"
+                                                onClick={() => handleDeleteReply(note.id, reply.id)}
+                                              >
+                                                <TrashIcon className="h-3 w-3 text-red-500" />
+                                              </Button>
+                                            )}
+                                          </div>
+                                        </div>
+                                        <p className="text-sm">{reply.content}</p>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                                
+                                <div className="mt-4 pt-4 border-t">
+                                  <h4 className="text-sm font-medium mb-2">Add Reply</h4>
+                                  <div className="space-y-3">
+                                    <Textarea 
+                                      placeholder="Type your reply here..."
+                                      className="min-h-[80px]"
+                                      value={replyingTo?.id === note.id ? replyContent : ""}
+                                      onChange={(e) => {
+                                        setReplyingTo(note);
+                                        setReplyContent(e.target.value);
+                                      }}
+                                    />
+                                    <Button 
+                                      size="sm"
+                                      onClick={handleAddReply}
+                                      disabled={!replyContent.trim()}
+                                    >
+                                      <ReplyIcon className="h-4 w-4 mr-2" />
+                                      Add Reply
+                                    </Button>
+                                  </div>
+                                </div>
                               </div>
-                            )}
-                            
-                            <div className="mt-4 pt-4 border-t">
-                              <h4 className="text-sm font-medium mb-2">Add Reply</h4>
-                              <div className="space-y-3">
+                            </DialogContent>
+                          </Dialog>
+                          
+                          {canModify(note.createdBy, note.createdByRole) && (
+                            <>
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                                    <PencilIcon className="h-4 w-4 mr-2" />
+                                    <span>Edit</span>
+                                  </DropdownMenuItem>
+                                </DialogTrigger>
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>Edit Note</DialogTitle>
+                                    <DialogDescription>
+                                      Make changes to your note
+                                    </DialogDescription>
+                                  </DialogHeader>
+                                  
+                                  <div className="grid gap-4 py-4">
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                      <Label htmlFor="edit-order-id" className="text-right">
+                                        Order ID
+                                      </Label>
+                                      <Input 
+                                        id="edit-order-id" 
+                                        className="col-span-3"
+                                        defaultValue={note.orderId}
+                                        onChange={(e) => setEditingNote({
+                                          ...note,
+                                          orderId: e.target.value
+                                        })}
+                                      />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                      <Label htmlFor="edit-title" className="text-right">
+                                        Title
+                                      </Label>
+                                      <Input 
+                                        id="edit-title" 
+                                        className="col-span-3"
+                                        defaultValue={note.title}
+                                        onChange={(e) => setEditingNote({
+                                          ...note,
+                                          title: e.target.value
+                                        })}
+                                      />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-start gap-4">
+                                      <Label htmlFor="edit-content" className="text-right pt-2">
+                                        Content
+                                      </Label>
+                                      <Textarea 
+                                        id="edit-content" 
+                                        className="col-span-3 min-h-[100px]"
+                                        defaultValue={note.content}
+                                        onChange={(e) => setEditingNote({
+                                          ...note,
+                                          content: e.target.value
+                                        })}
+                                      />
+                                    </div>
+                                  </div>
+                                  
+                                  <DialogFooter>
+                                    <DialogClose asChild>
+                                      <Button variant="outline" onClick={() => setEditingNote(null)}>
+                                        Cancel
+                                      </Button>
+                                    </DialogClose>
+                                    <Button onClick={handleUpdateNote}>
+                                      Save Changes
+                                    </Button>
+                                  </DialogFooter>
+                                </DialogContent>
+                              </Dialog>
+                              
+                              <DropdownMenuItem 
+                                className="text-red-600"
+                                onClick={() => handleDeleteNote(note.id)}
+                              >
+                                <TrashIcon className="h-4 w-4 mr-2" />
+                                <span>Delete</span>
+                              </DropdownMenuItem>
+                            </>
+                          )}
+                          
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                                <ReplyIcon className="h-4 w-4 mr-2" />
+                                <span>Reply</span>
+                              </DropdownMenuItem>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Reply to Note</DialogTitle>
+                                <DialogDescription>
+                                  Add a reply to "{note.title}"
+                                </DialogDescription>
+                              </DialogHeader>
+                              
+                              <div className="py-4">
+                                <div className="bg-gray-50 p-3 rounded-md mb-4">
+                                  <p className="text-sm italic">{note.content}</p>
+                                  <div className="text-xs text-muted-foreground mt-2">
+                                    By {note.createdBy} on {formatDate(note.createdAt)}
+                                  </div>
+                                </div>
+                                
                                 <Textarea 
                                   placeholder="Type your reply here..."
-                                  className="min-h-[80px]"
+                                  className="min-h-[100px]"
                                   value={replyingTo?.id === note.id ? replyContent : ""}
                                   onChange={(e) => {
                                     setReplyingTo(note);
                                     setReplyContent(e.target.value);
                                   }}
                                 />
-                                <Button 
-                                  size="sm"
-                                  onClick={handleAddReply}
-                                  disabled={!replyContent.trim()}
-                                >
-                                  <ReplyIcon className="h-4 w-4 mr-2" />
-                                  Add Reply
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                      
-                      {canModify(note.createdBy, note.createdByRole) && (
-                        <>
-                          <Dialog>
-                            <DialogTrigger asChild>
-                              <Button variant="ghost" size="icon">
-                                <PencilIcon className="h-4 w-4" />
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                              <DialogHeader>
-                                <DialogTitle>Edit Note</DialogTitle>
-                                <DialogDescription>
-                                  Make changes to your note
-                                </DialogDescription>
-                              </DialogHeader>
-                              
-                              <div className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label htmlFor="edit-order-id" className="text-right">
-                                    Order ID
-                                  </Label>
-                                  <Input 
-                                    id="edit-order-id" 
-                                    className="col-span-3"
-                                    defaultValue={note.orderId}
-                                    onChange={(e) => setEditingNote({
-                                      ...note,
-                                      orderId: e.target.value
-                                    })}
-                                  />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label htmlFor="edit-title" className="text-right">
-                                    Title
-                                  </Label>
-                                  <Input 
-                                    id="edit-title" 
-                                    className="col-span-3"
-                                    defaultValue={note.title}
-                                    onChange={(e) => setEditingNote({
-                                      ...note,
-                                      title: e.target.value
-                                    })}
-                                  />
-                                </div>
-                                <div className="grid grid-cols-4 items-start gap-4">
-                                  <Label htmlFor="edit-content" className="text-right pt-2">
-                                    Content
-                                  </Label>
-                                  <Textarea 
-                                    id="edit-content" 
-                                    className="col-span-3 min-h-[100px]"
-                                    defaultValue={note.content}
-                                    onChange={(e) => setEditingNote({
-                                      ...note,
-                                      content: e.target.value
-                                    })}
-                                  />
-                                </div>
                               </div>
                               
                               <DialogFooter>
                                 <DialogClose asChild>
-                                  <Button variant="outline" onClick={() => setEditingNote(null)}>
+                                  <Button variant="outline" onClick={() => {
+                                    setReplyingTo(null);
+                                    setReplyContent("");
+                                  }}>
                                     Cancel
                                   </Button>
                                 </DialogClose>
-                                <Button onClick={handleUpdateNote}>
-                                  Save Changes
+                                <Button 
+                                  onClick={handleAddReply}
+                                  disabled={!replyContent.trim()}
+                                >
+                                  Post Reply
                                 </Button>
                               </DialogFooter>
                             </DialogContent>
                           </Dialog>
-                          
-                          <Button 
-                            variant="ghost" 
-                            size="icon"
-                            onClick={() => handleDeleteNote(note.id)}
-                          >
-                            <TrashIcon className="h-4 w-4 text-red-500" />
-                          </Button>
-                        </>
-                      )}
-                      
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <ReplyIcon className="h-4 w-4" />
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Reply to Note</DialogTitle>
-                            <DialogDescription>
-                              Add a reply to "{note.title}"
-                            </DialogDescription>
-                          </DialogHeader>
-                          
-                          <div className="py-4">
-                            <div className="bg-gray-50 p-3 rounded-md mb-4">
-                              <p className="text-sm italic">{note.content}</p>
-                              <div className="text-xs text-muted-foreground mt-2">
-                                By {note.createdBy} on {formatDate(note.createdAt)}
-                              </div>
-                            </div>
-                            
-                            <Textarea 
-                              placeholder="Type your reply here..."
-                              className="min-h-[100px]"
-                              value={replyingTo?.id === note.id ? replyContent : ""}
-                              onChange={(e) => {
-                                setReplyingTo(note);
-                                setReplyContent(e.target.value);
-                              }}
-                            />
-                          </div>
-                          
-                          <DialogFooter>
-                            <DialogClose asChild>
-                              <Button variant="outline" onClick={() => {
-                                setReplyingTo(null);
-                                setReplyContent("");
-                              }}>
-                                Cancel
-                              </Button>
-                            </DialogClose>
-                            <Button 
-                              onClick={handleAddReply}
-                              disabled={!replyContent.trim()}
-                            >
-                              Post Reply
-                            </Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </TableCell>
                   </TableRow>
                 ))

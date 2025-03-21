@@ -1,19 +1,23 @@
 
 import { 
-  PackageIcon, 
-  Edit, 
-  Trash,
-  PlusIcon 
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { 
   Card, 
-  CardHeader, 
   CardContent, 
-  CardTitle, 
-  CardDescription 
+  CardDescription, 
+  CardHeader, 
+  CardTitle 
 } from "@/components/ui/card";
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 import { Product } from "@/types/supabase";
+import { formatCurrency } from "@/lib/utils";
+import { ImageIcon, PlusIcon } from "lucide-react";
 
 interface ProductListProps {
   products: Product[];
@@ -22,82 +26,83 @@ interface ProductListProps {
 }
 
 const ProductList = ({ products, canAddProducts, onAddProduct }: ProductListProps) => {
+  // Helper function to format price
+  const getPrice = (price: number | null | undefined) => {
+    if (price === null || price === undefined || price === 0) {
+      return "Not priced";
+    }
+    return formatCurrency(price);
+  };
+
+  // Helper function to get image or placeholder
+  const getImageElement = (imageUrl: string | null | undefined) => {
+    if (!imageUrl) {
+      return (
+        <div className="flex items-center justify-center bg-gray-100 h-10 w-10 rounded">
+          <ImageIcon className="h-5 w-5 text-gray-400" />
+        </div>
+      );
+    }
+    return (
+      <img
+        src={imageUrl}
+        alt="Product"
+        className="h-10 w-10 rounded object-cover"
+      />
+    );
+  };
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Product Catalog</CardTitle>
+        <CardTitle>Products</CardTitle>
         <CardDescription>
-          View and manage your product inventory
+          Manage your products and pricing
         </CardDescription>
       </CardHeader>
       <CardContent>
         {products.length > 0 ? (
-          <div className="relative overflow-x-auto rounded-md">
-            <table className="w-full text-sm text-left">
-              <thead className="text-xs uppercase bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3">Product</th>
-                  <th className="px-6 py-3">Category</th>
-                  <th className="px-6 py-3">Price</th>
-                  {canAddProducts && <th className="px-6 py-3">Actions</th>}
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => (
-                  <tr key={product.id} className="bg-white border-b hover:bg-gray-50">
-                    <td className="px-6 py-4 font-medium">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-md bg-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
-                          {product.image_url ? (
-                            <img 
-                              src={product.image_url} 
-                              alt={product.name} 
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <PackageIcon className="h-5 w-5 text-gray-400" />
-                          )}
-                        </div>
-                        <div>
-                          <p className="font-medium">{product.name}</p>
-                          <p className="text-xs text-gray-500 truncate max-w-xs">{product.description}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">{product.category || 'Uncategorized'}</td>
-                    <td className="px-6 py-4">
-                      {product.price 
-                        ? `$${parseFloat(product.price.toString()).toFixed(2)}` 
-                        : 'Not priced'
-                      }
-                    </td>
-                    {canAddProducts && (
-                      <td className="px-6 py-4">
-                        <div className="flex space-x-2">
-                          <Button variant="ghost" size="sm">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" className="text-red-500">
-                            <Trash className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Image</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead>Price</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {products.map((product) => (
+                <TableRow key={product.id}>
+                  <TableCell>
+                    {getImageElement(product.image_url)}
+                  </TableCell>
+                  <TableCell className="font-medium">{product.name}</TableCell>
+                  <TableCell>
+                    {product.description || 
+                      <span className="text-gray-400 italic">No description</span>
+                    }
+                  </TableCell>
+                  <TableCell>{getPrice(product.price)}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         ) : (
-          <div className="text-center py-12">
-            <PackageIcon className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-            <p className="text-muted-foreground mb-4">
-              No products found
+          <div className="flex flex-col items-center justify-center py-10 text-center">
+            <div className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+              <ImageIcon className="h-8 w-8 text-gray-400" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">No products found</h3>
+            <p className="text-muted-foreground max-w-sm mb-6">
+              {canAddProducts
+                ? "You haven't added any products yet. Add your first product to get started."
+                : "No products are available in the system yet."}
             </p>
             {canAddProducts && (
-              <Button onClick={onAddProduct}>
-                <PlusIcon className="mr-2 h-4 w-4" />
-                Add Your First Product
+              <Button onClick={onAddProduct} className="gap-2">
+                <PlusIcon className="h-4 w-4" />
+                Add First Product
               </Button>
             )}
           </div>

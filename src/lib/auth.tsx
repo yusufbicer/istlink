@@ -101,6 +101,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Login function
   const login = async (email: string, password: string) => {
+    // Special case for admin login with hardcoded credentials
+    if (email === 'admin@example.com' && password === 'admin123') {
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({ 
+          email, 
+          password 
+        });
+
+        if (error) {
+          // If the admin user doesn't exist yet, create it
+          if (error.message.includes('Invalid login credentials')) {
+            console.log('Admin user does not exist, creating...');
+            return register('Admin User', 'admin@example.com', 'admin123', 'admin');
+          }
+          throw error;
+        }
+
+        const user = await transformUser(data.user, data.session);
+        setUser(user);
+        
+        toast({
+          title: "Admin login successful",
+          description: "Welcome to the admin dashboard!",
+        });
+        
+        return;
+      } catch (error: any) {
+        console.error('Admin login error:', error);
+        throw error;
+      }
+    }
+
+    // Regular login process
     setIsLoading(true);
     try {
       const { data, error } = await supabase.auth.signInWithPassword({ 

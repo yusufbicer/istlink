@@ -140,6 +140,10 @@ const AuthForm = ({ type }: AuthFormProps) => {
                   <RadioGroupItem value="supplier" id="supplier" />
                   <Label htmlFor="supplier" className="cursor-pointer">Supplier</Label>
                 </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="admin" id="admin" />
+                  <Label htmlFor="admin" className="cursor-pointer">Admin</Label>
+                </div>
               </RadioGroup>
             </div>
           )}
@@ -176,10 +180,10 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
         {type === 'login' && (
           <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-xs text-gray-500 mb-2 text-center">For testing, use:</p>
+            <p className="text-xs text-gray-500 mb-2 text-center">Admin Login:</p>
             <div className="text-xs text-center">
-              <p>Email: <span className="font-medium">user@example.com</span></p>
-              <p>Password: <span className="font-medium">password123</span></p>
+              <p>Email: <span className="font-medium">admin@example.com</span></p>
+              <p>Password: <span className="font-medium">admin123</span></p>
             </div>
           </div>
         )}

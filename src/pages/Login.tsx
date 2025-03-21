@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
 import AuthForm from '@/components/auth/AuthForm';
+import { Zap, Atom } from 'lucide-react';
 
 const Login = () => {
   const { user } = useAuth();
@@ -21,9 +22,14 @@ const Login = () => {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-                ShipSync
-              </span>
+              <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
+                <Zap className="w-5 h-5 text-white absolute" />
+                <Atom className="w-6 h-6 text-white/80 animate-pulse" />
+              </div>
+              <div className="ml-3">
+                <span className="font-bold text-xl text-gray-900">GROOP</span>
+                <span className="block text-xs text-indigo-600 font-medium tracking-wide">BEYOND BORDERS</span>
+              </div>
             </Link>
           </div>
         </div>
@@ -37,7 +43,7 @@ const Login = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-600">
-              &copy; {new Date().getFullYear()} ShipSync. All rights reserved.
+              &copy; {new Date().getFullYear()} GROOP. All rights reserved.
             </p>
             <div className="flex mt-4 md:mt-0">
               <Link to="/" className="text-sm text-gray-600 hover:text-blue-600 mx-3">

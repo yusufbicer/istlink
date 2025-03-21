@@ -37,7 +37,7 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                {/* New modern and futuristic logo */}
+                {/* Modern and futuristic logo */}
                 <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
                   <Zap className="w-5 h-5 text-white absolute" />
                   <Atom className="w-6 h-6 text-white/80 animate-pulse" />
@@ -118,26 +118,26 @@ const Header = () => {
             <div className="flex flex-col py-4 px-6 space-y-4">
               <button 
                 onClick={() => scrollToSection('features')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2"
+                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2"
+                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
               >
                 How It Works
               </button>
               <Link 
                 to="/blog" 
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2"
+                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left w-full block"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Blog
               </Link>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2"
+                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
               >
                 Pricing
               </button>

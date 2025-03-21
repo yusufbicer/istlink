@@ -35,7 +35,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         await login(email, password);
         toast({
           title: "Login successful",
-          description: "Welcome back to ShipSync!",
+          description: "Welcome back to GROOP!",
         });
       } else {
         await register(name, email, password, role);

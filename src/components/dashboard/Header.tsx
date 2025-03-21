@@ -38,7 +38,7 @@ const Header = () => {
         <div className="flex items-center">
           <SidebarTrigger className="mr-4 md:hidden" />
           
-          <div className="hidden md:block max-w-[calc(100vw-250px)] overflow-hidden pr-2">
+          <div className="hidden md:block max-w-[200px] lg:max-w-[calc(100vw-250px)] overflow-hidden pr-2">
             <h1 className="text-xl font-semibold truncate">
               {greeting}, {user?.name.split(' ')[0]}
             </h1>

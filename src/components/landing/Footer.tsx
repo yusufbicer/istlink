@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import { Zap, Atom } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,10 +10,15 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-1">
-            <Link to="/" className="inline-block mb-6">
-              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-                ShipSync
-              </span>
+            <Link to="/" className="inline-flex items-center mb-6">
+              <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
+                <Zap className="w-5 h-5 text-white absolute" />
+                <Atom className="w-6 h-6 text-white/80 animate-pulse" />
+              </div>
+              <div className="ml-3">
+                <span className="font-bold text-xl text-gray-900">GROOP</span>
+                <span className="block text-xs text-indigo-600 font-medium tracking-wide">BEYOND BORDERS</span>
+              </div>
             </Link>
             <p className="text-gray-600 mb-6">
               Simplifying cross-border commerce with consolidated shipping solutions.
@@ -143,7 +149,7 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-gray-100">
           <p className="text-center text-gray-500 text-sm">
-            &copy; {currentYear} ShipSync. All rights reserved.
+            &copy; {currentYear} GROOP. All rights reserved.
           </p>
         </div>
       </div>

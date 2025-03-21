@@ -30,6 +30,7 @@ export interface Product {
   price?: number;
   currency?: string;
   image_url?: string;
+  category?: string;  // Added category field
   created_at: string;
   updated_at: string;
   supplier?: Supplier;

@@ -26,7 +26,7 @@ interface ProductFormProps {
 const ProductForm = ({ userId, onSuccess, onCancel }: ProductFormProps) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  // Use the interface with default values
+  // Explicitly initialize with concrete type
   const [formValues, setFormValues] = useState<ProductFormValues>({
     name: '',
     description: '',

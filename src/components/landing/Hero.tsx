@@ -43,7 +43,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Seamless Consolidation for <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">Global Buyers</span>
+            Your Turkish Supply Chain, <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">Elegantly Simplified</span>
           </h1>
           
           <p 

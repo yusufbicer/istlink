@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { useForm, UseFormReturn, FieldValues, DefaultValues } from "react-hook-form";
 import { 
   Form, 
   FormControl, 
@@ -55,16 +55,18 @@ const Products = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
-  // Explicitly type the form to prevent deep type instantiation
-  const form: UseFormReturn<ProductFormValues> = useForm<ProductFormValues>({
-    defaultValues: {
-      name: '',
-      description: '',
-      price: '',
-      sku: '',
-      category: '',
-      stock: ''
-    }
+  // Using a different approach to prevent deep type instantiation
+  const defaultValues: DefaultValues<ProductFormValues> = {
+    name: '',
+    description: '',
+    price: '',
+    sku: '',
+    category: '',
+    stock: ''
+  };
+  
+  const form = useForm<ProductFormValues>({
+    defaultValues
   });
   
   useEffect(() => {

@@ -66,9 +66,9 @@ const Hero = () => {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="h-12 px-8 text-md border-indigo-600 text-indigo-600 hover:bg-indigo-50">
-              <Link to="/#how-it-works">
-                Learn More
-              </Link>
+              <a href="https://calendly.com/yourusername" target="_blank" rel="noopener noreferrer">
+                Chat With Us
+              </a>
             </Button>
           </div>
         </div>
@@ -154,55 +154,63 @@ const Hero = () => {
                       </div>
                     </div>
                     
-                    {/* Mobile Network Visual */}
-                    <div className="bg-gray-800 p-3 rounded-lg border border-gray-700 h-48 flex items-center justify-center relative overflow-hidden">
+                    {/* Improved Mobile Network Visual - Optimized to be fully visible */}
+                    <div className="bg-gray-800 p-3 rounded-lg border border-gray-700 h-60 flex items-center justify-center relative overflow-hidden">
                       <div className="absolute top-2 left-2 right-2 flex justify-between items-center">
                         <span className="text-xs font-medium">AI Network Optimization</span>
                       </div>
                       
-                      {/* Simple Mobile Network Visualization */}
-                      <svg className="w-full h-full" viewBox="0 0 200 140">
+                      {/* Simplified and more visible mobile network visualization */}
+                      <svg className="w-full h-full" viewBox="0 0 200 180">
                         {/* Connection lines */}
-                        <line x1="60" y1="70" x2="100" y2="40" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="60" y1="70" x2="100" y2="70" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="60" y1="70" x2="100" y2="100" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="100" y1="40" x2="140" y2="70" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="100" y1="70" x2="140" y2="70" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="100" y1="100" x2="140" y2="70" stroke="#4F46E5" strokeWidth="1" />
+                        <line x1="50" y1="90" x2="100" y2="40" stroke="#4F46E5" strokeWidth="1" />
+                        <line x1="50" y1="90" x2="100" y2="90" stroke="#4F46E5" strokeWidth="1" />
+                        <line x1="50" y1="90" x2="100" y2="140" stroke="#4F46E5" strokeWidth="1" />
+                        <line x1="100" y1="40" x2="150" y2="90" stroke="#4F46E5" strokeWidth="1" />
+                        <line x1="100" y1="90" x2="150" y2="90" stroke="#4F46E5" strokeWidth="1" />
+                        <line x1="100" y1="140" x2="150" y2="90" stroke="#4F46E5" strokeWidth="1" />
+                        <line x1="150" y1="90" x2="200" y2="90" stroke="#4F46E5" strokeWidth="1" />
                         
                         {/* Pulse animations */}
                         <circle r="2" fill="#60A5FA">
-                          <animateMotion path="M60,70 L100,40" dur="3s" repeatCount="indefinite" />
+                          <animateMotion path="M50,90 L100,40" dur="3s" repeatCount="indefinite" />
                         </circle>
                         <circle r="2" fill="#60A5FA">
-                          <animateMotion path="M60,70 L100,70" dur="2s" repeatCount="indefinite" />
+                          <animateMotion path="M50,90 L100,90" dur="2s" repeatCount="indefinite" />
                         </circle>
                         <circle r="2" fill="#60A5FA">
-                          <animateMotion path="M100,70 L140,70" dur="2.5s" repeatCount="indefinite" />
+                          <animateMotion path="M100,90 L150,90" dur="2.5s" repeatCount="indefinite" />
+                        </circle>
+                        <circle r="2" fill="#60A5FA">
+                          <animateMotion path="M150,90 L200,90" dur="3s" repeatCount="indefinite" />
                         </circle>
                         
                         {/* Connection nodes */}
-                        <circle cx="60" cy="70" r="12" fill="#4F46E5" />
-                        <circle cx="60" cy="70" r="6" fill="#818CF8" />
+                        <circle cx="50" cy="90" r="10" fill="#4F46E5" />
+                        <circle cx="50" cy="90" r="5" fill="#818CF8" />
                         
                         <circle cx="100" cy="40" r="8" fill="#4F46E5" />
                         <circle cx="100" cy="40" r="4" fill="#818CF8" />
                         
-                        <circle cx="100" cy="70" r="8" fill="#4F46E5" />
-                        <circle cx="100" cy="70" r="4" fill="#818CF8" />
+                        <circle cx="100" cy="90" r="8" fill="#4F46E5" />
+                        <circle cx="100" cy="90" r="4" fill="#818CF8" />
                         
-                        <circle cx="100" cy="100" r="8" fill="#4F46E5" />
-                        <circle cx="100" cy="100" r="4" fill="#818CF8" />
+                        <circle cx="100" cy="140" r="8" fill="#4F46E5" />
+                        <circle cx="100" cy="140" r="4" fill="#818CF8" />
                         
-                        <circle cx="140" cy="70" r="12" fill="#4F46E5" />
-                        <circle cx="140" cy="70" r="6" fill="#818CF8" />
+                        <circle cx="150" cy="90" r="10" fill="#4F46E5" />
+                        <circle cx="150" cy="90" r="5" fill="#818CF8" />
                         
-                        {/* Labels */}
-                        <text x="60" y="90" fill="white" fontSize="8" textAnchor="middle">Buyers</text>
-                        <text x="100" y="35" fill="white" fontSize="6" textAnchor="middle">Supplier A</text>
-                        <text x="100" y="65" fill="white" fontSize="6" textAnchor="middle">Supplier B</text>
-                        <text x="100" y="110" fill="white" fontSize="6" textAnchor="middle">Supplier C</text>
-                        <text x="140" y="90" fill="white" fontSize="8" textAnchor="middle">Consolidation</text>
+                        <circle cx="200" cy="90" r="10" fill="#4F46E5" />
+                        <circle cx="200" cy="90" r="5" fill="#818CF8" />
+                        
+                        {/* Labels - Positioned for better visibility */}
+                        <text x="50" y="110" fill="white" fontSize="8" textAnchor="middle">Buyers</text>
+                        <text x="100" y="30" fill="white" fontSize="7" textAnchor="middle">Supplier A</text>
+                        <text x="100" y="80" fill="white" fontSize="7" textAnchor="middle">Supplier B</text>
+                        <text x="100" y="150" fill="white" fontSize="7" textAnchor="middle">Supplier C</text>
+                        <text x="150" y="110" fill="white" fontSize="8" textAnchor="middle">Consolidation</text>
+                        <text x="200" y="110" fill="white" fontSize="8" textAnchor="middle">Shipping</text>
                       </svg>
                     </div>
                     

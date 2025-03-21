@@ -3,7 +3,7 @@ import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
 import Features from '@/components/landing/Features';
 import Footer from '@/components/landing/Footer';
-import { BookOpenIcon, ArrowRightIcon } from 'lucide-react';
+import { BookOpenIcon, ArrowRightIcon, PackageCheck, GitMerge, Receipt, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
@@ -161,7 +161,7 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Pricing Section */}
+        {/* Updated Pricing Section */}
         <section id="pricing" className="py-20 bg-gray-50">
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-16">
@@ -169,47 +169,51 @@ const Index = () => {
                 Pricing
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Transparent Pricing for All Businesses
+                Service-Based Pricing
               </h2>
               <p className="text-xl text-gray-600">
-                Choose the plan that fits your business needs. No hidden fees.
+                Choose the services that fit your specific business needs. Pay only for what you use.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Starter Plan */}
+              {/* Shipping Consolidation */}
               <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:transform hover:-translate-y-1 hover:shadow-md">
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-1">Starter</h3>
-                  <p className="text-gray-600 mb-4">For small businesses</p>
-                  <div className="flex items-baseline mb-5">
-                    <span className="text-3xl font-bold">$99</span>
-                    <span className="text-gray-600 ml-1">/month</span>
+                  <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                    <PackageCheck className="h-6 w-6 text-indigo-600" />
                   </div>
+                  <h3 className="text-xl font-bold mb-1">Shipping Consolidation</h3>
+                  <p className="text-gray-600 mb-4">Combine multiple shipments into one</p>
+                  <div className="flex items-baseline mb-1">
+                    <span className="text-3xl font-bold">5%</span>
+                    <span className="text-gray-600 ml-1">of shipment value</span>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-5">Minimum $50 per shipment</p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Up to 5 suppliers</span>
+                      <span>Multiple supplier pickup</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>10 orders per month</span>
+                      <span>Single bill of lading</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Basic consolidation</span>
+                      <span>Optimized container usage</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Email support</span>
+                      <span>Real-time tracking</span>
                     </li>
                   </ul>
                   <a href="/register" className="block w-full py-2 px-4 bg-white border border-blue-600 text-blue-600 rounded-lg text-center font-medium hover:bg-blue-50 transition-colors">
@@ -218,48 +222,52 @@ const Index = () => {
                 </div>
               </div>
               
-              {/* Business Plan */}
+              {/* Document Consolidation */}
               <div className="bg-white rounded-xl border-2 border-blue-500 shadow-md overflow-hidden transform scale-105 z-10 transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <div className="bg-blue-600 text-white py-2 px-6 text-center text-sm font-medium">
                   MOST POPULAR
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-1">Business</h3>
-                  <p className="text-gray-600 mb-4">For growing companies</p>
-                  <div className="flex items-baseline mb-5">
+                  <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                    <FileText className="h-6 w-6 text-indigo-600" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-1">Document Consolidation</h3>
+                  <p className="text-gray-600 mb-4">Unified customs and export processing</p>
+                  <div className="flex items-baseline mb-1">
                     <span className="text-3xl font-bold">$299</span>
                     <span className="text-gray-600 ml-1">/month</span>
                   </div>
+                  <p className="text-sm text-gray-500 mb-5">Plus $15 per document set</p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Up to 20 suppliers</span>
+                      <span>Unified customs declarations</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>50 orders per month</span>
+                      <span>Export certificate handling</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Advanced consolidation</span>
+                      <span>Simplified compliance</span>
+                    </li>
+                    <li className="flex items-center">
+                      <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>Digital document storage</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       <span>Priority support</span>
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Analytics dashboard</span>
                     </li>
                   </ul>
                   <a href="/register" className="block w-full py-2 px-4 bg-blue-600 text-white rounded-lg text-center font-medium hover:bg-blue-700 transition-colors">
@@ -268,51 +276,61 @@ const Index = () => {
                 </div>
               </div>
               
-              {/* Enterprise Plan */}
+              {/* Payment Consolidation */}
               <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-1">Enterprise</h3>
-                  <p className="text-gray-600 mb-4">For large organizations</p>
-                  <div className="flex items-baseline mb-5">
-                    <span className="text-3xl font-bold">Custom</span>
+                  <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                    <Receipt className="h-6 w-6 text-indigo-600" />
                   </div>
+                  <h3 className="text-xl font-bold mb-1">Payment Consolidation</h3>
+                  <p className="text-gray-600 mb-4">Single payment for multiple suppliers</p>
+                  <div className="flex items-baseline mb-1">
+                    <span className="text-3xl font-bold">3%</span>
+                    <span className="text-gray-600 ml-1">of transaction value</span>
+                  </div>
+                  <p className="text-sm text-gray-500 mb-5">Minimum $100 per transaction</p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Unlimited suppliers</span>
+                      <span>Single payment processing</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Unlimited orders</span>
+                      <span>Multi-currency support</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Premium consolidation</span>
+                      <span>Automated invoicing</span>
                     </li>
                     <li className="flex items-center">
                       <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span>Dedicated account manager</span>
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="h-5 w-5 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Custom integrations</span>
+                      <span>Secure payment processing</span>
                     </li>
                   </ul>
-                  <a href="#" className="block w-full py-2 px-4 bg-white border border-blue-600 text-blue-600 rounded-lg text-center font-medium hover:bg-blue-50 transition-colors">
-                    Contact Sales
+                  <a href="/register" className="block w-full py-2 px-4 bg-white border border-blue-600 text-blue-600 rounded-lg text-center font-medium hover:bg-blue-50 transition-colors">
+                    Get Started
                   </a>
                 </div>
               </div>
+            </div>
+            
+            {/* Enterprise custom solution */}
+            <div className="mt-10 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 text-center">
+              <h3 className="text-2xl font-bold mb-2">Need a Custom Solution?</h3>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Combine services and get volume discounts with our enterprise packages tailored to your specific business requirements.
+              </p>
+              <a href="#" className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                Contact Sales
+              </a>
             </div>
           </div>
         </section>

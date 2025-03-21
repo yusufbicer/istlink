@@ -1,6 +1,8 @@
 
-// Simple auth utilities
 import { useState, useEffect, createContext, useContext } from 'react';
+import { User as SupabaseUser, Session } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from "@/components/ui/use-toast";
 
 export type UserRole = 'buyer' | 'supplier' | 'admin';
 
@@ -10,40 +12,17 @@ export interface User {
   email: string;
   role: UserRole;
   avatar?: string;
+  session: Session | null;
 }
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   register: (name: string, email: string, password: string, role: UserRole) => Promise<void>;
+  updateProfile: (data: Partial<User>) => Promise<void>;
 }
-
-// Simulated users for demo
-const DEMO_USERS: User[] = [
-  {
-    id: '1',
-    name: 'Buyer Demo',
-    email: 'buyer@example.com',
-    role: 'buyer',
-    avatar: 'https://i.pravatar.cc/150?u=buyer',
-  },
-  {
-    id: '2',
-    name: 'Supplier Demo',
-    email: 'supplier@example.com',
-    role: 'supplier',
-    avatar: 'https://i.pravatar.cc/150?u=supplier',
-  },
-  {
-    id: '3',
-    name: 'Admin Demo',
-    email: 'admin@example.com',
-    role: 'admin',
-    avatar: 'https://i.pravatar.cc/150?u=admin',
-  }
-];
 
 // Create an authentication context
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -53,77 +32,202 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Check if the user is already logged in (via localStorage)
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+  // Function to transform Supabase user to our User type
+  const transformUser = async (supabaseUser: SupabaseUser | null, session: Session | null): Promise<User | null> => {
+    if (!supabaseUser) return null;
+
+    try {
+      // Fetch the user profile from our profiles table
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('name, role, avatar_url')
+        .eq('id', supabaseUser.id)
+        .single();
+
+      if (error) {
+        console.error('Error fetching user profile:', error);
+        return null;
+      }
+
+      return {
+        id: supabaseUser.id,
+        name: profile?.name || supabaseUser.email?.split('@')[0] || 'User',
+        email: supabaseUser.email || '',
+        role: (profile?.role as UserRole) || 'buyer',
+        avatar: profile?.avatar_url,
+        session: session
+      };
+    } catch (error) {
+      console.error('Error transforming user:', error);
+      return null;
     }
-    setIsLoading(false);
+  };
+
+  // Initialize auth state
+  useEffect(() => {
+    const initializeAuth = async () => {
+      setIsLoading(true);
+      
+      // Set up auth state listener FIRST
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(
+        async (event, session) => {
+          console.log('Auth state changed:', event);
+          
+          if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+            const user = await transformUser(session?.user || null, session);
+            setUser(user);
+          } else if (event === 'SIGNED_OUT') {
+            setUser(null);
+          }
+        }
+      );
+
+      // THEN check for existing session
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        const user = await transformUser(session.user, session);
+        setUser(user);
+      }
+
+      setIsLoading(false);
+      
+      return () => {
+        subscription.unsubscribe();
+      };
+    };
+
+    initializeAuth();
   }, []);
 
-  // Simulated login function
+  // Login function
   const login = async (email: string, password: string) => {
     setIsLoading(true);
-    return new Promise<void>((resolve, reject) => {
-      // Simulate API request
-      setTimeout(() => {
-        const foundUser = DEMO_USERS.find(u => u.email === email);
-        if (foundUser && password === 'password') { // For demo, any password works
-          setUser(foundUser);
-          localStorage.setItem('user', JSON.stringify(foundUser));
-          setIsLoading(false);
-          resolve();
-        } else {
-          setIsLoading(false);
-          reject(new Error('Invalid credentials'));
-        }
-      }, 1000);
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({ 
+        email, 
+        password 
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      const user = await transformUser(data.user, data.session);
+      setUser(user);
+      
+      toast({
+        title: "Login successful",
+        description: `Welcome back${user?.name ? ', ' + user.name : ''}!`,
+      });
+    } catch (error: any) {
+      toast({
+        title: "Login failed",
+        description: error.message || "An error occurred during login",
+        variant: "destructive",
+      });
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Simulated logout function
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
+  // Logout function
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+      setUser(null);
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Logout failed",
+        description: error.message || "An error occurred during logout",
+        variant: "destructive",
+      });
+      throw error;
+    }
   };
 
-  // Simulated registration function
+  // Registration function
   const register = async (name: string, email: string, password: string, role: UserRole) => {
     setIsLoading(true);
-    return new Promise<void>((resolve, reject) => {
-      // Simulate API request
-      setTimeout(() => {
-        // Check if email already exists
-        const existingUser = DEMO_USERS.find(u => u.email === email);
-        if (existingUser) {
-          setIsLoading(false);
-          reject(new Error('Email already in use'));
-          return;
+    try {
+      const { data, error } = await supabase.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          data: {
+            name,
+            role
+          }
         }
+      });
 
-        // Create a new user
-        const newUser: User = {
-          id: Date.now().toString(),
-          name,
-          email,
-          role,
-          avatar: `https://i.pravatar.cc/150?u=${Date.now()}`
-        };
+      if (error) {
+        throw error;
+      }
 
-        // In a real app, you would send this to your backend
-        // For demo purposes, we'll just set it directly
-        setUser(newUser);
-        localStorage.setItem('user', JSON.stringify(newUser));
-        
-        setIsLoading(false);
-        resolve();
-      }, 1000);
-    });
+      // The profile will be created automatically by the database trigger
+      // we set up in our SQL migration
+
+      const user = await transformUser(data.user, data.session);
+      setUser(user);
+      
+      toast({
+        title: "Registration successful",
+        description: "Your account has been created successfully.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Registration failed",
+        description: error.message || "An error occurred during registration",
+        variant: "destructive",
+      });
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Update profile function
+  const updateProfile = async (data: Partial<User>) => {
+    if (!user) throw new Error("No user is logged in");
+    
+    setIsLoading(true);
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          name: data.name,
+          avatar_url: data.avatar
+        })
+        .eq('id', user.id);
+
+      if (error) throw error;
+
+      // Update the user state with new values
+      setUser(prev => prev ? { ...prev, ...data } : null);
+      
+      toast({
+        title: "Profile updated",
+        description: "Your profile has been updated successfully.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Profile update failed",
+        description: error.message || "An error occurred updating your profile",
+        variant: "destructive",
+      });
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, register }}>
+    <AuthContext.Provider value={{ user, isLoading, login, logout, register, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );

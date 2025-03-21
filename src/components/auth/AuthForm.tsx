@@ -35,7 +35,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         await login(email, password);
         toast({
           title: "Login successful",
-          description: "Welcome back to GROOP!",
+          description: "Welcome back!",
         });
       } else {
         await register(name, email, password, role);
@@ -174,41 +174,12 @@ const AuthForm = ({ type }: AuthFormProps) => {
           )}
         </div>
 
-        {/* Demo accounts */}
         {type === 'login' && (
           <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-xs text-gray-500 mb-2 text-center">Demo Accounts:</p>
-            <div className="grid grid-cols-3 gap-2 text-xs">
-              <div 
-                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => {
-                  setEmail('buyer@example.com');
-                  setPassword('password');
-                }}
-              >
-                <div className="font-medium">Buyer</div>
-                <div className="text-gray-500">buyer@example.com</div>
-              </div>
-              <div 
-                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => {
-                  setEmail('supplier@example.com');
-                  setPassword('password');
-                }}
-              >
-                <div className="font-medium">Supplier</div>
-                <div className="text-gray-500">supplier@example.com</div>
-              </div>
-              <div 
-                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => {
-                  setEmail('admin@example.com');
-                  setPassword('password');
-                }}
-              >
-                <div className="font-medium">Admin</div>
-                <div className="text-gray-500">admin@example.com</div>
-              </div>
+            <p className="text-xs text-gray-500 mb-2 text-center">For testing, use:</p>
+            <div className="text-xs text-center">
+              <p>Email: <span className="font-medium">user@example.com</span></p>
+              <p>Password: <span className="font-medium">password123</span></p>
             </div>
           </div>
         )}

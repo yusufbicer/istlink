@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Card, 
   CardContent, 
@@ -27,57 +27,23 @@ import {
   PlusIcon, 
   X, 
   Edit, 
-  Trash 
+  Trash,
+  Loader2,
+  ImageIcon
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
-import { toast } from "@/components/ui/use-toast";
-
-// Mock product data
-const initialProducts = [
-  {
-    id: '1',
-    name: 'Premium Widget',
-    description: 'High-quality widget for various applications',
-    price: 29.99,
-    sku: 'WDG-001',
-    category: 'Widgets',
-    stock: 45
-  },
-  {
-    id: '2',
-    name: 'Basic Gadget',
-    description: 'Affordable gadget for everyday use',
-    price: 19.99,
-    sku: 'GDG-001',
-    category: 'Gadgets',
-    stock: 120
-  },
-  {
-    id: '3',
-    name: 'Deluxe Accessory',
-    description: 'Premium accessory for enhanced functionality',
-    price: 39.99,
-    sku: 'ACC-001',
-    category: 'Accessories',
-    stock: 30
-  }
-];
-
-// Product type definition
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  sku: string;
-  category: string;
-  stock: number;
-}
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { Product } from "@/types/supabase";
 
 const Products = () => {
   const { user } = useAuth();
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const { toast } = useToast();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   // Form setup
   const form = useForm({
@@ -91,32 +57,168 @@ const Products = () => {
     }
   });
   
-  // Add product function
-  const onSubmit = (data: any) => {
-    const newProduct = {
-      id: Date.now().toString(),
-      name: data.name,
-      description: data.description,
-      price: parseFloat(data.price),
-      sku: data.sku,
-      category: data.category,
-      stock: parseInt(data.stock, 10)
+  // Fetch products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        let query = supabase.from('products').select('*');
+        
+        // If the user is a supplier, only fetch their products
+        if (user?.role === 'supplier') {
+          // First, find the supplier record for this user
+          const { data: supplierData } = await supabase
+            .from('suppliers')
+            .select('id')
+            .eq('user_id', user.id)
+            .single();
+            
+          if (supplierData?.id) {
+            query = query.eq('supplier_id', supplierData.id);
+          }
+        }
+        
+        const { data, error } = await query;
+        
+        if (error) throw error;
+        
+        setProducts(data || []);
+      } catch (error: any) {
+        console.error('Error fetching products:', error.message);
+        toast({
+          title: "Error",
+          description: "Failed to load products",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
     };
     
-    setProducts([...products, newProduct]);
-    setShowAddForm(false);
-    form.reset();
-    
-    toast({
-      title: "Product added",
-      description: `${data.name} has been added to your catalog.`,
-    });
+    fetchProducts();
+  }, [user, toast]);
+  
+  // Add product function
+  const onSubmit = async (data: any) => {
+    try {
+      // First, get the supplier ID
+      const { data: supplierData, error: supplierError } = await supabase
+        .from('suppliers')
+        .select('id')
+        .eq('user_id', user?.id)
+        .single();
+        
+      if (supplierError) throw supplierError;
+      
+      if (!supplierData?.id) {
+        // Create a supplier record if it doesn't exist
+        const { data: newSupplier, error: createError } = await supabase
+          .from('suppliers')
+          .insert({
+            name: user?.name || 'Unknown Supplier',
+            user_id: user?.id
+          })
+          .select();
+          
+        if (createError) throw createError;
+        
+        // Now create the product with the new supplier ID
+        const { error } = await supabase
+          .from('products')
+          .insert({
+            supplier_id: newSupplier[0].id,
+            name: data.name,
+            description: data.description,
+            price: parseFloat(data.price),
+            image_url: selectedImage,
+            category: data.category
+          });
+          
+        if (error) throw error;
+      } else {
+        // Create the product with the existing supplier ID
+        const { error } = await supabase
+          .from('products')
+          .insert({
+            supplier_id: supplierData.id,
+            name: data.name,
+            description: data.description,
+            price: parseFloat(data.price),
+            image_url: selectedImage,
+            category: data.category
+          });
+          
+        if (error) throw error;
+      }
+      
+      // Refresh the products list
+      const { data: updatedProducts } = await supabase
+        .from('products')
+        .select('*');
+        
+      setProducts(updatedProducts || []);
+      setShowAddForm(false);
+      form.reset();
+      setSelectedImage(null);
+      
+      toast({
+        title: "Product added",
+        description: `${data.name} has been added to your catalog.`,
+      });
+    } catch (error: any) {
+      console.error('Error adding product:', error.message);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to add product",
+        variant: "destructive",
+      });
+    }
   };
 
   // Cancel function for the form
   const handleCancel = () => {
     setShowAddForm(false);
     form.reset();
+    setSelectedImage(null);
+  };
+
+  // Handle image upload
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !e.target.files[0]) return;
+    
+    const file = e.target.files[0];
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    
+    setIsUploading(true);
+    
+    try {
+      // Upload image to storage
+      const { error: uploadError } = await supabase.storage
+        .from('products')
+        .upload(fileName, file);
+        
+      if (uploadError) throw uploadError;
+      
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('products')
+        .getPublicUrl(fileName);
+        
+      setSelectedImage(publicUrl);
+      
+      toast({
+        title: "Image uploaded",
+        description: "The product image has been uploaded successfully.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Upload failed",
+        description: error.message || "There was a problem uploading your image",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   // Only suppliers can add products
@@ -164,50 +266,6 @@ const Products = () => {
                   
                   <FormField
                     control={form.control}
-                    name="sku"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>SKU</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Enter SKU" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Enter product description" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="price"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Price ($)</FormLabel>
-                        <FormControl>
-                          <Input type="number" step="0.01" min="0" placeholder="0.00" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
                     name="category"
                     render={({ field }) => (
                       <FormItem>
@@ -225,6 +283,75 @@ const Products = () => {
                             <SelectItem value="Parts">Parts</SelectItem>
                           </SelectContent>
                         </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <FormLabel>Product Image</FormLabel>
+                  <div className="flex flex-col gap-2">
+                    {selectedImage && (
+                      <div className="relative w-full h-40 border rounded-md overflow-hidden">
+                        <img 
+                          src={selectedImage} 
+                          alt="Product" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <Label 
+                      htmlFor="product-image" 
+                      className="cursor-pointer flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                    >
+                      {isUploading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <ImageIcon className="mr-2 h-4 w-4" />
+                          Upload Product Image
+                        </>
+                      )}
+                    </Label>
+                    <Input 
+                      id="product-image" 
+                      type="file" 
+                      accept="image/*"
+                      className="hidden" 
+                      onChange={handleImageUpload}
+                      disabled={isUploading}
+                    />
+                  </div>
+                </div>
+                
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Enter product description" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="price"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Price ($)</FormLabel>
+                        <FormControl>
+                          <Input type="number" step="0.01" min="0" placeholder="0.00" {...field} />
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -259,113 +386,141 @@ const Products = () => {
         </Card>
       )}
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-2xl">{products.length}</CardTitle>
-            <CardDescription>Total Products</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold flex items-center text-blue-600">
-              <PackageIcon className="mr-2 h-4 w-4" />
-              <span>Products</span>
-            </div>
-          </CardContent>
-        </Card>
+      {isLoading ? (
+        <div className="flex justify-center items-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-2xl">{products.length}</CardTitle>
+                <CardDescription>Total Products</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold flex items-center text-blue-600">
+                  <PackageIcon className="mr-2 h-4 w-4" />
+                  <span>Products</span>
+                </div>
+              </CardContent>
+            </Card>
 
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-2xl">
-              {products.filter(p => p.stock > 10).length}
-            </CardTitle>
-            <CardDescription>Active Products</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-sm text-muted-foreground">
-              {Math.round((products.filter(p => p.stock > 10).length / products.length) * 100)}% of your products are currently active
-            </div>
-          </CardContent>
-        </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-2xl">
+                  {products.filter(p => parseFloat(p.price?.toString() || '0') > 0).length}
+                </CardTitle>
+                <CardDescription>Active Products</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-sm text-muted-foreground">
+                  {products.length > 0 
+                    ? `${Math.round((products.filter(p => parseFloat(p.price?.toString() || '0') > 0).length / products.length) * 100)}% of your products are currently active`
+                    : 'No products available'
+                  }
+                </div>
+              </CardContent>
+            </Card>
 
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-2xl">
-              {products.filter(p => p.stock < 10).length}
-            </CardTitle>
-            <CardDescription>Low Stock</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-sm text-muted-foreground">
-              Products that need reordering soon
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-2xl">
+                  {products.filter(p => parseFloat(p.price?.toString() || '0') === 0).length}
+                </CardTitle>
+                <CardDescription>Inactive Products</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-sm text-muted-foreground">
+                  Products that need pricing
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Product Catalog</CardTitle>
-          <CardDescription>
-            View and manage your product inventory
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {products.length > 0 ? (
-            <div className="relative overflow-x-auto rounded-md">
-              <table className="w-full text-sm text-left">
-                <thead className="text-xs uppercase bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3">Product</th>
-                    <th className="px-6 py-3">SKU</th>
-                    <th className="px-6 py-3">Category</th>
-                    <th className="px-6 py-3">Price</th>
-                    <th className="px-6 py-3">Stock</th>
-                    {canAddProducts && <th className="px-6 py-3">Actions</th>}
-                  </tr>
-                </thead>
-                <tbody>
-                  {products.map((product) => (
-                    <tr key={product.id} className="bg-white border-b hover:bg-gray-50">
-                      <td className="px-6 py-4 font-medium">
-                        <div>
-                          <p className="font-medium">{product.name}</p>
-                          <p className="text-xs text-gray-500 truncate max-w-xs">{product.description}</p>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">{product.sku}</td>
-                      <td className="px-6 py-4">{product.category}</td>
-                      <td className="px-6 py-4">${product.price.toFixed(2)}</td>
-                      <td className="px-6 py-4">
-                        <span className={`px-2 py-1 rounded-full text-xs ${
-                          product.stock > 10 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                        }`}>
-                          {product.stock}
-                        </span>
-                      </td>
-                      {canAddProducts && (
-                        <td className="px-6 py-4">
-                          <div className="flex space-x-2">
-                            <Button variant="ghost" size="sm">
-                              <Edit className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="sm" className="text-red-500">
-                              <Trash className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </td>
-                      )}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p className="text-center py-6 text-muted-foreground">
-              No products found. Add your first product to get started.
-            </p>
-          )}
-        </CardContent>
-      </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Product Catalog</CardTitle>
+              <CardDescription>
+                View and manage your product inventory
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {products.length > 0 ? (
+                <div className="relative overflow-x-auto rounded-md">
+                  <table className="w-full text-sm text-left">
+                    <thead className="text-xs uppercase bg-gray-50">
+                      <tr>
+                        <th className="px-6 py-3">Product</th>
+                        <th className="px-6 py-3">Category</th>
+                        <th className="px-6 py-3">Price</th>
+                        {canAddProducts && <th className="px-6 py-3">Actions</th>}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {products.map((product) => (
+                        <tr key={product.id} className="bg-white border-b hover:bg-gray-50">
+                          <td className="px-6 py-4 font-medium">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-md bg-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+                                {product.image_url ? (
+                                  <img 
+                                    src={product.image_url} 
+                                    alt={product.name} 
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <PackageIcon className="h-5 w-5 text-gray-400" />
+                                )}
+                              </div>
+                              <div>
+                                <p className="font-medium">{product.name}</p>
+                                <p className="text-xs text-gray-500 truncate max-w-xs">{product.description}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4">{product.category || 'Uncategorized'}</td>
+                          <td className="px-6 py-4">
+                            {product.price 
+                              ? `$${parseFloat(product.price.toString()).toFixed(2)}` 
+                              : 'Not priced'
+                            }
+                          </td>
+                          {canAddProducts && (
+                            <td className="px-6 py-4">
+                              <div className="flex space-x-2">
+                                <Button variant="ghost" size="sm">
+                                  <Edit className="h-4 w-4" />
+                                </Button>
+                                <Button variant="ghost" size="sm" className="text-red-500">
+                                  <Trash className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </td>
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <PackageIcon className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-muted-foreground mb-4">
+                    No products found
+                  </p>
+                  {canAddProducts && (
+                    <Button onClick={() => setShowAddForm(true)}>
+                      <PlusIcon className="mr-2 h-4 w-4" />
+                      Add Your First Product
+                    </Button>
+                  )}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </>
+      )}
     </div>
   );
 };

@@ -152,7 +152,7 @@ const Sidebar = () => {
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/shipping")}>
                         <Link to="/dashboard/shipping">
                           <TruckIcon className="w-5 h-5" />
-                          <span>Shipping</span>
+                          <span>Shipments</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>

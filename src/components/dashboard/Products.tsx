@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { 
   Card, 
@@ -12,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useForm, UseFormReturn, FieldValues, DefaultValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { 
   Form, 
   FormControl, 
@@ -37,14 +36,14 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Product } from "@/types/supabase";
 
-type ProductFormValues = {
+interface ProductFormValues {
   name: string;
   description: string;
   price: string;
   sku: string;
   category: string;
   stock: string;
-};
+}
 
 const Products = () => {
   const { user } = useAuth();
@@ -55,18 +54,15 @@ const Products = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
-  // Using a different approach to prevent deep type instantiation
-  const defaultValues: DefaultValues<ProductFormValues> = {
-    name: '',
-    description: '',
-    price: '',
-    sku: '',
-    category: '',
-    stock: ''
-  };
-  
   const form = useForm<ProductFormValues>({
-    defaultValues
+    defaultValues: {
+      name: '',
+      description: '',
+      price: '',
+      sku: '',
+      category: '',
+      stock: ''
+    }
   });
   
   useEffect(() => {

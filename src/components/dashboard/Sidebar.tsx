@@ -120,7 +120,7 @@ const Sidebar = () => {
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/notes")}>
                       <Link to="/dashboard/notes">
                         <StickyNoteIcon className="w-5 h-5" />
-                        <span>Order Notes</span>
+                        <span>Order-Notes</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -142,7 +142,7 @@ const Sidebar = () => {
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/payments")}>
                       <Link to="/dashboard/payments">
                         <CreditCardIcon className="w-5 h-5" />
-                        <span>Payment Info</span>
+                        <span>Payments</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

@@ -353,7 +353,7 @@ const Notes = () => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-2xl">{filteredNotes.length}</CardTitle>
@@ -407,41 +407,40 @@ const Notes = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>Order</TableHead>
+                <TableHead>ID/Order</TableHead>
                 <TableHead>Title</TableHead>
-                <TableHead>Created By</TableHead>
+                <TableHead>Author</TableHead>
                 <TableHead>Date</TableHead>
-                <TableHead>Replies</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+                <TableHead className="text-center">Replies</TableHead>
+                <TableHead className="w-[50px]"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredNotes.length > 0 ? (
                 filteredNotes.map(note => (
-                  <TableRow key={note.id}>
-                    <TableCell className="font-medium">{note.id}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <ClipboardListIcon className="h-4 w-4 text-blue-600" />
+                  <TableRow key={note.id} className="py-1">
+                    <TableCell className="py-2">
+                      <div className="font-medium">{note.id}</div>
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                        <ClipboardListIcon className="h-3 w-3 text-blue-600" />
                         <span>{note.orderId}</span>
                       </div>
                     </TableCell>
-                    <TableCell>{note.title}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <span>{note.createdBy}</span>
+                    <TableCell className="py-2 max-w-[200px] truncate">{note.title}</TableCell>
+                    <TableCell className="py-2">
+                      <div className="flex items-center gap-1">
+                        <span className="text-sm truncate max-w-[80px]">{note.createdBy}</span>
                         {getRoleBadge(note.createdByRole)}
                       </div>
                     </TableCell>
-                    <TableCell>{formatDate(note.createdAt)}</TableCell>
-                    <TableCell>
+                    <TableCell className="py-2 text-sm whitespace-nowrap">{formatDate(note.createdAt)}</TableCell>
+                    <TableCell className="py-2 text-center">
                       <Badge>{note.replies.length}</Badge>
                     </TableCell>
-                    <TableCell className="text-right">
+                    <TableCell className="py-2">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
+                          <Button variant="ghost" size="icon" className="h-8 w-8">
                             <MoreHorizontal className="h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
@@ -676,7 +675,7 @@ const Notes = () => {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-10 text-muted-foreground">
+                  <TableCell colSpan={6} className="text-center py-10 text-muted-foreground">
                     No notes found matching your criteria
                   </TableCell>
                 </TableRow>

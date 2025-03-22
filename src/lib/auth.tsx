@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from 'react-router-dom';
 
-export type UserRole = 'admin' | 'customer' | 'supplier';
+export type UserRole = 'admin' | 'customer' | 'supplier'; // Changed from 'buyer' to 'customer'
 
 export interface User {
   id: string;

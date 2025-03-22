@@ -30,11 +30,11 @@ export function useSupabaseRealtime<T extends { id: string }, TableT extends str
     // Fetch initial data
     const fetchData = async () => {
       try {
-        // @ts-ignore - We're using a dynamic table name
+        // @ts-ignore - Using dynamic table name
         let query = supabase.from(table).select('*');
         
         if (filter && filterValue !== undefined) {
-          // @ts-ignore - We're using dynamic filtering
+          // @ts-ignore - Using dynamic filtering
           query = query.eq(filter, filterValue);
         }
         
@@ -46,7 +46,8 @@ export function useSupabaseRealtime<T extends { id: string }, TableT extends str
         
         // Ensure initialData has the expected shape with id property
         if (initialData && Array.isArray(initialData) && initialData.every(item => 'id' in item)) {
-          setData(initialData as T[]);
+          // Use explicit type assertion with 'as unknown as T[]' to safely convert
+          setData(initialData as unknown as T[]);
         } else {
           console.warn('Data returned from Supabase does not match expected type T');
           setData([]);
@@ -73,8 +74,9 @@ export function useSupabaseRealtime<T extends { id: string }, TableT extends str
           table
         },
         (payload) => {
-          const newRecord = payload.new as T;
-          const oldRecord = payload.old as T;
+          // Use explicit type assertions for payload data
+          const newRecord = payload.new as unknown as T;
+          const oldRecord = payload.old as unknown as T;
           
           if (payload.eventType === 'INSERT') {
             setData((currentData) => [...currentData, newRecord]);

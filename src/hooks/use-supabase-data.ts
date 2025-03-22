@@ -43,19 +43,22 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
       setLoading(true);
       
       // Cast table name to any to bypass TypeScript checking for dynamic tables
-      // This is necessary because we're allowing dynamic table names
-      // @ts-ignore - We're using a dynamic table name here
-      let query = supabase.from(table).select(select);
+      // @ts-ignore - Using dynamic table name
+      let query = supabase.from(table);
+      
+      // Explicitly type query with any to avoid TypeScript errors
+      // @ts-ignore - Dynamic query building
+      query = query.select(select);
       
       // Apply filters if provided
       if (filter) {
         Object.entries(filter).forEach(([key, value]) => {
           if (value !== undefined) {
             if (Array.isArray(value)) {
-              // @ts-ignore - We're using dynamic filtering
+              // @ts-ignore - Dynamic filtering
               query = query.in(key, value);
             } else {
-              // @ts-ignore - We're using dynamic filtering
+              // @ts-ignore - Dynamic filtering
               query = query.eq(key, value);
             }
           }
@@ -64,18 +67,18 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
       
       // Apply sorting
       if (order) {
-        // @ts-ignore - We're using dynamic ordering
+        // @ts-ignore - Dynamic ordering
         query = query.order(order.column, { ascending: order.ascending !== false });
       }
       
       // Apply limit
       if (limit) {
-        // @ts-ignore - We're using a dynamic limit
+        // @ts-ignore - Dynamic limit
         query = query.limit(limit);
       }
       
       const { data: responseData, error: responseError } = single
-        ? // @ts-ignore - We're using a dynamic single selection
+        ? // @ts-ignore - Dynamic single selection
           await query.single()
         : await query;
       
@@ -132,7 +135,7 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
   const create = async (newData: Partial<R>) => {
     try {
       setLoading(true);
-      // @ts-ignore - We're using a dynamic table name
+      // @ts-ignore - Using dynamic table access
       const { data: createdData, error: createError } = await supabase
         .from(table)
         .insert(newData as any)
@@ -164,7 +167,7 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
   const update = async (id: string, updates: Partial<R>) => {
     try {
       setLoading(true);
-      // @ts-ignore - We're using a dynamic table name
+      // @ts-ignore - Using dynamic table access
       const { data: updatedData, error: updateError } = await supabase
         .from(table)
         .update(updates as any)
@@ -197,7 +200,7 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
   const remove = async (id: string) => {
     try {
       setLoading(true);
-      // @ts-ignore - We're using a dynamic table name
+      // @ts-ignore - Using dynamic table access
       const { error: deleteError } = await supabase
         .from(table)
         .delete()

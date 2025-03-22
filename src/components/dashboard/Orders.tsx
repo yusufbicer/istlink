@@ -1,4 +1,5 @@
 
+// Fix the buyer/customer role mismatch in Orders.tsx
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -200,8 +201,8 @@ const Orders = () => {
       filtered = filtered.filter(order => order.supplier === supplierNameToFilter);
     }
     
-    // For buyer role, only show their own orders
-    if (user?.role === "buyer") {
+    // For customer role, only show their own orders
+    if (user?.role === "customer") {
       // For demo purposes, buyer with id 3 is "Fashion Retailer Inc." and buyer with id 4 is "Gadget World"
       const buyerNameToFilter = user.name.includes("Buyer") ? "Fashion Retailer Inc." : "Gadget World";
       filtered = filtered.filter(order => order.buyer === buyerNameToFilter);

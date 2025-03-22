@@ -1,3 +1,5 @@
+
+// Fix the buyer/customer role mismatch in Notes.tsx
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -139,7 +141,7 @@ const Notes = () => {
       return matchesSearch && (note.createdByRole === "supplier" || true);
     }
     
-    if (user?.role === "buyer") {
+    if (user?.role === "customer") {
       return matchesSearch && (note.createdBy === user.name || note.createdByRole === "buyer");
     }
     

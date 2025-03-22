@@ -6,7 +6,7 @@ import { toast } from './use-toast';
 import { useAuth } from '@/lib/auth';
 import type { Database } from '@/integrations/supabase/types';
 
-// Generic type for data fetching
+// Generic type for data fetching with explicit return type to avoid infinite type instantiation
 type FetchDataOptions<T> = {
   table: keyof Database['public']['Tables'];
   column?: string;
@@ -29,11 +29,12 @@ export function useSupabaseData<T>({
   transformResponse,
 }: FetchDataOptions<T>) {
   const { user } = useAuth();
+  // Use the table name directly to avoid infinite type recursion
   const tableName = dynamicTable(table);
 
   // Function to fetch data
-  const fetchData = async () => {
-    let query = supabase.from(tableName).select(select);
+  const fetchData = async (): Promise<T[]> => {
+    let query = supabase.from(String(tableName)).select(select);
 
     // Apply filters
     if (column && value !== undefined) {
@@ -85,7 +86,7 @@ export function useSupabaseData<T>({
 
   // Use React Query to fetch and cache data
   return useQuery({
-    queryKey: [table.toString(), column, value, JSON.stringify(filters), order, limit, select],
+    queryKey: [String(table), column, value, JSON.stringify(filters), order, limit, select],
     queryFn: fetchData,
     enabled: !!user, // Only fetch if user is authenticated
   });
@@ -97,9 +98,9 @@ export function useSupabaseCreate<T>(table: keyof Database['public']['Tables']) 
   const tableName = dynamicTable(table);
 
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: any): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(tableName)
+        .from(String(tableName))
         .insert(data)
         .select();
 
@@ -112,7 +113,7 @@ export function useSupabaseCreate<T>(table: keyof Database['public']['Tables']) 
     },
     onSuccess: () => {
       // Invalidate query cache for this table
-      queryClient.invalidateQueries({ queryKey: [table.toString()] });
+      queryClient.invalidateQueries({ queryKey: [String(table)] });
       toast({
         title: "Success",
         description: "Data created successfully",
@@ -134,9 +135,9 @@ export function useSupabaseUpdate<T>(table: keyof Database['public']['Tables']) 
   const tableName = dynamicTable(table);
 
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+    mutationFn: async ({ id, data }: { id: string; data: any }): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(tableName)
+        .from(String(tableName))
         .update(data)
         .eq('id', id)
         .select();
@@ -150,7 +151,7 @@ export function useSupabaseUpdate<T>(table: keyof Database['public']['Tables']) 
     },
     onSuccess: () => {
       // Invalidate query cache for this table
-      queryClient.invalidateQueries({ queryKey: [table.toString()] });
+      queryClient.invalidateQueries({ queryKey: [String(table)] });
       toast({
         title: "Success",
         description: "Data updated successfully",
@@ -172,9 +173,9 @@ export function useSupabaseDelete(table: keyof Database['public']['Tables']) {
   const tableName = dynamicTable(table);
 
   return useMutation({
-    mutationFn: async (id: string) => {
+    mutationFn: async (id: string): Promise<string> => {
       const { error } = await supabase
-        .from(tableName)
+        .from(String(tableName))
         .delete()
         .eq('id', id);
 
@@ -187,7 +188,7 @@ export function useSupabaseDelete(table: keyof Database['public']['Tables']) {
     },
     onSuccess: () => {
       // Invalidate query cache for this table
-      queryClient.invalidateQueries({ queryKey: [table.toString()] });
+      queryClient.invalidateQueries({ queryKey: [String(table)] });
       toast({
         title: "Success",
         description: "Data deleted successfully",

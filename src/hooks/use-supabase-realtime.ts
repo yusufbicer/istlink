@@ -22,7 +22,7 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
     const fetchInitialData = async () => {
       try {
         setLoading(true);
-        let query = supabase.from(tableName).select('*');
+        let query = supabase.from(String(tableName)).select('*');
         
         // Apply filter if provided
         if (filter) {
@@ -51,27 +51,31 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
     const channelName = `${String(table)}-changes`;
     const channel = supabase
       .channel(channelName)
-      .on('postgres_changes', {
-        event,
-        schema: 'public',
-        table: String(tableName)
-      }, (payload) => {
-        console.log('Realtime update:', payload);
-        
-        if (payload.eventType === 'INSERT') {
-          setData((prev) => [...prev, payload.new as unknown as T]);
-        } else if (payload.eventType === 'UPDATE') {
-          setData((prev) => 
-            prev.map((item: any) => 
-              item.id === payload.new.id ? (payload.new as unknown as T) : item
-            )
-          );
-        } else if (payload.eventType === 'DELETE') {
-          setData((prev) => 
-            prev.filter((item: any) => item.id !== payload.old.id)
-          );
+      .on(
+        'postgres_changes', 
+        {
+          event,
+          schema: 'public',
+          table: String(tableName)
+        },
+        (payload) => {
+          console.log('Realtime update:', payload);
+          
+          if (payload.eventType === 'INSERT') {
+            setData((prev) => [...prev, payload.new as unknown as T]);
+          } else if (payload.eventType === 'UPDATE') {
+            setData((prev) => 
+              prev.map((item: any) => 
+                item.id === payload.new.id ? (payload.new as unknown as T) : item
+              )
+            );
+          } else if (payload.eventType === 'DELETE') {
+            setData((prev) => 
+              prev.filter((item: any) => item.id !== payload.old.id)
+            );
+          }
         }
-      })
+      )
       .subscribe();
 
     channelRef.current = channel;

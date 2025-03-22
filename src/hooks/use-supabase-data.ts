@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase, dynamicTable } from '@/integrations/supabase/client';
 import { toast } from './use-toast';
 import { useAuth } from '@/lib/auth';
+import type { Database } from '@/integrations/supabase/types';
 
 // Generic type for data fetching
 type FetchDataOptions<T> = {

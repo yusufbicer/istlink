@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { supabase, dynamicTable } from '@/integrations/supabase/client';
 import { RealtimeChannel } from '@supabase/supabase-js';
+import type { Database } from '@/integrations/supabase/types';
 
 type RealtimeOptions = {
   table: keyof Database['public']['Tables'];
@@ -47,12 +48,13 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
     fetchInitialData();
 
     // Set up real-time subscription
+    const channelName = `${String(table)}-changes`;
     const channel = supabase
-      .channel(`${table}-changes`)
+      .channel(channelName)
       .on('postgres_changes', {
         event,
         schema: 'public',
-        table: tableName
+        table: String(tableName)
       }, (payload) => {
         console.log('Realtime update:', payload);
         

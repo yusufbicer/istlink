@@ -25,7 +25,7 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
     const fetchInitialData = async () => {
       try {
         setLoading(true);
-        let query = supabase.from(table).select('*');
+        let query = supabase.from(table as TableNames).select('*');
         
         // Apply filter if provided
         if (filter) {
@@ -53,11 +53,10 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
     // Set up real-time subscription
     const channelName = `${table}-changes`;
     
-    // Fixed channel subscription syntax
+    // Fix channel subscription syntax
     const channel = supabase
       .channel(channelName)
-      .on(
-        'postgres_changes', 
+      .on('postgres_changes', 
         {
           event: event,
           schema: 'public',

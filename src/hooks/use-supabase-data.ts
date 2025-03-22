@@ -36,45 +36,45 @@ export function useSupabaseData<T>({
   
   // Function to fetch data
   const fetchData = async (): Promise<T[]> => {
-    // Cast the table name to the specific TableNames type to satisfy TypeScript
-    let query = supabase.from(table as TableNames).select(select);
+    // Use type assertion to fix the deep instantiation issue
+    const query = supabase.from(table as TableNames).select(select);
 
     // Apply filters
     if (column && value !== undefined) {
-      query = query.eq(column, value);
+      query.eq(column, value);
     }
 
     // Apply additional filters
     filters.forEach(filter => {
       if (filter.operator === 'eq') {
-        query = query.eq(filter.column, filter.value);
+        query.eq(filter.column, filter.value);
       } else if (filter.operator === 'neq') {
-        query = query.neq(filter.column, filter.value);
+        query.neq(filter.column, filter.value);
       } else if (filter.operator === 'gt') {
-        query = query.gt(filter.column, filter.value);
+        query.gt(filter.column, filter.value);
       } else if (filter.operator === 'lt') {
-        query = query.lt(filter.column, filter.value);
+        query.lt(filter.column, filter.value);
       } else if (filter.operator === 'gte') {
-        query = query.gte(filter.column, filter.value);
+        query.gte(filter.column, filter.value);
       } else if (filter.operator === 'lte') {
-        query = query.lte(filter.column, filter.value);
+        query.lte(filter.column, filter.value);
       } else if (filter.operator === 'in') {
-        query = query.in(filter.column, filter.value);
+        query.in(filter.column, filter.value);
       } else if (filter.operator === 'is') {
-        query = query.is(filter.column, filter.value);
+        query.is(filter.column, filter.value);
       }
     });
 
     // Order results
     if (order) {
-      query = query.order(order.column, {
+      query.order(order.column, {
         ascending: order.ascending !== false,
       });
     }
 
     // Limit results
     if (limit) {
-      query = query.limit(limit);
+      query.limit(limit);
     }
 
     const { data, error } = await query;

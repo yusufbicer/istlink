@@ -35,6 +35,7 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
     try {
       setLoading(true);
       
+      // @ts-ignore - We're using a dynamic table name here
       let query = supabase.from(table).select(select);
       
       // Apply filters if provided
@@ -42,8 +43,10 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
         Object.entries(filter).forEach(([key, value]) => {
           if (value !== undefined) {
             if (Array.isArray(value)) {
+              // @ts-ignore - We're using dynamic filtering
               query = query.in(key, value);
             } else {
+              // @ts-ignore - We're using dynamic filtering
               query = query.eq(key, value);
             }
           }
@@ -52,23 +55,26 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
       
       // Apply sorting
       if (order) {
+        // @ts-ignore - We're using dynamic ordering
         query = query.order(order.column, { ascending: order.ascending !== false });
       }
       
       // Apply limit
       if (limit) {
+        // @ts-ignore - We're using a dynamic limit
         query = query.limit(limit);
       }
       
       const { data: responseData, error: responseError } = single
-        ? await query.single()
+        ? // @ts-ignore - We're using a dynamic single selection
+          await query.single()
         : await query;
       
       if (responseError) {
         throw responseError;
       }
       
-      setData(responseData);
+      setData(responseData as T | T[]);
       setError(null);
     } catch (err: any) {
       console.error(`Error fetching data from ${table}:`, err);
@@ -117,9 +123,10 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
   const create = async (newData: Partial<T>) => {
     try {
       setLoading(true);
+      // @ts-ignore - We're using a dynamic table name
       const { data: createdData, error: createError } = await supabase
         .from(table)
-        .insert(newData)
+        .insert(newData as any)
         .select();
         
       if (createError) {
@@ -148,9 +155,10 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
   const update = async (id: string, updates: Partial<T>) => {
     try {
       setLoading(true);
+      // @ts-ignore - We're using a dynamic table name
       const { data: updatedData, error: updateError } = await supabase
         .from(table)
-        .update(updates)
+        .update(updates as any)
         .eq('id', id)
         .select();
         
@@ -180,6 +188,7 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
   const remove = async (id: string) => {
     try {
       setLoading(true);
+      // @ts-ignore - We're using a dynamic table name
       const { error: deleteError } = await supabase
         .from(table)
         .delete()

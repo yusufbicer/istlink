@@ -11,7 +11,7 @@ interface UseRealtimeOptions {
   filterValue?: any;
 }
 
-export function useSupabaseRealtime<T>(options: UseRealtimeOptions) {
+export function useSupabaseRealtime<T extends { id: string }>(options: UseRealtimeOptions) {
   const { table, schema = 'public', event = '*', filter, filterValue } = options;
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -23,9 +23,11 @@ export function useSupabaseRealtime<T>(options: UseRealtimeOptions) {
     // Fetch initial data
     const fetchData = async () => {
       try {
+        // @ts-ignore - We're using a dynamic table name
         let query = supabase.from(table).select('*');
         
         if (filter && filterValue !== undefined) {
+          // @ts-ignore - We're using dynamic filtering
           query = query.eq(filter, filterValue);
         }
         
@@ -52,7 +54,7 @@ export function useSupabaseRealtime<T>(options: UseRealtimeOptions) {
       .on(
         'postgres_changes',
         {
-          event,
+          event: event as any,
           schema,
           table
         },
@@ -64,13 +66,13 @@ export function useSupabaseRealtime<T>(options: UseRealtimeOptions) {
             setData((currentData) => [...currentData, newRecord]);
           } else if (payload.eventType === 'UPDATE') {
             setData((currentData) =>
-              currentData.map((item: any) =>
+              currentData.map((item) =>
                 item.id === newRecord.id ? newRecord : item
               )
             );
           } else if (payload.eventType === 'DELETE') {
             setData((currentData) =>
-              currentData.filter((item: any) => item.id !== oldRecord.id)
+              currentData.filter((item) => item.id !== oldRecord.id)
             );
           }
         }

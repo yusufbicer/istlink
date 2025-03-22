@@ -14,8 +14,15 @@ export interface UserProfile {
   avatar?: string;
 }
 
+// Extend the User type to include profile data
+export interface ExtendedUser extends User {
+  name: string;
+  avatar?: string;
+  role: UserRole;
+}
+
 interface AuthContextType {
-  user: User | null;
+  user: ExtendedUser | null;
   profile: UserProfile | null;
   session: Session | null;
   isLoading: boolean;
@@ -29,7 +36,7 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 // Auth provider component
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<ExtendedUser | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -62,12 +69,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, currentSession) => {
         setSession(currentSession);
-        setUser(currentSession?.user ?? null);
-
+        
         if (currentSession?.user) {
           const userProfile = await fetchProfile(currentSession.user.id);
           setProfile(userProfile);
+          
+          // Create an extended user with profile data
+          if (userProfile) {
+            const extendedUser: ExtendedUser = {
+              ...currentSession.user,
+              name: userProfile.name,
+              avatar: userProfile.avatar,
+              role: userProfile.role
+            };
+            setUser(extendedUser);
+          } else {
+            setUser(null);
+          }
         } else {
+          setUser(null);
           setProfile(null);
         }
 
@@ -78,11 +98,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // THEN check for existing session
     supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
       setSession(currentSession);
-      setUser(currentSession?.user ?? null);
-
+      
       if (currentSession?.user) {
         const userProfile = await fetchProfile(currentSession.user.id);
         setProfile(userProfile);
+        
+        // Create an extended user with profile data
+        if (userProfile) {
+          const extendedUser: ExtendedUser = {
+            ...currentSession.user,
+            name: userProfile.name,
+            avatar: userProfile.avatar,
+            role: userProfile.role
+          };
+          setUser(extendedUser);
+        }
       }
 
       setIsLoading(false);
@@ -161,46 +191,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         variant: "destructive",
       });
       throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Use demo users for local development
-  const useDemoUser = async (demoEmail: string) => {
-    setIsLoading(true);
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: demoEmail,
-        password: 'password'
-      });
-
-      if (error) {
-        // If the demo user doesn't exist, create it
-        if (error.message.includes('Invalid login credentials')) {
-          const role = demoEmail.includes('buyer') ? 'buyer' : 
-                       demoEmail.includes('supplier') ? 'supplier' : 'admin';
-          
-          const name = demoEmail.includes('buyer') ? 'Buyer Demo' : 
-                       demoEmail.includes('supplier') ? 'Supplier Demo' : 'Admin Demo';
-          
-          await register(name, demoEmail, 'password', role as UserRole);
-          
-          // Try logging in again
-          await supabase.auth.signInWithPassword({
-            email: demoEmail,
-            password: 'password'
-          });
-        } else {
-          throw error;
-        }
-      }
-    } catch (error: any) {
-      toast({
-        title: "Demo login error",
-        description: error.message || 'Failed to login with demo account',
-        variant: "destructive",
-      });
     } finally {
       setIsLoading(false);
     }

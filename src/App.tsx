@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/lib/auth";
+import WhatsAppButton from "./components/common/WhatsAppButton";
 
 // Pages
 import Index from "./pages/Index";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/dashboard/blog-management" element={<BlogManagement />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <WhatsAppButton />
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>

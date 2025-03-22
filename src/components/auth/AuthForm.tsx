@@ -8,7 +8,6 @@ import { useAuth, UserRole } from '@/lib/auth';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { User, UserPlus, Loader2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 
 interface AuthFormProps {
   type: 'login' | 'register';
@@ -45,32 +44,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
           description: "Your account has been created.",
         });
       }
-      navigate('/dashboard');
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
-      toast({
-        title: "Error",
-        description: err.message || 'An error occurred',
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDemoLogin = async (demoEmail: string) => {
-    setIsLoading(true);
-    try {
-      await supabase.auth.signInWithPassword({
-        email: demoEmail,
-        password: 'password'
-      });
-      
-      toast({
-        title: "Demo Login",
-        description: `Logged in as ${demoEmail}`,
-      });
-      
       navigate('/dashboard');
     } catch (err: any) {
       setError(err.message || 'An error occurred');
@@ -208,21 +181,30 @@ const AuthForm = ({ type }: AuthFormProps) => {
             <div className="grid grid-cols-3 gap-2 text-xs">
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => handleDemoLogin('buyer@example.com')}
+                onClick={() => {
+                  setEmail('buyer@example.com');
+                  setPassword('password');
+                }}
               >
                 <div className="font-medium">Customer</div>
                 <div className="text-gray-500">buyer@example.com</div>
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => handleDemoLogin('supplier@example.com')}
+                onClick={() => {
+                  setEmail('supplier@example.com');
+                  setPassword('password');
+                }}
               >
                 <div className="font-medium">Supplier</div>
                 <div className="text-gray-500">supplier@example.com</div>
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => handleDemoLogin('admin@example.com')}
+                onClick={() => {
+                  setEmail('admin@example.com');
+                  setPassword('password');
+                }}
               >
                 <div className="font-medium">Admin</div>
                 <div className="text-gray-500">admin@example.com</div>

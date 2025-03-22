@@ -4,7 +4,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/lib/auth";
-import { BellIcon, SearchIcon } from "lucide-react";
+import { BellIcon, SearchIcon, Zap, Atom } from "lucide-react";
 import { useIsMobile, useIsTablet } from "@/hooks/use-mobile";
 import {
   DropdownMenu,
@@ -33,9 +33,6 @@ const Header = () => {
     }
   }, []);
 
-  // Get the first name if available, otherwise use a default
-  const firstName = user?.name ? user.name.split(' ')[0] : 'User';
-
   return (
     <header className="sticky top-0 z-10 w-full bg-white border-b border-gray-100">
       <div className="h-16 px-4 flex items-center justify-between">
@@ -44,7 +41,7 @@ const Header = () => {
           
           <div className="hidden md:block max-w-[200px] lg:max-w-[calc(100vw-900px)] overflow-hidden pr-2">
             <h1 className="text-xl font-semibold truncate">
-              {greeting}, {firstName}
+              {greeting}, {user?.name.split(' ')[0]}
             </h1>
             <p className="text-sm text-muted-foreground truncate">
               {isTablet ? "Welcome to your dashboard" : "Here's what's happening with your account today."}
@@ -121,13 +118,13 @@ const Header = () => {
                 {user?.avatar ? (
                   <img 
                     src={user.avatar} 
-                    alt={user.name || 'User'} 
+                    alt={user.name} 
                     className="h-8 w-8 rounded-full object-cover"
                   />
                 ) : (
                   <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
                     <span className="text-blue-600 font-medium">
-                      {user?.name ? user.name.charAt(0) : 'U'}
+                      {user?.name.charAt(0)}
                     </span>
                   </div>
                 )}

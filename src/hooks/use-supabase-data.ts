@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { supabase, type TableName } from '@/integrations/supabase/client';
+import { supabase, dynamicTable, type TableName } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth';
 import { useToast } from '@/hooks/use-toast';
 import { Tables } from '@/integrations/supabase/types';
@@ -42,11 +42,10 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
     try {
       setLoading(true);
       
-      // Cast table name to any to bypass TypeScript checking for dynamic tables
-      // @ts-ignore - Using dynamic table name
-      let query = supabase.from(table);
+      // Use the dynamicTable helper to cast the string to a valid table name
+      let query = supabase.from(dynamicTable(table));
       
-      // Explicitly type query with any to avoid TypeScript errors
+      // Continue with the rest of the query building
       // @ts-ignore - Dynamic query building
       query = query.select(select);
       
@@ -135,9 +134,9 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
   const create = async (newData: Partial<R>) => {
     try {
       setLoading(true);
-      // @ts-ignore - Using dynamic table access
+      // Use the dynamicTable helper for proper type casting
       const { data: createdData, error: createError } = await supabase
-        .from(table)
+        .from(dynamicTable(table))
         .insert(newData as any)
         .select();
         
@@ -167,9 +166,9 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
   const update = async (id: string, updates: Partial<R>) => {
     try {
       setLoading(true);
-      // @ts-ignore - Using dynamic table access
+      // Use the dynamicTable helper for proper type casting
       const { data: updatedData, error: updateError } = await supabase
-        .from(table)
+        .from(dynamicTable(table))
         .update(updates as any)
         .eq('id', id)
         .select();
@@ -200,9 +199,9 @@ export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseS
   const remove = async (id: string) => {
     try {
       setLoading(true);
-      // @ts-ignore - Using dynamic table access
+      // Use the dynamicTable helper for proper type casting
       const { error: deleteError } = await supabase
-        .from(table)
+        .from(dynamicTable(table))
         .delete()
         .eq('id', id);
         

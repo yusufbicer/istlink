@@ -20,3 +20,8 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
 
 // Add type helper for dynamic table access
 export type TableName = keyof Database['public']['Tables'];
+
+// Helper function to handle dynamic table names with proper type casting
+export function dynamicTable(tableName: string) {
+  return tableName as TableName;
+}

@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { supabase, type TableName } from '@/integrations/supabase/client';
+import { supabase, dynamicTable, type TableName } from '@/integrations/supabase/client';
 import { Tables } from '@/integrations/supabase/types';
 
 interface UseRealtimeOptions {
@@ -30,8 +30,8 @@ export function useSupabaseRealtime<T extends { id: string }, TableT extends str
     // Fetch initial data
     const fetchData = async () => {
       try {
-        // @ts-ignore - Using dynamic table name
-        let query = supabase.from(table).select('*');
+        // Use the dynamicTable helper for proper type casting
+        let query = supabase.from(dynamicTable(table)).select('*');
         
         if (filter && filterValue !== undefined) {
           // @ts-ignore - Using dynamic filtering

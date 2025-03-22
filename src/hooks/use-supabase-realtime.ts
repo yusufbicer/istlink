@@ -4,8 +4,12 @@ import { supabase } from '@/integrations/supabase/client';
 import { RealtimeChannel } from '@supabase/supabase-js';
 import type { Database } from '@/integrations/supabase/types';
 
+// Use the same table name type as in use-supabase-data.ts
+type TableNames = 'blog_posts' | 'consolidated_orders' | 'consolidations' | 'notes' | 
+                  'order_items' | 'orders' | 'payments' | 'products' | 'profiles' | 'shipping';
+
 type RealtimeOptions = {
-  table: keyof Database['public']['Tables'];
+  table: TableNames;
   event?: 'INSERT' | 'UPDATE' | 'DELETE' | '*';
   filter?: string;
 };
@@ -21,7 +25,7 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
     const fetchInitialData = async () => {
       try {
         setLoading(true);
-        let query = supabase.from(table as string).select('*');
+        let query = supabase.from(table).select('*');
         
         // Apply filter if provided
         if (filter) {
@@ -47,32 +51,36 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
     fetchInitialData();
 
     // Set up real-time subscription
-    const channelName = `${String(table)}-changes`;
+    const channelName = `${table}-changes`;
     
-    // Fix the channel subscription syntax
+    // Fixed channel subscription syntax
     const channel = supabase
       .channel(channelName)
-      .on('postgres_changes', {
-        event: event,
-        schema: 'public',
-        table: String(table)
-      }, (payload) => {
-        console.log('Realtime update:', payload);
-        
-        if (payload.eventType === 'INSERT') {
-          setData((prev) => [...prev, payload.new as unknown as T]);
-        } else if (payload.eventType === 'UPDATE') {
-          setData((prev) => 
-            prev.map((item: any) => 
-              item.id === payload.new.id ? (payload.new as unknown as T) : item
-            )
-          );
-        } else if (payload.eventType === 'DELETE') {
-          setData((prev) => 
-            prev.filter((item: any) => item.id !== payload.old.id)
-          );
+      .on(
+        'postgres_changes', 
+        { 
+          event: event,
+          schema: 'public',
+          table: table
+        },
+        (payload) => {
+          console.log('Realtime update:', payload);
+          
+          if (payload.eventType === 'INSERT') {
+            setData((prev) => [...prev, payload.new as unknown as T]);
+          } else if (payload.eventType === 'UPDATE') {
+            setData((prev) => 
+              prev.map((item: any) => 
+                item.id === payload.new.id ? (payload.new as unknown as T) : item
+              )
+            );
+          } else if (payload.eventType === 'DELETE') {
+            setData((prev) => 
+              prev.filter((item: any) => item.id !== payload.old.id)
+            );
+          }
         }
-      })
+      )
       .subscribe();
 
     channelRef.current = channel;

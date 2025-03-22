@@ -6,12 +6,13 @@ import { toast } from './use-toast';
 import { useAuth } from '@/lib/auth';
 import type { Database } from '@/integrations/supabase/types';
 
-// Define a simpler type for table names to avoid deep instantiation
-type TableName = keyof Database['public']['Tables'];
+// Define our table type more directly to avoid deep instantiation
+type TableNames = 'blog_posts' | 'consolidated_orders' | 'consolidations' | 'notes' | 
+                 'order_items' | 'orders' | 'payments' | 'products' | 'profiles' | 'shipping';
 
 // Generic type for data fetching
 type FetchDataOptions<T> = {
-  table: TableName;
+  table: TableNames;
   column?: string;
   value?: string | number | boolean;
   order?: { column: string; ascending?: boolean };
@@ -35,8 +36,8 @@ export function useSupabaseData<T>({
   
   // Function to fetch data
   const fetchData = async (): Promise<T[]> => {
-    // Use the table name directly
-    let query = supabase.from(table as string).select(select);
+    // Use the table name directly - now properly typed
+    let query = supabase.from(table).select(select);
 
     // Apply filters
     if (column && value !== undefined) {
@@ -88,20 +89,20 @@ export function useSupabaseData<T>({
 
   // Use React Query to fetch and cache data
   return useQuery({
-    queryKey: [String(table), column, value, JSON.stringify(filters), order, limit, select],
+    queryKey: [table, column, value, JSON.stringify(filters), order, limit, select],
     queryFn: fetchData,
     enabled: !!user, // Only fetch if user is authenticated
   });
 }
 
 // Hook to create data
-export function useSupabaseCreate<T>(table: TableName) {
+export function useSupabaseCreate<T>(table: TableNames) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: any): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(table as string)
+        .from(table)
         .insert(data)
         .select();
 
@@ -114,7 +115,7 @@ export function useSupabaseCreate<T>(table: TableName) {
     },
     onSuccess: () => {
       // Invalidate query cache for this table
-      queryClient.invalidateQueries({ queryKey: [String(table)] });
+      queryClient.invalidateQueries({ queryKey: [table] });
       toast({
         title: "Success",
         description: "Data created successfully",
@@ -131,13 +132,13 @@ export function useSupabaseCreate<T>(table: TableName) {
 }
 
 // Hook to update data
-export function useSupabaseUpdate<T>(table: TableName) {
+export function useSupabaseUpdate<T>(table: TableNames) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(table as string)
+        .from(table)
         .update(data)
         .eq('id', id)
         .select();
@@ -151,7 +152,7 @@ export function useSupabaseUpdate<T>(table: TableName) {
     },
     onSuccess: () => {
       // Invalidate query cache for this table
-      queryClient.invalidateQueries({ queryKey: [String(table)] });
+      queryClient.invalidateQueries({ queryKey: [table] });
       toast({
         title: "Success",
         description: "Data updated successfully",
@@ -168,13 +169,13 @@ export function useSupabaseUpdate<T>(table: TableName) {
 }
 
 // Hook to delete data
-export function useSupabaseDelete(table: TableName) {
+export function useSupabaseDelete(table: TableNames) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (id: string): Promise<string> => {
       const { error } = await supabase
-        .from(table as string)
+        .from(table)
         .delete()
         .eq('id', id);
 
@@ -187,7 +188,7 @@ export function useSupabaseDelete(table: TableName) {
     },
     onSuccess: () => {
       // Invalidate query cache for this table
-      queryClient.invalidateQueries({ queryKey: [String(table)] });
+      queryClient.invalidateQueries({ queryKey: [table] });
       toast({
         title: "Success",
         description: "Data deleted successfully",

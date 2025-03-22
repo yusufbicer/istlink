@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase, dynamicTable } from '@/integrations/supabase/client';
@@ -6,7 +5,7 @@ import { toast } from './use-toast';
 import { useAuth } from '@/lib/auth';
 import type { Database } from '@/integrations/supabase/types';
 
-// Generic type for data fetching with explicit return type to avoid infinite type instantiation
+// Generic type for data fetching without causing infinite type instantiation
 type FetchDataOptions<T> = {
   table: keyof Database['public']['Tables'];
   column?: string;
@@ -29,12 +28,11 @@ export function useSupabaseData<T>({
   transformResponse,
 }: FetchDataOptions<T>) {
   const { user } = useAuth();
-  // Get a type-safe table name
-  const tableName = table;
-
+  
   // Function to fetch data
   const fetchData = async (): Promise<T[]> => {
-    let query = supabase.from(tableName).select(select);
+    // Use the table name directly as we've ensured it's type-safe
+    let query = supabase.from(table).select(select);
 
     // Apply filters
     if (column && value !== undefined) {
@@ -95,12 +93,11 @@ export function useSupabaseData<T>({
 // Hook to create data
 export function useSupabaseCreate<T>(table: keyof Database['public']['Tables']) {
   const queryClient = useQueryClient();
-  const tableName = table;
 
   return useMutation({
     mutationFn: async (data: any): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(tableName)
+        .from(table)
         .insert(data)
         .select();
 

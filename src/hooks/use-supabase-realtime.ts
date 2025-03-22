@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { supabase, dynamicTable } from '@/integrations/supabase/client';
+import { supabase } from '@/integrations/supabase/client';
 import { RealtimeChannel } from '@supabase/supabase-js';
 import type { Database } from '@/integrations/supabase/types';
 
@@ -15,14 +15,13 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const channelRef = useRef<RealtimeChannel | null>(null);
-  const tableName = table;
 
   useEffect(() => {
     // Initial data fetch
     const fetchInitialData = async () => {
       try {
         setLoading(true);
-        let query = supabase.from(tableName).select('*');
+        let query = supabase.from(table).select('*');
         
         // Apply filter if provided
         if (filter) {
@@ -53,10 +52,10 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
       .channel(channelName)
       .on(
         'postgres_changes', 
-        {
+        { 
           event,
           schema: 'public',
-          table: String(tableName),
+          table: String(table),
         },
         (payload) => {
           console.log('Realtime update:', payload);

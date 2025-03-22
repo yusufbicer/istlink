@@ -1,9 +1,11 @@
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, type TableName } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth';
 import { useToast } from '@/hooks/use-toast';
+import { Tables } from '@/integrations/supabase/types';
 
+// Define types for the options
 interface UseSupabaseDataOptions {
   table: string;
   select?: string;
@@ -14,7 +16,12 @@ interface UseSupabaseDataOptions {
   realtime?: boolean;
 }
 
-export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
+// Helper type to get row type from table name
+type TableRow<T extends string> = T extends TableName 
+  ? Tables<T>
+  : Record<string, any>;
+
+export function useSupabaseData<T extends string, R = TableRow<T>>(options: UseSupabaseDataOptions) {
   const { 
     table, 
     select = '*', 
@@ -25,7 +32,7 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
     realtime = false
   } = options;
   
-  const [data, setData] = useState<T | T[] | null>(null);
+  const [data, setData] = useState<R | R[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
   const { session } = useAuth();
@@ -35,6 +42,8 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
     try {
       setLoading(true);
       
+      // Cast table name to any to bypass TypeScript checking for dynamic tables
+      // This is necessary because we're allowing dynamic table names
       // @ts-ignore - We're using a dynamic table name here
       let query = supabase.from(table).select(select);
       
@@ -74,7 +83,7 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
         throw responseError;
       }
       
-      setData(responseData as T | T[]);
+      setData(responseData as R | R[]);
       setError(null);
     } catch (err: any) {
       console.error(`Error fetching data from ${table}:`, err);
@@ -120,7 +129,7 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
   }, [session, table, JSON.stringify(filter), JSON.stringify(order), limit, single, realtime]);
 
   // CRUD functions
-  const create = async (newData: Partial<T>) => {
+  const create = async (newData: Partial<R>) => {
     try {
       setLoading(true);
       // @ts-ignore - We're using a dynamic table name
@@ -152,7 +161,7 @@ export function useSupabaseData<T>(options: UseSupabaseDataOptions) {
     }
   };
   
-  const update = async (id: string, updates: Partial<T>) => {
+  const update = async (id: string, updates: Partial<R>) => {
     try {
       setLoading(true);
       // @ts-ignore - We're using a dynamic table name

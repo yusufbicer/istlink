@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
-import { RealtimeChannel } from '@supabase/supabase-js';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, type TableName } from '@/integrations/supabase/client';
+import { Tables } from '@/integrations/supabase/types';
 
 interface UseRealtimeOptions {
   table: string;
@@ -11,7 +11,14 @@ interface UseRealtimeOptions {
   filterValue?: any;
 }
 
-export function useSupabaseRealtime<T extends { id: string }>(options: UseRealtimeOptions) {
+// Helper type to get row type from table name
+type TableRow<T extends string> = T extends TableName 
+  ? Tables<T>
+  : Record<string, any>;
+
+export function useSupabaseRealtime<T extends { id: string }, TableT extends string = string>(
+  options: UseRealtimeOptions
+) {
   const { table, schema = 'public', event = '*', filter, filterValue } = options;
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -37,7 +44,14 @@ export function useSupabaseRealtime<T extends { id: string }>(options: UseRealti
           throw initialError;
         }
         
-        setData(initialData as T[]);
+        // Ensure initialData has the expected shape with id property
+        if (initialData && Array.isArray(initialData) && initialData.every(item => 'id' in item)) {
+          setData(initialData as T[]);
+        } else {
+          console.warn('Data returned from Supabase does not match expected type T');
+          setData([]);
+        }
+        
         setLoading(false);
       } catch (err: any) {
         console.error('Error fetching data:', err);

@@ -17,3 +17,6 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     storage: typeof window !== 'undefined' ? localStorage : undefined
   }
 });
+
+// Add type helper for dynamic table access
+export type TableName = keyof Database['public']['Tables'];

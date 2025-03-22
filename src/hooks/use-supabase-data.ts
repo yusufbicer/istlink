@@ -29,12 +29,12 @@ export function useSupabaseData<T>({
   transformResponse,
 }: FetchDataOptions<T>) {
   const { user } = useAuth();
-  // Use the table name directly to avoid infinite type recursion
-  const tableName = dynamicTable(table);
+  // Get a type-safe table name
+  const tableName = table;
 
   // Function to fetch data
   const fetchData = async (): Promise<T[]> => {
-    let query = supabase.from(String(tableName)).select(select);
+    let query = supabase.from(tableName).select(select);
 
     // Apply filters
     if (column && value !== undefined) {
@@ -95,12 +95,12 @@ export function useSupabaseData<T>({
 // Hook to create data
 export function useSupabaseCreate<T>(table: keyof Database['public']['Tables']) {
   const queryClient = useQueryClient();
-  const tableName = dynamicTable(table);
+  const tableName = table;
 
   return useMutation({
     mutationFn: async (data: any): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(String(tableName))
+        .from(tableName)
         .insert(data)
         .select();
 
@@ -132,12 +132,12 @@ export function useSupabaseCreate<T>(table: keyof Database['public']['Tables']) 
 // Hook to update data
 export function useSupabaseUpdate<T>(table: keyof Database['public']['Tables']) {
   const queryClient = useQueryClient();
-  const tableName = dynamicTable(table);
+  const tableName = table;
 
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(String(tableName))
+        .from(tableName)
         .update(data)
         .eq('id', id)
         .select();
@@ -170,12 +170,12 @@ export function useSupabaseUpdate<T>(table: keyof Database['public']['Tables']) 
 // Hook to delete data
 export function useSupabaseDelete(table: keyof Database['public']['Tables']) {
   const queryClient = useQueryClient();
-  const tableName = dynamicTable(table);
+  const tableName = table;
 
   return useMutation({
     mutationFn: async (id: string): Promise<string> => {
       const { error } = await supabase
-        .from(String(tableName))
+        .from(tableName)
         .delete()
         .eq('id', id);
 

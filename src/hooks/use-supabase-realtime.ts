@@ -15,14 +15,14 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const channelRef = useRef<RealtimeChannel | null>(null);
-  const tableName = dynamicTable(table);
+  const tableName = table;
 
   useEffect(() => {
     // Initial data fetch
     const fetchInitialData = async () => {
       try {
         setLoading(true);
-        let query = supabase.from(String(tableName)).select('*');
+        let query = supabase.from(tableName).select('*');
         
         // Apply filter if provided
         if (filter) {
@@ -56,7 +56,7 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
         {
           event,
           schema: 'public',
-          table: String(tableName)
+          table: String(tableName),
         },
         (payload) => {
           console.log('Realtime update:', payload);

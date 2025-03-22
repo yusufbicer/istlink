@@ -34,6 +34,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { 
   SettingsIcon, 
   UserIcon, 
@@ -87,7 +88,6 @@ const Settings = () => {
   });
 
   const handleProfileUpdate = () => {
-    // In a real app, this would call an API to update the profile
     toast({
       title: "Profile Updated",
       description: "Your profile information has been updated successfully."
@@ -96,7 +96,6 @@ const Settings = () => {
   };
 
   const handlePasswordChange = () => {
-    // Validate passwords
     if (passwordData.newPassword !== passwordData.confirmPassword) {
       toast({
         title: "Password Mismatch",
@@ -115,13 +114,11 @@ const Settings = () => {
       return;
     }
 
-    // In a real app, this would call an API to change the password
     toast({
       title: "Password Changed",
       description: "Your password has been updated successfully."
     });
 
-    // Reset form
     setPasswordData({
       currentPassword: "",
       newPassword: "",
@@ -130,13 +127,11 @@ const Settings = () => {
   };
 
   const handleDeleteAccount = () => {
-    // In a real app, this would call an API to delete the account
     toast({
       title: "Account Deleted",
       description: "Your account has been deleted. You will be logged out."
     });
     
-    // Log the user out
     setTimeout(() => {
       logout();
     }, 2000);
@@ -205,7 +200,6 @@ const Settings = () => {
   };
 
   const getRoleSpecificSettings = () => {
-    // If user is admin, show all settings
     if (user?.role === "admin") {
       return (
         <div>
@@ -251,8 +245,7 @@ const Settings = () => {
         </div>
       );
     }
-    
-    // If user is supplier, show supplier settings
+
     if (user?.role === "supplier") {
       return (
         <div>
@@ -307,8 +300,7 @@ const Settings = () => {
         </div>
       );
     }
-    
-    // For customer (previously buyer) role
+
     return (
       <div>
         <Card className="mb-6">
@@ -1089,3 +1081,4 @@ const Settings = () => {
 };
 
 export default Settings;
+

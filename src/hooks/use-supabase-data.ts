@@ -36,8 +36,10 @@ export function useSupabaseData<T>({
   
   // Function to fetch data
   const fetchData = async (): Promise<T[]> => {
-    // Use type assertion to fix the deep instantiation issue
-    const query = supabase.from(table as TableNames).select(select);
+    // Cast type but don't use a reassignable variable to avoid deep type instantiation
+    const query = supabase
+      .from(table)
+      .select(select);
 
     // Apply filters
     if (column && value !== undefined) {
@@ -102,7 +104,7 @@ export function useSupabaseCreate<T>(table: TableNames) {
   return useMutation({
     mutationFn: async (data: any): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(table as TableNames)
+        .from(table)
         .insert(data)
         .select();
 
@@ -138,7 +140,7 @@ export function useSupabaseUpdate<T>(table: TableNames) {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(table as TableNames)
+        .from(table)
         .update(data)
         .eq('id', id)
         .select();
@@ -175,7 +177,7 @@ export function useSupabaseDelete(table: TableNames) {
   return useMutation({
     mutationFn: async (id: string): Promise<string> => {
       const { error } = await supabase
-        .from(table as TableNames)
+        .from(table)
         .delete()
         .eq('id', id);
 

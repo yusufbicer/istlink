@@ -21,7 +21,7 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
     const fetchInitialData = async () => {
       try {
         setLoading(true);
-        let query = supabase.from(table).select('*');
+        let query = supabase.from(table as string).select('*');
         
         // Apply filter if provided
         if (filter) {
@@ -48,33 +48,31 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
 
     // Set up real-time subscription
     const channelName = `${String(table)}-changes`;
+    
+    // Fix the channel subscription syntax
     const channel = supabase
       .channel(channelName)
-      .on(
-        'postgres_changes', 
-        { 
-          event,
-          schema: 'public',
-          table: String(table),
-        },
-        (payload) => {
-          console.log('Realtime update:', payload);
-          
-          if (payload.eventType === 'INSERT') {
-            setData((prev) => [...prev, payload.new as unknown as T]);
-          } else if (payload.eventType === 'UPDATE') {
-            setData((prev) => 
-              prev.map((item: any) => 
-                item.id === payload.new.id ? (payload.new as unknown as T) : item
-              )
-            );
-          } else if (payload.eventType === 'DELETE') {
-            setData((prev) => 
-              prev.filter((item: any) => item.id !== payload.old.id)
-            );
-          }
+      .on('postgres_changes', {
+        event: event,
+        schema: 'public',
+        table: String(table)
+      }, (payload) => {
+        console.log('Realtime update:', payload);
+        
+        if (payload.eventType === 'INSERT') {
+          setData((prev) => [...prev, payload.new as unknown as T]);
+        } else if (payload.eventType === 'UPDATE') {
+          setData((prev) => 
+            prev.map((item: any) => 
+              item.id === payload.new.id ? (payload.new as unknown as T) : item
+            )
+          );
+        } else if (payload.eventType === 'DELETE') {
+          setData((prev) => 
+            prev.filter((item: any) => item.id !== payload.old.id)
+          );
         }
-      )
+      })
       .subscribe();
 
     channelRef.current = channel;

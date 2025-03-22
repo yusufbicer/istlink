@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase, dynamicTable } from '@/integrations/supabase/client';
@@ -5,9 +6,12 @@ import { toast } from './use-toast';
 import { useAuth } from '@/lib/auth';
 import type { Database } from '@/integrations/supabase/types';
 
-// Generic type for data fetching without causing infinite type instantiation
+// Define a simpler type for table names to avoid deep instantiation
+type TableName = keyof Database['public']['Tables'];
+
+// Generic type for data fetching
 type FetchDataOptions<T> = {
-  table: keyof Database['public']['Tables'];
+  table: TableName;
   column?: string;
   value?: string | number | boolean;
   order?: { column: string; ascending?: boolean };
@@ -31,8 +35,8 @@ export function useSupabaseData<T>({
   
   // Function to fetch data
   const fetchData = async (): Promise<T[]> => {
-    // Use the table name directly as we've ensured it's type-safe
-    let query = supabase.from(table).select(select);
+    // Use the table name directly
+    let query = supabase.from(table as string).select(select);
 
     // Apply filters
     if (column && value !== undefined) {
@@ -91,13 +95,13 @@ export function useSupabaseData<T>({
 }
 
 // Hook to create data
-export function useSupabaseCreate<T>(table: keyof Database['public']['Tables']) {
+export function useSupabaseCreate<T>(table: TableName) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: any): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(table)
+        .from(table as string)
         .insert(data)
         .select();
 
@@ -127,14 +131,13 @@ export function useSupabaseCreate<T>(table: keyof Database['public']['Tables']) 
 }
 
 // Hook to update data
-export function useSupabaseUpdate<T>(table: keyof Database['public']['Tables']) {
+export function useSupabaseUpdate<T>(table: TableName) {
   const queryClient = useQueryClient();
-  const tableName = table;
 
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }): Promise<T[]> => {
       const { data: result, error } = await supabase
-        .from(tableName)
+        .from(table as string)
         .update(data)
         .eq('id', id)
         .select();
@@ -165,14 +168,13 @@ export function useSupabaseUpdate<T>(table: keyof Database['public']['Tables']) 
 }
 
 // Hook to delete data
-export function useSupabaseDelete(table: keyof Database['public']['Tables']) {
+export function useSupabaseDelete(table: TableName) {
   const queryClient = useQueryClient();
-  const tableName = table;
 
   return useMutation({
     mutationFn: async (id: string): Promise<string> => {
       const { error } = await supabase
-        .from(tableName)
+        .from(table as string)
         .delete()
         .eq('id', id);
 

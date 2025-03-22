@@ -9,6 +9,7 @@ const Header = () => {
   const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,7 @@ const Header = () => {
 
   // Smooth scroll function for anchor links
   const scrollToSection = (id: string) => {
+    setActiveItem(id);
     setIsMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
@@ -54,24 +56,48 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => scrollToSection('features')}
-              className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors"
+              className={`text-sm font-medium transition-all duration-200 px-3 py-2 rounded-md relative ${
+                activeItem === 'features' 
+                  ? 'text-indigo-700 bg-indigo-50' 
+                  : 'text-gray-700 hover:text-indigo-600'
+              }`}
             >
-              Features
+              <span className="relative z-10">Features</span>
+              {activeItem === 'features' && (
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-indigo-600 rounded-full"></span>
+              )}
             </button>
             <button 
               onClick={() => scrollToSection('how-it-works')}
-              className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors"
+              className={`text-sm font-medium transition-all duration-200 px-3 py-2 rounded-md relative ${
+                activeItem === 'how-it-works' 
+                  ? 'text-indigo-700 bg-indigo-50' 
+                  : 'text-gray-700 hover:text-indigo-600'
+              }`}
             >
-              How It Works
+              <span className="relative z-10">How It Works</span>
+              {activeItem === 'how-it-works' && (
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-indigo-600 rounded-full"></span>
+              )}
             </button>
-            <Link to="/blog" className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors">
+            <Link 
+              to="/blog" 
+              className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-all duration-200 px-3 py-2 rounded-md hover:bg-indigo-50/50"
+            >
               Blog
             </Link>
             <button 
               onClick={() => scrollToSection('pricing')}
-              className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors"
+              className={`text-sm font-medium transition-all duration-200 px-3 py-2 rounded-md relative ${
+                activeItem === 'pricing' 
+                  ? 'text-indigo-700 bg-indigo-50' 
+                  : 'text-gray-700 hover:text-indigo-600'
+              }`}
             >
-              Pricing
+              <span className="relative z-10">Pricing</span>
+              {activeItem === 'pricing' && (
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-indigo-600 rounded-full"></span>
+              )}
             </button>
           </div>
 
@@ -118,26 +144,26 @@ const Header = () => {
             <div className="flex flex-col py-4 px-6 space-y-4">
               <button 
                 onClick={() => scrollToSection('features')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200 py-2 px-3 rounded-md text-left"
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200 py-2 px-3 rounded-md text-left"
               >
                 How It Works
               </button>
               <Link 
                 to="/blog" 
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left w-full block"
+                className="text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200 py-2 px-3 rounded-md text-left w-full block"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Blog
               </Link>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200 py-2 px-3 rounded-md text-left"
               >
                 Pricing
               </button>

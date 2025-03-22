@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -64,8 +65,8 @@ const Hero = () => {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="h-12 px-8 text-md border-indigo-600 text-indigo-600 hover:bg-indigo-50">
-              <a href="https://calendly.com/yourusername" target="_blank" rel="noopener noreferrer">
-                Chat With Us
+              <a href="https://calendly.com/yusufbicer/30min" target="_blank" rel="noopener noreferrer">
+                Schedule a Call
               </a>
             </Button>
           </div>

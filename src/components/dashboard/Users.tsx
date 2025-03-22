@@ -31,7 +31,7 @@ const mockUsers = [
     id: "USR-001",
     name: "John Smith",
     email: "john@example.com",
-    role: "buyer",
+    role: "customer",
     company: "Global Imports Ltd.",
     orders: 12,
     status: "active"
@@ -40,7 +40,7 @@ const mockUsers = [
     id: "USR-002",
     name: "Emma Johnson",
     email: "emma@example.com",
-    role: "buyer",
+    role: "customer",
     company: "Johnson Retailers",
     orders: 8,
     status: "active"
@@ -49,7 +49,7 @@ const mockUsers = [
     id: "USR-003",
     name: "Michael Brown",
     email: "michael@example.com",
-    role: "buyer",
+    role: "customer",
     company: "Brown Wholesale",
     orders: 5,
     status: "inactive"
@@ -58,7 +58,7 @@ const mockUsers = [
     id: "USR-004",
     name: "Sarah Davis",
     email: "sarah@example.com",
-    role: "buyer",
+    role: "customer",
     company: "Davis Distributors",
     orders: 15,
     status: "active"
@@ -67,7 +67,7 @@ const mockUsers = [
     id: "USR-005",
     name: "Robert Wilson",
     email: "robert@example.com",
-    role: "buyer",
+    role: "customer",
     company: "Wilson Trade Co.",
     orders: 3,
     status: "active"
@@ -86,9 +86,9 @@ const Users = () => {
       u.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       u.company.toLowerCase().includes(searchTerm.toLowerCase());
     
-    // For suppliers, they can only see buyers (their customers)
+    // For suppliers, they can only see customers (their customers)
     if (user?.role === "supplier") {
-      return matchesSearch && u.role === "buyer";
+      return matchesSearch && u.role === "customer";
     }
     
     return matchesSearch;
@@ -174,7 +174,7 @@ const Users = () => {
                       id="role" 
                       className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      <option value="buyer">Customer</option>
+                      <option value="customer">Customer</option>
                       <option value="supplier">Supplier</option>
                       <option value="admin">Admin</option>
                     </select>

@@ -21,7 +21,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<UserRole>('buyer');
+  const [role, setRole] = useState<UserRole>('customer');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -133,8 +133,8 @@ const AuthForm = ({ type }: AuthFormProps) => {
               <Label>Account Type</Label>
               <RadioGroup value={role} onValueChange={(value) => setRole(value as UserRole)} className="flex gap-4">
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="buyer" id="buyer" />
-                  <Label htmlFor="buyer" className="cursor-pointer">Customer</Label>
+                  <RadioGroupItem value="customer" id="customer" />
+                  <Label htmlFor="customer" className="cursor-pointer">Customer</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="supplier" id="supplier" />
@@ -182,12 +182,12 @@ const AuthForm = ({ type }: AuthFormProps) => {
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
                 onClick={() => {
-                  setEmail('buyer@example.com');
+                  setEmail('customer@example.com');
                   setPassword('password');
                 }}
               >
                 <div className="font-medium">Customer</div>
-                <div className="text-gray-500">buyer@example.com</div>
+                <div className="text-gray-500">customer@example.com</div>
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"

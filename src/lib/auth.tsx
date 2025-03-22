@@ -2,7 +2,7 @@
 // Simple auth utilities
 import { useState, useEffect, createContext, useContext } from 'react';
 
-export type UserRole = 'buyer' | 'supplier' | 'admin';
+export type UserRole = 'customer' | 'supplier' | 'admin';
 
 export interface User {
   id: string;
@@ -24,10 +24,10 @@ interface AuthContextType {
 const DEMO_USERS: User[] = [
   {
     id: '1',
-    name: 'Buyer Demo',
-    email: 'buyer@example.com',
-    role: 'buyer',
-    avatar: 'https://i.pravatar.cc/150?u=buyer',
+    name: 'Customer Demo',
+    email: 'customer@example.com',
+    role: 'customer',
+    avatar: 'https://i.pravatar.cc/150?u=customer',
   },
   {
     id: '2',

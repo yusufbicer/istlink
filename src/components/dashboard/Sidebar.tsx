@@ -94,8 +94,8 @@ const Sidebar = () => {
                     </SidebarMenuItem>
                   )}
                   
-                  {/* Suppliers - for Buyers and Admins */}
-                  {(user?.role === "buyer" || user?.role === "admin") && (
+                  {/* Suppliers - for Customers and Admins */}
+                  {(user?.role === "customer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/suppliers")}>
                         <Link to="/dashboard/suppliers">
@@ -120,13 +120,13 @@ const Sidebar = () => {
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/notes")}>
                       <Link to="/dashboard/notes">
                         <StickyNoteIcon className="w-5 h-5" />
-                        <span>Order-Notes</span>
+                        <span>Notes</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   
-                  {/* Consolidations - for Admin and Buyers */}
-                  {(user?.role === "buyer" || user?.role === "admin") && (
+                  {/* Consolidations - for Admin and Customers */}
+                  {(user?.role === "customer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/consolidations")}>
                         <Link to="/dashboard/consolidations">
@@ -147,7 +147,7 @@ const Sidebar = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   
-                  {(user?.role === "buyer" || user?.role === "admin") && (
+                  {(user?.role === "customer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/shipping")}>
                         <Link to="/dashboard/shipping">

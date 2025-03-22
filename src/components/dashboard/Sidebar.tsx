@@ -94,8 +94,8 @@ const Sidebar = () => {
                     </SidebarMenuItem>
                   )}
                   
-                  {/* Suppliers - for Customers and Admins */}
-                  {(user?.role === "customer" || user?.role === "admin") && (
+                  {/* Suppliers - for Buyers and Admins */}
+                  {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/suppliers")}>
                         <Link to="/dashboard/suppliers">
@@ -125,8 +125,8 @@ const Sidebar = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   
-                  {/* Consolidations - for Admin and Customers */}
-                  {(user?.role === "customer" || user?.role === "admin") && (
+                  {/* Consolidations - for Admin and Buyers */}
+                  {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/consolidations")}>
                         <Link to="/dashboard/consolidations">
@@ -147,7 +147,7 @@ const Sidebar = () => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   
-                  {(user?.role === "customer" || user?.role === "admin") && (
+                  {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/shipping")}>
                         <Link to="/dashboard/shipping">

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -163,8 +164,8 @@ const Payments = () => {
       return matchesSearch && payment.supplierId === supplierIdToFilter;
     }
     
-    // Customer can only see their own payments
-    if (user?.role === "customer") {
+    // Buyer can only see their own payments
+    if (user?.role === "buyer") {
       // For demo purposes, buyer with id 3 is "Fashion Retailer Inc." and buyer with id 4 is "Gadget World"
       const buyerIdToFilter = user.name.includes("Buyer") ? "3" : "4";
       return matchesSearch && payment.buyerId === buyerIdToFilter;
@@ -551,7 +552,7 @@ const Payments = () => {
                 {(user?.role === "admin" || user?.role === "supplier") && (
                   <TableHead>Buyer</TableHead>
                 )}
-                {(user?.role === "admin" || user?.role === "customer") && (
+                {(user?.role === "admin" || user?.role === "buyer") && (
                   <TableHead>Supplier</TableHead>
                 )}
                 <TableHead>Amount</TableHead>
@@ -577,7 +578,7 @@ const Payments = () => {
                     {(user?.role === "admin" || user?.role === "supplier") && (
                       <TableCell>{payment.buyerName}</TableCell>
                     )}
-                    {(user?.role === "admin" || user?.role === "customer") && (
+                    {(user?.role === "admin" || user?.role === "buyer") && (
                       <TableCell>{payment.supplierName}</TableCell>
                     )}
                     <TableCell>${payment.amount.toLocaleString()}</TableCell>

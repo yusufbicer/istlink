@@ -21,7 +21,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<UserRole>('customer');
+  const [role, setRole] = useState<UserRole>('buyer');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -133,8 +133,8 @@ const AuthForm = ({ type }: AuthFormProps) => {
               <Label>Account Type</Label>
               <RadioGroup value={role} onValueChange={(value) => setRole(value as UserRole)} className="flex gap-4">
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="customer" id="customer" />
-                  <Label htmlFor="customer" className="cursor-pointer">Customer</Label>
+                  <RadioGroupItem value="buyer" id="buyer" />
+                  <Label htmlFor="buyer" className="cursor-pointer">Customer</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="supplier" id="supplier" />
@@ -174,13 +174,40 @@ const AuthForm = ({ type }: AuthFormProps) => {
           )}
         </div>
 
+        {/* Demo accounts */}
         {type === 'login' && (
           <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-xs text-gray-500 mb-2 text-center">For demo purposes, you can create a new account or use these credentials:</p>
-            <div className="grid grid-cols-1 gap-2 text-xs">
-              <div className="p-2 bg-gray-50 rounded text-center">
-                <div className="font-medium">Create a new account with any email and password</div>
-                <div className="text-gray-500">Registration is enabled for testing</div>
+            <p className="text-xs text-gray-500 mb-2 text-center">Demo Accounts:</p>
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <div 
+                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setEmail('buyer@example.com');
+                  setPassword('password');
+                }}
+              >
+                <div className="font-medium">Customer</div>
+                <div className="text-gray-500">buyer@example.com</div>
+              </div>
+              <div 
+                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setEmail('supplier@example.com');
+                  setPassword('password');
+                }}
+              >
+                <div className="font-medium">Supplier</div>
+                <div className="text-gray-500">supplier@example.com</div>
+              </div>
+              <div 
+                className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setEmail('admin@example.com');
+                  setPassword('password');
+                }}
+              >
+                <div className="font-medium">Admin</div>
+                <div className="text-gray-500">admin@example.com</div>
               </div>
             </div>
           </div>
@@ -188,6 +215,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
       </div>
     </div>
   );
-}
+};
 
 export default AuthForm;

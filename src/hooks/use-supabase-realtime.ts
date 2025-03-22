@@ -58,7 +58,7 @@ export function useSupabaseRealtime<T>({ table, event = '*', filter }: RealtimeO
       .channel(channelName)
       .on(
         'postgres_changes', 
-        { 
+        {
           event: event,
           schema: 'public',
           table: table

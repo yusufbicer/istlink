@@ -23,8 +23,10 @@ const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
     return <Navigate to="/login" replace />;
   }
 
-  // Check if user has the required role
+  // Get user role from profile first, then from user object as fallback
   const userRole = profile?.role || user.role;
+  
+  // Check if user has the required role
   if (allowedRoles && userRole && !allowedRoles.includes(userRole)) {
     return <Navigate to="/dashboard" replace />;
   }

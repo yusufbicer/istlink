@@ -63,60 +63,91 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Process the authenticated user and fetch their profile
+  const processUser = async (authSession: Session | null) => {
+    if (!authSession || !authSession.user) {
+      setUser(null);
+      setProfile(null);
+      setIsLoading(false);
+      return;
+    }
+
+    // Add additional user metadata from auth if profile couldn't be fetched
+    const fallbackUserData = {
+      name: authSession.user.user_metadata?.name || authSession.user.email?.split('@')[0] || 'User',
+      role: (authSession.user.user_metadata?.role || 'buyer') as UserRole,
+      avatar: authSession.user.user_metadata?.avatar
+    };
+
+    try {
+      const userProfile = await fetchProfile(authSession.user.id);
+      
+      if (userProfile) {
+        // Create an extended user with profile data
+        const extendedUser: ExtendedUser = {
+          ...authSession.user,
+          name: userProfile.name,
+          avatar: userProfile.avatar,
+          role: userProfile.role
+        };
+        setUser(extendedUser);
+        setProfile(userProfile);
+      } else {
+        // Use fallback data from auth metadata if profile couldn't be fetched
+        const extendedUser: ExtendedUser = {
+          ...authSession.user,
+          ...fallbackUserData
+        };
+        setUser(extendedUser);
+        
+        // Set a minimal profile using auth data to avoid null checks
+        setProfile({
+          id: authSession.user.id,
+          email: authSession.user.email || '',
+          ...fallbackUserData
+        });
+      }
+    } catch (error) {
+      console.error('Error processing user:', error);
+      
+      // Fallback to minimal user data to avoid authentication loops
+      const extendedUser: ExtendedUser = {
+        ...authSession.user,
+        ...fallbackUserData
+      };
+      setUser(extendedUser);
+      
+      // Set a minimal profile using auth data
+      setProfile({
+        id: authSession.user.id,
+        email: authSession.user.email || '',
+        ...fallbackUserData
+      });
+    }
+    
+    setIsLoading(false);
+  };
+
   // Handle auth state changes
   useEffect(() => {
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, currentSession) => {
+        console.log('Auth state changed:', event);
         setSession(currentSession);
-        
-        if (currentSession?.user) {
-          const userProfile = await fetchProfile(currentSession.user.id);
-          setProfile(userProfile);
-          
-          // Create an extended user with profile data
-          if (userProfile) {
-            const extendedUser: ExtendedUser = {
-              ...currentSession.user,
-              name: userProfile.name,
-              avatar: userProfile.avatar,
-              role: userProfile.role
-            };
-            setUser(extendedUser);
-          } else {
-            setUser(null);
-          }
-        } else {
-          setUser(null);
-          setProfile(null);
-        }
-
-        setIsLoading(false);
+        await processUser(currentSession);
       }
     );
 
     // THEN check for existing session
-    supabase.auth.getSession().then(async ({ data: { session: currentSession } }) => {
+    const initAuth = async () => {
+      setIsLoading(true);
+      const { data: { session: currentSession } } = await supabase.auth.getSession();
       setSession(currentSession);
-      
-      if (currentSession?.user) {
-        const userProfile = await fetchProfile(currentSession.user.id);
-        setProfile(userProfile);
-        
-        // Create an extended user with profile data
-        if (userProfile) {
-          const extendedUser: ExtendedUser = {
-            ...currentSession.user,
-            name: userProfile.name,
-            avatar: userProfile.avatar,
-            role: userProfile.role
-          };
-          setUser(extendedUser);
-        }
-      }
-
-      setIsLoading(false);
-    });
+      await processUser(currentSession);
+    };
+    
+    initAuth();
 
     return () => subscription.unsubscribe();
   }, []);
@@ -139,9 +170,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         description: error.message || 'Failed to login',
         variant: "destructive",
       });
-      throw error;
-    } finally {
       setIsLoading(false);
+      throw error;
     }
   };
 
@@ -190,9 +220,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         description: error.message || 'Failed to register',
         variant: "destructive",
       });
-      throw error;
-    } finally {
       setIsLoading(false);
+      throw error;
     }
   };
 

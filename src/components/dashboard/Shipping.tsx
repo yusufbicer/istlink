@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -752,4 +753,90 @@ const Shipping = () => {
                       <h4 className="text-sm font-medium">Efficient Tracking</h4>
                       <p className="text-sm text-muted-foreground">
                         Track all your shipments in one place with real-time updates.
-                      </p
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  Learn More
+                </Button>
+              </CardFooter>
+            </Card>
+            
+            <Card 
+              className={`col-span-1 lg:col-span-2 transition-all duration-500 transform ${
+                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+              }`}
+              style={{ transitionDelay: '400ms' }}
+            >
+              <CardHeader>
+                <CardTitle>Consolidation Process</CardTitle>
+                <CardDescription>How your orders are consolidated and shipped</CardDescription>
+              </CardHeader>
+              <CardContent className="pb-2">
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <div className="mt-1 mr-3 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                      <div className="text-xs font-bold text-blue-600">1</div>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Order Collection</h4>
+                      <p className="text-sm text-muted-foreground">
+                        We receive and verify your orders from different suppliers in Turkey.
+                      </p>
+                    </div>
+                  </div>
+                  <Separator />
+                  <div className="flex items-start">
+                    <div className="mt-1 mr-3 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                      <div className="text-xs font-bold text-blue-600">2</div>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Quality Inspection</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Each item is carefully checked for quality and accuracy.
+                      </p>
+                    </div>
+                  </div>
+                  <Separator />
+                  <div className="flex items-start">
+                    <div className="mt-1 mr-3 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                      <div className="text-xs font-bold text-blue-600">3</div>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">Consolidation & Packaging</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Items are consolidated into a single shipment and securely packaged.
+                      </p>
+                    </div>
+                  </div>
+                  <Separator />
+                  <div className="flex items-start">
+                    <div className="mt-1 mr-3 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                      <div className="text-xs font-bold text-blue-600">4</div>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium">International Shipping</h4>
+                      <p className="text-sm text-muted-foreground">
+                        The consolidated package is shipped to your destination with tracking.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full">
+                  Start Consolidation
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+        </div>
+      </WithLoading>
+    </ErrorBoundary>
+  );
+};
+
+export default Shipping;

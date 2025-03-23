@@ -139,7 +139,7 @@ const Notes = () => {
       return matchesSearch && (note.createdByRole === "supplier" || true);
     }
     
-    if (user?.role === "buyer") {
+    if (user?.role === "customer") {
       return matchesSearch && (note.createdBy === user.name || note.createdByRole === "buyer");
     }
     
@@ -249,8 +249,8 @@ const Notes = () => {
         return <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-100">Admin</Badge>;
       case 'supplier':
         return <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">Supplier</Badge>;
-      case 'buyer':
-        return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Buyer</Badge>;
+      case 'customer':
+        return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Customer</Badge>;
       default:
         return <Badge variant="outline">{role}</Badge>;
     }

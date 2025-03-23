@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/lib/auth";
@@ -78,7 +77,7 @@ const Overview = () => {
   
   // Different stats based on user role
   const getStats = () => {
-    if (user?.role === 'buyer') {
+    if (user?.role === 'customer') {
       return [
         { 
           title: "Active Orders", 

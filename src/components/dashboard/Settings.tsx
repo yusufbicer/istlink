@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -213,7 +212,7 @@ const Settings = () => {
                   </div>
                 )}
                 
-                {(user?.role === "supplier" || user?.role === "buyer") && (
+                {(user?.role === "supplier" || user?.role === "customer") && (
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">

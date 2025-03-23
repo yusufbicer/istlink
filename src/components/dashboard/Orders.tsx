@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,10 +44,9 @@ import {
   UserIcon
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { useAuth } from "@/lib/auth";
+import { useAuth } from '@/lib/auth';
 import { useToast } from "@/components/ui/use-toast";
 
-// Mock data for orders
 const initialOrders = [
   { 
     id: "ORD-1234", 
@@ -137,7 +135,6 @@ const initialOrders = [
   },
 ];
 
-// Mock data for suppliers and buyers for admin order creation
 const mockSuppliers = [
   { id: "1", name: "Textile Masters Co." },
   { id: "2", name: "Bosphorus Tech" },
@@ -174,16 +171,13 @@ const Orders = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Filter orders based on search term and active tab
   useEffect(() => {
     let filtered = orders;
     
-    // Filter by tab
     if (activeTab !== "all") {
       filtered = filtered.filter(order => order.status === activeTab);
     }
     
-    // Filter by search
     if (searchTerm) {
       filtered = filtered.filter(order => 
         order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -193,24 +187,19 @@ const Orders = () => {
       );
     }
     
-    // For supplier role, only show their own orders
     if (user?.role === "supplier") {
-      // For demo purposes, supplier with id 1 is "Textile Masters Co." and supplier with id 2 is "Bosphorus Tech"
       const supplierNameToFilter = user.name.includes("Supplier") ? "Textile Masters Co." : "Bosphorus Tech";
       filtered = filtered.filter(order => order.supplier === supplierNameToFilter);
     }
     
-    // For buyer role, only show their own orders
-    if (user?.role === "buyer") {
-      // For demo purposes, buyer with id 3 is "Fashion Retailer Inc." and buyer with id 4 is "Gadget World"
-      const buyerNameToFilter = user.name.includes("Buyer") ? "Fashion Retailer Inc." : "Gadget World";
+    if (user?.role === "customer") {
+      const buyerNameToFilter = user.name.includes("Customer") ? "Fashion Retailer Inc." : "Gadget World";
       filtered = filtered.filter(order => order.buyer === buyerNameToFilter);
     }
     
     setFilteredOrders(filtered);
   }, [searchTerm, activeTab, orders, user]);
 
-  // Add new item to order form
   const addItemToOrder = () => {
     setNewOrder({
       ...newOrder,
@@ -218,7 +207,6 @@ const Orders = () => {
     });
   };
 
-  // Remove item from order form
   const removeItemFromOrder = (index: number) => {
     if (newOrder.items.length > 1) {
       setNewOrder({
@@ -228,7 +216,6 @@ const Orders = () => {
     }
   };
 
-  // Update item in order form
   const updateItemInOrder = (index: number, field: keyof typeof newOrder.items[0], value: any) => {
     const updatedItems = [...newOrder.items];
     updatedItems[index] = { ...updatedItems[index], [field]: value };
@@ -239,9 +226,7 @@ const Orders = () => {
     });
   };
 
-  // Create new order
   const handleCreateOrder = () => {
-    // Validate form
     if (!newOrder.supplier) {
       toast({
         title: "Validation Error",
@@ -269,12 +254,10 @@ const Orders = () => {
       return;
     }
 
-    // Calculate total
     const total = newOrder.items.reduce(
       (sum, item) => sum + (item.quantity * item.price), 0
     );
     
-    // Get supplier and buyer details
     const supplierDetails = mockSuppliers.find(s => s.id === newOrder.supplier);
     const buyerDetails = user?.role === "admin" 
       ? mockBuyers.find(b => b.id === newOrder.buyer)
@@ -289,7 +272,6 @@ const Orders = () => {
       return;
     }
 
-    // Create new order object
     const newOrderObj = {
       id: `ORD-${Math.floor(1000 + Math.random() * 9000)}`,
       supplier: supplierDetails.name,
@@ -305,10 +287,8 @@ const Orders = () => {
       payment: "pending"
     };
     
-    // Add to orders list
     setOrders([...orders, newOrderObj]);
     
-    // Reset form
     setNewOrder({
       supplier: "",
       buyer: user?.role === "admin" ? "" : user?.id || "",
@@ -321,7 +301,6 @@ const Orders = () => {
     });
   };
 
-  // Get status icon
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "completed":
@@ -337,13 +316,11 @@ const Orders = () => {
     }
   };
 
-  // Format date
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
-  // Calculate subtotal
   const calculateSubtotal = () => {
     return newOrder.items.reduce(
       (sum, item) => sum + (item.quantity * item.price), 0
@@ -540,7 +517,7 @@ const Orders = () => {
                 <TableHead>Order ID</TableHead>
                 <TableHead>Supplier</TableHead>
                 {(user?.role === "admin" || user?.role === "supplier") && (
-                  <TableHead>Buyer</TableHead>
+                  <TableHead>Customer</TableHead>
                 )}
                 <TableHead>Items</TableHead>
                 <TableHead>Total</TableHead>

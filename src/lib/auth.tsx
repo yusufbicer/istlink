@@ -1,6 +1,7 @@
 
 // Simple auth utilities
 import { useState, useEffect, createContext, useContext } from 'react';
+import { supabase } from "@/integrations/supabase/client";
 
 export type UserRole = 'customer' | 'supplier' | 'admin';
 
@@ -20,7 +21,7 @@ interface AuthContextType {
   register: (name: string, email: string, password: string, role: UserRole) => Promise<void>;
 }
 
-// Simulated users for demo
+// Simulated users for demo - will be replaced with Supabase Auth
 const DEMO_USERS: User[] = [
   {
     id: '1',
@@ -60,9 +61,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(JSON.parse(storedUser));
     }
     setIsLoading(false);
+    
+    // Later this will be replaced with Supabase auth state listener:
+    // const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    //   (event, session) => {
+    //     // Handle auth state change
+    //   }
+    // );
+    
+    // return () => {
+    //   subscription.unsubscribe();
+    // };
   }, []);
 
-  // Simulated login function
+  // Simulated login function - will be replaced with Supabase Auth
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     return new Promise<void>((resolve, reject) => {
@@ -80,15 +92,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       }, 1000);
     });
+    
+    // Later will be replaced with:
+    // const { data, error } = await supabase.auth.signInWithPassword({
+    //   email,
+    //   password,
+    // });
+    // if (error) throw error;
+    // return data;
   };
 
-  // Simulated logout function
+  // Simulated logout function - will be replaced with Supabase Auth
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
+    
+    // Later will be replaced with:
+    // await supabase.auth.signOut();
   };
 
-  // Simulated registration function
+  // Simulated registration function - will be replaced with Supabase Auth
   const register = async (name: string, email: string, password: string, role: UserRole) => {
     setIsLoading(true);
     return new Promise<void>((resolve, reject) => {
@@ -120,6 +143,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         resolve();
       }, 1000);
     });
+    
+    // Later will be replaced with:
+    // const { data, error } = await supabase.auth.signUp({
+    //   email,
+    //   password,
+    //   options: {
+    //     data: {
+    //       name,
+    //       role
+    //     }
+    //   }
+    // });
+    // if (error) throw error;
+    // return data;
   };
 
   return (

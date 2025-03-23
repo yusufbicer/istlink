@@ -6,7 +6,6 @@ import { AlertTriangle } from "lucide-react";
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
-  onReset?: () => void;
 }
 
 interface State {
@@ -34,13 +33,6 @@ class ErrorBoundary extends Component<Props, State> {
     console.error('Error caught by ErrorBoundary:', error, errorInfo);
   }
 
-  resetErrorBoundary = () => {
-    this.setState({ hasError: false, error: null });
-    if (this.props.onReset) {
-      this.props.onReset();
-    }
-  };
-
   render(): ReactNode {
     if (this.state.hasError) {
       if (this.props.fallback) {
@@ -54,7 +46,7 @@ class ErrorBoundary extends Component<Props, State> {
           <p className="text-sm text-red-700 mb-4">{this.state.error?.message || 'An unexpected error occurred'}</p>
           <Button 
             variant="outline" 
-            onClick={this.resetErrorBoundary}
+            onClick={() => this.setState({ hasError: false, error: null })}
           >
             Try again
           </Button>
@@ -64,18 +56,6 @@ class ErrorBoundary extends Component<Props, State> {
 
     return this.props.children;
   }
-}
-
-// Utility higher-order component for easy wrapping
-export function withErrorBoundary<P extends object>(
-  Component: React.ComponentType<P>,
-  errorBoundaryProps?: Omit<Props, 'children'>
-): React.FC<P> {
-  return (props: P) => (
-    <ErrorBoundary {...errorBoundaryProps}>
-      <Component {...props} />
-    </ErrorBoundary>
-  );
 }
 
 export default ErrorBoundary;

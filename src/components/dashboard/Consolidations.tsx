@@ -33,7 +33,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/components/ui/use-toast";
-import { PermissionGuard } from "@/components/ui/permission-guard";
 import { 
   BoxesIcon, 
   MoreHorizontalIcon, 
@@ -215,8 +214,7 @@ const Consolidations = () => {
             />
           </div>
           
-          {/* Use PermissionGuard to control access to create consolidation */}
-          <PermissionGuard resource="consolidation" action="create" fallback={null}>
+          {user?.role === "admin" && (
             <Dialog>
               <DialogTrigger asChild>
                 <Button>
@@ -340,7 +338,7 @@ const Consolidations = () => {
                 </DialogFooter>
               </DialogContent>
             </Dialog>
-          </PermissionGuard>
+          )}
         </div>
       </div>
       
@@ -439,21 +437,18 @@ const Consolidations = () => {
                             View Details
                           </DropdownMenuItem>
                           
-                          {/* Use PermissionGuard for role-specific actions */}
-                          <PermissionGuard resource="consolidation" action="update" fallback={null}>
-                            {consolidation.status !== "shipped" && (
-                              <>
-                                <DropdownMenuItem>
-                                  <TruckIcon className="h-4 w-4 mr-2" />
-                                  Mark as Shipped
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                  <PlusIcon className="h-4 w-4 mr-2" />
-                                  Add Orders
-                                </DropdownMenuItem>
-                              </>
-                            )}
-                          </PermissionGuard>
+                          {user?.role === "admin" && consolidation.status !== "shipped" && (
+                            <>
+                              <DropdownMenuItem>
+                                <TruckIcon className="h-4 w-4 mr-2" />
+                                Mark as Shipped
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <PlusIcon className="h-4 w-4 mr-2" />
+                                Add Orders
+                              </DropdownMenuItem>
+                            </>
+                          )}
                           
                           <DropdownMenuItem>
                             <DownloadIcon className="h-4 w-4 mr-2" />

@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useAuth } from '@/lib/auth';
-import ErrorBoundary from '@/components/ui/error-boundary';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
 import Overview from '@/components/dashboard/Overview';
@@ -35,42 +34,34 @@ const Dashboard = () => {
   const renderContent = () => {
     const path = location.pathname;
     
-    // Wrap each component with ErrorBoundary for better error handling
-    const withErrorBoundary = (Component: React.ComponentType) => (
-      <ErrorBoundary>
-        <Component />
-      </ErrorBoundary>
-    );
-
-    // Improved routing map better aligned with the consolidation workflow
-    switch (path) {
-      case '/dashboard':
-        return withErrorBoundary(Overview);
-      case '/dashboard/suppliers':
-        return withErrorBoundary(Suppliers);
-      case '/dashboard/orders':
-        return withErrorBoundary(Orders);
-      case '/dashboard/shipping':
-        return withErrorBoundary(Shipping);
-      case '/dashboard/products':
-        return withErrorBoundary(Products);
-      case '/dashboard/analytics':
-        return withErrorBoundary(Analytics);
-      case '/dashboard/tracking':
-        return withErrorBoundary(Tracking);
-      case '/dashboard/settings':
-        return withErrorBoundary(Settings);
-      case '/dashboard/users':
-        return withErrorBoundary(Users);
-      case '/dashboard/notes':
-        return withErrorBoundary(Notes);
-      case '/dashboard/consolidations':
-        return withErrorBoundary(Consolidations);
-      case '/dashboard/payments':
-        return withErrorBoundary(Payments);
-      default:
-        return withErrorBoundary(Overview);
+    if (path === '/dashboard') {
+      return <Overview />;
+    } else if (path === '/dashboard/suppliers') {
+      return <Suppliers />;
+    } else if (path === '/dashboard/orders') {
+      return <Orders />;
+    } else if (path === '/dashboard/shipping') {
+      return <Shipping />;
+    } else if (path === '/dashboard/products') {
+      return <Products />;
+    } else if (path === '/dashboard/analytics') {
+      return <Analytics />;
+    } else if (path === '/dashboard/tracking') {
+      return <Tracking />;
+    } else if (path === '/dashboard/settings') {
+      return <Settings />;
+    } else if (path === '/dashboard/users') {
+      return <Users />;
+    } else if (path === '/dashboard/notes') {
+      return <Notes />;
+    } else if (path === '/dashboard/consolidations') {
+      return <Consolidations />;
+    } else if (path === '/dashboard/payments') {
+      return <Payments />;
     }
+    
+    // Default to Overview if no matching path
+    return <Overview />;
   };
 
   if (!user) {

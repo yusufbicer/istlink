@@ -12,16 +12,6 @@ export interface Customer {
   status: "active" | "inactive";
 }
 
-export interface Supplier {
-  id: string;
-  name: string;
-  email: string;
-  company: string;
-  status: "pending" | "approved" | "rejected" | "active" | "inactive";
-  products: number;
-  customers: number;
-}
-
 export interface Order {
   id: string;
   customer_id: string;
@@ -32,54 +22,6 @@ export interface Order {
   status: string;
   date: string;
   items: number;
-}
-
-export interface Invoice {
-  id: string;
-  order_id: string;
-  supplier_id: string;
-  customer_id: string;
-  amount: number;
-  status: "draft" | "pending" | "paid" | "overdue";
-  created_at: string;
-  due_date: string;
-}
-
-export interface Payment {
-  id: string;
-  invoice_id: string;
-  amount: number;
-  method: string;
-  status: "pending" | "completed" | "failed";
-  transaction_id?: string;
-  date: string;
-}
-
-export interface Shipment {
-  id: string;
-  orders: string[];
-  status: "pending" | "processing" | "shipped" | "delivered";
-  origin: string;
-  destination: string;
-  tracking_number?: string;
-  carrier: string;
-  weight: number;
-  dimensions: string;
-  created_at: string;
-  delivered_at?: string;
-}
-
-export interface Consolidation {
-  id: string;
-  name: string;
-  orders: string[];
-  status: string;
-  totalWeight: number;
-  totalValue: number;
-  createdAt: string;
-  shippingDate: string | null;
-  trackingNumber: string | null;
-  hasPayment: boolean;
 }
 
 export interface Note {
@@ -103,16 +45,6 @@ export const userService = {
     // Will be implemented with Supabase
     return null;
   },
-
-  getSuppliers: async (customerOnly: boolean = false): Promise<Supplier[]> => {
-    // Will be implemented with Supabase
-    return [];
-  },
-  
-  getSupplierById: async (id: string): Promise<Supplier | null> => {
-    // Will be implemented with Supabase
-    return null;
-  },
 }
 
 // Order service functions
@@ -121,70 +53,6 @@ export const orderService = {
   getOrders: async (filterByUser: boolean = true): Promise<Order[]> => {
     // This will be replaced with Supabase queries
     return [];
-  },
-  
-  createOrder: async (order: Omit<Order, 'id' | 'date'>): Promise<Order | null> => {
-    // Will be implemented with Supabase
-    return null;
-  },
-  
-  updateOrderStatus: async (id: string, status: string): Promise<Order | null> => {
-    // Will be implemented with Supabase
-    return null;
-  }
-}
-
-// Invoice service functions
-export const invoiceService = {
-  getInvoices: async (filterByUser: boolean = true): Promise<Invoice[]> => {
-    // Will be implemented with Supabase
-    return [];
-  },
-  
-  createInvoice: async (invoice: Omit<Invoice, 'id' | 'created_at'>): Promise<Invoice | null> => {
-    // Will be implemented with Supabase
-    return null;
-  }
-}
-
-// Payment service functions
-export const paymentService = {
-  getPayments: async (filterByUser: boolean = true): Promise<Payment[]> => {
-    // Will be implemented with Supabase
-    return [];
-  },
-  
-  createPayment: async (payment: Omit<Payment, 'id' | 'date'>): Promise<Payment | null> => {
-    // Will be implemented with Supabase
-    return null;
-  }
-}
-
-// Shipment service functions
-export const shipmentService = {
-  getShipments: async (filterByUser: boolean = true): Promise<Shipment[]> => {
-    // Will be implemented with Supabase
-    return [];
-  },
-  
-  createShipment: async (shipment: Omit<Shipment, 'id' | 'created_at'>): Promise<Shipment | null> => {
-    // Will be implemented with Supabase
-    return null;
-  }
-}
-
-// Consolidation service functions
-export const consolidationService = {
-  getConsolidations: async (filterByUser: boolean = true): Promise<Consolidation[]> => {
-    // Will be implemented with Supabase
-    return [];
-  },
-  
-  createConsolidation: async (
-    consolidation: Omit<Consolidation, 'id' | 'createdAt'>
-  ): Promise<Consolidation | null> => {
-    // Will be implemented with Supabase
-    return null;
   }
 }
 

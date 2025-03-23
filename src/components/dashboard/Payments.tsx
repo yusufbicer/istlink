@@ -551,7 +551,7 @@ const Payments = () => {
                 {(user?.role === "admin" || user?.role === "supplier") && (
                   <TableHead>Customer</TableHead>
                 )}
-                {(user?.role === "admin" || user?.role === "buyer") && (
+                {(user?.role === "admin" || user?.role === "customer") && (
                   <TableHead>Supplier</TableHead>
                 )}
                 <TableHead>Amount</TableHead>
@@ -577,7 +577,7 @@ const Payments = () => {
                     {(user?.role === "admin" || user?.role === "supplier") && (
                       <TableCell>{payment.customerName}</TableCell>
                     )}
-                    {(user?.role === "admin" || user?.role === "buyer") && (
+                    {(user?.role === "admin" || user?.role === "customer") && (
                       <TableCell>{payment.supplierName}</TableCell>
                     )}
                     <TableCell>${payment.amount.toLocaleString()}</TableCell>

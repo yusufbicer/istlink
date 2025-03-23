@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Network, Activity, Zap, TrendingUp, PackageCheck, GitMerge, Atom } from 'lucide-react';
+import { ArrowRight, Network, Activity, Zap, TrendingUp, PackageCheck, GitMerge, Atom, BarChart4, PieChart, FileBarChart } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero = () => {
@@ -213,6 +212,47 @@ const Hero = () => {
                       </svg>
                     </div>
                     
+                    {/* Enhanced Mobile AI Efficiency Metrics */}
+                    <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs font-medium">AI Efficiency Metrics</span>
+                        <span className="text-indigo-400"><FileBarChart className="h-3 w-3" /></span>
+                      </div>
+                      
+                      {/* New enhanced metrics display */}
+                      <div className="space-y-2 mt-2">
+                        <div className="space-y-1">
+                          <div className="flex justify-between text-xs">
+                            <span>Cost Reduction</span>
+                            <span className="font-medium">32%</span>
+                          </div>
+                          <div className="h-1.5 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div className="h-full bg-gradient-to-r from-indigo-500 to-blue-400 rounded-full" style={{width: '32%'}}></div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-1">
+                          <div className="flex justify-between text-xs">
+                            <span>Time Saved</span>
+                            <span className="font-medium">68%</span>
+                          </div>
+                          <div className="h-1.5 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div className="h-full bg-gradient-to-r from-indigo-500 to-blue-400 rounded-full" style={{width: '68%'}}></div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-1">
+                          <div className="flex justify-between text-xs">
+                            <span>Error Reduction</span>
+                            <span className="font-medium">91%</span>
+                          </div>
+                          <div className="h-1.5 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div className="h-full bg-gradient-to-r from-indigo-500 to-blue-400 rounded-full" style={{width: '91%'}}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
                     {/* Activity List */}
                     <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
                       <div className="text-xs font-medium mb-2">Recent Activity</div>
@@ -395,9 +435,10 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Data grid and logistics chart */}
+                      {/* Data grid and enhanced AI metrics chart */}
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
+                          {/* Active Consolidations */}
                           <div className="font-medium mb-3">Active Consolidations</div>
                           <div className="space-y-2">
                             <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
@@ -416,22 +457,72 @@ const Hero = () => {
                         </div>
                         <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                           <div className="font-medium mb-2">AI Efficiency Metrics</div>
-                          <div className="h-32 w-full">
-                            {/* Simple bar chart visualization */}
-                            <div className="flex h-24 items-end space-x-2 mt-2">
-                              <div className="w-1/5 bg-gradient-to-t from-indigo-600 to-blue-400 rounded-t" style={{height: '40%'}}></div>
-                              <div className="w-1/5 bg-gradient-to-t from-indigo-600 to-blue-400 rounded-t" style={{height: '65%'}}></div>
-                              <div className="w-1/5 bg-gradient-to-t from-indigo-600 to-blue-400 rounded-t" style={{height: '85%'}}></div>
-                              <div className="w-1/5 bg-gradient-to-t from-indigo-600 to-blue-400 rounded-t" style={{height: '70%'}}></div>
-                              <div className="w-1/5 bg-gradient-to-t from-indigo-600 to-blue-400 rounded-t" style={{height: '90%'}}></div>
+                          
+                          {/* Enhanced metrics visualization */}
+                          <div className="grid grid-cols-2 gap-4 mt-4">
+                            {/* Left column - metrics with progress bars */}
+                            <div className="space-y-3">
+                              <div className="space-y-1">
+                                <div className="flex justify-between text-xs">
+                                  <span>Cost Reduction</span>
+                                  <span className="font-medium">32%</span>
+                                </div>
+                                <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                  <div className="h-full bg-gradient-to-r from-indigo-600 to-blue-400 rounded-full" style={{width: '32%'}}></div>
+                                </div>
+                              </div>
+                              
+                              <div className="space-y-1">
+                                <div className="flex justify-between text-xs">
+                                  <span>Time Saved</span>
+                                  <span className="font-medium">68%</span>
+                                </div>
+                                <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                  <div className="h-full bg-gradient-to-r from-indigo-600 to-blue-400 rounded-full" style={{width: '68%'}}></div>
+                                </div>
+                              </div>
+                              
+                              <div className="space-y-1">
+                                <div className="flex justify-between text-xs">
+                                  <span>Error Reduction</span>
+                                  <span className="font-medium">91%</span>
+                                </div>
+                                <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                  <div className="h-full bg-gradient-to-r from-indigo-600 to-blue-400 rounded-full" style={{width: '91%'}}></div>
+                                </div>
+                              </div>
                             </div>
-                            <div className="flex justify-between text-xs text-gray-400 mt-2">
-                              <span>Mon</span>
-                              <span>Tue</span>
-                              <span>Wed</span>
-                              <span>Thu</span>
-                              <span>Fri</span>
+                            
+                            {/* Right column - small circular chart */}
+                            <div className="flex items-center justify-center">
+                              <div className="relative h-24 w-24">
+                                {/* Circular progress indicators */}
+                                <svg viewBox="0 0 120 120" className="transform -rotate-90">
+                                  <circle cx="60" cy="60" r="54" fill="none" stroke="#374151" strokeWidth="12" />
+                                  <circle 
+                                    cx="60" 
+                                    cy="60" 
+                                    r="54" 
+                                    fill="none" 
+                                    stroke="#4F46E5" 
+                                    strokeWidth="12"
+                                    strokeDasharray="339.292"
+                                    strokeDashoffset="67.8584" // 20% of circumference
+                                    strokeLinecap="round"
+                                  />
+                                </svg>
+                                
+                                {/* Label in center */}
+                                <div className="absolute inset-0 flex items-center justify-center flex-col">
+                                  <span className="text-xl font-bold text-white">80%</span>
+                                  <span className="text-[10px] text-gray-400">EFFICIENCY</span>
+                                </div>
+                              </div>
                             </div>
+                          </div>
+                          
+                          <div className="mt-2 text-center">
+                            <span className="text-xs text-indigo-400">AI-Powered Analysis</span>
                           </div>
                         </div>
                       </div>

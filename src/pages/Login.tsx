@@ -10,26 +10,22 @@ const Login = () => {
   const navigate = useNavigate();
   const [redirecting, setRedirecting] = useState(false);
   
-  // Redirect if already logged in
-  useEffect(() => {
-    // Only execute the effect if component is mounted
-    let isMounted = true;
-    
-    // Clear effect if component unmounts
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   // Handle redirection when auth state changes
   useEffect(() => {
+    // Create a flag to track if component is mounted
     let isMounted = true;
     
     const checkRedirect = async () => {
+      console.log("Login page - Checking redirect, user:", !!user, "isLoading:", isLoading);
       if (user && !isLoading && isMounted) {
         console.log("User is authenticated, redirecting to dashboard");
         setRedirecting(true);
-        navigate('/dashboard');
+        // Add a small delay to ensure state is updated before navigation
+        setTimeout(() => {
+          if (isMounted) {
+            navigate('/dashboard');
+          }
+        }, 50);
       }
     };
     
@@ -42,7 +38,16 @@ const Login = () => {
 
   // Prevent flash of login form if we're redirecting
   if (redirecting) {
-    return null;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
+            <Atom className="w-8 h-8 text-indigo-600 animate-spin" />
+          </div>
+          <p className="text-lg font-medium text-gray-700">Redirecting to dashboard...</p>
+        </div>
+      </div>
+    );
   }
 
   return (

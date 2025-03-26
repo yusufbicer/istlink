@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useAuth } from '@/lib/auth';
@@ -17,18 +17,24 @@ import Users from '@/components/dashboard/Users';
 import Notes from '@/components/dashboard/Notes';
 import Consolidations from '@/components/dashboard/Consolidations';
 import Payments from '@/components/dashboard/Payments';
+import { Loader2 } from 'lucide-react';
 
 const Dashboard = () => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isRedirecting, setIsRedirecting] = useState(false);
   
   // Redirect to login if not authenticated
   useEffect(() => {
-    if (!user) {
+    console.log("Dashboard - Auth check, user:", !!user, "isLoading:", isLoading);
+    
+    if (!isLoading && !user) {
+      console.log("User not authenticated, redirecting to login");
+      setIsRedirecting(true);
       navigate('/login');
     }
-  }, [user, navigate]);
+  }, [user, isLoading, navigate]);
 
   // Determine which component to render based on the path
   const renderContent = () => {
@@ -64,7 +70,18 @@ const Dashboard = () => {
     return <Overview />;
   };
 
-  if (!user) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mx-auto" />
+          <p className="mt-4 text-lg font-medium text-gray-700">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isRedirecting || !user) {
     return null; // Don't render anything while redirecting
   }
 

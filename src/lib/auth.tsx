@@ -51,40 +51,46 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (currentSession) {
           setSession(currentSession);
           
-          try {
-            // Fetch the user profile data
-            const { data: profile, error } = await supabase
-              .from('profiles')
-              .select('*')
-              .eq('id', currentSession.user.id)
-              .single();
+          // Use setTimeout to avoid potential deadlocks with Supabase client
+          setTimeout(async () => {
+            try {
+              // Fetch the user profile data
+              const { data: profile, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', currentSession.user.id)
+                .maybeSingle();
 
-            if (error) {
-              console.error('Error fetching user profile:', error);
-              if (isMounted.current) setUser(null);
-            } else if (profile) {
-              if (isMounted.current) {
-                setUser({
-                  id: profile.id,
-                  email: profile.email,
-                  name: profile.name,
-                  role: profile.role,
-                  avatar: profile.avatar,
-                });
+              if (error) {
+                console.error('Error fetching user profile:', error);
+                if (isMounted.current) setUser(null);
+              } else if (profile) {
+                if (isMounted.current) {
+                  setUser({
+                    id: profile.id,
+                    email: profile.email,
+                    name: profile.name,
+                    role: profile.role,
+                    avatar: profile.avatar,
+                  });
+                }
+              } else {
+                console.log('No profile found for user, waiting for DB trigger to create one');
               }
+            } catch (error) {
+              console.error('Session restoration error:', error);
+              if (isMounted.current) setUser(null);
+            } finally {
+              if (isMounted.current) setIsLoading(false);
             }
-          } catch (error) {
-            console.error('Session restoration error:', error);
-            if (isMounted.current) setUser(null);
-          }
+          }, 0);
         } else {
           if (isMounted.current) {
             setSession(null);
             setUser(null);
+            setIsLoading(false);
           }
         }
-        
-        if (isMounted.current) setIsLoading(false);
       }
     );
 
@@ -101,7 +107,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             .from('profiles')
             .select('*')
             .eq('id', initialSession.user.id)
-            .single();
+            .maybeSingle();
 
           if (error) {
             console.error('Error fetching user profile:', error);
@@ -146,19 +152,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         console.error("Login error:", error.message, error.code);
-        
-        // Handle the email not confirmed error specifically
-        if (error.message === "Email not confirmed" || error.code === "email_not_confirmed") {
-          toast({
-            title: "Email not verified",
-            description: "Please check your email and click the verification link first. We can resend the email if needed.",
-            variant: "destructive",
-          });
-          
-          throw error;
-        } else {
-          throw error;
-        }
+        throw error;
       } else {
         console.log("Login successful, session:", !!data.session);
         toast({
@@ -229,7 +223,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       toast({
         title: "Registration successful",
-        description: "Your account has been created. Please check your email for verification.",
+        description: "Your account has been created. You can now log in.",
       });
     } catch (error: any) {
       console.error('Registration error:', error);

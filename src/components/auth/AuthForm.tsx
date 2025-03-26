@@ -35,14 +35,16 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
     try {
       if (type === 'login') {
-        console.log("Login form submission for:", email);
+        console.log(`Attempting login for: ${email}`);
         await login(email, password);
-        // Navigate will happen via the useEffect in the Login component
+        console.log('Login successful, will redirect via Navigation component');
+        // We don't need to navigate here as the auth state change in Login.tsx will handle the redirect
       } else {
+        console.log(`Registering user: ${email}, ${role}`);
         await register(name, email, password, role);
         toast({
           title: "Registration successful",
-          description: "Your account has been created. Please check your email for verification.",
+          description: "Your account has been created. You can now log in.",
         });
         navigate('/login');
       }
@@ -62,9 +64,25 @@ const AuthForm = ({ type }: AuthFormProps) => {
   };
 
   const handleResendVerification = async () => {
+    if (!email) {
+      setError('Please enter your email address');
+      return;
+    }
+    
     setIsResending(true);
     try {
       await resendConfirmationEmail(email);
+      toast({
+        title: "Verification email sent",
+        description: "Please check your inbox for the verification link",
+      });
+    } catch (err: any) {
+      console.error('Failed to resend verification email:', err);
+      toast({
+        title: "Failed to send verification email",
+        description: err.message || "An error occurred",
+        variant: "destructive",
+      });
     } finally {
       setIsResending(false);
     }

@@ -15,11 +15,25 @@ const Login = () => {
     // Only execute the effect if component is mounted
     let isMounted = true;
     
-    if (user && !isLoading && isMounted) {
-      console.log("User is authenticated, redirecting to dashboard");
-      setRedirecting(true);
-      navigate('/dashboard');
-    }
+    // Clear effect if component unmounts
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Handle redirection when auth state changes
+  useEffect(() => {
+    let isMounted = true;
+    
+    const checkRedirect = async () => {
+      if (user && !isLoading && isMounted) {
+        console.log("User is authenticated, redirecting to dashboard");
+        setRedirecting(true);
+        navigate('/dashboard');
+      }
+    };
+    
+    checkRedirect();
     
     return () => {
       isMounted = false;

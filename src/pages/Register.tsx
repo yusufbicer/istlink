@@ -1,20 +1,38 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
 import AuthForm from '@/components/auth/AuthForm';
 import { Zap, Atom } from 'lucide-react';
 
 const Register = () => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
+  const [redirecting, setRedirecting] = useState(false);
   
   // Redirect if already logged in
   useEffect(() => {
-    if (user) {
-      navigate('/dashboard');
-    }
-  }, [user, navigate]);
+    let isMounted = true;
+    
+    const checkAuth = async () => {
+      if (user && !isLoading && isMounted) {
+        console.log("User is already authenticated, redirecting to dashboard");
+        setRedirecting(true);
+        navigate('/dashboard');
+      }
+    };
+    
+    checkAuth();
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [user, isLoading, navigate]);
+
+  // Prevent flash of register form if we're redirecting
+  if (redirecting) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -22,15 +40,13 @@ const Register = () => {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex items-center">
-              <div className="flex items-center">
-                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
-                  <Zap className="w-5 h-5 text-white absolute" />
-                  <Atom className="w-6 h-6 text-white/80 animate-pulse" />
-                </div>
-                <div className="ml-2">
-                  <span className="font-bold text-base text-gray-900">GROOP</span>
-                  <span className="block text-xs text-indigo-600 font-medium tracking-wide">BEYOND BORDERS</span>
-                </div>
+              <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
+                <Zap className="w-5 h-5 text-white absolute" />
+                <Atom className="w-6 h-6 text-white/80 animate-pulse" />
+              </div>
+              <div className="ml-3">
+                <span className="font-bold text-xl text-gray-900">GROOP</span>
+                <span className="block text-xs text-indigo-600 font-medium tracking-wide">BEYOND BORDERS</span>
               </div>
             </Link>
           </div>

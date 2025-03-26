@@ -6,15 +6,18 @@ import AuthForm from '@/components/auth/AuthForm';
 import { Zap, Atom } from 'lucide-react';
 
 const Login = () => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
   
   // Redirect if already logged in
   useEffect(() => {
-    if (user) {
+    console.log("Login page mounted, user:", !!user, "isLoading:", isLoading);
+    
+    if (user && !isLoading) {
+      console.log("User is authenticated, redirecting to dashboard");
       navigate('/dashboard');
     }
-  }, [user, navigate]);
+  }, [user, isLoading, navigate]);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">

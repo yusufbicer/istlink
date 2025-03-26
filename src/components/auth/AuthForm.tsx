@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,6 +35,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
     try {
       if (type === 'login') {
+        console.log("Login form submission for:", email);
         await login(email, password);
         // Navigate will happen via the useEffect in the Login component
         // since successful login will update the user state
@@ -47,6 +49,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         navigate('/login');
       }
     } catch (err: any) {
+      console.error('Form submission error:', err);
       setError(err.message || 'An error occurred');
       
       // Show resend option if email not confirmed error
@@ -68,6 +71,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
     } finally {
       setIsResending(false);
     }
+  };
+
+  const setDemoAccount = (demoEmail: string, demoPassword: string) => {
+    setEmail(demoEmail);
+    setPassword(demoPassword);
   };
 
   return (
@@ -217,30 +225,21 @@ const AuthForm = ({ type }: AuthFormProps) => {
             <div className="grid grid-cols-3 gap-2 text-xs">
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => {
-                  setEmail('customer@example.com');
-                  setPassword('password');
-                }}
+                onClick={() => setDemoAccount('customer@example.com', 'password')}
               >
                 <div className="font-medium">Customer</div>
                 <div className="text-gray-500">customer@example.com</div>
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => {
-                  setEmail('supplier@example.com');
-                  setPassword('password');
-                }}
+                onClick={() => setDemoAccount('supplier@example.com', 'password')}
               >
                 <div className="font-medium">Supplier</div>
                 <div className="text-gray-500">supplier@example.com</div>
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => {
-                  setEmail('admin@example.com');
-                  setPassword('password');
-                }}
+                onClick={() => setDemoAccount('admin@example.com', 'password')}
               >
                 <div className="font-medium">Admin</div>
                 <div className="text-gray-500">admin@example.com</div>

@@ -34,39 +34,184 @@ export interface Note {
 
 // User service functions
 export const userService = {
-  // Will be implemented with Supabase
   getCustomers: async (supplierOnly: boolean = false): Promise<Customer[]> => {
-    // For now, return mock data
-    // This will be replaced with: return supabase.from('customers')...
-    return [];
+    try {
+      let query = supabase.from('customers').select('*');
+      
+      if (supplierOnly) {
+        // Get current user ID
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          query = query.eq('supplier_id', session.user.id);
+        }
+      }
+      
+      const { data, error } = await query;
+      
+      if (error) {
+        console.error("Error fetching customers:", error);
+        return [];
+      }
+      
+      // Transform to match the expected Customer interface
+      return data.map(customer => ({
+        id: customer.id,
+        name: customer.name,
+        email: customer.email,
+        company: customer.company || '',
+        status: customer.status,
+        orders: 0 // We'll need to fetch this separately or join
+      }));
+    } catch (error) {
+      console.error("Error in getCustomers:", error);
+      return [];
+    }
   },
   
   getCustomerById: async (id: string): Promise<Customer | null> => {
-    // Will be implemented with Supabase
-    return null;
+    try {
+      const { data, error } = await supabase
+        .from('customers')
+        .select('*')
+        .eq('id', id)
+        .single();
+      
+      if (error) {
+        console.error("Error fetching customer:", error);
+        return null;
+      }
+      
+      // Transform to match the expected Customer interface
+      return {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        company: data.company || '',
+        status: data.status,
+        orders: 0 // We'll need to fetch this separately
+      };
+    } catch (error) {
+      console.error("Error in getCustomerById:", error);
+      return null;
+    }
   },
 }
 
 // Order service functions
 export const orderService = {
-  // Will be implemented with Supabase
   getOrders: async (filterByUser: boolean = true): Promise<Order[]> => {
-    // This will be replaced with Supabase queries
-    return [];
+    try {
+      let query = supabase.from('orders').select(`
+        *,
+        customers!orders_customer_id_fkey(name)
+      `);
+      
+      if (filterByUser) {
+        // Get current user ID and role
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', session.user.id)
+            .single();
+          
+          if (profile?.role === 'supplier') {
+            query = query.eq('supplier_id', session.user.id);
+          } else if (profile?.role === 'customer') {
+            // For customers, we need to find orders by their customer ID
+            const { data: customerData } = await supabase
+              .from('customers')
+              .select('id')
+              .eq('user_id', session.user.id)
+              .single();
+            
+            if (customerData?.id) {
+              query = query.eq('customer_id', customerData.id);
+            }
+          }
+          // For admins, don't filter
+        }
+      }
+      
+      const { data, error } = await query;
+      
+      if (error) {
+        console.error("Error fetching orders:", error);
+        return [];
+      }
+      
+      // Transform to match the expected Order interface
+      return data.map(order => ({
+        id: order.id,
+        customer_id: order.customer_id,
+        supplier_id: order.supplier_id,
+        customerName: order.customers?.name || 'Unknown Customer',
+        supplierName: 'Supplier', // We need to fetch this separately
+        amount: order.amount,
+        status: order.status,
+        date: order.date,
+        items: order.items
+      }));
+    } catch (error) {
+      console.error("Error in getOrders:", error);
+      return [];
+    }
   }
 }
 
 // Note service functions
 export const noteService = {
-  // Will be implemented with Supabase
   getNotes: async (): Promise<Note[]> => {
-    // This will be replaced with Supabase queries
-    return [];
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return [];
+      
+      const { data, error } = await supabase
+        .from('notes')
+        .select('*')
+        .eq('user_id', session.user.id)
+        .order('created_at', { ascending: false });
+      
+      if (error) {
+        console.error("Error fetching notes:", error);
+        return [];
+      }
+      
+      return data;
+    } catch (error) {
+      console.error("Error in getNotes:", error);
+      return [];
+    }
   },
   
   createNote: async (note: Omit<Note, 'id' | 'created_at' | 'user_id'>): Promise<Note | null> => {
-    // Will be implemented with Supabase
-    return null;
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return null;
+      
+      const { data, error } = await supabase
+        .from('notes')
+        .insert([
+          { 
+            title: note.title, 
+            content: note.content,
+            user_id: session.user.id
+          }
+        ])
+        .select()
+        .single();
+      
+      if (error) {
+        console.error("Error creating note:", error);
+        return null;
+      }
+      
+      return data;
+    } catch (error) {
+      console.error("Error in createNote:", error);
+      return null;
+    }
   }
 }
 

@@ -54,12 +54,13 @@ export const userService = {
       }
       
       // Transform to match the expected Customer interface
+      // Explicitly cast status to the union type
       return data.map(customer => ({
         id: customer.id,
         name: customer.name,
         email: customer.email,
         company: customer.company || '',
-        status: customer.status,
+        status: (customer.status === 'active' ? 'active' : 'inactive') as "active" | "inactive",
         orders: 0 // We'll need to fetch this separately or join
       }));
     } catch (error) {
@@ -82,12 +83,13 @@ export const userService = {
       }
       
       // Transform to match the expected Customer interface
+      // Explicitly cast status to the union type
       return {
         id: data.id,
         name: data.name,
         email: data.email,
         company: data.company || '',
-        status: data.status,
+        status: (data.status === 'active' ? 'active' : 'inactive') as "active" | "inactive",
         orders: 0 // We'll need to fetch this separately
       };
     } catch (error) {

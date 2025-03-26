@@ -1,4 +1,3 @@
-
 // Simple auth utilities
 import { useState, useEffect, createContext, useContext } from 'react';
 import { supabase } from "@/integrations/supabase/client";
@@ -21,6 +20,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   register: (name: string, email: string, password: string, role: UserRole) => Promise<void>;
+  resendConfirmationEmail: (email: string) => Promise<void>;
 }
 
 // Create an authentication context
@@ -124,13 +124,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         password,
       });
 
-      if (error) throw error;
-
-      // User profile data is fetched in the auth state change handler
-      toast({
-        title: "Login successful",
-        description: "Welcome back to GROOP!",
-      });
+      if (error) {
+        // Handle the email not confirmed error specifically
+        if (error.message === "Email not confirmed" || error.code === "email_not_confirmed") {
+          toast({
+            title: "Email not verified",
+            description: "Please check your email and click the verification link first. We can resend the email if needed.",
+            variant: "destructive",
+          });
+          
+          // Automatically resend the verification email
+          await supabase.auth.resend({
+            type: 'signup',
+            email,
+          });
+          
+          toast({
+            title: "Verification email resent",
+            description: "We've sent another verification email. Please check your inbox.",
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({
+          title: "Login successful",
+          description: "Welcome back to GROOP!",
+        });
+      }
     } catch (error: any) {
       console.error('Login error:', error);
       toast({
@@ -194,8 +215,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const resendConfirmationEmail = async (email: string) => {
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Verification email sent",
+        description: "Please check your inbox for the verification link.",
+      });
+    } catch (error: any) {
+      console.error('Email resend error:', error);
+      toast({
+        title: "Failed to resend verification email",
+        description: error.message || "An error occurred",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, register }}>
+    <AuthContext.Provider value={{ user, isLoading, login, logout, register, resendConfirmationEmail }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,14 +6,14 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useAuth, UserRole } from '@/lib/auth';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
-import { User, UserPlus, Loader2 } from 'lucide-react';
+import { User, UserPlus, Loader2, RefreshCw } from 'lucide-react';
 
 interface AuthFormProps {
   type: 'login' | 'register';
 }
 
 const AuthForm = ({ type }: AuthFormProps) => {
-  const { login, register } = useAuth();
+  const { login, register, resendConfirmationEmail } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   
@@ -24,36 +23,50 @@ const AuthForm = ({ type }: AuthFormProps) => {
   const [role, setRole] = useState<UserRole>('customer');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showResendOption, setShowResendOption] = useState(false);
+  const [isResending, setIsResending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
+    setShowResendOption(false);
 
     try {
       if (type === 'login') {
         await login(email, password);
-        toast({
-          title: "Login successful",
-          description: "Welcome back to GROOP!",
-        });
+        // Navigate will happen via the useEffect in the Login component
+        // since successful login will update the user state
       } else {
         await register(name, email, password, role);
         toast({
           title: "Registration successful",
-          description: "Your account has been created.",
+          description: "Your account has been created. Please check your email for verification.",
         });
+        // Optionally navigate to login page after successful registration
+        navigate('/login');
       }
-      navigate('/dashboard');
     } catch (err: any) {
       setError(err.message || 'An error occurred');
-      toast({
-        title: "Error",
-        description: err.message || 'An error occurred',
-        variant: "destructive",
-      });
+      
+      // Show resend option if email not confirmed error
+      if (type === 'login' && 
+         (err.message?.includes('not confirmed') || 
+          err.message?.includes('not verified') || 
+          err.code === 'email_not_confirmed')) {
+        setShowResendOption(true);
+      }
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    setIsResending(true);
+    try {
+      await resendConfirmationEmail(email);
+    } finally {
+      setIsResending(false);
     }
   };
 
@@ -81,6 +94,29 @@ const AuthForm = ({ type }: AuthFormProps) => {
         {error && (
           <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-6">
             {error}
+            {showResendOption && (
+              <div className="mt-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="w-full mt-1 text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700"
+                  onClick={handleResendVerification}
+                  disabled={isResending}
+                >
+                  {isResending ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending verification email...
+                    </>
+                  ) : (
+                    <>
+                      <RefreshCw className="mr-2 h-4 w-4" />
+                      Resend verification email
+                    </>
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
         )}
 

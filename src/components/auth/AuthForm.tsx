@@ -38,21 +38,18 @@ const AuthForm = ({ type }: AuthFormProps) => {
         console.log("Login form submission for:", email);
         await login(email, password);
         // Navigate will happen via the useEffect in the Login component
-        // since successful login will update the user state
       } else {
         await register(name, email, password, role);
         toast({
           title: "Registration successful",
           description: "Your account has been created. Please check your email for verification.",
         });
-        // Optionally navigate to login page after successful registration
         navigate('/login');
       }
     } catch (err: any) {
       console.error('Form submission error:', err);
       setError(err.message || 'An error occurred');
       
-      // Show resend option if email not confirmed error
       if (type === 'login' && 
          (err.message?.includes('not confirmed') || 
           err.message?.includes('not verified') || 
@@ -225,10 +222,10 @@ const AuthForm = ({ type }: AuthFormProps) => {
             <div className="grid grid-cols-3 gap-2 text-xs">
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => setDemoAccount('customer@example.com', 'password')}
+                onClick={() => setDemoAccount('admin@groop.com', 'admin123')}
               >
-                <div className="font-medium">Customer</div>
-                <div className="text-gray-500">customer@example.com</div>
+                <div className="font-medium">Admin</div>
+                <div className="text-gray-500">admin@groop.com</div>
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
@@ -239,10 +236,10 @@ const AuthForm = ({ type }: AuthFormProps) => {
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => setDemoAccount('admin@example.com', 'password')}
+                onClick={() => setDemoAccount('customer@example.com', 'password')}
               >
-                <div className="font-medium">Admin</div>
-                <div className="text-gray-500">admin@example.com</div>
+                <div className="font-medium">Customer</div>
+                <div className="text-gray-500">customer@example.com</div>
               </div>
             </div>
           </div>

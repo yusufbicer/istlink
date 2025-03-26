@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
 import AuthForm from '@/components/auth/AuthForm';
@@ -8,16 +8,28 @@ import { Zap, Atom } from 'lucide-react';
 const Login = () => {
   const { user, isLoading } = useAuth();
   const navigate = useNavigate();
+  const [redirecting, setRedirecting] = useState(false);
   
   // Redirect if already logged in
   useEffect(() => {
-    console.log("Login page mounted, user:", !!user, "isLoading:", isLoading);
+    // Only execute the effect if component is mounted
+    let isMounted = true;
     
-    if (user && !isLoading) {
+    if (user && !isLoading && isMounted) {
       console.log("User is authenticated, redirecting to dashboard");
+      setRedirecting(true);
       navigate('/dashboard');
     }
+    
+    return () => {
+      isMounted = false;
+    };
   }, [user, isLoading, navigate]);
+
+  // Prevent flash of login form if we're redirecting
+  if (redirecting) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">

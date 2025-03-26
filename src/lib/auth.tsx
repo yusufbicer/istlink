@@ -1,6 +1,5 @@
 
-// Simple auth utilities
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { Session, User as SupabaseUser } from '@supabase/supabase-js';
 import { useToast } from '@/hooks/use-toast';
@@ -19,7 +18,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   register: (name: string, email: string, password: string, role: UserRole) => Promise<void>;
   resendConfirmationEmail: (email: string) => Promise<void>;
 }
@@ -33,20 +32,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [session, setSession] = useState<Session | null>(null);
   const { toast } = useToast();
+  
+  // Use a ref to track component mount state
+  const isMounted = useRef(true);
 
   // Set up Supabase auth state listener
   useEffect(() => {
-    let mounted = true;
+    console.log("Setting up auth state listener");
+    setIsLoading(true);
     
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, currentSession) => {
-        if (!mounted) return;
-        
         console.log("Auth state changed:", event, !!currentSession);
-        setSession(currentSession);
         
-        if (currentSession?.user) {
+        if (!isMounted.current) return;
+        
+        if (currentSession) {
+          setSession(currentSession);
+          
           try {
             // Fetch the user profile data
             const { data: profile, error } = await supabase
@@ -57,9 +61,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
             if (error) {
               console.error('Error fetching user profile:', error);
-              if (mounted) setUser(null);
+              if (isMounted.current) setUser(null);
             } else if (profile) {
-              if (mounted) {
+              if (isMounted.current) {
                 setUser({
                   id: profile.id,
                   email: profile.email,
@@ -71,26 +75,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             }
           } catch (error) {
             console.error('Session restoration error:', error);
-            if (mounted) setUser(null);
+            if (isMounted.current) setUser(null);
           }
         } else {
-          if (mounted) setUser(null);
+          if (isMounted.current) {
+            setSession(null);
+            setUser(null);
+          }
         }
         
-        if (mounted) setIsLoading(false);
+        if (isMounted.current) setIsLoading(false);
       }
     );
 
     // Check for existing session
     const initializeAuth = async () => {
-      if (!mounted) return;
-      setIsLoading(true);
-      
       try {
         const { data: { session: initialSession } } = await supabase.auth.getSession();
         
-        if (initialSession?.user) {
+        if (initialSession?.user && isMounted.current) {
           console.log("Found existing session");
+          setSession(initialSession);
+          
           const { data: profile, error } = await supabase
             .from('profiles')
             .select('*')
@@ -99,36 +105,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
           if (error) {
             console.error('Error fetching user profile:', error);
-            if (mounted) setUser(null);
-          } else if (profile) {
-            if (mounted) {
-              setUser({
-                id: profile.id,
-                email: profile.email,
-                name: profile.name,
-                role: profile.role,
-                avatar: profile.avatar,
-              });
-            }
+            if (isMounted.current) setUser(null);
+          } else if (profile && isMounted.current) {
+            setUser({
+              id: profile.id,
+              email: profile.email,
+              name: profile.name,
+              role: profile.role,
+              avatar: profile.avatar,
+            });
           }
         }
       } catch (error) {
         console.error('Initial auth error:', error);
-        if (mounted) setUser(null);
+        if (isMounted.current) setUser(null);
       } finally {
-        if (mounted) setIsLoading(false);
+        if (isMounted.current) setIsLoading(false);
       }
     };
 
-    initializeAuth();
+    // Initialize auth after a small delay to avoid race conditions
+    setTimeout(initializeAuth, 10);
 
     return () => {
-      mounted = false;
+      isMounted.current = false;
       subscription.unsubscribe();
     };
   }, []);
 
   const login = async (email: string, password: string) => {
+    if (!isMounted.current) return;
+    
     setIsLoading(true);
     try {
       console.log("Attempting login for:", email);
@@ -148,16 +155,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             variant: "destructive",
           });
           
-          // Automatically resend the verification email
-          await supabase.auth.resend({
-            type: 'signup',
-            email,
-          });
-          
-          toast({
-            title: "Verification email resent",
-            description: "We've sent another verification email. Please check your inbox.",
-          });
+          throw error;
         } else {
           throw error;
         }
@@ -177,13 +175,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       throw error;
     } finally {
-      setIsLoading(false);
+      if (isMounted.current) setIsLoading(false);
     }
   };
 
   const logout = async () => {
+    if (!isMounted.current) return;
+    
     try {
-      await supabase.auth.signOut();
+      setIsLoading(true);
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) throw error;
+      
       toast({
         title: "Logout successful",
         description: "You have been logged out",
@@ -195,10 +199,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         description: error.message || "An error occurred during logout",
         variant: "destructive",
       });
+    } finally {
+      if (isMounted.current) {
+        setUser(null);
+        setSession(null);
+        setIsLoading(false);
+      }
     }
   };
 
   const register = async (name: string, email: string, password: string, role: UserRole) => {
+    if (!isMounted.current) return;
+    
     setIsLoading(true);
     try {
       console.log("Registering user:", email, role);
@@ -228,11 +240,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       throw error;
     } finally {
-      setIsLoading(false);
+      if (isMounted.current) setIsLoading(false);
     }
   };
 
   const resendConfirmationEmail = async (email: string) => {
+    if (!isMounted.current) return;
+    
     try {
       console.log("Resending confirmation to:", email);
       const { error } = await supabase.auth.resend({
@@ -253,11 +267,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         description: error.message || "An error occurred",
         variant: "destructive",
       });
+      throw error;
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, register, resendConfirmationEmail }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      isLoading, 
+      login, 
+      logout, 
+      register, 
+      resendConfirmationEmail 
+    }}>
       {children}
     </AuthContext.Provider>
   );

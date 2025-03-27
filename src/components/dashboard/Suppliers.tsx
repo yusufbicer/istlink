@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -159,7 +160,7 @@ const Suppliers = () => {
         .insert({
           name: newSupplier.name,
           email: newSupplier.contact,
-          role: 'supplier',
+          role: 'supplier' as "supplier", // Cast to expected enum type
           company: newSupplier.name,
           location: newSupplier.location,
           phone: newSupplier.phone,

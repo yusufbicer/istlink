@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -156,7 +155,12 @@ const Orders = () => {
           let orderItems: OrderItem[] = [];
           try {
             if (order.items_json) {
-              orderItems = JSON.parse(order.items_json);
+              // Convert to string before parsing if it's not already a string
+              const itemsJsonString = typeof order.items_json === 'string' 
+                ? order.items_json 
+                : JSON.stringify(order.items_json);
+              
+              orderItems = JSON.parse(itemsJsonString);
             } else {
               // If no items are stored, create a placeholder
               orderItems = [{ name: "Unknown item", quantity: 1, price: order.amount }];

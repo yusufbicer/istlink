@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -156,14 +157,14 @@ const Users = () => {
         return;
       }
       
-      // Create profile entry
+      // Create profile entry with proper type casting for role
       const { data, error } = await supabase
         .from('profiles')
         .insert({
           name: newUser.name,
           email: newUser.email,
           company: newUser.company,
-          role: newUser.role,
+          role: newUser.role as "customer" | "supplier" | "admin", // Cast to expected enum type
           status: 'active'
         })
         .select();

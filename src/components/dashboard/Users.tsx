@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -160,15 +159,13 @@ const Users = () => {
       // Create profile entry
       const { data, error } = await supabase
         .from('profiles')
-        .insert([
-          {
-            name: newUser.name,
-            email: newUser.email,
-            company: newUser.company,
-            role: newUser.role,
-            status: 'active'
-          }
-        ])
+        .insert({
+          name: newUser.name,
+          email: newUser.email,
+          company: newUser.company,
+          role: newUser.role,
+          status: 'active'
+        })
         .select();
         
       if (error) {

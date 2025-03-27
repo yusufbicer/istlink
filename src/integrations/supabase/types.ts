@@ -75,33 +75,45 @@ export type Database = {
       orders: {
         Row: {
           amount: number
+          consolidation_id: string | null
           created_at: string
           customer_id: string | null
           date: string
           id: string
           items: number
+          items_json: Json | null
+          payment_status: string | null
+          shipment_id: string | null
           status: string
           supplier_id: string | null
           updated_at: string
         }
         Insert: {
           amount: number
+          consolidation_id?: string | null
           created_at?: string
           customer_id?: string | null
           date?: string
           id?: string
           items?: number
+          items_json?: Json | null
+          payment_status?: string | null
+          shipment_id?: string | null
           status?: string
           supplier_id?: string | null
           updated_at?: string
         }
         Update: {
           amount?: number
+          consolidation_id?: string | null
           created_at?: string
           customer_id?: string | null
           date?: string
           id?: string
           items?: number
+          items_json?: Json | null
+          payment_status?: string | null
+          shipment_id?: string | null
           status?: string
           supplier_id?: string | null
           updated_at?: string
@@ -158,32 +170,50 @@ export type Database = {
       profiles: {
         Row: {
           avatar: string | null
+          category: string | null
           company: string | null
           created_at: string
           email: string
           id: string
+          location: string | null
           name: string
+          orders: number | null
+          phone: string | null
+          rating: number | null
           role: Database["public"]["Enums"]["user_role"]
+          status: string | null
           updated_at: string
         }
         Insert: {
           avatar?: string | null
+          category?: string | null
           company?: string | null
           created_at?: string
           email: string
           id: string
+          location?: string | null
           name: string
+          orders?: number | null
+          phone?: string | null
+          rating?: number | null
           role?: Database["public"]["Enums"]["user_role"]
+          status?: string | null
           updated_at?: string
         }
         Update: {
           avatar?: string | null
+          category?: string | null
           company?: string | null
           created_at?: string
           email?: string
           id?: string
+          location?: string | null
           name?: string
+          orders?: number | null
+          phone?: string | null
+          rating?: number | null
           role?: Database["public"]["Enums"]["user_role"]
+          status?: string | null
           updated_at?: string
         }
         Relationships: []

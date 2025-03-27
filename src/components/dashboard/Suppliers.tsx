@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,7 +28,7 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { PlusIcon, MoreHorizontalIcon, SearchIcon, PackageIcon, StarIcon, ExternalLinkIcon } from "lucide-react";
+import { PlusIcon, MoreHorizontalIcon, SearchIcon, PackageIcon, StarIcon, ExternalLinkIcon, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -157,20 +156,18 @@ const Suppliers = () => {
       // Insert new supplier into the profiles table
       const { data, error } = await supabase
         .from('profiles')
-        .insert([
-          {
-            name: newSupplier.name,
-            email: newSupplier.contact,
-            role: 'supplier',
-            company: newSupplier.name,
-            location: newSupplier.location,
-            phone: newSupplier.phone,
-            category: newSupplier.category,
-            status: 'active',
-            rating: 0,
-            orders: 0
-          }
-        ])
+        .insert({
+          name: newSupplier.name,
+          email: newSupplier.contact,
+          role: 'supplier',
+          company: newSupplier.name,
+          location: newSupplier.location,
+          phone: newSupplier.phone,
+          category: newSupplier.category,
+          status: 'active',
+          rating: 0,
+          orders: 0
+        })
         .select();
       
       if (error) {

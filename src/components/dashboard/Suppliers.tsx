@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -153,11 +154,11 @@ const Suppliers = () => {
         return;
       }
       
-      // Instead of trying to insert with 'id' field (which is auto-generated),
-      // we specify only the fields we want to set
+      // Use upsert instead of insert to avoid the id requirement
+      // The database will generate a UUID automatically
       const { data, error } = await supabase
         .from('profiles')
-        .insert({
+        .upsert({
           email: newSupplier.contact,
           name: newSupplier.name,
           role: 'supplier' as "supplier", // Cast to expected enum type

@@ -154,11 +154,13 @@ const Suppliers = () => {
         return;
       }
       
-      // Use upsert instead of insert to avoid the id requirement
-      // The database will generate a UUID automatically
+      // Generate a UUID for the new supplier
+      const newSupplierId = crypto.randomUUID();
+      
       const { data, error } = await supabase
         .from('profiles')
-        .upsert({
+        .insert({
+          id: newSupplierId, // Add generated id
           email: newSupplier.contact,
           name: newSupplier.name,
           role: 'supplier' as "supplier", // Cast to expected enum type

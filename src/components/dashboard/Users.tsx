@@ -157,11 +157,14 @@ const Users = () => {
         return;
       }
       
-      // Use upsert instead of insert to avoid the id requirement
-      // The database will generate a UUID automatically
+      // For the profiles table, we need to provide an id
+      // Generate a UUID for the new user
+      const newUserId = crypto.randomUUID();
+      
       const { data, error } = await supabase
         .from('profiles')
-        .upsert({
+        .insert({
+          id: newUserId, // Add generated id
           name: newUser.name,
           email: newUser.email,
           company: newUser.company,

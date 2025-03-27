@@ -16,6 +16,20 @@ import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import BlogManagement from "./pages/BlogManagement";
 
+// Dashboard components
+import Overview from './components/dashboard/Overview';
+import Suppliers from './components/dashboard/Suppliers';
+import Orders from './components/dashboard/Orders';
+import Shipping from './components/dashboard/Shipping';
+import Products from './components/dashboard/Products';
+import Analytics from './components/dashboard/Analytics';
+import Tracking from './components/dashboard/Tracking';
+import Settings from './components/dashboard/Settings';
+import Users from './components/dashboard/Users';
+import Notes from './components/dashboard/Notes';
+import Consolidations from './components/dashboard/Consolidations';
+import Payments from './components/dashboard/Payments';
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -30,18 +44,24 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/suppliers" element={<Dashboard />} />
-            <Route path="/dashboard/orders" element={<Dashboard />} />
-            <Route path="/dashboard/shipping" element={<Dashboard />} />
-            <Route path="/dashboard/products" element={<Dashboard />} />
-            <Route path="/dashboard/analytics" element={<Dashboard />} />
-            <Route path="/dashboard/tracking" element={<Dashboard />} />
-            <Route path="/dashboard/settings" element={<Dashboard />} />
-            <Route path="/dashboard/users" element={<Dashboard />} />
-            <Route path="/dashboard/notes" element={<Dashboard />} />
-            <Route path="/dashboard/consolidations" element={<Dashboard />} />
-            <Route path="/dashboard/payments" element={<Dashboard />} />
+            
+            {/* Dashboard with nested routes */}
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route index element={<Navigate to="/dashboard/overview" replace />} />
+              <Route path="overview" element={<Overview />} />
+              <Route path="suppliers" element={<Suppliers />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="shipping" element={<Shipping />} />
+              <Route path="products" element={<Products />} />
+              <Route path="analytics" element={<Analytics />} />
+              <Route path="tracking" element={<Tracking />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="users" element={<Users />} />
+              <Route path="notes" element={<Notes />} />
+              <Route path="consolidations" element={<Consolidations />} />
+              <Route path="payments" element={<Payments />} />
+            </Route>
+            
             <Route path="/dashboard/blog-management" element={<BlogManagement />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

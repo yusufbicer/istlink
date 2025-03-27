@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { useNavigate, Outlet, useLocation, Routes, Route } from 'react-router-dom';
+import { useNavigate, useLocation, Routes, Route, Outlet } from 'react-router-dom';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useAuth } from '@/lib/auth';
 import Sidebar from '@/components/dashboard/Sidebar';
@@ -29,7 +29,8 @@ const Dashboard = () => {
   console.log("[Dashboard] Render - Auth state:", { 
     isAuthenticated: !!user, 
     isLoading, 
-    email: user?.email || 'none' 
+    email: user?.email || 'none',
+    pathname: location.pathname
   });
   
   // Redirect to login if not authenticated
@@ -44,9 +45,14 @@ const Dashboard = () => {
         navigate('/login', { replace: true });
       } else {
         console.log("[Dashboard] User is authenticated:", user.email);
+        
+        // If user lands on /dashboard with no sub-route, redirect to overview
+        if (location.pathname === '/dashboard') {
+          navigate('/dashboard/overview', { replace: true });
+        }
       }
     }
-  }, [user, isLoading, navigate]);
+  }, [user, isLoading, navigate, location.pathname]);
 
   if (isLoading) {
     return (
@@ -75,20 +81,7 @@ const Dashboard = () => {
           <Header />
           
           <main className="flex-1 px-4 sm:px-6 py-4 sm:py-6 overflow-auto">
-            <Routes>
-              <Route path="/" element={<Overview />} />
-              <Route path="/suppliers" element={<Suppliers />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/shipping" element={<Shipping />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/analytics" element={<Analytics />} />
-              <Route path="/tracking" element={<Tracking />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="/notes" element={<Notes />} />
-              <Route path="/consolidations" element={<Consolidations />} />
-              <Route path="/payments" element={<Payments />} />
-            </Routes>
+            <Outlet />
           </main>
         </div>
       </div>

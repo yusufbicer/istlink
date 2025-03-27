@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
@@ -12,20 +11,17 @@ const Login = () => {
   
   // Handle redirection when auth state changes
   useEffect(() => {
-    // Create a flag to track if component is mounted
     let isMounted = true;
     
     const checkRedirect = async () => {
       console.log("Login page - Checking redirect, user:", !!user, "isLoading:", isLoading);
+      
       if (user && !isLoading && isMounted) {
         console.log("User is authenticated, redirecting to dashboard");
         setRedirecting(true);
-        // Add a small delay to ensure state is updated before navigation
-        setTimeout(() => {
-          if (isMounted) {
-            navigate('/dashboard');
-          }
-        }, 50);
+        
+        // Force navigation with replace to ensure clean history
+        navigate('/dashboard', { replace: true });
       }
     };
     
@@ -37,7 +33,7 @@ const Login = () => {
   }, [user, isLoading, navigate]);
 
   // Prevent flash of login form if we're redirecting
-  if (redirecting) {
+  if (redirecting || (user && !isLoading)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">

@@ -66,6 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 if (isMounted.current) setUser(null);
               } else if (profile) {
                 if (isMounted.current) {
+                  console.log("Profile loaded successfully, setting user:", profile.email);
                   setUser({
                     id: profile.id,
                     email: profile.email,
@@ -81,11 +82,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               console.error('Session restoration error:', error);
               if (isMounted.current) setUser(null);
             } finally {
-              if (isMounted.current) setIsLoading(false);
+              if (isMounted.current) {
+                console.log("Auth loading complete, user:", user?.email || "null");
+                setIsLoading(false);
+              }
             }
           }, 0);
         } else {
           if (isMounted.current) {
+            console.log("No active session, clearing user state");
             setSession(null);
             setUser(null);
             setIsLoading(false);
@@ -113,6 +118,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             console.error('Error fetching user profile:', error);
             if (isMounted.current) setUser(null);
           } else if (profile && isMounted.current) {
+            console.log("Setting user from existing session:", profile.email);
             setUser({
               id: profile.id,
               email: profile.email,
@@ -126,7 +132,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.error('Initial auth error:', error);
         if (isMounted.current) setUser(null);
       } finally {
-        if (isMounted.current) setIsLoading(false);
+        if (isMounted.current) {
+          console.log("Initial auth check complete");
+          setIsLoading(false);
+        }
       }
     };
 
@@ -134,6 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setTimeout(initializeAuth, 10);
 
     return () => {
+      console.log("Cleaning up auth state listener");
       isMounted.current = false;
       subscription.unsubscribe();
     };

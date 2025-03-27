@@ -32,7 +32,7 @@ const Dashboard = () => {
     if (!isLoading && !user) {
       console.log("User not authenticated, redirecting to login");
       setIsRedirecting(true);
-      navigate('/login');
+      navigate('/login', { replace: true });
     }
   }, [user, isLoading, navigate]);
 
@@ -85,6 +85,9 @@ const Dashboard = () => {
     return null; // Don't render anything while redirecting
   }
 
+  // User is authenticated and data is loaded, render the dashboard
+  console.log("Rendering dashboard for authenticated user");
+  
   return (
     <SidebarProvider>
       <div className="min-h-screen w-full flex bg-gray-50 text-gray-900">

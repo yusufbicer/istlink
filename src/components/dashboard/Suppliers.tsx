@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -154,20 +153,19 @@ const Suppliers = () => {
         return;
       }
       
-      // Insert new supplier into the profiles table
+      // Instead of trying to insert with 'id' field (which is auto-generated),
+      // we specify only the fields we want to set
       const { data, error } = await supabase
         .from('profiles')
         .insert({
-          name: newSupplier.name,
           email: newSupplier.contact,
+          name: newSupplier.name,
           role: 'supplier' as "supplier", // Cast to expected enum type
           company: newSupplier.name,
           location: newSupplier.location,
           phone: newSupplier.phone,
           category: newSupplier.category,
-          status: 'active',
-          rating: 0,
-          orders: 0
+          status: 'active'
         })
         .select();
       

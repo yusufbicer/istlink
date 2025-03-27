@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,128 +42,65 @@ import {
   PackageIcon,
   AlertCircleIcon,
   XIcon,
-  UserIcon
+  UserIcon,
+  Loader2
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from '@/lib/auth';
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { orderService } from "@/lib/api";
 
-const initialOrders = [
-  { 
-    id: "ORD-1234", 
-    supplier: "Textile Masters Co.", 
-    supplierId: "1",
-    buyer: "Fashion Retailer Inc.",
-    buyerId: "3",
-    items: [
-      { name: "Cotton T-Shirt", quantity: 200, price: 4.5 },
-      { name: "Denim Jeans", quantity: 100, price: 12.0 }
-    ],
-    total: 2100,
-    date: "2023-07-25",
-    status: "completed",
-    consolidationId: "CONS-001",
-    shipment: "SHP-567",
-    payment: "paid"
-  },
-  { 
-    id: "ORD-1235", 
-    supplier: "Anatolian Ceramics",
-    supplierId: "2",
-    buyer: "Fashion Retailer Inc.",
-    buyerId: "3",
-    items: [
-      { name: "Ceramic Plates", quantity: 50, price: 8.0 },
-      { name: "Coffee Mugs", quantity: 100, price: 3.5 }
-    ],
-    total: 750,
-    date: "2023-07-27",
-    status: "processing",
-    consolidationId: "CONS-001",
-    shipment: "SHP-568",
-    payment: "paid"
-  },
-  { 
-    id: "ORD-1236", 
-    supplier: "Turkish Delights Ltd.", 
-    supplierId: "3",
-    buyer: "Retail Chain Inc.",
-    buyerId: "5",
-    items: [
-      { name: "Assorted Lokum Box", quantity: 300, price: 6.0 },
-      { name: "Turkish Coffee", quantity: 200, price: 4.5 }
-    ],
-    total: 2700,
-    date: "2023-07-28",
-    status: "pending",
-    consolidationId: null,
-    shipment: null,
-    payment: "pending"
-  },
-  { 
-    id: "ORD-1237", 
-    supplier: "Modern Furniture Co.", 
-    supplierId: "4",
-    buyer: "Gadget World",
-    buyerId: "4",
-    items: [
-      { name: "Office Chair", quantity: 20, price: 75.0 },
-      { name: "Desk Lamp", quantity: 30, price: 25.0 }
-    ],
-    total: 2250,
-    date: "2023-07-29",
-    status: "processing",
-    consolidationId: "CONS-003",
-    shipment: null,
-    payment: "paid"
-  },
-  { 
-    id: "ORD-1238", 
-    supplier: "Bosphorus Tech", 
-    supplierId: "2",
-    buyer: "Gadget World",
-    buyerId: "4",
-    items: [
-      { name: "Bluetooth Speaker", quantity: 50, price: 35.0 },
-      { name: "Wireless Earbuds", quantity: 100, price: 22.0 }
-    ],
-    total: 3950,
-    date: "2023-07-30",
-    status: "pending",
-    consolidationId: "CONS-003",
-    shipment: null,
-    payment: "pending"
-  },
-];
+// Type definitions
+interface OrderItem {
+  name: string;
+  quantity: number;
+  price: number;
+}
 
-const mockSuppliers = [
-  { id: "1", name: "Textile Masters Co." },
-  { id: "2", name: "Bosphorus Tech" },
-  { id: "3", name: "Turkish Delights Ltd." },
-  { id: "4", name: "Modern Furniture Co." },
-  { id: "5", name: "Anatolian Ceramics" }
-];
+interface Order {
+  id: string;
+  supplier: string;
+  supplierId: string;
+  buyer: string;
+  buyerId: string;
+  items: OrderItem[];
+  total: number;
+  date: string;
+  status: string;
+  consolidationId: string | null;
+  shipment: string | null;
+  payment: string;
+}
 
-const mockBuyers = [
-  { id: "3", name: "Fashion Retailer Inc." },
-  { id: "4", name: "Gadget World" },
-  { id: "5", name: "Retail Chain Inc." }
-];
+interface Supplier {
+  id: string;
+  name: string;
+}
+
+interface Customer {
+  id: string;
+  name: string;
+}
 
 const Orders = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [orders, setOrders] = useState(initialOrders);
-  const [filteredOrders, setFilteredOrders] = useState(initialOrders);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [suppliers, setSuppliers] = useState<Supplier[]>([]);
+  const [customers, setCustomers] = useState<Customer[]>([]);
   const [newOrder, setNewOrder] = useState({
     supplier: "",
     buyer: user?.role === "admin" ? "" : user?.id || "",
     items: [{ name: "", quantity: 1, price: 0 }]
   });
 
+  // Animation effect
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -171,6 +109,132 @@ const Orders = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Fetch orders from Supabase
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        setIsLoading(true);
+        console.log("Fetching orders...");
+        
+        const { data, error } = await supabase
+          .from('orders')
+          .select(`
+            *,
+            customers(name)
+          `);
+        
+        if (error) {
+          console.error("Error fetching orders:", error);
+          toast({
+            title: "Error",
+            description: "Failed to load orders. " + error.message,
+            variant: "destructive"
+          });
+          return;
+        }
+
+        // Fetch supplier profiles to map supplier_id to supplier names
+        const { data: supplierProfiles, error: supplierError } = await supabase
+          .from('profiles')
+          .select('id, name')
+          .eq('role', 'supplier');
+          
+        if (supplierError) {
+          console.error("Error fetching supplier profiles:", supplierError);
+        }
+        
+        const supplierMap = new Map();
+        if (supplierProfiles) {
+          supplierProfiles.forEach(supplier => {
+            supplierMap.set(supplier.id, supplier.name);
+          });
+        }
+        
+        // Transform the data to match our Order interface
+        const formattedOrders = data.map(order => {
+          // Parse order items from JSON if stored that way, or use a default
+          let orderItems: OrderItem[] = [];
+          try {
+            if (order.items_json) {
+              orderItems = JSON.parse(order.items_json);
+            } else {
+              // If no items are stored, create a placeholder
+              orderItems = [{ name: "Unknown item", quantity: 1, price: order.amount }];
+            }
+          } catch (e) {
+            console.error("Error parsing order items:", e);
+            orderItems = [{ name: "Error loading items", quantity: 1, price: order.amount }];
+          }
+          
+          return {
+            id: order.id,
+            supplier: supplierMap.get(order.supplier_id) || "Unknown Supplier",
+            supplierId: order.supplier_id || "",
+            buyer: order.customers?.name || "Unknown Customer",
+            buyerId: order.customer_id || "",
+            items: orderItems,
+            total: order.amount || 0,
+            date: order.date || new Date().toISOString(),
+            status: order.status || "pending",
+            consolidationId: order.consolidation_id || null,
+            shipment: order.shipment_id || null,
+            payment: order.payment_status || "pending"
+          };
+        });
+        
+        console.log("Orders loaded:", formattedOrders.length);
+        setOrders(formattedOrders);
+        
+      } catch (err) {
+        console.error("Error in fetchOrders:", err);
+        toast({
+          title: "Error",
+          description: "Something went wrong while loading orders.",
+          variant: "destructive"
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    // Fetch suppliers and customers for dropdowns
+    const fetchSuppliersAndCustomers = async () => {
+      try {
+        // Fetch suppliers
+        const { data: supplierData, error: supplierError } = await supabase
+          .from('profiles')
+          .select('id, name')
+          .eq('role', 'supplier');
+          
+        if (supplierError) {
+          console.error("Error fetching suppliers:", supplierError);
+        } else {
+          setSuppliers(supplierData);
+        }
+        
+        // Fetch customers
+        const { data: customerData, error: customerError } = await supabase
+          .from('profiles')
+          .select('id, name')
+          .eq('role', 'customer');
+          
+        if (customerError) {
+          console.error("Error fetching customers:", customerError);
+        } else {
+          setCustomers(customerData);
+        }
+      } catch (err) {
+        console.error("Error fetching suppliers and customers:", err);
+      }
+    };
+
+    if (user) {
+      fetchOrders();
+      fetchSuppliersAndCustomers();
+    }
+  }, [user, toast]);
+
+  // Filter orders based on tab selection and search term
   useEffect(() => {
     let filtered = orders;
     
@@ -187,19 +251,19 @@ const Orders = () => {
       );
     }
     
+    // Filter based on user role
     if (user?.role === "supplier") {
-      const supplierNameToFilter = user.name.includes("Supplier") ? "Textile Masters Co." : "Bosphorus Tech";
-      filtered = filtered.filter(order => order.supplier === supplierNameToFilter);
+      filtered = filtered.filter(order => order.supplierId === user.id);
     }
     
     if (user?.role === "customer") {
-      const buyerNameToFilter = user.name.includes("Customer") ? "Fashion Retailer Inc." : "Gadget World";
-      filtered = filtered.filter(order => order.buyer === buyerNameToFilter);
+      filtered = filtered.filter(order => order.buyerId === user.id);
     }
     
     setFilteredOrders(filtered);
   }, [searchTerm, activeTab, orders, user]);
 
+  // Add item to order form
   const addItemToOrder = () => {
     setNewOrder({
       ...newOrder,
@@ -207,6 +271,7 @@ const Orders = () => {
     });
   };
 
+  // Remove item from order form
   const removeItemFromOrder = (index: number) => {
     if (newOrder.items.length > 1) {
       setNewOrder({
@@ -216,7 +281,8 @@ const Orders = () => {
     }
   };
 
-  const updateItemInOrder = (index: number, field: keyof typeof newOrder.items[0], value: any) => {
+  // Update item in order form
+  const updateItemInOrder = (index: number, field: keyof OrderItem, value: any) => {
     const updatedItems = [...newOrder.items];
     updatedItems[index] = { ...updatedItems[index], [field]: value };
     
@@ -226,81 +292,124 @@ const Orders = () => {
     });
   };
 
-  const handleCreateOrder = () => {
-    if (!newOrder.supplier) {
-      toast({
-        title: "Validation Error",
-        description: "Please select a supplier.",
-        variant: "destructive"
-      });
-      return;
-    }
+  // Create new order
+  const handleCreateOrder = async () => {
+    try {
+      // Validation
+      if (!newOrder.supplier) {
+        toast({
+          title: "Validation Error",
+          description: "Please select a supplier.",
+          variant: "destructive"
+        });
+        return;
+      }
 
-    if (user?.role === "admin" && !newOrder.buyer) {
-      toast({
-        title: "Validation Error",
-        description: "Please select a buyer.",
-        variant: "destructive"
-      });
-      return;
-    }
+      if (user?.role === "admin" && !newOrder.buyer) {
+        toast({
+          title: "Validation Error",
+          description: "Please select a buyer.",
+          variant: "destructive"
+        });
+        return;
+      }
 
-    if (newOrder.items.some(item => !item.name || item.quantity <= 0)) {
-      toast({
-        title: "Validation Error",
-        description: "Please fill in all item details with valid quantities.",
-        variant: "destructive"
-      });
-      return;
-    }
+      if (newOrder.items.some(item => !item.name || item.quantity <= 0)) {
+        toast({
+          title: "Validation Error",
+          description: "Please fill in all item details with valid quantities.",
+          variant: "destructive"
+        });
+        return;
+      }
 
-    const total = newOrder.items.reduce(
-      (sum, item) => sum + (item.quantity * item.price), 0
-    );
-    
-    const supplierDetails = mockSuppliers.find(s => s.id === newOrder.supplier);
-    const buyerDetails = user?.role === "admin" 
-      ? mockBuyers.find(b => b.id === newOrder.buyer)
-      : { id: user?.id || "3", name: user?.name || "Fashion Retailer Inc." };
-    
-    if (!supplierDetails || !buyerDetails) {
+      // Calculate total
+      const total = newOrder.items.reduce(
+        (sum, item) => sum + (item.quantity * item.price), 0
+      );
+      
+      // Get supplier and buyer details
+      const supplier = suppliers.find(s => s.id === newOrder.supplier);
+      const buyer = user?.role === "admin" 
+        ? customers.find(c => c.id === newOrder.buyer)
+        : { id: user?.id, name: user?.name || "Customer" };
+      
+      if (!supplier || !buyer) {
+        toast({
+          title: "Error",
+          description: "Invalid supplier or buyer selection.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Insert the order into Supabase
+      const { data, error } = await supabase
+        .from('orders')
+        .insert([
+          {
+            supplier_id: supplier.id,
+            customer_id: buyer.id,
+            amount: Math.round(total * 100) / 100,
+            status: "pending",
+            date: new Date().toISOString(),
+            items: newOrder.items.length,
+            items_json: JSON.stringify(newOrder.items),
+            payment_status: "pending"
+          }
+        ])
+        .select();
+      
+      if (error) {
+        console.error("Error creating order:", error);
+        toast({
+          title: "Error",
+          description: "Failed to create order. " + error.message,
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      // Add the new order to the state
+      const newOrderObj: Order = {
+        id: data[0].id,
+        supplier: supplier.name,
+        supplierId: supplier.id,
+        buyer: buyer.name || "Customer",
+        buyerId: buyer.id || "",
+        items: newOrder.items,
+        total: Math.round(total * 100) / 100,
+        date: new Date().toISOString(),
+        status: "pending",
+        consolidationId: null,
+        shipment: null,
+        payment: "pending"
+      };
+      
+      setOrders([...orders, newOrderObj]);
+      
+      // Reset the form
+      setNewOrder({
+        supplier: "",
+        buyer: user?.role === "admin" ? "" : user?.id || "",
+        items: [{ name: "", quantity: 1, price: 0 }]
+      });
+      
+      toast({
+        title: "Order Created",
+        description: `Order has been successfully created.`
+      });
+    } catch (err) {
+      console.error("Error in handleCreateOrder:", err);
       toast({
         title: "Error",
-        description: "Invalid supplier or buyer selection.",
+        description: "Something went wrong. Please try again.",
         variant: "destructive"
       });
-      return;
     }
-
-    const newOrderObj = {
-      id: `ORD-${Math.floor(1000 + Math.random() * 9000)}`,
-      supplier: supplierDetails.name,
-      supplierId: supplierDetails.id,
-      buyer: buyerDetails.name,
-      buyerId: buyerDetails.id,
-      items: newOrder.items,
-      total: Math.round(total * 100) / 100,
-      date: new Date().toISOString().split('T')[0],
-      status: "pending",
-      consolidationId: null,
-      shipment: null,
-      payment: "pending"
-    };
-    
-    setOrders([...orders, newOrderObj]);
-    
-    setNewOrder({
-      supplier: "",
-      buyer: user?.role === "admin" ? "" : user?.id || "",
-      items: [{ name: "", quantity: 1, price: 0 }]
-    });
-    
-    toast({
-      title: "Order Created",
-      description: `Order ${newOrderObj.id} has been successfully created.`
-    });
   };
 
+  // Get status icon based on order status
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "completed":
@@ -316,16 +425,30 @@ const Orders = () => {
     }
   };
 
+  // Format date string
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
+  // Calculate subtotal for new order
   const calculateSubtotal = () => {
     return newOrder.items.reduce(
       (sum, item) => sum + (item.quantity * item.price), 0
     );
   };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mx-auto" />
+          <p className="mt-2 text-gray-600">Loading orders...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -364,7 +487,7 @@ const Orders = () => {
                       onChange={(e) => setNewOrder({...newOrder, supplier: e.target.value})}
                     >
                       <option value="">Select a supplier</option>
-                      {mockSuppliers.map(supplier => (
+                      {suppliers.map(supplier => (
                         <option key={supplier.id} value={supplier.id}>
                           {supplier.name}
                         </option>
@@ -386,9 +509,9 @@ const Orders = () => {
                         onChange={(e) => setNewOrder({...newOrder, buyer: e.target.value})}
                       >
                         <option value="">Select a buyer</option>
-                        {mockBuyers.map(buyer => (
-                          <option key={buyer.id} value={buyer.id}>
-                            {buyer.name}
+                        {customers.map(customer => (
+                          <option key={customer.id} value={customer.id}>
+                            {customer.name}
                           </option>
                         ))}
                       </select>
@@ -529,111 +652,111 @@ const Orders = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredOrders.map((order, index) => (
-                <TableRow 
-                  key={order.id}
-                  className={`transition-all duration-500 transform ${
-                    isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                  style={{ transitionDelay: `${index * 50}ms` }}
-                >
-                  <TableCell className="font-medium">
-                    <div className="flex items-center gap-2">
-                      <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                        <FileTextIcon className="h-4 w-4 text-blue-600" />
-                      </div>
-                      {order.id}
-                    </div>
-                  </TableCell>
-                  <TableCell>{order.supplier}</TableCell>
-                  {(user?.role === "admin" || user?.role === "supplier") && (
-                    <TableCell>
+              {filteredOrders.length > 0 ? (
+                filteredOrders.map((order, index) => (
+                  <TableRow 
+                    key={order.id}
+                    className={`transition-all duration-500 transform ${
+                      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                    }`}
+                    style={{ transitionDelay: `${index * 50}ms` }}
+                  >
+                    <TableCell className="font-medium">
                       <div className="flex items-center gap-2">
-                        <UserIcon className="h-4 w-4 text-green-600" />
-                        <span>{order.buyer}</span>
+                        <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                          <FileTextIcon className="h-4 w-4 text-blue-600" />
+                        </div>
+                        {order.id.substring(0, 8)}
                       </div>
                     </TableCell>
-                  )}
-                  <TableCell>
-                    <div className="max-w-[180px]">
-                      {order.items.map((item, i) => (
-                        <div key={i} className="text-sm truncate">
-                          {item.quantity} × {item.name}
+                    <TableCell>{order.supplier}</TableCell>
+                    {(user?.role === "admin" || user?.role === "supplier") && (
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <UserIcon className="h-4 w-4 text-green-600" />
+                          <span>{order.buyer}</span>
                         </div>
-                      ))}
-                    </div>
-                  </TableCell>
-                  <TableCell>${order.total.toLocaleString()}</TableCell>
-                  <TableCell>{formatDate(order.date)}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1.5">
-                      {getStatusIcon(order.status)}
-                      <Badge
-                        variant={
-                          order.status === "completed" ? "default" :
-                          order.status === "processing" ? "secondary" :
-                          order.status === "pending" ? "outline" :
-                          "destructive"
-                        }
-                        className="capitalize"
-                      >
-                        {order.status}
-                      </Badge>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    {order.consolidationId ? (
-                      <Badge variant="outline" className="bg-blue-50 text-blue-700 hover:bg-blue-50">
-                        {order.consolidationId}
-                      </Badge>
-                    ) : (
-                      <span className="text-muted-foreground text-sm">Not assigned</span>
+                      </TableCell>
                     )}
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={order.payment === "paid" ? "default" : "outline"}
-                      className={`capitalize ${
-                        order.payment === "paid" ? "bg-green-100 text-green-800 hover:bg-green-100" : ""
-                      }`}
-                    >
-                      {order.payment}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
-                          <MoreHorizontalIcon className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>View Details</DropdownMenuItem>
-                        {user?.role !== "supplier" && (
-                          <>
-                            <DropdownMenuItem>Track Shipment</DropdownMenuItem>
-                            <DropdownMenuItem>Download Invoice</DropdownMenuItem>
-                            <DropdownMenuItem>Add Note</DropdownMenuItem>
-                          </>
-                        )}
-                        {user?.role === "supplier" && order.status === "pending" && (
-                          <DropdownMenuItem>Process Order</DropdownMenuItem>
-                        )}
-                        {user?.role === "admin" && order.status === "pending" && !order.consolidationId && (
-                          <DropdownMenuItem>Add to Consolidation</DropdownMenuItem>
-                        )}
-                        {order.status === "pending" && (
-                          <DropdownMenuItem className="text-red-600">Cancel Order</DropdownMenuItem>
-                        )}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
-              
-              {filteredOrders.length === 0 && (
+                    <TableCell>
+                      <div className="max-w-[180px]">
+                        {order.items.map((item, i) => (
+                          <div key={i} className="text-sm truncate">
+                            {item.quantity} × {item.name}
+                          </div>
+                        ))}
+                      </div>
+                    </TableCell>
+                    <TableCell>${order.total.toLocaleString()}</TableCell>
+                    <TableCell>{formatDate(order.date)}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-1.5">
+                        {getStatusIcon(order.status)}
+                        <Badge
+                          variant={
+                            order.status === "completed" ? "default" :
+                            order.status === "processing" ? "secondary" :
+                            order.status === "pending" ? "outline" :
+                            "destructive"
+                          }
+                          className="capitalize"
+                        >
+                          {order.status}
+                        </Badge>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      {order.consolidationId ? (
+                        <Badge variant="outline" className="bg-blue-50 text-blue-700 hover:bg-blue-50">
+                          {order.consolidationId.substring(0, 8)}
+                        </Badge>
+                      ) : (
+                        <span className="text-muted-foreground text-sm">Not assigned</span>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={order.payment === "paid" ? "default" : "outline"}
+                        className={`capitalize ${
+                          order.payment === "paid" ? "bg-green-100 text-green-800 hover:bg-green-100" : ""
+                        }`}
+                      >
+                        {order.payment}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <MoreHorizontalIcon className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem>View Details</DropdownMenuItem>
+                          {user?.role !== "supplier" && (
+                            <>
+                              <DropdownMenuItem>Track Shipment</DropdownMenuItem>
+                              <DropdownMenuItem>Download Invoice</DropdownMenuItem>
+                              <DropdownMenuItem>Add Note</DropdownMenuItem>
+                            </>
+                          )}
+                          {user?.role === "supplier" && order.status === "pending" && (
+                            <DropdownMenuItem>Process Order</DropdownMenuItem>
+                          )}
+                          {user?.role === "admin" && order.status === "pending" && !order.consolidationId && (
+                            <DropdownMenuItem>Add to Consolidation</DropdownMenuItem>
+                          )}
+                          {order.status === "pending" && (
+                            <DropdownMenuItem className="text-red-600">Cancel Order</DropdownMenuItem>
+                          )}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
                 <TableRow>
                   <TableCell colSpan={user?.role === "admin" ? 10 : 9} className="text-center py-8 text-muted-foreground">
                     No orders found matching your criteria.

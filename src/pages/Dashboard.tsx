@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { useNavigate, Outlet, useLocation } from 'react-router-dom';
+import { useNavigate, Outlet, useLocation, Routes, Route } from 'react-router-dom';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useAuth } from '@/lib/auth';
 import Sidebar from '@/components/dashboard/Sidebar';
@@ -48,40 +48,6 @@ const Dashboard = () => {
     }
   }, [user, isLoading, navigate]);
 
-  // Determine which component to render based on the path
-  const renderContent = () => {
-    const path = location.pathname;
-    
-    if (path === '/dashboard') {
-      return <Overview />;
-    } else if (path === '/dashboard/suppliers') {
-      return <Suppliers />;
-    } else if (path === '/dashboard/orders') {
-      return <Orders />;
-    } else if (path === '/dashboard/shipping') {
-      return <Shipping />;
-    } else if (path === '/dashboard/products') {
-      return <Products />;
-    } else if (path === '/dashboard/analytics') {
-      return <Analytics />;
-    } else if (path === '/dashboard/tracking') {
-      return <Tracking />;
-    } else if (path === '/dashboard/settings') {
-      return <Settings />;
-    } else if (path === '/dashboard/users') {
-      return <Users />;
-    } else if (path === '/dashboard/notes') {
-      return <Notes />;
-    } else if (path === '/dashboard/consolidations') {
-      return <Consolidations />;
-    } else if (path === '/dashboard/payments') {
-      return <Payments />;
-    }
-    
-    // Default to Overview if no matching path
-    return <Overview />;
-  };
-
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -109,7 +75,20 @@ const Dashboard = () => {
           <Header />
           
           <main className="flex-1 px-4 sm:px-6 py-4 sm:py-6 overflow-auto">
-            {renderContent()}
+            <Routes>
+              <Route path="/" element={<Overview />} />
+              <Route path="/suppliers" element={<Suppliers />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/tracking" element={<Tracking />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/notes" element={<Notes />} />
+              <Route path="/consolidations" element={<Consolidations />} />
+              <Route path="/payments" element={<Payments />} />
+            </Routes>
           </main>
         </div>
       </div>

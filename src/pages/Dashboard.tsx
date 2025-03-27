@@ -25,14 +25,26 @@ const Dashboard = () => {
   const location = useLocation();
   const [isRedirecting, setIsRedirecting] = useState(false);
   
+  // Debug
+  console.log("[Dashboard] Render - Auth state:", { 
+    isAuthenticated: !!user, 
+    isLoading, 
+    email: user?.email || 'none' 
+  });
+  
   // Redirect to login if not authenticated
   useEffect(() => {
-    console.log("Dashboard - Auth check, user:", !!user, "isLoading:", isLoading);
+    console.log("[Dashboard] Auth check effect - user:", !!user, "isLoading:", isLoading);
     
-    if (!isLoading && !user) {
-      console.log("User not authenticated, redirecting to login");
-      setIsRedirecting(true);
-      navigate('/login', { replace: true });
+    // Only redirect after we're sure authentication is complete
+    if (!isLoading) {
+      if (!user) {
+        console.log("[Dashboard] User not authenticated, redirecting to login");
+        setIsRedirecting(true);
+        navigate('/login', { replace: true });
+      } else {
+        console.log("[Dashboard] User is authenticated:", user.email);
+      }
     }
   }, [user, isLoading, navigate]);
 
@@ -86,7 +98,7 @@ const Dashboard = () => {
   }
 
   // User is authenticated and data is loaded, render the dashboard
-  console.log("Rendering dashboard for authenticated user");
+  console.log("[Dashboard] Rendering dashboard for authenticated user:", user.email);
   
   return (
     <SidebarProvider>

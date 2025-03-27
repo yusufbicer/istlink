@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
@@ -11,25 +12,16 @@ const Login = () => {
   
   // Handle redirection when auth state changes
   useEffect(() => {
-    let isMounted = true;
+    console.log("Login page - Auth effect triggered, user:", !!user, "isLoading:", isLoading);
     
-    const checkRedirect = async () => {
-      console.log("Login page - Checking redirect, user:", !!user, "isLoading:", isLoading);
+    // If user is authenticated and data is loaded, redirect to dashboard
+    if (user && !isLoading) {
+      console.log("User is authenticated, redirecting to dashboard");
+      setRedirecting(true);
       
-      if (user && !isLoading && isMounted) {
-        console.log("User is authenticated, redirecting to dashboard");
-        setRedirecting(true);
-        
-        // Force navigation with replace to ensure clean history
-        navigate('/dashboard', { replace: true });
-      }
-    };
-    
-    checkRedirect();
-    
-    return () => {
-      isMounted = false;
-    };
+      // Force immediate navigation with replace to ensure clean history
+      navigate('/dashboard', { replace: true });
+    }
   }, [user, isLoading, navigate]);
 
   // Prevent flash of login form if we're redirecting

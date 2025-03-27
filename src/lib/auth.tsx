@@ -1,4 +1,3 @@
-
 import { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { Session, User as SupabaseUser } from '@supabase/supabase-js';
@@ -38,59 +37,106 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Set up Supabase auth state listener
   useEffect(() => {
-    console.log("Setting up auth state listener");
+    console.log("[Auth] Setting up auth state listener");
     setIsLoading(true);
     
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, currentSession) => {
-        console.log("Auth state changed:", event, !!currentSession);
+        console.log("[Auth] Auth state changed:", event, !!currentSession);
         
         if (!isMounted.current) return;
         
         if (currentSession) {
           setSession(currentSession);
           
-          // Use setTimeout to avoid potential deadlocks with Supabase client
-          setTimeout(async () => {
-            try {
-              // Fetch the user profile data
-              const { data: profile, error } = await supabase
-                .from('profiles')
-                .select('*')
-                .eq('id', currentSession.user.id)
-                .maybeSingle();
+          // After successful login, assume user exists and immediately set a placeholder to allow redirect
+          if (event === 'SIGNED_IN') {
+            console.log("[Auth] Signed in, setting temporary user to allow redirect");
+            const tempUser = {
+              id: currentSession.user.id,
+              email: currentSession.user.email || 'unknown',
+              name: currentSession.user.email?.split('@')[0] || 'User',
+              role: 'customer' as UserRole,
+            };
+            setUser(tempUser);
+            setIsLoading(false);
+            
+            // Then fetch the actual profile data in the background
+            setTimeout(async () => {
+              try {
+                console.log("[Auth] Fetching user profile for", currentSession.user.id);
+                // Fetch the user profile data
+                const { data: profile, error } = await supabase
+                  .from('profiles')
+                  .select('*')
+                  .eq('id', currentSession.user.id)
+                  .maybeSingle();
 
-              if (error) {
-                console.error('Error fetching user profile:', error);
-                if (isMounted.current) setUser(null);
-              } else if (profile) {
-                if (isMounted.current) {
-                  console.log("Profile loaded successfully, setting user:", profile.email);
-                  setUser({
-                    id: profile.id,
-                    email: profile.email,
-                    name: profile.name,
-                    role: profile.role,
-                    avatar: profile.avatar,
-                  });
+                if (error) {
+                  console.error('[Auth] Error fetching user profile:', error);
+                  // Don't clear user here - keep the temporary one
+                } else if (profile) {
+                  console.log("[Auth] Profile loaded successfully:", profile.email);
+                  if (isMounted.current) {
+                    setUser({
+                      id: profile.id,
+                      email: profile.email,
+                      name: profile.name,
+                      role: profile.role,
+                      avatar: profile.avatar,
+                    });
+                  }
+                } else {
+                  console.log('[Auth] No profile found, keeping temporary user');
                 }
-              } else {
-                console.log('No profile found for user, waiting for DB trigger to create one');
+              } catch (error) {
+                console.error('[Auth] Error loading profile:', error);
+                // Keep temporary user
               }
-            } catch (error) {
-              console.error('Session restoration error:', error);
-              if (isMounted.current) setUser(null);
-            } finally {
-              if (isMounted.current) {
-                console.log("Auth loading complete, user:", user?.email || "null");
-                setIsLoading(false);
+            }, 100);
+          } else {
+            // For other events, use the normal profile loading flow with setTimeout
+            setTimeout(async () => {
+              try {
+                // Fetch the user profile data
+                const { data: profile, error } = await supabase
+                  .from('profiles')
+                  .select('*')
+                  .eq('id', currentSession.user.id)
+                  .maybeSingle();
+
+                if (error) {
+                  console.error('[Auth] Error fetching user profile:', error);
+                  if (isMounted.current) setUser(null);
+                } else if (profile) {
+                  if (isMounted.current) {
+                    console.log("[Auth] Profile loaded:", profile.email);
+                    setUser({
+                      id: profile.id,
+                      email: profile.email,
+                      name: profile.name,
+                      role: profile.role,
+                      avatar: profile.avatar,
+                    });
+                  }
+                } else {
+                  console.log('[Auth] No profile found for user, waiting for DB trigger');
+                }
+              } catch (error) {
+                console.error('[Auth] Session restoration error:', error);
+                if (isMounted.current) setUser(null);
+              } finally {
+                if (isMounted.current) {
+                  console.log("[Auth] Auth loading complete, user:", user?.email || "null");
+                  setIsLoading(false);
+                }
               }
-            }
-          }, 0);
+            }, 0);
+          }
         } else {
           if (isMounted.current) {
-            console.log("No active session, clearing user state");
+            console.log("[Auth] No active session, clearing user state");
             setSession(null);
             setUser(null);
             setIsLoading(false);
@@ -102,38 +148,60 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Check for existing session
     const initializeAuth = async () => {
       try {
+        console.log("[Auth] Checking for existing session");
         const { data: { session: initialSession } } = await supabase.auth.getSession();
         
         if (initialSession?.user && isMounted.current) {
-          console.log("Found existing session");
+          console.log("[Auth] Found existing session for", initialSession.user.email);
           setSession(initialSession);
           
-          const { data: profile, error } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', initialSession.user.id)
-            .maybeSingle();
+          // Set temporary user first to allow immediate redirect
+          const tempUser = {
+            id: initialSession.user.id,
+            email: initialSession.user.email || 'unknown',
+            name: initialSession.user.email?.split('@')[0] || 'User',
+            role: 'customer' as UserRole,
+          };
+          setUser(tempUser);
+          setIsLoading(false);
+          
+          // Then fetch the actual profile in the background
+          setTimeout(async () => {
+            try {
+              const { data: profile, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', initialSession.user.id)
+                .maybeSingle();
 
-          if (error) {
-            console.error('Error fetching user profile:', error);
-            if (isMounted.current) setUser(null);
-          } else if (profile && isMounted.current) {
-            console.log("Setting user from existing session:", profile.email);
-            setUser({
-              id: profile.id,
-              email: profile.email,
-              name: profile.name,
-              role: profile.role,
-              avatar: profile.avatar,
-            });
+              if (error) {
+                console.error('[Auth] Error fetching user profile:', error);
+                // Keep the temporary user instead of setting to null
+              } else if (profile && isMounted.current) {
+                console.log("[Auth] Setting user from existing session:", profile.email);
+                setUser({
+                  id: profile.id,
+                  email: profile.email,
+                  name: profile.name,
+                  role: profile.role,
+                  avatar: profile.avatar,
+                });
+              }
+            } catch (error) {
+              console.error('[Auth] Initial auth error:', error);
+              // Keep the temporary user
+            }
+          }, 100);
+        } else {
+          if (isMounted.current) {
+            console.log("[Auth] No existing session");
+            setIsLoading(false);
           }
         }
       } catch (error) {
-        console.error('Initial auth error:', error);
-        if (isMounted.current) setUser(null);
-      } finally {
+        console.error('[Auth] Initial auth error:', error);
         if (isMounted.current) {
-          console.log("Initial auth check complete");
+          setUser(null);
           setIsLoading(false);
         }
       }
@@ -143,7 +211,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setTimeout(initializeAuth, 10);
 
     return () => {
-      console.log("Cleaning up auth state listener");
+      console.log("[Auth] Cleaning up auth state listener");
       isMounted.current = false;
       subscription.unsubscribe();
     };
@@ -154,24 +222,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     
     setIsLoading(true);
     try {
-      console.log("Attempting login for:", email);
+      console.log("[Auth] Attempting login for:", email);
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error) {
-        console.error("Login error:", error.message, error.code);
+        console.error("[Auth] Login error:", error.message, error.code);
         throw error;
       } else {
-        console.log("Login successful, session:", !!data.session);
+        console.log("[Auth] Login successful, session:", !!data.session);
         toast({
           title: "Login successful",
           description: "Welcome back to GROOP!",
         });
       }
     } catch (error: any) {
-      console.error('Login error details:', error);
+      console.error('[Auth] Login error details:', error);
       toast({
         title: "Login failed",
         description: error.message || "An error occurred during login",

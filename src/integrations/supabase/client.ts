@@ -9,7 +9,67 @@ const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+// Create a custom type that includes the 'users' table
+interface CustomDatabase extends Database {
+  public: {
+    Tables: {
+      users: {
+        Row: {
+          id: string;
+          email: string;
+          name: string;
+          role: 'admin' | 'supplier' | 'customer';
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          email: string;
+          name: string;
+          role: 'admin' | 'supplier' | 'customer';
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          email?: string;
+          name?: string;
+          role?: 'admin' | 'supplier' | 'customer';
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      order_notes: {
+        Row: {
+          id: string;
+          order_id: string;
+          customer_id: string;
+          note_text: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          order_id: string;
+          customer_id: string;
+          note_text: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          order_id?: string;
+          customer_id?: string;
+          note_text?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+    } & Database['public']['Tables'];
+  } & Database['public'];
+}
+
+export const supabase = createClient<CustomDatabase>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     persistSession: true,
     autoRefreshToken: true,

@@ -84,7 +84,7 @@ export const userService = {
       
       // For each customer, count their orders
       const customersWithOrderCounts = await Promise.all(
-        (data || []).map(async (customer) => {
+        (data || []).map(async (customer: any) => {
           const user = customer.users;
           if (!user) {
             return null;
@@ -240,7 +240,7 @@ export const orderService = {
       console.log("Orders fetched:", data?.length);
       
       // Transform to match the expected Order interface
-      return (data || []).map(order => ({
+      return (data || []).map((order: any) => ({
         id: order.id,
         customer_id: order.customer_id,
         supplier_id: order.supplier_id,
@@ -312,7 +312,7 @@ export const noteService = {
         return [];
       }
       
-      return data.map(note => ({
+      return data.map((note: any) => ({
         id: note.id,
         title: note.order_id || 'Note',
         content: note.note_text,

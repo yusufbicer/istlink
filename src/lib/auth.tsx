@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { supabase, handleSupabaseError } from "@/integrations/supabase/client";
-import { Session, User as SupabaseUser } from '@supabase/supabase-js';
+import { Session } from '@supabase/supabase-js';
 import { useToast } from '@/components/ui/use-toast';
 
 export type UserRole = 'customer' | 'supplier' | 'admin';

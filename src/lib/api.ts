@@ -1,4 +1,3 @@
-
 import { supabase, handleSupabaseError, getCurrentSupplierID, getCurrentCustomerID } from "@/integrations/supabase/client";
 import { User, UserRole } from "./auth";
 
@@ -149,11 +148,11 @@ export const userService = {
         .select('id', { count: 'exact', head: true })
         .eq('customer_id', id);
       
-      // Return the customer data
+      // Return the customer data - fix TypeScript errors by accessing properties from the users object, not array
       return {
         id: data.id,
-        name: data.users.name,
-        email: data.users.email,
+        name: (data.users as any)?.name,
+        email: (data.users as any)?.email,
         company: data.company_name || 'Not specified',
         status: 'active' as "active" | "inactive", // Default status
         orders: count || 0

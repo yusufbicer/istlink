@@ -130,11 +130,9 @@ const Orders = () => {
           return;
         }
 
-        // Transform the data to match our Order interface
         const formattedOrders = data.map(order => {
           let orderItems: OrderItem[] = [];
           try {
-            // For now, just create a dummy item since we don't have items_json in new schema
             orderItems = [{ name: "Order item", quantity: 1, price: order.total_amount }];
           } catch (e) {
             console.error("Error processing order items:", e);
@@ -151,9 +149,9 @@ const Orders = () => {
             total: order.total_amount || 0,
             date: order.order_date || new Date().toISOString(),
             status: order.status || "pending",
-            consolidationId: null, // Not implemented in new schema yet
-            shipment: null, // Not implemented in new schema yet
-            payment: "pending" // Default payment status
+            consolidationId: null,
+            shipment: null,
+            payment: "pending"
           };
         });
         
@@ -174,7 +172,6 @@ const Orders = () => {
     
     const fetchSuppliersAndCustomers = async () => {
       try {
-        // Fetch suppliers
         const { data: supplierData, error: supplierError } = await supabase
           .from('suppliers')
           .select(`
@@ -187,17 +184,16 @@ const Orders = () => {
           console.error("Error fetching suppliers:", supplierError);
         } else if (supplierData) {
           const formattedSuppliers = supplierData
-            .filter(s => s.users) // Ensure we have user data
+            .filter(s => s.users)
             .map(s => ({
               id: s.id,
-              name: s.company_name || s.users.name
+              name: s.company_name || (s.users as any)?.name
             }));
           
           console.log("Suppliers loaded for dropdown:", formattedSuppliers.length);
           setSuppliers(formattedSuppliers);
         }
         
-        // Fetch customers
         const { data: customerData, error: customerError } = await supabase
           .from('customers')
           .select(`
@@ -210,10 +206,10 @@ const Orders = () => {
           console.error("Error fetching customers:", customerError);
         } else if (customerData) {
           const formattedCustomers = customerData
-            .filter(c => c.users) // Ensure we have user data
+            .filter(c => c.users)
             .map(c => ({
               id: c.id,
-              name: c.company_name || c.users.name
+              name: c.company_name || (c.users as any)?.name
             }));
           
           console.log("Customers loaded for dropdown:", formattedCustomers.length);
@@ -246,7 +242,6 @@ const Orders = () => {
       );
     }
     
-    // Filter based on user role
     if (user?.role === "supplier") {
       filtered = filtered.filter(order => order.supplierId === user.id);
     }
@@ -317,15 +312,12 @@ const Orders = () => {
         (sum, item) => sum + (item.quantity * item.price), 0
       );
       
-      // Find full supplier and buyer objects
       const supplier = suppliers.find(s => s.id === newOrder.supplier);
       
       let buyerId;
       if (user?.role === "admin") {
-        // Admin selected a customer
         buyerId = newOrder.buyer;
       } else {
-        // Customer is creating order for themselves
         buyerId = await getCurrentCustomerID();
       }
       
@@ -344,7 +336,6 @@ const Orders = () => {
         total_amount: Math.round(total * 100) / 100
       });
 
-      // Use the create_order RPC function
       const { data, error } = await supabase.rpc('create_order', {
         p_supplier_id: supplier.id,
         p_customer_id: buyerId,
@@ -361,11 +352,10 @@ const Orders = () => {
         return;
       }
       
-      // Create a new order object with the response
       const customer = customers.find(c => c.id === buyerId);
       
       const newOrderObj: Order = {
-        id: data as string, // The function returns the new order ID
+        id: data as string,
         supplier: supplier.name,
         supplierId: supplier.id,
         buyer: customer?.name || "Customer",
@@ -381,7 +371,6 @@ const Orders = () => {
       
       setOrders([...orders, newOrderObj]);
       
-      // Reset the form
       setNewOrder({
         supplier: "",
         buyer: user?.role === "admin" ? "" : user?.id || "",

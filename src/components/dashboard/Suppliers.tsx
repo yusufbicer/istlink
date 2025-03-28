@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -78,6 +79,7 @@ const Suppliers = () => {
     const fetchSuppliers = async () => {
       try {
         setIsLoading(true);
+        console.log("Fetching suppliers...");
         
         // We'll use profiles to get suppliers (assuming suppliers have the role 'supplier')
         const { data, error } = await supabase
@@ -89,7 +91,7 @@ const Suppliers = () => {
           console.error("Error fetching suppliers:", error);
           toast({
             title: "Error",
-            description: "Failed to load suppliers data.",
+            description: "Failed to load suppliers data: " + error.message,
             variant: "destructive",
           });
           return;
@@ -108,6 +110,7 @@ const Suppliers = () => {
           orders: supplier.orders || 0
         }));
         
+        console.log("Suppliers loaded:", formattedSuppliers.length);
         setSuppliers(formattedSuppliers);
         setFilteredSuppliers(formattedSuppliers);
       } catch (err) {
@@ -155,6 +158,7 @@ const Suppliers = () => {
       
       // Generate a UUID for the new supplier
       const newSupplierId = generateUUID();
+      console.log("Creating supplier with ID:", newSupplierId);
       
       const { error } = await supabase
         .from('profiles')
@@ -174,7 +178,7 @@ const Suppliers = () => {
         console.error("Error adding supplier:", error);
         toast({
           title: "Error",
-          description: "Failed to add new supplier. " + error.message,
+          description: "Failed to add new supplier: " + error.message,
           variant: "destructive",
         });
         return;

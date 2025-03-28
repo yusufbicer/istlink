@@ -116,8 +116,8 @@ const Orders = () => {
           .from('orders')
           .select(`
             *,
-            customers(company_name, user_id, users:users(name)),
-            suppliers(company_name, user_id, users:users(name))
+            customers(company_name, user_id, profiles:profiles(name)),
+            suppliers(company_name, user_id, profiles:profiles(name))
           `);
         
         if (error) {
@@ -177,17 +177,17 @@ const Orders = () => {
           .select(`
             id,
             company_name,
-            users:users(id, name)
+            profiles:profiles(id, name)
           `);
           
         if (supplierError) {
           console.error("Error fetching suppliers:", supplierError);
         } else if (supplierData) {
           const formattedSuppliers = supplierData
-            .filter(s => s.users)
+            .filter(s => s.profiles)
             .map(s => ({
               id: s.id,
-              name: s.company_name || (s.users as any)?.name
+              name: s.company_name || (s.profiles as any)?.name
             }));
           
           console.log("Suppliers loaded for dropdown:", formattedSuppliers.length);
@@ -199,17 +199,17 @@ const Orders = () => {
           .select(`
             id,
             company_name,
-            users:users(id, name)
+            profiles:profiles(id, name)
           `);
           
         if (customerError) {
           console.error("Error fetching customers:", customerError);
         } else if (customerData) {
           const formattedCustomers = customerData
-            .filter(c => c.users)
+            .filter(c => c.profiles)
             .map(c => ({
               id: c.id,
-              name: c.company_name || (c.users as any)?.name
+              name: c.company_name || (c.profiles as any)?.name
             }));
           
           console.log("Customers loaded for dropdown:", formattedCustomers.length);

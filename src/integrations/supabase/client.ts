@@ -9,11 +9,11 @@ const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-// Create a custom type that includes the 'users' table
+// Create a custom type that includes the 'profiles' table
 interface CustomDatabase extends Database {
   public: {
     Tables: {
-      users: {
+      profiles: {
         Row: {
           id: string;
           email: string;
@@ -39,28 +39,28 @@ interface CustomDatabase extends Database {
           updated_at?: string;
         };
       };
-      order_notes: {
+      notes: {
         Row: {
           id: string;
-          order_id: string;
-          customer_id: string;
-          note_text: string;
+          title: string;
+          content: string;
+          user_id: string;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           id?: string;
-          order_id: string;
-          customer_id: string;
-          note_text: string;
+          title: string;
+          content: string;
+          user_id: string;
           created_at?: string;
           updated_at?: string;
         };
         Update: {
           id?: string;
-          order_id?: string;
-          customer_id?: string;
-          note_text?: string;
+          title?: string;
+          content?: string;
+          user_id?: string;
           created_at?: string;
           updated_at?: string;
         };
@@ -103,9 +103,9 @@ export const getUserRole = async (): Promise<'admin' | 'supplier' | 'customer' |
     const { data: { session } } = await supabase.auth.getSession();
     if (!session?.user) return null;
     
-    // Get the user's role from the users table
+    // Get the user's role from the profiles table
     const { data, error } = await supabase
-      .from('users')
+      .from('profiles')
       .select('role')
       .eq('id', session.user.id)
       .maybeSingle();

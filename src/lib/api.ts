@@ -1,3 +1,4 @@
+
 import { supabase, handleSupabaseError, getCurrentSupplierID, getCurrentCustomerID } from "@/integrations/supabase/client";
 import { User, UserRole } from "./auth";
 
@@ -42,7 +43,7 @@ export const userService = {
         id,
         user_id,
         company_name,
-        users:users(id, name, email, role)
+        profiles:profiles(id, name, email, role)
       `);
       
       if (supplierOnly) {
@@ -84,8 +85,8 @@ export const userService = {
       // For each customer, count their orders
       const customersWithOrderCounts = await Promise.all(
         (data || []).map(async (customer: any) => {
-          const user = customer.users;
-          if (!user) {
+          const profile = customer.profiles;
+          if (!profile) {
             return null;
           }
           
@@ -101,8 +102,8 @@ export const userService = {
           
           return {
             id: customer.id,
-            name: user.name,
-            email: user.email,
+            name: profile.name,
+            email: profile.email,
             company: customer.company_name || 'Not specified',
             orders: count || 0,
             status: 'active' as "active" | "inactive" // Default status
@@ -127,7 +128,7 @@ export const userService = {
         .select(`
           id,
           company_name,
-          users:users(id, name, email, role)
+          profiles:profiles(id, name, email, role)
         `)
         .eq('id', id)
         .maybeSingle();
@@ -137,7 +138,7 @@ export const userService = {
         return null;
       }
       
-      if (!data || !data.users) {
+      if (!data || !data.profiles) {
         console.log("No customer found with ID:", id);
         return null;
       }
@@ -148,11 +149,11 @@ export const userService = {
         .select('id', { count: 'exact', head: true })
         .eq('customer_id', id);
       
-      // Return the customer data - fix TypeScript errors by accessing properties from the users object, not array
+      // Return the customer data
       return {
         id: data.id,
-        name: (data.users as any)?.name,
-        email: (data.users as any)?.email,
+        name: data.profiles.name,
+        email: data.profiles.email,
         company: data.company_name || 'Not specified',
         status: 'active' as "active" | "inactive", // Default status
         orders: count || 0
@@ -177,8 +178,8 @@ export const orderService = {
         status,
         order_date,
         total_amount,
-        customers:customers(id, company_name, users:users(name)),
-        suppliers:suppliers(id, company_name, users:users(name))
+        customers:customers(id, company_name, profiles:profiles(name)),
+        suppliers:suppliers(id, company_name, profiles:profiles(name))
       `);
       
       if (filterByUser) {
@@ -191,7 +192,7 @@ export const orderService = {
         
         // Get user role
         const { data: userData } = await supabase
-          .from('users')
+          .from('profiles')
           .select('role')
           .eq('id', session.user.id)
           .single();
@@ -301,9 +302,9 @@ export const noteService = {
       }
       
       const { data, error } = await supabase
-        .from('order_notes')
+        .from('notes')
         .select('*')
-        .eq('customer_id', customerId)
+        .eq('user_id', session.user.id)
         .order('created_at', { ascending: false });
       
       if (error) {
@@ -313,10 +314,10 @@ export const noteService = {
       
       return data.map((note: any) => ({
         id: note.id,
-        title: note.order_id || 'Note',
-        content: note.note_text,
+        title: note.title || 'Note',
+        content: note.content,
         created_at: note.created_at,
-        user_id: note.customer_id
+        user_id: note.user_id
       }));
     } catch (error) {
       console.error("Error in getNotes:", error);
@@ -329,20 +330,13 @@ export const noteService = {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) return null;
       
-      // Get customer ID
-      const customerId = await getCurrentCustomerID();
-      if (!customerId) {
-        console.error("No customer ID found for user");
-        return null;
-      }
-      
       const { data, error } = await supabase
-        .from('order_notes')
+        .from('notes')
         .insert([
           { 
-            order_id: note.title, // Use title as order_id
-            note_text: note.content,
-            customer_id: customerId
+            title: note.title,
+            content: note.content,
+            user_id: session.user.id
           }
         ])
         .select()
@@ -355,10 +349,10 @@ export const noteService = {
       
       return {
         id: data.id,
-        title: data.order_id || 'Note',
-        content: data.note_text,
+        title: data.title || 'Note',
+        content: data.content,
         created_at: data.created_at,
-        user_id: data.customer_id
+        user_id: data.user_id
       };
     } catch (error) {
       console.error("Error in createNote:", error);

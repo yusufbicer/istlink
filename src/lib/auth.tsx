@@ -66,9 +66,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setTimeout(async () => {
               try {
                 console.log("[Auth] Fetching user profile for", currentSession.user.id);
-                // Fetch the user data from users table
+                // Fetch the user data from profiles table
                 const { data: userData, error } = await supabase
-                  .from('users')
+                  .from('profiles')
                   .select('*')
                   .eq('id', currentSession.user.id)
                   .maybeSingle();
@@ -84,7 +84,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                       email: userData.email,
                       name: userData.name,
                       role: userData.role,
-                      avatar: null, // No avatar in new schema
+                      avatar: userData.avatar,
                     });
                   }
                 } else {
@@ -99,9 +99,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             // For other events, use the normal profile loading flow with setTimeout
             setTimeout(async () => {
               try {
-                // Fetch the user data from users table
+                // Fetch the user data from profiles table
                 const { data: userData, error } = await supabase
-                  .from('users')
+                  .from('profiles')
                   .select('*')
                   .eq('id', currentSession.user.id)
                   .maybeSingle();
@@ -117,7 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                       email: userData.email,
                       name: userData.name,
                       role: userData.role,
-                      avatar: null, // No avatar in new schema
+                      avatar: userData.avatar,
                     });
                   }
                 } else {
@@ -169,7 +169,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setTimeout(async () => {
             try {
               const { data: userData, error } = await supabase
-                .from('users')
+                .from('profiles')
                 .select('*')
                 .eq('id', initialSession.user.id)
                 .maybeSingle();
@@ -184,7 +184,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                   email: userData.email,
                   name: userData.name,
                   role: userData.role,
-                  avatar: null, // No avatar in new schema
+                  avatar: userData.avatar,
                 });
               }
             } catch (error) {
@@ -290,7 +290,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // First, sign up the user with Supabase Auth
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
-        password
+        password,
+        options: {
+          data: {
+            name,
+            role
+          }
+        }
       });
 
       if (authError) throw authError;
@@ -299,28 +305,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         throw new Error("Failed to create user account");
       }
       
-      // Then create a record in the users table
-      const { error: userError } = await supabase
-        .from('users')
-        .insert({
-          id: authData.user.id,
-          email,
-          name,
-          role
-        });
-      
-      if (userError) {
-        console.error("Error creating user record:", userError);
-        // Try to clean up the auth user
-        await supabase.auth.admin.deleteUser(authData.user.id);
-        throw userError;
-      }
-      
       // If role is supplier, create a supplier record
       if (role === 'supplier') {
         const { error: supplierError } = await supabase
           .from('suppliers')
           .insert({
+            id: generateUUID(),
             user_id: authData.user.id,
             company_name: name + " Company" // Default company name
           });
@@ -336,6 +326,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const { error: customerError } = await supabase
           .from('customers')
           .insert({
+            id: generateUUID(),
             user_id: authData.user.id,
             company_name: name + " Company" // Default company name
           });

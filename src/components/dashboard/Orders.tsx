@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -366,7 +365,7 @@ const Orders = () => {
       const customer = customers.find(c => c.id === buyerId);
       
       const newOrderObj: Order = {
-        id: data, // The function returns the new order ID
+        id: data as string, // The function returns the new order ID
         supplier: supplier.name,
         supplierId: supplier.id,
         buyer: customer?.name || "Customer",

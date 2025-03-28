@@ -43,14 +43,19 @@ export const getUserRole = async (): Promise<'admin' | 'supplier' | 'customer' |
     const { data: { session } } = await supabase.auth.getSession();
     if (!session?.user) return null;
     
+    // Get the user's role from the users table
     const { data, error } = await supabase
       .from('users')
       .select('role')
       .eq('id', session.user.id)
       .maybeSingle();
     
-    if (error || !data) return null;
-    return data.role;
+    if (error || !data) {
+      console.error("Error getting user role:", error);
+      return null;
+    }
+
+    return data.role as 'admin' | 'supplier' | 'customer';
   } catch (error) {
     console.error("Error getting user role:", error);
     return null;
@@ -69,7 +74,11 @@ export const getCurrentSupplierID = async (): Promise<string | null> => {
       .eq('user_id', session.user.id)
       .maybeSingle();
     
-    if (error || !data) return null;
+    if (error || !data) {
+      console.error("Error getting supplier ID:", error);
+      return null;
+    }
+    
     return data.id;
   } catch (error) {
     console.error("Error getting supplier ID:", error);
@@ -89,7 +98,11 @@ export const getCurrentCustomerID = async (): Promise<string | null> => {
       .eq('user_id', session.user.id)
       .maybeSingle();
     
-    if (error || !data) return null;
+    if (error || !data) {
+      console.error("Error getting customer ID:", error);
+      return null;
+    }
+    
     return data.id;
   } catch (error) {
     console.error("Error getting customer ID:", error);

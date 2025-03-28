@@ -294,10 +294,17 @@ export const noteService = {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) return [];
       
+      // Get the customer ID for the current user
+      const customerId = await getCurrentCustomerID();
+      if (!customerId) {
+        console.error("No customer ID found for user");
+        return [];
+      }
+      
       const { data, error } = await supabase
         .from('order_notes')
         .select('*')
-        .eq('customer_id', session.user.id)
+        .eq('customer_id', customerId)
         .order('created_at', { ascending: false });
       
       if (error) {

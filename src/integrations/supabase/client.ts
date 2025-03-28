@@ -14,10 +14,25 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     persistSession: true,
     autoRefreshToken: true,
     storageKey: 'supabase.auth.token',
-  }
+  },
+  global: {
+    headers: {
+      'X-Client-Info': 'supabase-js/2.x'
+    },
+  },
 });
 
 // Helper function to generate a UUID (v4)
 export const generateUUID = () => {
   return crypto.randomUUID();
+};
+
+// Helper function to handle Supabase errors
+export const handleSupabaseError = (error: any, customMessage?: string) => {
+  console.error(customMessage || "Supabase operation failed:", error);
+  return {
+    message: error?.message || "An unknown error occurred",
+    details: error?.details || null,
+    code: error?.code || null
+  };
 };

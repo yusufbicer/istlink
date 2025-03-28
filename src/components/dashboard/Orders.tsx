@@ -47,10 +47,9 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from '@/lib/auth';
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase, handleSupabaseError } from "@/integrations/supabase/client";
 import { orderService } from "@/lib/api";
 
-// Type definitions
 interface OrderItem {
   name: string;
   quantity: number;
@@ -99,7 +98,6 @@ const Orders = () => {
     items: [{ name: "", quantity: 1, price: 0 }]
   });
 
-  // Animation effect
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -108,7 +106,6 @@ const Orders = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Fetch orders from Supabase
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -132,7 +129,6 @@ const Orders = () => {
           return;
         }
 
-        // Fetch supplier profiles to map supplier_id to supplier names
         const { data: supplierProfiles, error: supplierError } = await supabase
           .from('profiles')
           .select('id, name')
@@ -149,20 +145,16 @@ const Orders = () => {
           });
         }
         
-        // Transform the data to match our Order interface
         const formattedOrders = data.map(order => {
-          // Parse order items from JSON if stored that way, or use a default
           let orderItems: OrderItem[] = [];
           try {
             if (order.items_json) {
-              // Convert to string before parsing if it's not already a string
               const itemsJsonString = typeof order.items_json === 'string' 
                 ? order.items_json 
                 : JSON.stringify(order.items_json);
               
               orderItems = JSON.parse(itemsJsonString);
             } else {
-              // If no items are stored, create a placeholder
               orderItems = [{ name: "Unknown item", quantity: 1, price: order.amount }];
             }
           } catch (e) {
@@ -201,10 +193,8 @@ const Orders = () => {
       }
     };
     
-    // Fetch suppliers and customers for dropdowns
     const fetchSuppliersAndCustomers = async () => {
       try {
-        // Fetch suppliers
         const { data: supplierData, error: supplierError } = await supabase
           .from('profiles')
           .select('id, name')
@@ -213,10 +203,10 @@ const Orders = () => {
         if (supplierError) {
           console.error("Error fetching suppliers:", supplierError);
         } else {
+          console.log("Suppliers loaded for dropdown:", supplierData?.length);
           setSuppliers(supplierData);
         }
         
-        // Fetch customers
         const { data: customerData, error: customerError } = await supabase
           .from('profiles')
           .select('id, name')
@@ -225,6 +215,7 @@ const Orders = () => {
         if (customerError) {
           console.error("Error fetching customers:", customerError);
         } else {
+          console.log("Customers loaded for dropdown:", customerData?.length);
           setCustomers(customerData);
         }
       } catch (err) {
@@ -238,7 +229,6 @@ const Orders = () => {
     }
   }, [user, toast]);
 
-  // Filter orders based on tab selection and search term
   useEffect(() => {
     let filtered = orders;
     
@@ -255,7 +245,6 @@ const Orders = () => {
       );
     }
     
-    // Filter based on user role
     if (user?.role === "supplier") {
       filtered = filtered.filter(order => order.supplierId === user.id);
     }
@@ -267,7 +256,6 @@ const Orders = () => {
     setFilteredOrders(filtered);
   }, [searchTerm, activeTab, orders, user]);
 
-  // Add item to order form
   const addItemToOrder = () => {
     setNewOrder({
       ...newOrder,
@@ -275,7 +263,6 @@ const Orders = () => {
     });
   };
 
-  // Remove item from order form
   const removeItemFromOrder = (index: number) => {
     if (newOrder.items.length > 1) {
       setNewOrder({
@@ -285,7 +272,6 @@ const Orders = () => {
     }
   };
 
-  // Update item in order form
   const updateItemInOrder = (index: number, field: keyof OrderItem, value: any) => {
     const updatedItems = [...newOrder.items];
     updatedItems[index] = { ...updatedItems[index], [field]: value };
@@ -296,10 +282,8 @@ const Orders = () => {
     });
   };
 
-  // Create new order
   const handleCreateOrder = async () => {
     try {
-      // Validation
       if (!newOrder.supplier) {
         toast({
           title: "Validation Error",
@@ -327,12 +311,10 @@ const Orders = () => {
         return;
       }
 
-      // Calculate total
       const total = newOrder.items.reduce(
         (sum, item) => sum + (item.quantity * item.price), 0
       );
       
-      // Get supplier and buyer details
       const supplier = suppliers.find(s => s.id === newOrder.supplier);
       const buyer = user?.role === "admin" 
         ? customers.find(c => c.id === newOrder.buyer)
@@ -347,7 +329,14 @@ const Orders = () => {
         return;
       }
 
-      // Insert the order into Supabase
+      console.log("Creating order with:", {
+        supplier_id: supplier.id,
+        customer_id: buyer.id,
+        amount: Math.round(total * 100) / 100,
+        items: newOrder.items.length,
+        items_json: JSON.stringify(newOrder.items)
+      });
+
       const { data, error } = await supabase
         .from('orders')
         .insert([
@@ -374,7 +363,6 @@ const Orders = () => {
         return;
       }
       
-      // Add the new order to the state
       const newOrderObj: Order = {
         id: data[0].id,
         supplier: supplier.name,
@@ -392,7 +380,6 @@ const Orders = () => {
       
       setOrders([...orders, newOrderObj]);
       
-      // Reset the form
       setNewOrder({
         supplier: "",
         buyer: user?.role === "admin" ? "" : user?.id || "",
@@ -413,7 +400,6 @@ const Orders = () => {
     }
   };
 
-  // Get status icon based on order status
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "completed":
@@ -429,20 +415,17 @@ const Orders = () => {
     }
   };
 
-  // Format date string
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
-  // Calculate subtotal for new order
   const calculateSubtotal = () => {
     return newOrder.items.reduce(
       (sum, item) => sum + (item.quantity * item.price), 0
     );
   };
 
-  // Loading state
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">

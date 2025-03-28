@@ -1,5 +1,5 @@
 
-import { supabase } from "@/integrations/supabase/client";
+import { supabase, handleSupabaseError } from "@/integrations/supabase/client";
 import { User, UserRole } from "./auth";
 
 // Types that will map to our Supabase schema
@@ -36,12 +36,14 @@ export interface Note {
 export const userService = {
   getCustomers: async (supplierOnly: boolean = false): Promise<Customer[]> => {
     try {
+      console.log("Fetching customers, supplierOnly:", supplierOnly);
       let query = supabase.from('customers').select('*');
       
       if (supplierOnly) {
         // Get current user ID
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
+          console.log("Filtering customers for supplier:", session.user.id);
           query = query.eq('supplier_id', session.user.id);
         }
       }
@@ -52,6 +54,8 @@ export const userService = {
         console.error("Error fetching customers:", error);
         return [];
       }
+      
+      console.log("Customers fetched:", data.length);
       
       // Transform to match the expected Customer interface
       // Explicitly cast status to the union type
@@ -71,14 +75,20 @@ export const userService = {
   
   getCustomerById: async (id: string): Promise<Customer | null> => {
     try {
+      console.log("Fetching customer by ID:", id);
       const { data, error } = await supabase
         .from('customers')
         .select('*')
         .eq('id', id)
-        .single();
+        .maybeSingle();
       
       if (error) {
         console.error("Error fetching customer:", error);
+        return null;
+      }
+      
+      if (!data) {
+        console.log("No customer found with ID:", id);
         return null;
       }
       
@@ -103,6 +113,7 @@ export const userService = {
 export const orderService = {
   getOrders: async (filterByUser: boolean = true): Promise<Order[]> => {
     try {
+      console.log("Fetching orders, filterByUser:", filterByUser);
       let query = supabase.from('orders').select(`
         *,
         customers!orders_customer_id_fkey(name)
@@ -119,9 +130,11 @@ export const orderService = {
             .single();
           
           if (profile?.role === 'supplier') {
+            console.log("Filtering orders for supplier:", session.user.id);
             query = query.eq('supplier_id', session.user.id);
           } else if (profile?.role === 'customer') {
             // For customers, we need to find orders by their customer ID
+            console.log("Finding customer ID for user:", session.user.id);
             const { data: customerData } = await supabase
               .from('customers')
               .select('id')
@@ -129,6 +142,7 @@ export const orderService = {
               .single();
             
             if (customerData?.id) {
+              console.log("Filtering orders for customer:", customerData.id);
               query = query.eq('customer_id', customerData.id);
             }
           }
@@ -142,6 +156,8 @@ export const orderService = {
         console.error("Error fetching orders:", error);
         return [];
       }
+      
+      console.log("Orders fetched:", data.length);
       
       // Transform to match the expected Order interface
       return data.map(order => ({
@@ -158,6 +174,32 @@ export const orderService = {
     } catch (error) {
       console.error("Error in getOrders:", error);
       return [];
+    }
+  },
+  
+  createOrder: async (orderData: any): Promise<{success: boolean, data?: any, error?: any}> => {
+    try {
+      console.log("Creating order:", orderData);
+      const { data, error } = await supabase
+        .from('orders')
+        .insert([orderData])
+        .select();
+        
+      if (error) {
+        console.error("Error creating order:", error);
+        return { 
+          success: false, 
+          error: handleSupabaseError(error, "Failed to create order") 
+        };
+      }
+      
+      return { success: true, data };
+    } catch (error) {
+      console.error("Error in createOrder:", error);
+      return { 
+        success: false, 
+        error: { message: "An unexpected error occurred" } 
+      };
     }
   }
 }

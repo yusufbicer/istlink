@@ -36,3 +36,63 @@ export const handleSupabaseError = (error: any, customMessage?: string) => {
     code: error?.code || null
   };
 };
+
+// Helper function to check user role
+export const getUserRole = async (): Promise<'admin' | 'supplier' | 'customer' | null> => {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.user) return null;
+    
+    const { data, error } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', session.user.id)
+      .maybeSingle();
+    
+    if (error || !data) return null;
+    return data.role;
+  } catch (error) {
+    console.error("Error getting user role:", error);
+    return null;
+  }
+};
+
+// Helper function to get the current user's supplier ID
+export const getCurrentSupplierID = async (): Promise<string | null> => {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.user) return null;
+    
+    const { data, error } = await supabase
+      .from('suppliers')
+      .select('id')
+      .eq('user_id', session.user.id)
+      .maybeSingle();
+    
+    if (error || !data) return null;
+    return data.id;
+  } catch (error) {
+    console.error("Error getting supplier ID:", error);
+    return null;
+  }
+};
+
+// Helper function to get the current user's customer ID
+export const getCurrentCustomerID = async (): Promise<string | null> => {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.user) return null;
+    
+    const { data, error } = await supabase
+      .from('customers')
+      .select('id')
+      .eq('user_id', session.user.id)
+      .maybeSingle();
+    
+    if (error || !data) return null;
+    return data.id;
+  } catch (error) {
+    console.error("Error getting customer ID:", error);
+    return null;
+  }
+};

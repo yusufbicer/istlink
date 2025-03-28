@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,7 +48,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from '@/lib/auth';
 import { useToast } from "@/components/ui/use-toast";
-import { supabase, handleSupabaseError } from "@/integrations/supabase/client";
+import { supabase, getCurrentSupplierID, getCurrentCustomerID } from "@/integrations/supabase/client";
 import { orderService } from "@/lib/api";
 
 interface OrderItem {
@@ -116,7 +117,8 @@ const Orders = () => {
           .from('orders')
           .select(`
             *,
-            customers(name)
+            customers(company_name, user_id, users:users(name)),
+            suppliers(company_name, user_id, users:users(name))
           `);
         
         if (error) {
@@ -129,52 +131,30 @@ const Orders = () => {
           return;
         }
 
-        const { data: supplierProfiles, error: supplierError } = await supabase
-          .from('profiles')
-          .select('id, name')
-          .eq('role', 'supplier');
-          
-        if (supplierError) {
-          console.error("Error fetching supplier profiles:", supplierError);
-        }
-        
-        const supplierMap = new Map();
-        if (supplierProfiles) {
-          supplierProfiles.forEach(supplier => {
-            supplierMap.set(supplier.id, supplier.name);
-          });
-        }
-        
+        // Transform the data to match our Order interface
         const formattedOrders = data.map(order => {
           let orderItems: OrderItem[] = [];
           try {
-            if (order.items_json) {
-              const itemsJsonString = typeof order.items_json === 'string' 
-                ? order.items_json 
-                : JSON.stringify(order.items_json);
-              
-              orderItems = JSON.parse(itemsJsonString);
-            } else {
-              orderItems = [{ name: "Unknown item", quantity: 1, price: order.amount }];
-            }
+            // For now, just create a dummy item since we don't have items_json in new schema
+            orderItems = [{ name: "Order item", quantity: 1, price: order.total_amount }];
           } catch (e) {
-            console.error("Error parsing order items:", e);
-            orderItems = [{ name: "Error loading items", quantity: 1, price: order.amount }];
+            console.error("Error processing order items:", e);
+            orderItems = [{ name: "Error loading items", quantity: 1, price: order.total_amount }];
           }
           
           return {
             id: order.id,
-            supplier: supplierMap.get(order.supplier_id) || "Unknown Supplier",
+            supplier: order.suppliers?.company_name || "Unknown Supplier",
             supplierId: order.supplier_id || "",
-            buyer: order.customers?.name || "Unknown Customer",
+            buyer: order.customers?.company_name || "Unknown Customer",
             buyerId: order.customer_id || "",
             items: orderItems,
-            total: order.amount || 0,
-            date: order.date || new Date().toISOString(),
+            total: order.total_amount || 0,
+            date: order.order_date || new Date().toISOString(),
             status: order.status || "pending",
-            consolidationId: order.consolidation_id || null,
-            shipment: order.shipment_id || null,
-            payment: order.payment_status || "pending"
+            consolidationId: null, // Not implemented in new schema yet
+            shipment: null, // Not implemented in new schema yet
+            payment: "pending" // Default payment status
           };
         });
         
@@ -195,28 +175,50 @@ const Orders = () => {
     
     const fetchSuppliersAndCustomers = async () => {
       try {
+        // Fetch suppliers
         const { data: supplierData, error: supplierError } = await supabase
-          .from('profiles')
-          .select('id, name')
-          .eq('role', 'supplier');
+          .from('suppliers')
+          .select(`
+            id,
+            company_name,
+            users:users(id, name)
+          `);
           
         if (supplierError) {
           console.error("Error fetching suppliers:", supplierError);
-        } else {
-          console.log("Suppliers loaded for dropdown:", supplierData?.length);
-          setSuppliers(supplierData);
+        } else if (supplierData) {
+          const formattedSuppliers = supplierData
+            .filter(s => s.users) // Ensure we have user data
+            .map(s => ({
+              id: s.id,
+              name: s.company_name || s.users.name
+            }));
+          
+          console.log("Suppliers loaded for dropdown:", formattedSuppliers.length);
+          setSuppliers(formattedSuppliers);
         }
         
+        // Fetch customers
         const { data: customerData, error: customerError } = await supabase
-          .from('profiles')
-          .select('id, name')
-          .eq('role', 'customer');
+          .from('customers')
+          .select(`
+            id,
+            company_name,
+            users:users(id, name)
+          `);
           
         if (customerError) {
           console.error("Error fetching customers:", customerError);
-        } else {
-          console.log("Customers loaded for dropdown:", customerData?.length);
-          setCustomers(customerData);
+        } else if (customerData) {
+          const formattedCustomers = customerData
+            .filter(c => c.users) // Ensure we have user data
+            .map(c => ({
+              id: c.id,
+              name: c.company_name || c.users.name
+            }));
+          
+          console.log("Customers loaded for dropdown:", formattedCustomers.length);
+          setCustomers(formattedCustomers);
         }
       } catch (err) {
         console.error("Error fetching suppliers and customers:", err);
@@ -245,6 +247,7 @@ const Orders = () => {
       );
     }
     
+    // Filter based on user role
     if (user?.role === "supplier") {
       filtered = filtered.filter(order => order.supplierId === user.id);
     }
@@ -315,12 +318,19 @@ const Orders = () => {
         (sum, item) => sum + (item.quantity * item.price), 0
       );
       
+      // Find full supplier and buyer objects
       const supplier = suppliers.find(s => s.id === newOrder.supplier);
-      const buyer = user?.role === "admin" 
-        ? customers.find(c => c.id === newOrder.buyer)
-        : { id: user?.id, name: user?.name || "Customer" };
       
-      if (!supplier || !buyer) {
+      let buyerId;
+      if (user?.role === "admin") {
+        // Admin selected a customer
+        buyerId = newOrder.buyer;
+      } else {
+        // Customer is creating order for themselves
+        buyerId = await getCurrentCustomerID();
+      }
+      
+      if (!supplier || !buyerId) {
         toast({
           title: "Error",
           description: "Invalid supplier or buyer selection.",
@@ -331,27 +341,16 @@ const Orders = () => {
 
       console.log("Creating order with:", {
         supplier_id: supplier.id,
-        customer_id: buyer.id,
-        amount: Math.round(total * 100) / 100,
-        items: newOrder.items.length,
-        items_json: JSON.stringify(newOrder.items)
+        customer_id: buyerId,
+        total_amount: Math.round(total * 100) / 100
       });
 
-      const { data, error } = await supabase
-        .from('orders')
-        .insert([
-          {
-            supplier_id: supplier.id,
-            customer_id: buyer.id,
-            amount: Math.round(total * 100) / 100,
-            status: "pending",
-            date: new Date().toISOString(),
-            items: newOrder.items.length,
-            items_json: JSON.stringify(newOrder.items),
-            payment_status: "pending"
-          }
-        ])
-        .select();
+      // Use the create_order RPC function
+      const { data, error } = await supabase.rpc('create_order', {
+        p_supplier_id: supplier.id,
+        p_customer_id: buyerId,
+        p_total_amount: Math.round(total * 100) / 100
+      });
       
       if (error) {
         console.error("Error creating order:", error);
@@ -363,12 +362,15 @@ const Orders = () => {
         return;
       }
       
+      // Create a new order object with the response
+      const customer = customers.find(c => c.id === buyerId);
+      
       const newOrderObj: Order = {
-        id: data[0].id,
+        id: data, // The function returns the new order ID
         supplier: supplier.name,
         supplierId: supplier.id,
-        buyer: buyer.name || "Customer",
-        buyerId: buyer.id || "",
+        buyer: customer?.name || "Customer",
+        buyerId: buyerId,
         items: newOrder.items,
         total: Math.round(total * 100) / 100,
         date: new Date().toISOString(),
@@ -380,6 +382,7 @@ const Orders = () => {
       
       setOrders([...orders, newOrderObj]);
       
+      // Reset the form
       setNewOrder({
         supplier: "",
         buyer: user?.role === "admin" ? "" : user?.id || "",

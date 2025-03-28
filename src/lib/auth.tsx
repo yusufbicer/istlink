@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext, useContext, useRef } from 'react';
-import { supabase } from "@/integrations/supabase/client";
+import { supabase, handleSupabaseError } from "@/integrations/supabase/client";
 import { Session, User as SupabaseUser } from '@supabase/supabase-js';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/components/ui/use-toast';
 
 export type UserRole = 'customer' | 'supplier' | 'admin';
 
@@ -66,9 +66,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setTimeout(async () => {
               try {
                 console.log("[Auth] Fetching user profile for", currentSession.user.id);
-                // Fetch the user profile data
-                const { data: profile, error } = await supabase
-                  .from('profiles')
+                // Fetch the user data from users table
+                const { data: userData, error } = await supabase
+                  .from('users')
                   .select('*')
                   .eq('id', currentSession.user.id)
                   .maybeSingle();
@@ -76,15 +76,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 if (error) {
                   console.error('[Auth] Error fetching user profile:', error);
                   // Don't clear user here - keep the temporary one
-                } else if (profile) {
-                  console.log("[Auth] Profile loaded successfully:", profile.email);
+                } else if (userData) {
+                  console.log("[Auth] Profile loaded successfully:", userData.email);
                   if (isMounted.current) {
                     setUser({
-                      id: profile.id,
-                      email: profile.email,
-                      name: profile.name,
-                      role: profile.role,
-                      avatar: profile.avatar,
+                      id: userData.id,
+                      email: userData.email,
+                      name: userData.name,
+                      role: userData.role,
+                      avatar: null, // No avatar in new schema
                     });
                   }
                 } else {
@@ -99,9 +99,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             // For other events, use the normal profile loading flow with setTimeout
             setTimeout(async () => {
               try {
-                // Fetch the user profile data
-                const { data: profile, error } = await supabase
-                  .from('profiles')
+                // Fetch the user data from users table
+                const { data: userData, error } = await supabase
+                  .from('users')
                   .select('*')
                   .eq('id', currentSession.user.id)
                   .maybeSingle();
@@ -109,15 +109,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 if (error) {
                   console.error('[Auth] Error fetching user profile:', error);
                   if (isMounted.current) setUser(null);
-                } else if (profile) {
+                } else if (userData) {
                   if (isMounted.current) {
-                    console.log("[Auth] Profile loaded:", profile.email);
+                    console.log("[Auth] Profile loaded:", userData.email);
                     setUser({
-                      id: profile.id,
-                      email: profile.email,
-                      name: profile.name,
-                      role: profile.role,
-                      avatar: profile.avatar,
+                      id: userData.id,
+                      email: userData.email,
+                      name: userData.name,
+                      role: userData.role,
+                      avatar: null, // No avatar in new schema
                     });
                   }
                 } else {
@@ -168,8 +168,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           // Then fetch the actual profile in the background
           setTimeout(async () => {
             try {
-              const { data: profile, error } = await supabase
-                .from('profiles')
+              const { data: userData, error } = await supabase
+                .from('users')
                 .select('*')
                 .eq('id', initialSession.user.id)
                 .maybeSingle();
@@ -177,14 +177,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               if (error) {
                 console.error('[Auth] Error fetching user profile:', error);
                 // Keep the temporary user instead of setting to null
-              } else if (profile && isMounted.current) {
-                console.log("[Auth] Setting user from existing session:", profile.email);
+              } else if (userData && isMounted.current) {
+                console.log("[Auth] Setting user from existing session:", userData.email);
                 setUser({
-                  id: profile.id,
-                  email: profile.email,
-                  name: profile.name,
-                  role: profile.role,
-                  avatar: profile.avatar,
+                  id: userData.id,
+                  email: userData.email,
+                  name: userData.name,
+                  role: userData.role,
+                  avatar: null, // No avatar in new schema
                 });
               }
             } catch (error) {
@@ -286,18 +286,65 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true);
     try {
       console.log("Registering user:", email, role);
-      const { data, error } = await supabase.auth.signUp({
+      
+      // First, sign up the user with Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
-        password,
-        options: {
-          data: {
-            name,
-            role
-          }
-        }
+        password
       });
 
-      if (error) throw error;
+      if (authError) throw authError;
+      
+      if (!authData.user) {
+        throw new Error("Failed to create user account");
+      }
+      
+      // Then create a record in the users table
+      const { error: userError } = await supabase
+        .from('users')
+        .insert({
+          id: authData.user.id,
+          email,
+          name,
+          role
+        });
+      
+      if (userError) {
+        console.error("Error creating user record:", userError);
+        // Try to clean up the auth user
+        await supabase.auth.admin.deleteUser(authData.user.id);
+        throw userError;
+      }
+      
+      // If role is supplier, create a supplier record
+      if (role === 'supplier') {
+        const { error: supplierError } = await supabase
+          .from('suppliers')
+          .insert({
+            user_id: authData.user.id,
+            company_name: name + " Company" // Default company name
+          });
+          
+        if (supplierError) {
+          console.error("Error creating supplier record:", supplierError);
+          // Note: We don't clean up here as the user record is still valid
+        }
+      }
+      
+      // If role is customer, create a customer record
+      if (role === 'customer') {
+        const { error: customerError } = await supabase
+          .from('customers')
+          .insert({
+            user_id: authData.user.id,
+            company_name: name + " Company" // Default company name
+          });
+          
+        if (customerError) {
+          console.error("Error creating customer record:", customerError);
+          // Note: We don't clean up here as the user record is still valid
+        }
+      }
 
       toast({
         title: "Registration successful",

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,7 +31,7 @@ import {
 import { PlusIcon, MoreHorizontalIcon, SearchIcon, PackageIcon, StarIcon, ExternalLinkIcon, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase, generateUUID } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 
 // Supplier type definition
@@ -155,22 +154,21 @@ const Suppliers = () => {
       }
       
       // Generate a UUID for the new supplier
-      const newSupplierId = crypto.randomUUID();
+      const newSupplierId = generateUUID();
       
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('profiles')
         .insert({
-          id: newSupplierId, // Add generated id
+          id: newSupplierId,
           email: newSupplier.contact,
           name: newSupplier.name,
-          role: 'supplier' as "supplier", // Cast to expected enum type
+          role: 'supplier',
           company: newSupplier.name,
           location: newSupplier.location,
           phone: newSupplier.phone,
           category: newSupplier.category,
           status: 'active'
-        })
-        .select();
+        });
       
       if (error) {
         console.error("Error adding supplier:", error);
@@ -184,12 +182,12 @@ const Suppliers = () => {
       
       // Add the new supplier to the state
       const newSupplierData = {
-        id: data[0].id,
-        name: data[0].name,
-        category: data[0].category || "General",
-        location: data[0].location || "Not specified",
-        contact: data[0].email,
-        phone: data[0].phone || "Not provided",
+        id: newSupplierId,
+        name: newSupplier.name,
+        category: newSupplier.category || "General",
+        location: newSupplier.location || "Not specified",
+        contact: newSupplier.contact,
+        phone: newSupplier.phone || "Not provided",
         status: "active",
         rating: 0,
         orders: 0

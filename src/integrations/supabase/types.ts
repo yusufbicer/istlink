@@ -342,12 +342,120 @@ export type Database = {
           },
         ]
       }
+      shipping_details: {
+        Row: {
+          carrier: string | null
+          created_at: string
+          estimated_delivery: string | null
+          id: string
+          order_id: string | null
+          shipping_address: Json | null
+          shipping_cost: number | null
+          shipping_method: string | null
+          status: string | null
+          tracking_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          carrier?: string | null
+          created_at?: string
+          estimated_delivery?: string | null
+          id?: string
+          order_id?: string | null
+          shipping_address?: Json | null
+          shipping_cost?: number | null
+          shipping_method?: string | null
+          status?: string | null
+          tracking_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          carrier?: string | null
+          created_at?: string
+          estimated_delivery?: string | null
+          id?: string
+          order_id?: string | null
+          shipping_address?: Json | null
+          shipping_cost?: number | null
+          shipping_method?: string | null
+          status?: string | null
+          tracking_number?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shipping_details_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      suppliers: {
+        Row: {
+          business_type: string | null
+          company_name: string
+          contact_address: string | null
+          contact_phone: string | null
+          created_at: string
+          id: string
+          registration_number: string | null
+          status: string | null
+          tax_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          business_type?: string | null
+          company_name: string
+          contact_address?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          id: string
+          registration_number?: string | null
+          status?: string | null
+          tax_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          business_type?: string | null
+          company_name?: string
+          contact_address?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          id?: string
+          registration_number?: string | null
+          status?: string | null
+          tax_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "suppliers_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      current_user_is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      current_user_is_supplier: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      get_current_user_role: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       user_role: "customer" | "supplier" | "admin"

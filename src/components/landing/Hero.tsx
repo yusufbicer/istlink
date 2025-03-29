@@ -18,10 +18,8 @@ const Hero = () => {
 
   return (
     <section className="pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden relative">
-      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-50 to-transparent opacity-70 pointer-events-none" />
       
-      {/* Animated blobs */}
       <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-indigo-200 rounded-full filter blur-3xl opacity-30 animate-float pointer-events-none" />
       <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-blue-200 rounded-full filter blur-3xl opacity-20 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
       
@@ -73,19 +71,14 @@ const Hero = () => {
           </div>
         </div>
         
-        {/* Dashboard Preview with reduced size for desktop */}
         <div 
           className={`mt-12 relative mx-auto max-w-5xl transition-all duration-1000 delay-500 transform ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
           }`}
         >
           <div className="relative overflow-hidden rounded-xl shadow-2xl">
-            {/* Consistent border styling with fixed rounded corners */}
             <div className="bg-gradient-to-r from-indigo-500 to-blue-500 p-0.5 rounded-xl">
-              
-              {/* Dashboard with glass effect */}
               <div className="rounded-xl overflow-hidden bg-gray-900 border-0">
-                {/* Mockup of the dashboard */}
                 <div className="relative bg-gray-900 px-2 pt-2 pb-1 flex items-center rounded-t-xl">
                   <div className="flex space-x-1.5 absolute left-4">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -98,9 +91,7 @@ const Hero = () => {
                 </div>
                 
                 {isMobile ? (
-                  // Enhanced Mobile-optimized dashboard with improved layout and space usage
                   <div className="bg-gray-900 text-white p-3">
-                    {/* Mobile Dashboard Header - Optimized with logo and nav in single row */}
                     <div className="flex items-center space-x-2 mb-3">
                       <div className="flex items-center space-x-2">
                         <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
@@ -113,7 +104,6 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Navigation Tabs - Explicitly in two rows with equal width items */}
                       <div className="flex flex-col gap-1 flex-1 overflow-hidden">
                         <div className="flex gap-1 justify-between w-full">
                           <div className="flex items-center px-2 py-1 bg-indigo-600 rounded-full text-[10px] font-medium whitespace-nowrap">
@@ -123,23 +113,21 @@ const Hero = () => {
                             <Package className="h-3 w-3 mr-1" /> Orders
                           </div>
                           <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
-                            <GitMerge className="h-3 w-3 mr-1" /> Consol
+                            <TrendingUp className="h-3 w-3 mr-1" /> Analytics
                           </div>
                         </div>
                         <div className="flex gap-1 justify-between w-full">
                           <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
-                            <Network className="h-3 w-3 mr-1" /> Supply
+                            <GitMerge className="h-3 w-3 mr-1" /> Consolidations
                           </div>
                           <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
-                            <TrendingUp className="h-3 w-3 mr-1" /> Analytics
+                            <Network className="h-3 w-3 mr-1" /> Suppliers
                           </div>
                         </div>
                       </div>
                     </div>
                     
-                    {/* Mobile Dashboard Content - More compact layout */}
                     <div className="space-y-2">
-                      {/* Stats Cards */}
                       <div className="grid grid-cols-2 gap-2">
                         <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
                           <div className="flex justify-between items-center mb-1">
@@ -165,7 +153,6 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Efficiency Metrics for Mobile - More compact */}
                       <div className="grid grid-cols-3 gap-2">
                         <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
                           <div className="flex justify-between items-center mb-1">
@@ -199,7 +186,6 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* More compact Account Balance Section */}
                       <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-xs font-medium">Account Balance</span>
@@ -215,7 +201,6 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Active Consolidations */}
                       <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
                         <div className="text-xs font-medium mb-1">Active Consolidations</div>
                         <div className="space-y-1">
@@ -232,14 +217,10 @@ const Hero = () => {
                     </div>
                   </div>
                 ) : (
-                  // Desktop dashboard with navigation moved next to logo
                   <div className="bg-gray-900 text-white">
-                    {/* Dashboard content */}
                     <div className="grid grid-cols-12 gap-4 p-6 bg-gray-900">
-                      {/* Reorganized Header with logo and navigation tabs on same line */}
                       <div className="col-span-12 mb-4">
                         <div className="flex items-center justify-between mb-2">
-                          {/* Combined logo and navigation tabs in single row */}
                           <div className="flex items-center flex-grow">
                             <div className="flex items-center mr-4">
                               <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
@@ -251,7 +232,6 @@ const Hero = () => {
                                 <div className="text-xs text-indigo-400">BEYOND BORDERS</div>
                               </div>
                             </div>
-                            {/* Navigation moved to the right of logo */}
                             <div className="flex space-x-2 flex-grow">
                               <div className="flex items-center px-4 py-2 bg-indigo-600 rounded-lg text-sm font-medium">
                                 <Activity className="h-4 w-4 mr-2" /> Overview
@@ -270,8 +250,6 @@ const Hero = () => {
                               </div>
                             </div>
                           </div>
-                          
-                          {/* User controls */}
                           <div className="flex space-x-1">
                             <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 cursor-pointer">
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -289,9 +267,7 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Main dashboard area */}
                       <div className="col-span-12 space-y-4">
-                        {/* Stats row */}
                         <div className="grid grid-cols-3 gap-4">
                           <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                             <div className="flex justify-between items-center mb-2">
@@ -328,7 +304,6 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Consolidation Efficiency Metrics */}
                         <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-60 relative">
                           <div className="flex justify-between items-center mb-4">
                             <span className="font-medium">Consolidation Efficiency Metrics</span>
@@ -346,9 +321,7 @@ const Hero = () => {
                             </div>
                           </div>
                           
-                          {/* Updated Consolidation Efficiency Visualization */}
                           <div className="grid grid-cols-5 gap-4 h-44">
-                            {/* Container Space Utilization */}
                             <div className="col-span-2 bg-gray-700 rounded-lg p-3 flex flex-col justify-between">
                               <div className="flex justify-between items-center">
                                 <span className="text-xs font-medium">Container Utilization</span>
@@ -356,9 +329,7 @@ const Hero = () => {
                               </div>
                               <div className="flex-grow flex items-center justify-center">
                                 <div className="relative w-24 h-24 rounded border border-gray-600">
-                                  {/* Container with boxes inside */}
                                   <div className="absolute inset-1 bg-gray-800 rounded-sm border border-gray-600">
-                                    {/* Stacked boxes showing space utilization */}
                                     <div className="absolute bottom-0 left-0 right-0 h-[90%] bg-gradient-to-t from-indigo-600 to-indigo-400 rounded-sm opacity-90">
                                       <div className="h-full w-full grid grid-cols-3 grid-rows-3 gap-px p-px">
                                         {Array(9).fill(0).map((_, i) => (
@@ -375,7 +346,6 @@ const Hero = () => {
                               </div>
                             </div>
                             
-                            {/* Cost Savings */}
                             <div className="col-span-2 bg-gray-700 rounded-lg p-3 flex flex-col justify-between">
                               <div className="flex justify-between items-center">
                                 <span className="text-xs font-medium">Cost Savings</span>
@@ -407,7 +377,6 @@ const Hero = () => {
                               </div>
                             </div>
                             
-                            {/* Time Savings */}
                             <div className="bg-gray-700 rounded-lg p-3 flex flex-col justify-between">
                               <div className="flex justify-between items-center">
                                 <span className="text-xs font-medium">Time Saved</span>
@@ -424,7 +393,6 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Consolidation Data and Updated Payment Status - Revised with grid layout */}
                         <div className="grid grid-cols-2 gap-4">
                           <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                             <div className="font-medium mb-3">Active Consolidations</div>
@@ -444,7 +412,6 @@ const Hero = () => {
                             </div>
                           </div>
                           
-                          {/* Completely redesigned Account Balance section with more compact layout */}
                           <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                             <div className="flex justify-between items-center mb-3">
                               <span className="font-medium">Account Balance</span>

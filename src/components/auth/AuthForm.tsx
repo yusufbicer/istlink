@@ -35,7 +35,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         await login(email, password);
         toast({
           title: "Login successful",
-          description: "Welcome back to GROOP!",
+          description: "Welcome back!",
         });
       } else {
         await register(name, email, password, role);
@@ -44,7 +44,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
           description: "Your account has been created.",
         });
       }
-      navigate('/dashboard');
+      navigate('/');
     } catch (err: any) {
       setError(err.message || 'An error occurred');
       toast({
@@ -73,7 +73,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
           </h1>
           <p className="text-gray-600 mt-2">
             {type === 'login' 
-              ? 'Sign in to access your dashboard' 
+              ? 'Sign in to access your account' 
               : 'Complete the form below to get started'}
           </p>
         </div>

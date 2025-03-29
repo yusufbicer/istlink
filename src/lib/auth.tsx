@@ -1,135 +1,114 @@
 
-// Simple auth utilities
-import { useState, useEffect, createContext, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type UserRole = 'importer' | 'supplier' | 'admin';
+// Define the user role type
+export type UserRole = "importer" | "supplier" | "admin";
 
-export interface User {
+// Define what a user object looks like
+export type User = {
   id: string;
-  name: string;
+  name: string | null;
   email: string;
   role: UserRole;
-  avatar?: string;
-}
+  avatar?: string | null;
+};
 
-interface AuthContextType {
+// Define what the auth context provides
+type AuthContextType = {
   user: User | null;
-  isLoading: boolean;
+  isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
   register: (name: string, email: string, password: string, role: UserRole) => Promise<void>;
-}
+  logout: () => void;
+};
 
-// Simulated users for demo
-const DEMO_USERS: User[] = [
-  {
-    id: '1',
-    name: 'Importer Demo',
-    email: 'importer@example.com',
-    role: 'importer',
-    avatar: 'https://i.pravatar.cc/150?u=importer',
-  },
-  {
-    id: '2',
-    name: 'Supplier Demo',
-    email: 'supplier@example.com',
-    role: 'supplier',
-    avatar: 'https://i.pravatar.cc/150?u=supplier',
-  },
-  {
-    id: '3',
-    name: 'Admin Demo',
-    email: 'admin@example.com',
-    role: 'admin',
-    avatar: 'https://i.pravatar.cc/150?u=admin',
-  }
+// Create the context with a default value
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+// Demo users for testing
+const demoUsers: User[] = [
+  { id: "1", name: "Importer User", email: "importer@example.com", role: "importer" },
+  { id: "2", name: "Supplier User", email: "supplier@example.com", role: "supplier" },
+  { id: "3", name: "Admin User", email: "admin@example.com", role: "admin" }
 ];
 
-// Create an authentication context
-const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+// Hook for components to access the auth context
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
 
-// Auth provider component
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+// Provider component that wraps the app and makes auth object available
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  // Check if the user is already logged in (via localStorage)
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Check for saved user on mount
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
     }
     setIsLoading(false);
   }, []);
 
-  // Simulated login function
+  // Login function
   const login = async (email: string, password: string) => {
-    setIsLoading(true);
-    return new Promise<void>((resolve, reject) => {
-      // Simulate API request
-      setTimeout(() => {
-        const foundUser = DEMO_USERS.find(u => u.email === email);
-        if (foundUser && password === 'password') { // For demo, any password works
-          setUser(foundUser);
-          localStorage.setItem('user', JSON.stringify(foundUser));
-          setIsLoading(false);
-          resolve();
-        } else {
-          setIsLoading(false);
-          reject(new Error('Invalid credentials'));
-        }
-      }, 1000);
-    });
+    // In a real app, this would validate credentials with a backend
+    if (password !== "password") {
+      throw new Error("Invalid credentials");
+    }
+
+    const foundUser = demoUsers.find(u => u.email === email);
+    if (!foundUser) {
+      throw new Error("User not found");
+    }
+    
+    // Set the user in state
+    setUser(foundUser);
+    
+    // Save to localStorage
+    localStorage.setItem("user", JSON.stringify(foundUser));
   };
 
-  // Simulated logout function
+  // Register function
+  const register = async (name: string, email: string, password: string, role: UserRole) => {
+    // In a real app, this would create a new user in a database
+    const newUser: User = {
+      id: `user-${Date.now()}`,
+      name,
+      email,
+      role
+    };
+    
+    // Set the user in state
+    setUser(newUser);
+    
+    // Save to localStorage
+    localStorage.setItem("user", JSON.stringify(newUser));
+  };
+
+  // Logout function
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
   };
 
-  // Simulated registration function
-  const register = async (name: string, email: string, password: string, role: UserRole) => {
-    setIsLoading(true);
-    return new Promise<void>((resolve, reject) => {
-      // Simulate API request
-      setTimeout(() => {
-        // Check if email already exists
-        const existingUser = DEMO_USERS.find(u => u.email === email);
-        if (existingUser) {
-          setIsLoading(false);
-          reject(new Error('Email already in use'));
-          return;
-        }
-
-        // Create a new user
-        const newUser: User = {
-          id: Date.now().toString(),
-          name,
-          email,
-          role,
-          avatar: `https://i.pravatar.cc/150?u=${Date.now()}`
-        };
-
-        // In a real app, you would send this to your backend
-        // For demo purposes, we'll just set it directly
-        setUser(newUser);
-        localStorage.setItem('user', JSON.stringify(newUser));
-        
-        setIsLoading(false);
-        resolve();
-      }, 1000);
-    });
+  // Value provided to consuming components
+  const value = {
+    user,
+    isAuthenticated: !!user,
+    login,
+    register,
+    logout
   };
-
+  
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, register }}>
-      {children}
+    <AuthContext.Provider value={value}>
+      {!isLoading && children}
     </AuthContext.Provider>
   );
-}
-
-// Custom hook to use the auth context
-export function useAuth() {
-  return useContext(AuthContext);
-}
+};

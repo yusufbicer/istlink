@@ -1,273 +1,172 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { 
-  Sidebar as ShadcnSidebar, 
-  SidebarContent, 
-  SidebarGroup, 
-  SidebarGroupContent, 
-  SidebarGroupLabel, 
-  SidebarMenu, 
-  SidebarMenuButton, 
-  SidebarMenuItem 
-} from "@/components/ui/sidebar";
 import { useAuth } from "@/lib/auth";
-import { 
-  HomeIcon, 
-  PackageIcon, 
-  UsersIcon, 
-  TruckIcon, 
-  ClipboardListIcon, 
-  SettingsIcon,
-  LayoutDashboardIcon,
-  LogOutIcon,
-  BarChart3Icon, 
-  MapPinIcon,
-  BoxesIcon,
-  CreditCardIcon,
-  StickyNoteIcon,
-  FileTextIcon,
+import {
+  Sidebar as SidebarComponent,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuLabel,
+  SidebarMenuTrigger,
+} from "@/components/ui/sidebar";
+import {
+  Package,
+  Users,
+  ShoppingBag,
+  Truck,
+  TrendingUp,
+  Settings,
+  LogOut,
+  Home,
+  UserCircle,
+  FileText,
+  GitMerge,
+  DollarSign,
+  User,
+  BarChart4,
+  HelpCircle,
   Zap,
-  Atom
+  Atom,
 } from "lucide-react";
-import { useState, useEffect } from "react";
 
-const Sidebar = () => {
-  const { user, logout } = useAuth();
+interface SidebarProps {
+  userRole?: 'importer' | 'supplier' | 'admin';
+}
+
+const Sidebar = ({ userRole = 'importer' }: SidebarProps) => {
+  const { logout, user } = useAuth();
   const location = useLocation();
-  const [mounted, setMounted] = useState(false);
 
-  // Prevent hydration issues
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const isActive = (path: string) => {
-    return location.pathname === path;
+  // Define menu items based on user role
+  const getMenuItems = () => {
+    switch (userRole) {
+      case 'admin':
+        return [
+          { icon: Home, label: "Dashboard", path: "/dashboard" },
+          { icon: Users, label: "Customers", path: "/dashboard/customers" },
+          { icon: ShoppingBag, label: "Suppliers", path: "/dashboard/suppliers" },
+          { icon: Package, label: "Orders", path: "/dashboard/orders" },
+          { icon: GitMerge, label: "Consolidations", path: "/dashboard/consolidations" },
+          { icon: Truck, label: "Shipping", path: "/dashboard/shipping" },
+          { icon: FileText, label: "Documents", path: "/dashboard/documents" },
+          { icon: DollarSign, label: "Payments", path: "/dashboard/payments" },
+          { icon: TrendingUp, label: "Analytics", path: "/dashboard/analytics" },
+          { icon: BarChart4, label: "Reports", path: "/dashboard/reports" },
+          { icon: Settings, label: "Settings", path: "/dashboard/settings" },
+        ];
+      case 'supplier':
+        return [
+          { icon: Home, label: "Dashboard", path: "/dashboard" },
+          { icon: Package, label: "Orders", path: "/dashboard/orders" },
+          { icon: Users, label: "Customers", path: "/dashboard/customers" },
+          { icon: FileText, label: "Documents", path: "/dashboard/documents" },
+          { icon: DollarSign, label: "Payments", path: "/dashboard/payments" },
+          { icon: TrendingUp, label: "Analytics", path: "/dashboard/analytics" },
+          { icon: Settings, label: "Settings", path: "/dashboard/settings" },
+        ];
+      case 'importer':
+      default:
+        return [
+          { icon: Home, label: "Dashboard", path: "/dashboard" },
+          { icon: Package, label: "Orders", path: "/dashboard/orders" },
+          { icon: ShoppingBag, label: "Suppliers", path: "/dashboard/suppliers" },
+          { icon: GitMerge, label: "Consolidations", path: "/dashboard/consolidations" },
+          { icon: Truck, label: "Shipping", path: "/dashboard/shipping" },
+          { icon: FileText, label: "Documents", path: "/dashboard/documents" },
+          { icon: DollarSign, label: "Payments", path: "/dashboard/payments" },
+          { icon: Settings, label: "Settings", path: "/dashboard/settings" },
+        ];
+    }
   };
 
+  const menuItems = getMenuItems();
+  
+  const isActive = (path: string) => location.pathname === path;
+  
   return (
-    <ShadcnSidebar>
-      <SidebarContent className="py-6">
-        <div className="flex flex-col h-full justify-between">
-          <div className="space-y-6">
-            {/* Brand Logo */}
-            <div className="px-6">
-              <Link to="/dashboard" className="flex items-center">
-                <div className="flex items-center">
-                  <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
-                    <Zap className="w-5 h-5 text-white absolute" />
-                    <Atom className="w-6 h-6 text-white/80 animate-pulse" />
-                  </div>
-                  <div className="ml-2">
-                    <span className="font-bold text-base text-gray-900">GROOP</span>
-                    <span className="block text-xs text-indigo-600 font-medium tracking-wide">BEYOND BORDERS</span>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            
-            {/* Main Navigation */}
-            <SidebarGroup>
-              <SidebarGroupLabel>Main</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard")}>
-                      <Link to="/dashboard">
-                        <LayoutDashboardIcon className="w-5 h-5" />
-                        <span>Dashboard</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  
-                  {/* Users/Customers - for Admin and Suppliers */}
-                  {(user?.role === "admin" || user?.role === "supplier") && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/users")}>
-                        <Link to="/dashboard/users">
-                          <UsersIcon className="w-5 h-5" />
-                          <span>{user?.role === "admin" ? "All Users" : "My Customers"}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
-                  
-                  {/* Suppliers - for Buyers and Admins */}
-                  {(user?.role === "buyer" || user?.role === "admin") && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/suppliers")}>
-                        <Link to="/dashboard/suppliers">
-                          <UsersIcon className="w-5 h-5" />
-                          <span>Suppliers</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
-                  
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/orders")}>
-                      <Link to="/dashboard/orders">
-                        <ClipboardListIcon className="w-5 h-5" />
-                        <span>Orders</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  
-                  {/* Notes - for all users */}
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/notes")}>
-                      <Link to="/dashboard/notes">
-                        <StickyNoteIcon className="w-5 h-5" />
-                        <span>Order Notes</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  
-                  {/* Consolidations - for Admin and Buyers */}
-                  {(user?.role === "buyer" || user?.role === "admin") && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/consolidations")}>
-                        <Link to="/dashboard/consolidations">
-                          <BoxesIcon className="w-5 h-5" />
-                          <span>Consolidations</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
-                  
-                  {/* Payment Info - visible to all users */}
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/payments")}>
-                      <Link to="/dashboard/payments">
-                        <CreditCardIcon className="w-5 h-5" />
-                        <span>Payment Info</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  
-                  {(user?.role === "buyer" || user?.role === "admin") && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/shipping")}>
-                        <Link to="/dashboard/shipping">
-                          <TruckIcon className="w-5 h-5" />
-                          <span>Shipping</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
-
-                  {user?.role === "supplier" && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/products")}>
-                        <Link to="/dashboard/products">
-                          <PackageIcon className="w-5 h-5" />
-                          <span>Products</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
-                  
-                  {/* Blog Management - Admin only */}
-                  {user?.role === "admin" && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/blog-management")}>
-                        <Link to="/dashboard/blog-management">
-                          <FileTextIcon className="w-5 h-5" />
-                          <span>Blog Management</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-
-            {/* Admin Navigation */}
-            {user?.role === "admin" && (
-              <SidebarGroup>
-                <SidebarGroupLabel>Admin</SidebarGroupLabel>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/analytics")}>
-                        <Link to="/dashboard/analytics">
-                          <BarChart3Icon className="w-5 h-5" />
-                          <span>Analytics</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/tracking")}>
-                        <Link to="/dashboard/tracking">
-                          <MapPinIcon className="w-5 h-5" />
-                          <span>Tracking</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </SidebarGroup>
-            )}
-          </div>
-          
-          {/* Bottom Navigation */}
-          <div className="space-y-6">
-            <SidebarGroup>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/settings")}>
-                      <Link to="/dashboard/settings">
-                        <SettingsIcon className="w-5 h-5" />
-                        <span>Settings</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild onClick={() => logout()}>
-                      <button className="w-full flex items-center">
-                        <LogOutIcon className="w-5 h-5" />
-                        <span>Logout</span>
-                      </button>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-            
-            {/* User Info */}
-            {user && (
-              <div className="px-6 py-4">
-                <div className="flex items-center space-x-3">
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      {user.avatar ? (
-                        <img 
-                          src={user.avatar} 
-                          alt={user.name} 
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
-                      ) : (
-                        <span className="text-blue-600 font-medium">
-                          {user.name.charAt(0)}
-                        </span>
-                      )}
-                    </div>
-                    <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-500 border-2 border-white"></div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{user.name}</p>
-                    <p className="text-xs text-muted-foreground capitalize">{user.role}</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+    <SidebarComponent>
+      <SidebarHeader className="py-4 px-3 flex flex-col items-center justify-center border-b">
+        <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
+          <Zap className="w-5 h-5 text-white absolute" />
+          <Atom className="w-6 h-6 text-white/80 animate-pulse" />
+        </div>
+        <div className="mt-2 text-center">
+          <span className="font-bold text-lg text-gray-900">GROOP</span>
+          <span className="block text-xs text-indigo-600 font-medium tracking-wide">BEYOND BORDERS</span>
+        </div>
+      </SidebarHeader>
+      
+      <SidebarContent className="py-4 px-3">
+        <SidebarMenu>
+          <SidebarMenuLabel>Menu</SidebarMenuLabel>
+          {menuItems.map((item) => (
+            <SidebarMenuItem key={item.path}>
+              <SidebarMenuTrigger asChild active={isActive(item.path)}>
+                <Link to={item.path} className="flex items-center space-x-3">
+                  <item.icon className="h-5 w-5" />
+                  <span>{item.label}</span>
+                </Link>
+              </SidebarMenuTrigger>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+        
+        <div className="mt-6">
+          <SidebarMenu>
+            <SidebarMenuLabel>Account</SidebarMenuLabel>
+            <SidebarMenuItem>
+              <SidebarMenuTrigger asChild>
+                <Link to="/dashboard/profile" className="flex items-center space-x-3">
+                  <UserCircle className="h-5 w-5" />
+                  <span>Profile</span>
+                </Link>
+              </SidebarMenuTrigger>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuTrigger asChild>
+                <Link to="/dashboard/help" className="flex items-center space-x-3">
+                  <HelpCircle className="h-5 w-5" />
+                  <span>Help & Support</span>
+                </Link>
+              </SidebarMenuTrigger>
+            </SidebarMenuItem>
+          </SidebarMenu>
         </div>
       </SidebarContent>
-    </ShadcnSidebar>
+      
+      <SidebarFooter className="p-3 border-t">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            {user?.image ? (
+              <img
+                src={user.image}
+                alt={user.name || "User"}
+                className="h-8 w-8 rounded-full object-cover"
+              />
+            ) : (
+              <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
+                <User className="h-5 w-5 text-gray-500" />
+              </div>
+            )}
+            <div className="flex flex-col">
+              <span className="text-sm font-medium">{user?.name || "User"}</span>
+              <span className="text-xs text-muted-foreground">
+                {userRole.charAt(0).toUpperCase() + userRole.slice(1)}
+              </span>
+            </div>
+          </div>
+          
+          <button
+            onClick={() => logout()}
+            className="p-1.5 rounded-md text-gray-500 hover:text-red-600 hover:bg-red-50"
+          >
+            <LogOut className="h-5 w-5" />
+          </button>
+        </div>
+      </SidebarFooter>
+    </SidebarComponent>
   );
 };
 

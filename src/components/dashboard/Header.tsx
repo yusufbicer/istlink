@@ -16,7 +16,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const Header = () => {
+interface HeaderProps {
+  userRole?: 'importer' | 'supplier' | 'admin';
+}
+
+const Header = ({ userRole = 'importer' }: HeaderProps) => {
   const { user, logout } = useAuth();
   const [greeting, setGreeting] = useState('');
   const isMobile = useIsMobile();
@@ -41,10 +45,10 @@ const Header = () => {
           
           <div className="hidden md:block max-w-[200px] lg:max-w-[calc(100vw-900px)] overflow-hidden pr-2">
             <h1 className="text-xl font-semibold truncate">
-              {greeting}, {user?.name.split(' ')[0]}
+              {greeting}, {user?.name?.split(' ')[0]}
             </h1>
             <p className="text-sm text-muted-foreground truncate">
-              {isTablet ? "Welcome to your dashboard" : "Here's what's happening with your account today."}
+              {isTablet ? `${userRole.charAt(0).toUpperCase() + userRole.slice(1)} Dashboard` : `Welcome to your ${userRole} dashboard.`}
             </p>
           </div>
         </div>
@@ -115,16 +119,16 @@ const Header = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                {user?.avatar ? (
+                {user?.image ? (
                   <img 
-                    src={user.avatar} 
-                    alt={user.name} 
+                    src={user.image} 
+                    alt={user.name || "User"} 
                     className="h-8 w-8 rounded-full object-cover"
                   />
                 ) : (
                   <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
                     <span className="text-blue-600 font-medium">
-                      {user?.name.charAt(0)}
+                      {user?.name?.charAt(0) || "U"}
                     </span>
                   </div>
                 )}

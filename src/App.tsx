@@ -29,7 +29,14 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/blog" element={<Blog />} />
+            
+            {/* Dashboard routes - all handled by the Dashboard component with proper role detection */}
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/importer" element={<Dashboard />} />
+            <Route path="/dashboard/supplier" element={<Dashboard />} />
+            <Route path="/dashboard/admin" element={<Dashboard />} />
+            
+            {/* Sub-routes - the Dashboard component will handle the proper views */}
             <Route path="/dashboard/suppliers" element={<Dashboard />} />
             <Route path="/dashboard/orders" element={<Dashboard />} />
             <Route path="/dashboard/shipping" element={<Dashboard />} />
@@ -41,7 +48,13 @@ const App = () => (
             <Route path="/dashboard/notes" element={<Dashboard />} />
             <Route path="/dashboard/consolidations" element={<Dashboard />} />
             <Route path="/dashboard/payments" element={<Dashboard />} />
+            <Route path="/dashboard/customers" element={<Dashboard />} />
+            <Route path="/dashboard/documents" element={<Dashboard />} />
+            <Route path="/dashboard/reports" element={<Dashboard />} />
+            <Route path="/dashboard/profile" element={<Dashboard />} />
+            <Route path="/dashboard/help" element={<Dashboard />} />
             <Route path="/dashboard/blog-management" element={<BlogManagement />} />
+            
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

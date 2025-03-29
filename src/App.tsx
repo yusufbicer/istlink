@@ -11,8 +11,6 @@ import WhatsAppButton from "@/components/common/WhatsAppButton";
 
 // Pages
 import Index from "./pages/Index";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 
@@ -27,8 +25,6 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

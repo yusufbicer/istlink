@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { CheckCircle2, FileText, FileCheck, Ship, Receipt, Users, Wallet } from 'lucide-react';
 
 interface Step {
-  icon: any;
+  icon: React.ComponentType<any>;
   title: string;
   description: string;
 }
@@ -48,6 +48,7 @@ const steps: Step[] = [
 
 const HowItWorks = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeStep, setActiveStep] = useState<number | null>(null);
   const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -72,7 +73,7 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section id="how-it-works" className="py-20 bg-gray-100">
+    <section id="how-it-works" className="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
@@ -94,9 +95,9 @@ const HowItWorks = () => {
         <div className="max-w-5xl mx-auto">
           <div className="relative">
             {/* Connecting line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-indigo-100 transform -translate-x-1/2 z-0"></div>
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-indigo-200 transform -translate-x-1/2 z-0"></div>
             
-            {/* Steps */}
+            {/* Conversation Steps */}
             <div className="space-y-12 relative z-10">
               {steps.map((step, index) => {
                 const [stepVisible, setStepVisible] = useState(false);
@@ -125,6 +126,7 @@ const HowItWorks = () => {
 
                 const delay = 100 + (index * 150);
                 const isOdd = index % 2 === 1;
+                const StepIcon = step.icon;
 
                 return (
                   <div 
@@ -134,24 +136,57 @@ const HowItWorks = () => {
                       stepVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
                     style={{ transitionDelay: `${delay}ms` }}
+                    onMouseEnter={() => setActiveStep(index)}
+                    onMouseLeave={() => setActiveStep(null)}
                   >
-                    {/* Icon with number */}
+                    {/* Icon circle */}
                     <div className="flex-shrink-0 relative z-10">
-                      <div className="w-12 h-12 rounded-full bg-white border border-indigo-100 flex items-center justify-center shadow-sm">
-                        <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center">
-                          <step.icon className="h-5 w-5 text-indigo-600" />
+                      <div 
+                        className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          activeStep === index ? 'bg-indigo-500 text-white scale-110' : 'bg-white border border-indigo-100 text-indigo-500'
+                        }`}
+                      >
+                        <StepIcon className="h-5 w-5" />
+                        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+                          <span className={`text-xs font-bold ${activeStep === index ? 'text-white' : 'text-indigo-500'}`}>
+                            {index + 1}
+                          </span>
                         </div>
-                      </div>
-                      <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-                        <span className="text-xs font-bold text-indigo-600">{index + 1}</span>
                       </div>
                     </div>
                     
                     {/* Content */}
-                    <div className={`mt-4 md:mt-0 ${isOdd ? 'md:mr-6 md:text-right' : 'md:ml-6'} md:w-5/12`}>
-                      <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
-                        <h3 className="font-bold text-lg text-gray-900 mb-2">{step.title}</h3>
-                        <p className="text-gray-600">{step.description}</p>
+                    <div 
+                      className={`mt-4 md:mt-0 ${isOdd ? 'md:mr-6 md:text-right' : 'md:ml-6'} md:w-5/12`}
+                    >
+                      <div 
+                        className={`p-5 rounded-lg transition-all duration-300 ${
+                          activeStep === index 
+                            ? 'bg-indigo-50 border border-indigo-100 shadow-md transform -translate-y-1' 
+                            : 'bg-white border border-gray-100 shadow-sm'
+                        }`}
+                      >
+                        <div className="flex items-center mb-1">
+                          {!isOdd && (
+                            <div className="mr-2">
+                              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                <span className="text-xs text-blue-600">YOU</span>
+                              </div>
+                            </div>
+                          )}
+                          <h3 className="font-bold text-lg text-gray-900">{isOdd ? "Our Response:" : "You Ask:"}</h3>
+                          {isOdd && (
+                            <div className="ml-2">
+                              <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
+                                <span className="text-xs text-indigo-600">US</span>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        <div className="mt-2">
+                          <h4 className="font-semibold text-md">{step.title}</h4>
+                          <p className={`mt-1 text-sm ${isOdd ? 'text-indigo-700' : 'text-gray-600'}`}>{step.description}</p>
+                        </div>
                       </div>
                     </div>
                   </div>

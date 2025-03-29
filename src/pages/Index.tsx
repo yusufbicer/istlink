@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Header from '@/components/landing/Header';
-import Hero from '@/components/landing/Hero';
+import SimplifiedHero from '@/components/landing/SimplifiedHero';
 import Features from '@/components/landing/Features';
 import HowItWorks from '@/components/landing/HowItWorks';
 import Footer from '@/components/landing/Footer';
@@ -23,10 +23,8 @@ const Index = () => {
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
       <main className="flex-grow">
-        <Hero />
+        <SimplifiedHero />
         <Features />
-        
-        {/* How It Works Section - Now imported as a component */}
         <HowItWorks />
         
         {/* Blog Preview Section */}

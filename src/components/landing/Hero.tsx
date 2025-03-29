@@ -114,9 +114,9 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Navigation Tabs in two rows */}
-                      <div className="flex flex-col gap-1 flex-1 overflow-x-hidden">
-                        <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-none">
+                      {/* Navigation Tabs - Explicitly in two rows with equal width items */}
+                      <div className="flex flex-col gap-1 flex-1 overflow-hidden">
+                        <div className="flex gap-1 justify-between w-full">
                           <div className="flex items-center px-2 py-1 bg-indigo-600 rounded-full text-[10px] font-medium whitespace-nowrap">
                             <Activity className="h-3 w-3 mr-1" /> Overview
                           </div>
@@ -127,7 +127,7 @@ const Hero = () => {
                             <GitMerge className="h-3 w-3 mr-1" /> Consol
                           </div>
                         </div>
-                        <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-none">
+                        <div className="flex gap-1 justify-between w-full">
                           <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
                             <Network className="h-3 w-3 mr-1" /> Supply
                           </div>
@@ -425,7 +425,7 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Consolidation Data and Updated Payment Status with fixed vertical overflow */}
+                        {/* Consolidation Data and Updated Payment Status - Revised with grid layout */}
                         <div className="grid grid-cols-2 gap-4">
                           <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                             <div className="font-medium mb-3">Active Consolidations</div>
@@ -445,33 +445,29 @@ const Hero = () => {
                             </div>
                           </div>
                           
-                          {/* Fixed Account Balance section with 2% fee - fixed overflow */}
+                          {/* Revised Account Balance section with 2-column grid layout */}
                           <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                             <div className="font-medium mb-3">Account Balance & Payments</div>
                             <div className="flex flex-col h-32"> 
-                              <div className="flex items-center justify-between mb-3">
-                                <div className="flex flex-col">
-                                  <span className="text-sm">Total Value</span>
-                                  <span className="text-lg font-bold">$185,000</span>
+                              <div className="grid grid-cols-2 gap-4 mb-3">
+                                <div>
+                                  <div className="text-sm">Total Value</div>
+                                  <div className="text-lg font-bold">$185,000</div>
                                 </div>
-                                <div className="flex flex-col items-end">
-                                  <span className="text-sm">Account Balance</span>
-                                  <span className="text-lg font-bold text-green-400">$69,000</span>
+                                <div className="text-right">
+                                  <div className="text-sm">Account Balance</div>
+                                  <div className="text-lg font-bold text-green-400">$69,000</div>
                                 </div>
                               </div>
-                              <div className="space-y-1 overflow-y-auto max-h-16">
-                                <div className="flex justify-between items-center">
-                                  <span className="text-sm">Paid to Suppliers</span>
-                                  <span className="text-sm font-medium text-green-400">$112,300</span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                  <span className="text-sm">Service Fee (2%)</span>
-                                  <span className="text-sm font-medium text-blue-400">$3,700</span>
-                                </div>
-                                <div className="flex justify-between items-center pt-1 border-t border-gray-700 mt-1">
-                                  <span className="text-sm">Available for Orders</span>
-                                  <span className="text-sm font-medium text-indigo-400">$69,000</span>
-                                </div>
+                              <div className="grid grid-cols-2 gap-2 text-sm">
+                                <div>Paid to Suppliers</div>
+                                <div className="text-right text-green-400">$112,300</div>
+                                
+                                <div>Service Fee (2%)</div>
+                                <div className="text-right text-blue-400">$3,700</div>
+                                
+                                <div className="pt-1 border-t border-gray-700 mt-1">Available for Orders</div>
+                                <div className="text-right pt-1 border-t border-gray-700 mt-1 text-indigo-400">$69,000</div>
                               </div>
                             </div>
                           </div>

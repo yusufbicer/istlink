@@ -80,12 +80,12 @@ const Hero = () => {
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
           }`}
         >
-          <div className="relative overflow-hidden shadow-2xl rounded-xl">
-            {/* Fixed border styling with consistent rounded corners */}
+          <div className="relative overflow-hidden rounded-xl shadow-2xl">
+            {/* Consistent border styling with fixed rounded corners */}
             <div className="bg-gradient-to-r from-indigo-500 to-blue-500 p-0.5 rounded-xl">
               
               {/* Dashboard with glass effect */}
-              <div className="rounded-xl overflow-hidden glass border-0">
+              <div className="rounded-xl overflow-hidden bg-gray-900 border-0">
                 {/* Mockup of the dashboard */}
                 <div className="relative bg-gray-900 px-2 pt-2 pb-1 flex items-center rounded-t-xl">
                   <div className="flex space-x-1.5 absolute left-4">
@@ -99,10 +99,10 @@ const Hero = () => {
                 </div>
                 
                 {isMobile ? (
-                  // Enhanced Mobile-optimized dashboard with improved layout
-                  <div className="bg-gray-900 text-white p-4">
-                    {/* Mobile Dashboard Header - Nav Tabs instead of sidebar */}
-                    <div className="flex items-center justify-between mb-4">
+                  // Enhanced Mobile-optimized dashboard with improved layout and space usage
+                  <div className="bg-gray-900 text-white p-3">
+                    {/* Mobile Dashboard Header - Optimized with logo and nav in single row */}
+                    <div className="flex items-center space-x-2 mb-3">
                       <div className="flex items-center space-x-2">
                         <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
                           <Zap className="w-4 h-4 text-white absolute" />
@@ -110,47 +110,32 @@ const Hero = () => {
                         </div>
                         <div>
                           <div className="font-bold text-white text-sm">GROOP</div>
-                          <div className="text-xs text-indigo-400">BEYOND BORDERS</div>
+                          <div className="text-xs text-indigo-400">BEYOND</div>
                         </div>
                       </div>
-                      <div className="flex space-x-1">
-                        <div className="w-7 h-7 rounded-full bg-gray-800 flex items-center justify-center">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 5V19M5 12H19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                      
+                      {/* Navigation Tabs all in one row - removed + and hamburger icons */}
+                      <div className="flex gap-1 flex-1 overflow-x-auto pb-1 scrollbar-none">
+                        <div className="flex items-center px-2 py-1 bg-indigo-600 rounded-full text-[10px] font-medium whitespace-nowrap">
+                          <Activity className="h-3 w-3 mr-1" /> Overview
                         </div>
-                        <div className="w-7 h-7 rounded-full bg-gray-800 flex items-center justify-center">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 6h16M4 12h16M4 18h16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                        <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
+                          <Package className="h-3 w-3 mr-1" /> Orders
+                        </div>
+                        <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
+                          <GitMerge className="h-3 w-3 mr-1" /> Consol
+                        </div>
+                        <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
+                          <Network className="h-3 w-3 mr-1" /> Supply
                         </div>
                       </div>
                     </div>
                     
-                    {/* Navigation Tabs for Mobile - two rows if needed */}
-                    <div className="flex flex-wrap gap-2 py-2 mb-3">
-                      <div className="flex items-center px-3 py-1.5 bg-indigo-600 rounded-full text-xs font-medium whitespace-nowrap">
-                        <Activity className="h-3 w-3 mr-1" /> Overview
-                      </div>
-                      <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
-                        <Package className="h-3 w-3 mr-1" /> Orders
-                      </div>
-                      <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
-                        <GitMerge className="h-3 w-3 mr-1" /> Consolidations
-                      </div>
-                      <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
-                        <TrendingUp className="h-3 w-3 mr-1" /> Analytics
-                      </div>
-                      <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
-                        <Network className="h-3 w-3 mr-1" /> Suppliers
-                      </div>
-                    </div>
-                    
-                    {/* Mobile Dashboard Content */}
-                    <div className="space-y-3">
+                    {/* Mobile Dashboard Content - More compact layout */}
+                    <div className="space-y-2">
                       {/* Stats Cards */}
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-400 text-xs">Orders</span>
                             <span className="text-indigo-400"><Package className="h-3 w-3" /></span>
@@ -161,7 +146,7 @@ const Hero = () => {
                             <span>Active</span>
                           </div>
                         </div>
-                        <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-400 text-xs">Consolidations</span>
                             <span className="text-indigo-400"><GitMerge className="h-3 w-3" /></span>
@@ -174,69 +159,75 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Efficiency Metrics for Mobile - Downsized version */}
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
-                          <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs font-medium">Space Used</span>
+                      {/* Efficiency Metrics for Mobile - More compact */}
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-[10px] font-medium">Space</span>
                             <Truck className="h-3 w-3 text-blue-400" />
                           </div>
-                          <div className="text-center mb-1">
-                            <div className="text-xl font-bold">92%</div>
-                            <div className="text-xs text-green-400">Optimized</div>
+                          <div className="text-center">
+                            <div className="text-lg font-bold">92%</div>
+                            <div className="text-[10px] text-green-400">Saved</div>
                           </div>
                         </div>
-                        <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
-                          <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs font-medium">Cost Saved</span>
+                        <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-[10px] font-medium">Cost</span>
                             <DollarSign className="h-3 w-3 text-green-400" />
                           </div>
-                          <div className="text-center mb-1">
-                            <div className="text-xl font-bold">35%</div>
-                            <div className="text-xs text-green-400">Reduced</div>
+                          <div className="text-center">
+                            <div className="text-lg font-bold">35%</div>
+                            <div className="text-[10px] text-green-400">Saved</div>
+                          </div>
+                        </div>
+                        <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-[10px] font-medium">Time</span>
+                            <FileText className="h-3 w-3 text-blue-400" />
+                          </div>
+                          <div className="text-center">
+                            <div className="text-lg font-bold">68%</div>
+                            <div className="text-[10px] text-blue-400">Faster</div>
                           </div>
                         </div>
                       </div>
                       
-                      {/* Improved Mobile Account Balance - More compact */}
-                      <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                      {/* More compact Account Balance Section */}
+                      <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-xs font-medium">Account Balance</span>
-                          <DollarSign className="h-3 w-3 text-green-400" />
+                          <span className="text-lg font-bold text-green-400">$69,000</span>
                         </div>
-                        <div className="grid grid-cols-2 gap-x-2 gap-y-1 mb-1 text-xs">
+                        <div className="grid grid-cols-3 gap-x-1 gap-y-1 text-[10px]">
                           <div>Total Value:</div>
-                          <div className="text-right font-medium">$185,000</div>
-                          <div>Paid to Suppliers:</div>
-                          <div className="text-right">$112,300</div>
-                          <div>Service Fee (2%):</div>
-                          <div className="text-right">$3,700</div>
-                        </div>
-                        <div className="flex justify-between items-center pt-1 border-t border-gray-700">
-                          <span className="text-xs">Available Balance:</span>
-                          <span className="text-sm font-bold text-green-400">$69,000</span>
+                          <div className="text-right col-span-2">$185,000</div>
+                          <div>To Suppliers:</div>
+                          <div className="text-right col-span-2">$112,300</div>
+                          <div>Fee (2%):</div>
+                          <div className="text-right col-span-2">$3,700</div>
                         </div>
                       </div>
                       
-                      {/* Active Consolidations (instead of Recent Updates) */}
-                      <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
-                        <div className="text-xs font-medium mb-2">Active Consolidations</div>
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center p-2 bg-gray-700 rounded text-xs">
+                      {/* Active Consolidations */}
+                      <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
+                        <div className="text-xs font-medium mb-1">Active Consolidations</div>
+                        <div className="space-y-1">
+                          <div className="flex justify-between items-center p-1.5 bg-gray-700 rounded text-[10px]">
                             <span>CON-2023-1458</span>
-                            <span className="px-1.5 py-0.5 text-[10px] rounded-full bg-green-900 text-green-300">Ready to Ship</span>
+                            <span className="px-1.5 py-0.5 text-[8px] rounded-full bg-green-900 text-green-300">Ready</span>
                           </div>
-                          <div className="flex justify-between items-center p-2 bg-gray-700 rounded text-xs">
+                          <div className="flex justify-between items-center p-1.5 bg-gray-700 rounded text-[10px]">
                             <span>CON-2023-1457</span>
-                            <span className="px-1.5 py-0.5 text-[10px] rounded-full bg-blue-900 text-blue-300">Consolidating</span>
+                            <span className="px-1.5 py-0.5 text-[8px] rounded-full bg-blue-900 text-blue-300">In Progress</span>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 ) : (
-                  // Reduced size Desktop dashboard (1cm less)
-                  <div className="bg-gray-900 text-white" style={{ transform: 'scale(0.96)', transformOrigin: 'top center' }}>
+                  // Desktop dashboard with navigation moved next to logo
+                  <div className="bg-gray-900 text-white">
                     {/* Dashboard content */}
                     <div className="grid grid-cols-12 gap-4 p-6 bg-gray-900">
                       {/* Reorganized Header with logo and navigation tabs on same line */}

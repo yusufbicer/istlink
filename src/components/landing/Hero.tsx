@@ -74,7 +74,7 @@ const Hero = () => {
           </div>
         </div>
         
-        {/* Mobile-friendly Dashboard Preview with more vertical space */}
+        {/* Dashboard Preview with reduced size for desktop */}
         <div 
           className={`mt-12 relative mx-auto max-w-5xl transition-all duration-1000 delay-500 transform ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
@@ -99,7 +99,7 @@ const Hero = () => {
               </div>
               
               {isMobile ? (
-                // Enhanced Mobile-optimized dashboard with more vertical space
+                // Enhanced Mobile-optimized dashboard with improved layout
                 <div className="bg-gray-900 text-white p-4">
                   {/* Mobile Dashboard Header - Nav Tabs instead of sidebar */}
                   <div className="flex items-center justify-between mb-4">
@@ -127,8 +127,8 @@ const Hero = () => {
                     </div>
                   </div>
                   
-                  {/* Navigation Tabs for Mobile */}
-                  <div className="flex overflow-x-auto space-x-2 py-2 mb-3 scrollbar-hide">
+                  {/* Navigation Tabs for Mobile - two rows if needed */}
+                  <div className="flex flex-wrap gap-2 py-2 mb-3">
                     <div className="flex items-center px-3 py-1.5 bg-indigo-600 rounded-full text-xs font-medium whitespace-nowrap">
                       <Activity className="h-3 w-3 mr-1" /> Overview
                     </div>
@@ -140,6 +140,9 @@ const Hero = () => {
                     </div>
                     <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
                       <TrendingUp className="h-3 w-3 mr-1" /> Analytics
+                    </div>
+                    <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
+                      <Network className="h-3 w-3 mr-1" /> Suppliers
                     </div>
                   </div>
                   
@@ -171,71 +174,52 @@ const Hero = () => {
                       </div>
                     </div>
                     
-                    {/* Improved Mobile Consolidation Visual - Taller for more vertical space */}
-                    <div className="bg-gray-800 p-3 rounded-lg border border-gray-700 h-72 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute top-2 left-2 right-2 flex justify-between items-center">
-                        <span className="text-xs font-medium">Consolidation Efficiency</span>
+                    {/* Efficiency Metrics for Mobile - Downsized version */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-xs font-medium">Space Used</span>
+                          <Truck className="h-3 w-3 text-blue-400" />
+                        </div>
+                        <div className="text-center mb-1">
+                          <div className="text-xl font-bold">92%</div>
+                          <div className="text-xs text-green-400">Optimized</div>
+                        </div>
                       </div>
-                      
-                      {/* Consolidation Process Visualization */}
-                      <svg className="w-full h-full" viewBox="0 0 200 180">
-                        {/* Connection lines */}
-                        <line x1="50" y1="90" x2="100" y2="40" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="50" y1="90" x2="100" y2="90" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="50" y1="90" x2="100" y2="140" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="100" y1="40" x2="150" y2="90" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="100" y1="90" x2="150" y2="90" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="100" y1="140" x2="150" y2="90" stroke="#4F46E5" strokeWidth="1" />
-                        <line x1="150" y1="90" x2="200" y2="90" stroke="#4F46E5" strokeWidth="1" />
-                        
-                        {/* Pulse animations */}
-                        <circle r="2" fill="#60A5FA">
-                          <animateMotion path="M50,90 L100,40" dur="3s" repeatCount="indefinite" />
-                        </circle>
-                        <circle r="2" fill="#60A5FA">
-                          <animateMotion path="M50,90 L100,90" dur="2s" repeatCount="indefinite" />
-                        </circle>
-                        <circle r="2" fill="#60A5FA">
-                          <animateMotion path="M100,90 L150,90" dur="2.5s" repeatCount="indefinite" />
-                        </circle>
-                        <circle r="2" fill="#60A5FA">
-                          <animateMotion path="M150,90 L200,90" dur="3s" repeatCount="indefinite" />
-                        </circle>
-                        
-                        {/* Connection nodes with icons */}
-                        <circle cx="50" cy="90" r="10" fill="#4F46E5" />
-                        <circle cx="50" cy="90" r="5" fill="#818CF8" />
-                        
-                        <circle cx="100" cy="40" r="8" fill="#4F46E5" />
-                        <circle cx="100" cy="40" r="4" fill="#818CF8" />
-                        
-                        <circle cx="100" cy="90" r="8" fill="#4F46E5" />
-                        <circle cx="100" cy="90" r="4" fill="#818CF8" />
-                        
-                        <circle cx="100" cy="140" r="8" fill="#4F46E5" />
-                        <circle cx="100" cy="140" r="4" fill="#818CF8" />
-                        
-                        <circle cx="150" cy="90" r="10" fill="#4F46E5" />
-                        <circle cx="150" cy="90" r="5" fill="#818CF8" />
-                        
-                        <circle cx="200" cy="90" r="10" fill="#4F46E5" />
-                        <circle cx="200" cy="90" r="5" fill="#818CF8" />
-                        
-                        {/* Labels - Positioned for better visibility */}
-                        <text x="50" y="110" fill="white" fontSize="8" textAnchor="middle">Importers</text>
-                        <text x="100" y="30" fill="white" fontSize="7" textAnchor="middle">Supplier A</text>
-                        <text x="100" y="80" fill="white" fontSize="7" textAnchor="middle">Supplier B</text>
-                        <text x="100" y="150" fill="white" fontSize="7" textAnchor="middle">Supplier C</text>
-                        <text x="150" y="110" fill="white" fontSize="8" textAnchor="middle">Consolidation</text>
-                        <text x="200" y="110" fill="white" fontSize="8" textAnchor="middle">Shipping</text>
-                      </svg>
+                      <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-xs font-medium">Cost Saved</span>
+                          <DollarSign className="h-3 w-3 text-green-400" />
+                        </div>
+                        <div className="text-center mb-1">
+                          <div className="text-xl font-bold">35%</div>
+                          <div className="text-xs text-green-400">Reduced</div>
+                        </div>
+                      </div>
                     </div>
                     
-                    {/* Account Balance */}
+                    {/* Improved Mobile Account Balance */}
                     <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
-                      <div className="text-xs font-medium mb-2">Account Balance</div>
-                      <div className="text-xl font-bold text-green-400">$154,370</div>
-                      <div className="text-xs text-gray-400">After 3% service fee</div>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-xs font-medium">Account Balance</span>
+                        <DollarSign className="h-3 w-3 text-green-400" />
+                      </div>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs">Total Value:</span>
+                        <span className="text-sm font-bold">$185,000</span>
+                      </div>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs">Paid to Suppliers:</span>
+                        <span className="text-sm">$112,300</span>
+                      </div>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs">Service Fee (2%):</span>
+                        <span className="text-sm">$3,700</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-1 border-t border-gray-700">
+                        <span className="text-xs">Available Balance:</span>
+                        <span className="text-sm font-bold text-green-400">$69,000</span>
+                      </div>
                     </div>
                     
                     {/* Activity List */}
@@ -255,13 +239,14 @@ const Hero = () => {
                   </div>
                 </div>
               ) : (
-                // Desktop dashboard content with updated payment status
-                <div className="bg-gray-900 text-white">
+                // Reduced size Desktop dashboard (1cm less)
+                <div className="bg-gray-900 text-white" style={{ transform: 'scale(0.96)', transformOrigin: 'top center' }}>
                   {/* Dashboard content */}
                   <div className="grid grid-cols-12 gap-4 p-6 bg-gray-900">
-                    {/* Navigation Tabs instead of Sidebar */}
+                    {/* Navigation Tabs with optimized layout */}
                     <div className="col-span-12 mb-4">
-                      <div className="flex items-center justify-between mb-4">
+                      {/* Header with logo alongside navigation */}
+                      <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center">
                           <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
                             <Zap className="w-5 h-5 text-white absolute" />
@@ -287,8 +272,13 @@ const Hero = () => {
                           <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-sm font-medium">JD</div>
                         </div>
                       </div>
+                      
+                      {/* Navigation tabs with GROOP logo + Overview together */}
                       <div className="flex space-x-2 mb-2">
                         <div className="flex items-center px-4 py-2 bg-indigo-600 rounded-lg text-sm font-medium">
+                          <div className="flex items-center space-x-1 mr-1">
+                            <Atom className="h-3 w-3" />
+                          </div>
                           <Activity className="h-4 w-4 mr-2" /> Overview
                         </div>
                         <div className="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm font-medium cursor-pointer">
@@ -346,7 +336,7 @@ const Hero = () => {
                       </div>
                       
                       {/* Consolidation Efficiency Metrics */}
-                      <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-64 relative">
+                      <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-60 relative">
                         <div className="flex justify-between items-center mb-4">
                           <span className="font-medium">Consolidation Efficiency Metrics</span>
                           <div className="flex space-x-2">
@@ -364,7 +354,7 @@ const Hero = () => {
                         </div>
                         
                         {/* Updated Consolidation Efficiency Visualization */}
-                        <div className="grid grid-cols-5 gap-4 h-48">
+                        <div className="grid grid-cols-5 gap-4 h-44">
                           {/* Container Space Utilization */}
                           <div className="col-span-2 bg-gray-700 rounded-lg p-3 flex flex-col justify-between">
                             <div className="flex justify-between items-center">
@@ -441,7 +431,7 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Consolidation Data and Updated Payment Status */}
+                      {/* Consolidation Data and Updated Payment Status with fixed vertical overflow */}
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                           <div className="font-medium mb-3">Active Consolidations</div>
@@ -460,17 +450,19 @@ const Hero = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
-                          <div className="font-medium mb-2">Account Balance & Payments</div>
-                          <div className="h-32 w-full">
-                            <div className="flex items-center justify-between mb-4">
+                        
+                        {/* Fixed Account Balance section with 2% fee */}
+                        <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44 overflow-hidden">
+                          <div className="font-medium mb-3">Account Balance & Payments</div>
+                          <div className="flex flex-col h-36">
+                            <div className="flex items-center justify-between mb-3">
                               <div className="flex flex-col">
                                 <span className="text-sm">Total Value</span>
                                 <span className="text-lg font-bold">$185,000</span>
                               </div>
                               <div className="flex flex-col items-end">
                                 <span className="text-sm">Account Balance</span>
-                                <span className="text-lg font-bold text-green-400">$72,470</span>
+                                <span className="text-lg font-bold text-green-400">$69,000</span>
                               </div>
                             </div>
                             <div className="space-y-2">
@@ -479,12 +471,12 @@ const Hero = () => {
                                 <span className="text-sm font-medium text-green-400">$112,300</span>
                               </div>
                               <div className="flex justify-between items-center">
-                                <span className="text-sm">Service Fee (3%)</span>
-                                <span className="text-sm font-medium text-blue-400">$5,550</span>
+                                <span className="text-sm">Service Fee (2%)</span>
+                                <span className="text-sm font-medium text-blue-400">$3,700</span>
                               </div>
-                              <div className="flex justify-between items-center">
+                              <div className="flex justify-between items-center pt-2 border-t border-gray-700 mt-2">
                                 <span className="text-sm">Available for Orders</span>
-                                <span className="text-sm font-medium text-indigo-400">$67,150</span>
+                                <span className="text-sm font-medium text-indigo-400">$69,000</span>
                               </div>
                             </div>
                           </div>

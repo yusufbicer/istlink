@@ -81,11 +81,11 @@ const Hero = () => {
           }`}
         >
           <div className="relative rounded-xl overflow-hidden shadow-2xl">
-            {/* Gradient border effect */}
-            <div className="absolute inset-0 p-0.5 rounded-xl bg-gradient-to-r from-indigo-500 to-blue-500 pointer-events-none" />
+            {/* Fixed gradient border effect to prevent overflow issues */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 to-blue-500 p-[1px]" />
             
             {/* Dashboard with glass effect */}
-            <div className="rounded-xl overflow-hidden glass border-0">
+            <div className="rounded-xl overflow-hidden bg-gray-900 border-0">
               {/* Mockup of the dashboard */}
               <div className="relative bg-gray-900 px-2 pt-2 pb-1 flex items-center rounded-t-xl">
                 <div className="flex space-x-1.5 absolute left-4">
@@ -101,7 +101,7 @@ const Hero = () => {
               {isMobile ? (
                 // Enhanced Mobile-optimized dashboard with improved layout
                 <div className="bg-gray-900 text-white p-4">
-                  {/* Mobile Dashboard Header - Nav Tabs instead of sidebar */}
+                  {/* Mobile Dashboard Header - Nav Tabs */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
                       <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
@@ -127,7 +127,7 @@ const Hero = () => {
                     </div>
                   </div>
                   
-                  {/* Navigation Tabs for Mobile - two rows if needed */}
+                  {/* Navigation Tabs for Mobile - two rows */}
                   <div className="flex flex-wrap gap-2 py-2 mb-3">
                     <div className="flex items-center px-3 py-1.5 bg-indigo-600 rounded-full text-xs font-medium whitespace-nowrap">
                       <Activity className="h-3 w-3 mr-1" /> Overview
@@ -198,33 +198,30 @@ const Hero = () => {
                       </div>
                     </div>
                     
-                    {/* Improved Mobile Account Balance */}
+                    {/* Improved Mobile Account Balance - More compact */}
                     <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-xs font-medium">Account Balance</span>
                         <DollarSign className="h-3 w-3 text-green-400" />
                       </div>
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs">Total Value:</span>
-                        <span className="text-sm font-bold">$185,000</span>
-                      </div>
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs">Paid to Suppliers:</span>
-                        <span className="text-sm">$112,300</span>
-                      </div>
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs">Service Fee (2%):</span>
-                        <span className="text-sm">$3,700</span>
-                      </div>
-                      <div className="flex justify-between items-center pt-1 border-t border-gray-700">
-                        <span className="text-xs">Available Balance:</span>
-                        <span className="text-sm font-bold text-green-400">$69,000</span>
+                      <div className="grid grid-cols-2 gap-1">
+                        <div className="text-xs">Total Value:</div>
+                        <div className="text-xs text-right font-medium">$185,000</div>
+                        
+                        <div className="text-xs">Paid to Suppliers:</div>
+                        <div className="text-xs text-right">$112,300</div>
+                        
+                        <div className="text-xs">Service Fee (2%):</div>
+                        <div className="text-xs text-right">$3,700</div>
+                        
+                        <div className="text-xs pt-1 border-t border-gray-700 mt-1">Available:</div>
+                        <div className="text-xs text-right font-bold text-green-400 pt-1 border-t border-gray-700 mt-1">$69,000</div>
                       </div>
                     </div>
                     
-                    {/* Activity List */}
+                    {/* Active Consolidations - Replacing Recent Updates */}
                     <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
-                      <div className="text-xs font-medium mb-2">Recent Updates</div>
+                      <div className="text-xs font-medium mb-2">Active Consolidations</div>
                       <div className="space-y-2">
                         <div className="flex justify-between items-center p-2 bg-gray-700 rounded text-xs">
                           <span>CON-2023-1458</span>
@@ -451,8 +448,8 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Fixed Account Balance section with 2% fee */}
-                        <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44 overflow-hidden">
+                        {/* Fixed Account Balance section with proper formatting and 2% fee */}
+                        <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                           <div className="font-medium mb-3">Account Balance & Payments</div>
                           <div className="flex flex-col h-36">
                             <div className="flex items-center justify-between mb-3">

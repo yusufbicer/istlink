@@ -1,672 +1,853 @@
+import React, { useState } from 'react';
+import { useAuth } from '@/lib/auth';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Package, Search, Filter, Plus, FileText, Truck, AlertCircle, CheckCircle, Clock, ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogFooter, 
-  DialogHeader, 
-  DialogTitle,
-  DialogTrigger,
-  DialogClose
-} from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Label } from "@/components/ui/label";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
-import { 
-  PlusIcon, 
-  MoreHorizontalIcon, 
-  SearchIcon, 
-  FileTextIcon,
-  CheckCircleIcon,
-  ClockIcon,
-  TruckIcon,
-  PackageIcon,
-  AlertCircleIcon,
-  XIcon,
-  UserIcon
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { useAuth } from "@/lib/auth";
-import { useToast } from "@/components/ui/use-toast";
-
-// Mock data for orders
-const initialOrders = [
-  { 
-    id: "ORD-1234", 
-    supplier: "Textile Masters Co.", 
-    supplierId: "1",
-    buyer: "Fashion Retailer Inc.",
-    buyerId: "3",
-    items: [
-      { name: "Cotton T-Shirt", quantity: 200, price: 4.5 },
-      { name: "Denim Jeans", quantity: 100, price: 12.0 }
-    ],
-    total: 2100,
-    date: "2023-07-25",
-    status: "completed",
-    consolidationId: "CONS-001",
-    shipment: "SHP-567",
-    payment: "paid"
+// Sample data for demonstration
+const sampleOrders = [
+  {
+    id: 'ORD-2023-1001',
+    supplier: 'Turkish Textiles Ltd.',
+    products: ['Cotton T-shirts (200 units)', 'Denim Jeans (100 units)'],
+    total: '$5,240.00',
+    status: 'processing',
+    date: '2023-05-15',
+    paymentStatus: 'paid',
+    shippingStatus: 'preparing'
   },
-  { 
-    id: "ORD-1235", 
-    supplier: "Anatolian Ceramics",
-    supplierId: "2",
-    buyer: "Fashion Retailer Inc.",
-    buyerId: "3",
-    items: [
-      { name: "Ceramic Plates", quantity: 50, price: 8.0 },
-      { name: "Coffee Mugs", quantity: 100, price: 3.5 }
-    ],
-    total: 750,
-    date: "2023-07-27",
-    status: "processing",
-    consolidationId: "CONS-001",
-    shipment: "SHP-568",
-    payment: "paid"
+  {
+    id: 'ORD-2023-1002',
+    supplier: 'Istanbul Furniture Co.',
+    products: ['Wooden Chairs (50 units)', 'Coffee Tables (25 units)'],
+    total: '$8,750.00',
+    status: 'shipped',
+    date: '2023-05-10',
+    paymentStatus: 'paid',
+    shippingStatus: 'in_transit'
   },
-  { 
-    id: "ORD-1236", 
-    supplier: "Turkish Delights Ltd.", 
-    supplierId: "3",
-    buyer: "Retail Chain Inc.",
-    buyerId: "5",
-    items: [
-      { name: "Assorted Lokum Box", quantity: 300, price: 6.0 },
-      { name: "Turkish Coffee", quantity: 200, price: 4.5 }
-    ],
-    total: 2700,
-    date: "2023-07-28",
-    status: "pending",
-    consolidationId: null,
-    shipment: null,
-    payment: "pending"
+  {
+    id: 'ORD-2023-1003',
+    supplier: 'Anatolian Ceramics',
+    products: ['Decorative Vases (75 units)', 'Ceramic Plates (150 units)'],
+    total: '$3,125.00',
+    status: 'pending',
+    date: '2023-05-18',
+    paymentStatus: 'pending',
+    shippingStatus: 'not_started'
   },
-  { 
-    id: "ORD-1237", 
-    supplier: "Modern Furniture Co.", 
-    supplierId: "4",
-    buyer: "Gadget World",
-    buyerId: "4",
-    items: [
-      { name: "Office Chair", quantity: 20, price: 75.0 },
-      { name: "Desk Lamp", quantity: 30, price: 25.0 }
-    ],
-    total: 2250,
-    date: "2023-07-29",
-    status: "processing",
-    consolidationId: "CONS-003",
-    shipment: null,
-    payment: "paid"
+  {
+    id: 'ORD-2023-1004',
+    supplier: 'Bosphorus Leather Goods',
+    products: ['Leather Bags (30 units)', 'Wallets (100 units)'],
+    total: '$4,890.00',
+    status: 'completed',
+    date: '2023-04-28',
+    paymentStatus: 'paid',
+    shippingStatus: 'delivered'
   },
-  { 
-    id: "ORD-1238", 
-    supplier: "Bosphorus Tech", 
-    supplierId: "2",
-    buyer: "Gadget World",
-    buyerId: "4",
-    items: [
-      { name: "Bluetooth Speaker", quantity: 50, price: 35.0 },
-      { name: "Wireless Earbuds", quantity: 100, price: 22.0 }
-    ],
-    total: 3950,
-    date: "2023-07-30",
-    status: "pending",
-    consolidationId: "CONS-003",
-    shipment: null,
-    payment: "pending"
-  },
+  {
+    id: 'ORD-2023-1005',
+    supplier: 'Turkish Delight Sweets',
+    products: ['Assorted Turkish Delights (500 boxes)', 'Baklava (200 boxes)'],
+    total: '$6,750.00',
+    status: 'processing',
+    date: '2023-05-14',
+    paymentStatus: 'partially_paid',
+    shippingStatus: 'preparing'
+  }
 ];
 
-// Mock data for suppliers and buyers for admin order creation
-const mockSuppliers = [
-  { id: "1", name: "Textile Masters Co." },
-  { id: "2", name: "Bosphorus Tech" },
-  { id: "3", name: "Turkish Delights Ltd." },
-  { id: "4", name: "Modern Furniture Co." },
-  { id: "5", name: "Anatolian Ceramics" }
+// Sample supplier orders for the supplier view
+const supplierOrders = [
+  {
+    id: 'ORD-2023-2001',
+    customer: 'Global Imports Inc.',
+    products: ['Cotton T-shirts (500 units)', 'Hoodies (250 units)'],
+    total: '$12,750.00',
+    status: 'processing',
+    date: '2023-05-16',
+    paymentStatus: 'paid',
+    productionStatus: 'in_progress'
+  },
+  {
+    id: 'ORD-2023-2002',
+    customer: 'European Retail Group',
+    products: ['Denim Jeans (300 units)', 'Casual Shirts (200 units)'],
+    total: '$9,840.00',
+    status: 'ready',
+    date: '2023-05-12',
+    paymentStatus: 'paid',
+    productionStatus: 'completed'
+  },
+  {
+    id: 'ORD-2023-2003',
+    customer: 'American Department Stores',
+    products: ['Winter Jackets (150 units)', 'Scarves (300 units)'],
+    total: '$14,250.00',
+    status: 'pending',
+    date: '2023-05-18',
+    paymentStatus: 'pending',
+    productionStatus: 'not_started'
+  }
 ];
 
-const mockBuyers = [
-  { id: "3", name: "Fashion Retailer Inc." },
-  { id: "4", name: "Gadget World" },
-  { id: "5", name: "Retail Chain Inc." }
-];
+// Status badge component
+const StatusBadge = ({ status }: { status: string }) => {
+  const statusMap: Record<string, { label: string, variant: "default" | "secondary" | "destructive" | "outline" }> = {
+    processing: { label: 'Processing', variant: 'secondary' },
+    shipped: { label: 'Shipped', variant: 'default' },
+    pending: { label: 'Pending', variant: 'outline' },
+    completed: { label: 'Completed', variant: 'default' },
+    ready: { label: 'Ready for Pickup', variant: 'default' },
+    cancelled: { label: 'Cancelled', variant: 'destructive' }
+  };
+
+  const { label, variant } = statusMap[status] || { label: status, variant: 'outline' };
+
+  return <Badge variant={variant}>{label}</Badge>;
+};
+
+// Payment status badge component
+const PaymentBadge = ({ status }: { status: string }) => {
+  const statusMap: Record<string, { label: string, variant: "default" | "secondary" | "destructive" | "outline" | "success" }> = {
+    paid: { label: 'Paid', variant: 'success' },
+    pending: { label: 'Pending', variant: 'outline' },
+    partially_paid: { label: 'Partially Paid', variant: 'secondary' },
+    refunded: { label: 'Refunded', variant: 'destructive' }
+  };
+
+  // Custom success variant
+  if (status === 'paid') {
+    return <Badge className="bg-green-600 hover:bg-green-700">{statusMap[status].label}</Badge>;
+  }
+
+  const { label, variant } = statusMap[status] || { label: status, variant: 'outline' };
+
+  return <Badge variant={variant as any}>{label}</Badge>;
+};
+
+// Shipping status badge component
+const ShippingBadge = ({ status }: { status: string }) => {
+  const statusMap: Record<string, { label: string, variant: "default" | "secondary" | "destructive" | "outline" }> = {
+    not_started: { label: 'Not Started', variant: 'outline' },
+    preparing: { label: 'Preparing', variant: 'secondary' },
+    in_transit: { label: 'In Transit', variant: 'default' },
+    delivered: { label: 'Delivered', variant: 'default' }
+  };
+
+  const { label, variant } = statusMap[status] || { label: status, variant: 'outline' };
+
+  return <Badge variant={variant}>{label}</Badge>;
+};
+
+// Production status badge component
+const ProductionBadge = ({ status }: { status: string }) => {
+  const statusMap: Record<string, { label: string, variant: "default" | "secondary" | "destructive" | "outline" }> = {
+    not_started: { label: 'Not Started', variant: 'outline' },
+    in_progress: { label: 'In Progress', variant: 'secondary' },
+    completed: { label: 'Completed', variant: 'default' }
+  };
+
+  const { label, variant } = statusMap[status] || { label: status, variant: 'outline' };
+
+  return <Badge variant={variant}>{label}</Badge>;
+};
 
 const Orders = () => {
   const { user } = useAuth();
-  const { toast } = useToast();
-  const [orders, setOrders] = useState(initialOrders);
-  const [filteredOrders, setFilteredOrders] = useState(initialOrders);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState("all");
-  const [isVisible, setIsVisible] = useState(false);
-  const [newOrder, setNewOrder] = useState({
-    supplier: "",
-    buyer: user?.role === "admin" ? "" : user?.id || "",
-    items: [{ name: "", quantity: 1, price: 0 }]
-  });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [showNewOrderDialog, setShowNewOrderDialog] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<any>(null);
+  const [showOrderDetailsDialog, setShowOrderDetailsDialog] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
-    
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Filter orders based on search term and active tab
-  useEffect(() => {
-    let filtered = orders;
-    
-    // Filter by tab
-    if (activeTab !== "all") {
-      filtered = filtered.filter(order => order.status === activeTab);
-    }
-    
-    // Filter by search
-    if (searchTerm) {
-      filtered = filtered.filter(order => 
-        order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.supplier.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.buyer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.items.some(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  // Filter orders based on search term and status
+  const filteredOrders = user?.role === "importer" 
+    ? sampleOrders.filter(order => 
+        (order.id.toLowerCase().includes(searchTerm.toLowerCase()) || 
+         order.supplier.toLowerCase().includes(searchTerm.toLowerCase())) &&
+        (statusFilter === 'all' || order.status === statusFilter)
+      )
+    : supplierOrders.filter(order => 
+        (order.id.toLowerCase().includes(searchTerm.toLowerCase()) || 
+         order.customer.toLowerCase().includes(searchTerm.toLowerCase())) &&
+        (statusFilter === 'all' || order.status === statusFilter)
       );
-    }
-    
-    // For supplier role, only show their own orders
-    if (user?.role === "supplier") {
-      // For demo purposes, supplier with id 1 is "Textile Masters Co." and supplier with id 2 is "Bosphorus Tech"
-      const supplierNameToFilter = user.name.includes("Supplier") ? "Textile Masters Co." : "Bosphorus Tech";
-      filtered = filtered.filter(order => order.supplier === supplierNameToFilter);
-    }
-    
-    // For buyer role, only show their own orders
-    if (user?.role === "buyer") {
-      // For demo purposes, buyer with id 3 is "Fashion Retailer Inc." and buyer with id 4 is "Gadget World"
-      const buyerNameToFilter = user.name.includes("Buyer") ? "Fashion Retailer Inc." : "Gadget World";
-      filtered = filtered.filter(order => order.buyer === buyerNameToFilter);
-    }
-    
-    setFilteredOrders(filtered);
-  }, [searchTerm, activeTab, orders, user]);
 
-  // Add new item to order form
-  const addItemToOrder = () => {
-    setNewOrder({
-      ...newOrder,
-      items: [...newOrder.items, { name: "", quantity: 1, price: 0 }]
-    });
-  };
-
-  // Remove item from order form
-  const removeItemFromOrder = (index: number) => {
-    if (newOrder.items.length > 1) {
-      setNewOrder({
-        ...newOrder,
-        items: newOrder.items.filter((_, i) => i !== index)
-      });
-    }
-  };
-
-  // Update item in order form
-  const updateItemInOrder = (index: number, field: keyof typeof newOrder.items[0], value: any) => {
-    const updatedItems = [...newOrder.items];
-    updatedItems[index] = { ...updatedItems[index], [field]: value };
-    
-    setNewOrder({
-      ...newOrder,
-      items: updatedItems
-    });
-  };
-
-  // Create new order
-  const handleCreateOrder = () => {
-    // Validate form
-    if (!newOrder.supplier) {
-      toast({
-        title: "Validation Error",
-        description: "Please select a supplier.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (user?.role === "admin" && !newOrder.buyer) {
-      toast({
-        title: "Validation Error",
-        description: "Please select a buyer.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (newOrder.items.some(item => !item.name || item.quantity <= 0)) {
-      toast({
-        title: "Validation Error",
-        description: "Please fill in all item details with valid quantities.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    // Calculate total
-    const total = newOrder.items.reduce(
-      (sum, item) => sum + (item.quantity * item.price), 0
-    );
-    
-    // Get supplier and buyer details
-    const supplierDetails = mockSuppliers.find(s => s.id === newOrder.supplier);
-    const buyerDetails = user?.role === "admin" 
-      ? mockBuyers.find(b => b.id === newOrder.buyer)
-      : { id: user?.id || "3", name: user?.name || "Fashion Retailer Inc." };
-    
-    if (!supplierDetails || !buyerDetails) {
-      toast({
-        title: "Error",
-        description: "Invalid supplier or buyer selection.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    // Create new order object
-    const newOrderObj = {
-      id: `ORD-${Math.floor(1000 + Math.random() * 9000)}`,
-      supplier: supplierDetails.name,
-      supplierId: supplierDetails.id,
-      buyer: buyerDetails.name,
-      buyerId: buyerDetails.id,
-      items: newOrder.items,
-      total: Math.round(total * 100) / 100,
-      date: new Date().toISOString().split('T')[0],
-      status: "pending",
-      consolidationId: null,
-      shipment: null,
-      payment: "pending"
-    };
-    
-    // Add to orders list
-    setOrders([...orders, newOrderObj]);
-    
-    // Reset form
-    setNewOrder({
-      supplier: "",
-      buyer: user?.role === "admin" ? "" : user?.id || "",
-      items: [{ name: "", quantity: 1, price: 0 }]
-    });
-    
-    toast({
-      title: "Order Created",
-      description: `Order ${newOrderObj.id} has been successfully created.`
-    });
-  };
-
-  // Get status icon
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "completed":
-        return <CheckCircleIcon className="h-4 w-4 text-green-500" />;
-      case "processing":
-        return <TruckIcon className="h-4 w-4 text-blue-500" />;
-      case "pending":
-        return <ClockIcon className="h-4 w-4 text-yellow-500" />;
-      case "cancelled":
-        return <AlertCircleIcon className="h-4 w-4 text-red-500" />;
-      default:
-        return <PackageIcon className="h-4 w-4" />;
-    }
-  };
-
-  // Format date
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
-  };
-
-  // Calculate subtotal
-  const calculateSubtotal = () => {
-    return newOrder.items.reduce(
-      (sum, item) => sum + (item.quantity * item.price), 0
-    );
+  const handleOrderClick = (order: any) => {
+    setSelectedOrder(order);
+    setShowOrderDetailsDialog(true);
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="container mx-auto p-6">
+      <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-bold">Orders</h1>
-          <p className="text-muted-foreground">Manage and track your orders from suppliers.</p>
+          <p className="text-gray-500">Manage and track your orders</p>
         </div>
         
-        {user?.role !== "supplier" && (
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button className="h-10">
-                <PlusIcon className="mr-2 h-4 w-4" />
-                New Order
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-2xl">
-              <DialogHeader>
-                <DialogTitle>Create New Order</DialogTitle>
-                <DialogDescription>
-                  Enter the details for your new order request.
-                </DialogDescription>
-              </DialogHeader>
-              
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="supplier" className="text-right">
-                    Supplier
-                  </Label>
-                  <div className="col-span-3">
-                    <select
-                      id="supplier"
-                      className="w-full flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      value={newOrder.supplier}
-                      onChange={(e) => setNewOrder({...newOrder, supplier: e.target.value})}
-                    >
-                      <option value="">Select a supplier</option>
-                      {mockSuppliers.map(supplier => (
-                        <option key={supplier.id} value={supplier.id}>
-                          {supplier.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                
-                {user?.role === "admin" && (
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="buyer" className="text-right">
-                      Buyer
-                    </Label>
-                    <div className="col-span-3">
-                      <select
-                        id="buyer"
-                        className="w-full flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                        value={newOrder.buyer}
-                        onChange={(e) => setNewOrder({...newOrder, buyer: e.target.value})}
-                      >
-                        <option value="">Select a buyer</option>
-                        {mockBuyers.map(buyer => (
-                          <option key={buyer.id} value={buyer.id}>
-                            {buyer.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                )}
-                
-                <div className="grid grid-cols-4 items-start gap-4">
-                  <Label htmlFor="items" className="text-right mt-2">
-                    Items
-                  </Label>
-                  <div className="col-span-3 space-y-3">
-                    {newOrder.items.map((item, index) => (
-                      <div key={index} className="flex items-start gap-2">
-                        <div className="flex-1">
-                          <Input
-                            placeholder="Product name"
-                            value={item.name}
-                            onChange={(e) => updateItemInOrder(index, "name", e.target.value)}
-                          />
-                        </div>
-                        <div className="w-20">
-                          <Input
-                            placeholder="Qty"
-                            type="number"
-                            min="1"
-                            value={item.quantity}
-                            onChange={(e) => updateItemInOrder(index, "quantity", parseInt(e.target.value) || 0)}
-                          />
-                        </div>
-                        <div className="w-24">
-                          <Input
-                            placeholder="Price"
-                            type="number"
-                            step="0.01"
-                            min="0"
-                            value={item.price}
-                            onChange={(e) => updateItemInOrder(index, "price", parseFloat(e.target.value) || 0)}
-                          />
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => removeItemFromOrder(index)}
-                          disabled={newOrder.items.length <= 1}
-                        >
-                          <XIcon className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    ))}
-                    
-                    <Button variant="outline" size="sm" onClick={addItemToOrder}>
-                      <PlusIcon className="mr-2 h-3 w-3" />
-                      Add Another Item
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <div className="text-right">
-                    Subtotal
-                  </div>
-                  <div className="col-span-3 font-medium">
-                    ${calculateSubtotal().toFixed(2)}
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="notes" className="text-right">
-                    Notes
-                  </Label>
-                  <Input
-                    id="notes"
-                    placeholder="Additional instructions"
-                    className="col-span-3"
-                  />
-                </div>
-              </div>
-              
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DialogClose>
-                <Button onClick={handleCreateOrder}>Submit Order</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+        {user?.role === "importer" && (
+          <Button onClick={() => setShowNewOrderDialog(true)}>
+            <Plus className="mr-2 h-4 w-4" /> New Order
+          </Button>
         )}
       </div>
       
-      <div className="flex flex-col sm:flex-row justify-between gap-4">
-        <Tabs defaultValue="all" className="w-full" onValueChange={setActiveTab}>
-          <TabsList>
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="relative flex-grow">
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+          <Input
+            placeholder="Search orders..."
+            className="pl-8"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-full md:w-[180px]">
+            <SelectValue placeholder="Filter by status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Statuses</SelectItem>
+            <SelectItem value="pending">Pending</SelectItem>
+            <SelectItem value="processing">Processing</SelectItem>
+            <SelectItem value="shipped">Shipped</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+            {user?.role === "supplier" && (
+              <SelectItem value="ready">Ready for Pickup</SelectItem>
+            )}
+            <SelectItem value="cancelled">Cancelled</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      
+      {user?.role === "importer" && (
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle>Your Orders</CardTitle>
+            <CardDescription>
+              View and manage all your orders from Turkish suppliers
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Order ID</TableHead>
+                  <TableHead>Supplier</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Total</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Payment</TableHead>
+                  <TableHead>Shipping</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredOrders.length > 0 ? (
+                  filteredOrders.map((order) => (
+                    <TableRow key={order.id} className="cursor-pointer hover:bg-gray-50" onClick={() => handleOrderClick(order)}>
+                      <TableCell className="font-medium">{order.id}</TableCell>
+                      <TableCell>{order.supplier}</TableCell>
+                      <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
+                      <TableCell>{order.total}</TableCell>
+                      <TableCell><StatusBadge status={order.status} /></TableCell>
+                      <TableCell><PaymentBadge status={order.paymentStatus} /></TableCell>
+                      <TableCell><ShippingBadge status={order.shippingStatus} /></TableCell>
+                      <TableCell className="text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                            <Button variant="ghost" className="h-8 w-8 p-0">
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem onClick={(e) => {
+                              e.stopPropagation();
+                              handleOrderClick(order);
+                            }}>
+                              View details
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>Track shipment</DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>Download invoice</DropdownMenuItem>
+                            {order.status !== 'cancelled' && order.status !== 'completed' && (
+                              <>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem className="text-red-600">Cancel order</DropdownMenuItem>
+                              </>
+                            )}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={8} className="text-center py-4 text-gray-500">
+                      No orders found. Try adjusting your search or filters.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+      
+      {user?.role === "supplier" && (
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle>Customer Orders</CardTitle>
+            <CardDescription>
+              Manage orders from your customers
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Order ID</TableHead>
+                  <TableHead>Customer</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Total</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Payment</TableHead>
+                  <TableHead>Production</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredOrders.length > 0 ? (
+                  filteredOrders.map((order) => (
+                    <TableRow key={order.id} className="cursor-pointer hover:bg-gray-50" onClick={() => handleOrderClick(order)}>
+                      <TableCell className="font-medium">{order.id}</TableCell>
+                      <TableCell>{order.customer}</TableCell>
+                      <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
+                      <TableCell>{order.total}</TableCell>
+                      <TableCell><StatusBadge status={order.status} /></TableCell>
+                      <TableCell><PaymentBadge status={order.paymentStatus} /></TableCell>
+                      <TableCell><ProductionBadge status={order.productionStatus} /></TableCell>
+                      <TableCell className="text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                            <Button variant="ghost" className="h-8 w-8 p-0">
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem onClick={(e) => {
+                              e.stopPropagation();
+                              handleOrderClick(order);
+                            }}>
+                              View details
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>Update status</DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>Generate invoice</DropdownMenuItem>
+                            <DropdownMenuItem>Mark as ready</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={8} className="text-center py-4 text-gray-500">
+                      No orders found. Try adjusting your search or filters.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+      
+      {user?.role === "admin" && (
+        <Tabs defaultValue="all">
+          <TabsList className="mb-4">
             <TabsTrigger value="all">All Orders</TabsTrigger>
             <TabsTrigger value="pending">Pending</TabsTrigger>
             <TabsTrigger value="processing">Processing</TabsTrigger>
-            <TabsTrigger value="completed">Completed</TabsTrigger>
+            <TabsTrigger value="issues">Issues</TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="all">
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle>All Orders</CardTitle>
+                <CardDescription>
+                  Complete overview of all orders in the system
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Order ID</TableHead>
+                      <TableHead>Customer</TableHead>
+                      <TableHead>Supplier</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Total</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {/* Combined and extended list for admin view */}
+                    {[...sampleOrders, ...supplierOrders].slice(0, 5).map((order: any) => (
+                      <TableRow key={order.id} className="cursor-pointer hover:bg-gray-50" onClick={() => handleOrderClick(order)}>
+                        <TableCell className="font-medium">{order.id}</TableCell>
+                        <TableCell>{order.customer || "Direct Import"}</TableCell>
+                        <TableCell>{order.supplier || "Various Suppliers"}</TableCell>
+                        <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
+                        <TableCell>{order.total}</TableCell>
+                        <TableCell><StatusBadge status={order.status} /></TableCell>
+                        <TableCell className="text-right">
+                          <Button variant="ghost" size="sm">
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="pending">
+            <Card>
+              <CardHeader>
+                <CardTitle>Pending Orders</CardTitle>
+                <CardDescription>Orders awaiting processing or approval</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {/* Pending orders content */}
+                <div className="text-center py-8 text-gray-500">
+                  <p>Pending orders will appear here</p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="processing">
+            <Card>
+              <CardHeader>
+                <CardTitle>Processing Orders</CardTitle>
+                <CardDescription>Orders currently being processed</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {/* Processing orders content */}
+                <div className="text-center py-8 text-gray-500">
+                  <p>Processing orders will appear here</p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="issues">
+            <Card>
+              <CardHeader>
+                <CardTitle>Orders with Issues</CardTitle>
+                <CardDescription>Orders requiring attention</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {/* Issues content */}
+                <div className="text-center py-8 text-gray-500">
+                  <p>Orders with issues will appear here</p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
-        
-        <div className="flex gap-4">
-          <div className="relative flex-1 min-w-[200px]">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input
-              placeholder="Search orders..."
-              className="pl-9"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          {user?.role !== "supplier" && (
-            <Button variant="outline">Export</Button>
-          )}
-        </div>
-      </div>
+      )}
       
-      <Card 
-        className={`transition-all duration-500 transform ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}
-      >
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Order ID</TableHead>
-                <TableHead>Supplier</TableHead>
-                {(user?.role === "admin" || user?.role === "supplier") && (
-                  <TableHead>Buyer</TableHead>
-                )}
-                <TableHead>Items</TableHead>
-                <TableHead>Total</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Consolidation</TableHead>
-                <TableHead>Payment</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredOrders.map((order, index) => (
-                <TableRow 
-                  key={order.id}
-                  className={`transition-all duration-500 transform ${
-                    isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                  style={{ transitionDelay: `${index * 50}ms` }}
+      {/* New Order Dialog */}
+      <Dialog open={showNewOrderDialog} onOpenChange={setShowNewOrderDialog}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Create New Order</DialogTitle>
+            <DialogDescription>
+              Enter the details for your new order from a Turkish supplier.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="supplier" className="text-right">
+                Supplier
+              </Label>
+              <Select>
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Select supplier" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="turkish-textiles">Turkish Textiles Ltd.</SelectItem>
+                  <SelectItem value="istanbul-furniture">Istanbul Furniture Co.</SelectItem>
+                  <SelectItem value="anatolian-ceramics">Anatolian Ceramics</SelectItem>
+                  <SelectItem value="bosphorus-leather">Bosphorus Leather Goods</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="products" className="text-right">
+                Products
+              </Label>
+              <div className="col-span-3 space-y-2">
+                <div className="flex items-center space-x-2">
+                  <Input id="product1" placeholder="Product name" />
+                  <Input id="quantity1" placeholder="Qty" className="w-20" />
+                  <Button variant="outline" size="sm">+</Button>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Input id="product2" placeholder="Product name" />
+                  <Input id="quantity2" placeholder="Qty" className="w-20" />
+                  <Button variant="outline" size="sm">-</Button>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="shipping" className="text-right">
+                Shipping Method
+              </Label>
+              <Select>
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Select shipping method" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="sea">Sea Freight</SelectItem>
+                  <SelectItem value="air">Air Freight</SelectItem>
+                  <SelectItem value="express">Express Courier</SelectItem>
+                  <SelectItem value="consolidated">Consolidated Shipping</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="notes" className="text-right">
+                Notes
+              </Label>
+              <Input id="notes" placeholder="Additional instructions" className="col-span-3" />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <div className="text-right">
+                <Label htmlFor="consolidate">Consolidation</Label>
+              </div>
+              <div className="flex items-center space-x-2 col-span-3">
+                <Checkbox id="consolidate" />
+                <label
+                  htmlFor="consolidate"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  <TableCell className="font-medium">
-                    <div className="flex items-center gap-2">
-                      <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                        <FileTextIcon className="h-4 w-4 text-blue-600" />
-                      </div>
-                      {order.id}
+                  Add to consolidation group
+                </label>
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowNewOrderDialog(false)}>
+              Cancel
+            </Button>
+            <Button type="submit">Create Order</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Order Details Dialog */}
+      <Dialog open={showOrderDetailsDialog} onOpenChange={setShowOrderDetailsDialog}>
+        <DialogContent className="sm:max-w-[700px]">
+          <DialogHeader>
+            <DialogTitle>Order Details</DialogTitle>
+            <DialogDescription>
+              Complete information about order {selectedOrder?.id}
+            </DialogDescription>
+          </DialogHeader>
+          
+          {selectedOrder && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">Order Information</h3>
+                  <div className="mt-2 space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Order ID:</span>
+                      <span className="text-sm font-medium">{selectedOrder.id}</span>
                     </div>
-                  </TableCell>
-                  <TableCell>{order.supplier}</TableCell>
-                  {(user?.role === "admin" || user?.role === "supplier") && (
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <UserIcon className="h-4 w-4 text-green-600" />
-                        <span>{order.buyer}</span>
-                      </div>
-                    </TableCell>
-                  )}
-                  <TableCell>
-                    <div className="max-w-[180px]">
-                      {order.items.map((item, i) => (
-                        <div key={i} className="text-sm truncate">
-                          {item.quantity} × {item.name}
-                        </div>
-                      ))}
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Date:</span>
+                      <span className="text-sm font-medium">{new Date(selectedOrder.date).toLocaleDateString()}</span>
                     </div>
-                  </TableCell>
-                  <TableCell>${order.total.toLocaleString()}</TableCell>
-                  <TableCell>{formatDate(order.date)}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1.5">
-                      {getStatusIcon(order.status)}
-                      <Badge
-                        variant={
-                          order.status === "completed" ? "default" :
-                          order.status === "processing" ? "secondary" :
-                          order.status === "pending" ? "outline" :
-                          "destructive"
-                        }
-                        className="capitalize"
-                      >
-                        {order.status}
-                      </Badge>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Status:</span>
+                      <StatusBadge status={selectedOrder.status} />
                     </div>
-                  </TableCell>
-                  <TableCell>
-                    {order.consolidationId ? (
-                      <Badge variant="outline" className="bg-blue-50 text-blue-700 hover:bg-blue-50">
-                        {order.consolidationId}
-                      </Badge>
-                    ) : (
-                      <span className="text-muted-foreground text-sm">Not assigned</span>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={order.payment === "paid" ? "default" : "outline"}
-                      className={`capitalize ${
-                        order.payment === "paid" ? "bg-green-100 text-green-800 hover:bg-green-100" : ""
-                      }`}
-                    >
-                      {order.payment}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
-                          <MoreHorizontalIcon className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>View Details</DropdownMenuItem>
-                        {user?.role !== "supplier" && (
-                          <>
-                            <DropdownMenuItem>Track Shipment</DropdownMenuItem>
-                            <DropdownMenuItem>Download Invoice</DropdownMenuItem>
-                            <DropdownMenuItem>Add Note</DropdownMenuItem>
-                          </>
-                        )}
-                        {user?.role === "supplier" && order.status === "pending" && (
-                          <DropdownMenuItem>Process Order</DropdownMenuItem>
-                        )}
-                        {user?.role === "admin" && order.status === "pending" && !order.consolidationId && (
-                          <DropdownMenuItem>Add to Consolidation</DropdownMenuItem>
-                        )}
-                        {order.status === "pending" && (
-                          <DropdownMenuItem className="text-red-600">Cancel Order</DropdownMenuItem>
-                        )}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Total:</span>
+                      <span className="text-sm font-medium">{selectedOrder.total}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500">
+                    {user?.role === "importer" ? "Supplier Information" : "Customer Information"}
+                  </h3>
+                  <div className="mt-2 space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Name:</span>
+                      <span className="text-sm font-medium">
+                        {user?.role === "importer" ? selectedOrder.supplier : selectedOrder.customer}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Contact:</span>
+                      <span className="text-sm font-medium">+90 212 555 1234</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Email:</span>
+                      <span className="text-sm font-medium">contact@example.com</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Location:</span>
+                      <span className="text-sm font-medium">Istanbul, Turkey</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
-              {filteredOrders.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={user?.role === "admin" ? 10 : 9} className="text-center py-8 text-muted-foreground">
-                    No orders found matching your criteria.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+              <div>
+                <h3 className="text-sm font-medium text-gray-500 mb-2">Products</h3>
+                <div className="border rounded-md">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Product</TableHead>
+                        <TableHead className="text-right">Quantity</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {selectedOrder.products.map((product: string, index: number) => {
+                        const [name, quantity] = product.split('(');
+                        const cleanQuantity = quantity ? quantity.replace(')', '') : '';
+                        
+                        return (
+                          <TableRow key={index}>
+                            <TableCell>{name.trim()}</TableCell>
+                            <TableCell className="text-right">{cleanQuantity}</TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 mb-2">Payment</h3>
+                  <div className="p-3 border rounded-md space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Status:</span>
+                      <PaymentBadge status={selectedOrder.paymentStatus} />
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Method:</span>
+                      <span className="text-sm font-medium">Bank Transfer</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Date:</span>
+                      <span className="text-sm font-medium">
+                        {selectedOrder.paymentStatus === 'paid' ? new Date(selectedOrder.date).toLocaleDateString() : '-'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 mb-2">Shipping</h3>
+                  <div className="p-3 border rounded-md space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Status:</span>
+                      {user?.role === "importer" ? (
+                        <ShippingBadge status={selectedOrder.shippingStatus} />
+                      ) : (
+                        <ProductionBadge status={selectedOrder.productionStatus} />
+                      )}
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Method:</span>
+                      <span className="text-sm font-medium">Sea Freight</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-500">Tracking:</span>
+                      <span className="text-sm font-medium">
+                        {selectedOrder.status === 'shipped' ? 'TRK123456789' : '-'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 mb-2">Documents</h3>
+                  <div className="p-3 border rounded-md space-y-2">
+                    <Button variant="outline" size="sm" className="w-full justify-start">
+                      <FileText className="mr-2 h-4 w-4" /> Invoice
+                    </Button>
+                    <Button variant="outline" size="sm" className="w-full justify-start">
+                      <FileText className="mr-2 h-4 w-4" /> Packing List
+                    </Button>
+                    <Button variant="outline" size="sm" className="w-full justify-start">
+                      <FileText className="mr-2 h-4 w-4" /> Bill of Lading
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-sm font-medium text-gray-500 mb-2">Timeline</h3>
+                <div className="p-3 border rounded-md">
+                  <div className="space-y-4">
+                    <div className="flex">
+                      <div className="mr-3">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                          <CheckCircle className="h-3 w-3 text-blue-600" />
+                        </div>
+                        <div className="h-full w-px bg-gray-200 mx-auto mt-1"></div>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Order Placed</p>
+                        <p className="text-xs text-gray-500">{new Date(selectedOrder.date).toLocaleString()}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex">
+                      <div className="mr-3">
+                        {selectedOrder.paymentStatus === 'paid' ? (
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                            <CheckCircle className="h-3 w-3 text-blue-600" />
+                          </div>
+                        ) : (
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100">
+                            <Clock className="h-3 w-3 text-gray-400" />
+                          </div>
+                        )}
+                        <div className="h-full w-px bg-gray-200 mx-auto mt-1"></div>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Payment Confirmed</p>
+                        <p className="text-xs text-gray-500">
+                          {selectedOrder.paymentStatus === 'paid' ? 
+                            new Date(selectedOrder.date).toLocaleString() : 
+                            'Pending payment confirmation'}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex">
+                      <div className="mr-3">
+                        {selectedOrder.status === 'processing' || selectedOrder.status === 'shipped' || selectedOrder.status === 'completed' ? (
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                            <CheckCircle className="h-3 w-3 text-blue-600" />
+                          </div>
+                        ) : (
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100">
+                            <Clock className="h-3 w-3 text-gray-400" />
+                          </div>
+                        )}
+                        <div className="h-full w-px bg-gray-200 mx-auto mt-1"></div>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Processing</p>
+                        <p className="text-xs text-gray-500">
+                          {selectedOrder.status === 'processing' || selectedOrder.status === 'shipped' || selectedOrder.status === 'completed' ? 
+                            'Order is being processed' : 
+                            'Waiting to begin processing'}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex">
+                      <div className="mr-3">
+                        {selectedOrder.status === 'shipped' || selectedOrder.status === 'completed' ? (
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                            <CheckCircle className="h-3 w-3 text-blue-600" />
+                          </div>
+                        ) : (
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100">
+                            <Clock className="h-3 w-3 text-gray-400" />
+                          </div>
+                        )}
+                        <div className="h-full w-px bg-gray-200 mx-auto mt-1"></div>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Shipped</p>
+                        <p className="text-xs text-gray-500">
+                          {selectedOrder.status === 'shipped' || selectedOrder.status === 'completed' ? 
+                            'Order has been shipped' : 
+                            'Waiting to be shipped'}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex">
+                      <div className="mr-3">
+                        {selectedOrder.status === 'completed' ? (
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                            <CheckCircle className="h-3 w-3 text-blue-600" />
+                          </div>
+                        ) : (
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100">
+                            <Clock className="h-3 w-3 text-gray-400" />
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Delivered</p>
+                        <p className="text-xs text-gray-500">
+                          {selectedOrder.status === 'completed' ? 
+                            'Order has been delivered' : 
+                            'Waiting to be delivered'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          <DialogFooter className="gap-2 sm:gap-0">
+            {user?.role === "importer" && selectedOrder?.status !== 'completed' && selectedOrder?.status !== 'cancelled' && (
+              <Button variant="destructive" className="mr-auto">
+                Cancel Order
+              </Button>
+            )}
+            <Button variant="outline" onClick={() => setShowOrderDetailsDialog(false)}>
+              Close
+            </Button>
+            {user?.role === "supplier" && selectedOrder?.status === 'pending' && (
+              <Button>Process Order</Button>
+            )}
+            {user?.role === "importer" && selectedOrder?.status === 'processing' && (
+              <Button>Track Order</Button>
+            )}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

@@ -1,11 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/lib/auth";
 import { ArrowUpIcon, ArrowDownIcon, PackageIcon, TruckIcon, UsersIcon, DollarSignIcon } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 
-// Mock data for the dashboard
 const orderData = [
   { name: "Jan", orders: 10 },
   { name: "Feb", orders: 15 },
@@ -76,9 +74,8 @@ const Overview = () => {
     return () => clearTimeout(timer);
   }, []);
   
-  // Different stats based on user role
   const getStats = () => {
-    if (user?.role === 'buyer') {
+    if (user?.role === "importer") {
       return [
         { 
           title: "Active Orders", 
@@ -109,7 +106,7 @@ const Overview = () => {
           icon: <DollarSignIcon className="h-5 w-5 text-amber-600" />
         },
       ];
-    } else if (user?.role === 'supplier') {
+    } else if (user?.role === "supplier") {
       return [
         { 
           title: "Open Orders", 
@@ -141,7 +138,6 @@ const Overview = () => {
         },
       ];
     } else {
-      // Admin role
       return [
         { 
           title: "Total Orders", 
@@ -178,7 +174,7 @@ const Overview = () => {
   const stats = getStats();
   
   return (
-    <div className="space-y-6">
+    <div className="container mx-auto p-6">
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, i) => (
           <Card key={stat.title} className={`transition-all duration-500 transform ${

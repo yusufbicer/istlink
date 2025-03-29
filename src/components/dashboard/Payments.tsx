@@ -1,863 +1,376 @@
+import { useState } from 'react';
+import { useAuth } from '@/lib/auth';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { DollarSign, Download, Filter, Plus, Search, ArrowUpDown, FileText, CreditCard, CheckCircle, AlertCircle, Clock } from 'lucide-react';
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogFooter, 
-  DialogHeader, 
-  DialogTitle,
-  DialogTrigger,
-  DialogClose
-} from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useToast } from "@/components/ui/use-toast";
-import { 
-  CreditCardIcon, 
-  DollarSignIcon, 
-  EyeIcon, 
-  FileTextIcon, 
-  MailIcon, 
-  MoreHorizontalIcon, 
-  PlusIcon, 
-  SearchIcon,
-  TrashIcon,
-  PencilIcon
-} from "lucide-react";
-import { useAuth } from "@/lib/auth";
-
-// Mock payment data
-const initialPayments = [
-  {
-    id: "PAY-001",
-    consolidationId: "CONS-001",
-    consolidationName: "Summer Collection Shipment",
-    amount: 5550,
-    currency: "USD",
-    status: "paid",
-    method: "bank_transfer",
-    reference: "INV-12345",
-    supplierId: "1",
-    supplierName: "Textile Masters Co.",
-    buyerId: "3",
-    buyerName: "Fashion Retailer Inc.",
-    orderIds: ["ORD-1234", "ORD-1235"],
-    details: {
-      bankName: "Global Bank",
-      accountNumber: "XXXX-XXXX-XXXX-1234",
-      holderName: "ShipSync LLC",
-      swiftCode: "GLBANK123"
-    },
-    createdAt: "2023-08-12T10:15:00Z",
-    paidAt: "2023-08-15T14:30:00Z"
-  },
-  {
-    id: "PAY-002",
-    consolidationId: "CONS-003",
-    consolidationName: "Electronics Shipment",
-    amount: 8750,
-    currency: "USD",
-    status: "paid",
-    method: "credit_card",
-    reference: "INV-12346",
-    supplierId: "2",
-    supplierName: "Bosphorus Tech",
-    buyerId: "4",
-    buyerName: "Gadget World",
-    orderIds: ["ORD-1237", "ORD-1238"],
-    details: {
-      cardType: "Visa",
-      lastFourDigits: "4567",
-      expiryDate: "XX/XX",
-      holderName: "ShipSync LLC"
-    },
-    createdAt: "2023-08-06T08:45:00Z",
-    paidAt: "2023-08-06T09:30:00Z"
-  },
-  {
-    id: "PAY-003",
-    consolidationId: "CONS-002",
-    consolidationName: "Fall Inventory Restock",
-    amount: 6200,
-    currency: "USD",
-    status: "pending",
-    method: "bank_transfer",
-    reference: "INV-12347",
-    supplierId: "1",
-    supplierName: "Textile Masters Co.",
-    buyerId: "5",
-    buyerName: "Retail Chain Inc.",
-    orderIds: ["ORD-1236"],
-    details: {
-      bankName: "Global Bank",
-      accountNumber: "XXXX-XXXX-XXXX-1234",
-      holderName: "ShipSync LLC",
-      swiftCode: "GLBANK123"
-    },
-    createdAt: "2023-08-16T11:20:00Z",
-    paidAt: null
-  }
+// Mock data for payments
+const importerPayments = [
+  { id: 'PAY-001', date: '2023-05-15', amount: 12500, status: 'completed', method: 'Bank Transfer', reference: 'INV-2023-001' },
+  { id: 'PAY-002', date: '2023-05-28', amount: 8750, status: 'completed', method: 'Credit Card', reference: 'INV-2023-002' },
+  { id: 'PAY-003', date: '2023-06-10', amount: 15000, status: 'pending', method: 'Bank Transfer', reference: 'INV-2023-003' },
+  { id: 'PAY-004', date: '2023-06-22', amount: 9200, status: 'failed', method: 'Credit Card', reference: 'INV-2023-004' },
+  { id: 'PAY-005', date: '2023-07-05', amount: 11800, status: 'completed', method: 'Bank Transfer', reference: 'INV-2023-005' },
 ];
 
-// Mock consolidations without payment
-const consolidationsWithoutPayment = [
-  { id: "CONS-004", name: "Holiday Collection", total: 4800, supplierIds: ["1"], buyerId: "3" },
-  { id: "CONS-005", name: "Office Supplies", total: 1250, supplierIds: ["2"], buyerId: "4" }
+const supplierPayments = [
+  { id: 'PAY-101', date: '2023-05-18', amount: 8500, status: 'completed', method: 'Bank Transfer', reference: 'ORD-2023-101' },
+  { id: 'PAY-102', date: '2023-06-02', amount: 12300, status: 'completed', method: 'Bank Transfer', reference: 'ORD-2023-102' },
+  { id: 'PAY-103', date: '2023-06-15', amount: 9800, status: 'pending', method: 'Bank Transfer', reference: 'ORD-2023-103' },
+  { id: 'PAY-104', date: '2023-06-28', amount: 14500, status: 'completed', method: 'Bank Transfer', reference: 'ORD-2023-104' },
+  { id: 'PAY-105', date: '2023-07-10', amount: 7600, status: 'pending', method: 'Bank Transfer', reference: 'ORD-2023-105' },
 ];
 
 const Payments = () => {
   const { user } = useAuth();
-  const { toast } = useToast();
-  const [payments, setPayments] = useState(initialPayments);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [newPayment, setNewPayment] = useState({
-    consolidationId: "",
-    method: "bank_transfer",
-    reference: "",
-    details: {
-      bankName: "",
-      accountNumber: "",
-      holderName: "",
-      swiftCode: ""
-    }
-  });
-  const [editingPayment, setEditingPayment] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState<"importer" | "supplier">("importer");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
 
-  // Filter payments based on search and user role
-  const filteredPayments = payments.filter(payment => {
+  // Filter payments based on search query and status filter
+  const filteredImporterPayments = importerPayments.filter(payment => {
     const matchesSearch = 
-      payment.consolidationId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      payment.consolidationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      payment.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      payment.reference.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      payment.orderIds.some(id => id.toLowerCase().includes(searchTerm.toLowerCase()));
+      payment.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      payment.reference.toLowerCase().includes(searchQuery.toLowerCase());
     
-    // Admin can see all payments
-    if (user?.role === "admin") {
-      return matchesSearch;
-    }
+    const matchesStatus = statusFilter === 'all' || payment.status === statusFilter;
     
-    // Supplier can only see payments related to their orders
-    if (user?.role === "supplier") {
-      // For demo purposes, supplier with id 1 is "Textile Masters Co." and supplier with id 2 is "Bosphorus Tech"
-      const supplierIdToFilter = user.name.includes("Supplier") ? "1" : "2";
-      return matchesSearch && payment.supplierId === supplierIdToFilter;
-    }
-    
-    // Buyer can only see their own payments
-    if (user?.role === "buyer") {
-      // For demo purposes, buyer with id 3 is "Fashion Retailer Inc." and buyer with id 4 is "Gadget World"
-      const buyerIdToFilter = user.name.includes("Buyer") ? "3" : "4";
-      return matchesSearch && payment.buyerId === buyerIdToFilter;
-    }
-    
-    return false;
+    return matchesSearch && matchesStatus;
   });
 
-  // Format date
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return "Not processed";
+  const filteredSupplierPayments = supplierPayments.filter(payment => {
+    const matchesSearch = 
+      payment.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      payment.reference.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const options: Intl.DateTimeFormatOptions = { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    };
+    const matchesStatus = statusFilter === 'all' || payment.status === statusFilter;
     
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    return matchesSearch && matchesStatus;
+  });
+
+  // Calculate totals
+  const calculateTotals = (payments: typeof importerPayments) => {
+    const total = payments.reduce((sum, payment) => sum + payment.amount, 0);
+    const completed = payments.filter(p => p.status === 'completed').reduce((sum, payment) => sum + payment.amount, 0);
+    const pending = payments.filter(p => p.status === 'pending').reduce((sum, payment) => sum + payment.amount, 0);
+    const failed = payments.filter(p => p.status === 'failed').reduce((sum, payment) => sum + payment.amount, 0);
+    
+    return { total, completed, pending, failed };
   };
 
-  // Format payment method
-  const formatPaymentMethod = (method: string) => {
-    switch (method) {
-      case "bank_transfer":
-        return "Bank Transfer";
-      case "credit_card":
-        return "Credit Card";
-      case "paypal":
-        return "PayPal";
-      case "wire_transfer":
-        return "Wire Transfer";
-      default:
-        return method.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    }
-  };
+  const importerTotals = calculateTotals(importerPayments);
+  const supplierTotals = calculateTotals(supplierPayments);
 
-  // Get status badge
-  const getStatusBadge = (status: string) => {
+  // Status badge component
+  const StatusBadge = ({ status }: { status: string }) => {
     switch (status) {
-      case 'paid':
-        return <Badge className="bg-green-100 text-green-800 hover:bg-green-100 capitalize">Paid</Badge>;
+      case 'completed':
+        return <Badge className="bg-green-100 text-green-800 hover:bg-green-100"><CheckCircle className="w-3 h-3 mr-1" /> Completed</Badge>;
       case 'pending':
-        return <Badge variant="outline" className="capitalize">Pending</Badge>;
-      case 'cancelled':
-        return <Badge variant="destructive" className="capitalize">Cancelled</Badge>;
+        return <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100"><Clock className="w-3 h-3 mr-1" /> Pending</Badge>;
+      case 'failed':
+        return <Badge className="bg-red-100 text-red-800 hover:bg-red-100"><AlertCircle className="w-3 h-3 mr-1" /> Failed</Badge>;
       default:
-        return <Badge variant="outline" className="capitalize">{status}</Badge>;
+        return <Badge>{status}</Badge>;
     }
-  };
-
-  // Create new payment (admin only)
-  const handleCreatePayment = () => {
-    const selectedConsolidation = consolidationsWithoutPayment.find(
-      c => c.id === newPayment.consolidationId
-    );
-    
-    if (!selectedConsolidation) {
-      toast({
-        title: "Error",
-        description: "Please select a valid consolidation.",
-        variant: "destructive"
-      });
-      return;
-    }
-    
-    // Create new payment object
-    const newPaymentObj = {
-      id: `PAY-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
-      consolidationId: selectedConsolidation.id,
-      consolidationName: selectedConsolidation.name,
-      amount: selectedConsolidation.total,
-      currency: "USD",
-      status: "pending",
-      method: newPayment.method,
-      reference: newPayment.reference || `INV-${Date.now().toString().slice(-5)}`,
-      details: newPayment.details,
-      supplierId: selectedConsolidation.supplierIds[0],
-      supplierName: selectedConsolidation.supplierIds[0] === "1" ? "Textile Masters Co." : "Bosphorus Tech",
-      buyerId: selectedConsolidation.buyerId,
-      buyerName: selectedConsolidation.buyerId === "3" ? "Fashion Retailer Inc." : "Gadget World",
-      orderIds: [`ORD-${Math.floor(Math.random() * 1000 + 1240)}`],
-      createdAt: new Date().toISOString(),
-      paidAt: null
-    };
-    
-    setPayments([...payments, newPaymentObj]);
-    
-    // Reset form
-    setNewPayment({
-      consolidationId: "",
-      method: "bank_transfer",
-      reference: "",
-      details: {
-        bankName: "",
-        accountNumber: "",
-        holderName: "",
-        swiftCode: ""
-      }
-    });
-    
-    toast({
-      title: "Payment Info Added",
-      description: `Payment information has been added for ${selectedConsolidation.name}.`
-    });
-  };
-
-  // Update payment (admin only)
-  const handleUpdatePayment = () => {
-    if (!editingPayment) return;
-    
-    const updatedPayments = payments.map(payment => 
-      payment.id === editingPayment.id ? { ...payment, ...editingPayment } : payment
-    );
-    
-    setPayments(updatedPayments);
-    setEditingPayment(null);
-    
-    toast({
-      title: "Payment Updated",
-      description: "The payment information has been successfully updated."
-    });
-  };
-
-  // Delete payment (admin only)
-  const handleDeletePayment = (id: string) => {
-    setPayments(payments.filter(payment => payment.id !== id));
-    
-    toast({
-      title: "Payment Deleted",
-      description: "The payment information has been successfully deleted."
-    });
-  };
-
-  // Mark payment as paid (admin only)
-  const handleMarkAsPaid = (paymentId: string) => {
-    const updatedPayments = payments.map(payment => 
-      payment.id === paymentId 
-        ? { ...payment, status: "paid", paidAt: new Date().toISOString() } 
-        : payment
-    );
-    
-    setPayments(updatedPayments);
-    
-    toast({
-      title: "Payment Status Updated",
-      description: "The payment has been marked as paid."
-    });
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-2xl font-bold">Payment Information</h1>
-          <p className="text-muted-foreground">
-            {user?.role === "admin" 
-              ? "Manage payment information for consolidations" 
-              : user?.role === "supplier"
-              ? "View payment information for orders you've supplied"
-              : "View payment information for your shipments"}
-          </p>
+    <div className="container mx-auto p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Payments</h1>
+        
+        {user?.role === "admin" && (
+          <div className="flex space-x-2">
+            <Button variant="outline" size="sm">
+              <Download className="h-4 w-4 mr-2" />
+              Export
+            </Button>
+            <Button size="sm">
+              <Plus className="h-4 w-4 mr-2" />
+              New Payment
+            </Button>
+          </div>
+        )}
+        
+        {user?.role === "importer" && (
+          <div className="flex space-x-2">
+            <Button variant="outline" size="sm">
+              <FileText className="h-4 w-4 mr-2" />
+              Payment History
+            </Button>
+            <Button size="sm">
+              <CreditCard className="h-4 w-4 mr-2" />
+              Make Payment
+            </Button>
+          </div>
+        )}
+        
+        {user?.role === "supplier" && (
+          <Button variant="outline" size="sm">
+            <FileText className="h-4 w-4 mr-2" />
+            Payment History
+          </Button>
+        )}
+      </div>
+
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-gray-500">Total Payments</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <DollarSign className="h-4 w-4 text-gray-400 mr-1" />
+              <div className="text-2xl font-bold">
+                ${activeTab === "importer" ? importerTotals.total.toLocaleString() : supplierTotals.total.toLocaleString()}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-gray-500">Completed</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <CheckCircle className="h-4 w-4 text-green-500 mr-1" />
+              <div className="text-2xl font-bold text-green-600">
+                ${activeTab === "importer" ? importerTotals.completed.toLocaleString() : supplierTotals.completed.toLocaleString()}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-gray-500">Pending</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <Clock className="h-4 w-4 text-yellow-500 mr-1" />
+              <div className="text-2xl font-bold text-yellow-600">
+                ${activeTab === "importer" ? importerTotals.pending.toLocaleString() : supplierTotals.pending.toLocaleString()}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-gray-500">Failed</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <AlertCircle className="h-4 w-4 text-red-500 mr-1" />
+              <div className="text-2xl font-bold text-red-600">
+                ${activeTab === "importer" ? importerTotals.failed.toLocaleString() : supplierTotals.failed.toLocaleString()}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Tabs for different payment views */}
+      {user?.role === "admin" && (
+        <Tabs defaultValue="importer" className="mb-6" onValueChange={(value) => setActiveTab(value as "importer" | "supplier")}>
+          <TabsList>
+            <TabsTrigger value="importer">Importer Payments</TabsTrigger>
+            <TabsTrigger value="supplier">Supplier Payments</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      )}
+
+      {/* Search and Filter */}
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="relative flex-grow">
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+          <Input
+            type="search"
+            placeholder="Search payments..."
+            className="pl-8"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
         
-        <div className="flex gap-4">
-          <div className="relative flex-1 min-w-[200px]">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input
-              placeholder="Search payments..."
-              className="pl-9"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+        <div className="flex gap-2">
+          <div className="w-[180px]">
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger>
+                <div className="flex items-center">
+                  <Filter className="h-4 w-4 mr-2" />
+                  <span>Status: {statusFilter === 'all' ? 'All' : statusFilter}</span>
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Statuses</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="failed">Failed</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           
-          {user?.role === "admin" && (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>
-                  <PlusIcon className="mr-2 h-4 w-4" />
-                  Add Payment Info
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Add Payment Information</DialogTitle>
-                  <DialogDescription>
-                    Create payment details for a consolidation
-                  </DialogDescription>
-                </DialogHeader>
-                
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="consolidation" className="text-right">
-                      Consolidation
-                    </Label>
-                    <select 
-                      id="consolidation" 
-                      className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      value={newPayment.consolidationId}
-                      onChange={(e) => setNewPayment({...newPayment, consolidationId: e.target.value})}
-                    >
-                      <option value="">Select a consolidation</option>
-                      {consolidationsWithoutPayment.map(cons => (
-                        <option key={cons.id} value={cons.id}>
-                          {cons.name} - ${cons.total}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="payment-method" className="text-right">
-                      Payment Method
-                    </Label>
-                    <select 
-                      id="payment-method" 
-                      className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      value={newPayment.method}
-                      onChange={(e) => setNewPayment({...newPayment, method: e.target.value})}
-                    >
-                      <option value="bank_transfer">Bank Transfer</option>
-                      <option value="credit_card">Credit Card</option>
-                      <option value="wire_transfer">Wire Transfer</option>
-                      <option value="paypal">PayPal</option>
-                    </select>
-                  </div>
-                  
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="reference" className="text-right">
-                      Reference/Invoice
-                    </Label>
-                    <Input 
-                      id="reference" 
-                      placeholder="Invoice number"
-                      className="col-span-3"
-                      value={newPayment.reference}
-                      onChange={(e) => setNewPayment({...newPayment, reference: e.target.value})}
-                    />
-                  </div>
-                  
-                  {newPayment.method === "bank_transfer" && (
-                    <>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="bank-name" className="text-right">
-                          Bank Name
-                        </Label>
-                        <Input 
-                          id="bank-name" 
-                          className="col-span-3"
-                          value={newPayment.details.bankName}
-                          onChange={(e) => setNewPayment({
-                            ...newPayment, 
-                            details: {...newPayment.details, bankName: e.target.value}
-                          })}
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="account-number" className="text-right">
-                          Account Number
-                        </Label>
-                        <Input 
-                          id="account-number" 
-                          className="col-span-3"
-                          value={newPayment.details.accountNumber}
-                          onChange={(e) => setNewPayment({
-                            ...newPayment, 
-                            details: {...newPayment.details, accountNumber: e.target.value}
-                          })}
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="holder-name" className="text-right">
-                          Account Holder
-                        </Label>
-                        <Input 
-                          id="holder-name" 
-                          className="col-span-3"
-                          value={newPayment.details.holderName}
-                          onChange={(e) => setNewPayment({
-                            ...newPayment, 
-                            details: {...newPayment.details, holderName: e.target.value}
-                          })}
-                        />
-                      </div>
-                      
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="swift-code" className="text-right">
-                          SWIFT Code
-                        </Label>
-                        <Input 
-                          id="swift-code" 
-                          className="col-span-3"
-                          value={newPayment.details.swiftCode}
-                          onChange={(e) => setNewPayment({
-                            ...newPayment, 
-                            details: {...newPayment.details, swiftCode: e.target.value}
-                          })}
-                        />
-                      </div>
-                    </>
-                  )}
-                </div>
-                
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <Button variant="outline">Cancel</Button>
-                  </DialogClose>
-                  <Button 
-                    onClick={handleCreatePayment}
-                    disabled={!newPayment.consolidationId}
-                  >
-                    Save Payment Info
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          )}
+          <Button variant="outline" size="icon">
+            <ArrowUpDown className="h-4 w-4" />
+          </Button>
         </div>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-2xl">{filteredPayments.length}</CardTitle>
-            <CardDescription>Total Payments</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold flex items-center text-blue-600">
-              <CreditCardIcon className="mr-2 h-4 w-4" />
-              <span>Payments</span>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-2xl">
-              ${filteredPayments.filter(p => p.status === "paid").reduce((total, p) => total + p.amount, 0).toLocaleString()}
-            </CardTitle>
-            <CardDescription>Total Paid</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-sm text-muted-foreground">
-              {filteredPayments.filter(p => p.status === "paid").length} payments completed
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-2xl">
-              ${filteredPayments.filter(p => p.status === "pending").reduce((total, p) => total + p.amount, 0).toLocaleString()}
-            </CardTitle>
-            <CardDescription>Pending Payments</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-sm text-muted-foreground">
-              {filteredPayments.filter(p => p.status === "pending").length} payments awaiting processing
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-      
-      <Card>
-        <CardHeader>
-          <CardTitle>Payment Information</CardTitle>
-          <CardDescription>
-            {user?.role === "admin" 
-              ? "Manage payment details for consolidations" 
-              : "View payment details for your orders"}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>Consolidation</TableHead>
-                {(user?.role === "admin" || user?.role === "supplier") && (
-                  <TableHead>Buyer</TableHead>
-                )}
-                {(user?.role === "admin" || user?.role === "buyer") && (
-                  <TableHead>Supplier</TableHead>
-                )}
-                <TableHead>Amount</TableHead>
-                <TableHead>Method</TableHead>
-                <TableHead>Related Orders</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredPayments.length > 0 ? (
-                filteredPayments.map(payment => (
-                  <TableRow key={payment.id}>
-                    <TableCell className="font-medium">{payment.id}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <FileTextIcon className="h-4 w-4 text-blue-600" />
-                        <span title={payment.consolidationName}>
-                          {payment.consolidationId}
-                        </span>
-                      </div>
-                    </TableCell>
-                    {(user?.role === "admin" || user?.role === "supplier") && (
-                      <TableCell>{payment.buyerName}</TableCell>
-                    )}
-                    {(user?.role === "admin" || user?.role === "buyer") && (
-                      <TableCell>{payment.supplierName}</TableCell>
-                    )}
-                    <TableCell>${payment.amount.toLocaleString()}</TableCell>
-                    <TableCell>{formatPaymentMethod(payment.method)}</TableCell>
-                    <TableCell>
-                      <div className="flex flex-wrap gap-1">
-                        {payment.orderIds.map(orderId => (
-                          <Badge key={orderId} variant="outline" className="text-xs">
-                            {orderId}
-                          </Badge>
-                        ))}
-                      </div>
-                    </TableCell>
-                    <TableCell>{getStatusBadge(payment.status)}</TableCell>
-                    <TableCell className="text-right">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <EyeIcon className="h-4 w-4" />
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Payment Details</DialogTitle>
-                            <DialogDescription>
-                              {payment.consolidationName} - {payment.reference}
-                            </DialogDescription>
-                          </DialogHeader>
-                          
-                          <div className="space-y-4 py-4">
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <h4 className="text-sm font-medium mb-1">Payment ID</h4>
-                                <p className="text-sm">{payment.id}</p>
-                              </div>
-                              <div>
-                                <h4 className="text-sm font-medium mb-1">Status</h4>
-                                <p className="text-sm">{getStatusBadge(payment.status)}</p>
-                              </div>
-                            </div>
-                            
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <h4 className="text-sm font-medium mb-1">Amount</h4>
-                                <p className="text-sm">${payment.amount.toLocaleString()} {payment.currency}</p>
-                              </div>
-                              <div>
-                                <h4 className="text-sm font-medium mb-1">Method</h4>
-                                <p className="text-sm">{formatPaymentMethod(payment.method)}</p>
-                              </div>
-                            </div>
-                            
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <h4 className="text-sm font-medium mb-1">Created Date</h4>
-                                <p className="text-sm">{formatDate(payment.createdAt)}</p>
-                              </div>
-                              <div>
-                                <h4 className="text-sm font-medium mb-1">Payment Date</h4>
-                                <p className="text-sm">{formatDate(payment.paidAt)}</p>
-                              </div>
-                            </div>
 
-                            <div>
-                              <h4 className="text-sm font-medium mb-1">Related Orders</h4>
-                              <div className="flex flex-wrap gap-1 mt-1">
-                                {payment.orderIds.map(orderId => (
-                                  <Badge key={orderId} variant="outline">
-                                    {orderId}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </div>
-                            
-                            <div className="pt-2">
-                              <h4 className="text-sm font-medium mb-2">Payment Details</h4>
-                              {payment.method === "bank_transfer" && (
-                                <div className="space-y-2 bg-gray-50 p-3 rounded-md">
-                                  <div className="grid grid-cols-2 text-sm">
-                                    <span className="text-muted-foreground">Bank Name:</span>
-                                    <span>{payment.details.bankName}</span>
-                                  </div>
-                                  <div className="grid grid-cols-2 text-sm">
-                                    <span className="text-muted-foreground">Account Number:</span>
-                                    <span>{payment.details.accountNumber}</span>
-                                  </div>
-                                  <div className="grid grid-cols-2 text-sm">
-                                    <span className="text-muted-foreground">Account Holder:</span>
-                                    <span>{payment.details.holderName}</span>
-                                  </div>
-                                  <div className="grid grid-cols-2 text-sm">
-                                    <span className="text-muted-foreground">SWIFT Code:</span>
-                                    <span>{payment.details.swiftCode}</span>
-                                  </div>
-                                </div>
-                              )}
-                              
-                              {payment.method === "credit_card" && (
-                                <div className="space-y-2 bg-gray-50 p-3 rounded-md">
-                                  <div className="grid grid-cols-2 text-sm">
-                                    <span className="text-muted-foreground">Card Type:</span>
-                                    <span>{payment.details.cardType}</span>
-                                  </div>
-                                  <div className="grid grid-cols-2 text-sm">
-                                    <span className="text-muted-foreground">Last Four Digits:</span>
-                                    <span>**** **** **** {payment.details.lastFourDigits}</span>
-                                  </div>
-                                  <div className="grid grid-cols-2 text-sm">
-                                    <span className="text-muted-foreground">Expiry Date:</span>
-                                    <span>{payment.details.expiryDate}</span>
-                                  </div>
-                                  <div className="grid grid-cols-2 text-sm">
-                                    <span className="text-muted-foreground">Card Holder:</span>
-                                    <span>{payment.details.holderName}</span>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                      
-                      {user?.role === "admin" && (
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                              <PencilIcon className="h-4 w-4" />
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>Edit Payment</DialogTitle>
-                              <DialogDescription>
-                                Update payment information
-                              </DialogDescription>
-                            </DialogHeader>
-                            
-                            <div className="grid gap-4 py-4">
-                              <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="edit-reference" className="text-right">
-                                  Reference
-                                </Label>
-                                <Input 
-                                  id="edit-reference" 
-                                  className="col-span-3"
-                                  defaultValue={payment.reference}
-                                  onChange={(e) => setEditingPayment({
-                                    ...payment,
-                                    reference: e.target.value
-                                  })}
-                                />
-                              </div>
-                              
-                              <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="edit-method" className="text-right">
-                                  Payment Method
-                                </Label>
-                                <select 
-                                  id="edit-method" 
-                                  className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                                  defaultValue={payment.method}
-                                  onChange={(e) => setEditingPayment({
-                                    ...payment,
-                                    method: e.target.value
-                                  })}
-                                >
-                                  <option value="bank_transfer">Bank Transfer</option>
-                                  <option value="credit_card">Credit Card</option>
-                                  <option value="wire_transfer">Wire Transfer</option>
-                                  <option value="paypal">PayPal</option>
-                                </select>
-                              </div>
-                              
-                              {(payment.method === "bank_transfer" || (!editingPayment || editingPayment.method === "bank_transfer")) && (
-                                <>
-                                  <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="edit-bank" className="text-right">
-                                      Bank Name
-                                    </Label>
-                                    <Input 
-                                      id="edit-bank" 
-                                      className="col-span-3"
-                                      defaultValue={payment.details.bankName}
-                                      onChange={(e) => setEditingPayment({
-                                        ...payment,
-                                        details: {
-                                          ...payment.details,
-                                          bankName: e.target.value
-                                        }
-                                      })}
-                                    />
-                                  </div>
-                                  
-                                  <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="edit-account" className="text-right">
-                                      Account Number
-                                    </Label>
-                                    <Input 
-                                      id="edit-account" 
-                                      className="col-span-3"
-                                      defaultValue={payment.details.accountNumber}
-                                      onChange={(e) => setEditingPayment({
-                                        ...payment,
-                                        details: {
-                                          ...payment.details,
-                                          accountNumber: e.target.value
-                                        }
-                                      })}
-                                    />
-                                  </div>
-                                </>
-                              )}
-                            </div>
-                            
-                            <DialogFooter>
-                              <DialogClose asChild>
-                                <Button variant="outline" onClick={() => setEditingPayment(null)}>
-                                  Cancel
-                                </Button>
-                              </DialogClose>
-                              <Button onClick={handleUpdatePayment}>
-                                Save Changes
-                              </Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
-                      )}
-                      
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <MoreHorizontalIcon className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          
-                          {user?.role === "admin" && payment.status === "pending" && (
-                            <DropdownMenuItem onClick={() => handleMarkAsPaid(payment.id)}>
-                              <DollarSignIcon className="h-4 w-4 mr-2" />
-                              Mark as Paid
-                            </DropdownMenuItem>
-                          )}
-                          
-                          <DropdownMenuItem>
-                            <FileTextIcon className="h-4 w-4 mr-2" />
-                            Download Invoice
-                          </DropdownMenuItem>
-                          
-                          {user?.role !== "admin" && payment.status === "pending" && (
-                            <DropdownMenuItem>
-                              <MailIcon className="h-4 w-4 mr-2" />
-                              Send Payment Proof
-                            </DropdownMenuItem>
-                          )}
-                          
-                          {user?.role === "admin" && (
-                            <DropdownMenuItem onClick={() => handleDeletePayment(payment.id)} className="text-red-500">
-                              <TrashIcon className="h-4 w-4 mr-2" />
-                              Delete Payment
-                            </DropdownMenuItem>
-                          )}
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+      {/* Payments Table */}
+      {activeTab === "importer" && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Payment History</CardTitle>
+            <CardDescription>
+              {user?.role === "admin" ? "All payments made by importers" : "Your payment history"}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Payment ID</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Amount</TableHead>
+                  <TableHead>Method</TableHead>
+                  <TableHead>Reference</TableHead>
+                  <TableHead>Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredImporterPayments.length > 0 ? (
+                  filteredImporterPayments.map((payment) => (
+                    <TableRow key={payment.id}>
+                      <TableCell className="font-medium">{payment.id}</TableCell>
+                      <TableCell>{payment.date}</TableCell>
+                      <TableCell>${payment.amount.toLocaleString()}</TableCell>
+                      <TableCell>{payment.method}</TableCell>
+                      <TableCell>{payment.reference}</TableCell>
+                      <TableCell>
+                        <StatusBadge status={payment.status} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center py-4 text-gray-500">
+                      No payments found
                     </TableCell>
                   </TableRow>
-                ))
-              ) : (
+                )}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+
+      {activeTab === "supplier" && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Supplier Payments</CardTitle>
+            <CardDescription>
+              {user?.role === "admin" ? "All payments made to suppliers" : "Payments received for your products"}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
                 <TableRow>
-                  <TableCell colSpan={user?.role === "admin" ? 9 : 8} className="text-center py-10 text-muted-foreground">
-                    No payment information found matching your criteria
-                  </TableCell>
+                  <TableHead>Payment ID</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Amount</TableHead>
+                  <TableHead>Method</TableHead>
+                  <TableHead>Reference</TableHead>
+                  <TableHead>Status</TableHead>
                 </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+              </TableHeader>
+              <TableBody>
+                {filteredSupplierPayments.length > 0 ? (
+                  filteredSupplierPayments.map((payment) => (
+                    <TableRow key={payment.id}>
+                      <TableCell className="font-medium">{payment.id}</TableCell>
+                      <TableCell>{payment.date}</TableCell>
+                      <TableCell>${payment.amount.toLocaleString()}</TableCell>
+                      <TableCell>{payment.method}</TableCell>
+                      <TableCell>{payment.reference}</TableCell>
+                      <TableCell>
+                        <StatusBadge status={payment.status} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center py-4 text-gray-500">
+                      No payments found
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Payment Form (simplified) */}
+      {user?.role === "importer" && (
+        <div className="mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Make a Payment</CardTitle>
+              <CardDescription>
+                Pay for your orders or add funds to your account
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="amount">Amount</Label>
+                    <div className="relative">
+                      <DollarSign className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+                      <Input id="amount" type="number" placeholder="0.00" className="pl-8" />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="reference">Reference</Label>
+                    <Input id="reference" placeholder="Invoice or Order ID" />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="payment-method">Payment Method</Label>
+                  <Select defaultValue="bank-transfer">
+                    <SelectTrigger id="payment-method">
+                      <SelectValue placeholder="Select payment method" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="bank-transfer">Bank Transfer</SelectItem>
+                      <SelectItem value="credit-card">Credit Card</SelectItem>
+                      <SelectItem value="paypal">PayPal</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <Button type="submit" className="w-full">
+                  <CreditCard className="h-4 w-4 mr-2" />
+                  Process Payment
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };

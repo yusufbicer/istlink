@@ -1,43 +1,36 @@
 
-import { useState, useEffect } from 'react';
-import { SidebarProvider } from "@/components/ui/sidebar";
+import React from 'react';
+import BlogPostManagement from '@/components/blog/BlogPostManagement';
 import { useAuth } from '@/lib/auth';
+import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Header from '@/components/dashboard/Header';
-import BlogPostManagement from '@/components/blog/BlogPostManagement';
 
 const BlogManagement = () => {
   const { user } = useAuth();
+  const { toast } = useToast();
   const navigate = useNavigate();
   
-  // Redirect to login if not authenticated or not admin
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    } else if (user.role !== 'admin') {
-      navigate('/dashboard');
-    }
-  }, [user, navigate]);
-
   if (!user || user.role !== 'admin') {
-    return null; // Don't render anything while redirecting
+    toast({
+      title: "Access Denied",
+      description: "You do not have permission to access this page.",
+      variant: "destructive"
+    });
+    navigate('/dashboard');
+    return null;
   }
-
+  
   return (
-    <SidebarProvider>
-      <div className="min-h-screen w-full flex bg-gray-50 text-gray-900">
-        <Sidebar />
-        
-        <div className="flex-1 flex flex-col">
-          <Header />
-          
-          <main className="flex-1 px-4 sm:px-6 py-4 sm:py-6 overflow-auto">
-            <BlogPostManagement />
-          </main>
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar userRole={user.role} />
+      <div className="flex-1 overflow-auto">
+        <div className="container mx-auto p-6">
+          <h1 className="text-2xl font-bold mb-6">Blog Management</h1>
+          <BlogPostManagement />
         </div>
       </div>
-    </SidebarProvider>
+    </div>
   );
 };
 

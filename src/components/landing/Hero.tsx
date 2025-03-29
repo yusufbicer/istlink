@@ -43,7 +43,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Your Turkish Supply Chain, <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">Elegantly Simplified</span>
+            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">Elegantly Resolved</span>
           </h1>
           
           <p 
@@ -51,8 +51,9 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Consolidate multiple purchases from Turkish suppliers into a single shipment. 
-            Simplify payments, documentation, and tracking with our smart consolidation dashboard.
+            Transform fragmented Turkish supplier purchases into a single, streamlined shipment. 
+            Our AI-powered platform simplifies the entire process—from payment consolidation to 
+            documentation management and comprehensive tracking.
           </p>
           
           <div 

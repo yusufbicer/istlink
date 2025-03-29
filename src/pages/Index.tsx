@@ -1,8 +1,8 @@
-
 import { useEffect } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
 import Features from '@/components/landing/Features';
+import HowItWorks from '@/components/landing/HowItWorks';
 import Footer from '@/components/landing/Footer';
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon, PackageCheck, FileText, Receipt } from 'lucide-react';
@@ -26,52 +26,8 @@ const Index = () => {
         <Hero />
         <Features />
         
-        {/* How It Works Section */}
-        <section id="how-it-works" className="py-20 bg-white">
-          <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
-                How It Works
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Simple Process, Powerful Results
-              </h2>
-              <p className="text-xl text-gray-600">
-                Our platform makes consolidating shipments from Turkey straightforward and efficient.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <div className="text-center relative">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full mb-5 text-xl font-bold">1</div>
-                <h3 className="text-xl font-bold mb-3">Add Your Suppliers</h3>
-                <p className="text-gray-600">
-                  Register your Turkish suppliers in our platform and manage all your vendor relationships in one place.
-                </p>
-                {/* Connector line */}
-                <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-blue-100 -ml-4 transform -translate-x-1/2"></div>
-              </div>
-              
-              <div className="text-center relative">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full mb-5 text-xl font-bold">2</div>
-                <h3 className="text-xl font-bold mb-3">Place Orders</h3>
-                <p className="text-gray-600">
-                  Enter your order details from multiple suppliers and select your preferred consolidation options.
-                </p>
-                {/* Connector line */}
-                <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-blue-100 -ml-4 transform -translate-x-1/2"></div>
-              </div>
-              
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full mb-5 text-xl font-bold">3</div>
-                <h3 className="text-xl font-bold mb-3">Track & Receive</h3>
-                <p className="text-gray-600">
-                  Monitor your consolidated shipment in real-time and receive your products with a single bill of lading.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* How It Works Section - Now imported as a component */}
+        <HowItWorks />
         
         {/* Blog Preview Section */}
         <section id="blog" className="py-20 bg-gray-50">

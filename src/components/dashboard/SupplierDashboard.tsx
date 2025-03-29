@@ -1,221 +1,279 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Package, Truck, DollarSign, Clock, ShoppingBag, Users, BarChart4, Check } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { ArrowUpRight, ShoppingCart, CreditCard, Users, Box, Clock, CheckCircle, TruckIcon, AlertCircle } from "lucide-react";
+import { 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  Legend,
+  PieChart,
+  Pie,
+  Cell
+} from 'recharts';
+
+// Sample data
+const revenueData = [
+  { name: 'Jan', revenue: 15000 },
+  { name: 'Feb', revenue: 18000 },
+  { name: 'Mar', revenue: 25000 },
+  { name: 'Apr', revenue: 22000 },
+  { name: 'May', revenue: 30000 },
+  { name: 'Jun', revenue: 28000 },
+  { name: 'Jul', revenue: 35000 },
+  { name: 'Aug', revenue: 42000 },
+];
+
+const productPerformanceData = [
+  { name: 'Product A', sales: 120 },
+  { name: 'Product B', sales: 80 },
+  { name: 'Product C', sales: 150 },
+  { name: 'Product D', sales: 200 },
+  { name: 'Product E', sales: 70 },
+];
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 const SupplierDashboard = () => {
-  // Mock data for demonstration
-  const orders = [
-    { id: 'ORD-2023-001', customer: 'Globex Inc.', items: 34, amount: 12400, status: 'Ready for Pickup', date: '2023-10-15' },
-    { id: 'ORD-2023-012', customer: 'Acme Corp', items: 28, amount: 9640, status: 'Processing', date: '2023-11-05' },
-    { id: 'ORD-2023-015', customer: 'Soylent Corp', items: 22, amount: 7520, status: 'New Order', date: '2023-11-12' },
-    { id: 'ORD-2023-018', customer: 'Initech', items: 45, amount: 15280, status: 'Pending', date: '2023-11-15' },
+  // Recent orders from importers
+  const recentOrders = [
+    { id: 'OR-7832', date: '2023-08-15', status: 'Processing', amount: '$2,500.00', customer: 'Global Imports Inc.' },
+    { id: 'OR-7833', date: '2023-08-12', status: 'Shipped', amount: '$1,200.00', customer: 'Eastern Trading Co.' },
+    { id: 'OR-7834', date: '2023-08-10', status: 'Pending', amount: '$3,450.00', customer: 'Pacific Distributors' },
+    { id: 'OR-7835', date: '2023-08-05', status: 'Delivered', amount: '$980.00', customer: 'American Importers Ltd.' },
   ];
 
-  const getStatusColor = (status: string) => {
+  const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'Ready for Pickup':
-        return 'bg-green-100 text-green-800';
       case 'Processing':
-        return 'bg-blue-100 text-blue-800';
-      case 'New Order':
-        return 'bg-purple-100 text-purple-800';
+        return <Clock className="h-4 w-4 text-yellow-500" />;
+      case 'Shipped':
+        return <TruckIcon className="h-4 w-4 text-blue-500" />;
+      case 'Delivered':
+        return <CheckCircle className="h-4 w-4 text-green-500" />;
       case 'Pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return <AlertCircle className="h-4 w-4 text-orange-500" />;
       default:
-        return 'bg-gray-100 text-gray-800';
+        return <AlertCircle className="h-4 w-4 text-gray-500" />;
     }
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Supplier Dashboard</h1>
-        <p className="text-muted-foreground mt-1">
-          Manage your orders, payments, and customer relationships
-        </p>
+    <div className="w-full space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Card 1 - Order Requests */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex justify-between items-center">
+              Order Requests
+              <span className="p-2 rounded-full bg-blue-50">
+                <ShoppingCart className="h-5 w-5 text-blue-500" />
+              </span>
+            </CardTitle>
+            <CardDescription>New order requests</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-baseline justify-between">
+              <span className="text-3xl font-bold">18</span>
+              <span className="text-sm flex items-center text-green-600">
+                <ArrowUpRight className="h-4 w-4 mr-1" />
+                24%
+              </span>
+            </div>
+            <Progress value={70} className="h-2 mt-4" />
+            <p className="text-xs text-muted-foreground mt-2">
+              5 require immediate attention
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Card 2 - Revenue */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex justify-between items-center">
+              Monthly Revenue
+              <span className="p-2 rounded-full bg-green-50">
+                <CreditCard className="h-5 w-5 text-green-500" />
+              </span>
+            </CardTitle>
+            <CardDescription>This month's earnings</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-baseline justify-between">
+              <span className="text-3xl font-bold">$42K</span>
+              <span className="text-sm flex items-center text-green-600">
+                <ArrowUpRight className="h-4 w-4 mr-1" />
+                18%
+              </span>
+            </div>
+            <Progress value={85} className="h-2 mt-4" />
+            <p className="text-xs text-muted-foreground mt-2">
+              85% of monthly target
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Card 3 - Active Customers */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex justify-between items-center">
+              Active Customers
+              <span className="p-2 rounded-full bg-purple-50">
+                <Users className="h-5 w-5 text-purple-500" />
+              </span>
+            </CardTitle>
+            <CardDescription>Importers working with you</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-baseline justify-between">
+              <span className="text-3xl font-bold">24</span>
+              <span className="text-sm flex items-center text-green-600">
+                <ArrowUpRight className="h-4 w-4 mr-1" />
+                12%
+              </span>
+            </div>
+            <Progress value={60} className="h-2 mt-4" />
+            <p className="text-xs text-muted-foreground mt-2">
+              3 new customers this month
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Card 4 - Products */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex justify-between items-center">
+              Active Products
+              <span className="p-2 rounded-full bg-amber-50">
+                <Box className="h-5 w-5 text-amber-500" />
+              </span>
+            </CardTitle>
+            <CardDescription>Listed in catalog</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-baseline justify-between">
+              <span className="text-3xl font-bold">85</span>
+              <span className="text-sm flex items-center text-green-600">
+                <ArrowUpRight className="h-4 w-4 mr-1" />
+                5%
+              </span>
+            </div>
+            <Progress value={75} className="h-2 mt-4" />
+            <p className="text-xs text-muted-foreground mt-2">
+              12 new products added
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Status Cards - First Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Active Orders</CardTitle>
-            <Package className="h-4 w-4 text-indigo-600" />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Chart 1 - Revenue Trend */}
+        <Card className="lg:col-span-2 hover:shadow-md transition-shadow">
+          <CardHeader>
+            <CardTitle>Revenue Trend</CardTitle>
+            <CardDescription>
+              Monthly revenue performance
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">8</div>
-            <p className="text-xs text-muted-foreground">From 4 customers</p>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={revenueData}
+                  margin={{
+                    top: 10,
+                    right: 30,
+                    left: 0,
+                    bottom: 0,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip formatter={(value) => [`$${value}`, 'Revenue']} />
+                  <Area type="monotone" dataKey="revenue" stroke="#10b981" fill="#10b981" fillOpacity={0.3} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Ready for Pickup</CardTitle>
-            <Truck className="h-4 w-4 text-green-600" />
+
+        {/* Chart 2 - Top Products */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader>
+            <CardTitle>Top Products</CardTitle>
+            <CardDescription>
+              Best selling products
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">2</div>
-            <p className="text-xs text-muted-foreground">Awaiting consolidation</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Monthly Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-blue-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$44,840</div>
-            <p className="text-xs text-muted-foreground">+12% from last month</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Avg. Processing</CardTitle>
-            <Clock className="h-4 w-4 text-purple-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">1.4 days</div>
-            <p className="text-xs text-muted-foreground">-0.3 days from average</p>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  layout="vertical"
+                  data={productPerformanceData}
+                  margin={{
+                    top: 20,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis type="number" />
+                  <YAxis dataKey="name" type="category" scale="band" />
+                  <Tooltip />
+                  <Bar dataKey="sales" fill="#8884d8" barSize={20} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Status Cards - Second Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Top Product</CardTitle>
-            <ShoppingBag className="h-4 w-4 text-yellow-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">Turkish Carpets</div>
-            <p className="text-xs text-muted-foreground">325 units this month</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Top Customer</CardTitle>
-            <Users className="h-4 w-4 text-indigo-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">Globex Inc.</div>
-            <p className="text-xs text-muted-foreground">$32,450 total orders</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Satisfaction</CardTitle>
-            <BarChart4 className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">98%</div>
-            <p className="text-xs text-muted-foreground">Based on 124 reviews</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">On-Time Delivery</CardTitle>
-            <Check className="h-4 w-4 text-blue-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">99%</div>
-            <p className="text-xs text-muted-foreground">Last 30 days</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Orders Table */}
-      <Card>
+      {/* Recent Orders */}
+      <Card className="hover:shadow-md transition-shadow">
         <CardHeader>
           <CardTitle>Recent Orders</CardTitle>
-          <CardDescription>Your latest customer orders</CardDescription>
+          <CardDescription>
+            Latest customer orders
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left font-medium py-3 px-4">Order ID</th>
-                  <th className="text-left font-medium py-3 px-4">Customer</th>
-                  <th className="text-left font-medium py-3 px-4">Items</th>
-                  <th className="text-left font-medium py-3 px-4">Amount</th>
-                  <th className="text-left font-medium py-3 px-4">Status</th>
-                  <th className="text-left font-medium py-3 px-4">Date</th>
+                  <th className="pb-3 text-left">Order ID</th>
+                  <th className="pb-3 text-left">Date</th>
+                  <th className="pb-3 text-left">Customer</th>
+                  <th className="pb-3 text-left">Amount</th>
+                  <th className="pb-3 text-left">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order) => (
-                  <tr key={order.id} className="border-b">
-                    <td className="py-3 px-4">{order.id}</td>
-                    <td className="py-3 px-4">{order.customer}</td>
-                    <td className="py-3 px-4">{order.items}</td>
-                    <td className="py-3 px-4">${order.amount.toLocaleString()}</td>
-                    <td className="py-3 px-4">
-                      <span className={`inline-block px-2 py-1 rounded-full text-xs ${getStatusColor(order.status)}`}>
-                        {order.status}
-                      </span>
+                {recentOrders.map((order) => (
+                  <tr key={order.id} className="border-b hover:bg-gray-50">
+                    <td className="py-3 text-blue-600 font-medium">{order.id}</td>
+                    <td className="py-3">{order.date}</td>
+                    <td className="py-3">{order.customer}</td>
+                    <td className="py-3">{order.amount}</td>
+                    <td className="py-3">
+                      <div className="flex items-center">
+                        {getStatusIcon(order.status)}
+                        <span className="ml-2">{order.status}</span>
+                      </div>
                     </td>
-                    <td className="py-3 px-4">{new Date(order.date).toLocaleDateString()}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Order Fulfillment Progress */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Order Fulfillment</CardTitle>
-          <CardDescription>Progress monitoring for active orders</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between mb-1">
-                <span className="text-sm font-medium">Order #ORD-2023-001</span>
-                <span className="text-sm text-muted-foreground">100%</span>
-              </div>
-              <div className="h-2 bg-gray-200 rounded-full">
-                <div className="h-2 bg-green-500 rounded-full" style={{ width: '100%' }}></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-1">
-                <span className="text-sm font-medium">Order #ORD-2023-012</span>
-                <span className="text-sm text-muted-foreground">75%</span>
-              </div>
-              <div className="h-2 bg-gray-200 rounded-full">
-                <div className="h-2 bg-blue-500 rounded-full" style={{ width: '75%' }}></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-1">
-                <span className="text-sm font-medium">Order #ORD-2023-015</span>
-                <span className="text-sm text-muted-foreground">25%</span>
-              </div>
-              <div className="h-2 bg-gray-200 rounded-full">
-                <div className="h-2 bg-purple-500 rounded-full" style={{ width: '25%' }}></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-1">
-                <span className="text-sm font-medium">Order #ORD-2023-018</span>
-                <span className="text-sm text-muted-foreground">10%</span>
-              </div>
-              <div className="h-2 bg-gray-200 rounded-full">
-                <div className="h-2 bg-yellow-500 rounded-full" style={{ width: '10%' }}></div>
-              </div>
-            </div>
           </div>
         </CardContent>
       </Card>

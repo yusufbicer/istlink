@@ -6,6 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/lib/auth";
 
+// WhatsApp Button
+import WhatsAppButton from "@/components/common/WhatsAppButton";
+
 // Pages
 import Index from "./pages/Index";
 import Login from "./pages/Login";
@@ -57,6 +60,7 @@ const App = () => (
             
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <WhatsAppButton />
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>

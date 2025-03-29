@@ -4,7 +4,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/lib/auth";
-import { BellIcon, SearchIcon, Zap, Atom } from "lucide-react";
+import { BellIcon, SearchIcon } from "lucide-react";
 import { useIsMobile, useIsTablet } from "@/hooks/use-mobile";
 import {
   DropdownMenu,
@@ -119,9 +119,9 @@ const Header = ({ userRole = 'importer' }: HeaderProps) => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                {user?.image ? (
+                {user?.avatar ? (
                   <img 
-                    src={user.image} 
+                    src={user.avatar} 
                     alt={user.name || "User"} 
                     className="h-8 w-8 rounded-full object-cover"
                   />

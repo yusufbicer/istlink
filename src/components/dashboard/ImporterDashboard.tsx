@@ -1,250 +1,286 @@
 
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Package, Truck, DollarSign, FileText, Calendar, AlertCircle, TrendingUp, Clock } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { ArrowUpRight, Package, CreditCard, Truck, Calendar, AlertCircle, CheckCircle, Clock } from "lucide-react";
+import { 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell
+} from 'recharts';
+import { useAuth } from '@/lib/auth';
+
+// Sample data
+const orderData = [
+  { name: 'Jan', orders: 5 },
+  { name: 'Feb', orders: 8 },
+  { name: 'Mar', orders: 12 },
+  { name: 'Apr', orders: 19 },
+  { name: 'May', orders: 15 },
+  { name: 'Jun', orders: 25 },
+  { name: 'Jul', orders: 30 },
+  { name: 'Aug', orders: 35 },
+];
+
+const shipmentStatusData = [
+  { name: 'In Transit', value: 10 },
+  { name: 'Processing', value: 5 },
+  { name: 'Delivered', value: 15 },
+  { name: 'Pending', value: 3 },
+];
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const ImporterDashboard = () => {
-  const [view, setView] = useState('all');
+  const { user } = useAuth();
+  const [activeOrders, setActiveOrders] = useState(12);
+  const [pendingPayments, setPendingPayments] = useState(3);
+  const [consolidations, setConsolidations] = useState(4);
+  const [upcomingShipments, setUpcomingShipments] = useState(2);
 
-  // Mock data for demonstration
-  const orders = [
-    { id: 'ORD-2023-001', supplier: 'Turkish Textiles Ltd', items: 34, amount: 12400, status: 'In Transit', date: '2023-10-15' },
-    { id: 'ORD-2023-002', supplier: 'Ankara Furniture Co', items: 12, amount: 8750, status: 'Consolidated', date: '2023-10-22' },
-    { id: 'ORD-2023-003', supplier: 'Istanbul Ceramics', items: 50, amount: 5280, status: 'Processing', date: '2023-11-01' },
-    { id: 'ORD-2023-004', supplier: 'Izmir Textiles', items: 28, amount: 9640, status: 'Awaiting Payment', date: '2023-11-05' },
+  const recentOrders = [
+    { id: 'OR-7832', date: '2023-08-15', status: 'Processing', amount: '$2,500.00', supplier: 'Tech Supplies Co.' },
+    { id: 'OR-7833', date: '2023-08-12', status: 'Shipped', amount: '$1,200.00', supplier: 'Office Gear Ltd.' },
+    { id: 'OR-7834', date: '2023-08-10', status: 'Processing', amount: '$3,450.00', supplier: 'Industrial Parts Inc.' },
+    { id: 'OR-7835', date: '2023-08-05', status: 'Delivered', amount: '$980.00', supplier: 'Global Electronics' },
   ];
 
-  const consolidations = [
-    { id: 'CON-2023-1458', orders: 3, totalValue: 26430, status: 'Ready to Ship', estimatedArrival: '2023-12-10' },
-    { id: 'CON-2023-1457', orders: 5, totalValue: 18920, status: 'Consolidating', estimatedArrival: '2023-12-18' },
-  ];
-
-  const getStatusColor = (status: string) => {
+  const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'In Transit':
-        return 'bg-blue-100 text-blue-800';
-      case 'Consolidated':
-        return 'bg-green-100 text-green-800';
       case 'Processing':
-        return 'bg-purple-100 text-purple-800';
-      case 'Awaiting Payment':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'Ready to Ship':
-        return 'bg-green-100 text-green-800';
-      case 'Consolidating':
-        return 'bg-indigo-100 text-indigo-800';
+        return <Clock className="h-4 w-4 text-yellow-500" />;
+      case 'Shipped':
+        return <Truck className="h-4 w-4 text-blue-500" />;
+      case 'Delivered':
+        return <CheckCircle className="h-4 w-4 text-green-500" />;
       default:
-        return 'bg-gray-100 text-gray-800';
+        return <AlertCircle className="h-4 w-4 text-gray-500" />;
     }
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Importer Dashboard</h1>
-        <div className="flex items-center space-x-2">
-          <button 
-            onClick={() => setView('all')} 
-            className={`px-3 py-1.5 text-sm font-medium rounded-md ${
-              view === 'all' ? 'bg-indigo-100 text-indigo-800' : 'bg-white text-gray-600'
-            }`}
-          >
-            All
-          </button>
-          <button 
-            onClick={() => setView('orders')} 
-            className={`px-3 py-1.5 text-sm font-medium rounded-md ${
-              view === 'orders' ? 'bg-indigo-100 text-indigo-800' : 'bg-white text-gray-600'
-            }`}
-          >
-            Orders
-          </button>
-          <button 
-            onClick={() => setView('consolidations')} 
-            className={`px-3 py-1.5 text-sm font-medium rounded-md ${
-              view === 'consolidations' ? 'bg-indigo-100 text-indigo-800' : 'bg-white text-gray-600'
-            }`}
-          >
-            Consolidations
-          </button>
-        </div>
-      </div>
+    <div className="w-full space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Card 1 - Active Orders */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex justify-between items-center">
+              Active Orders
+              <span className="p-2 rounded-full bg-blue-50">
+                <Package className="h-5 w-5 text-blue-500" />
+              </span>
+            </CardTitle>
+            <CardDescription>Current open orders</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-baseline justify-between">
+              <span className="text-3xl font-bold">{activeOrders}</span>
+              <span className="text-sm flex items-center text-green-600">
+                <ArrowUpRight className="h-4 w-4 mr-1" />
+                12%
+              </span>
+            </div>
+            <Progress value={65} className="h-2 mt-4" />
+            <p className="text-xs text-muted-foreground mt-2">
+              65% increase since last month
+            </p>
+          </CardContent>
+        </Card>
 
-      {/* Status Cards - First Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Active Orders</CardTitle>
-            <Package className="h-4 w-4 text-indigo-600" />
+        {/* Card 2 - Pending Payments */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex justify-between items-center">
+              Pending Payments
+              <span className="p-2 rounded-full bg-amber-50">
+                <CreditCard className="h-5 w-5 text-amber-500" />
+              </span>
+            </CardTitle>
+            <CardDescription>Awaiting payment</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">From 3 suppliers</p>
+            <div className="flex items-baseline justify-between">
+              <span className="text-3xl font-bold">{pendingPayments}</span>
+              <span className="text-sm flex items-center text-red-600">
+                <ArrowUpRight className="h-4 w-4 mr-1" />
+                3%
+              </span>
+            </div>
+            <Progress value={30} className="h-2 mt-4" />
+            <p className="text-xs text-muted-foreground mt-2">
+              $12,450 total pending amount
+            </p>
           </CardContent>
         </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Consolidations</CardTitle>
-            <Truck className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">2</div>
-            <p className="text-xs text-muted-foreground">In Progress</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Value</CardTitle>
-            <DollarSign className="h-4 w-4 text-blue-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$36,070</div>
-            <p className="text-xs text-muted-foreground">Outstanding balance</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Next Arrival</CardTitle>
-            <Calendar className="h-4 w-4 text-purple-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">Dec 10</div>
-            <p className="text-xs text-muted-foreground">Estimated arrival date</p>
-          </CardContent>
-        </Card>
-      </div>
 
-      {/* Status Cards - Second Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Pending Actions</CardTitle>
-            <AlertCircle className="h-4 w-4 text-yellow-600" />
+        {/* Card 3 - Active Consolidations */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex justify-between items-center">
+              Consolidations
+              <span className="p-2 rounded-full bg-purple-50">
+                <Package className="h-5 w-5 text-purple-500" />
+              </span>
+            </CardTitle>
+            <CardDescription>Active consolidation groups</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">2</div>
-            <p className="text-xs text-muted-foreground">Payments to approve</p>
+            <div className="flex items-baseline justify-between">
+              <span className="text-3xl font-bold">{consolidations}</span>
+              <span className="text-sm flex items-center text-green-600">
+                <ArrowUpRight className="h-4 w-4 mr-1" />
+                8%
+              </span>
+            </div>
+            <Progress value={45} className="h-2 mt-4" />
+            <p className="text-xs text-muted-foreground mt-2">
+              12 items being consolidated
+            </p>
           </CardContent>
         </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Space Saved</CardTitle>
-            <TrendingUp className="h-4 w-4 text-indigo-600" />
+
+        {/* Card 4 - Upcoming Shipments */}
+        <Card className="hover:shadow-md transition-shadow">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex justify-between items-center">
+              Upcoming Shipments
+              <span className="p-2 rounded-full bg-green-50">
+                <Truck className="h-5 w-5 text-green-500" />
+              </span>
+            </CardTitle>
+            <CardDescription>Scheduled for delivery</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">38%</div>
-            <p className="text-xs text-muted-foreground">Through consolidation</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Documentation</CardTitle>
-            <FileText className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">7</div>
-            <p className="text-xs text-muted-foreground">Processed automatically</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Processing Time</CardTitle>
-            <Clock className="h-4 w-4 text-blue-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">-41%</div>
-            <p className="text-xs text-muted-foreground">Compared to direct shipping</p>
+            <div className="flex items-baseline justify-between">
+              <span className="text-3xl font-bold">{upcomingShipments}</span>
+              <span className="text-sm flex items-center text-green-600">
+                <ArrowUpRight className="h-4 w-4 mr-1" />
+                5%
+              </span>
+            </div>
+            <Progress value={80} className="h-2 mt-4" />
+            <p className="text-xs text-muted-foreground mt-2">
+              Next shipment in 3 days
+            </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Orders Table */}
-      {(view === 'all' || view === 'orders') && (
-        <Card>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Chart 1 - Order Trend */}
+        <Card className="lg:col-span-2 hover:shadow-md transition-shadow">
           <CardHeader>
-            <CardTitle>Recent Orders</CardTitle>
-            <CardDescription>Your latest orders from suppliers</CardDescription>
+            <CardTitle>Orders Over Time</CardTitle>
+            <CardDescription>
+              Monthly order volume trends
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left font-medium py-3 px-4">Order ID</th>
-                    <th className="text-left font-medium py-3 px-4">Supplier</th>
-                    <th className="text-left font-medium py-3 px-4">Items</th>
-                    <th className="text-left font-medium py-3 px-4">Amount</th>
-                    <th className="text-left font-medium py-3 px-4">Status</th>
-                    <th className="text-left font-medium py-3 px-4">Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {orders.map((order) => (
-                    <tr key={order.id} className="border-b">
-                      <td className="py-3 px-4">{order.id}</td>
-                      <td className="py-3 px-4">{order.supplier}</td>
-                      <td className="py-3 px-4">{order.items}</td>
-                      <td className="py-3 px-4">${order.amount.toLocaleString()}</td>
-                      <td className="py-3 px-4">
-                        <span className={`inline-block px-2 py-1 rounded-full text-xs ${getStatusColor(order.status)}`}>
-                          {order.status}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4">{new Date(order.date).toLocaleDateString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={orderData}
+                  margin={{
+                    top: 10,
+                    right: 30,
+                    left: 0,
+                    bottom: 0,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="orders" stroke="#8884d8" fill="#8884d8" fillOpacity={0.3} />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
-      )}
 
-      {/* Consolidations Table */}
-      {(view === 'all' || view === 'consolidations') && (
-        <Card>
+        {/* Chart 2 - Shipment Status */}
+        <Card className="hover:shadow-md transition-shadow">
           <CardHeader>
-            <CardTitle>Active Consolidations</CardTitle>
-            <CardDescription>Your ongoing consolidated shipments</CardDescription>
+            <CardTitle>Shipment Status</CardTitle>
+            <CardDescription>
+              Current status breakdown
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left font-medium py-3 px-4">Consolidation ID</th>
-                    <th className="text-left font-medium py-3 px-4">Orders</th>
-                    <th className="text-left font-medium py-3 px-4">Total Value</th>
-                    <th className="text-left font-medium py-3 px-4">Status</th>
-                    <th className="text-left font-medium py-3 px-4">Est. Arrival</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {consolidations.map((con) => (
-                    <tr key={con.id} className="border-b">
-                      <td className="py-3 px-4">{con.id}</td>
-                      <td className="py-3 px-4">{con.orders}</td>
-                      <td className="py-3 px-4">${con.totalValue.toLocaleString()}</td>
-                      <td className="py-3 px-4">
-                        <span className={`inline-block px-2 py-1 rounded-full text-xs ${getStatusColor(con.status)}`}>
-                          {con.status}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4">{new Date(con.estimatedArrival).toLocaleDateString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="h-80 flex items-center justify-center">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={shipmentStatusData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  >
+                    {shipmentStatusData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
-      )}
+      </div>
+
+      {/* Recent Orders */}
+      <Card className="hover:shadow-md transition-shadow">
+        <CardHeader>
+          <CardTitle>Recent Orders</CardTitle>
+          <CardDescription>
+            Your latest order activity
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="pb-3 text-left">Order ID</th>
+                  <th className="pb-3 text-left">Date</th>
+                  <th className="pb-3 text-left">Supplier</th>
+                  <th className="pb-3 text-left">Amount</th>
+                  <th className="pb-3 text-left">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recentOrders.map((order) => (
+                  <tr key={order.id} className="border-b hover:bg-gray-50">
+                    <td className="py-3 text-blue-600 font-medium">{order.id}</td>
+                    <td className="py-3">{order.date}</td>
+                    <td className="py-3">{order.supplier}</td>
+                    <td className="py-3">{order.amount}</td>
+                    <td className="py-3">
+                      <div className="flex items-center">
+                        {getStatusIcon(order.status)}
+                        <span className="ml-2">{order.status}</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

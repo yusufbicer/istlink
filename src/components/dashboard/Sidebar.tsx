@@ -1,172 +1,163 @@
 
-import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "@/lib/auth";
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '@/lib/auth';
 import {
-  Sidebar as SidebarComponent,
+  Sidebar as SidebarContainer,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuLabel,
-  SidebarMenuTrigger,
+  SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import {
+import { 
+  Home, 
   Package,
-  Users,
-  ShoppingBag,
-  Truck,
-  TrendingUp,
-  Settings,
-  LogOut,
-  Home,
-  UserCircle,
-  FileText,
-  GitMerge,
-  DollarSign,
+  Truck, 
+  ShoppingCart, 
+  PieChart, 
+  Map, 
+  Settings, 
+  Users, 
+  FileText, 
+  Box, 
+  CreditCard, 
+  FileCheck,
   User,
-  BarChart4,
   HelpCircle,
-  Zap,
-  Atom,
-} from "lucide-react";
+  Building2,
+  LogOut
+} from 'lucide-react';
 
 interface SidebarProps {
-  userRole?: 'importer' | 'supplier' | 'admin';
+  userRole: 'importer' | 'supplier' | 'admin';
 }
 
-const Sidebar = ({ userRole = 'importer' }: SidebarProps) => {
-  const { logout, user } = useAuth();
+const Sidebar = ({ userRole }: SidebarProps) => {
   const location = useLocation();
+  const { user, logout } = useAuth();
+  const [open, setOpen] = useState(true);
 
-  // Define menu items based on user role
-  const getMenuItems = () => {
-    switch (userRole) {
-      case 'admin':
-        return [
-          { icon: Home, label: "Dashboard", path: "/dashboard" },
-          { icon: Users, label: "Customers", path: "/dashboard/customers" },
-          { icon: ShoppingBag, label: "Suppliers", path: "/dashboard/suppliers" },
-          { icon: Package, label: "Orders", path: "/dashboard/orders" },
-          { icon: GitMerge, label: "Consolidations", path: "/dashboard/consolidations" },
-          { icon: Truck, label: "Shipping", path: "/dashboard/shipping" },
-          { icon: FileText, label: "Documents", path: "/dashboard/documents" },
-          { icon: DollarSign, label: "Payments", path: "/dashboard/payments" },
-          { icon: TrendingUp, label: "Analytics", path: "/dashboard/analytics" },
-          { icon: BarChart4, label: "Reports", path: "/dashboard/reports" },
-          { icon: Settings, label: "Settings", path: "/dashboard/settings" },
-        ];
-      case 'supplier':
-        return [
-          { icon: Home, label: "Dashboard", path: "/dashboard" },
-          { icon: Package, label: "Orders", path: "/dashboard/orders" },
-          { icon: Users, label: "Customers", path: "/dashboard/customers" },
-          { icon: FileText, label: "Documents", path: "/dashboard/documents" },
-          { icon: DollarSign, label: "Payments", path: "/dashboard/payments" },
-          { icon: TrendingUp, label: "Analytics", path: "/dashboard/analytics" },
-          { icon: Settings, label: "Settings", path: "/dashboard/settings" },
-        ];
-      case 'importer':
-      default:
-        return [
-          { icon: Home, label: "Dashboard", path: "/dashboard" },
-          { icon: Package, label: "Orders", path: "/dashboard/orders" },
-          { icon: ShoppingBag, label: "Suppliers", path: "/dashboard/suppliers" },
-          { icon: GitMerge, label: "Consolidations", path: "/dashboard/consolidations" },
-          { icon: Truck, label: "Shipping", path: "/dashboard/shipping" },
-          { icon: FileText, label: "Documents", path: "/dashboard/documents" },
-          { icon: DollarSign, label: "Payments", path: "/dashboard/payments" },
-          { icon: Settings, label: "Settings", path: "/dashboard/settings" },
-        ];
-    }
+  // Common menu items for all roles
+  const commonMenuItems = [
+    { icon: Home, text: 'Dashboard', path: '/dashboard' },
+    { icon: Settings, text: 'Settings', path: '/dashboard/settings' },
+    { icon: User, text: 'Profile', path: '/dashboard/profile' },
+    { icon: HelpCircle, text: 'Help', path: '/dashboard/help' },
+  ];
+
+  // Role-specific menu items
+  const roleSpecificMenuItems = {
+    importer: [
+      { icon: Package, text: 'Orders', path: '/dashboard/orders' },
+      { icon: Truck, text: 'Shipping', path: '/dashboard/shipping' },
+      { icon: Map, text: 'Tracking', path: '/dashboard/tracking' },
+      { icon: CreditCard, text: 'Payments', path: '/dashboard/payments' },
+      { icon: FileCheck, text: 'Documents', path: '/dashboard/documents' },
+      { icon: Box, text: 'Consolidations', path: '/dashboard/consolidations' },
+      { icon: Building2, text: 'Suppliers', path: '/dashboard/suppliers' },
+    ],
+    supplier: [
+      { icon: ShoppingCart, text: 'Orders', path: '/dashboard/orders' },
+      { icon: Package, text: 'Products', path: '/dashboard/products' },
+      { icon: CreditCard, text: 'Payments', path: '/dashboard/payments' },
+      { icon: FileText, text: 'Documents', path: '/dashboard/documents' },
+      { icon: Users, text: 'Customers', path: '/dashboard/customers' },
+    ],
+    admin: [
+      { icon: Users, text: 'Users', path: '/dashboard/users' },
+      { icon: Building2, text: 'Suppliers', path: '/dashboard/suppliers' },
+      { icon: ShoppingCart, text: 'Orders', path: '/dashboard/orders' },
+      { icon: Truck, text: 'Shipping', path: '/dashboard/shipping' },
+      { icon: Box, text: 'Consolidations', path: '/dashboard/consolidations' },
+      { icon: CreditCard, text: 'Payments', path: '/dashboard/payments' },
+      { icon: FileCheck, text: 'Documents', path: '/dashboard/documents' },
+      { icon: PieChart, text: 'Analytics', path: '/dashboard/analytics' },
+      { icon: FileText, text: 'Reports', path: '/dashboard/reports' },
+    ],
   };
 
-  const menuItems = getMenuItems();
-  
-  const isActive = (path: string) => location.pathname === path;
-  
+  // Combine common and role-specific menu items
+  const menuItems = [...commonMenuItems, ...roleSpecificMenuItems[userRole]];
+
+  // Check if a menu item is active
+  const isActive = (path: string) => {
+    return location.pathname === path || location.pathname.startsWith(`${path}/`);
+  };
+
   return (
-    <SidebarComponent>
-      <SidebarHeader className="py-4 px-3 flex flex-col items-center justify-center border-b">
+    <SidebarContainer collapsible="icon">
+      <SidebarHeader className="flex items-center px-4 py-2">
         <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
-          <Zap className="w-5 h-5 text-white absolute" />
-          <Atom className="w-6 h-6 text-white/80 animate-pulse" />
+          <Package className="w-5 h-5 text-white" />
         </div>
-        <div className="mt-2 text-center">
-          <span className="font-bold text-lg text-gray-900">GROOP</span>
-          <span className="block text-xs text-indigo-600 font-medium tracking-wide">BEYOND BORDERS</span>
+        <div className="ml-3">
+          <span className="font-bold text-xl">GROOP</span>
+          <span className="block text-xs text-indigo-600 font-medium tracking-wide">Consolidation Platform</span>
         </div>
       </SidebarHeader>
       
-      <SidebarContent className="py-4 px-3">
-        <SidebarMenu>
-          <SidebarMenuLabel>Menu</SidebarMenuLabel>
-          {menuItems.map((item) => (
-            <SidebarMenuItem key={item.path}>
-              <SidebarMenuTrigger asChild active={isActive(item.path)}>
-                <Link to={item.path} className="flex items-center space-x-3">
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.label}</span>
-                </Link>
-              </SidebarMenuTrigger>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-        
-        <div className="mt-6">
-          <SidebarMenu>
-            <SidebarMenuLabel>Account</SidebarMenuLabel>
-            <SidebarMenuItem>
-              <SidebarMenuTrigger asChild>
-                <Link to="/dashboard/profile" className="flex items-center space-x-3">
-                  <UserCircle className="h-5 w-5" />
-                  <span>Profile</span>
-                </Link>
-              </SidebarMenuTrigger>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuTrigger asChild>
-                <Link to="/dashboard/help" className="flex items-center space-x-3">
-                  <HelpCircle className="h-5 w-5" />
-                  <span>Help & Support</span>
-                </Link>
-              </SidebarMenuTrigger>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </div>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.path}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={isActive(item.path)}
+                    tooltip={item.text}
+                  >
+                    <Link to={item.path} className="w-full flex items-center">
+                      <item.icon className="mr-2 h-4 w-4" />
+                      <span>{item.text}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
       
-      <SidebarFooter className="p-3 border-t">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            {user?.image ? (
-              <img
-                src={user.image}
-                alt={user.name || "User"}
-                className="h-8 w-8 rounded-full object-cover"
+      <SidebarFooter className="py-4">
+        <div className="px-3 mb-2">
+          <div className="flex items-center p-2 rounded-lg bg-gray-50">
+            {user?.avatar ? (
+              <img 
+                src={user.avatar} 
+                alt={user.name || "User"} 
+                className="h-10 w-10 rounded-full object-cover"
               />
             ) : (
-              <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                <User className="h-5 w-5 text-gray-500" />
+              <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                <span className="text-indigo-600 font-medium">
+                  {user?.name?.charAt(0) || "U"}
+                </span>
               </div>
             )}
-            <div className="flex flex-col">
-              <span className="text-sm font-medium">{user?.name || "User"}</span>
-              <span className="text-xs text-muted-foreground">
-                {userRole.charAt(0).toUpperCase() + userRole.slice(1)}
-              </span>
+            <div className="ml-3 overflow-hidden">
+              <p className="text-sm font-medium truncate">{user?.name}</p>
+              <p className="text-xs text-gray-500 truncate">{user?.email}</p>
             </div>
           </div>
-          
+        </div>
+        <div className="px-3">
           <button
             onClick={() => logout()}
-            className="p-1.5 rounded-md text-gray-500 hover:text-red-600 hover:bg-red-50"
+            className="w-full flex items-center justify-center gap-2 p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
           >
-            <LogOut className="h-5 w-5" />
+            <LogOut className="h-4 w-4" />
+            <span>Log out</span>
           </button>
         </div>
       </SidebarFooter>
-    </SidebarComponent>
+    </SidebarContainer>
   );
 };
 

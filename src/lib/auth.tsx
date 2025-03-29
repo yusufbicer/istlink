@@ -9,7 +9,7 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
-  avatar?: string; // Changed from 'image' to 'avatar'
+  avatar?: string;
 }
 
 interface AuthContextType {

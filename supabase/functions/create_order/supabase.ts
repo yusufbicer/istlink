@@ -1,3 +1,0 @@
-
-export const SUPABASE_URL = "https://kszyokancjhnxykowaiv.supabase.co"
-export const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtzenlva2FuY2pobnh5a293YWl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5ODgzMTcsImV4cCI6MjA1ODU2NDMxN30.Jh0rHXXqx1qody_jmrq6rJnV3TU3z97EYE5HkbsaGO8"

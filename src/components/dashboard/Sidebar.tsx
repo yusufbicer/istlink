@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import { 
   Sidebar as ShadcnSidebar, 
@@ -87,14 +88,14 @@ const Sidebar = () => {
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/users")}>
                         <Link to="/dashboard/users">
                           <UsersIcon className="w-5 h-5" />
-                          <span>{user?.role === "admin" ? "All Customers" : "My Customers"}</span>
+                          <span>{user?.role === "admin" ? "All Users" : "My Customers"}</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   )}
                   
-                  {/* Suppliers - for Customers and Admins */}
-                  {(user?.role === "customer" || user?.role === "admin") && (
+                  {/* Suppliers - for Buyers and Admins */}
+                  {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/suppliers")}>
                         <Link to="/dashboard/suppliers">
@@ -119,13 +120,13 @@ const Sidebar = () => {
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/notes")}>
                       <Link to="/dashboard/notes">
                         <StickyNoteIcon className="w-5 h-5" />
-                        <span>Notes</span>
+                        <span>Order Notes</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   
-                  {/* Consolidations - for Admin and Customers */}
-                  {(user?.role === "customer" || user?.role === "admin") && (
+                  {/* Consolidations - for Admin and Buyers */}
+                  {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/consolidations")}>
                         <Link to="/dashboard/consolidations">
@@ -141,17 +142,17 @@ const Sidebar = () => {
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/payments")}>
                       <Link to="/dashboard/payments">
                         <CreditCardIcon className="w-5 h-5" />
-                        <span>Payments</span>
+                        <span>Payment Info</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   
-                  {(user?.role === "customer" || user?.role === "admin") && (
+                  {(user?.role === "buyer" || user?.role === "admin") && (
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/shipping")}>
                         <Link to="/dashboard/shipping">
                           <TruckIcon className="w-5 h-5" />
-                          <span>Shipments</span>
+                          <span>Shipping</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>

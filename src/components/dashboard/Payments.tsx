@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -58,8 +59,8 @@ const initialPayments = [
     reference: "INV-12345",
     supplierId: "1",
     supplierName: "Textile Masters Co.",
-    customerId: "3",
-    customerName: "Fashion Retailer Inc.",
+    buyerId: "3",
+    buyerName: "Fashion Retailer Inc.",
     orderIds: ["ORD-1234", "ORD-1235"],
     details: {
       bankName: "Global Bank",
@@ -81,8 +82,8 @@ const initialPayments = [
     reference: "INV-12346",
     supplierId: "2",
     supplierName: "Bosphorus Tech",
-    customerId: "4",
-    customerName: "Gadget World",
+    buyerId: "4",
+    buyerName: "Gadget World",
     orderIds: ["ORD-1237", "ORD-1238"],
     details: {
       cardType: "Visa",
@@ -104,8 +105,8 @@ const initialPayments = [
     reference: "INV-12347",
     supplierId: "1",
     supplierName: "Textile Masters Co.",
-    customerId: "5",
-    customerName: "Retail Chain Inc.",
+    buyerId: "5",
+    buyerName: "Retail Chain Inc.",
     orderIds: ["ORD-1236"],
     details: {
       bankName: "Global Bank",
@@ -120,8 +121,8 @@ const initialPayments = [
 
 // Mock consolidations without payment
 const consolidationsWithoutPayment = [
-  { id: "CONS-004", name: "Holiday Collection", total: 4800, supplierIds: ["1"], customerId: "3" },
-  { id: "CONS-005", name: "Office Supplies", total: 1250, supplierIds: ["2"], customerId: "4" }
+  { id: "CONS-004", name: "Holiday Collection", total: 4800, supplierIds: ["1"], buyerId: "3" },
+  { id: "CONS-005", name: "Office Supplies", total: 1250, supplierIds: ["2"], buyerId: "4" }
 ];
 
 const Payments = () => {
@@ -163,11 +164,11 @@ const Payments = () => {
       return matchesSearch && payment.supplierId === supplierIdToFilter;
     }
     
-    // Customer can only see their own payments
-    if (user?.role === "customer") {
-      // For demo purposes, customer with id 3 is "Fashion Retailer Inc." and customer with id 4 is "Gadget World"
-      const customerIdToFilter = user.name.includes("Customer") ? "3" : "4";
-      return matchesSearch && payment.customerId === customerIdToFilter;
+    // Buyer can only see their own payments
+    if (user?.role === "buyer") {
+      // For demo purposes, buyer with id 3 is "Fashion Retailer Inc." and buyer with id 4 is "Gadget World"
+      const buyerIdToFilter = user.name.includes("Buyer") ? "3" : "4";
+      return matchesSearch && payment.buyerId === buyerIdToFilter;
     }
     
     return false;
@@ -246,8 +247,8 @@ const Payments = () => {
       details: newPayment.details,
       supplierId: selectedConsolidation.supplierIds[0],
       supplierName: selectedConsolidation.supplierIds[0] === "1" ? "Textile Masters Co." : "Bosphorus Tech",
-      customerId: selectedConsolidation.customerId,
-      customerName: selectedConsolidation.customerId === "3" ? "Fashion Retailer Inc." : "Gadget World",
+      buyerId: selectedConsolidation.buyerId,
+      buyerName: selectedConsolidation.buyerId === "3" ? "Fashion Retailer Inc." : "Gadget World",
       orderIds: [`ORD-${Math.floor(Math.random() * 1000 + 1240)}`],
       createdAt: new Date().toISOString(),
       paidAt: null
@@ -549,9 +550,9 @@ const Payments = () => {
                 <TableHead>ID</TableHead>
                 <TableHead>Consolidation</TableHead>
                 {(user?.role === "admin" || user?.role === "supplier") && (
-                  <TableHead>Customer</TableHead>
+                  <TableHead>Buyer</TableHead>
                 )}
-                {(user?.role === "admin" || user?.role === "customer") && (
+                {(user?.role === "admin" || user?.role === "buyer") && (
                   <TableHead>Supplier</TableHead>
                 )}
                 <TableHead>Amount</TableHead>
@@ -575,9 +576,9 @@ const Payments = () => {
                       </div>
                     </TableCell>
                     {(user?.role === "admin" || user?.role === "supplier") && (
-                      <TableCell>{payment.customerName}</TableCell>
+                      <TableCell>{payment.buyerName}</TableCell>
                     )}
-                    {(user?.role === "admin" || user?.role === "customer") && (
+                    {(user?.role === "admin" || user?.role === "buyer") && (
                       <TableCell>{payment.supplierName}</TableCell>
                     )}
                     <TableCell>${payment.amount.toLocaleString()}</TableCell>

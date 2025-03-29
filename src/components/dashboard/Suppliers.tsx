@@ -29,31 +29,72 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { PlusIcon, MoreHorizontalIcon, SearchIcon, PackageIcon, StarIcon, ExternalLinkIcon, Loader2 } from "lucide-react";
+import { PlusIcon, MoreHorizontalIcon, SearchIcon, PackageIcon, StarIcon, ExternalLinkIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/components/ui/use-toast";
-import { supabase, generateUUID } from "@/integrations/supabase/client";
-import { useAuth } from "@/lib/auth";
 
-// Supplier type definition
-interface Supplier {
-  id: string;
-  name: string;
-  category: string;
-  location: string;
-  contact: string;
-  phone: string;
-  status: string;
-  rating: number;
-  orders: number;
-}
+// Mock data for suppliers
+const initialSuppliers = [
+  { 
+    id: "1", 
+    name: "Textile Masters Co.", 
+    category: "Clothing & Textiles", 
+    location: "Istanbul", 
+    contact: "info@textilemasters.com", 
+    phone: "+90 212 456 7890",
+    status: "active",
+    rating: 4.8,
+    orders: 24
+  },
+  { 
+    id: "2", 
+    name: "Anatolian Ceramics", 
+    category: "Home Goods", 
+    location: "Izmir", 
+    contact: "sales@anatolianceramics.com", 
+    phone: "+90 232 345 6789",
+    status: "active",
+    rating: 4.5,
+    orders: 18
+  },
+  { 
+    id: "3", 
+    name: "Turkish Delights Ltd.", 
+    category: "Food Products", 
+    location: "Ankara", 
+    contact: "orders@turkishdelights.com", 
+    phone: "+90 312 234 5678",
+    status: "active",
+    rating: 4.2,
+    orders: 32
+  },
+  { 
+    id: "4", 
+    name: "Modern Furniture Co.", 
+    category: "Furniture", 
+    location: "Istanbul", 
+    contact: "contact@modernfurniture.com", 
+    phone: "+90 212 345 6789",
+    status: "inactive",
+    rating: 3.9,
+    orders: 7
+  },
+  { 
+    id: "5", 
+    name: "Bosphorus Tech", 
+    category: "Electronics", 
+    location: "Istanbul", 
+    contact: "sales@bosphorustech.com", 
+    phone: "+90 212 567 8901",
+    status: "active",
+    rating: 4.6,
+    orders: 41
+  },
+];
 
 const Suppliers = () => {
-  const { toast } = useToast();
-  const { user } = useAuth();
-  const [suppliers, setSuppliers] = useState<Supplier[]>([]);
+  const [suppliers, setSuppliers] = useState(initialSuppliers);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredSuppliers, setFilteredSuppliers] = useState<Supplier[]>([]);
+  const [filteredSuppliers, setFilteredSuppliers] = useState(initialSuppliers);
   const [newSupplier, setNewSupplier] = useState({
     name: "",
     category: "",
@@ -63,9 +104,7 @@ const Suppliers = () => {
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
-  // Set visibility for animation
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -73,62 +112,6 @@ const Suppliers = () => {
     
     return () => clearTimeout(timer);
   }, []);
-
-  // Fetch suppliers from Supabase
-  useEffect(() => {
-    const fetchSuppliers = async () => {
-      try {
-        setIsLoading(true);
-        console.log("Fetching suppliers...");
-        
-        // We'll use profiles to get suppliers (assuming suppliers have the role 'supplier')
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('role', 'supplier');
-        
-        if (error) {
-          console.error("Error fetching suppliers:", error);
-          toast({
-            title: "Error",
-            description: "Failed to load suppliers data: " + error.message,
-            variant: "destructive",
-          });
-          return;
-        }
-        
-        // Transform the data to match our Supplier interface
-        const formattedSuppliers = data.map(supplier => ({
-          id: supplier.id,
-          name: supplier.name,
-          category: supplier.category || "General",
-          location: supplier.location || "Not specified",
-          contact: supplier.email,
-          phone: supplier.phone || "Not provided",
-          status: supplier.status || "active",
-          rating: supplier.rating || 0,
-          orders: supplier.orders || 0
-        }));
-        
-        console.log("Suppliers loaded:", formattedSuppliers.length);
-        setSuppliers(formattedSuppliers);
-        setFilteredSuppliers(formattedSuppliers);
-      } catch (err) {
-        console.error("Error in fetchSuppliers:", err);
-        toast({
-          title: "Error",
-          description: "Something went wrong while loading suppliers.",
-          variant: "destructive",
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (user) {
-      fetchSuppliers();
-    }
-  }, [user, toast]);
 
   // Filter suppliers based on search term
   useEffect(() => {
@@ -145,83 +128,25 @@ const Suppliers = () => {
   }, [searchTerm, suppliers]);
 
   // Handle adding a new supplier
-  const handleAddSupplier = async () => {
-    try {
-      if (!newSupplier.name || !newSupplier.contact) {
-        toast({
-          title: "Validation Error",
-          description: "Name and email are required fields.",
-          variant: "destructive",
-        });
-        return;
-      }
-      
-      // Generate a UUID for the new supplier
-      const newSupplierId = generateUUID();
-      console.log("Creating supplier with ID:", newSupplierId);
-      
-      const { error } = await supabase
-        .from('profiles')
-        .insert({
-          id: newSupplierId,
-          email: newSupplier.contact,
-          name: newSupplier.name,
-          role: 'supplier',
-          company: newSupplier.name,
-          location: newSupplier.location,
-          phone: newSupplier.phone,
-          category: newSupplier.category,
-          status: 'active'
-        });
-      
-      if (error) {
-        console.error("Error adding supplier:", error);
-        toast({
-          title: "Error",
-          description: "Failed to add new supplier: " + error.message,
-          variant: "destructive",
-        });
-        return;
-      }
-      
-      // Add the new supplier to the state
-      const newSupplierData = {
-        id: newSupplierId,
-        name: newSupplier.name,
-        category: newSupplier.category || "General",
-        location: newSupplier.location || "Not specified",
-        contact: newSupplier.contact,
-        phone: newSupplier.phone || "Not provided",
-        status: "active",
-        rating: 0,
-        orders: 0
-      };
-      
-      setSuppliers([...suppliers, newSupplierData]);
-      
-      // Reset the form
-      setNewSupplier({
-        name: "",
-        category: "",
-        location: "",
-        contact: "",
-        phone: ""
-      });
-      
-      setIsDialogOpen(false);
-      
-      toast({
-        title: "Success",
-        description: "Supplier added successfully.",
-      });
-    } catch (err) {
-      console.error("Error in handleAddSupplier:", err);
-      toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
-    }
+  const handleAddSupplier = () => {
+    const newId = (suppliers.length + 1).toString();
+    const supplierToAdd = {
+      ...newSupplier,
+      id: newId,
+      status: "active",
+      rating: 0,
+      orders: 0
+    };
+    
+    setSuppliers([...suppliers, supplierToAdd]);
+    setNewSupplier({
+      name: "",
+      category: "",
+      location: "",
+      contact: "",
+      phone: ""
+    });
+    setIsDialogOpen(false);
   };
 
   // Format the rating with stars
@@ -241,18 +166,6 @@ const Suppliers = () => {
       </div>
     );
   };
-
-  // Loading state
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-center">
-          <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mx-auto" />
-          <p className="mt-2 text-gray-600">Loading suppliers...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -388,63 +301,63 @@ const Suppliers = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredSuppliers.length > 0 ? (
-                filteredSuppliers.map((supplier, index) => (
-                  <TableRow 
-                    key={supplier.id}
-                    className={`transition-all duration-500 transform ${
-                      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                    }`}
-                    style={{ transitionDelay: `${index * 50}ms` }}
-                  >
-                    <TableCell className="font-medium">
-                      <div className="flex items-center gap-2">
-                        <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                          <PackageIcon className="h-4 w-4 text-blue-600" />
-                        </div>
-                        {supplier.name}
+              {filteredSuppliers.map((supplier, index) => (
+                <TableRow 
+                  key={supplier.id}
+                  className={`transition-all duration-500 transform ${
+                    isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                  }`}
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                >
+                  <TableCell className="font-medium">
+                    <div className="flex items-center gap-2">
+                      <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                        <PackageIcon className="h-4 w-4 text-blue-600" />
                       </div>
-                    </TableCell>
-                    <TableCell>{supplier.category}</TableCell>
-                    <TableCell>{supplier.location}</TableCell>
-                    <TableCell>
-                      <div className="grid gap-0.5">
-                        <span className="text-sm">{supplier.contact}</span>
-                        <span className="text-xs text-muted-foreground">{supplier.phone}</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={supplier.status === 'active' ? 'default' : 'secondary'} className="capitalize">
-                        {supplier.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{renderRating(supplier.rating)}</TableCell>
-                    <TableCell>{supplier.orders}</TableCell>
-                    <TableCell className="text-right">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <MoreHorizontalIcon className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem>
-                            <ExternalLinkIcon className="mr-2 h-4 w-4" />
-                            View Details
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>Edit</DropdownMenuItem>
-                          <DropdownMenuItem className="text-red-600">Delete</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
+                      {supplier.name}
+                    </div>
+                  </TableCell>
+                  <TableCell>{supplier.category}</TableCell>
+                  <TableCell>{supplier.location}</TableCell>
+                  <TableCell>
+                    <div className="grid gap-0.5">
+                      <span className="text-sm">{supplier.contact}</span>
+                      <span className="text-xs text-muted-foreground">{supplier.phone}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={supplier.status === 'active' ? 'default' : 'secondary'} className="capitalize">
+                      {supplier.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{renderRating(supplier.rating)}</TableCell>
+                  <TableCell>{supplier.orders}</TableCell>
+                  <TableCell className="text-right">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                          <MoreHorizontalIcon className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                          <ExternalLinkIcon className="mr-2 h-4 w-4" />
+                          View Details
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>Edit</DropdownMenuItem>
+                        <DropdownMenuItem className="text-red-600">Delete</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+              
+              {filteredSuppliers.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
-                    {isLoading ? "Loading suppliers..." : "No suppliers found matching your search criteria."}
+                    No suppliers found matching your search criteria.
                   </TableCell>
                 </TableRow>
               )}
@@ -453,103 +366,105 @@ const Suppliers = () => {
         </CardContent>
       </Card>
       
-      {suppliers.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card 
-            className={`transition-all duration-500 transform ${
-              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}
-            style={{ transitionDelay: '300ms' }}
-          >
-            <CardHeader>
-              <CardTitle>Top Suppliers</CardTitle>
-              <CardDescription>Based on order volume and rating</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {suppliers
-                  .sort((a, b) => b.orders - a.orders)
-                  .slice(0, 3)
-                  .map((supplier, i) => (
-                    <div key={supplier.id} className="flex items-center gap-3">
-                      <div className="flex items-center justify-center h-9 w-9 rounded-full bg-blue-100 text-blue-600">
-                        <span className="font-semibold text-sm">{i + 1}</span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-medium">{supplier.name}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {supplier.orders} orders · {supplier.rating.toFixed(1)} rating
-                        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card 
+          className={`transition-all duration-500 transform ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+          style={{ transitionDelay: '300ms' }}
+        >
+          <CardHeader>
+            <CardTitle>Top Suppliers</CardTitle>
+            <CardDescription>Based on order volume and rating</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {suppliers
+                .sort((a, b) => b.orders - a.orders)
+                .slice(0, 3)
+                .map((supplier, i) => (
+                  <div key={supplier.id} className="flex items-center gap-3">
+                    <div className="flex items-center justify-center h-9 w-9 rounded-full bg-blue-100 text-blue-600">
+                      <span className="font-semibold text-sm">{i + 1}</span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-medium">{supplier.name}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {supplier.orders} orders · {supplier.rating.toFixed(1)} rating
                       </div>
                     </div>
-                  ))}
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card 
-            className={`transition-all duration-500 transform ${
-              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}
-            style={{ transitionDelay: '400ms' }}
-          >
-            <CardHeader>
-              <CardTitle>Categories</CardTitle>
-              <CardDescription>Suppliers by product category</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {Array.from(new Set(suppliers.map(s => s.category))).map(category => {
-                  const count = suppliers.filter(s => s.category === category).length;
-                  const percentage = (count / suppliers.length) * 100;
-                  return (
-                    <div key={category}>
-                      <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">{category}</span>
-                        <span className="text-sm text-muted-foreground">{count}</span>
-                      </div>
-                      <div className="w-full bg-gray-100 rounded-full h-2">
-                        <div 
-                          className="bg-blue-600 h-2 rounded-full" 
-                          style={{ width: `${percentage}%` }}
-                        ></div>
-                      </div>
+                  </div>
+                ))}
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card 
+          className={`transition-all duration-500 transform ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+          style={{ transitionDelay: '400ms' }}
+        >
+          <CardHeader>
+            <CardTitle>Categories</CardTitle>
+            <CardDescription>Suppliers by product category</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {Array.from(new Set(suppliers.map(s => s.category))).map(category => {
+                const count = suppliers.filter(s => s.category === category).length;
+                const percentage = (count / suppliers.length) * 100;
+                return (
+                  <div key={category}>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-sm font-medium">{category}</span>
+                      <span className="text-sm text-muted-foreground">{count}</span>
                     </div>
-                  );
-                })}
+                    <div className="w-full bg-gray-100 rounded-full h-2">
+                      <div 
+                        className="bg-blue-600 h-2 rounded-full" 
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card 
+          className={`transition-all duration-500 transform ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+          style={{ transitionDelay: '500ms' }}
+        >
+          <CardHeader>
+            <CardTitle>Recent Activities</CardTitle>
+            <CardDescription>Latest supplier interactions</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="border-l-2 border-blue-500 pl-4 py-1">
+                <div className="text-sm font-medium">New supplier added</div>
+                <div className="text-xs text-muted-foreground">Today, 10:30 AM</div>
               </div>
-            </CardContent>
-          </Card>
-          
-          <Card 
-            className={`transition-all duration-500 transform ${
-              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}
-            style={{ transitionDelay: '500ms' }}
-          >
-            <CardHeader>
-              <CardTitle>Recent Activities</CardTitle>
-              <CardDescription>Latest supplier interactions</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="border-l-2 border-blue-500 pl-4 py-1">
-                  <div className="text-sm font-medium">System updated</div>
-                  <div className="text-xs text-muted-foreground">Today</div>
-                </div>
-                <div className="border-l-2 border-green-500 pl-4 py-1">
-                  <div className="text-sm font-medium">Data migration completed</div>
-                  <div className="text-xs text-muted-foreground">Today</div>
-                </div>
-                <div className="border-l-2 border-amber-500 pl-4 py-1">
-                  <div className="text-sm font-medium">Ready to add suppliers</div>
-                  <div className="text-xs text-muted-foreground">Now</div>
-                </div>
+              <div className="border-l-2 border-green-500 pl-4 py-1">
+                <div className="text-sm font-medium">Order placed with Textile Masters</div>
+                <div className="text-xs text-muted-foreground">Yesterday, 2:15 PM</div>
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+              <div className="border-l-2 border-amber-500 pl-4 py-1">
+                <div className="text-sm font-medium">Supplier rating updated</div>
+                <div className="text-xs text-muted-foreground">Jul 24, 11:45 AM</div>
+              </div>
+              <div className="border-l-2 border-purple-500 pl-4 py-1">
+                <div className="text-sm font-medium">Contract renewed with Bosphorus Tech</div>
+                <div className="text-xs text-muted-foreground">Jul 22, 4:30 PM</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };

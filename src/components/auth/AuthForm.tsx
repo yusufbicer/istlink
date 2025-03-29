@@ -7,90 +7,54 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useAuth, UserRole } from '@/lib/auth';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
-import { User, UserPlus, Loader2, RefreshCw } from 'lucide-react';
+import { User, UserPlus, Loader2 } from 'lucide-react';
 
 interface AuthFormProps {
   type: 'login' | 'register';
 }
 
 const AuthForm = ({ type }: AuthFormProps) => {
-  const { login, register, resendConfirmationEmail } = useAuth();
+  const { login, register } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<UserRole>('customer');
+  const [role, setRole] = useState<UserRole>('buyer');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [showResendOption, setShowResendOption] = useState(false);
-  const [isResending, setIsResending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-    setShowResendOption(false);
 
     try {
       if (type === 'login') {
-        console.log(`Attempting login for: ${email}`);
         await login(email, password);
-        console.log('Login successful, will redirect via Navigation component');
-        // We don't need to navigate here as the auth state change in Login.tsx will handle the redirect
+        toast({
+          title: "Login successful",
+          description: "Welcome back to GROOP!",
+        });
       } else {
-        console.log(`Registering user: ${email}, ${role}`);
         await register(name, email, password, role);
         toast({
           title: "Registration successful",
-          description: "Your account has been created. You can now log in.",
+          description: "Your account has been created.",
         });
-        navigate('/login');
       }
+      navigate('/dashboard');
     } catch (err: any) {
-      console.error('Form submission error:', err);
       setError(err.message || 'An error occurred');
-      
-      if (type === 'login' && 
-         (err.message?.includes('not confirmed') || 
-          err.message?.includes('not verified') || 
-          err.code === 'email_not_confirmed')) {
-        setShowResendOption(true);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleResendVerification = async () => {
-    if (!email) {
-      setError('Please enter your email address');
-      return;
-    }
-    
-    setIsResending(true);
-    try {
-      await resendConfirmationEmail(email);
       toast({
-        title: "Verification email sent",
-        description: "Please check your inbox for the verification link",
-      });
-    } catch (err: any) {
-      console.error('Failed to resend verification email:', err);
-      toast({
-        title: "Failed to send verification email",
-        description: err.message || "An error occurred",
+        title: "Error",
+        description: err.message || 'An error occurred',
         variant: "destructive",
       });
     } finally {
-      setIsResending(false);
+      setIsLoading(false);
     }
-  };
-
-  const setDemoAccount = (demoEmail: string, demoPassword: string) => {
-    setEmail(demoEmail);
-    setPassword(demoPassword);
   };
 
   return (
@@ -117,29 +81,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
         {error && (
           <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-6">
             {error}
-            {showResendOption && (
-              <div className="mt-2">
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  className="w-full mt-1 text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700"
-                  onClick={handleResendVerification}
-                  disabled={isResending}
-                >
-                  {isResending ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending verification email...
-                    </>
-                  ) : (
-                    <>
-                      <RefreshCw className="mr-2 h-4 w-4" />
-                      Resend verification email
-                    </>
-                  )}
-                </Button>
-              </div>
-            )}
           </div>
         )}
 
@@ -192,8 +133,8 @@ const AuthForm = ({ type }: AuthFormProps) => {
               <Label>Account Type</Label>
               <RadioGroup value={role} onValueChange={(value) => setRole(value as UserRole)} className="flex gap-4">
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="customer" id="customer" />
-                  <Label htmlFor="customer" className="cursor-pointer">Customer</Label>
+                  <RadioGroupItem value="buyer" id="buyer" />
+                  <Label htmlFor="buyer" className="cursor-pointer">Buyer</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="supplier" id="supplier" />
@@ -240,24 +181,33 @@ const AuthForm = ({ type }: AuthFormProps) => {
             <div className="grid grid-cols-3 gap-2 text-xs">
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => setDemoAccount('admin@groop.com', 'admin123')}
+                onClick={() => {
+                  setEmail('buyer@example.com');
+                  setPassword('password');
+                }}
               >
-                <div className="font-medium">Admin</div>
-                <div className="text-gray-500">admin@groop.com</div>
+                <div className="font-medium">Buyer</div>
+                <div className="text-gray-500">buyer@example.com</div>
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => setDemoAccount('supplier@example.com', 'password')}
+                onClick={() => {
+                  setEmail('supplier@example.com');
+                  setPassword('password');
+                }}
               >
                 <div className="font-medium">Supplier</div>
                 <div className="text-gray-500">supplier@example.com</div>
               </div>
               <div 
                 className="p-2 bg-gray-50 rounded text-center cursor-pointer hover:bg-gray-100"
-                onClick={() => setDemoAccount('customer@example.com', 'password')}
+                onClick={() => {
+                  setEmail('admin@example.com');
+                  setPassword('password');
+                }}
               >
-                <div className="font-medium">Customer</div>
-                <div className="text-gray-500">customer@example.com</div>
+                <div className="font-medium">Admin</div>
+                <div className="text-gray-500">admin@example.com</div>
               </div>
             </div>
           </div>

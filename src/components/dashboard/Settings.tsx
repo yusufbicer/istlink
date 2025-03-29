@@ -1,11 +1,10 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Switch } from "@/components/ui/switch";
 import { useAuth } from "@/lib/auth";
-import { BellIcon, MailIcon, SmartphoneIcon, GlobeIcon } from "lucide-react";
 
 const Settings = () => {
   const { user } = useAuth();
@@ -124,118 +123,10 @@ const Settings = () => {
                 Choose how you want to be notified
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <BellIcon className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-medium">Order Status Updates</h4>
-                      <p className="text-sm text-muted-foreground">Get notified when your order status changes</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2">
-                      <Switch id="order-email" />
-                      <Label htmlFor="order-email" className="text-xs">Email</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Switch id="order-sms" />
-                      <Label htmlFor="order-sms" className="text-xs">SMS</Label>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <MailIcon className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-medium">Shipment Updates</h4>
-                      <p className="text-sm text-muted-foreground">Get notified about shipment progress</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2">
-                      <Switch id="shipping-email" defaultChecked />
-                      <Label htmlFor="shipping-email" className="text-xs">Email</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Switch id="shipping-sms" />
-                      <Label htmlFor="shipping-sms" className="text-xs">SMS</Label>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <SmartphoneIcon className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-medium">App Notifications</h4>
-                      <p className="text-sm text-muted-foreground">Push notifications on your devices</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2">
-                      <Switch id="app-notifications" defaultChecked />
-                      <Label htmlFor="app-notifications" className="text-xs">Enable</Label>
-                    </div>
-                  </div>
-                </div>
-                
-                {user?.role === "admin" && (
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                        <GlobeIcon className="h-5 w-5 text-blue-600" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-medium">System Alerts</h4>
-                        <p className="text-sm text-muted-foreground">Critical platform updates and alerts</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-2">
-                        <Switch id="system-email" defaultChecked />
-                        <Label htmlFor="system-email" className="text-xs">Email</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Switch id="system-sms" />
-                        <Label htmlFor="system-sms" className="text-xs">SMS</Label>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                {(user?.role === "supplier" || user?.role === "customer") && (
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                        <MailIcon className="h-5 w-5 text-blue-600" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-medium">Marketing</h4>
-                        <p className="text-sm text-muted-foreground">Receive newsletters and promotions</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-2">
-                        <Switch id="marketing-email" />
-                        <Label htmlFor="marketing-email" className="text-xs">Email</Label>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-              
-              <div className="flex justify-end">
-                <Button>Save Preferences</Button>
-              </div>
+            <CardContent>
+              <p className="text-center py-6 text-muted-foreground">
+                Notification settings will appear here.
+              </p>
             </CardContent>
           </Card>
         </TabsContent>

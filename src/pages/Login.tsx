@@ -1,42 +1,20 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
 import AuthForm from '@/components/auth/AuthForm';
 import { Zap, Atom } from 'lucide-react';
 
 const Login = () => {
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const [redirecting, setRedirecting] = useState(false);
   
-  // Handle redirection when auth state changes
+  // Redirect if already logged in
   useEffect(() => {
-    console.log("Login page - Auth effect triggered, user:", !!user, "isLoading:", isLoading);
-    
-    // If user is authenticated and data is loaded, redirect to dashboard
-    if (user && !isLoading) {
-      console.log("User is authenticated, redirecting to dashboard");
-      setRedirecting(true);
-      
-      // Force immediate navigation with replace to ensure clean history
-      navigate('/dashboard', { replace: true });
+    if (user) {
+      navigate('/dashboard');
     }
-  }, [user, isLoading, navigate]);
-
-  // Prevent flash of login form if we're redirecting
-  if (redirecting || (user && !isLoading)) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
-            <Atom className="w-8 h-8 text-indigo-600 animate-spin" />
-          </div>
-          <p className="text-lg font-medium text-gray-700">Redirecting to dashboard...</p>
-        </div>
-      </div>
-    );
-  }
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">

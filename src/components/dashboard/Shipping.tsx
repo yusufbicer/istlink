@@ -6,7 +6,6 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAuth } from "@/lib/auth";
 import { 
   Package, 
   TruckIcon, 
@@ -94,7 +93,6 @@ const shipments = [
 
 const Shipping = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { user } = useAuth();
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -134,17 +132,14 @@ const Shipping = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Shipments</h1>
+          <h1 className="text-2xl font-bold">Shipping</h1>
           <p className="text-muted-foreground">Manage and track your consolidated shipments.</p>
         </div>
         
-        {/* Only show button for admin, and show "New Shipment" instead of "New Consolidation" */}
-        {user?.role === "admin" && (
-          <Button className="h-10">
-            <PlusIcon className="mr-2 h-4 w-4" />
-            New Shipment
-          </Button>
-        )}
+        <Button className="h-10">
+          <PlusIcon className="mr-2 h-4 w-4" />
+          New Consolidation
+        </Button>
       </div>
       
       <Tabs defaultValue="all" className="w-full">

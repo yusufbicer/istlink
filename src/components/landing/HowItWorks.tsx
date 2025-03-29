@@ -1,6 +1,6 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { CheckCircle2, FileText, FileCheck, Ship, Receipt, Users, Wallet } from 'lucide-react';
+import { FileText, Users, Wallet, Package, FileCheck, Ship, CheckCircle2 } from 'lucide-react';
 
 interface Step {
   icon: React.ComponentType<any>;
@@ -25,7 +25,7 @@ const steps: Step[] = [
     description: "We will handle all your order payments on behalf of you from your account balance with complete transparency."
   },
   {
-    icon: Receipt,
+    icon: Package,
     title: "Order Consolidation",
     description: "Our team will receive and verify all your orders, then combine them into a single optimized shipment."
   },
@@ -97,7 +97,7 @@ const HowItWorks = () => {
             {/* Connecting line */}
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-indigo-200 transform -translate-x-1/2 z-0"></div>
             
-            {/* Conversation Steps */}
+            {/* Steps */}
             <div className="space-y-12 relative z-10">
               {steps.map((step, index) => {
                 const [stepVisible, setStepVisible] = useState(false);
@@ -147,11 +147,11 @@ const HowItWorks = () => {
                         }`}
                       >
                         <StepIcon className="h-5 w-5" />
-                        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-                          <span className={`text-xs font-bold ${activeStep === index ? 'text-white' : 'text-indigo-500'}`}>
-                            {index + 1}
-                          </span>
-                        </div>
+                      </div>
+                      <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+                        <span className={`text-xs font-bold ${activeStep === index ? 'text-white' : 'text-indigo-500'}`}>
+                          {index + 1}
+                        </span>
                       </div>
                     </div>
                     
@@ -166,27 +166,8 @@ const HowItWorks = () => {
                             : 'bg-white border border-gray-100 shadow-sm'
                         }`}
                       >
-                        <div className="flex items-center mb-1">
-                          {!isOdd && (
-                            <div className="mr-2">
-                              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                                <span className="text-xs text-blue-600">YOU</span>
-                              </div>
-                            </div>
-                          )}
-                          <h3 className="font-bold text-lg text-gray-900">{isOdd ? "Our Response:" : "You Ask:"}</h3>
-                          {isOdd && (
-                            <div className="ml-2">
-                              <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                                <span className="text-xs text-indigo-600">US</span>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        <div className="mt-2">
-                          <h4 className="font-semibold text-md">{step.title}</h4>
-                          <p className={`mt-1 text-sm ${isOdd ? 'text-indigo-700' : 'text-gray-600'}`}>{step.description}</p>
-                        </div>
+                        <h3 className="font-bold text-lg text-gray-900">{step.title}</h3>
+                        <p className="mt-2 text-sm text-gray-600">{step.description}</p>
                       </div>
                     </div>
                   </div>

@@ -445,30 +445,24 @@ const Hero = () => {
                             </div>
                           </div>
                           
-                          {/* Revised Account Balance section with 2-column grid layout */}
+                          {/* Completely redesigned Account Balance section with more compact layout */}
                           <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
-                            <div className="font-medium mb-3">Account Balance & Payments</div>
-                            <div className="flex flex-col h-32"> 
-                              <div className="grid grid-cols-2 gap-4 mb-3">
-                                <div>
-                                  <div className="text-sm">Total Value</div>
-                                  <div className="text-lg font-bold">$185,000</div>
-                                </div>
-                                <div className="text-right">
-                                  <div className="text-sm">Account Balance</div>
-                                  <div className="text-lg font-bold text-green-400">$69,000</div>
-                                </div>
-                              </div>
-                              <div className="grid grid-cols-2 gap-2 text-sm">
-                                <div>Paid to Suppliers</div>
-                                <div className="text-right text-green-400">$112,300</div>
-                                
-                                <div>Service Fee (2%)</div>
-                                <div className="text-right text-blue-400">$3,700</div>
-                                
-                                <div className="pt-1 border-t border-gray-700 mt-1">Available for Orders</div>
-                                <div className="text-right pt-1 border-t border-gray-700 mt-1 text-indigo-400">$69,000</div>
-                              </div>
+                            <div className="flex justify-between items-center mb-3">
+                              <span className="font-medium">Account Balance</span>
+                              <span className="text-lg font-bold text-green-400">$69,000</span>
+                            </div>
+                            <div className="grid grid-cols-2 gap-x-2 gap-y-2 text-sm">
+                              <div>Total Value:</div>
+                              <div className="text-right">$185,000</div>
+                              
+                              <div>Paid to Suppliers:</div>
+                              <div className="text-right text-green-400">$112,300</div>
+                              
+                              <div>Service Fee (2%):</div>
+                              <div className="text-right text-blue-400">$3,700</div>
+                              
+                              <div className="pt-2 border-t border-gray-700 mt-1 font-medium">Available:</div>
+                              <div className="text-right pt-2 border-t border-gray-700 mt-1 text-indigo-400 font-medium">$69,000</div>
                             </div>
                           </div>
                         </div>

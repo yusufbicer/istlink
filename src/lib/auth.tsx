@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext, useContext, useRef } from 'react';
-import { supabase, handleSupabaseError } from "@/integrations/supabase/client";
+import { supabase, handleSupabaseError, generateUUID } from "@/integrations/supabase/client";
 import { Session } from '@supabase/supabase-js';
 import { useToast } from '@/components/ui/use-toast';
 

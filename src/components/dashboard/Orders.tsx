@@ -47,7 +47,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from '@/lib/auth';
 import { useToast } from "@/components/ui/use-toast";
-import { supabase, getCurrentSupplierID, getCurrentCustomerID } from "@/integrations/supabase/client";
+import { supabase, getCurrentSupplierID, getCurrentCustomerID, generateUUID } from "@/integrations/supabase/client";
 import { orderService } from "@/lib/api";
 
 interface OrderItem {
@@ -114,11 +114,7 @@ const Orders = () => {
         
         const { data, error } = await supabase
           .from('orders')
-          .select(`
-            *,
-            customers(company_name, user_id, profiles:profiles(name)),
-            suppliers(company_name, user_id, profiles:profiles(name))
-          `);
+          .select('*');
         
         if (error) {
           console.error("Error fetching orders:", error);
@@ -130,33 +126,57 @@ const Orders = () => {
           return;
         }
 
-        const formattedOrders = data.map(order => {
-          let orderItems: OrderItem[] = [];
-          try {
-            orderItems = [{ name: "Order item", quantity: 1, price: order.total_amount }];
-          } catch (e) {
-            console.error("Error processing order items:", e);
-            orderItems = [{ name: "Error loading items", quantity: 1, price: order.total_amount }];
+        const ordersWithDetails = await Promise.all(data.map(async (order) => {
+          let supplier = "Unknown Supplier";
+          let supplierId = order.supplier_id || "";
+          if (supplierId) {
+            const { data: supplierData } = await supabase
+              .from('suppliers')
+              .select('company_name')
+              .eq('id', supplierId)
+              .maybeSingle();
+            if (supplierData) {
+              supplier = supplierData.company_name;
+            }
           }
+          
+          let buyer = "Unknown Customer";
+          let buyerId = order.customer_id || "";
+          if (buyerId) {
+            const { data: customerData } = await supabase
+              .from('customers')
+              .select('company_name')
+              .eq('id', buyerId)
+              .maybeSingle();
+            if (customerData) {
+              buyer = customerData.company_name;
+            }
+          }
+          
+          const orderItems: OrderItem[] = [{ 
+            name: "Order item", 
+            quantity: 1, 
+            price: order.amount || 0 
+          }];
           
           return {
             id: order.id,
-            supplier: order.suppliers?.company_name || "Unknown Supplier",
-            supplierId: order.supplier_id || "",
-            buyer: order.customers?.company_name || "Unknown Customer",
-            buyerId: order.customer_id || "",
+            supplier,
+            supplierId,
+            buyer,
+            buyerId,
             items: orderItems,
-            total: order.total_amount || 0,
-            date: order.order_date || new Date().toISOString(),
+            total: order.amount || 0,
+            date: order.date || new Date().toISOString(),
             status: order.status || "pending",
-            consolidationId: null,
-            shipment: null,
-            payment: "pending"
+            consolidationId: order.consolidation_id || null,
+            shipment: order.shipment_id || null,
+            payment: order.payment_status || "pending"
           };
-        });
+        }));
         
-        console.log("Orders loaded:", formattedOrders.length);
-        setOrders(formattedOrders);
+        console.log("Orders loaded:", ordersWithDetails.length);
+        setOrders(ordersWithDetails);
         
       } catch (err) {
         console.error("Error in fetchOrders:", err);
@@ -174,21 +194,15 @@ const Orders = () => {
       try {
         const { data: supplierData, error: supplierError } = await supabase
           .from('suppliers')
-          .select(`
-            id,
-            company_name,
-            profiles:profiles(id, name)
-          `);
+          .select('id, company_name');
           
         if (supplierError) {
           console.error("Error fetching suppliers:", supplierError);
         } else if (supplierData) {
-          const formattedSuppliers = supplierData
-            .filter(s => s.profiles)
-            .map(s => ({
-              id: s.id,
-              name: s.company_name || (s.profiles as any)?.name
-            }));
+          const formattedSuppliers = supplierData.map(s => ({
+            id: s.id,
+            name: s.company_name
+          }));
           
           console.log("Suppliers loaded for dropdown:", formattedSuppliers.length);
           setSuppliers(formattedSuppliers);
@@ -196,21 +210,15 @@ const Orders = () => {
         
         const { data: customerData, error: customerError } = await supabase
           .from('customers')
-          .select(`
-            id,
-            company_name,
-            profiles:profiles(id, name)
-          `);
+          .select('id, company_name');
           
         if (customerError) {
           console.error("Error fetching customers:", customerError);
         } else if (customerData) {
-          const formattedCustomers = customerData
-            .filter(c => c.profiles)
-            .map(c => ({
-              id: c.id,
-              name: c.company_name || (c.profiles as any)?.name
-            }));
+          const formattedCustomers = customerData.map(c => ({
+            id: c.id,
+            name: c.company_name
+          }));
           
           console.log("Customers loaded for dropdown:", formattedCustomers.length);
           setCustomers(formattedCustomers);
@@ -333,7 +341,7 @@ const Orders = () => {
       console.log("Creating order with:", {
         supplier_id: supplier.id,
         customer_id: buyerId,
-        total_amount: Math.round(total * 100) / 100
+        amount: Math.round(total * 100) / 100
       });
 
       const { data, error } = await supabase.rpc('create_order', {

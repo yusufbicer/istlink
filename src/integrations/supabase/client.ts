@@ -9,8 +9,8 @@ const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-// Create a custom type that includes the 'profiles' table
-interface CustomDatabase extends Database {
+// Simplified custom type to avoid excessive depth and infinite type issues
+interface CustomDatabase {
   public: {
     Tables: {
       profiles: {
@@ -22,21 +22,40 @@ interface CustomDatabase extends Database {
           created_at: string;
           updated_at: string;
         };
-        Insert: {
-          id?: string;
-          email: string;
-          name: string;
-          role: 'admin' | 'supplier' | 'customer';
-          created_at?: string;
-          updated_at?: string;
+      };
+      suppliers: {
+        Row: {
+          id: string;
+          user_id: string;
+          company_name: string;
+          status: string;
+          created_at: string;
+          updated_at: string;
         };
-        Update: {
-          id?: string;
-          email?: string;
-          name?: string;
-          role?: 'admin' | 'supplier' | 'customer';
-          created_at?: string;
-          updated_at?: string;
+      };
+      customers: {
+        Row: {
+          id: string;
+          user_id: string;
+          company_name: string;
+          status: string;
+          created_at: string;
+          updated_at: string;
+        };
+      };
+      orders: {
+        Row: {
+          id: string;
+          customer_id: string;
+          supplier_id: string;
+          status: string;
+          amount: number;
+          total_amount: number;
+          date: string;
+          order_date: string;
+          items: number;
+          created_at: string;
+          updated_at: string;
         };
       };
       notes: {
@@ -48,25 +67,31 @@ interface CustomDatabase extends Database {
           created_at: string;
           updated_at: string;
         };
-        Insert: {
-          id?: string;
-          title: string;
-          content: string;
-          user_id: string;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          title?: string;
-          content?: string;
-          user_id?: string;
-          created_at?: string;
-          updated_at?: string;
-        };
       };
-    } & Database['public']['Tables'];
-  } & Database['public'];
+    };
+    Functions: {
+      create_order: {
+        Args: {
+          p_customer_id: string;
+          p_supplier_id: string;
+          p_total_amount: number;
+        };
+        Returns: string;
+      };
+      current_user_is_admin: {
+        Args: Record<string, never>;
+        Returns: boolean;
+      };
+      current_user_is_supplier: {
+        Args: Record<string, never>;
+        Returns: boolean;
+      };
+      get_current_user_role: {
+        Args: Record<string, never>;
+        Returns: string;
+      };
+    };
+  };
 }
 
 export const supabase = createClient<CustomDatabase>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {

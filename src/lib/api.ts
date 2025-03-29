@@ -1,5 +1,5 @@
 
-import { supabase, handleSupabaseError, getCurrentSupplierID, getCurrentCustomerID } from "@/integrations/supabase/client";
+import { supabase, handleSupabaseError, getCurrentSupplierID, getCurrentCustomerID, generateUUID } from "@/integrations/supabase/client";
 import { User, UserRole } from "./auth";
 
 // Types that will map to our Supabase schema
@@ -43,7 +43,7 @@ export const userService = {
         id,
         user_id,
         company_name,
-        profiles:profiles(id, name, email, role)
+        status
       `);
       
       if (supplierOnly) {
@@ -82,11 +82,18 @@ export const userService = {
       
       console.log("Customers fetched:", data?.length);
       
-      // For each customer, count their orders
+      // For each customer, get user information and count their orders
       const customersWithOrderCounts = await Promise.all(
         (data || []).map(async (customer: any) => {
-          const profile = customer.profiles;
-          if (!profile) {
+          // Get user profile data
+          const { data: userData, error: userError } = await supabase
+            .from('profiles')
+            .select('name, email')
+            .eq('id', customer.user_id)
+            .maybeSingle();
+            
+          if (userError || !userData) {
+            console.error("Error fetching user profile:", userError);
             return null;
           }
           
@@ -102,11 +109,11 @@ export const userService = {
           
           return {
             id: customer.id,
-            name: profile.name,
-            email: profile.email,
+            name: userData.name,
+            email: userData.email,
             company: customer.company_name || 'Not specified',
             orders: count || 0,
-            status: 'active' as "active" | "inactive" // Default status
+            status: customer.status as "active" | "inactive"
           };
         })
       );
@@ -128,7 +135,8 @@ export const userService = {
         .select(`
           id,
           company_name,
-          profiles:profiles(id, name, email, role)
+          status,
+          user_id
         `)
         .eq('id', id)
         .maybeSingle();
@@ -138,8 +146,20 @@ export const userService = {
         return null;
       }
       
-      if (!data || !data.profiles) {
+      if (!data) {
         console.log("No customer found with ID:", id);
+        return null;
+      }
+      
+      // Get user profile data
+      const { data: userData, error: userError } = await supabase
+        .from('profiles')
+        .select('name, email')
+        .eq('id', data.user_id)
+        .maybeSingle();
+        
+      if (userError || !userData) {
+        console.error("Error fetching user profile:", userError);
         return null;
       }
       
@@ -152,10 +172,10 @@ export const userService = {
       // Return the customer data
       return {
         id: data.id,
-        name: data.profiles.name,
-        email: data.profiles.email,
+        name: userData.name,
+        email: userData.email,
         company: data.company_name || 'Not specified',
-        status: 'active' as "active" | "inactive", // Default status
+        status: data.status as "active" | "inactive",
         orders: count || 0
       };
     } catch (error) {
@@ -176,10 +196,8 @@ export const orderService = {
         customer_id,
         supplier_id,
         status,
-        order_date,
-        total_amount,
-        customers:customers(id, company_name, profiles:profiles(name)),
-        suppliers:suppliers(id, company_name, profiles:profiles(name))
+        amount,
+        date
       `);
       
       if (filterByUser) {
@@ -239,18 +257,48 @@ export const orderService = {
       
       console.log("Orders fetched:", data?.length);
       
-      // Transform to match the expected Order interface
-      return (data || []).map((order: any) => ({
-        id: order.id,
-        customer_id: order.customer_id,
-        supplier_id: order.supplier_id,
-        customerName: order.customers?.company_name || 'Unknown Customer',
-        supplierName: order.suppliers?.company_name || 'Unknown Supplier',
-        amount: order.total_amount || 0,
-        status: order.status || 'pending',
-        date: order.order_date || new Date().toISOString(),
-        items: 0 // This field needs to be added to the orders table if needed
+      // Transform to match the expected Order interface with customer and supplier names
+      const ordersWithNames = await Promise.all((data || []).map(async (order: any) => {
+        // Get customer name
+        let customerName = "Unknown Customer";
+        if (order.customer_id) {
+          const { data: customerData } = await supabase
+            .from('customers')
+            .select('company_name')
+            .eq('id', order.customer_id)
+            .maybeSingle();
+          if (customerData) {
+            customerName = customerData.company_name;
+          }
+        }
+        
+        // Get supplier name
+        let supplierName = "Unknown Supplier";
+        if (order.supplier_id) {
+          const { data: supplierData } = await supabase
+            .from('suppliers')
+            .select('company_name')
+            .eq('id', order.supplier_id)
+            .maybeSingle();
+          if (supplierData) {
+            supplierName = supplierData.company_name;
+          }
+        }
+        
+        return {
+          id: order.id,
+          customer_id: order.customer_id,
+          supplier_id: order.supplier_id,
+          customerName,
+          supplierName,
+          amount: order.amount || 0,
+          status: order.status || 'pending',
+          date: order.date || new Date().toISOString(),
+          items: 0 // This field needs to be added to the orders table if needed
+        };
       }));
+      
+      return ordersWithNames;
     } catch (error) {
       console.error("Error in getOrders:", error);
       return [];
@@ -293,13 +341,6 @@ export const noteService = {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) return [];
-      
-      // Get the customer ID for the current user
-      const customerId = await getCurrentCustomerID();
-      if (!customerId) {
-        console.error("No customer ID found for user");
-        return [];
-      }
       
       const { data, error } = await supabase
         .from('notes')

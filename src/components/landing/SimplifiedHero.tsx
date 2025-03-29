@@ -1,17 +1,12 @@
 
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from 'lucide-react';
 import dashboardPlaceholder from '@/assets/hero/placeholder-dashboard.svg';
 
-// Lazy-loaded dashboard components
-const DesktopDashboard = lazy(() => import('@/components/landing/hero/DesktopDashboard'));
-const MobileDashboard = lazy(() => import('@/components/landing/hero/MobileDashboard'));
-
 const SimplifiedHero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // Handle visibility animation
   useEffect(() => {
@@ -20,16 +15,6 @@ const SimplifiedHero = () => {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  // Handle responsive behavior
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -68,7 +53,7 @@ const SimplifiedHero = () => {
           </div>
         </div>
         
-        {/* Dashboard preview with lazy loading */}
+        {/* Simple dashboard preview */}
         <div 
           className={`mt-12 relative mx-auto max-w-4xl transition-all duration-1000 ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
@@ -91,18 +76,15 @@ const SimplifiedHero = () => {
                 </div>
               </div>
               
-              {/* Lazy-loaded dashboard content with fallback */}
-              <Suspense fallback={
-                <div className="flex items-center justify-center p-8 bg-gray-900">
-                  <img 
-                    src={dashboardPlaceholder} 
-                    alt="Dashboard loading" 
-                    className="max-w-full h-auto opacity-70"
-                  />
-                </div>
-              }>
-                {isMobile ? <MobileDashboard /> : <DesktopDashboard />}
-              </Suspense>
+              {/* Simplified dashboard image - one image for all devices */}
+              <div className="flex items-center justify-center p-8 bg-gray-900">
+                <img 
+                  src={dashboardPlaceholder} 
+                  alt="Dashboard preview" 
+                  className="max-w-full h-auto"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </div>

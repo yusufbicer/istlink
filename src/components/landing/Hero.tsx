@@ -33,7 +33,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <span className="inline-block py-1 px-3 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-5">
+            <span className="inline-block py-1 px-3 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-3">
               Smart Consolidation Solutions
             </span>
           </div>
@@ -74,9 +74,9 @@ const Hero = () => {
           </div>
         </div>
         
-        {/* Mobile-friendly Dashboard Preview */}
+        {/* Mobile-friendly Dashboard Preview with more vertical space */}
         <div 
-          className={`mt-16 relative mx-auto max-w-5xl transition-all duration-1000 delay-500 transform ${
+          className={`mt-12 relative mx-auto max-w-5xl transition-all duration-1000 delay-500 transform ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
           }`}
         >
@@ -99,9 +99,9 @@ const Hero = () => {
               </div>
               
               {isMobile ? (
-                // Mobile-optimized dashboard
+                // Enhanced Mobile-optimized dashboard with more vertical space
                 <div className="bg-gray-900 text-white p-4">
-                  {/* Mobile Dashboard Header */}
+                  {/* Mobile Dashboard Header - Nav Tabs instead of sidebar */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
                       <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
@@ -124,6 +124,22 @@ const Hero = () => {
                           <path d="M4 6h16M4 12h16M4 18h16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </div>
+                    </div>
+                  </div>
+                  
+                  {/* Navigation Tabs for Mobile */}
+                  <div className="flex overflow-x-auto space-x-2 py-2 mb-3 scrollbar-hide">
+                    <div className="flex items-center px-3 py-1.5 bg-indigo-600 rounded-full text-xs font-medium whitespace-nowrap">
+                      <Activity className="h-3 w-3 mr-1" /> Overview
+                    </div>
+                    <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
+                      <Package className="h-3 w-3 mr-1" /> Orders
+                    </div>
+                    <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
+                      <GitMerge className="h-3 w-3 mr-1" /> Consolidations
+                    </div>
+                    <div className="flex items-center px-3 py-1.5 bg-gray-800 rounded-full text-xs font-medium whitespace-nowrap">
+                      <TrendingUp className="h-3 w-3 mr-1" /> Analytics
                     </div>
                   </div>
                   
@@ -155,8 +171,8 @@ const Hero = () => {
                       </div>
                     </div>
                     
-                    {/* Improved Mobile Consolidation Visual */}
-                    <div className="bg-gray-800 p-3 rounded-lg border border-gray-700 h-60 flex items-center justify-center relative overflow-hidden">
+                    {/* Improved Mobile Consolidation Visual - Taller for more vertical space */}
+                    <div className="bg-gray-800 p-3 rounded-lg border border-gray-700 h-72 flex items-center justify-center relative overflow-hidden">
                       <div className="absolute top-2 left-2 right-2 flex justify-between items-center">
                         <span className="text-xs font-medium">Consolidation Efficiency</span>
                       </div>
@@ -215,6 +231,13 @@ const Hero = () => {
                       </svg>
                     </div>
                     
+                    {/* Account Balance */}
+                    <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                      <div className="text-xs font-medium mb-2">Account Balance</div>
+                      <div className="text-xl font-bold text-green-400">$154,370</div>
+                      <div className="text-xs text-gray-400">After 3% service fee</div>
+                    </div>
+                    
                     {/* Activity List */}
                     <div className="bg-gray-800 p-3 rounded-lg border border-gray-700">
                       <div className="text-xs font-medium mb-2">Recent Updates</div>
@@ -232,43 +255,59 @@ const Hero = () => {
                   </div>
                 </div>
               ) : (
-                // Desktop dashboard content
+                // Desktop dashboard content with updated payment status
                 <div className="bg-gray-900 text-white">
                   {/* Dashboard content */}
                   <div className="grid grid-cols-12 gap-4 p-6 bg-gray-900">
-                    {/* Sidebar */}
-                    <div className="col-span-3 bg-gray-800 p-4 h-[540px] rounded-lg border border-gray-700">
-                      <div className="flex items-center mb-6">
-                        <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
-                          <Zap className="w-4 h-4 text-white absolute" />
-                          <Atom className="w-5 h-5 text-white/80 animate-pulse" />
+                    {/* Navigation Tabs instead of Sidebar */}
+                    <div className="col-span-12 mb-4">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
+                            <Zap className="w-5 h-5 text-white absolute" />
+                            <Atom className="w-6 h-6 text-white/80 animate-pulse" />
+                          </div>
+                          <div className="ml-3">
+                            <div className="font-bold text-white text-lg">GROOP</div>
+                            <div className="text-xs text-indigo-400">BEYOND BORDERS</div>
+                          </div>
                         </div>
-                        <div className="ml-2">
-                          <div className="font-bold text-white">GROOP</div>
-                          <div className="text-xs text-indigo-400">BEYOND BORDERS</div>
+                        <div className="flex space-x-1">
+                          <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 cursor-pointer">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 cursor-pointer">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-sm font-medium">JD</div>
                         </div>
                       </div>
-                      <div className="space-y-2">
-                        <div className="h-9 w-full bg-indigo-600 rounded-md flex items-center px-3 text-sm font-medium">
+                      <div className="flex space-x-2 mb-2">
+                        <div className="flex items-center px-4 py-2 bg-indigo-600 rounded-lg text-sm font-medium">
                           <Activity className="h-4 w-4 mr-2" /> Overview
                         </div>
-                        <div className="h-9 w-full bg-gray-700 hover:bg-gray-600 rounded-md flex items-center px-3 text-sm font-medium text-gray-200">
+                        <div className="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm font-medium cursor-pointer">
                           <Package className="h-4 w-4 mr-2" /> Orders
                         </div>
-                        <div className="h-9 w-full bg-gray-700 hover:bg-gray-600 rounded-md flex items-center px-3 text-sm font-medium text-gray-200">
+                        <div className="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm font-medium cursor-pointer">
                           <GitMerge className="h-4 w-4 mr-2" /> Consolidations
                         </div>
-                        <div className="h-9 w-full bg-gray-700 hover:bg-gray-600 rounded-md flex items-center px-3 text-sm font-medium text-gray-200">
+                        <div className="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm font-medium cursor-pointer">
                           <TrendingUp className="h-4 w-4 mr-2" /> Analytics
                         </div>
-                        <div className="h-9 w-full bg-gray-700 hover:bg-gray-600 rounded-md flex items-center px-3 text-sm font-medium text-gray-200">
+                        <div className="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm font-medium cursor-pointer">
                           <Network className="h-4 w-4 mr-2" /> Suppliers
                         </div>
                       </div>
                     </div>
                     
                     {/* Main dashboard area */}
-                    <div className="col-span-9 space-y-4">
+                    <div className="col-span-12 space-y-4">
                       {/* Stats row */}
                       <div className="grid grid-cols-3 gap-4">
                         <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
@@ -402,7 +441,7 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Consolidation Data and Payment Status */}
+                      {/* Consolidation Data and Updated Payment Status */}
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                           <div className="font-medium mb-3">Active Consolidations</div>
@@ -422,16 +461,16 @@ const Hero = () => {
                           </div>
                         </div>
                         <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
-                          <div className="font-medium mb-2">Payment Status</div>
+                          <div className="font-medium mb-2">Account Balance & Payments</div>
                           <div className="h-32 w-full">
                             <div className="flex items-center justify-between mb-4">
                               <div className="flex flex-col">
                                 <span className="text-sm">Total Value</span>
-                                <span className="text-lg font-bold">$158,450</span>
+                                <span className="text-lg font-bold">$185,000</span>
                               </div>
                               <div className="flex flex-col items-end">
-                                <span className="text-sm">Service Fees</span>
-                                <span className="text-lg font-bold">$7,922</span>
+                                <span className="text-sm">Account Balance</span>
+                                <span className="text-lg font-bold text-green-400">$72,470</span>
                               </div>
                             </div>
                             <div className="space-y-2">
@@ -440,12 +479,12 @@ const Hero = () => {
                                 <span className="text-sm font-medium text-green-400">$112,300</span>
                               </div>
                               <div className="flex justify-between items-center">
-                                <span className="text-sm">Pending Payments</span>
-                                <span className="text-sm font-medium text-yellow-400">$46,150</span>
+                                <span className="text-sm">Service Fee (3%)</span>
+                                <span className="text-sm font-medium text-blue-400">$5,550</span>
                               </div>
                               <div className="flex justify-between items-center">
-                                <span className="text-sm">Collection Rate</span>
-                                <span className="text-sm font-medium text-blue-400">94%</span>
+                                <span className="text-sm">Available for Orders</span>
+                                <span className="text-sm font-medium text-indigo-400">$67,150</span>
                               </div>
                             </div>
                           </div>

@@ -1,15 +1,15 @@
 
-import { supabase, handleSupabaseError, getCurrentSupplierID, getCurrentCustomerID, generateUUID } from "@/integrations/supabase/client";
-import { User, UserRole } from "./auth";
+import { supabase, generateUUID, handleError, getCurrentSupplierId, getCurrentCustomerId } from "@/integrations/supabase/client";
+import type { User, UserRole } from "./auth";
 
-// Types that will map to our Supabase schema
+// Interface definitions
 export interface Customer {
   id: string;
   name: string;
   email: string;
   company: string;
   orders: number;
-  status: "active" | "inactive";
+  status: string;
 }
 
 export interface Order {
@@ -32,14 +32,13 @@ export interface Note {
   user_id: string;
 }
 
-// User service functions
-export const userService = {
+// Customer service
+export const customerService = {
   getCustomers: async (supplierOnly: boolean = false): Promise<Customer[]> => {
     try {
       console.log("Fetching customers, supplierOnly:", supplierOnly);
       
-      // First get the relevant customers based on role
-      let customersQuery = supabase.from('customers').select(`
+      let query = supabase.from('customers').select(`
         id,
         user_id,
         company_name,
@@ -47,79 +46,58 @@ export const userService = {
       `);
       
       if (supplierOnly) {
-        // Get current supplier ID
-        const supplierId = await getCurrentSupplierID();
-        if (supplierId) {
-          console.log("Filtering customers for supplier:", supplierId);
-          
-          // Get orders for this supplier
-          const { data: orders } = await supabase
-            .from('orders')
-            .select('customer_id')
-            .eq('supplier_id', supplierId);
-          
-          // If there are orders, get unique customer IDs
-          if (orders && orders.length > 0) {
-            const customerIds = [...new Set(orders.map(order => order.customer_id))];
-            customersQuery = customersQuery.in('id', customerIds);
-          } else {
-            // No orders for this supplier, return empty array
-            return [];
-          }
+        const supplierId = await getCurrentSupplierId();
+        if (!supplierId) return [];
+        
+        // Get orders for this supplier to find customers
+        const { data: orders } = await supabase
+          .from('orders')
+          .select('customer_id')
+          .eq('supplier_id', supplierId);
+        
+        if (orders && orders.length > 0) {
+          const customerIds = [...new Set(orders.map(order => order.customer_id))];
+          query = query.in('id', customerIds);
         } else {
-          console.log("No supplier ID found for current user");
           return [];
         }
       }
       
-      // Execute the query
-      const { data, error } = await customersQuery;
+      const { data, error } = await query;
       
-      if (error) {
+      if (error || !data) {
         console.error("Error fetching customers:", error);
         return [];
       }
       
-      console.log("Customers fetched:", data?.length);
-      
-      // For each customer, get user information and count their orders
-      const customersWithOrderCounts = await Promise.all(
-        (data || []).map(async (customer: any) => {
-          // Get user profile data
-          const { data: userData, error: userError } = await supabase
+      // Get profile info and order counts
+      const customersWithData = await Promise.all(
+        data.map(async (customer) => {
+          // Get user profile
+          const { data: profile } = await supabase
             .from('profiles')
             .select('name, email')
             .eq('id', customer.user_id)
             .maybeSingle();
-            
-          if (userError || !userData) {
-            console.error("Error fetching user profile:", userError);
-            return null;
-          }
           
-          // Count orders for this customer
-          const { count, error: countError } = await supabase
+          // Count orders
+          const { count } = await supabase
             .from('orders')
             .select('id', { count: 'exact', head: true })
             .eq('customer_id', customer.id);
           
-          if (countError) {
-            console.error("Error counting orders:", countError);
-          }
-          
           return {
             id: customer.id,
-            name: userData.name,
-            email: userData.email,
+            name: profile?.name || 'Unknown',
+            email: profile?.email || 'no-email',
             company: customer.company_name || 'Not specified',
             orders: count || 0,
-            status: customer.status as "active" | "inactive"
+            status: customer.status as string
           };
         })
       );
       
-      // Filter out any null values and return
-      return customersWithOrderCounts.filter(Boolean) as Customer[];
+      return customersWithData.filter(Boolean) as Customer[];
     } catch (error) {
       console.error("Error in getCustomers:", error);
       return [];
@@ -128,8 +106,6 @@ export const userService = {
   
   getCustomerById: async (id: string): Promise<Customer | null> => {
     try {
-      console.log("Fetching customer by ID:", id);
-      
       const { data, error } = await supabase
         .from('customers')
         .select(`
@@ -141,41 +117,27 @@ export const userService = {
         .eq('id', id)
         .maybeSingle();
       
-      if (error) {
-        console.error("Error fetching customer:", error);
-        return null;
-      }
+      if (error || !data) return null;
       
-      if (!data) {
-        console.log("No customer found with ID:", id);
-        return null;
-      }
-      
-      // Get user profile data
-      const { data: userData, error: userError } = await supabase
+      // Get user profile
+      const { data: profile } = await supabase
         .from('profiles')
         .select('name, email')
         .eq('id', data.user_id)
         .maybeSingle();
-        
-      if (userError || !userData) {
-        console.error("Error fetching user profile:", userError);
-        return null;
-      }
       
-      // Count orders for this customer
+      // Count orders
       const { count } = await supabase
         .from('orders')
         .select('id', { count: 'exact', head: true })
         .eq('customer_id', id);
       
-      // Return the customer data
       return {
         id: data.id,
-        name: userData.name,
-        email: userData.email,
+        name: profile?.name || 'Unknown',
+        email: profile?.email || 'no-email',
         company: data.company_name || 'Not specified',
-        status: data.status as "active" | "inactive",
+        status: data.status as string,
         orders: count || 0
       };
     } catch (error) {
@@ -183,9 +145,9 @@ export const userService = {
       return null;
     }
   },
-}
+};
 
-// Order service functions
+// Order service
 export const orderService = {
   getOrders: async (filterByUser: boolean = true): Promise<Order[]> => {
     try {
@@ -197,91 +159,80 @@ export const orderService = {
         supplier_id,
         status,
         amount,
-        date
+        total_amount,
+        order_date
       `);
       
       if (filterByUser) {
-        // Get current user role
         const { data: { session } } = await supabase.auth.getSession();
-        if (!session?.user) {
-          console.log("No active session, returning empty orders");
-          return [];
-        }
+        if (!session?.user) return [];
         
         // Get user role
-        const { data: userData } = await supabase
+        const { data: profile } = await supabase
           .from('profiles')
           .select('role')
           .eq('id', session.user.id)
-          .single();
+          .maybeSingle();
         
-        if (!userData) {
-          console.log("User role not found, returning empty orders");
-          return [];
-        }
+        if (!profile) return [];
         
-        if (userData.role === 'supplier') {
-          // Get supplier ID
-          const { data: supplierData } = await supabase
+        if (profile.role === 'supplier') {
+          const { data: supplier } = await supabase
             .from('suppliers')
             .select('id')
             .eq('user_id', session.user.id)
-            .single();
+            .maybeSingle();
           
-          if (supplierData) {
-            console.log("Filtering orders for supplier:", supplierData.id);
-            query = query.eq('supplier_id', supplierData.id);
+          if (supplier) {
+            query = query.eq('supplier_id', supplier.id);
           }
-        } else if (userData.role === 'customer') {
-          // Get customer ID
-          const { data: customerData } = await supabase
+        } else if (profile.role === 'customer') {
+          const { data: customer } = await supabase
             .from('customers')
             .select('id')
             .eq('user_id', session.user.id)
-            .single();
+            .maybeSingle();
           
-          if (customerData) {
-            console.log("Filtering orders for customer:", customerData.id);
-            query = query.eq('customer_id', customerData.id);
+          if (customer) {
+            query = query.eq('customer_id', customer.id);
           }
         }
-        // For admins, don't filter
       }
       
       const { data, error } = await query;
       
-      if (error) {
+      if (error || !data) {
         console.error("Error fetching orders:", error);
         return [];
       }
       
-      console.log("Orders fetched:", data?.length);
-      
-      // Transform to match the expected Order interface with customer and supplier names
-      const ordersWithNames = await Promise.all((data || []).map(async (order: any) => {
+      // Get customer and supplier names
+      const ordersWithNames = await Promise.all(data.map(async (order) => {
         // Get customer name
         let customerName = "Unknown Customer";
         if (order.customer_id) {
-          const { data: customerData } = await supabase
+          const { data: customer } = await supabase
             .from('customers')
             .select('company_name')
             .eq('id', order.customer_id)
             .maybeSingle();
-          if (customerData) {
-            customerName = customerData.company_name;
+          
+          if (customer) {
+            customerName = customer.company_name;
           }
         }
         
         // Get supplier name
         let supplierName = "Unknown Supplier";
         if (order.supplier_id) {
-          const { data: supplierData } = await supabase
+          const { data: supplier } = await supabase
             .from('suppliers')
             .select('company_name')
             .eq('id', order.supplier_id)
             .maybeSingle();
-          if (supplierData) {
-            supplierName = supplierData.company_name;
+          
+          if (supplier) {
+            supplierName = supplier.company_name;
           }
         }
         
@@ -291,10 +242,10 @@ export const orderService = {
           supplier_id: order.supplier_id,
           customerName,
           supplierName,
-          amount: order.amount || 0,
+          amount: order.total_amount || order.amount || 0,
           status: order.status || 'pending',
-          date: order.date || new Date().toISOString(),
-          items: 0 // This field needs to be added to the orders table if needed
+          date: order.order_date || new Date().toISOString(),
+          items: 1 // Default value
         };
       }));
       
@@ -305,22 +256,22 @@ export const orderService = {
     }
   },
   
-  createOrder: async (orderData: any): Promise<{success: boolean, data?: any, error?: any}> => {
+  createOrder: async (orderData: { customer_id: string; supplier_id: string; amount: number }): Promise<{ success: boolean; data?: any; error?: any }> => {
     try {
       console.log("Creating order:", orderData);
       
-      // Use the create_order function to create the order
-      const { data, error } = await supabase.rpc('create_order', {
-        p_customer_id: orderData.customer_id,
-        p_supplier_id: orderData.supplier_id,
-        p_total_amount: orderData.amount
+      const { data, error } = await supabase.functions.invoke('create_order', {
+        body: {
+          customer_id: orderData.customer_id,
+          supplier_id: orderData.supplier_id,
+          total_amount: orderData.amount
+        }
       });
       
       if (error) {
-        console.error("Error creating order:", error);
         return { 
           success: false, 
-          error: handleSupabaseError(error, "Failed to create order") 
+          error: handleError(error, "Failed to create order") 
         };
       }
       
@@ -333,9 +284,9 @@ export const orderService = {
       };
     }
   }
-}
+};
 
-// Note service functions
+// Note service
 export const noteService = {
   getNotes: async (): Promise<Note[]> => {
     try {
@@ -400,9 +351,9 @@ export const noteService = {
       return null;
     }
   }
-}
+};
 
-// Helper to check if a user can access a specific resource
+// Helper to check access
 export const checkAccess = (user: User | null, role: UserRole | UserRole[]): boolean => {
   if (!user) return false;
   
@@ -410,5 +361,5 @@ export const checkAccess = (user: User | null, role: UserRole | UserRole[]): boo
     return role.includes(user.role);
   }
   
-  return user.role === role || user.role === 'admin'; // Admins have access to everything
-}
+  return user.role === role || user.role === 'admin';
+};

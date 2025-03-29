@@ -114,19 +114,26 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Navigation Tabs all in one row - removed + and hamburger icons */}
-                      <div className="flex gap-1 flex-1 overflow-x-auto pb-1 scrollbar-none">
-                        <div className="flex items-center px-2 py-1 bg-indigo-600 rounded-full text-[10px] font-medium whitespace-nowrap">
-                          <Activity className="h-3 w-3 mr-1" /> Overview
+                      {/* Navigation Tabs in two rows */}
+                      <div className="flex flex-col gap-1 flex-1 overflow-x-hidden">
+                        <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-none">
+                          <div className="flex items-center px-2 py-1 bg-indigo-600 rounded-full text-[10px] font-medium whitespace-nowrap">
+                            <Activity className="h-3 w-3 mr-1" /> Overview
+                          </div>
+                          <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
+                            <Package className="h-3 w-3 mr-1" /> Orders
+                          </div>
+                          <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
+                            <GitMerge className="h-3 w-3 mr-1" /> Consol
+                          </div>
                         </div>
-                        <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
-                          <Package className="h-3 w-3 mr-1" /> Orders
-                        </div>
-                        <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
-                          <GitMerge className="h-3 w-3 mr-1" /> Consol
-                        </div>
-                        <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
-                          <Network className="h-3 w-3 mr-1" /> Supply
+                        <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-none">
+                          <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
+                            <Network className="h-3 w-3 mr-1" /> Supply
+                          </div>
+                          <div className="flex items-center px-2 py-1 bg-gray-800 rounded-full text-[10px] font-medium whitespace-nowrap">
+                            <TrendingUp className="h-3 w-3 mr-1" /> Analytics
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -168,7 +175,7 @@ const Hero = () => {
                           </div>
                           <div className="text-center">
                             <div className="text-lg font-bold">92%</div>
-                            <div className="text-[10px] text-green-400">Saved</div>
+                            <div className="text-[10px] text-green-400">Utilization</div>
                           </div>
                         </div>
                         <div className="bg-gray-800 p-2 rounded-lg border border-gray-700">
@@ -365,7 +372,7 @@ const Hero = () => {
                               </div>
                               <div className="text-center">
                                 <div className="text-lg font-bold">92%</div>
-                                <div className="text-xs text-green-400">Optimized Space</div>
+                                <div className="text-xs text-green-400">Utilization</div>
                               </div>
                             </div>
                             
@@ -441,7 +448,7 @@ const Hero = () => {
                           {/* Fixed Account Balance section with 2% fee - fixed overflow */}
                           <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 h-44">
                             <div className="font-medium mb-3">Account Balance & Payments</div>
-                            <div className="flex flex-col h-32">
+                            <div className="flex flex-col h-32"> 
                               <div className="flex items-center justify-between mb-3">
                                 <div className="flex flex-col">
                                   <span className="text-sm">Total Value</span>
@@ -452,7 +459,7 @@ const Hero = () => {
                                   <span className="text-lg font-bold text-green-400">$69,000</span>
                                 </div>
                               </div>
-                              <div className="space-y-2">
+                              <div className="space-y-1 overflow-y-auto max-h-16">
                                 <div className="flex justify-between items-center">
                                   <span className="text-sm">Paid to Suppliers</span>
                                   <span className="text-sm font-medium text-green-400">$112,300</span>
@@ -461,7 +468,7 @@ const Hero = () => {
                                   <span className="text-sm">Service Fee (2%)</span>
                                   <span className="text-sm font-medium text-blue-400">$3,700</span>
                                 </div>
-                                <div className="flex justify-between items-center pt-2 border-t border-gray-700 mt-2">
+                                <div className="flex justify-between items-center pt-1 border-t border-gray-700 mt-1">
                                   <span className="text-sm">Available for Orders</span>
                                   <span className="text-sm font-medium text-indigo-400">$69,000</span>
                                 </div>

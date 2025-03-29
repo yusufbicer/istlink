@@ -1,6 +1,6 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { CheckCircle2, PackagePlus, GitMerge, Ship, FileCheck, Users } from 'lucide-react';
+import { CheckCircle2, FileText, FileCheck, Ship, Receipt, Users, Wallet } from 'lucide-react';
 
 interface Step {
   icon: any;
@@ -10,19 +10,24 @@ interface Step {
 
 const steps: Step[] = [
   {
+    icon: FileText,
+    title: "Find Your Suppliers",
+    description: "Find your suppliers, get your proforma invoices and send them all to our team for review and processing."
+  },
+  {
     icon: Users,
-    title: "Connect with Suppliers",
-    description: "Easily link your existing Turkish suppliers to our platform, or discover new ones from our verified network."
+    title: "Supplier Verification",
+    description: "Our team will verify your suppliers and after confirmation we will sign a master contract to act on your behalf."
   },
   {
-    icon: PackagePlus,
-    title: "Make Your Purchases",
-    description: "Buy products from multiple suppliers through our platform or simply enter your order details for tracking."
+    icon: Wallet,
+    title: "Payment Processing",
+    description: "We will handle all your order payments on behalf of you from your account balance with complete transparency."
   },
   {
-    icon: GitMerge,
-    title: "Consolidation Happens",
-    description: "Our team in Turkey receives and verifies all items, then combines them into a single optimized shipment."
+    icon: Receipt,
+    title: "Order Consolidation",
+    description: "Our team will receive and verify all your orders, then combine them into a single optimized shipment."
   },
   {
     icon: FileCheck,

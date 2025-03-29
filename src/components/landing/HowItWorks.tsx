@@ -7,15 +7,14 @@ import {
   PackagePlus, 
   ClipboardCheck, 
   ShipIcon, 
-  MapPin,
-  Zap
+  MapPin
 } from 'lucide-react';
 
 interface Step {
   icon: React.ComponentType<any>;
   title: string;
   description: string;
-  color: string;
+  color: string; // Add color property for each step
 }
 
 const steps: Step[] = [
@@ -23,43 +22,43 @@ const steps: Step[] = [
     icon: Search,
     title: "Find Your Suppliers",
     description: "Find your suppliers, get your proforma invoices and send them all to our team for review and processing.",
-    color: "bg-neon-blue/20 text-neon-blue"
+    color: "bg-blue-100 text-blue-600"
   },
   {
     icon: ShieldCheck,
     title: "Supplier Verification",
     description: "Our team will verify your suppliers and after confirmation we will sign a master contract to act on your behalf.",
-    color: "bg-neon-purple/20 text-neon-purple"
+    color: "bg-green-100 text-green-600"
   },
   {
     icon: CreditCard,
     title: "Payment Processing",
     description: "We will handle all your order payments on behalf of you from your account balance with complete transparency.",
-    color: "bg-neon-pink/20 text-neon-pink"
+    color: "bg-purple-100 text-purple-600"
   },
   {
     icon: PackagePlus,
     title: "Order Consolidation",
     description: "Our team will receive and verify all your orders, then combine them into a single optimized shipment.",
-    color: "bg-neon-green/20 text-neon-green"
+    color: "bg-amber-100 text-amber-600"
   },
   {
     icon: ClipboardCheck,
     title: "Documentation Simplified",
     description: "We handle all export paperwork, customs forms, and create a single bill of lading for your consolidated shipment.",
-    color: "bg-neon-cyan/20 text-neon-cyan"
+    color: "bg-indigo-100 text-indigo-600"
   },
   {
     icon: ShipIcon,
     title: "Global Shipping",
     description: "Your consolidated order is shipped to your destination with real-time tracking and updates.",
-    color: "bg-neon-blue/20 text-neon-blue"
+    color: "bg-cyan-100 text-cyan-600"
   },
   {
     icon: MapPin,
     title: "Easy Delivery",
     description: "Receive your multiple orders as a single shipment, saving time and reducing customs complexity.",
-    color: "bg-neon-purple/20 text-neon-purple"
+    color: "bg-pink-100 text-pink-600"
   }
 ];
 
@@ -90,31 +89,21 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section 
-      id="how-it-works" 
-      className="py-20 bg-gradient-to-b from-background to-secondary/20 relative overflow-hidden"
-    >
-      {/* Cyber grid background */}
-      <div className="absolute inset-0 bg-cyber-grid opacity-10"></div>
-      
-      {/* Glowing orbs for futuristic effect */}
-      <div className="absolute top-1/4 -left-20 w-64 h-64 rounded-full bg-neon-purple/20 filter blur-3xl animate-glow-pulse"></div>
-      <div className="absolute bottom-1/4 -right-20 w-80 h-80 rounded-full bg-neon-blue/20 filter blur-3xl animate-glow-pulse" style={{ animationDelay: '1.5s' }}></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="how-it-works" className="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
+      <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
           className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <span className="inline-block py-1 px-3 text-sm font-medium bg-neon-purple/10 text-neon-purple rounded-full mb-3 border border-neon-purple/30 font-future">
-            PROCESS PROTOCOL
+          <span className="inline-block py-1 px-3 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-3">
+            Simple Process
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-glow font-future">
-            7 <span className="cyber-text">Synaptic Steps</span> to Supply Chain Success
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            7 Simple Steps to Supply Chain Success
           </h2>
-          <p className="text-xl text-foreground/80">
+          <p className="text-xl text-gray-600">
             Our streamlined process makes sourcing and shipping from Turkey effortless.
           </p>
         </div>
@@ -123,7 +112,7 @@ const HowItWorks = () => {
         <div className="hidden md:block max-w-5xl mx-auto">
           <div className="relative">
             {/* Connecting line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-neon-purple/30 transform -translate-x-1/2 z-0 shadow-neon-purple"></div>
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indigo-200 transform -translate-x-1/2 z-0"></div>
             
             {/* Steps */}
             <div className="space-y-16 relative z-10">
@@ -141,13 +130,13 @@ const HowItWorks = () => {
                     {/* Icon circle */}
                     <div className="flex-shrink-0 relative z-10">
                       <div 
-                        className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border-2 ${
-                          activeStep === index ? 'border-neon-purple scale-110 shadow-neon-purple' : 'border-neon-purple/50'
-                        } ${step.color} backdrop-blur-sm`}
+                        className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border-4 ${
+                          activeStep === index ? 'border-indigo-500 scale-110' : 'border-white'
+                        } ${step.color}`}
                       >
                         <StepIcon className="h-7 w-7" />
                       </div>
-                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-neon-purple flex items-center justify-center text-white font-bold text-sm border border-white/20 shadow-neon-purple">
+                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
                         {index + 1}
                       </div>
                     </div>
@@ -159,16 +148,12 @@ const HowItWorks = () => {
                       <div 
                         className={`p-5 rounded-lg transition-all duration-300 ${
                           activeStep === index 
-                            ? 'neo-glass shadow-neon-purple transform -translate-y-1 border-l-4 border-neon-purple' 
-                            : 'bg-secondary/50 backdrop-blur-sm border border-neon-purple/20'
+                            ? 'bg-white shadow-xl transform -translate-y-1 border-l-4 border-indigo-500' 
+                            : 'bg-white shadow-md'
                         }`}
                       >
-                        <h3 className="font-bold text-xl text-foreground mb-2 font-future flex items-center">
-                          {!isOdd && <Zap size={16} className="mr-2 text-neon-purple" />}
-                          {step.title}
-                          {isOdd && <Zap size={16} className="ml-2 text-neon-purple" />}
-                        </h3>
-                        <p className="text-foreground/80">{step.description}</p>
+                        <h3 className="font-bold text-xl text-gray-900 mb-2">{step.title}</h3>
+                        <p className="text-gray-600">{step.description}</p>
                       </div>
                     </div>
                   </div>
@@ -186,23 +171,23 @@ const HowItWorks = () => {
             return (
               <div 
                 key={index} 
-                className="neo-glass rounded-lg overflow-hidden border-l-4 border-neon-purple"
+                className="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-indigo-500"
               >
                 <div className="p-5">
                   <div className="flex items-center mb-4">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 ${step.color} border border-white/10`}>
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 ${step.color}`}>
                       <StepIcon className="h-6 w-6" />
                     </div>
                     <div>
                       <div className="flex items-center">
-                        <span className="w-6 h-6 rounded-full bg-neon-purple text-white flex items-center justify-center text-sm font-bold mr-2 shadow-neon-purple">
+                        <span className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold mr-2">
                           {index + 1}
                         </span>
-                        <h3 className="font-bold text-lg text-foreground font-future">{step.title}</h3>
+                        <h3 className="font-bold text-lg text-gray-900">{step.title}</h3>
                       </div>
                     </div>
                   </div>
-                  <p className="text-foreground/80 pl-16">{step.description}</p>
+                  <p className="text-gray-600 pl-16">{step.description}</p>
                 </div>
               </div>
             );

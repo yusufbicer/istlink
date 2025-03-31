@@ -74,21 +74,13 @@ const Header = () => {
             </button>
           </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Changed to single Get Started button */}
           <div className="hidden md:flex items-center space-x-4">
-            {user ? (
-              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
-                <Link to="/dashboard" className="px-5 py-2">
-                  Dashboard
-                </Link>
-              </Button>
-            ) : (
-              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
-                <Link to="/register" className="px-5 py-2">
-                  Get Started
-                </Link>
-              </Button>
-            )}
+            <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
+              <Link to="/register" className="px-5 py-2">
+                Get Started
+              </Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -135,27 +127,15 @@ const Header = () => {
               </button>
               
               <div className="pt-2 border-t border-gray-100">
-                {user ? (
-                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
-                    <Link 
-                      to="/dashboard" 
-                      className="justify-center"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Dashboard
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
-                    <Link 
-                      to="/register" 
-                      className="justify-center"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Get Started
-                    </Link>
-                  </Button>
-                )}
+                <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
+                  <Link 
+                    to="/register" 
+                    className="justify-center"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Get Started
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

@@ -74,13 +74,28 @@ const Header = () => {
             </button>
           </div>
 
-          {/* CTA Buttons - Changed to single Get Started button */}
+          {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
-              <Link to="/register" className="px-5 py-2">
-                Get Started
-              </Link>
-            </Button>
+            {user ? (
+              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
+                <Link to="/dashboard" className="px-5 py-2">
+                  Dashboard
+                </Link>
+              </Button>
+            ) : (
+              <>
+                <Button asChild variant="outline" className="border-metallic-blue text-metallic-blue hover:bg-metallic-blue/5">
+                  <Link to="/login" className="px-5 py-2">
+                    Login
+                  </Link>
+                </Button>
+                <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
+                  <Link to="/register" className="px-5 py-2">
+                    Sign Up
+                  </Link>
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -127,15 +142,38 @@ const Header = () => {
               </button>
               
               <div className="pt-2 border-t border-gray-100">
-                <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
-                  <Link 
-                    to="/register" 
-                    className="justify-center"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Get Started
-                  </Link>
-                </Button>
+                {user ? (
+                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
+                    <Link 
+                      to="/dashboard" 
+                      className="justify-center"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  </Button>
+                ) : (
+                  <div className="flex flex-col space-y-3">
+                    <Button asChild variant="outline" className="w-full border-metallic-blue text-metallic-blue hover:bg-metallic-blue/5">
+                      <Link 
+                        to="/login" 
+                        className="justify-center"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Login
+                      </Link>
+                    </Button>
+                    <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
+                      <Link 
+                        to="/register" 
+                        className="justify-center"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Sign Up
+                      </Link>
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
-import { Menu, X, Zap, Atom } from 'lucide-react';
+import { Menu, X, Zap } from 'lucide-react';
 
 const Header = () => {
   const { user } = useAuth();
@@ -37,14 +37,13 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                {/* Modern and futuristic logo */}
-                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 relative overflow-hidden">
+                {/* Metallic blue logo */}
+                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
                   <Zap className="w-5 h-5 text-white absolute" />
-                  <Atom className="w-6 h-6 text-white/80 animate-pulse" />
                 </div>
                 <div className="ml-3">
                   <span className="font-bold text-xl text-gray-900">GROOP</span>
-                  <span className="block text-xs text-indigo-600 font-medium tracking-wide">BEYOND BORDERS</span>
+                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
                 </div>
               </div>
             </div>
@@ -54,22 +53,22 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => scrollToSection('features')}
-              className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
             >
               Features
             </button>
             <button 
               onClick={() => scrollToSection('how-it-works')}
-              className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
             >
               How It Works
             </button>
-            <Link to="/blog" className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors">
+            <Link to="/blog" className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors">
               Blog
             </Link>
             <button 
               onClick={() => scrollToSection('pricing')}
-              className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
             >
               Pricing
             </button>
@@ -78,19 +77,19 @@ const Header = () => {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
-              <Button asChild className="bg-indigo-600 hover:bg-indigo-700">
+              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
                 <Link to="/dashboard" className="px-5 py-2">
                   Dashboard
                 </Link>
               </Button>
             ) : (
               <>
-                <Button asChild variant="outline" className="border-indigo-600 text-indigo-600 hover:bg-indigo-50">
+                <Button asChild variant="outline" className="border-metallic-blue text-metallic-blue hover:bg-metallic-blue/5">
                   <Link to="/login" className="px-5 py-2">
                     Login
                   </Link>
                 </Button>
-                <Button asChild className="bg-indigo-600 hover:bg-indigo-700">
+                <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
                   <Link to="/register" className="px-5 py-2">
                     Sign Up
                   </Link>
@@ -118,33 +117,33 @@ const Header = () => {
             <div className="flex flex-col py-4 px-6 space-y-4">
               <button 
                 onClick={() => scrollToSection('features')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
               >
                 How It Works
               </button>
               <Link 
                 to="/blog" 
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left w-full block"
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left w-full block"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Blog
               </Link>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
               >
                 Pricing
               </button>
               
               <div className="pt-2 border-t border-gray-100">
                 {user ? (
-                  <Button asChild className="w-full bg-indigo-600 hover:bg-indigo-700">
+                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
                     <Link 
                       to="/dashboard" 
                       className="justify-center"
@@ -155,7 +154,7 @@ const Header = () => {
                   </Button>
                 ) : (
                   <div className="flex flex-col space-y-3">
-                    <Button asChild variant="outline" className="w-full border-indigo-600 text-indigo-600 hover:bg-indigo-50">
+                    <Button asChild variant="outline" className="w-full border-metallic-blue text-metallic-blue hover:bg-metallic-blue/5">
                       <Link 
                         to="/login" 
                         className="justify-center"
@@ -164,7 +163,7 @@ const Header = () => {
                         Login
                       </Link>
                     </Button>
-                    <Button asChild className="w-full bg-indigo-600 hover:bg-indigo-700">
+                    <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
                       <Link 
                         to="/register" 
                         className="justify-center"

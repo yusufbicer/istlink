@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
-import { Menu, X, Zap, Archive, BarChart2 } from 'lucide-react';
+import { Menu, X, Zap } from 'lucide-react';
 
 const Header = () => {
   const { user } = useAuth();
@@ -63,14 +63,6 @@ const Header = () => {
             >
               How It Works
             </button>
-            <Link to="/suppliers" className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors flex items-center">
-              <Archive className="mr-1 h-4 w-4" />
-              Suppliers
-            </Link>
-            <Link to="/analytics" className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors flex items-center">
-              <BarChart2 className="mr-1 h-4 w-4" />
-              Analytics
-            </Link>
             <Link to="/blog" className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors">
               Blog
             </Link>
@@ -91,18 +83,11 @@ const Header = () => {
                 </Link>
               </Button>
             ) : (
-              <>
-                <Button asChild variant="outline" className="border-metallic-blue text-metallic-blue hover:bg-metallic-blue/5">
-                  <Link to="/login" className="px-5 py-2">
-                    Login
-                  </Link>
-                </Button>
-                <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
-                  <Link to="/register" className="px-5 py-2">
-                    Sign Up
-                  </Link>
-                </Button>
-              </>
+              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
+                <Link to="/register" className="px-5 py-2">
+                  Get Started
+                </Link>
+              </Button>
             )}
           </div>
 
@@ -136,22 +121,6 @@ const Header = () => {
                 How It Works
               </button>
               <Link 
-                to="/suppliers" 
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left w-full block flex items-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Archive className="mr-1 h-4 w-4" />
-                Suppliers
-              </Link>
-              <Link 
-                to="/analytics" 
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left w-full block flex items-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <BarChart2 className="mr-1 h-4 w-4" />
-                Analytics
-              </Link>
-              <Link 
                 to="/blog" 
                 className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left w-full block"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -177,26 +146,15 @@ const Header = () => {
                     </Link>
                   </Button>
                 ) : (
-                  <div className="flex flex-col space-y-3">
-                    <Button asChild variant="outline" className="w-full border-metallic-blue text-metallic-blue hover:bg-metallic-blue/5">
-                      <Link 
-                        to="/login" 
-                        className="justify-center"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        Login
-                      </Link>
-                    </Button>
-                    <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
-                      <Link 
-                        to="/register" 
-                        className="justify-center"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        Sign Up
-                      </Link>
-                    </Button>
-                  </div>
+                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
+                    <Link 
+                      to="/register" 
+                      className="justify-center"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Get Started
+                    </Link>
+                  </Button>
                 )}
               </div>
             </div>

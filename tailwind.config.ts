@@ -66,7 +66,24 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				metallic: {
+					blue: "#3563E9",
+					light: "#4E7AFF",
+					dark: "#2D4CB3"
+				},
+				lavender: {
+					50: "#f3f4ff",
+					100: "#e9eaff",
+					200: "#d6d8ff",
+					300: "#b8baff",
+					400: "#9392ff",
+					500: "#7b66fc",
+					600: "#6a42f4",
+					700: "#5b32dd",
+					800: "#4b2bb7",
+					900: "#3f2893",
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius-lg)',

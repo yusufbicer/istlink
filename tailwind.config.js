@@ -12,6 +12,8 @@ export default {
     extend: {
       colors: {
         border: 'hsl(var(--border))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
         metallic: {
           blue: "#3563E9",
           light: "#4E7AFF",

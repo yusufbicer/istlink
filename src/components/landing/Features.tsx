@@ -79,6 +79,9 @@ const Features = () => {
     };
   }, []);
 
+  // Create a component reference for the first feature's icon
+  const MainFeatureIcon = features[0].icon;
+
   return (
     <section id="features" className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-6">
@@ -109,7 +112,7 @@ const Features = () => {
             style={{ transitionDelay: '100ms' }}
           >
             <div className={`w-16 h-16 ${features[0].iconColor} rounded-xl flex items-center justify-center mb-6`}>
-              <features[0].icon className="w-8 h-8" />
+              <MainFeatureIcon className="w-8 h-8" />
             </div>
             <h3 className="text-2xl font-semibold mb-3">{features[0].title}</h3>
             <p className="text-gray-600 text-lg mb-4">{features[0].description}</p>
@@ -133,41 +136,51 @@ const Features = () => {
           </div>
           
           {/* Regular feature items */}
-          {features.slice(1).map((feature, index) => (
-            <div 
-              key={index} 
-              className={`${feature.color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: `${(index + 1) * 100 + 100}ms` }}
-            >
-              <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
-                <feature.icon className="w-6 h-6" />
+          {features.slice(1).map((feature, index) => {
+            // Create a component reference for each feature icon
+            const FeatureIcon = feature.icon;
+            
+            return (
+              <div 
+                key={index} 
+                className={`${feature.color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${(index + 1) * 100 + 100}ms` }}
+              >
+                <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
+                  <FeatureIcon className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Mobile Optimized Layout - Swipe Cards */}
         <div className="md:hidden">
           <div className="pb-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory flex gap-4 -mx-6 px-6">
-            {features.map((feature, index) => (
-              <div 
-                key={index} 
-                className={`${feature.color} flex-shrink-0 w-[85%] snap-center rounded-xl border p-5 shadow-sm transition-all duration-300 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
-                  <feature.icon className="w-6 h-6" />
+            {features.map((feature, index) => {
+              // Create a component reference for each feature icon in mobile view
+              const FeatureIcon = feature.icon;
+              
+              return (
+                <div 
+                  key={index} 
+                  className={`${feature.color} flex-shrink-0 w-[85%] snap-center rounded-xl border p-5 shadow-sm transition-all duration-300 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
+                    <FeatureIcon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
           
           {/* Scroll indicator */}
@@ -185,15 +198,18 @@ const Features = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+      {/* Replace style jsx with a style element or move to CSS */}
+      <style>
+        {`
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}
+      </style>
     </section>
   );
 };

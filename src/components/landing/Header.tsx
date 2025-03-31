@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
-import { Menu, X, Zap, Archive, BarChart2 } from 'lucide-react';
+import { Menu, X, Zap } from 'lucide-react';
 
 const Header = () => {
   const { user } = useAuth();
@@ -63,14 +63,6 @@ const Header = () => {
             >
               How It Works
             </button>
-            <Link to="/suppliers" className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors flex items-center">
-              <Archive className="mr-1 h-4 w-4" />
-              Suppliers
-            </Link>
-            <Link to="/analytics" className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors flex items-center">
-              <BarChart2 className="mr-1 h-4 w-4" />
-              Analytics
-            </Link>
             <Link to="/blog" className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors">
               Blog
             </Link>
@@ -135,22 +127,6 @@ const Header = () => {
               >
                 How It Works
               </button>
-              <Link 
-                to="/suppliers" 
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left w-full block flex items-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Archive className="mr-1 h-4 w-4" />
-                Suppliers
-              </Link>
-              <Link 
-                to="/analytics" 
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left w-full block flex items-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <BarChart2 className="mr-1 h-4 w-4" />
-                Analytics
-              </Link>
               <Link 
                 to="/blog" 
                 className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left w-full block"

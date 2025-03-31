@@ -1,13 +1,19 @@
-import { useEffect } from 'react';
+
+import { useEffect, useRef } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
 import Features from '@/components/landing/Features';
 import HowItWorks from '@/components/landing/HowItWorks';
 import Footer from '@/components/landing/Footer';
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon, PackageCheck, FileText, Receipt } from 'lucide-react';
+import { ArrowRightIcon, PackageCheck, FileText, Receipt, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
+  const isMobile = useIsMobile();
+  const blogSliderRef = useRef<HTMLDivElement>(null);
+  const pricingSliderRef = useRef<HTMLDivElement>(null);
+
   // Scroll to section if hash is present in URL
   useEffect(() => {
     if (window.location.hash) {
@@ -19,6 +25,17 @@ const Index = () => {
     }
   }, []);
 
+  // Scroll functions for mobile sliders
+  const scrollSlider = (sliderRef: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
+    if (!sliderRef.current) return;
+    
+    const scrollAmount = sliderRef.current.offsetWidth * 0.85;
+    sliderRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
@@ -26,13 +43,13 @@ const Index = () => {
         <Hero />
         <Features />
         
-        {/* How It Works Section - Now imported as a component */}
+        {/* How It Works Section */}
         <HowItWorks />
         
-        {/* Blog Preview Section */}
+        {/* Blog Preview Section - Swipeable on Mobile */}
         <section id="blog" className="py-20 bg-gray-50">
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center max-w-3xl mx-auto mb-12">
               <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
                 Our Blog
               </span>
@@ -44,9 +61,40 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {/* Mobile Blog Slider Controls */}
+            {isMobile && (
+              <div className="flex justify-between items-center mb-4">
+                <button 
+                  onClick={() => scrollSlider(blogSliderRef, 'left')}
+                  className="p-2 bg-white rounded-full shadow-sm border border-gray-200 text-gray-600 hover:bg-gray-50"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <span className="text-sm text-gray-500">Swipe to see more</span>
+                <button 
+                  onClick={() => scrollSlider(blogSliderRef, 'right')}
+                  className="p-2 bg-white rounded-full shadow-sm border border-gray-200 text-gray-600 hover:bg-gray-50"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+            
+            {/* Desktop: Grid Layout, Mobile: Horizontal Scroll */}
+            <div 
+              ref={blogSliderRef}
+              className={`${
+                isMobile 
+                  ? 'flex overflow-x-auto snap-x snap-mandatory hide-scrollbar -mx-6 px-6 pb-4 gap-4'
+                  : 'grid grid-cols-1 md:grid-cols-3 gap-8'
+              } mb-12`}
+            >
               {/* Blog Post 1 */}
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
+              <div className={`
+                bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden 
+                transition-transform hover:-translate-y-1 hover:shadow-md
+                ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
+              `}>
                 <div className="h-48 overflow-hidden">
                   <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
                 </div>
@@ -67,7 +115,11 @@ const Index = () => {
               </div>
               
               {/* Blog Post 2 */}
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
+              <div className={`
+                bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden 
+                transition-transform hover:-translate-y-1 hover:shadow-md
+                ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
+              `}>
                 <div className="h-48 overflow-hidden">
                   <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
                 </div>
@@ -88,7 +140,11 @@ const Index = () => {
               </div>
               
               {/* Blog Post 3 */}
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
+              <div className={`
+                bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden 
+                transition-transform hover:-translate-y-1 hover:shadow-md
+                ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
+              `}>
                 <div className="h-48 overflow-hidden">
                   <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
                 </div>
@@ -118,10 +174,10 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Updated Pricing Section */}
+        {/* Updated Pricing Section - Swipeable on Mobile */}
         <section id="pricing" className="py-20 bg-gray-50">
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center max-w-3xl mx-auto mb-12">
               <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
                 Pricing
               </span>
@@ -133,9 +189,40 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Mobile Pricing Slider Controls */}
+            {isMobile && (
+              <div className="flex justify-between items-center mb-4">
+                <button 
+                  onClick={() => scrollSlider(pricingSliderRef, 'left')}
+                  className="p-2 bg-white rounded-full shadow-sm border border-gray-200 text-gray-600 hover:bg-gray-50"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <span className="text-sm text-gray-500">Swipe to see more</span>
+                <button 
+                  onClick={() => scrollSlider(pricingSliderRef, 'right')}
+                  className="p-2 bg-white rounded-full shadow-sm border border-gray-200 text-gray-600 hover:bg-gray-50"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+            
+            {/* Desktop: Grid Layout, Mobile: Horizontal Scroll */}
+            <div 
+              ref={pricingSliderRef}
+              className={`${
+                isMobile 
+                  ? 'flex overflow-x-auto snap-x snap-mandatory hide-scrollbar -mx-6 px-6 pb-4 gap-4'
+                  : 'grid grid-cols-1 md:grid-cols-3 gap-8'
+              } mb-10`}
+            >
               {/* First Trial */}
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:transform hover:-translate-y-1 hover:shadow-md">
+              <div className={`
+                bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden 
+                transition-transform hover:-translate-y-1 hover:shadow-md
+                ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
+              `}>
                 <div className="p-6">
                   <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
                     <PackageCheck className="h-6 w-6 text-indigo-600" />
@@ -180,7 +267,12 @@ const Index = () => {
               </div>
               
               {/* Regular Service */}
-              <div className="bg-white rounded-xl border-2 border-blue-500 shadow-md overflow-hidden transform scale-105 z-10 transition-transform hover:-translate-y-1 hover:shadow-lg">
+              <div className={`
+                bg-white rounded-xl border-2 border-blue-500 shadow-md overflow-hidden 
+                md:transform md:scale-105 md:z-10 
+                transition-transform hover:-translate-y-1 hover:shadow-lg
+                ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
+              `}>
                 <div className="bg-blue-600 text-white py-2 px-6 text-center text-sm font-medium">
                   MOST POPULAR
                 </div>
@@ -234,7 +326,11 @@ const Index = () => {
               </div>
               
               {/* Volume Discount */}
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
+              <div className={`
+                bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden 
+                transition-transform hover:-translate-y-1 hover:shadow-md
+                ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
+              `}>
                 <div className="p-6">
                   <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
                     <Receipt className="h-6 w-6 text-indigo-600" />
@@ -280,7 +376,7 @@ const Index = () => {
             </div>
             
             {/* Enterprise custom solution */}
-            <div className="mt-10 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 text-center">
+            <div className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 text-center">
               <h3 className="text-2xl font-bold mb-2">Need a Custom Solution?</h3>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
                 For high-volume businesses with specific requirements, we offer tailor-made enterprise solutions with additional discounts.
@@ -313,6 +409,19 @@ const Index = () => {
         </section>
       </main>
       <Footer />
+
+      {/* Styles for hide-scrollbar */}
+      <style>
+        {`
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}
+      </style>
     </div>
   );
 };

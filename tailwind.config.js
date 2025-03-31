@@ -11,6 +11,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        border: 'hsl(var(--border))',
         metallic: {
           blue: "#3563E9",
           light: "#4E7AFF",

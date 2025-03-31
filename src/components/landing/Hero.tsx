@@ -115,34 +115,28 @@ const Hero = () => {
                         <Package className="h-3 w-3 mr-1" /> Consolidations
                       </div>
                       <div className="px-2 py-1 flex items-center text-gray-600">
-                        <Archive className="h-3 w-3 mr-1" /> Suppliers
+                        <Truck className="h-3 w-3 mr-1" /> Orders
                       </div>
                       <div className="px-2 py-1 flex items-center text-gray-600">
                         <BarChart2 className="h-3 w-3 mr-1" /> Analytics
                       </div>
                     </div>
                     
-                    {/* Payment Status for Mobile */}
-                    <div className="mb-3 bg-green-50 border border-green-200 rounded-lg p-2.5">
+                    {/* Payment Status for Mobile - More compact */}
+                    <div className="mb-3 bg-green-50 border border-green-200 rounded-lg p-2">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center">
                           <CreditCard className="h-3.5 w-3.5 text-green-600 mr-1.5" />
-                          <span className="text-xs font-medium text-gray-700">Payment Status</span>
+                          <span className="text-xs font-medium text-gray-700">Payments</span>
                         </div>
                         <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-xs rounded-full font-medium">All Clear</span>
                       </div>
-                      <div className="flex justify-between mt-1.5 text-xs">
+                      <div className="flex justify-between mt-1 text-xs">
                         <div>
-                          <div className="text-gray-500">Pending</div>
-                          <div className="font-medium">$0</div>
+                          <div className="font-medium">$0 <span className="text-gray-500 text-[10px]">pending</span></div>
                         </div>
                         <div>
-                          <div className="text-gray-500">Processed</div>
-                          <div className="font-medium">$24,850</div>
-                        </div>
-                        <div>
-                          <div className="text-gray-500">Upcoming</div>
-                          <div className="font-medium">$7,230</div>
+                          <div className="font-medium">$24,850 <span className="text-gray-500 text-[10px]">processed</span></div>
                         </div>
                       </div>
                     </div>
@@ -163,13 +157,13 @@ const Hero = () => {
                       
                       <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-gray-500 text-xs">Savings</span>
-                          <DollarSign className="h-3.5 w-3.5 text-metallic-blue" />
+                          <span className="text-gray-500 text-xs">Active Consolidations</span>
+                          <GitMerge className="h-3.5 w-3.5 text-metallic-blue" />
                         </div>
-                        <div className="text-lg font-bold">35%</div>
+                        <div className="text-lg font-bold">5</div>
                         <div className="flex items-center mt-1 text-green-500 text-xs">
                           <TrendingUp className="h-3 w-3 mr-1" />
-                          <span>+8% vs avg</span>
+                          <span>2 ready to ship</span>
                         </div>
                       </div>
                       
@@ -179,28 +173,37 @@ const Hero = () => {
                           <Activity className="h-3.5 w-3.5 text-lavender-600" />
                         </div>
                         
-                        {/* Improved chart for mobile */}
-                        <div className="h-12 relative mt-1">
-                          <div className="absolute inset-0 flex items-end justify-between">
-                            {[35, 42, 56, 60, 75, 90, 65, 40].map((height, i) => (
-                              <div key={i} className="w-[8%] mx-[1px] relative">
-                                <div 
-                                  className={`${i === 5 ? 'bg-metallic-blue' : 'bg-lavender-300'} rounded-t-sm`}
-                                  style={{height: `${height}%`}}
-                                ></div>
-                                {i === 5 && (
-                                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-5 h-5 rounded-full bg-white shadow-md border border-lavender-300 flex items-center justify-center">
-                                    <div className="w-3 h-3 rounded-full bg-metallic-blue"></div>
-                                  </div>
-                                )}
+                        {/* Improved chart for mobile with data visualization */}
+                        <div className="relative h-20 mt-1">
+                          {/* Cost comparison bars */}
+                          <div className="absolute inset-0 flex items-end justify-around px-1">
+                            <div className="flex flex-col items-center justify-end h-full w-[30%]">
+                              <div className="w-full bg-gray-200 rounded-t-sm" style={{height: '45%'}}></div>
+                              <div className="text-[10px] text-gray-500 mt-1">Standard</div>
+                              <div className="text-xs font-medium">$32,500</div>
+                            </div>
+                            
+                            <div className="flex flex-col items-center justify-end h-full w-[30%]">
+                              <div className="relative w-full">
+                                <div className="w-full bg-metallic-blue rounded-t-sm" style={{height: '80px'}}></div>
+                                <div className="absolute top-0 left-0 w-full">
+                                  <div className="w-full h-[36px] bg-red-100 opacity-20"></div>
+                                </div>
+                                {/* Savings indicator */}
+                                <div className="absolute -right-2 top-[36px] w-4 h-4 bg-white rounded-full border border-metallic-blue flex items-center justify-center">
+                                  <div className="w-2 h-2 bg-metallic-blue rounded-full"></div>
+                                </div>
                               </div>
-                            ))}
+                              <div className="text-[10px] text-gray-500 mt-1">With GROOP</div>
+                              <div className="text-xs font-medium">$19,750</div>
+                            </div>
+                            
+                            <div className="flex flex-col items-center justify-end h-full">
+                              <div className="text-[10px] text-gray-500">Saved</div>
+                              <div className="text-xs font-bold text-green-600">$12,750</div>
+                              <div className="px-1.5 py-0.5 bg-green-100 text-green-700 text-[10px] rounded-full font-medium mt-1">39%</div>
+                            </div>
                           </div>
-                        </div>
-                        
-                        <div className="flex justify-between text-xs mt-2">
-                          <div className="text-metallic-blue font-medium">$12,750 saved</div>
-                          <div className="text-gray-500">Last 30 days</div>
                         </div>
                       </div>
                       
@@ -246,7 +249,7 @@ const Hero = () => {
                           <Package className="h-4 w-4 mr-2" /> Consolidations
                         </div>
                         <div className="flex items-center px-3 py-1.5 bg-gray-100 rounded-lg text-sm text-gray-700 font-medium">
-                          <Archive className="h-4 w-4 mr-2" /> Suppliers
+                          <Truck className="h-4 w-4 mr-2" /> Orders
                         </div>
                         <div className="flex items-center px-3 py-1.5 bg-gray-100 rounded-lg text-sm text-gray-700 font-medium">
                           <BarChart2 className="h-4 w-4 mr-2" /> Analytics
@@ -257,30 +260,29 @@ const Hero = () => {
                       </div>
                     </div>
                     
-                    {/* Payment Status */}
-                    <div className="bg-green-50 rounded-xl border border-green-200 p-3 mb-3">
-                      <div className="flex justify-between items-center mb-2">
-                        <div className="flex items-center">
-                          <CreditCard className="h-4 w-4 text-green-600 mr-2" />
-                          <span className="font-medium text-gray-700">Payment Status</span>
+                    {/* Payment Status - More compact and organized */}
+                    <div className="flex gap-3 mb-3">
+                      <div className="flex-grow bg-green-50 rounded-xl border border-green-200 p-3">
+                        <div className="flex justify-between items-center mb-2">
+                          <div className="flex items-center">
+                            <CreditCard className="h-4 w-4 text-green-600 mr-2" />
+                            <span className="font-medium text-gray-700">Payment Status</span>
+                          </div>
+                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">All Payments Cleared</span>
                         </div>
-                        <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">All Payments Cleared</span>
-                      </div>
-                      <div className="grid grid-cols-3 gap-4">
-                        <div className="bg-white rounded-lg p-2">
-                          <div className="text-sm text-gray-500">Pending Payments</div>
-                          <div className="text-xl font-bold mt-1">$0</div>
-                          <div className="text-xs text-green-600 mt-1">No pending transactions</div>
-                        </div>
-                        <div className="bg-white rounded-lg p-2">
-                          <div className="text-sm text-gray-500">Processed This Month</div>
-                          <div className="text-xl font-bold mt-1">$24,850</div>
-                          <div className="text-xs text-green-600 mt-1">3 suppliers paid</div>
-                        </div>
-                        <div className="bg-white rounded-lg p-2">
-                          <div className="text-sm text-gray-500">Upcoming</div>
-                          <div className="text-xl font-bold mt-1">$7,230</div>
-                          <div className="text-xs text-gray-600 mt-1">Due next week</div>
+                        <div className="grid grid-cols-3 gap-2">
+                          <div className="bg-white rounded-lg p-2">
+                            <div className="text-sm text-gray-500">Pending</div>
+                            <div className="text-lg font-bold mt-1">$0</div>
+                          </div>
+                          <div className="bg-white rounded-lg p-2">
+                            <div className="text-sm text-gray-500">Processed</div>
+                            <div className="text-lg font-bold mt-1">$24,850</div>
+                          </div>
+                          <div className="bg-white rounded-lg p-2">
+                            <div className="text-sm text-gray-500">Upcoming</div>
+                            <div className="text-lg font-bold mt-1">$7,230</div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -302,7 +304,7 @@ const Hero = () => {
                       
                       <div className="col-span-3 bg-gray-50 p-3 rounded-xl border border-gray-200">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-gray-500 text-sm">Consolidations</span>
+                          <span className="text-gray-500 text-sm">Active Consolidations</span>
                           <GitMerge className="h-4 w-4 text-metallic-blue" />
                         </div>
                         <div className="text-2xl font-bold">5</div>
@@ -338,7 +340,7 @@ const Hero = () => {
                       
                       {/* Middle Row - Shipping Cost Analysis */}
                       <div className="col-span-7 bg-lavender-50 p-4 rounded-xl border border-lavender-200">
-                        <div className="flex justify-between items-center mb-2">
+                        <div className="flex justify-between items-center mb-3">
                           <span className="font-medium text-gray-700">Shipping Cost Analysis</span>
                           <div className="flex space-x-2">
                             <div className="px-2 py-1 bg-lavender-100 text-lavender-700 rounded text-xs font-medium">Monthly</div>
@@ -346,103 +348,87 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Improved chart with annotations */}
-                        <div className="h-28 relative">
-                          <div className="grid grid-cols-12 h-full">
-                            {/* Grid lines */}
-                            {[...Array(5)].map((_, i) => (
-                              <div key={i} className="col-span-12 border-t border-dashed border-lavender-200" style={{height: '20%'}}></div>
-                            ))}
-                            
-                            {/* Month labels */}
-                            <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-gray-500 px-2">
-                              <span>Jan</span>
-                              <span>Feb</span>
-                              <span>Mar</span>
-                              <span>Apr</span>
-                              <span>May</span>
-                              <span>Jun</span>
-                              <span>Jul</span>
-                              <span>Aug</span>
-                              <span>Sep</span>
-                              <span>Oct</span>
-                              <span>Nov</span>
-                              <span>Dec</span>
-                            </div>
-                            
-                            {/* Bars */}
-                            <div className="absolute bottom-5 left-0 right-0 flex items-end justify-between h-[80%]">
-                              {[35, 42, 56, 60, 75, 90, 82, 65, 70, 55, 45, 40].map((height, i) => (
-                                <div key={i} className="w-6 mx-1 group">
-                                  <div 
-                                    className={`${i === 6 ? 'bg-metallic-blue' : 'bg-lavender-300'} rounded-t-sm w-full relative cursor-pointer`}
-                                    style={{height: `${height}%`}}
-                                  >
-                                    {/* Value tooltip on hover */}
-                                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                                      {height}% utilization
-                                    </div>
-                                    
-                                    {/* Point marker for peak month */}
-                                    {i === 6 && (
-                                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white shadow-md border-2 border-metallic-blue"></div>
-                                    )}
+                        {/* Improved chart with direct cost comparison visualization */}
+                        <div className="h-40 relative">
+                          <div className="flex justify-between items-end h-full p-2">
+                            {/* Standard Shipping Cost */}
+                            <div className="flex flex-col items-center space-y-2 w-1/3">
+                              <div className="w-full h-28 flex justify-center items-end">
+                                <div className="w-24 bg-gray-300 rounded-t relative" style={{height: '70%'}}>
+                                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-white rounded shadow-sm text-xs font-medium">
+                                    $32,500
                                   </div>
                                 </div>
-                              ))}
+                              </div>
+                              <div className="text-sm text-gray-500">Standard Shipping</div>
                             </div>
                             
-                            {/* Annotation for best month */}
-                            <div className="absolute right-1/3 top-[10%] bg-white p-2 rounded-lg shadow-md border border-gray-200 text-xs">
-                              <div className="font-medium text-gray-800">July 2023</div>
-                              <div className="text-metallic-blue font-medium">82% container utilization</div>
-                              <div className="text-green-500 font-medium">$15,750 saved</div>
+                            {/* GROOP Consolidation */}
+                            <div className="flex flex-col items-center space-y-2 w-1/3">
+                              <div className="w-full h-28 flex justify-center items-end">
+                                <div className="w-24 bg-metallic-blue rounded-t relative" style={{height: '40%'}}>
+                                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-white rounded shadow-sm text-xs font-medium text-metallic-blue">
+                                    $19,750
+                                  </div>
+                                  {/* Savings indicator */}
+                                  <div className="absolute -right-3 top-[calc(100%+15px)] w-6 h-6 bg-white rounded-full shadow border-2 border-green-500 flex items-center justify-center">
+                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                  </div>
+                                  {/* Connecting line */}
+                                  <div className="absolute top-0 right-0 h-[calc(100%+15px)] w-0.5 bg-dashed bg-green-200"></div>
+                                </div>
+                              </div>
+                              <div className="text-sm font-medium text-metallic-blue">GROOP Consolidation</div>
+                            </div>
+                            
+                            {/* Savings */}
+                            <div className="flex flex-col items-center space-y-2 w-1/3">
+                              <div className="flex flex-col items-center justify-center h-28">
+                                <div className="text-3xl font-bold text-green-600">$12,750</div>
+                                <div className="text-lg font-semibold text-green-600">Saved</div>
+                                <div className="px-3 py-1 bg-green-100 text-green-700 rounded-full font-medium mt-2">
+                                  39% reduction
+                                </div>
+                              </div>
+                              <div className="text-sm text-gray-500">Total Monthly Savings</div>
                             </div>
                           </div>
                         </div>
                       </div>
                       
-                      {/* Right Side - Efficiency and Next Shipment */}
-                      <div className="col-span-5 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="font-medium text-gray-700">Efficiency Metrics</span>
-                          <Activity className="h-4 w-4 text-metallic-blue" />
-                        </div>
-                        
-                        <div className="space-y-3 mb-4">
-                          <div>
-                            <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-500">Space Utilization</span>
-                              <span className="font-medium">92%</span>
-                            </div>
-                            <div className="w-full bg-gray-200 h-2 rounded-full">
-                              <div className="bg-metallic-blue h-full rounded-full" style={{width: '92%'}}></div>
-                            </div>
+                      {/* Right Side - Next Shipment and Active Consolidations */}
+                      <div className="col-span-5 grid grid-rows-2 gap-3">
+                        <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-medium text-gray-700">Efficiency Metrics</span>
+                            <Activity className="h-4 w-4 text-metallic-blue" />
                           </div>
                           
-                          <div>
-                            <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-500">Cost Savings</span>
-                              <span className="font-medium">35%</span>
+                          <div className="space-y-3">
+                            <div>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span className="text-gray-500">Space Utilization</span>
+                                <span className="font-medium">92%</span>
+                              </div>
+                              <div className="w-full bg-gray-200 h-2 rounded-full">
+                                <div className="bg-metallic-blue h-full rounded-full" style={{width: '92%'}}></div>
+                              </div>
                             </div>
-                            <div className="w-full bg-gray-200 h-2 rounded-full">
-                              <div className="bg-green-500 h-full rounded-full" style={{width: '35%'}}></div>
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-500">Documentation Time</span>
-                              <span className="font-medium">-68%</span>
-                            </div>
-                            <div className="w-full bg-gray-200 h-2 rounded-full">
-                              <div className="bg-lavender-500 h-full rounded-full" style={{width: '68%'}}></div>
+                            
+                            <div>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span className="text-gray-500">Cost Savings</span>
+                                <span className="font-medium">35%</span>
+                              </div>
+                              <div className="w-full bg-gray-200 h-2 rounded-full">
+                                <div className="bg-green-500 h-full rounded-full" style={{width: '35%'}}></div>
+                              </div>
                             </div>
                           </div>
                         </div>
 
                         {/* Next Shipment with Matadi destination */}
-                        <div>
+                        <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
                           <div className="font-medium text-gray-700 mb-2">Next Shipment</div>
                           <div className="bg-white p-3 rounded-lg border border-gray-100">
                             <div className="flex justify-between">

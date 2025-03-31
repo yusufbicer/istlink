@@ -83,18 +83,11 @@ const Header = () => {
                 </Link>
               </Button>
             ) : (
-              <>
-                <Button asChild variant="outline" className="border-metallic-blue text-metallic-blue hover:bg-metallic-blue/5">
-                  <Link to="/login" className="px-5 py-2">
-                    Login
-                  </Link>
-                </Button>
-                <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
-                  <Link to="/register" className="px-5 py-2">
-                    Sign Up
-                  </Link>
-                </Button>
-              </>
+              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
+                <Link to="/register" className="px-5 py-2">
+                  Get Started
+                </Link>
+              </Button>
             )}
           </div>
 
@@ -153,26 +146,15 @@ const Header = () => {
                     </Link>
                   </Button>
                 ) : (
-                  <div className="flex flex-col space-y-3">
-                    <Button asChild variant="outline" className="w-full border-metallic-blue text-metallic-blue hover:bg-metallic-blue/5">
-                      <Link 
-                        to="/login" 
-                        className="justify-center"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        Login
-                      </Link>
-                    </Button>
-                    <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
-                      <Link 
-                        to="/register" 
-                        className="justify-center"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        Sign Up
-                      </Link>
-                    </Button>
-                  </div>
+                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
+                    <Link 
+                      to="/register" 
+                      className="justify-center"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Get Started
+                    </Link>
+                  </Button>
                 )}
               </div>
             </div>

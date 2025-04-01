@@ -1,8 +1,9 @@
 
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Package, TruckIcon, UsersIcon, FileTextIcon, CreditCardIcon, GlobeIcon, ShieldCheck } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useIsMobile } from '@/hooks/use-mobile';
+import { type EmblaCarouselApi } from "embla-carousel-react";
 
 const features = [
   {
@@ -61,6 +62,7 @@ const Features = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const [emblaApi, setEmblaApi] = useState<EmblaCarouselApi | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -82,6 +84,20 @@ const Features = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (emblaApi) {
+      const onSelect = () => {
+        setActiveFeature(emblaApi.selectedScrollSnap());
+      };
+      
+      emblaApi.on("select", onSelect);
+      return () => {
+        emblaApi.off("select", onSelect);
+      };
+    }
+    return undefined;
+  }, [emblaApi]);
 
   return (
     <section id="features" className="py-16 md:py-20 bg-gray-50">
@@ -158,12 +174,7 @@ const Features = () => {
         <div className="md:hidden">
           <Carousel
             className="w-full"
-            onSelect={(api) => {
-              if (api) {
-                const selectedIndex = api.selectedScrollSnap();
-                setActiveFeature(selectedIndex);
-              }
-            }}
+            setApi={setEmblaApi}
           >
             <CarouselContent>
               {features.map((feature, index) => (

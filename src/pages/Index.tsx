@@ -322,7 +322,12 @@ const Index = () => {
                               <div key={i} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                                 <span className="font-medium text-sm">{otherPlan.name}</span>
                                 <button 
-                                  onClick={() => document.querySelector(`[data-state="inactive"][value="${otherPlan.name.toLowerCase().replace(' ', '-')}"]`)?.click()}
+                                  onClick={() => {
+                                    const tabElement = document.querySelector(`[data-state="inactive"][value="${otherPlan.name.toLowerCase().replace(' ', '-')}"]`);
+                                    if (tabElement && tabElement instanceof HTMLElement) {
+                                      tabElement.click();
+                                    }
+                                  }}
                                   className="text-xs text-metallic-blue font-medium"
                                 >
                                   View

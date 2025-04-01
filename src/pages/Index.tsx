@@ -6,14 +6,15 @@ import Features from '@/components/landing/Features';
 import HowItWorks from '@/components/landing/HowItWorks';
 import Footer from '@/components/landing/Footer';
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon, PackageCheck, FileText, Receipt, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRightIcon, PackageCheck, FileText, Receipt, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const Index = () => {
   const isMobile = useIsMobile();
   const blogSliderRef = useRef<HTMLDivElement>(null);
   const pricingSliderRef = useRef<HTMLDivElement>(null);
-  const [blogExpanded, setBlogExpanded] = useState(false);
+  const [blogCollapsed, setBlogCollapsed] = useState(true);
 
   // Scroll to section if hash is present in URL
   useEffect(() => {
@@ -42,13 +43,19 @@ const Index = () => {
       <Header />
       <main className="flex-grow">
         <Hero />
-        <Features />
         
-        {/* How It Works Section */}
-        <HowItWorks />
+        {/* Reduced spacing on mobile */}
+        <div className={isMobile ? "mt-0" : "mt-0"}>
+          <Features />
+        </div>
+        
+        {/* Reduced spacing on mobile */}
+        <div className={isMobile ? "mt-0" : "mt-0"}>
+          <HowItWorks />
+        </div>
         
         {/* Blog Preview Section - Collapsible on Mobile */}
-        <section id="blog" className="py-20 bg-gray-50">
+        <section id="blog" className={`py-16 md:py-20 bg-gray-50 ${isMobile ? "mt-0" : ""}`}>
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-8">
               <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
@@ -62,35 +69,80 @@ const Index = () => {
               </p>
             </div>
             
-            {/* Mobile Blog Controls - Collapsible */}
-            {isMobile && (
-              <div className="mb-4">
-                <button 
-                  onClick={() => setBlogExpanded(!blogExpanded)}
-                  className="w-full py-3 px-4 bg-white rounded-lg shadow-sm border border-gray-200 text-gray-700 font-medium flex justify-between items-center"
-                >
-                  <span>Latest Articles</span>
-                  <ChevronRight className={`h-5 w-5 transition-transform ${blogExpanded ? 'rotate-90' : ''}`} />
-                </button>
+            {/* Mobile Blog Posts - Collapsible */}
+            {isMobile ? (
+              <div className="mb-10">
+                <Collapsible open={!blogCollapsed} onOpenChange={(open) => setBlogCollapsed(!open)}>
+                  <CollapsibleTrigger className="w-full py-3 px-4 bg-white rounded-lg shadow-sm border border-gray-200 text-gray-700 font-medium flex justify-between items-center mb-3">
+                    <span>Latest Articles</span>
+                    {blogCollapsed ? (
+                      <ChevronDown className="h-5 w-5" />
+                    ) : (
+                      <ChevronUp className="h-5 w-5" />
+                    )}
+                  </CollapsibleTrigger>
+                  
+                  <CollapsibleContent className="space-y-3">
+                    {/* Blog Post 1 */}
+                    <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                      <div className="p-4">
+                        <div className="flex items-center mb-2">
+                          <span className="text-sm text-gray-500">May 15, 2023</span>
+                          <span className="mx-2 text-gray-300">•</span>
+                          <span className="text-sm text-blue-600">Shipping</span>
+                        </div>
+                        <h3 className="text-lg font-bold mb-2">Understanding Turkish Export Regulations in 2023</h3>
+                        <p className="text-gray-600 mb-3">
+                          A comprehensive guide to navigating the complex export regulations for goods leaving Turkey.
+                        </p>
+                        <a href="#" className="text-blue-600 font-medium hover:text-blue-700">
+                          Read More →
+                        </a>
+                      </div>
+                    </div>
+                    
+                    {/* Blog Post 2 */}
+                    <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                      <div className="p-4">
+                        <div className="flex items-center mb-2">
+                          <span className="text-sm text-gray-500">April 28, 2023</span>
+                          <span className="mx-2 text-gray-300">•</span>
+                          <span className="text-sm text-blue-600">Consolidation</span>
+                        </div>
+                        <h3 className="text-lg font-bold mb-2">5 Ways to Reduce Shipping Costs with Consolidation</h3>
+                        <p className="text-gray-600 mb-3">
+                          Learn how businesses are saving up to 40% on shipping costs by implementing strategic consolidation techniques.
+                        </p>
+                        <a href="#" className="text-blue-600 font-medium hover:text-blue-700">
+                          Read More →
+                        </a>
+                      </div>
+                    </div>
+                    
+                    {/* Blog Post 3 */}
+                    <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                      <div className="p-4">
+                        <div className="flex items-center mb-2">
+                          <span className="text-sm text-gray-500">April 10, 2023</span>
+                          <span className="mx-2 text-gray-300">•</span>
+                          <span className="text-sm text-blue-600">Success Story</span>
+                        </div>
+                        <h3 className="text-lg font-bold mb-2">Case Study: How Company XYZ Optimized Their Supply Chain</h3>
+                        <p className="text-gray-600 mb-3">
+                          Real-world example of how a furniture retailer transformed their Turkish imports with our consolidation services.
+                        </p>
+                        <a href="#" className="text-blue-600 font-medium hover:text-blue-700">
+                          Read More →
+                        </a>
+                      </div>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
               </div>
-            )}
-            
-            {/* Desktop: Grid Layout, Mobile: Collapsible */}
-            {(!isMobile || blogExpanded) && (
-              <div 
-                ref={blogSliderRef}
-                className={`${
-                  isMobile 
-                    ? 'flex overflow-x-auto snap-x snap-mandatory hide-scrollbar -mx-6 px-6 pb-4 gap-4'
-                    : 'grid grid-cols-1 md:grid-cols-3 gap-8'
-                } mb-10`}
-              >
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
                 {/* Blog Post 1 */}
-                <div className={`
-                  bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden 
-                  transition-transform hover:-translate-y-1 hover:shadow-md
-                  ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
-                `}>
+                <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
                   <div className="h-48 overflow-hidden">
                     <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
                   </div>
@@ -111,11 +163,7 @@ const Index = () => {
                 </div>
                 
                 {/* Blog Post 2 */}
-                <div className={`
-                  bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden 
-                  transition-transform hover:-translate-y-1 hover:shadow-md
-                  ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
-                `}>
+                <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
                   <div className="h-48 overflow-hidden">
                     <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
                   </div>
@@ -136,11 +184,7 @@ const Index = () => {
                 </div>
                 
                 {/* Blog Post 3 */}
-                <div className={`
-                  bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden 
-                  transition-transform hover:-translate-y-1 hover:shadow-md
-                  ${isMobile ? 'flex-shrink-0 w-[85%] snap-center' : ''}
-                `}>
+                <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
                   <div className="h-48 overflow-hidden">
                     <img src="/placeholder.svg" alt="Blog Post" className="w-full h-full object-cover" />
                   </div>
@@ -172,9 +216,9 @@ const Index = () => {
         </section>
         
         {/* Updated Pricing Section - Swipeable on Mobile */}
-        <section id="pricing" className="py-20 bg-gray-50">
+        <section id="pricing" className={`py-16 md:py-20 bg-gray-50 ${isMobile ? "mt-0" : ""}`}>
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
               <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
                 Pricing
               </span>

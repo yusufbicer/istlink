@@ -172,15 +172,15 @@ const Hero = () => {
                         </div>
                         
                         <div className="flex justify-between items-center">
-                          <div className="text-center">
+                          <div className="text-center flex-1">
                             <div className="text-xs text-gray-500">Standard</div>
                             <div className="text-sm font-bold">$32.5K</div>
                           </div>
-                          <div className="text-center">
+                          <div className="text-center flex-1">
                             <div className="text-xs text-gray-500">GROOP</div>
                             <div className="text-sm font-bold text-metallic-blue">$19.7K</div>
                           </div>
-                          <div className="text-center">
+                          <div className="text-center flex-1">
                             <div className="text-xs text-gray-500">Saved</div>
                             <div className="text-sm font-bold text-green-600">$12.7K</div>
                             <div className="text-[10px] text-green-600">-39%</div>
@@ -196,7 +196,7 @@ const Hero = () => {
                         <div className="flex justify-between items-center p-1 bg-white rounded border border-gray-100">
                           <div>
                             <div className="text-xs font-medium">Istanbul → Matadi</div>
-                            <div className="text-[10px] text-gray-500">Nov 15, 2023</div>
+                            <div className="text-[10px] text-gray-500">Nov 15, 2025</div>
                           </div>
                           <div className="text-right">
                             <div className="text-xs font-medium text-metallic-blue">75% filled</div>
@@ -208,18 +208,19 @@ const Hero = () => {
                       </div>
                     </div>
                     
-                    {/* Payment Status Moved to Bottom */}
-                    <div className="mt-2 bg-green-50 rounded-lg border border-green-200 p-2">
+                    {/* Updated Payment Status */}
+                    <div className="mt-2 bg-gray-50 rounded-lg border border-gray-200 p-2">
                       <div className="flex justify-between items-center mb-1">
                         <div className="flex items-center">
-                          <CreditCard className="h-3 w-3 text-green-600 mr-1" />
+                          <CreditCard className="h-3 w-3 text-metallic-blue mr-1" />
                           <span className="text-xs font-medium">Payment Status</span>
                         </div>
-                        <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-[10px] rounded-full font-medium">Clear</span>
+                        <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-[10px] rounded-full font-medium">Active</span>
                       </div>
                       <div className="flex justify-between text-xs">
-                        <div className="font-medium">$24,850 <span className="text-[10px] text-gray-500">processed</span></div>
-                        <div className="font-medium">$7,230 <span className="text-[10px] text-gray-500">upcoming</span></div>
+                        <div className="font-medium">$32,080 <span className="text-[10px] text-gray-500">available</span></div>
+                        <div className="font-medium">$24,850 <span className="text-[10px] text-gray-500">to suppliers</span></div>
+                        <div className="font-medium">$497 <span className="text-[10px] text-gray-500">service fee</span></div>
                       </div>
                     </div>
                   </div>
@@ -322,8 +323,8 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        <div className="flex justify-between items-center px-4">
-                          <div className="text-center p-3 bg-white rounded-lg shadow-sm flex-1 mx-2">
+                        <div className="flex justify-between items-center">
+                          <div className="text-center p-3 bg-white rounded-lg shadow-sm w-full mx-2">
                             <div className="text-sm text-gray-500 mb-1">Standard Shipping</div>
                             <div className="text-xl font-bold">$32,500</div>
                           </div>
@@ -334,12 +335,12 @@ const Hero = () => {
                             <div className="w-12 h-0.5 bg-gray-300"></div>
                           </div>
                           
-                          <div className="text-center p-3 bg-white rounded-lg shadow-sm border-l-4 border-metallic-blue flex-1 mx-2">
+                          <div className="text-center p-3 bg-white rounded-lg shadow-sm border-l-4 border-metallic-blue w-full mx-2">
                             <div className="text-sm text-metallic-blue mb-1">GROOP Consolidation</div>
                             <div className="text-xl font-bold text-metallic-blue">$19,750</div>
                           </div>
                           
-                          <div className="text-center p-3 bg-green-50 rounded-lg shadow-sm flex-1 mx-2">
+                          <div className="text-center p-3 bg-green-50 rounded-lg shadow-sm w-full mx-2">
                             <div className="text-sm text-green-600 mb-1">Total Savings</div>
                             <div className="text-xl font-bold text-green-600">$12,750</div>
                             <div className="text-xs font-medium text-green-600">39% reduction</div>
@@ -408,7 +409,7 @@ const Hero = () => {
                             <div className="flex justify-between">
                               <div>
                                 <div className="text-sm font-medium">Istanbul → Lagos</div>
-                                <div className="text-xs text-gray-500">Nov 10, 2023</div>
+                                <div className="text-xs text-gray-500">Nov 10, 2025</div>
                               </div>
                               <div className="text-right">
                                 <div className="text-sm font-medium text-metallic-blue">9 Orders</div>
@@ -425,7 +426,7 @@ const Hero = () => {
                             <div className="flex justify-between">
                               <div>
                                 <div className="text-sm font-medium">Istanbul → Matadi</div>
-                                <div className="text-xs text-gray-500">Nov 15, 2023</div>
+                                <div className="text-xs text-gray-500">Nov 15, 2025</div>
                               </div>
                               <div className="text-right">
                                 <div className="text-sm font-medium text-metallic-blue">28 Orders</div>
@@ -456,7 +457,7 @@ const Hero = () => {
                             </div>
                             <div className="ml-auto text-right">
                               <div className="text-sm font-medium">Departure</div>
-                              <div className="text-base text-metallic-blue font-bold">Nov 15, 2023</div>
+                              <div className="text-base text-metallic-blue font-bold">Nov 15, 2025</div>
                             </div>
                           </div>
                           
@@ -487,31 +488,31 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Payment Status Moved to Bottom */}
-                      <div className="col-span-12 bg-green-50 rounded-xl border border-green-200 p-3">
+                      {/* Updated Payment Status */}
+                      <div className="col-span-12 bg-gray-50 rounded-xl border border-gray-200 p-3">
                         <div className="flex justify-between items-center mb-2">
                           <div className="flex items-center">
-                            <CreditCard className="h-4 w-4 text-green-600 mr-2" />
+                            <CreditCard className="h-4 w-4 text-metallic-blue mr-2" />
                             <span className="font-medium text-gray-700">Payment Status</span>
                           </div>
-                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">All Payments Cleared</span>
+                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">Active Account</span>
                         </div>
                         <div className="grid grid-cols-4 gap-2">
                           <div className="bg-white rounded-lg p-2">
-                            <div className="text-sm text-gray-500">Pending</div>
-                            <div className="text-lg font-bold mt-1">$0</div>
+                            <div className="text-sm text-gray-500">Available Balance</div>
+                            <div className="text-lg font-bold mt-1">$32,080</div>
                           </div>
                           <div className="bg-white rounded-lg p-2">
-                            <div className="text-sm text-gray-500">Processed</div>
+                            <div className="text-sm text-gray-500">Paid to Suppliers</div>
                             <div className="text-lg font-bold mt-1">$24,850</div>
                           </div>
                           <div className="bg-white rounded-lg p-2">
-                            <div className="text-sm text-gray-500">Upcoming</div>
+                            <div className="text-sm text-gray-500">Upcoming Payments</div>
                             <div className="text-lg font-bold mt-1">$7,230</div>
                           </div>
                           <div className="bg-white rounded-lg p-2">
-                            <div className="text-sm text-gray-500">Total Saved</div>
-                            <div className="text-lg font-bold mt-1 text-green-600">$85,750</div>
+                            <div className="text-sm text-gray-500">Service Fee (2%)</div>
+                            <div className="text-lg font-bold mt-1 text-metallic-blue">$497</div>
                           </div>
                         </div>
                       </div>

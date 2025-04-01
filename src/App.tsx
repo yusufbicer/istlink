@@ -12,6 +12,7 @@ import WhatsAppButton from "@/components/common/WhatsAppButton";
 // Pages
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
+import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/analytics" element={<Analytics />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <WhatsAppButton />

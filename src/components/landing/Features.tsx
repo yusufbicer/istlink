@@ -1,6 +1,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Package, TruckIcon, UsersIcon, FileTextIcon, CreditCardIcon, GlobeIcon, ShieldCheck } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const features = [
   {
@@ -56,7 +58,9 @@ const features = [
 
 const Features = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(0);
   const titleRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -78,9 +82,6 @@ const Features = () => {
       }
     };
   }, []);
-
-  // Create a component reference for the first feature's icon
-  const MainFeatureIcon = features[0].icon;
 
   return (
     <section id="features" className="py-16 md:py-20 bg-gray-50">
@@ -112,7 +113,7 @@ const Features = () => {
             style={{ transitionDelay: '100ms' }}
           >
             <div className={`w-16 h-16 ${features[0].iconColor} rounded-xl flex items-center justify-center mb-6`}>
-              <MainFeatureIcon className="w-8 h-8" />
+              {React.createElement(features[0].icon, { className: "w-8 h-8" })}
             </div>
             <h3 className="text-2xl font-semibold mb-3">{features[0].title}</h3>
             <p className="text-gray-600 text-lg mb-4">{features[0].description}</p>
@@ -136,65 +137,86 @@ const Features = () => {
           </div>
           
           {/* Regular feature items */}
-          {features.slice(1).map((feature, index) => {
-            // Create a component reference for each feature icon
-            const FeatureIcon = feature.icon;
-            
-            return (
-              <div 
-                key={index} 
-                className={`${feature.color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{ transitionDelay: `${(index + 1) * 100 + 100}ms` }}
-              >
-                <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
-                  <FeatureIcon className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+          {features.slice(1).map((feature, index) => (
+            <div 
+              key={index} 
+              className={`${feature.color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: `${(index + 1) * 100 + 100}ms` }}
+            >
+              <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
+                {React.createElement(feature.icon, { className: "w-6 h-6" })}
               </div>
-            );
-          })}
+              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+              <p className="text-gray-600">{feature.description}</p>
+            </div>
+          ))}
         </div>
 
-        {/* Mobile Optimized Layout - Swipe Cards */}
+        {/* Mobile Feature Spotlight Carousel */}
         <div className="md:hidden">
-          <div className="pb-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory flex gap-4 -mx-6 px-6">
-            {features.map((feature, index) => {
-              // Create a component reference for each feature icon in mobile view
-              const FeatureIcon = feature.icon;
-              
-              return (
-                <div 
-                  key={index} 
-                  className={`${feature.color} flex-shrink-0 w-[85%] snap-center rounded-xl border p-5 shadow-sm transition-all duration-300 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
-                    <FeatureIcon className="w-6 h-6" />
+          <Carousel
+            className="w-full"
+            onSelect={(api) => {
+              if (api) {
+                const selectedIndex = api.selectedScrollSnap();
+                setActiveFeature(selectedIndex);
+              }
+            }}
+          >
+            <CarouselContent>
+              {features.map((feature, index) => (
+                <CarouselItem key={index}>
+                  <div className={`h-full ${feature.color} rounded-xl border p-6 shadow-sm flex flex-col ${
+                    isVisible ? 'opacity-100' : 'opacity-0'
+                  }`}>
+                    <div className={`w-16 h-16 ${feature.iconColor} rounded-xl flex items-center justify-center mb-6 mx-auto`}>
+                      {React.createElement(feature.icon, { className: "w-8 h-8" })}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-center">{feature.title}</h3>
+                    <p className="text-gray-600 text-center mb-6">{feature.description}</p>
+                    
+                    {index === 0 && (
+                      <div className="bg-white rounded-lg p-4 mt-auto">
+                        <div className="text-sm font-medium text-gray-800 text-center mb-2">Our customers typically save:</div>
+                        <div className="flex justify-between">
+                          <div className="text-center">
+                            <div className="text-xl font-bold text-metallic-blue">35%</div>
+                            <div className="text-xs text-gray-500">Shipping Costs</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-xl font-bold text-metallic-blue">68%</div>
+                            <div className="text-xs text-gray-500">Paperwork Time</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-xl font-bold text-metallic-blue">92%</div>
+                            <div className="text-xs text-gray-500">Space Utilization</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="absolute -bottom-10 left-0 right-0">
+              <div className="flex justify-center items-center gap-2 mt-4">
+                <CarouselPrevious className="static translate-y-0 h-8 w-8" />
+                <div className="flex space-x-1 items-center">
+                  {features.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        activeFeature === idx ? 'w-4 bg-metallic-blue' : 'w-1.5 bg-gray-300'
+                      }`}
+                    />
+                  ))}
                 </div>
-              );
-            })}
-          </div>
-          
-          {/* Scroll indicator */}
-          <div className="flex justify-center mt-4 space-x-1">
-            {features.map((_, index) => (
-              <div 
-                key={index} 
-                className={`h-1 rounded-full ${index === 0 ? 'w-4 bg-metallic-blue' : 'w-2 bg-gray-300'}`}
-              ></div>
-            ))}
-          </div>
-          <div className="text-center text-xs text-gray-500 mt-2">
-            Swipe to see more features
-          </div>
+                <CarouselNext className="static translate-y-0 h-8 w-8" />
+              </div>
+            </div>
+          </Carousel>
         </div>
       </div>
 

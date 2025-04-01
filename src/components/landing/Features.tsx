@@ -1,9 +1,8 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Package, TruckIcon, UsersIcon, FileTextIcon, CreditCardIcon, GlobeIcon, ShieldCheck } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useIsMobile } from '@/hooks/use-mobile';
-import { type EmblaCarouselApi } from "embla-carousel-react";
+import type { EmblaCarouselType } from "embla-carousel-react";
 
 const features = [
   {
@@ -62,7 +61,7 @@ const Features = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  const [emblaApi, setEmblaApi] = useState<EmblaCarouselApi | null>(null);
+  const [emblaApi, setEmblaApi] = useState<EmblaCarouselType | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

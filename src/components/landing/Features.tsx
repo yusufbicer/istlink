@@ -98,6 +98,13 @@ const Features = () => {
     return undefined;
   }, [emblaApi]);
 
+  // Function to navigate to a specific feature
+  const scrollToFeature = (index: number) => {
+    if (emblaApi && emblaApi.scrollTo) {
+      emblaApi.scrollTo(index);
+    }
+  };
+
   return (
     <section id="features" className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-6">
@@ -169,8 +176,27 @@ const Features = () => {
           ))}
         </div>
 
-        {/* Mobile Feature Spotlight Carousel */}
+        {/* Improved Mobile Feature Spotlight Carousel */}
         <div className="md:hidden">
+          {/* Feature Quick Nav - NEW */}
+          <div className="mb-4 overflow-x-auto hide-scrollbar">
+            <div className="flex space-x-2 pb-2">
+              {features.map((feature, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToFeature(idx)}
+                  className={`flex-shrink-0 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
+                    activeFeature === idx 
+                      ? 'bg-metallic-blue text-white' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {feature.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <Carousel
             className="w-full"
             setApi={setEmblaApi}
@@ -211,15 +237,17 @@ const Features = () => {
               ))}
             </CarouselContent>
             <div className="absolute -bottom-10 left-0 right-0">
-              <div className="flex justify-center items-center gap-2 mt-4">
+              <div className="flex justify-center items-center gap-4 mt-4">
                 <CarouselPrevious className="static translate-y-0 h-8 w-8" />
                 <div className="flex space-x-1 items-center">
                   {features.map((_, idx) => (
-                    <div
+                    <button
                       key={idx}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        activeFeature === idx ? 'w-4 bg-metallic-blue' : 'w-1.5 bg-gray-300'
+                      onClick={() => scrollToFeature(idx)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        activeFeature === idx ? 'w-6 bg-metallic-blue' : 'w-2 bg-gray-300 hover:bg-gray-400'
                       }`}
+                      aria-label={`Go to feature ${idx + 1}`}
                     />
                   ))}
                 </div>

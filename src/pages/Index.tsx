@@ -267,7 +267,7 @@ const Index = () => {
               </p>
             </div>
             
-            {/* Mobile: Interactive Pricing Comparison */}
+            {/* Mobile: Interactive Pricing Tabs - Removed comparison section */}
             {isMobile ? (
               <div className="mb-10">
                 <Tabs defaultValue="first-trial" className="w-full">
@@ -314,28 +314,7 @@ const Index = () => {
                           </div>
                         </div>
                         
-                        {/* Compare with other plans */}
-                        <div className="mt-6">
-                          <h4 className="text-sm font-medium text-gray-800 mb-3">Compare with other plans:</h4>
-                          <div className="space-y-3">
-                            {pricingPlans.filter(p => p.name !== plan.name).map((otherPlan, i) => (
-                              <div key={i} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                                <span className="font-medium text-sm">{otherPlan.name}</span>
-                                <button 
-                                  onClick={() => {
-                                    const tabElement = document.querySelector(`[data-state="inactive"][value="${otherPlan.name.toLowerCase().replace(' ', '-')}"]`);
-                                    if (tabElement && tabElement instanceof HTMLElement) {
-                                      tabElement.click();
-                                    }
-                                  }}
-                                  className="text-xs text-metallic-blue font-medium"
-                                >
-                                  View
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                        {/* Removed the "Compare with other plans" section */}
                       </TabsContent>
                     );
                   })}

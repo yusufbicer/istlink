@@ -6,7 +6,7 @@ import Features from '@/components/landing/Features';
 import HowItWorks from '@/components/landing/HowItWorks';
 import Footer from '@/components/landing/Footer';
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon, PackageCheck, FileText, Receipt, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, ListIcon, CheckIcon } from 'lucide-react';
+import { ArrowRightIcon, PackageCheck, FileText, Receipt, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, ListIcon, CheckIcon, CheckCircle2 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -26,51 +26,62 @@ const Index = () => {
     }
   }, []);
 
-  // Pricing plans data
+  // New pricing plans data
   const pricingPlans = [
     {
-      name: "First Trial",
-      price: "$299",
-      period: "flat rate",
-      description: "Perfect for testing our services",
+      name: "Starter",
+      price: "$499",
+      period: "One-time fee",
+      description: "Perfect for first-time users exploring Turkish supply chain services",
       icon: PackageCheck,
       iconColor: "text-indigo-600",
       iconBg: "bg-indigo-100",
       features: [
-        "Up to 5 orders",
-        "Single consolidation",
-        "Basic documentation",
-        "Email support"
+        "Single consolidated shipment",
+        "Supplier payment handling",
+        "Single Bill of Lading",
+        "Documentation support",
+        "Quality inspection",
+        "Bank transfer fees included",
+        "Export customs clearance"
       ]
     },
     {
-      name: "Business",
-      price: "$799",
-      period: "/month",
-      description: "For growing businesses",
+      name: "Growth",
+      price: "2%",
+      period: "Of the total order value",
+      description: "Our most popular option for growing businesses with regular shipments",
+      additionalInfo: "+ Bank transfer fees",
       icon: FileText,
       iconColor: "text-blue-600",
       iconBg: "bg-blue-100",
       features: [
-        "Up to 25 orders/month",
-        "Multiple consolidations",
-        "Full documentation",
+        "Multiple consolidated shipments",
+        "Unlimited suppliers",
+        "Digital procurement dashboard",
+        "Real-time tracking",
+        "Preferred shipping rates",
+        "Payment handling & protection",
         "Dedicated account manager"
       ]
     },
     {
       name: "Enterprise",
-      price: "Custom",
-      period: "",
-      description: "For large-scale operations",
+      price: "1.5%",
+      period: "After 5 consolidations/month",
+      description: "For businesses with high-volume international shipping needs",
+      additionalInfo: "Volume-based discounting after 5 consolidations/month",
       icon: Receipt,
       iconColor: "text-purple-600",
       iconBg: "bg-purple-100",
       features: [
-        "Unlimited orders",
+        "Volume discount pricing",
         "Priority consolidation",
-        "Custom documentation",
-        "24/7 priority support"
+        "Customized shipping schedule",
+        "Advanced analytics & reporting",
+        "API integration",
+        "Warehouse storage options",
+        "Strategic sourcing assistance"
       ]
     }
   ];
@@ -91,7 +102,7 @@ const Index = () => {
           <HowItWorks />
         </div>
         
-        {/* Updated Pricing Section - Interactive Comparison on Mobile */}
+        {/* Updated Pricing Section with New Design */}
         <section id="pricing" className={`py-16 md:py-20 bg-white ${isMobile ? "mt-0" : ""}`}>
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
@@ -109,17 +120,17 @@ const Index = () => {
             {/* Mobile: Interactive Pricing Tabs */}
             {isMobile ? (
               <div className="mb-10">
-                <Tabs defaultValue="first-trial" className="w-full">
+                <Tabs defaultValue="starter" className="w-full">
                   <TabsList className="grid grid-cols-3 mb-6 bg-gray-100 p-1 rounded-lg">
-                    <TabsTrigger value="first-trial" className="text-xs py-2">First Trial</TabsTrigger>
-                    <TabsTrigger value="business" className="text-xs py-2">Business</TabsTrigger>
+                    <TabsTrigger value="starter" className="text-xs py-2">Starter</TabsTrigger>
+                    <TabsTrigger value="growth" className="text-xs py-2">Growth</TabsTrigger>
                     <TabsTrigger value="enterprise" className="text-xs py-2">Enterprise</TabsTrigger>
                   </TabsList>
                   
                   {pricingPlans.map((plan, index) => {
                     const PlanIcon = plan.icon;
                     return (
-                      <TabsContent key={index} value={plan.name.toLowerCase().replace(' ', '-')} className="pt-2">
+                      <TabsContent key={index} value={plan.name.toLowerCase()} className="pt-2">
                         <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                           <div className="p-6">
                             <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-4`}>
@@ -127,20 +138,23 @@ const Index = () => {
                             </div>
                             <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
                             <p className="text-gray-600 mb-4">{plan.description}</p>
-                            <div className="flex items-baseline mb-6">
+                            <div className="flex items-baseline mb-2">
                               <span className="text-3xl font-bold">{plan.price}</span>
-                              {plan.period && <span className="text-gray-600 ml-1">{plan.period}</span>}
                             </div>
+                            <div className="text-gray-600 text-sm mb-4">{plan.period}</div>
+                            {plan.additionalInfo && (
+                              <div className="text-sm text-gray-500 mb-4">{plan.additionalInfo}</div>
+                            )}
                             
                             <div className="border-t border-gray-100 pt-4">
-                              <h4 className="font-medium mb-2 flex items-center">
+                              <h4 className="font-medium mb-3 flex items-center">
                                 <ListIcon className="h-4 w-4 mr-2 text-metallic-blue" />
-                                Features
+                                What's included
                               </h4>
                               <ul className="space-y-2">
                                 {plan.features.map((feature, i) => (
                                   <li key={i} className="flex items-center">
-                                    <CheckIcon className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                                    <CheckCircle2 className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
                                     <span className="text-gray-700 text-sm">{feature}</span>
                                   </li>
                                 ))}
@@ -159,136 +173,45 @@ const Index = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-                {/* First Trial */}
-                <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
-                  <div className="p-6">
-                    <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                      <PackageCheck className="h-6 w-6 text-indigo-600" />
+                {pricingPlans.map((plan, index) => {
+                  const PlanIcon = plan.icon;
+                  const isPopular = plan.name === "Growth";
+                  
+                  return (
+                    <div key={index} className={`bg-white rounded-xl border ${isPopular ? 'border-blue-200 shadow-lg relative' : 'border-gray-100 shadow-sm'} overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md`}>
+                      {isPopular && (
+                        <div className="absolute top-0 left-0 right-0 bg-blue-500 text-white text-xs font-bold text-center py-1">
+                          MOST POPULAR
+                        </div>
+                      )}
+                      <div className={`p-6 ${isPopular ? 'pt-8' : ''}`}>
+                        <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-4`}>
+                          <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
+                        </div>
+                        <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
+                        <p className="text-gray-600 mb-4 h-12">{plan.description}</p>
+                        <div className="flex items-baseline mb-1">
+                          <span className="text-3xl font-bold">{plan.price}</span>
+                        </div>
+                        <div className="text-gray-600 text-sm mb-2">{plan.period}</div>
+                        {plan.additionalInfo && (
+                          <div className="text-sm text-gray-500 mb-4">{plan.additionalInfo}</div>
+                        )}
+                        <ul className="mt-6 space-y-3 min-h-[280px]">
+                          {plan.features.map((feature, i) => (
+                            <li key={i} className="flex items-start">
+                              <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                              <span className="text-gray-700">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <button className={`w-full ${isPopular ? 'bg-blue-600 hover:bg-blue-700' : 'bg-metallic-blue hover:bg-metallic-dark'} text-white rounded-lg mt-4 py-2.5 font-medium`}>
+                          {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
+                        </button>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-1">First Trial</h3>
-                    <p className="text-gray-600 mb-4">Perfect for testing our services</p>
-                    <div className="flex items-baseline mb-1">
-                      <span className="text-3xl font-bold">$299</span>
-                      <span className="text-gray-600 ml-1">flat rate</span>
-                    </div>
-                    <ul className="mt-6 space-y-3">
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Up to 5 orders</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Single consolidation</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Basic documentation</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Email support</span>
-                      </li>
-                    </ul>
-                    <button className="w-full bg-metallic-blue hover:bg-metallic-dark text-white rounded-lg mt-8 py-2 font-medium">
-                      Get Started
-                    </button>
-                  </div>
-                </div>
-                
-                {/* Business */}
-                <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
-                  <div className="p-6">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                      <FileText className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-1">Business</h3>
-                    <p className="text-gray-600 mb-4">For growing businesses</p>
-                    <div className="flex items-baseline mb-1">
-                      <span className="text-3xl font-bold">$799</span>
-                      <span className="text-gray-600 ml-1">/month</span>
-                    </div>
-                    <ul className="mt-6 space-y-3">
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Up to 25 orders/month</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Multiple consolidations</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Full documentation</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Dedicated account manager</span>
-                      </li>
-                    </ul>
-                    <button className="w-full bg-metallic-blue hover:bg-metallic-dark text-white rounded-lg mt-8 py-2 font-medium">
-                      Get Started
-                    </button>
-                  </div>
-                </div>
-                
-                {/* Enterprise */}
-                <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md">
-                  <div className="p-6">
-                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                      <Receipt className="h-6 w-6 text-purple-600" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-1">Enterprise</h3>
-                    <p className="text-gray-600 mb-4">For large-scale operations</p>
-                    <div className="flex items-baseline mb-1">
-                      <span className="text-3xl font-bold">Custom</span>
-                    </div>
-                    <ul className="mt-6 space-y-3">
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Unlimited orders</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Priority consolidation</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">Custom documentation</span>
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span className="text-gray-700">24/7 priority support</span>
-                      </li>
-                    </ul>
-                    <button className="w-full bg-metallic-blue hover:bg-metallic-dark text-white rounded-lg mt-8 py-2 font-medium">
-                      Contact Sales
-                    </button>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             )}
           </div>

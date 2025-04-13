@@ -83,7 +83,7 @@ const Header = () => {
                 </Link>
               </Button>
             ) : (
-              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
+              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark text-white">
                 <Link to="/register" className="px-5 py-2">
                   Get Started
                 </Link>
@@ -139,7 +139,7 @@ const Header = () => {
                   <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
                     <Link 
                       to="/dashboard" 
-                      className="justify-center"
+                      className="justify-center text-white"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Dashboard
@@ -149,7 +149,7 @@ const Header = () => {
                   <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
                     <Link 
                       to="/register" 
-                      className="justify-center"
+                      className="justify-center text-white"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Get Started

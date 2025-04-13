@@ -113,7 +113,7 @@ const Hero = () => {
                         <Package className="h-2.5 w-2.5 mr-0.5" /> Orders
                       </div>
                       <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px]">
-                        <GitMerge className="h-2.5 w-2.5 mr-0.5" /> Consolidate
+                        <GitMerge className="h-2.5 w-2.5 mr-0.5" /> Consolidations
                       </div>
                       <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px]">
                         <Users className="h-2.5 w-2.5 mr-0.5" /> Suppliers
@@ -267,7 +267,7 @@ const Hero = () => {
                           <Package className="h-4 w-4 mr-2" /> Orders
                         </div>
                         <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
-                          <GitMerge className="h-4 w-4 mr-2" /> Consolidation
+                          <GitMerge className="h-4 w-4 mr-2" /> Consolidations
                         </div>
                         <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
                           <Users className="h-4 w-4 mr-2" /> Suppliers

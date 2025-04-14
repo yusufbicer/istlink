@@ -4,20 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { Menu, X, Zap } from 'lucide-react';
-import RequestAccessForm from '@/components/forms/RequestAccessForm';
-import { 
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription
-} from "@/components/ui/dialog";
 
 const Header = () => {
   const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,11 +83,10 @@ const Header = () => {
                 </Link>
               </Button>
             ) : (
-              <Button 
-                className="bg-metallic-blue hover:bg-metallic-dark text-white px-5 py-2"
-                onClick={() => setIsRequestFormOpen(true)}
-              >
-                Request Access
+              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark text-white">
+                <Link to="/register" className="px-5 py-2">
+                  Get Started
+                </Link>
               </Button>
             )}
           </div>
@@ -156,14 +146,14 @@ const Header = () => {
                     </Link>
                   </Button>
                 ) : (
-                  <Button 
-                    className="w-full bg-metallic-blue hover:bg-metallic-dark text-white justify-center"
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      setIsRequestFormOpen(true);
-                    }}
-                  >
-                    Request Access
+                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
+                    <Link 
+                      to="/register" 
+                      className="justify-center text-white"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Get Started
+                    </Link>
                   </Button>
                 )}
               </div>
@@ -171,19 +161,6 @@ const Header = () => {
           </div>
         )}
       </div>
-
-      {/* Request Access Dialog */}
-      <Dialog open={isRequestFormOpen} onOpenChange={setIsRequestFormOpen}>
-        <DialogContent className="sm:max-w-[500px]">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-gray-900">Request Access</DialogTitle>
-            <DialogDescription className="text-gray-600">
-              Fill out the form below to request access to GROOP's consolidated shipping platform.
-            </DialogDescription>
-          </DialogHeader>
-          <RequestAccessForm onClose={() => setIsRequestFormOpen(false)} />
-        </DialogContent>
-      </Dialog>
     </header>
   );
 };

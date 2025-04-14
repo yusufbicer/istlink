@@ -3,18 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { MessageSquare, Network, Activity, Zap, TrendingUp, GitMerge, Truck, Package, DollarSign, FileText, BarChart2, Archive, CreditCard, Timer, Users, Database } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import RequestAccessForm from '@/components/forms/RequestAccessForm';
-import { 
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription
-} from "@/components/ui/dialog";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -67,16 +58,14 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button 
-              size="lg" 
-              className="h-12 px-8 text-md bg-metallic-blue hover:bg-metallic-dark text-white"
-              onClick={() => setIsRequestFormOpen(true)}
-            >
-              <MessageSquare className="mr-2 h-5 w-5" /> Request Access
+            <Button asChild size="lg" className="h-12 px-8 text-md bg-metallic-blue hover:bg-metallic-dark text-white">
+              <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
+                <MessageSquare className="mr-2 h-5 w-5" /> Talk to Our Team
+              </a>
             </Button>
           </div>
         
-          {/* Bento Grid Dashboard Preview */}
+          {/* Bento Grid Dashboard Preview - More compact and mobile-friendly */}
           <div 
             className={`mt-2 md:mt-4 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
@@ -549,19 +538,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-
-      {/* Request Access Dialog */}
-      <Dialog open={isRequestFormOpen} onOpenChange={setIsRequestFormOpen}>
-        <DialogContent className="sm:max-w-[500px]">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-gray-900">Request Access</DialogTitle>
-            <DialogDescription className="text-gray-600">
-              Fill out the form below to request access to GROOP's consolidated shipping platform.
-            </DialogDescription>
-          </DialogHeader>
-          <RequestAccessForm onClose={() => setIsRequestFormOpen(false)} />
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };

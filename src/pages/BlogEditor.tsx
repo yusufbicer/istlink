@@ -42,14 +42,19 @@ const BlogEditor = () => {
   const [originalSlug, setOriginalSlug] = useState<string | null>(null);
 
   // In a real app, you'd check for admin role
-  const isAdmin = !!user;
+  const isAdmin = user && user.role === 'admin';
 
-  // Redirect if not logged in
+  // Redirect if not logged in or not admin
   useEffect(() => {
     if (!isAdmin) {
-      navigate('/blog');
+      navigate('/admin');
+      toast({
+        variant: "destructive",
+        title: "Access Denied",
+        description: "You must be logged in as an admin to edit blog posts."
+      });
     }
-  }, [isAdmin, navigate]);
+  }, [isAdmin, navigate, toast]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -162,11 +167,13 @@ const BlogEditor = () => {
         const newPost = {
           title: values.title,
           slug: values.slug,
-          content: values.content, // Required field
-          excerpt: values.excerpt,
+          content: values.content,
+          excerpt: values.excerpt || '',
           published: values.published,
           author_id: user?.id,
         };
+
+        console.log('Creating new post:', newPost);
 
         const { data, error } = await supabase
           .from('blog_posts')
@@ -174,6 +181,8 @@ const BlogEditor = () => {
           .select();
 
         if (error) throw error;
+
+        console.log('Post created successfully:', data);
 
         toast({
           title: "Success",

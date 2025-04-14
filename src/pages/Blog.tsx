@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { CalendarIcon, Clock, ArrowLeft, User } from 'lucide-react';
+import { CalendarIcon, ArrowLeft, LayoutDashboard } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/auth';
@@ -64,9 +64,17 @@ const BlogList = () => {
             </p>
           </div>
           {isAdmin && (
-            <Button asChild>
-              <Link to="/blog/new">Create Post</Link>
-            </Button>
+            <div className="flex gap-2">
+              <Button variant="outline" asChild>
+                <Link to="/admin">
+                  <LayoutDashboard className="mr-2 h-4 w-4" />
+                  Admin Dashboard
+                </Link>
+              </Button>
+              <Button asChild>
+                <Link to="/blog/new">Create Post</Link>
+              </Button>
+            </div>
           )}
         </div>
 

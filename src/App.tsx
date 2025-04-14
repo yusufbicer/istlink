@@ -16,6 +16,7 @@ import BlogPost from "./pages/BlogPost";
 import BlogEditor from "./pages/BlogEditor";
 import EarlyAccess from "./pages/EarlyAccess";
 import Analytics from "./pages/Analytics";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/blog/:slug/edit" element={<BlogEditor />} />
             <Route path="/early-access" element={<EarlyAccess />} />
             <Route path="/analytics" element={<Analytics />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <WhatsAppButton />

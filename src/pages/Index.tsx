@@ -32,6 +32,7 @@ const Index = () => {
       price: "$499",
       period: "One-time fee",
       description: "Perfect for first-time users exploring Turkish supply chain services",
+      additionalInfo: "+ Bank transfer fees",
       icon: PackageCheck,
       iconColor: "text-indigo-600",
       iconBg: "bg-indigo-100",
@@ -39,10 +40,7 @@ const Index = () => {
         "Single consolidated shipment",
         "Supplier payment handling",
         "Single Bill of Lading",
-        "Documentation support",
-        "Quality inspection",
-        "Bank transfer fees included",
-        "Export customs clearance"
+        "Documentation support"
       ]
     },
     {
@@ -56,12 +54,10 @@ const Index = () => {
       iconBg: "bg-blue-100",
       features: [
         "Multiple consolidated shipments",
-        "Unlimited suppliers",
         "Digital procurement dashboard",
         "Real-time tracking",
         "Preferred shipping rates",
-        "Payment handling & protection",
-        "Dedicated account manager"
+        "Payment handling & protection"
       ]
     },
     {
@@ -78,7 +74,6 @@ const Index = () => {
         "Priority consolidation",
         "Customized shipping schedule",
         "Advanced analytics & reporting",
-        "API integration",
         "Warehouse storage options",
         "Strategic sourcing assistance"
       ]

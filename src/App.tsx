@@ -12,6 +12,9 @@ import WhatsAppButton from "@/components/common/WhatsAppButton";
 // Pages
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import BlogEditor from "./pages/BlogEditor";
+import EarlyAccess from "./pages/EarlyAccess";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +30,10 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/blog/new" element={<BlogEditor />} />
+            <Route path="/blog/:slug/edit" element={<BlogEditor />} />
+            <Route path="/early-access" element={<EarlyAccess />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

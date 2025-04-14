@@ -84,8 +84,8 @@ const Header = () => {
               </Button>
             ) : (
               <Button asChild className="bg-metallic-blue hover:bg-metallic-dark text-white">
-                <Link to="/register" className="px-5 py-2">
-                  Get Started
+                <Link to="/early-access" className="px-5 py-2">
+                  Request Early Access
                 </Link>
               </Button>
             )}
@@ -148,11 +148,11 @@ const Header = () => {
                 ) : (
                   <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
                     <Link 
-                      to="/register" 
+                      to="/early-access" 
                       className="justify-center text-white"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      Get Started
+                      Request Early Access
                     </Link>
                   </Button>
                 )}

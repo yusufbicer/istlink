@@ -158,13 +158,19 @@ const BlogEditor = () => {
           navigate(`/blog/${slug}`);
         }
       } else {
-        // Create new post
+        // Create new post - Make sure all required fields are present
+        const newPost = {
+          title: values.title,
+          slug: values.slug,
+          content: values.content, // Required field
+          excerpt: values.excerpt,
+          published: values.published,
+          author_id: user?.id,
+        };
+
         const { data, error } = await supabase
           .from('blog_posts')
-          .insert({
-            ...values,
-            author_id: user?.id,
-          })
+          .insert(newPost)
           .select();
 
         if (error) throw error;

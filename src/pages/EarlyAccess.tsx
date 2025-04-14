@@ -42,9 +42,15 @@ const EarlyAccess = () => {
     setIsSubmitting(true);
     
     try {
+      // Make sure to send the data as a single object, not an array
       const { error } = await supabase
         .from('early_access_requests')
-        .insert([data]);
+        .insert({
+          name: data.name,
+          email: data.email,
+          company: data.company || null, // Use null for empty optional fields
+          reason: data.reason
+        });
       
       if (error) throw error;
       
@@ -149,7 +155,7 @@ const EarlyAccess = () => {
                       <Textarea 
                         placeholder="Tell us about your business needs and how GROOP can help..."
                         className="min-h-[120px]"
-                        {...field}
+                        {...field} 
                       />
                     </FormControl>
                     <FormMessage />

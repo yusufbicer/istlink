@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { Menu, X, Zap } from 'lucide-react';
 
@@ -9,6 +9,7 @@ const Header = () => {
   const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +27,11 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleNavigate = (path: string) => {
+    setIsMobileMenuOpen(false);
+    navigate(path);
   };
 
   return (
@@ -63,9 +69,12 @@ const Header = () => {
             >
               How It Works
             </button>
-            <Link to="/blog" className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors">
+            <button
+              onClick={() => handleNavigate('/blog')} 
+              className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
+            >
               Blog
-            </Link>
+            </button>
             <button 
               onClick={() => scrollToSection('pricing')}
               className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
@@ -77,16 +86,18 @@ const Header = () => {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
-              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
-                <Link to="/dashboard" className="px-5 py-2">
-                  Dashboard
-                </Link>
+              <Button 
+                className="bg-metallic-blue hover:bg-metallic-dark"
+                onClick={() => handleNavigate('/dashboard')}
+              >
+                Dashboard
               </Button>
             ) : (
-              <Button asChild className="bg-metallic-blue hover:bg-metallic-dark text-white">
-                <Link to="/early-access" className="px-5 py-2">
-                  Request Early Access
-                </Link>
+              <Button 
+                className="bg-metallic-blue hover:bg-metallic-dark text-white"
+                onClick={() => handleNavigate('/early-access')}
+              >
+                Request Early Access
               </Button>
             )}
           </div>
@@ -120,13 +131,12 @@ const Header = () => {
               >
                 How It Works
               </button>
-              <Link 
-                to="/blog" 
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left w-full block"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <button
+                onClick={() => handleNavigate('/blog')}
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
               >
                 Blog
-              </Link>
+              </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
                 className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
@@ -136,24 +146,18 @@ const Header = () => {
               
               <div className="pt-2 border-t border-gray-100">
                 {user ? (
-                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
-                    <Link 
-                      to="/dashboard" 
-                      className="justify-center text-white"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Dashboard
-                    </Link>
+                  <Button 
+                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                    onClick={() => handleNavigate('/dashboard')}
+                  >
+                    Dashboard
                   </Button>
                 ) : (
-                  <Button asChild className="w-full bg-metallic-blue hover:bg-metallic-dark">
-                    <Link 
-                      to="/early-access" 
-                      className="justify-center text-white"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Request Early Access
-                    </Link>
+                  <Button 
+                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                    onClick={() => handleNavigate('/early-access')}
+                  >
+                    Request Early Access
                   </Button>
                 )}
               </div>

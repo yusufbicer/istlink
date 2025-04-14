@@ -6,6 +6,7 @@ export type User = {
   id: string;
   name: string | null;
   email: string;
+  role?: 'admin' | 'user';
 };
 
 // Define what the auth context provides
@@ -19,9 +20,20 @@ type AuthContextType = {
 // Create the context with a default value
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Demo users for testing
+// Demo users for testing - now with an admin user
 const demoUsers: User[] = [
-  { id: "1", name: "Demo User", email: "demo@example.com" },
+  { 
+    id: "1", 
+    name: "Demo User", 
+    email: "demo@example.com",
+    role: 'user' 
+  },
+  { 
+    id: "2", 
+    name: "Admin User", 
+    email: "admin@groop.ai", 
+    role: 'admin' 
+  }
 ];
 
 // Hook for components to access the auth context
@@ -49,7 +61,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Login function
   const login = async (email: string, password: string) => {
-    // In a real app, this would validate credentials with a backend
+    // For early access mode, use a simple hardcoded credential check
     if (password !== "password") {
       throw new Error("Invalid credentials");
     }

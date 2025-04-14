@@ -1,18 +1,18 @@
-
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
 import Features from '@/components/landing/Features';
 import HowItWorks from '@/components/landing/HowItWorks';
 import Footer from '@/components/landing/Footer';
+import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
+import { PackageCheck, FileText, Receipt, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, ListIcon, CheckIcon, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon, PackageCheck, FileText, Receipt, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, ListIcon, CheckIcon, CheckCircle2 } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
   const [blogCollapsed, setBlogCollapsed] = useState(true);
 
   // Scroll to section if hash is present in URL
@@ -26,7 +26,6 @@ const Index = () => {
     }
   }, []);
 
-  // New pricing plans data
   const pricingPlans = [
     {
       name: "Starter",
@@ -102,7 +101,7 @@ const Index = () => {
           <HowItWorks />
         </div>
         
-        {/* Updated Pricing Section with New Design */}
+        {/* Updated Pricing Section with Improved Tablet Responsiveness */}
         <section id="pricing" className={`py-16 md:py-20 bg-white ${isMobile ? "mt-0" : ""}`}>
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
@@ -137,7 +136,7 @@ const Index = () => {
                               <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
                             </div>
                             <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
-                            <p className="text-gray-600 mb-4">{plan.description}</p>
+                            <p className="text-gray-600 mb-4 min-h-[50px]">{plan.description}</p>
                             <div className="flex items-baseline mb-2">
                               <span className="text-3xl font-bold">{plan.price}</span>
                             </div>
@@ -147,15 +146,12 @@ const Index = () => {
                             )}
                             
                             <div className="border-t border-gray-100 pt-4">
-                              <h4 className="font-medium mb-3 flex items-center">
-                                <ListIcon className="h-4 w-4 mr-2 text-metallic-blue" />
-                                What's included
-                              </h4>
+                              <h4 className="font-medium mb-3">Features</h4>
                               <ul className="space-y-2">
                                 {plan.features.map((feature, i) => (
-                                  <li key={i} className="flex items-center">
+                                  <li key={i} className="flex items-center text-sm text-gray-700">
                                     <CheckCircle2 className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                                    <span className="text-gray-700 text-sm">{feature}</span>
+                                    {feature}
                                   </li>
                                 ))}
                               </ul>
@@ -172,13 +168,19 @@ const Index = () => {
                 </Tabs>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+              <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 ${isTablet ? 'px-4' : ''}`}>
                 {pricingPlans.map((plan, index) => {
                   const PlanIcon = plan.icon;
                   const isPopular = plan.name === "Growth";
                   
                   return (
-                    <div key={index} className={`bg-white rounded-xl border ${isPopular ? 'border-blue-200 shadow-lg relative' : 'border-gray-100 shadow-sm'} overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md`}>
+                    <div 
+                      key={index} 
+                      className={`bg-white rounded-xl border 
+                        ${isPopular ? 'border-blue-200 shadow-lg relative' : 'border-gray-100 shadow-sm'} 
+                        overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md
+                        ${isTablet ? 'flex-1' : ''}`}
+                    >
                       {isPopular && (
                         <div className="absolute top-0 left-0 right-0 bg-blue-500 text-white text-xs font-bold text-center py-1">
                           MOST POPULAR
@@ -189,15 +191,21 @@ const Index = () => {
                           <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
                         </div>
                         <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
-                        <p className="text-gray-600 mb-4 h-12">{plan.description}</p>
+                        <p className={`text-gray-600 mb-4 ${isTablet ? 'text-sm' : ''} min-h-[50px]`}>
+                          {plan.description}
+                        </p>
                         <div className="flex items-baseline mb-1">
                           <span className="text-3xl font-bold">{plan.price}</span>
                         </div>
-                        <div className="text-gray-600 text-sm mb-2">{plan.period}</div>
+                        <div className={`text-gray-600 ${isTablet ? 'text-xs' : 'text-sm'} mb-2`}>
+                          {plan.period}
+                        </div>
                         {plan.additionalInfo && (
-                          <div className="text-sm text-gray-500 mb-4">{plan.additionalInfo}</div>
+                          <div className={`${isTablet ? 'text-xs' : 'text-sm'} text-gray-500 mb-4`}>
+                            {plan.additionalInfo}
+                          </div>
                         )}
-                        <ul className="mt-6 space-y-3 min-h-[280px]">
+                        <ul className={`mt-6 space-y-3 ${isTablet ? 'text-sm' : ''} min-h-[280px]`}>
                           {plan.features.map((feature, i) => (
                             <li key={i} className="flex items-start">
                               <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />

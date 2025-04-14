@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
-import { PlusCircle, Edit, Trash2, Eye, ArrowLeft } from 'lucide-react';
+import { PlusCircle, Edit, Trash2, Eye, ArrowLeft, LogOut } from 'lucide-react';
 import { format } from 'date-fns';
 import { useToast } from '@/components/ui/use-toast';
 import {
@@ -31,16 +30,8 @@ type BlogPost = {
 const AdminDashboard = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { user } = useAuth();
-  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const { toast } = useToast();
-  
-  // Check if user is logged in
-  useEffect(() => {
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, navigate]);
   
   // Fetch all blog posts
   const fetchPosts = async () => {
@@ -66,10 +57,8 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      fetchPosts();
-    }
-  }, [user]);
+    fetchPosts();
+  }, []);
 
   // Toggle post published status
   const togglePublishedStatus = async (post: BlogPost) => {
@@ -104,6 +93,11 @@ const AdminDashboard = () => {
   };
 
   // Delete a post
+  const handleLogout = () => {
+    logout();
+  };
+
+  // Delete a post
   const deletePost = async (id: string) => {
     if (!confirm('Are you sure you want to delete this post?')) return;
     
@@ -132,23 +126,26 @@ const AdminDashboard = () => {
     }
   };
 
-  if (!user) return null;
-
   return (
     <div className="container mx-auto p-6 min-h-screen">
       {/* Back link */}
-      <div className="mb-8">
+      <div className="mb-8 flex justify-between items-center">
         <Link to="/" className="flex items-center text-gray-600 hover:text-metallic-blue transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to home
         </Link>
+        
+        <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2">
+          <LogOut className="h-4 w-4" />
+          Logout
+        </Button>
       </div>
     
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold">Blog Management</h1>
-            <p className="text-gray-600 mt-1">Create and manage your blog posts</p>
+            <p className="text-gray-600 mt-1">Welcome, {user?.name || user?.email}</p>
           </div>
           <Button asChild>
             <Link to="/blog/new">

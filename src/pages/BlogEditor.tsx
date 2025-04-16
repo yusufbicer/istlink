@@ -11,8 +11,10 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/components/ui/use-toast';
-import { ArrowLeft, Save, Eye } from 'lucide-react';
+import { ArrowLeft, Save, Eye, FileText } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
 const formSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
@@ -152,13 +154,16 @@ const BlogEditor = () => {
     setIsLoading(true);
     
     try {
+      // Ensure timestamps are in ISO format
+      const timestamp = new Date().toISOString();
+      
       if (isEditing && slug) {
         // Update existing post
         const { error } = await supabase
           .from('blog_posts')
           .update({
             ...values,
-            updated_at: new Date().toISOString(),
+            updated_at: timestamp,
           })
           .eq('slug', slug);
 
@@ -187,8 +192,8 @@ const BlogEditor = () => {
           excerpt: values.excerpt || '',
           published: values.published,
           author_id: user.id,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
+          created_at: timestamp,
+          updated_at: timestamp
         };
 
         console.log('Creating new post:', newPost);
@@ -239,145 +244,165 @@ const BlogEditor = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 min-h-screen">
-      {/* Back to blog link */}
-      <div className="mb-8">
-        <Link to="/blog" className="flex items-center text-gray-600 hover:text-metallic-blue transition-colors">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to blog
-        </Link>
-      </div>
+    <div className="bg-gray-50 min-h-screen py-12">
+      <div className="container mx-auto px-4">
+        {/* Back to blog link */}
+        <div className="max-w-4xl mx-auto mb-8">
+          <Link to="/blog" className="flex items-center text-gray-600 hover:text-metallic-blue transition-colors">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to blog
+          </Link>
+        </div>
 
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">
-          {isEditing ? 'Edit Blog Post' : 'Create New Blog Post'}
-        </h1>
-
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Title</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Post title" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="slug"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Slug</FormLabel>
-                  <FormControl>
-                    <Input placeholder="post-url-slug" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    The URL-friendly version of the title.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="excerpt"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Excerpt (Optional)</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Brief summary of your post" 
-                      className="resize-y"
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    A short summary that appears in blog listings.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="content"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Content</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Write your blog post content here..." 
-                      className="min-h-[300px] font-mono"
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="published"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">Publish</FormLabel>
-                    <FormDescription>
-                      Make this post visible to the public.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            
-            <div className="flex justify-end gap-4 pt-4">
-              <Button 
-                type="button" 
-                variant="outline"
-                disabled={isLoading}
-                onClick={() => navigate('/blog')}
-              >
-                Cancel
-              </Button>
-              
-              {isEditing && (
-                <Button 
-                  type="button" 
-                  variant="outline"
-                  onClick={() => navigate(`/blog/${slug}`)}
-                >
-                  <Eye className="mr-2 h-4 w-4" />
-                  View
-                </Button>
-              )}
-              
-              <Button 
-                type="submit" 
-                disabled={isLoading}
-                className="bg-metallic-blue hover:bg-metallic-dark"
-              >
-                <Save className="mr-2 h-4 w-4" />
-                {isLoading ? 'Saving...' : 'Save'}
-              </Button>
-            </div>
-          </form>
-        </Form>
+        <Card className="max-w-4xl mx-auto">
+          <CardHeader>
+            <CardTitle className="text-3xl">
+              {isEditing ? 'Edit Blog Post' : 'Create New Blog Post'}
+            </CardTitle>
+            <CardDescription>
+              {isEditing ? 'Make changes to your existing post' : 'Share your thoughts with the world'}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <FormField
+                    control={form.control}
+                    name="title"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Title</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter a compelling title" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="slug"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Slug</FormLabel>
+                        <FormControl>
+                          <Input placeholder="post-url-slug" {...field} />
+                        </FormControl>
+                        <FormDescription>
+                          The URL-friendly version of the title
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                <FormField
+                  control={form.control}
+                  name="excerpt"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Excerpt</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Write a brief summary of your post (optional)" 
+                          className="resize-y h-20"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        A short summary that appears in blog listings (optional)
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Separator className="my-6" />
+                
+                <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        <div className="flex items-center gap-2 mb-2">
+                          <FileText className="h-4 w-4" />
+                          <span>Content</span>
+                        </div>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Write your blog post content here..." 
+                          className="min-h-[300px] font-mono resize-y p-4"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Separator className="my-6" />
+                
+                <FormField
+                  control={form.control}
+                  name="published"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 shadow-sm">
+                      <div className="space-y-0.5">
+                        <FormLabel className="text-base">Publish</FormLabel>
+                        <FormDescription>
+                          Make this post visible to the public
+                        </FormDescription>
+                      </div>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                
+                <div className="flex justify-end gap-4 pt-4">
+                  <Button 
+                    type="button" 
+                    variant="outline"
+                    disabled={isLoading}
+                    onClick={() => navigate('/blog')}
+                  >
+                    Cancel
+                  </Button>
+                  
+                  {isEditing && (
+                    <Button 
+                      type="button" 
+                      variant="outline"
+                      onClick={() => navigate(`/blog/${slug}`)}
+                      className="flex items-center"
+                    >
+                      <Eye className="mr-2 h-4 w-4" />
+                      Preview
+                    </Button>
+                  )}
+                  
+                  <Button 
+                    type="submit" 
+                    disabled={isLoading}
+                    className="bg-metallic-blue hover:bg-metallic-dark"
+                  >
+                    <Save className="mr-2 h-4 w-4" />
+                    {isLoading ? 'Saving...' : 'Save'}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

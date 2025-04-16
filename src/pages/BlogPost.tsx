@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, CalendarIcon, Edit, Trash2, ArrowRight, Share2 } from 'lucide-react';
+import { ArrowLeft, CalendarIcon, Edit, Trash2, ArrowRight, Share2, Eye } from 'lucide-react';
 import { format } from 'date-fns';
 import { useAuth } from '@/lib/auth';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useToast } from '@/components/ui/use-toast';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 type BlogPost = {
   id: string;
@@ -33,7 +34,7 @@ const BlogPost = () => {
   const { toast } = useToast();
   
   // In a real app, you'd check for admin role
-  const isAdmin = user?.role === 'admin' && post?.author_id === user.id;
+  const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
     async function fetchPost() {
@@ -44,15 +45,27 @@ const BlogPost = () => {
           .from('blog_posts')
           .select('*')
           .eq('slug', slug)
-          .single();
+          .maybeSingle();
         
         if (error) {
-          if (error.code === 'PGRST116') {
-            // Post not found
-            navigate('/blog');
-            return;
-          }
-          throw error;
+          console.error('Error fetching blog post:', error);
+          toast({
+            title: "Error",
+            description: "Failed to load the blog post. Please try again.",
+            variant: "destructive",
+          });
+          navigate('/blog');
+          return;
+        }
+        
+        if (!data) {
+          navigate('/blog');
+          toast({
+            title: "Post Not Found",
+            description: "The blog post you're looking for doesn't exist.",
+            variant: "destructive",
+          });
+          return;
         }
         
         setPost(data);
@@ -172,13 +185,17 @@ const BlogPost = () => {
   if (!post) {
     return (
       <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-center p-6">
-        <div className="text-center max-w-md bg-white p-8 rounded-xl shadow-md">
-          <h2 className="text-2xl font-bold mb-4">Post not found</h2>
-          <p className="mb-6 text-gray-600">The blog post you're looking for doesn't exist or may have been removed.</p>
-          <Button asChild>
-            <Link to="/blog">Back to Blog</Link>
-          </Button>
-        </div>
+        <Card className="max-w-md w-full text-center">
+          <CardHeader>
+            <CardTitle className="text-2xl">Post not found</CardTitle>
+            <CardDescription>The blog post you're looking for doesn't exist or may have been removed.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild className="mt-2">
+              <Link to="/blog">Back to Blog</Link>
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -193,7 +210,7 @@ const BlogPost = () => {
   const formatContent = (content: string) => {
     if (!content) return '';
     return content.split('\n\n').map((paragraph, idx) => (
-      <p key={idx} className="mb-6">{paragraph}</p>
+      <p key={idx} className="mb-6 leading-relaxed">{paragraph}</p>
     ));
   };
 
@@ -211,50 +228,59 @@ const BlogPost = () => {
         <article className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
           {/* Admin controls */}
           {isAdmin && (
-            <div className="bg-gray-50 border-b p-4 flex items-center justify-end gap-2">
-              <Button variant="outline" size="sm" asChild>
-                <Link to={`/blog/${post.slug}/edit`} className="flex items-center">
-                  <Edit className="h-4 w-4 mr-1" />
-                  Edit
-                </Link>
-              </Button>
-              
-              <Button 
-                variant={post.published ? "outline" : "default"}
-                size="sm"
-                onClick={handleTogglePublish}
-              >
-                {post.published ? 'Unpublish' : 'Publish'}
-              </Button>
-              
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="destructive" size="sm" className="flex items-center">
-                    <Trash2 className="h-4 w-4 mr-1" />
-                    Delete
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete the blog post.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleDeletePost}>Delete</AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+            <div className="bg-gray-50 border-b p-4 flex items-center justify-between">
+              <div className="flex items-center">
+                {!post.published && (
+                  <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-200 mr-2">Draft</Badge>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" asChild>
+                  <Link to={`/blog/${post.slug}/edit`} className="flex items-center">
+                    <Edit className="h-4 w-4 mr-1" />
+                    Edit
+                  </Link>
+                </Button>
+                
+                <Button 
+                  variant={post.published ? "outline" : "default"}
+                  size="sm"
+                  className={post.published ? "" : "bg-green-600 hover:bg-green-700"}
+                  onClick={handleTogglePublish}
+                >
+                  {post.published ? 'Unpublish' : 'Publish'}
+                </Button>
+                
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive" size="sm" className="flex items-center">
+                      <Trash2 className="h-4 w-4 mr-1" />
+                      Delete
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. This will permanently delete the blog post.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleDeletePost}>Delete</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
             </div>
           )}
 
           {/* Draft warning */}
-          {!post.published && (
+          {!post.published && isAdmin && (
             <div className="bg-yellow-50 border-b border-yellow-200 text-yellow-800 p-3">
-              <div className="max-w-3xl mx-auto">
-                This post is currently unpublished and only visible to you.
+              <div className="max-w-3xl mx-auto flex items-center">
+                <Eye className="h-4 w-4 mr-2" />
+                <span>This post is currently unpublished and only visible to you.</span>
               </div>
             </div>
           )}
@@ -280,7 +306,7 @@ const BlogPost = () => {
 
               {post.excerpt && (
                 <div className="mb-8">
-                  <p className="text-lg text-gray-600 italic">{post.excerpt}</p>
+                  <p className="text-lg text-gray-600 italic border-l-4 border-metallic-blue pl-4 py-1">{post.excerpt}</p>
                 </div>
               )}
 
@@ -291,12 +317,13 @@ const BlogPost = () => {
           </div>
 
           {/* Tags */}
-          <div className="px-8 pb-4">
+          <div className="px-8 pb-8">
             <div className="max-w-3xl mx-auto">
-              <div className="flex flex-wrap gap-2 mt-8">
-                <Badge variant="outline">Supply Chain</Badge>
-                <Badge variant="outline">Logistics</Badge>
-                <Badge variant="outline">Global Trade</Badge>
+              <Separator className="my-8" />
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline" className="bg-gray-50 hover:bg-gray-100">Supply Chain</Badge>
+                <Badge variant="outline" className="bg-gray-50 hover:bg-gray-100">Logistics</Badge>
+                <Badge variant="outline" className="bg-gray-50 hover:bg-gray-100">Global Trade</Badge>
               </div>
             </div>
           </div>
@@ -308,21 +335,26 @@ const BlogPost = () => {
             <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {relatedPosts.map((relatedPost, index) => (
-                <Link 
+                <Card 
                   key={index} 
-                  to={`/blog/${relatedPost.slug}`}
-                  className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-transparent hover:border-gray-200"
+                  className="hover:shadow-md transition-shadow cursor-pointer"
+                  onClick={() => navigate(`/blog/${relatedPost.slug}`)}
                 >
-                  <h3 className="font-semibold mb-2 line-clamp-2 hover:text-metallic-blue transition-colors">
-                    {relatedPost.title}
-                  </h3>
-                  <div className="flex items-center justify-between mt-4">
-                    <span className="text-xs text-gray-500">
-                      {format(new Date(relatedPost.created_at!), 'MMM d, yyyy')}
-                    </span>
-                    <ArrowRight className="h-4 w-4 text-gray-400" />
-                  </div>
-                </Link>
+                  <CardContent className="p-6">
+                    <h3 className="font-semibold mb-2 line-clamp-2 hover:text-metallic-blue transition-colors">
+                      {relatedPost.title}
+                    </h3>
+                    {relatedPost.excerpt && (
+                      <p className="text-sm text-gray-500 line-clamp-2 mb-4">{relatedPost.excerpt}</p>
+                    )}
+                    <div className="flex items-center justify-between mt-4">
+                      <span className="text-xs text-gray-500">
+                        {format(new Date(relatedPost.created_at!), 'MMM d, yyyy')}
+                      </span>
+                      <ArrowRight className="h-4 w-4 text-gray-400" />
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>

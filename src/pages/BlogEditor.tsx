@@ -11,10 +11,11 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/components/ui/use-toast';
-import { ArrowLeft, Save, Eye, FileText } from 'lucide-react';
+import { ArrowLeft, Save, Eye, FileText, Clock, AlertCircle } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const formSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
@@ -42,6 +43,7 @@ const BlogEditor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [originalSlug, setOriginalSlug] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   // In a real app, you'd check for admin role
   const isAdmin = user && user.role === 'admin';
@@ -150,14 +152,15 @@ const BlogEditor = () => {
       return;
     }
     
-    console.log("Attempting to save post with user:", user);
     setIsLoading(true);
+    setError(null);
     
     try {
       // Ensure timestamps are in ISO format
       const timestamp = new Date().toISOString();
       
       if (isEditing && slug) {
+        console.log("Updating existing post:", values);
         // Update existing post
         const { error } = await supabase
           .from('blog_posts')
@@ -189,7 +192,7 @@ const BlogEditor = () => {
           title: values.title,
           slug: values.slug,
           content: values.content,
-          excerpt: values.excerpt || '',
+          excerpt: values.excerpt || null, // Send null instead of empty string
           published: values.published,
           author_id: user.id,
           created_at: timestamp,
@@ -227,6 +230,8 @@ const BlogEditor = () => {
           type: 'manual', 
           message: errorMessage 
         });
+      } else {
+        setError(error.message || errorMessage);
       }
       
       toast({
@@ -264,6 +269,14 @@ const BlogEditor = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {error && (
+              <Alert variant="destructive" className="mb-6">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -402,6 +415,10 @@ const BlogEditor = () => {
               </form>
             </Form>
           </CardContent>
+          <CardFooter className="border-t py-3 px-6 bg-gray-50 flex items-center text-sm text-gray-500">
+            <Clock className="h-4 w-4 mr-2" />
+            <span>Last edited: {new Date().toLocaleDateString()}</span>
+          </CardFooter>
         </Card>
       </div>
     </div>

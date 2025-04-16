@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { CalendarIcon, ArrowLeft, LayoutDashboard, Search, Tag, FileText, PlusCircle, Clock } from 'lucide-react';
+import { CalendarIcon, ArrowLeft, LayoutDashboard, Search, Tag, FileText, PlusCircle, Clock, BookOpen } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -25,6 +25,7 @@ const BlogList = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -68,6 +69,13 @@ const BlogList = () => {
              (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
     }
     
+    // Filter by category if one is selected
+    if (selectedCategory) {
+      // In a real app, you'd filter by actual category data
+      // This is just a placeholder
+      return true;
+    }
+    
     return true;
   });
 
@@ -81,6 +89,14 @@ const BlogList = () => {
     'Supply Chain', 'Logistics', 'Inventory Management', 
     'Global Shipping', 'Sustainability'
   ];
+
+  const handleCategoryClick = (category: string) => {
+    if (selectedCategory === category) {
+      setSelectedCategory(null); // Deselect if already selected
+    } else {
+      setSelectedCategory(category); // Select the category
+    }
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -145,8 +161,13 @@ const BlogList = () => {
                 {categories.map((category) => (
                   <Badge 
                     key={category} 
-                    variant="outline" 
-                    className="cursor-pointer hover:bg-gray-100 transition-colors"
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    className={`cursor-pointer ${
+                      selectedCategory === category 
+                        ? "bg-metallic-blue text-white" 
+                        : "hover:bg-gray-100 transition-colors"
+                    }`}
+                    onClick={() => handleCategoryClick(category)}
                   >
                     {category}
                   </Badge>
@@ -208,16 +229,12 @@ const BlogList = () => {
               {filteredPosts.filter(post => post.published).map((post) => (
                 <Card 
                   key={post.id} 
-                  className={`overflow-hidden hover:shadow-md transition-shadow ${!post.published ? 'border-yellow-200 bg-yellow-50' : ''}`}
+                  className="overflow-hidden hover:shadow-md transition-shadow"
                 >
                   <CardContent className="p-6">
-                    {!post.published && (
-                      <Badge variant="outline" className="mb-3 bg-yellow-50 text-yellow-800 border-yellow-200">
-                        Draft
-                      </Badge>
-                    )}
                     <Link to={`/blog/${post.slug}`} className="group">
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-metallic-blue transition-colors">
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-metallic-blue transition-colors flex items-center">
+                        <BookOpen className="h-4 w-4 mr-2 text-gray-400 group-hover:text-metallic-blue" />
                         {post.title}
                       </h3>
                     </Link>
@@ -245,7 +262,7 @@ const BlogList = () => {
           
           {/* Admin-only section for drafts */}
           {isAdmin && draftPosts.length > 0 && searchQuery === '' && (
-            <div className="mt-12 pt-8">
+            <div className="mt-12 pt-8 border-t">
               <h2 className="text-2xl font-semibold mb-6 flex items-center">
                 <FileText className="h-5 w-5 mr-2 text-yellow-600" />
                 Draft Posts

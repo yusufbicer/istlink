@@ -13,7 +13,7 @@ export type User = {
 type AuthContextType = {
   user: User | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<User>; // Updated return type
   logout: () => void;
 };
 
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   // Login function
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string): Promise<User> => {
     // For early access mode, use a simple hardcoded credential check
     if (password !== "password") {
       throw new Error("Invalid credentials");

@@ -46,7 +46,7 @@ export const useAuth = () => {
 };
 
 // Provider component that wraps the app and makes auth object available
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   

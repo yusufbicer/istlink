@@ -54,7 +54,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (error) {
+        console.error("Failed to parse saved user:", error);
+        localStorage.removeItem("user");
+      }
     }
     setIsLoading(false);
   }, []);
@@ -76,6 +81,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     
     // Save to localStorage
     localStorage.setItem("user", JSON.stringify(foundUser));
+    
+    console.log("Login successful for:", foundUser);
+    return foundUser;
   };
 
   // Logout function

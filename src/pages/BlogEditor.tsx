@@ -47,6 +47,7 @@ const BlogEditor = () => {
   // Redirect if not logged in or not admin
   useEffect(() => {
     if (!isAdmin) {
+      console.log("Access denied - Current user:", user);
       navigate('/admin');
       toast({
         variant: "destructive",
@@ -54,7 +55,7 @@ const BlogEditor = () => {
         description: "You must be logged in as an admin to edit blog posts."
       });
     }
-  }, [isAdmin, navigate, toast]);
+  }, [isAdmin, navigate, toast, user]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -115,7 +116,7 @@ const BlogEditor = () => {
             slug: data.slug,
             excerpt: data.excerpt || '',
             content: data.content,
-            published: data.published,
+            published: data.published || false,
           });
         }
       } catch (error) {
@@ -131,13 +132,25 @@ const BlogEditor = () => {
       }
     }
 
-    fetchPost();
-  }, [slug, form, navigate, toast]);
+    if (isAdmin) {
+      fetchPost();
+    }
+  }, [slug, form, navigate, toast, isAdmin]);
 
   const onSubmit = async (values: FormValues) => {
-    if (!isAdmin) return;
+    if (!isAdmin || !user) {
+      console.error("Not authorized to save post");
+      toast({
+        title: "Error",
+        description: "You must be logged in as an admin to save blog posts.",
+        variant: "destructive",
+      });
+      return;
+    }
     
+    console.log("Attempting to save post with user:", user);
     setIsLoading(true);
+    
     try {
       if (isEditing && slug) {
         // Update existing post
@@ -149,7 +162,10 @@ const BlogEditor = () => {
           })
           .eq('slug', slug);
 
-        if (error) throw error;
+        if (error) {
+          console.error("Supabase update error:", error);
+          throw error;
+        }
 
         toast({
           title: "Success",
@@ -170,7 +186,9 @@ const BlogEditor = () => {
           content: values.content,
           excerpt: values.excerpt || '',
           published: values.published,
-          author_id: user?.id,
+          author_id: user.id,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
         };
 
         console.log('Creating new post:', newPost);
@@ -180,7 +198,10 @@ const BlogEditor = () => {
           .insert(newPost)
           .select();
 
-        if (error) throw error;
+        if (error) {
+          console.error("Supabase insert error:", error);
+          throw error;
+        }
 
         console.log('Post created successfully:', data);
 

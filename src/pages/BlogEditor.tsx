@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link, useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/components/ui/use-toast';
-import { ArrowLeft, Save, Eye, FileText, Clock, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Save, Eye, FileText, Clock, AlertCircle, LockKeyhole, CheckCircle2 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -24,42 +24,62 @@ const formSchema = z.object({
   excerpt: z.string().max(200, "Excerpt must be less than 200 characters").optional(),
   content: z.string().min(10, "Content must be at least 10 characters"),
   published: z.boolean().default(false),
+  accessToken: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-interface BlogPost extends FormValues {
+interface BlogPost extends Omit<FormValues, 'accessToken'> {
   id?: string;
   author_id?: string;
   created_at?: string;
   updated_at?: string;
 }
 
+// Secret token for direct blog creation - in a real app, store this securely
+const BLOG_ACCESS_TOKEN = "groopsecretblogs2025"; 
+
 const BlogEditor = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const accessToken = searchParams.get('accessToken');
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [originalSlug, setOriginalSlug] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasValidToken, setHasValidToken] = useState(false);
 
-  // In a real app, you'd check for admin role
+  // Check if user is admin or has valid access token
   const isAdmin = user && user.role === 'admin';
+  const hasAccess = isAdmin || hasValidToken;
 
-  // Redirect if not logged in or not admin
+  // Verify token on mount
   useEffect(() => {
-    if (!isAdmin) {
-      console.log("Access denied - Current user:", user);
+    if (accessToken === BLOG_ACCESS_TOKEN) {
+      setHasValidToken(true);
+      console.log("Valid access token provided");
+    } else if (accessToken) {
+      console.log("Invalid access token provided");
+    }
+  }, [accessToken]);
+
+  // Redirect if not authorized
+  useEffect(() => {
+    if (!isAdmin && !hasValidToken) {
+      console.log("Access denied - Current user:", user, "Token valid:", hasValidToken);
       navigate('/admin');
       toast({
         variant: "destructive",
         title: "Access Denied",
-        description: "You must be logged in as an admin to edit blog posts."
+        description: "You must be logged in as an admin or have a valid access token to edit blog posts."
       });
     }
-  }, [isAdmin, navigate, toast, user]);
+  }, [isAdmin, hasValidToken, navigate, toast, user]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -69,6 +89,7 @@ const BlogEditor = () => {
       excerpt: '',
       content: '',
       published: false,
+      accessToken: accessToken || '',
     },
   });
 
@@ -121,6 +142,7 @@ const BlogEditor = () => {
             excerpt: data.excerpt || '',
             content: data.content,
             published: data.published || false,
+            accessToken: accessToken || '',
           });
         }
       } catch (error) {
@@ -136,17 +158,17 @@ const BlogEditor = () => {
       }
     }
 
-    if (isAdmin) {
+    if (hasAccess) {
       fetchPost();
     }
-  }, [slug, form, navigate, toast, isAdmin]);
+  }, [slug, form, navigate, toast, hasAccess, accessToken]);
 
   const onSubmit = async (values: FormValues) => {
-    if (!isAdmin || !user) {
+    if (!hasAccess) {
       console.error("Not authorized to save post");
       toast({
         title: "Error",
-        description: "You must be logged in as an admin to save blog posts.",
+        description: "You must be logged in as an admin or have a valid access token to save blog posts.",
         variant: "destructive",
       });
       return;
@@ -154,18 +176,22 @@ const BlogEditor = () => {
     
     setIsLoading(true);
     setError(null);
+    setSuccess(null);
     
     try {
       // Ensure timestamps are in ISO format
       const timestamp = new Date().toISOString();
       
+      // Remove accessToken from values before saving to database
+      const { accessToken: _, ...postValues } = values;
+      
       if (isEditing && slug) {
-        console.log("Updating existing post:", values);
+        console.log("Updating existing post:", postValues);
         // Update existing post
         const { error } = await supabase
           .from('blog_posts')
           .update({
-            ...values,
+            ...postValues,
             updated_at: timestamp,
           })
           .eq('slug', slug);
@@ -175,6 +201,7 @@ const BlogEditor = () => {
           throw error;
         }
 
+        setSuccess("Blog post updated successfully!");
         toast({
           title: "Success",
           description: "Blog post updated successfully.",
@@ -189,12 +216,12 @@ const BlogEditor = () => {
       } else {
         // Create new post - Make sure all required fields are present
         const newPost = {
-          title: values.title,
-          slug: values.slug,
-          content: values.content,
-          excerpt: values.excerpt || null, // Send null instead of empty string
-          published: values.published,
-          author_id: user.id,
+          title: postValues.title,
+          slug: postValues.slug,
+          content: postValues.content,
+          excerpt: postValues.excerpt || null, // Send null instead of empty string
+          published: postValues.published,
+          author_id: user ? user.id : null, // Handle token-based creation without user
           created_at: timestamp,
           updated_at: timestamp
         };
@@ -212,13 +239,27 @@ const BlogEditor = () => {
         }
 
         console.log('Post created successfully:', data);
-
+        setSuccess("Blog post created successfully!");
+        setIsSubmitted(true);
+        
         toast({
           title: "Success",
           description: "Blog post created successfully.",
         });
         
-        navigate(`/blog/${values.slug}`);
+        // Clear form for token-based users or navigate for admins
+        if (hasValidToken && !isAdmin) {
+          form.reset({
+            title: '',
+            slug: '',
+            excerpt: '',
+            content: '',
+            published: false,
+            accessToken: accessToken || '',
+          });
+        } else {
+          navigate(`/blog/${postValues.slug}`);
+        }
       }
     } catch (error: any) {
       console.error('Error saving post:', error);
@@ -244,7 +285,7 @@ const BlogEditor = () => {
     }
   };
 
-  if (!isAdmin) {
+  if (!hasAccess) {
     return null; // Will redirect via useEffect
   }
 
@@ -261,12 +302,22 @@ const BlogEditor = () => {
 
         <Card className="max-w-4xl mx-auto">
           <CardHeader>
-            <CardTitle className="text-3xl">
-              {isEditing ? 'Edit Blog Post' : 'Create New Blog Post'}
-            </CardTitle>
-            <CardDescription>
-              {isEditing ? 'Make changes to your existing post' : 'Share your thoughts with the world'}
-            </CardDescription>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="text-3xl">
+                  {isEditing ? 'Edit Blog Post' : 'Create New Blog Post'}
+                </CardTitle>
+                <CardDescription>
+                  {isEditing ? 'Make changes to your existing post' : 'Share your thoughts with the world'}
+                </CardDescription>
+              </div>
+              {hasValidToken && !isAdmin && (
+                <div className="flex items-center text-amber-600 bg-amber-50 p-2 rounded-md">
+                  <LockKeyhole className="h-4 w-4 mr-2" />
+                  <span className="text-sm">Using secure token access</span>
+                </div>
+              )}
+            </div>
           </CardHeader>
           <CardContent>
             {error && (
@@ -274,6 +325,24 @@ const BlogEditor = () => {
                 <AlertCircle className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
                 <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
+            {success && (
+              <Alert variant="success" className="mb-6">
+                <CheckCircle2 className="h-4 w-4" />
+                <AlertTitle>Success</AlertTitle>
+                <AlertDescription>{success}</AlertDescription>
+              </Alert>
+            )}
+            
+            {isSubmitted && !isAdmin && (
+              <Alert className="mb-6">
+                <FileText className="h-4 w-4" />
+                <AlertTitle>Post Submitted</AlertTitle>
+                <AlertDescription>
+                  Your blog post has been submitted successfully. You can create another post below.
+                </AlertDescription>
               </Alert>
             )}
             
@@ -378,6 +447,15 @@ const BlogEditor = () => {
                         />
                       </FormControl>
                     </FormItem>
+                  )}
+                />
+                
+                {/* Hidden access token field for maintaining the token through form submissions */}
+                <FormField
+                  control={form.control}
+                  name="accessToken"
+                  render={({ field }) => (
+                    <input type="hidden" {...field} />
                   )}
                 />
                 

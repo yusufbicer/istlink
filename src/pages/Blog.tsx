@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { CalendarIcon, ArrowLeft, LayoutDashboard, Search, Tag, FileText, PlusCircle, Clock, BookOpen } from 'lucide-react';
+import { CalendarIcon, ArrowLeft, LayoutDashboard, Search, Tag, FileText, PlusCircle, Clock, BookOpen, Link as LinkIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,6 +11,17 @@ import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/lib/auth';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
+import { 
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 type BlogPost = {
   id: string;
@@ -21,11 +32,15 @@ type BlogPost = {
   published: boolean;
 };
 
+// Blog access token - in production, this should be an env variable or a generated code
+const BLOG_ACCESS_TOKEN = "groopsecretblogs2025";
+
 const BlogList = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [showSecretLink, setShowSecretLink] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -98,6 +113,31 @@ const BlogList = () => {
     }
   };
 
+  const specialAccessLink = `/blog/new?accessToken=${BLOG_ACCESS_TOKEN}`;
+
+  const copyToClipboard = () => {
+    // Get the base URL
+    const baseUrl = window.location.origin;
+    const fullUrl = `${baseUrl}${specialAccessLink}`;
+    
+    navigator.clipboard.writeText(fullUrl).then(
+      () => {
+        toast({
+          title: "Link Copied",
+          description: "The special access link has been copied to your clipboard.",
+        });
+      },
+      (err) => {
+        console.error('Could not copy text: ', err);
+        toast({
+          title: "Copy Failed",
+          description: "Could not copy the link. Please try again.",
+          variant: "destructive"
+        });
+      }
+    );
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4 py-12">
@@ -128,12 +168,59 @@ const BlogList = () => {
                       </Link>
                     </Button>
                   )}
-                  {isAdmin && (
+                  
+                  {isAdmin ? (
+                    <>
+                      <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
+                        <Link to="/blog/new">
+                          <PlusCircle className="mr-2 h-4 w-4" />
+                          Create Post
+                        </Link>
+                      </Button>
+                      
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" className="whitespace-nowrap border-amber-400 text-amber-700 hover:bg-amber-50">
+                            <LinkIcon className="mr-2 h-4 w-4" />
+                            Share Access
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-md">
+                          <DialogHeader>
+                            <DialogTitle>Special Blog Access Link</DialogTitle>
+                            <DialogDescription>
+                              Share this link to allow someone to create blog posts without an admin account.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="flex items-center space-x-2 mt-4">
+                            <div className="grid flex-1 gap-2">
+                              <Alert className="text-amber-700 bg-amber-50 border-amber-200">
+                                <AlertDescription className="break-all">
+                                  {window.location.origin}{specialAccessLink}
+                                </AlertDescription>
+                              </Alert>
+                            </div>
+                            <Button type="button" onClick={copyToClipboard} className="px-3">
+                              <span className="sr-only">Copy</span>
+                              <LinkIcon className="h-4 w-4" />
+                            </Button>
+                          </div>
+                          <DialogFooter className="sm:justify-start mt-4">
+                            <DialogClose asChild>
+                              <Button type="button" variant="secondary">
+                                Close
+                              </Button>
+                            </DialogClose>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
+                    </>
+                  ) : (
                     <Button asChild className="bg-metallic-blue hover:bg-metallic-dark">
-                      <Link to="/blog/new">
+                      <a href={specialAccessLink} onClick={() => setShowSecretLink(true)}>
                         <PlusCircle className="mr-2 h-4 w-4" />
-                        Create Post
-                      </Link>
+                        Contribute
+                      </a>
                     </Button>
                   )}
                 </div>
@@ -199,12 +286,22 @@ const BlogList = () => {
                 <FileText className="h-12 w-12 text-gray-400 mb-4" />
                 <p className="text-gray-600 font-medium">No blog posts published yet</p>
                 <p className="text-gray-500 text-sm mt-2">Check back later for updates and industry insights</p>
-                {isAdmin && (
+                {isAdmin ? (
                   <Button asChild className="mt-6 bg-metallic-blue hover:bg-metallic-dark">
                     <Link to="/blog/new">
                       <PlusCircle className="mr-2 h-4 w-4" />
                       Create First Post
                     </Link>
+                  </Button>
+                ) : (
+                  <Button 
+                    asChild
+                    className="mt-6 bg-metallic-blue hover:bg-metallic-dark"
+                  >
+                    <a href={specialAccessLink}>
+                      <PlusCircle className="mr-2 h-4 w-4" />
+                      Contribute First Post
+                    </a>
                   </Button>
                 )}
               </CardContent>

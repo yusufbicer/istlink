@@ -151,10 +151,6 @@ const Index = () => {
                                 ))}
                               </ul>
                             </div>
-                            
-                            <button className="w-full bg-metallic-blue hover:bg-metallic-dark text-white rounded-lg mt-6 py-2.5 font-medium">
-                              {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
-                            </button>
                           </div>
                         </div>
                       </TabsContent>
@@ -181,36 +177,35 @@ const Index = () => {
                           MOST POPULAR
                         </div>
                       )}
-                      <div className={`p-6 ${isPopular ? 'pt-8' : ''}`}>
-                        <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-4`}>
-                          <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
-                        </div>
-                        <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
-                        <p className={`text-gray-600 mb-4 ${isTablet ? 'text-sm' : ''} min-h-[50px]`}>
-                          {plan.description}
-                        </p>
-                        <div className="flex items-baseline mb-1">
-                          <span className="text-3xl font-bold">{plan.price}</span>
-                        </div>
-                        <div className={`text-gray-600 ${isTablet ? 'text-xs' : 'text-sm'} mb-2`}>
-                          {plan.period}
-                        </div>
-                        {plan.additionalInfo && (
-                          <div className={`${isTablet ? 'text-xs' : 'text-sm'} text-gray-500 mb-4`}>
-                            {plan.additionalInfo}
+                      <div className={`p-6 ${isPopular ? 'pt-8' : ''} flex flex-col h-full`}>
+                        <div className="flex-grow">
+                          <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-4`}>
+                            <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
                           </div>
-                        )}
-                        <ul className={`mt-6 space-y-3 ${isTablet ? 'text-sm' : ''} min-h-[280px]`}>
-                          {plan.features.map((feature, i) => (
-                            <li key={i} className="flex items-start">
-                              <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                              <span className="text-gray-700">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <button className={`w-full ${isPopular ? 'bg-blue-600 hover:bg-blue-700' : 'bg-metallic-blue hover:bg-metallic-dark'} text-white rounded-lg mt-4 py-2.5 font-medium`}>
-                          {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
-                        </button>
+                          <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
+                          <p className={`text-gray-600 mb-4 ${isTablet ? 'text-sm' : ''} min-h-[50px]`}>
+                            {plan.description}
+                          </p>
+                          <div className="flex items-baseline mb-1">
+                            <span className="text-3xl font-bold">{plan.price}</span>
+                          </div>
+                          <div className={`text-gray-600 ${isTablet ? 'text-xs' : 'text-sm'} mb-2`}>
+                            {plan.period}
+                          </div>
+                          {plan.additionalInfo && (
+                            <div className={`${isTablet ? 'text-xs' : 'text-sm'} text-gray-500 mb-4`}>
+                              {plan.additionalInfo}
+                            </div>
+                          )}
+                          <ul className={`mt-6 space-y-3 ${isTablet ? 'text-sm' : ''} min-h-[280px]`}>
+                            {plan.features.map((feature, i) => (
+                              <li key={i} className="flex items-start">
+                                <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span className="text-gray-700">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   );

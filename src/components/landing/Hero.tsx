@@ -88,27 +88,30 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-2">
+                          <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-3">
                             <Zap className="w-4 h-4 text-white absolute" />
                           </div>
                         </div>
                       </div>
                       
-                      <div className="flex mb-3 bg-gray-50 rounded-lg p-1 text-[10px] justify-between overflow-x-auto scrollbar-none space-x-3">
-                        <div className="px-1.5 py-1 bg-white shadow-sm rounded flex items-center font-medium text-metallic-blue text-[10px] whitespace-nowrap">
+                      <div className="flex mb-3 bg-gray-50 rounded-lg p-1 text-[10px] justify-between overflow-x-auto whitespace-nowrap">
+                        <div className="px-1.5 py-1 bg-white shadow-sm rounded flex items-center font-medium text-metallic-blue text-[10px]">
                           <Activity className="h-2.5 w-2.5 mr-0.5" /> Dashboard
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] whitespace-nowrap">
+                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] ml-1">
                           <Package className="h-2.5 w-2.5 mr-0.5" /> Orders
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] whitespace-nowrap">
+                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] ml-1">
                           <GitMerge className="h-2.5 w-2.5 mr-0.5" /> Consolidations
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] whitespace-nowrap">
+                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] ml-1">
                           <Users className="h-2.5 w-2.5 mr-0.5" /> Suppliers
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] whitespace-nowrap">
-                          <BarChart2 className="h-2.5 w-2.5 mr-0" /> Analytics
+                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] ml-1">
+                          <BarChart2 className="h-2.5 w-2.5 mr-0.5" /> Analytics
+                        </div>
+                        <div className="ml-1 px-1 py-1 rounded-full bg-lavender-100 flex items-center justify-center text-[10px] text-lavender-700 font-medium">
+                          JD
                         </div>
                       </div>
                       
@@ -235,7 +238,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-3">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-4">
                             <Zap className="w-5 h-5 text-white absolute" />
                           </div>
                         </div>

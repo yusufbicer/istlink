@@ -49,7 +49,8 @@ const Header = () => {
                 <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
                   <Zap className="w-5 h-5 text-white absolute" />
                 </div>
-                <div className="ml-3">
+                {/* Only show the text on larger screens */}
+                <div className="hidden sm:block ml-3">
                   <span className="font-bold text-xl text-gray-900">GROOP</span>
                   <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
                 </div>
@@ -60,7 +61,7 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
             {/* Adjusted spacing for tablet view - further reduced space */}
-            <div className={`flex ${isTablet ? 'space-x-2' : 'space-x-8'}`}>
+            <div className={`flex ${isTablet ? 'space-x-3' : 'space-x-8'}`}>
               <button 
                 onClick={() => scrollToSection('features')}
                 className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}

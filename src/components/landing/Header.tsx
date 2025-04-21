@@ -60,28 +60,28 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
             {/* Adjusted spacing for tablet view */}
-            <div className={`flex ${isTablet ? 'space-x-4' : 'space-x-8'}`}>
+            <div className={`flex ${isTablet ? 'space-x-3' : 'space-x-8'}`}>
               <button 
                 onClick={() => scrollToSection('features')}
-                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-2' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-2' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 How It Works
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-2' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Pricing
               </button>
               <button
                 onClick={() => handleNavigate('/analytics')}
-                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-2' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Analytics
               </button>
@@ -99,7 +99,7 @@ const Header = () => {
               </Button>
             ) : (
               <Button 
-                className="bg-metallic-blue hover:bg-metallic-dark text-white"
+                className="bg-metallic-blue hover:bg-metallic-dark text-white whitespace-nowrap"
                 onClick={() => handleNavigate('/early-access')}
               >
                 {isTablet ? "Early Access" : "Request Early Access"}

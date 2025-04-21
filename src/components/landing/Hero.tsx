@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -244,16 +245,13 @@ const Hero = () => {
                       </div>
                     </div>
                   ) : (
-                    // Improved Desktop Dashboard Layout
+                    // Improved Desktop Dashboard Layout with optimized tablet view
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-3">
+                          {/* Only show the logo icon without text for tablet view to save space */}
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
                             <Zap className="w-5 h-5 text-white absolute" />
-                          </div>
-                          <div>
-                            <div className="font-bold text-gray-900 text-lg">GROOP</div>
-                            <div className="text-xs text-metallic-blue font-medium">BEYOND BORDERS</div>
                           </div>
                         </div>
                         

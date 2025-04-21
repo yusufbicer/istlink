@@ -59,8 +59,8 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
-            {/* Adjusted spacing for tablet view */}
-            <div className={`flex ${isTablet ? 'space-x-3' : 'space-x-8'}`}>
+            {/* Adjusted spacing for tablet view - further reduced space */}
+            <div className={`flex ${isTablet ? 'space-x-2' : 'space-x-8'}`}>
               <button 
                 onClick={() => scrollToSection('features')}
                 className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}

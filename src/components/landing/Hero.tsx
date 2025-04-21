@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -66,7 +65,6 @@ const Hero = () => {
             </Button>
           </div>
         
-          {/* Bento Grid Dashboard Preview - More compact and mobile-friendly */}
           <div 
             className={`mt-2 md:mt-4 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
@@ -75,7 +73,6 @@ const Hero = () => {
             <div className="relative overflow-hidden rounded-xl shadow-xl">
               <div className="bg-gradient-to-r from-metallic-blue to-lavender-500 p-0.5 rounded-xl">
                 <div className="rounded-xl overflow-hidden bg-white border-0">
-                  {/* Browser chrome bar */}
                   <div className="relative bg-gray-100 px-2 pt-2 pb-1 flex items-center rounded-t-xl">
                     <div className="flex space-x-1.5 absolute left-4">
                       <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -87,42 +84,34 @@ const Hero = () => {
                     </div>
                   </div>
                   
-                  {/* Dashboard content */}
                   {isMobile ? (
-                    // Improved Mobile Dashboard Layout - More compact
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
+                          <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-2">
                             <Zap className="w-4 h-4 text-white absolute" />
                           </div>
-                          <div className="ml-2">
-                            <div className="font-bold text-gray-900 text-xs">GROOP</div>
-                            <div className="text-[10px] text-metallic-blue">BEYOND BORDERS</div>
-                          </div>
                         </div>
                       </div>
                       
-                      {/* Mobile Navigation - All options visible */}
-                      <div className="flex mb-3 bg-gray-50 rounded-lg p-1 text-[10px] justify-between">
-                        <div className="px-1.5 py-1 bg-white shadow-sm rounded flex items-center font-medium text-metallic-blue text-[10px]">
+                      <div className="flex mb-3 bg-gray-50 rounded-lg p-1 text-[10px] justify-between overflow-x-auto scrollbar-none space-x-3">
+                        <div className="px-1.5 py-1 bg-white shadow-sm rounded flex items-center font-medium text-metallic-blue text-[10px] whitespace-nowrap">
                           <Activity className="h-2.5 w-2.5 mr-0.5" /> Dashboard
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px]">
+                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] whitespace-nowrap">
                           <Package className="h-2.5 w-2.5 mr-0.5" /> Orders
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px]">
+                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] whitespace-nowrap">
                           <GitMerge className="h-2.5 w-2.5 mr-0.5" /> Consolidations
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px]">
+                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] whitespace-nowrap">
                           <Users className="h-2.5 w-2.5 mr-0.5" /> Suppliers
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px]">
-                          <BarChart2 className="h-2.5 w-2.5 mr-0.5" /> Analytics
+                        <div className="px-1.5 py-1 flex items-center text-gray-600 text-[10px] whitespace-nowrap">
+                          <BarChart2 className="h-2.5 w-2.5 mr-0" /> Analytics
                         </div>
                       </div>
                       
-                      {/* Improved Bento Grid for Mobile */}
                       <div className="grid grid-cols-2 gap-2">
                         <div className="bg-gray-50 p-2 rounded-lg border border-gray-200">
                           <div className="flex justify-between items-center mb-1">
@@ -186,7 +175,6 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Active Consolidations - Added as requested */}
                         <div className="col-span-2 bg-gray-50 p-2 rounded-lg border border-gray-200">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-600 text-[10px] font-medium">Active Consolidations</span>
@@ -219,7 +207,6 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Payment Status at the bottom */}
                       <div className="mt-2 bg-gray-50 rounded-lg border border-gray-200 p-2">
                         <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
@@ -245,12 +232,10 @@ const Hero = () => {
                       </div>
                     </div>
                   ) : (
-                    // Improved Desktop Dashboard Layout with optimized tablet view
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          {/* Only show the logo icon without text for tablet view to save space */}
-                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-3">
                             <Zap className="w-5 h-5 text-white absolute" />
                           </div>
                         </div>
@@ -269,7 +254,7 @@ const Hero = () => {
                             <Users className="h-4 w-4 mr-2" /> Suppliers
                           </div>
                           <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
-                            <BarChart2 className="h-4 w-4 mr-2" /> Analytics
+                            <BarChart2 className="h-4 w-4 mr-0" /> Analytics
                           </div>
                           <div className="h-8 w-8 rounded-full bg-lavender-100 flex items-center justify-center text-sm font-medium text-lavender-700">
                             JD
@@ -277,9 +262,7 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Improved Desktop Bento Grid Layout */}
                       <div className="grid grid-cols-12 gap-3">
-                        {/* Top Row - Key Metrics */}
                         <div className="col-span-3 bg-gray-50 p-3 rounded-xl border border-gray-200">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-500 text-sm">Active Orders</span>
@@ -328,7 +311,6 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Middle Row - Improved Shipping Cost Analysis */}
                         <div className="col-span-6 bg-lavender-50 p-4 rounded-xl border border-lavender-200">
                           <div className="flex justify-between items-center mb-3">
                             <div className="font-medium text-gray-700 flex items-center">
@@ -359,7 +341,6 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Right Side - Efficiency Metrics */}
                         <div className="col-span-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
                           <div className="flex justify-between items-center mb-2">
                             <span className="font-medium text-gray-700">Efficiency Metrics</span>
@@ -409,7 +390,6 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Bottom Row - Active Consolidations & Next Shipment */}
                         <div className="col-span-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
                           <div className="font-medium text-gray-700 mb-2 flex items-center">
                             <GitMerge className="h-4 w-4 mr-2 text-metallic-blue" />
@@ -499,7 +479,6 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Updated Payment Status */}
                         <div className="col-span-12 bg-gray-50 rounded-xl border border-gray-200 p-3">
                           <div className="flex justify-between items-center mb-2">
                             <div className="flex items-center">

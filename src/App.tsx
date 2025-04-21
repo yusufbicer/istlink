@@ -12,13 +12,10 @@ import WhatsAppButton from "@/components/common/WhatsAppButton";
 
 // Pages
 import Index from "./pages/Index";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import BlogEditor from "./pages/BlogEditor";
 import EarlyAccess from "./pages/EarlyAccess";
 import Analytics from "./pages/Analytics";
-import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,18 +39,6 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/blog/:slug" element={<BlogPost />} />
-      <Route path="/blog/new" element={
-        <AdminRoute>
-          <BlogEditor />
-        </AdminRoute>
-      } />
-      <Route path="/blog/:slug/edit" element={
-        <AdminRoute>
-          <BlogEditor />
-        </AdminRoute>
-      } />
       <Route path="/early-access" element={<EarlyAccess />} />
       <Route path="/analytics" element={<Analytics />} />
       <Route path="/admin" element={<AdminLogin />} />

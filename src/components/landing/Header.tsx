@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { Menu, X, Zap } from 'lucide-react';
+import { useIsTablet } from '@/hooks/use-mobile';
 
 const Header = () => {
   const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const isTablet = useIsTablet();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,31 +58,34 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => scrollToSection('features')}
-              className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
-            >
-              Features
-            </button>
-            <button 
-              onClick={() => scrollToSection('how-it-works')}
-              className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
-            >
-              How It Works
-            </button>
-            <button
-              onClick={() => handleNavigate('/blog')} 
-              className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
-            >
-              Blog
-            </button>
-            <button 
-              onClick={() => scrollToSection('pricing')}
-              className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors"
-            >
-              Pricing
-            </button>
+          <div className="hidden md:flex items-center">
+            {/* Adjusted spacing for tablet view */}
+            <div className={`flex ${isTablet ? 'space-x-4' : 'space-x-8'}`}>
+              <button 
+                onClick={() => scrollToSection('features')}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-2' : ''}`}
+              >
+                Features
+              </button>
+              <button 
+                onClick={() => scrollToSection('how-it-works')}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-2' : ''}`}
+              >
+                How It Works
+              </button>
+              <button 
+                onClick={() => scrollToSection('pricing')}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-2' : ''}`}
+              >
+                Pricing
+              </button>
+              <button
+                onClick={() => handleNavigate('/analytics')}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-2' : ''}`}
+              >
+                Analytics
+              </button>
+            </div>
           </div>
 
           {/* CTA Buttons */}
@@ -97,7 +102,7 @@ const Header = () => {
                 className="bg-metallic-blue hover:bg-metallic-dark text-white"
                 onClick={() => handleNavigate('/early-access')}
               >
-                Request Early Access
+                {isTablet ? "Early Access" : "Request Early Access"}
               </Button>
             )}
           </div>
@@ -131,17 +136,17 @@ const Header = () => {
               >
                 How It Works
               </button>
-              <button
-                onClick={() => handleNavigate('/blog')}
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
-              >
-                Blog
-              </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
                 className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
               >
                 Pricing
+              </button>
+              <button
+                onClick={() => handleNavigate('/analytics')}
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+              >
+                Analytics
               </button>
               
               <div className="pt-2 border-t border-gray-100">

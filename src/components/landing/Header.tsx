@@ -49,7 +49,7 @@ const Header = () => {
                 <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
                   <Zap className="w-5 h-5 text-white absolute" />
                 </div>
-                {/* Fixed: Now show the text on all screen sizes */}
+                {/* Fixed: Always show the text - on mobile too */}
                 <div className="ml-3">
                   <span className="font-bold text-xl text-gray-900">GROOP</span>
                   <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
@@ -121,7 +121,7 @@ const Header = () => {
           </button>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Improved visibility and spacing */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg animate-slide-down">
             <div className="flex flex-col py-4 px-6 space-y-4">

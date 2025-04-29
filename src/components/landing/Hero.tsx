@@ -1,7 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useAuth } from '@/lib/auth';
 import { MessageSquare, Network, Activity, Zap, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 

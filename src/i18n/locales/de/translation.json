@@ -1,0 +1,165 @@
+
+{
+  "common": {
+    "menu": {
+      "home": "Startseite",
+      "earlyAccess": "Frühzugang",
+      "blog": "Blog"
+    },
+    "buttons": {
+      "getStarted": "Loslegen",
+      "learnMore": "Mehr Erfahren",
+      "submit": "Absenden",
+      "send": "Senden",
+      "contactUs": "Kontaktieren Sie uns"
+    },
+    "footer": {
+      "company": "Unternehmen",
+      "services": "Dienstleistungen",
+      "legal": "Rechtliches",
+      "connect": "Verbinden",
+      "copyright": "© 2025 ShipConnector. Alle Rechte vorbehalten."
+    }
+  },
+  "landing": {
+    "hero": {
+      "title": "Vereinfachen Sie Ihre türkische Import-Lieferkette",
+      "subtitle": "Ein Konsolidierungsservice für mehrere türkische Lieferanten",
+      "description": "Sparen Sie Zeit und Geld, indem Sie Bestellungen von verschiedenen türkischen Lieferanten zu einer einzigen Sendung mit unserer Full-Service-Beschaffungslösung konsolidieren."
+    },
+    "features": {
+      "title": "Warum Ship Connector wählen",
+      "subtitle": "Vorteile unseres Konsolidierungsdienstes",
+      "items": {
+        "consolidation": {
+          "title": "Vereinfachte Konsolidierung",
+          "description": "Kombinieren Sie mehrere Bestellungen zu einer Sendung und reduzieren Sie Frachtkosten und Papierkram"
+        },
+        "payment": {
+          "title": "Zahlungsschutz",
+          "description": "Sichere Zahlungsabwicklung mit Überprüfung vor dem Versand der Waren"
+        },
+        "logistics": {
+          "title": "Optimierte Logistik",
+          "description": "Fachkundige Verwaltung von internationalen Versanddokumenten und Zoll"
+        },
+        "tracking": {
+          "title": "Echtzeit-Tracking",
+          "description": "Vollständige Transparenz Ihrer Bestellungen von der Beschaffung bis zur Lieferung"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "7 einfache Schritte zum Erfolg der Lieferkette",
+      "subtitle": "Einfacher Prozess",
+      "description": "Unser optimierter Prozess macht die Beschaffung und den Versand aus der Türkei mühelos.",
+      "steps": {
+        "step1": {
+          "title": "Finden Sie Ihre Lieferanten",
+          "description": "Finden Sie Ihre Lieferanten, holen Sie Ihre Proforma-Rechnungen ein und senden Sie sie alle an unser Team zur Überprüfung und Bearbeitung."
+        },
+        "step2": {
+          "title": "Lieferantenüberprüfung",
+          "description": "Unser Team überprüft Ihre Lieferanten und nach Bestätigung unterzeichnen wir einen Hauptvertrag, um in Ihrem Namen zu handeln."
+        },
+        "step3": {
+          "title": "Zahlungsabwicklung",
+          "description": "Wir übernehmen alle Ihre Bestellzahlungen in Ihrem Namen von Ihrem Kontoguthaben mit vollständiger Transparenz."
+        },
+        "step4": {
+          "title": "Auftragskonsolidierung",
+          "description": "Unser Team nimmt alle Ihre Bestellungen entgegen und überprüft sie, dann kombinieren wir sie zu einer optimierten Sendung."
+        },
+        "step5": {
+          "title": "Vereinfachte Dokumentation",
+          "description": "Wir kümmern uns um alle Exportpapiere, Zollformulare und erstellen einen einzigen Frachtbrief für Ihre konsolidierte Sendung."
+        },
+        "step6": {
+          "title": "Weltweiter Versand",
+          "description": "Ihre konsolidierte Bestellung wird mit Echtzeit-Tracking und Updates an Ihr Ziel verschickt."
+        },
+        "step7": {
+          "title": "Einfache Lieferung",
+          "description": "Erhalten Sie Ihre mehrfachen Bestellungen als eine einzige Sendung, sparen Sie Zeit und reduzieren Sie die Zollkomplexität."
+        }
+      }
+    },
+    "pricing": {
+      "title": "Flexible Konsolidierungspreise",
+      "subtitle": "Preisgestaltung",
+      "description": "Transparente Preisgestaltung, die auf die Bedürfnisse Ihres Unternehmens zugeschnitten ist. Zahlen Sie nur für das, was Sie nutzen.",
+      "plans": {
+        "starter": {
+          "name": "Starter",
+          "price": "499 €",
+          "period": "Einmalige Gebühr",
+          "description": "Perfekt für Erstbenutzer, die türkische Lieferkettendienste erkunden",
+          "additionalInfo": "+ Überweisungsgebühren",
+          "features": [
+            "Einzelne konsolidierte Sendung",
+            "Lieferanten-Zahlungsabwicklung",
+            "Einzelner Frachtbrief",
+            "Dokumentationsunterstützung"
+          ]
+        },
+        "growth": {
+          "name": "Wachstum",
+          "price": "2%",
+          "period": "Des gesamten Auftragswerts",
+          "description": "Unsere beliebteste Option für wachsende Unternehmen mit regelmäßigen Sendungen",
+          "additionalInfo": "+ Überweisungsgebühren",
+          "features": [
+            "Mehrere konsolidierte Sendungen",
+            "Digitales Beschaffungs-Dashboard",
+            "Echtzeit-Tracking",
+            "Bevorzugte Versandtarife",
+            "Zahlungsabwicklung & Schutz"
+          ]
+        },
+        "enterprise": {
+          "name": "Unternehmen",
+          "price": "1,5%",
+          "period": "Nach 5 Konsolidierungen/Monat",
+          "description": "Für Unternehmen mit hohem internationalen Versandvolumen",
+          "additionalInfo": "Volumenbasierte Rabatte nach 5 Konsolidierungen/Monat",
+          "features": [
+            "Volumenrabattpreise",
+            "Prioritätskonsolidierung",
+            "Angepasster Versandplan",
+            "Erweiterte Analysen & Berichte",
+            "Lagermöglichkeiten",
+            "Strategische Beschaffungsunterstützung"
+          ]
+        }
+      }
+    }
+  },
+  "earlyAccess": {
+    "title": "Erhalten Sie Frühzugang",
+    "subtitle": "Seien Sie unter den Ersten, die unsere türkische Lieferkettenplattform nutzen",
+    "description": "Treten Sie unserem Frühzugangsprogramm bei und erhalten Sie vorrangiges Onboarding für unseren Konsolidierungsservice. Füllen Sie das Formular unten aus, und unser Team wird sich in Kürze mit Ihnen in Verbindung setzen.",
+    "form": {
+      "name": "Vollständiger Name",
+      "email": "E-Mail-Adresse",
+      "company": "Firmenname",
+      "reason": "Warum interessieren Sie sich für unseren Service?",
+      "placeholder": {
+        "name": "Geben Sie Ihren vollständigen Namen ein",
+        "email": "Geben Sie Ihre E-Mail-Adresse ein",
+        "company": "Geben Sie Ihren Firmennamen ein (optional)",
+        "reason": "Erzählen Sie uns von Ihren türkischen Beschaffungsbedürfnissen..."
+      },
+      "success": "Vielen Dank für Ihr Interesse! Wir werden uns in Kürze bei Ihnen melden.",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    }
+  },
+  "notFound": {
+    "title": "Seite Nicht Gefunden",
+    "description": "Entschuldigung, wir konnten die gesuchte Seite nicht finden. Die Seite wurde möglicherweise verschoben oder gelöscht.",
+    "backToHome": "Zurück zur Startseite",
+    "contactSupport": "Support kontaktieren"
+  },
+  "whatsapp": {
+    "tooltip": "Chatten Sie mit uns auf WhatsApp"
+  }
+}

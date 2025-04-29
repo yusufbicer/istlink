@@ -1,0 +1,165 @@
+
+{
+  "common": {
+    "menu": {
+      "home": "Home",
+      "earlyAccess": "Early Access",
+      "blog": "Blog"
+    },
+    "buttons": {
+      "getStarted": "Get Started",
+      "learnMore": "Learn More",
+      "submit": "Submit",
+      "send": "Send",
+      "contactUs": "Contact Us"
+    },
+    "footer": {
+      "company": "Company",
+      "services": "Services",
+      "legal": "Legal",
+      "connect": "Connect",
+      "copyright": "© 2025 ShipConnector. All rights reserved."
+    }
+  },
+  "landing": {
+    "hero": {
+      "title": "Simplify Your Turkish Import Supply Chain",
+      "subtitle": "One consolidation service for multiple Turkish suppliers",
+      "description": "Save time and money by consolidating orders from different Turkish suppliers into a single shipment with our full-service procurement solution."
+    },
+    "features": {
+      "title": "Why Choose Ship Connector",
+      "subtitle": "Benefits of our consolidation service",
+      "items": {
+        "consolidation": {
+          "title": "Simplified Consolidation",
+          "description": "Combine multiple orders into one shipment, reducing freight costs and paperwork"
+        },
+        "payment": {
+          "title": "Payment Protection",
+          "description": "Secure payment handling with verification before goods are shipped"
+        },
+        "logistics": {
+          "title": "Streamlined Logistics",
+          "description": "Expert management of international shipping documentation and customs"
+        },
+        "tracking": {
+          "title": "Real-Time Tracking",
+          "description": "Full visibility of your orders from procurement to delivery"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "7 Simple Steps to Supply Chain Success",
+      "subtitle": "Simple Process",
+      "description": "Our streamlined process makes sourcing and shipping from Turkey effortless.",
+      "steps": {
+        "step1": {
+          "title": "Find Your Suppliers",
+          "description": "Find your suppliers, get your proforma invoices and send them all to our team for review and processing."
+        },
+        "step2": {
+          "title": "Supplier Verification",
+          "description": "Our team will verify your suppliers and after confirmation we will sign a master contract to act on your behalf."
+        },
+        "step3": {
+          "title": "Payment Processing",
+          "description": "We will handle all your order payments on behalf of you from your account balance with complete transparency."
+        },
+        "step4": {
+          "title": "Order Consolidation",
+          "description": "Our team will receive and verify all your orders, then combine them into a single optimized shipment."
+        },
+        "step5": {
+          "title": "Documentation Simplified",
+          "description": "We handle all export paperwork, customs forms, and create a single bill of lading for your consolidated shipment."
+        },
+        "step6": {
+          "title": "Global Shipping",
+          "description": "Your consolidated order is shipped to your destination with real-time tracking and updates."
+        },
+        "step7": {
+          "title": "Easy Delivery",
+          "description": "Receive your multiple orders as a single shipment, saving time and reducing customs complexity."
+        }
+      }
+    },
+    "pricing": {
+      "title": "Flexible Consolidation Pricing",
+      "subtitle": "Pricing",
+      "description": "Transparent pricing designed to scale with your business needs. Pay only for what you use.",
+      "plans": {
+        "starter": {
+          "name": "Starter",
+          "price": "$499",
+          "period": "One-time fee",
+          "description": "Perfect for first-time users exploring Turkish supply chain services",
+          "additionalInfo": "+ Bank transfer fees",
+          "features": [
+            "Single consolidated shipment",
+            "Supplier payment handling",
+            "Single Bill of Lading",
+            "Documentation support"
+          ]
+        },
+        "growth": {
+          "name": "Growth",
+          "price": "2%",
+          "period": "Of the total order value",
+          "description": "Our most popular option for growing businesses with regular shipments",
+          "additionalInfo": "+ Bank transfer fees",
+          "features": [
+            "Multiple consolidated shipments",
+            "Digital procurement dashboard",
+            "Real-time tracking",
+            "Preferred shipping rates",
+            "Payment handling & protection"
+          ]
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "price": "1.5%",
+          "period": "After 5 consolidations/month",
+          "description": "For businesses with high-volume international shipping needs",
+          "additionalInfo": "Volume-based discounting after 5 consolidations/month",
+          "features": [
+            "Volume discount pricing",
+            "Priority consolidation",
+            "Customized shipping schedule",
+            "Advanced analytics & reporting",
+            "Warehouse storage options",
+            "Strategic sourcing assistance"
+          ]
+        }
+      }
+    }
+  },
+  "earlyAccess": {
+    "title": "Get Early Access",
+    "subtitle": "Be among the first to use our Turkish supply consolidation platform",
+    "description": "Join our early access program and get priority onboarding to our consolidation service. Fill in the form below, and our team will get in touch with you shortly.",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "company": "Company Name",
+      "reason": "Why are you interested in our service?",
+      "placeholder": {
+        "name": "Enter your full name",
+        "email": "Enter your email address",
+        "company": "Enter your company name (optional)",
+        "reason": "Tell us about your Turkish sourcing needs..."
+      },
+      "success": "Thank you for your interest! We'll be in touch soon.",
+      "error": "Something went wrong. Please try again."
+    }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, we couldn't find the page you're looking for. The page might have been moved or deleted.",
+    "backToHome": "Back to Home",
+    "contactSupport": "Contact Support"
+  },
+  "whatsapp": {
+    "tooltip": "Chat with us on WhatsApp"
+  }
+}

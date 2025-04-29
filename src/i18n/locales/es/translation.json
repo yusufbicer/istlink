@@ -1,0 +1,165 @@
+
+{
+  "common": {
+    "menu": {
+      "home": "Inicio",
+      "earlyAccess": "Acceso Anticipado",
+      "blog": "Blog"
+    },
+    "buttons": {
+      "getStarted": "Comenzar",
+      "learnMore": "Más Información",
+      "submit": "Enviar",
+      "send": "Enviar",
+      "contactUs": "Contáctenos"
+    },
+    "footer": {
+      "company": "Empresa",
+      "services": "Servicios",
+      "legal": "Legal",
+      "connect": "Conectar",
+      "copyright": "© 2025 ShipConnector. Todos los derechos reservados."
+    }
+  },
+  "landing": {
+    "hero": {
+      "title": "Simplifique Su Cadena de Suministro de Importación Turca",
+      "subtitle": "Un servicio de consolidación para múltiples proveedores turcos",
+      "description": "Ahorre tiempo y dinero consolidando pedidos de diferentes proveedores turcos en un solo envío con nuestra solución completa de adquisición."
+    },
+    "features": {
+      "title": "Por Qué Elegir Ship Connector",
+      "subtitle": "Beneficios de nuestro servicio de consolidación",
+      "items": {
+        "consolidation": {
+          "title": "Consolidación Simplificada",
+          "description": "Combine múltiples pedidos en un solo envío, reduciendo costos de flete y papeleo"
+        },
+        "payment": {
+          "title": "Protección de Pago",
+          "description": "Manejo seguro de pagos con verificación antes de que se envíen los productos"
+        },
+        "logistics": {
+          "title": "Logística Optimizada",
+          "description": "Gestión experta de documentación de envío internacional y aduanas"
+        },
+        "tracking": {
+          "title": "Seguimiento en Tiempo Real",
+          "description": "Visibilidad completa de sus pedidos desde la adquisición hasta la entrega"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "7 Pasos Simples para el Éxito de la Cadena de Suministro",
+      "subtitle": "Proceso Simple",
+      "description": "Nuestro proceso optimizado hace que el abastecimiento y envío desde Turquía sea sencillo.",
+      "steps": {
+        "step1": {
+          "title": "Encuentre Sus Proveedores",
+          "description": "Encuentre sus proveedores, obtenga sus facturas proforma y envíelas todas a nuestro equipo para su revisión y procesamiento."
+        },
+        "step2": {
+          "title": "Verificación de Proveedores",
+          "description": "Nuestro equipo verificará sus proveedores y después de la confirmación firmaremos un contrato maestro para actuar en su nombre."
+        },
+        "step3": {
+          "title": "Procesamiento de Pagos",
+          "description": "Manejaremos todos los pagos de sus pedidos en su nombre desde su saldo de cuenta con total transparencia."
+        },
+        "step4": {
+          "title": "Consolidación de Pedidos",
+          "description": "Nuestro equipo recibirá y verificará todos sus pedidos, luego los combinará en un solo envío optimizado."
+        },
+        "step5": {
+          "title": "Documentación Simplificada",
+          "description": "Nos encargamos de todo el papeleo de exportación, formularios aduaneros y creamos un solo conocimiento de embarque para su envío consolidado."
+        },
+        "step6": {
+          "title": "Envío Global",
+          "description": "Su pedido consolidado se envía a su destino con seguimiento en tiempo real y actualizaciones."
+        },
+        "step7": {
+          "title": "Entrega Fácil",
+          "description": "Reciba sus múltiples pedidos como un solo envío, ahorrando tiempo y reduciendo la complejidad aduanera."
+        }
+      }
+    },
+    "pricing": {
+      "title": "Precios Flexibles de Consolidación",
+      "subtitle": "Precios",
+      "description": "Precios transparentes diseñados para escalar con las necesidades de su negocio. Pague solo por lo que usa.",
+      "plans": {
+        "starter": {
+          "name": "Inicial",
+          "price": "$499",
+          "period": "Tarifa única",
+          "description": "Perfecto para usuarios primerizos que exploran servicios de cadena de suministro turca",
+          "additionalInfo": "+ Tarifas de transferencia bancaria",
+          "features": [
+            "Envío único consolidado",
+            "Gestión de pagos a proveedores",
+            "Conocimiento de embarque único",
+            "Soporte de documentación"
+          ]
+        },
+        "growth": {
+          "name": "Crecimiento",
+          "price": "2%",
+          "period": "Del valor total del pedido",
+          "description": "Nuestra opción más popular para empresas en crecimiento con envíos regulares",
+          "additionalInfo": "+ Tarifas de transferencia bancaria",
+          "features": [
+            "Múltiples envíos consolidados",
+            "Panel digital de adquisiciones",
+            "Seguimiento en tiempo real",
+            "Tarifas de envío preferentes",
+            "Manejo y protección de pagos"
+          ]
+        },
+        "enterprise": {
+          "name": "Empresarial",
+          "price": "1.5%",
+          "period": "Después de 5 consolidaciones/mes",
+          "description": "Para empresas con necesidades de envío internacional de alto volumen",
+          "additionalInfo": "Descuentos basados en volumen después de 5 consolidaciones/mes",
+          "features": [
+            "Precios con descuento por volumen",
+            "Consolidación prioritaria",
+            "Programa de envío personalizado",
+            "Análisis e informes avanzados",
+            "Opciones de almacenamiento",
+            "Asistencia estratégica de abastecimiento"
+          ]
+        }
+      }
+    }
+  },
+  "earlyAccess": {
+    "title": "Obtenga Acceso Anticipado",
+    "subtitle": "Sea de los primeros en utilizar nuestra plataforma de consolidación de suministros turcos",
+    "description": "Únase a nuestro programa de acceso anticipado y obtenga incorporación prioritaria a nuestro servicio de consolidación. Complete el formulario a continuación y nuestro equipo se pondrá en contacto con usted en breve.",
+    "form": {
+      "name": "Nombre Completo",
+      "email": "Dirección de Correo",
+      "company": "Nombre de la Empresa",
+      "reason": "¿Por qué está interesado en nuestro servicio?",
+      "placeholder": {
+        "name": "Ingrese su nombre completo",
+        "email": "Ingrese su dirección de correo",
+        "company": "Ingrese el nombre de su empresa (opcional)",
+        "reason": "Cuéntenos sobre sus necesidades de abastecimiento en Turquía..."
+      },
+      "success": "¡Gracias por su interés! Nos pondremos en contacto pronto.",
+      "error": "Algo salió mal. Por favor, inténtelo de nuevo."
+    }
+  },
+  "notFound": {
+    "title": "Página No Encontrada",
+    "description": "Lo sentimos, no pudimos encontrar la página que está buscando. Es posible que la página haya sido movida o eliminada.",
+    "backToHome": "Volver al Inicio",
+    "contactSupport": "Contactar Soporte"
+  },
+  "whatsapp": {
+    "tooltip": "Chatee con nosotros en WhatsApp"
+  }
+}

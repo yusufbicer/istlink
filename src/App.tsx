@@ -13,7 +13,7 @@ import WhatsAppButton from "@/components/common/WhatsAppButton";
 // Pages
 import Index from "./pages/Index";
 import EarlyAccess from "./pages/EarlyAccess";
-import Analytics from "./pages/Analytics";
+import Blog from "./pages/Blog";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -40,7 +40,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/early-access" element={<EarlyAccess />} />
-      <Route path="/analytics" element={<Analytics />} />
+      <Route path="/blog" element={<Blog />} />
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/dashboard" element={
         <AdminRoute>

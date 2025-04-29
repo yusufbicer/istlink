@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { MessageSquare, Network, Activity, Zap, TrendingUp, GitMerge, Truck, Package, DollarSign, FileText, BarChart2, Archive, CreditCard, Timer, Users, Database } from 'lucide-react';
+import { useAuth } from '@/lib/auth';
+import { MessageSquare, Network, Activity, Zap, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero = () => {
@@ -96,7 +96,7 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Improved mobile navigation bar visibility with darker background and better spacing */}
+                      {/* Updated mobile navigation bar with correct items */}
                       <div className="flex mb-3 bg-gray-200 rounded-lg p-1.5 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
                         <div className="px-2.5 py-1.5 bg-white shadow-sm rounded-md flex items-center font-medium text-metallic-blue">
                           <Activity className="h-3.5 w-3.5 mr-1" /> Dashboard
@@ -108,7 +108,10 @@ const Hero = () => {
                           <GitMerge className="h-3.5 w-3.5 mr-1" /> Consol
                         </div>
                         <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
-                          <FileText className="h-3.5 w-3.5 mr-1" /> Blog
+                          <Users className="h-3.5 w-3.5 mr-1" /> Suppliers
+                        </div>
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
+                          <BarChart2 className="h-3.5 w-3.5 mr-1" /> Analytics
                         </div>
                         <div className="ml-1 w-7 h-7 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium">
                           JD

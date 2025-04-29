@@ -4,8 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "@/lib/auth";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // WhatsApp Button
 import WhatsAppButton from "@/components/common/WhatsAppButton";
@@ -14,26 +13,9 @@ import WhatsAppButton from "@/components/common/WhatsAppButton";
 import Index from "./pages/Index";
 import EarlyAccess from "./pages/EarlyAccess";
 import Blog from "./pages/Blog";
-import AdminLogin from "./pages/AdminLogin";
-import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
-
-// Protected route wrapper for admin-only routes
-const AdminRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuth();
-  
-  if (!user) {
-    return <Navigate to="/admin" replace />;
-  }
-  
-  if (user.role !== 'admin') {
-    return <Navigate to="/" replace />;
-  }
-  
-  return <>{children}</>;
-};
 
 const AppRoutes = () => {
   return (
@@ -41,12 +23,6 @@ const AppRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/early-access" element={<EarlyAccess />} />
       <Route path="/blog" element={<Blog />} />
-      <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={
-        <AdminRoute>
-          <AdminDashboard />
-        </AdminRoute>
-      } />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -55,14 +31,12 @@ const AppRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <AppRoutes />
-          <WhatsAppButton />
-        </TooltipProvider>
-      </AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <AppRoutes />
+        <WhatsAppButton />
+      </TooltipProvider>
     </BrowserRouter>
   </QueryClientProvider>
 );

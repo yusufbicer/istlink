@@ -2,12 +2,10 @@
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from '@/lib/auth';
 import { Menu, X, Zap } from 'lucide-react';
 import { useIsTablet } from '@/hooks/use-mobile';
 
 const Header = () => {
-  const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -91,21 +89,12 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            {user ? (
-              <Button 
-                className="bg-metallic-blue hover:bg-metallic-dark"
-                onClick={() => handleNavigate('/dashboard')}
-              >
-                Dashboard
-              </Button>
-            ) : (
-              <Button 
-                className="bg-metallic-blue hover:bg-metallic-dark text-white whitespace-nowrap"
-                onClick={() => handleNavigate('/early-access')}
-              >
-                {isTablet ? "Early Access" : "Request Early Access"}
-              </Button>
-            )}
+            <Button 
+              className="bg-metallic-blue hover:bg-metallic-dark text-white whitespace-nowrap"
+              onClick={() => handleNavigate('/early-access')}
+            >
+              {isTablet ? "Early Access" : "Request Early Access"}
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -151,21 +140,12 @@ const Header = () => {
               </button>
               
               <div className="pt-2 border-t border-gray-100">
-                {user ? (
-                  <Button 
-                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
-                    onClick={() => handleNavigate('/dashboard')}
-                  >
-                    Dashboard
-                  </Button>
-                ) : (
-                  <Button 
-                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
-                    onClick={() => handleNavigate('/early-access')}
-                  >
-                    Request Early Access
-                  </Button>
-                )}
+                <Button 
+                  className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                  onClick={() => handleNavigate('/early-access')}
+                >
+                  Request Early Access
+                </Button>
               </div>
             </div>
           </div>

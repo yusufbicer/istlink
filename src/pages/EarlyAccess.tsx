@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
 import { z } from "zod";
@@ -42,13 +41,12 @@ const EarlyAccess = () => {
     setIsSubmitting(true);
     
     try {
-      // Make sure to send the data as a single object, not an array
       const { error } = await supabase
         .from('early_access_requests')
         .insert({
           name: data.name,
           email: data.email,
-          company: data.company || null, // Use null for empty optional fields
+          company: data.company || null,
           reason: data.reason
         });
       

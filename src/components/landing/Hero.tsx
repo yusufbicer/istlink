@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -97,16 +96,13 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Mobile navigation bar with Orders, Consol, Suppliers, Analytics */}
+                      {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
                       <div className="flex mb-3 bg-gray-200 rounded-lg p-1.5 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
-                        <div className="px-2.5 py-1.5 bg-white shadow-sm rounded-md flex items-center font-medium text-metallic-blue">
-                          <Activity className="h-3.5 w-3.5 mr-1" /> Dashboard
-                        </div>
                         <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
                           <Package className="h-3.5 w-3.5 mr-1" /> Orders
                         </div>
                         <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
-                          <GitMerge className="h-3.5 w-3.5 mr-1" /> Consol
+                          <GitMerge className="h-3.5 w-3.5 mr-1" /> Consolidations
                         </div>
                         <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
                           <Users className="h-3.5 w-3.5 mr-1" /> Suppliers

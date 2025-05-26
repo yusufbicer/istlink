@@ -54,7 +54,7 @@ const EarlyAccess = () => {
       
       toast({
         title: "Request submitted successfully!",
-        description: "Thank you for your interest in GROOP. We'll be in touch soon.",
+        description: "Thank you for your interest in Konsolidex. We'll be in touch soon.",
       });
       
       form.reset();
@@ -81,7 +81,7 @@ const EarlyAccess = () => {
     <div className="container mx-auto p-6 min-h-screen">
       {/* Back to home link */}
       <div className="mb-8">
-        <Link to="/" className="flex items-center text-gray-600 hover:text-metallic-blue transition-colors">
+        <Link to="/" className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to home
         </Link>
@@ -91,7 +91,7 @@ const EarlyAccess = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">Request Early Access</h1>
           <p className="text-gray-600">
-            Join our exclusive early access program and be among the first to experience GROOP's innovative supply chain solutions.
+            Join our exclusive early access program and be among the first to experience Konsolidex's innovative shipping consolidation solutions.
           </p>
         </div>
         
@@ -148,10 +148,10 @@ const EarlyAccess = () => {
                 name="reason"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Why are you interested in GROOP?</FormLabel>
+                    <FormLabel>Why are you interested in Konsolidex?</FormLabel>
                     <FormControl>
                       <Textarea 
-                        placeholder="Tell us about your business needs and how GROOP can help..."
+                        placeholder="Tell us about your business needs and how Konsolidex can help..."
                         className="min-h-[120px]"
                         {...field} 
                       />
@@ -163,7 +163,7 @@ const EarlyAccess = () => {
               
               <Button 
                 type="submit" 
-                className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                className="w-full bg-blue-600 hover:bg-blue-700"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Submitting..." : "Submit Request"}

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -5,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '@/components/common/LanguageSwitcher';
+import Logo from '@/components/common/Logo';
+import { useNavigationLinks } from '@/config/navigation';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +15,7 @@ const Header = () => {
   const isMobile = useIsMobile();
   const location = useLocation();
   const { t } = useTranslation();
+  const links = useNavigationLinks();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,25 +29,15 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    // Close mobile menu when location changes
     setIsOpen(false);
   }, [location.pathname]);
-
-  // Define navigation links with their translation keys
-  const links = [
-    { to: "/", label: t('common.menu.home') },
-    { to: "/early-access", label: t('common.menu.earlyAccess') },
-    { to: "/blog", label: t('common.menu.blog') }
-  ];
 
   return (
     <header className={`fixed top-0 z-50 w-full ${isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'} transition-all duration-300 ease-in-out`}>
       <div className="container mx-auto px-4 md:px-6 py-4">
         <nav className="relative flex items-center justify-between">
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center">
-              <div className="text-xl font-bold text-blue-600">ShipConnector</div>
-            </Link>
+            <Logo />
           </div>
 
           {/* Desktop Navigation */}

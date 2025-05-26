@@ -1,13 +1,11 @@
 
-import React, { Suspense } from "react";
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-// Initialize i18n
-import './i18n/i18n';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "@/lib/auth";
 
 // WhatsApp Button
 import WhatsAppButton from "@/components/common/WhatsAppButton";
@@ -16,16 +14,26 @@ import WhatsAppButton from "@/components/common/WhatsAppButton";
 import Index from "./pages/Index";
 import EarlyAccess from "./pages/EarlyAccess";
 import Blog from "./pages/Blog";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Loading component for suspense fallback
-const LoadingScreen = () => (
-  <div className="flex items-center justify-center h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-  </div>
-);
+// Protected route wrapper for admin-only routes
+const AdminRoute = ({ children }: { children: React.ReactNode }) => {
+  const { user } = useAuth();
+  
+  if (!user) {
+    return <Navigate to="/admin" replace />;
+  }
+  
+  if (user.role !== 'admin') {
+    return <Navigate to="/" replace />;
+  }
+  
+  return <>{children}</>;
+};
 
 const AppRoutes = () => {
   return (
@@ -33,6 +41,12 @@ const AppRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/early-access" element={<EarlyAccess />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/admin" element={<AdminLogin />} />
+      <Route path="/admin/dashboard" element={
+        <AdminRoute>
+          <AdminDashboard />
+        </AdminRoute>
+      } />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -41,14 +55,14 @@ const AppRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <TooltipProvider>
-        <Suspense fallback={<LoadingScreen />}>
+      <AuthProvider>
+        <TooltipProvider>
           <Toaster />
           <Sonner />
           <AppRoutes />
           <WhatsAppButton />
-        </Suspense>
-      </TooltipProvider>
+        </TooltipProvider>
+      </AuthProvider>
     </BrowserRouter>
   </QueryClientProvider>
 );

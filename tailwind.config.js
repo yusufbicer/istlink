@@ -14,17 +14,22 @@ export default {
         border: 'hsl(var(--border))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        primary: {
-          50: "#eff6ff",
-          100: "#dbeafe", 
-          200: "#bfdbfe",
-          300: "#93c5fd",
-          400: "#60a5fa",
-          500: "#3b82f6",
-          600: "#2563eb", // Our main blue
-          700: "#1d4ed8",
-          800: "#1e40af",
-          900: "#1e3a8a",
+        metallic: {
+          blue: "#3563E9",
+          light: "#4E7AFF",
+          dark: "#2D4CB3"
+        },
+        lavender: {
+          50: "#f3f4ff",
+          100: "#e9eaff",
+          200: "#d6d8ff",
+          300: "#b8baff",
+          400: "#9392ff",
+          500: "#7b66fc", // This is our primary purple now
+          600: "#6a42f4",
+          700: "#5b32dd",
+          800: "#4b2bb7",
+          900: "#3f2893",
         },
         gray: {
           50: "#f8fafc",

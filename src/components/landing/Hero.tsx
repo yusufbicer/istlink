@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { MessageSquare, Network, Activity, Layers3, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database } from 'lucide-react';
+import { useAuth } from '@/lib/auth';
+import { MessageSquare, Network, Activity, Zap, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { BRAND } from '@/config/brand';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,11 +18,11 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="pt-28 pb-8 md:pt-36 md:pb-16 overflow-hidden relative bg-gradient-to-b from-blue-50 to-white">
+    <section className="pt-28 pb-8 md:pt-36 md:pb-16 overflow-hidden relative bg-gradient-to-b from-lavender-50 to-white">
       {/* Background gradients and effects */}
-      <div className="absolute inset-0 bg-gradient-radial from-blue-100/70 via-transparent to-transparent opacity-80" />
-      <div className="absolute top-1/4 right-1/3 w-64 h-64 bg-blue-200 rounded-full filter blur-3xl opacity-30 animate-float pointer-events-none" />
-      <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-indigo-100 rounded-full filter blur-3xl opacity-20 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
+      <div className="absolute inset-0 bg-gradient-radial from-lavender-100/70 via-transparent to-transparent opacity-80" />
+      <div className="absolute top-1/4 right-1/3 w-64 h-64 bg-lavender-200 rounded-full filter blur-3xl opacity-30 animate-float pointer-events-none" />
+      <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-lavender-100 rounded-full filter blur-3xl opacity-20 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
       
       <div className="container mx-auto px-4 sm:px-6 relative">
         <div className="max-w-4xl mx-auto text-center mb-6 md:mb-8">
@@ -32,7 +31,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-700 rounded-full mb-3">
+            <span className="inline-block py-1 px-3 text-sm font-medium bg-lavender-100 text-metallic-blue rounded-full mb-3">
               Smart Consolidation Solutions
             </span>
           </div>
@@ -42,7 +41,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">Elegantly Resolved</span>
+            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-metallic-blue to-lavender-500">Elegantly Resolved</span>
           </h1>
           
           <p 
@@ -60,7 +59,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="lg" className="h-12 px-8 text-md bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg">
+            <Button asChild size="lg" className="h-12 px-8 text-md bg-metallic-blue hover:bg-metallic-dark text-white">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-2 h-5 w-5" /> Talk to Our Team
               </a>
@@ -73,7 +72,7 @@ const Hero = () => {
             }`}
           >
             <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-0.5 rounded-xl">
+              <div className="bg-gradient-to-r from-metallic-blue to-lavender-500 p-0.5 rounded-xl">
                 <div className="rounded-xl overflow-hidden bg-white border-0">
                   <div className="relative bg-gray-100 px-2 pt-2 pb-1 flex items-center rounded-t-xl">
                     <div className="flex space-x-1.5 absolute left-4">
@@ -90,29 +89,28 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-8 w-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 relative overflow-hidden mr-3 shadow-lg">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
-                            <Layers3 className="w-4 h-4 text-white relative z-10" />
+                          <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-3">
+                            <Zap className="w-4 h-4 text-white absolute" />
                           </div>
-                          <span className="font-bold text-base">{BRAND.name}</span>
+                          <span className="font-bold text-base">GROOP</span>
                         </div>
                       </div>
                       
                       {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
                       <div className="flex mb-3 bg-gray-200 rounded-lg p-1.5 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
                           <Package className="h-3.5 w-3.5 mr-1" /> Orders
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
                           <GitMerge className="h-3.5 w-3.5 mr-1" /> Consolidations
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
                           <Users className="h-3.5 w-3.5 mr-1" /> Suppliers
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
                           <BarChart2 className="h-3.5 w-3.5 mr-1" /> Analytics
                         </div>
-                        <div className="ml-1 w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-xs text-blue-700 font-medium">
+                        <div className="ml-1 w-7 h-7 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium">
                           JD
                         </div>
                       </div>
@@ -240,15 +238,13 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 relative overflow-hidden mr-4 shadow-lg">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
-                            <Layers3 className="w-5 h-5 text-white relative z-10" />
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-4">
+                            <Zap className="w-5 h-5 text-white absolute" />
                           </div>
-                          <span className="font-bold text-xl">{BRAND.name}</span>
                         </div>
                         
                         <div className="flex space-x-2">
-                          <div className="flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-medium">
+                          <div className="flex items-center px-3 py-1.5 bg-metallic-blue text-white rounded-lg text-sm font-medium">
                             <Activity className="h-4 w-4 mr-2" /> Dashboard
                           </div>
                           <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
@@ -263,7 +259,7 @@ const Hero = () => {
                           <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
                             <BarChart2 className="h-4 w-4 mr-0" /> Analytics
                           </div>
-                          <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-sm font-medium text-blue-700">
+                          <div className="h-8 w-8 rounded-full bg-lavender-100 flex items-center justify-center text-sm font-medium text-lavender-700">
                             JD
                           </div>
                         </div>

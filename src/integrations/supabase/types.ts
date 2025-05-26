@@ -12,7 +12,7 @@ export type Database = {
       early_access_requests: {
         Row: {
           company: string | null
-          created_at: string
+          created_at: string | null
           email: string
           id: string
           name: string
@@ -20,7 +20,7 @@ export type Database = {
         }
         Insert: {
           company?: string | null
-          created_at?: string
+          created_at?: string | null
           email: string
           id?: string
           name: string
@@ -28,7 +28,7 @@ export type Database = {
         }
         Update: {
           company?: string | null
-          created_at?: string
+          created_at?: string | null
           email?: string
           id?: string
           name?: string

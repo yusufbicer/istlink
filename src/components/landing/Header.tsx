@@ -1,18 +1,17 @@
 
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { useIsMobile } from '@/hooks/use-mobile';
-import Logo from '@/components/common/Logo';
-import { useNavigationLinks } from '@/config/navigation';
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from '@/lib/auth';
+import { Menu, X, Zap } from 'lucide-react';
+import { useIsTablet } from '@/hooks/use-mobile';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
-  const isMobile = useIsMobile();
-  const location = useLocation();
-  const links = useNavigationLinks();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const isTablet = useIsTablet();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,86 +19,154 @@ const Header = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
+  // Smooth scroll function for anchor links
+  const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleNavigate = (path: string) => {
+    setIsMobileMenuOpen(false);
+    navigate(path);
+  };
 
   return (
-    <header className={`fixed top-0 z-50 w-full ${isScrolled ? 'bg-white shadow-sm' : 'bg-transparent'} transition-all duration-300 ease-in-out`}>
-      <div className="container mx-auto px-4 md:px-6 py-4">
-        <nav className="relative flex items-center justify-between">
-          <div className="flex-shrink-0">
-            <Logo />
-          </div>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'py-3 bg-white/80 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent'
+    }`}>
+      <div className="container mx-auto px-6">
+        <nav className="flex items-center justify-between">
+          <Link to="/" className="flex items-center">
+            <div className="flex items-center">
+              <div className="flex items-center justify-center">
+                {/* Metallic blue logo */}
+                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
+                  <Zap className="w-5 h-5 text-white absolute" />
+                </div>
+                {/* Fixed: Always show the text - on mobile too */}
+                <div className="ml-3">
+                  <span className="font-bold text-xl text-gray-900">GROOP</span>
+                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
+                </div>
+              </div>
+            </div>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-between gap-2">
-            <div className="hidden md:flex items-center space-x-1">
-              {links.map((link) => (
-                <Link 
-                  key={link.to} 
-                  to={link.to}
-                  className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 
-                    ${location.pathname === link.to 
-                      ? 'text-blue-600' 
-                      : 'text-gray-600 hover:text-gray-900'
-                    }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+          <div className="hidden md:flex items-center">
+            {/* Adjusted spacing for tablet view - further reduced space */}
+            <div className={`flex ${isTablet ? 'space-x-3' : 'space-x-8'}`}>
+              <button 
+                onClick={() => scrollToSection('features')}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
+              >
+                Features
+              </button>
+              <button 
+                onClick={() => scrollToSection('how-it-works')}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
+              >
+                How It Works
+              </button>
+              <button 
+                onClick={() => scrollToSection('pricing')}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
+              >
+                Pricing
+              </button>
+              <button
+                onClick={() => handleNavigate('/blog')}
+                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
+              >
+                Blog
+              </button>
             </div>
-            
-            <div className="ml-4 flex items-center gap-2">
-              <Button asChild size="sm" variant="outline">
-                <Link to="/early-access">
-                  Get Started
-                </Link>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            {user ? (
+              <Button 
+                className="bg-metallic-blue hover:bg-metallic-dark"
+                onClick={() => handleNavigate('/dashboard')}
+              >
+                Dashboard
               </Button>
-            </div>
+            ) : (
+              <Button 
+                className="bg-metallic-blue hover:bg-metallic-dark text-white whitespace-nowrap"
+                onClick={() => handleNavigate('/early-access')}
+              >
+                {isTablet ? "Early Access" : "Request Early Access"}
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
-            <Button 
-              onClick={() => setIsOpen(!isOpen)} 
-              size="icon" 
-              variant="ghost" 
-              className="md:hidden"
-            >
-              {isOpen ? <X /> : <Menu />}
-            </Button>
-          </div>
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden flex items-center"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
         </nav>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden pt-2 pb-4">
-            <div className="flex flex-col space-y-2">
-              {links.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`px-3 py-3 rounded-md text-base font-medium 
-                    ${location.pathname === link.to
-                      ? 'bg-blue-50 text-blue-600'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                    }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-
-              <Button asChild className="mt-2 w-full">
-                <Link to="/early-access">
-                  Get Started
-                </Link>
-              </Button>
+        {/* Mobile Menu - Improved visibility and spacing */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg animate-slide-down">
+            <div className="flex flex-col py-4 px-6 space-y-4">
+              <button 
+                onClick={() => scrollToSection('features')}
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+              >
+                Features
+              </button>
+              <button 
+                onClick={() => scrollToSection('how-it-works')}
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+              >
+                How It Works
+              </button>
+              <button 
+                onClick={() => scrollToSection('pricing')}
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+              >
+                Pricing
+              </button>
+              <button
+                onClick={() => handleNavigate('/blog')}
+                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+              >
+                Blog
+              </button>
+              
+              <div className="pt-2 border-t border-gray-100">
+                {user ? (
+                  <Button 
+                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                    onClick={() => handleNavigate('/dashboard')}
+                  >
+                    Dashboard
+                  </Button>
+                ) : (
+                  <Button 
+                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                    onClick={() => handleNavigate('/early-access')}
+                  >
+                    Request Early Access
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         )}

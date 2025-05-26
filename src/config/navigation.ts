@@ -5,8 +5,8 @@ export const useNavigationLinks = () => {
   const { t } = useTranslation();
   
   return [
-    { to: "/", label: t('common.menu.home') },
-    { to: "/early-access", label: t('common.menu.earlyAccess') },
-    { to: "/blog", label: t('common.menu.blog') }
+    { to: "/", label: "Home" },
+    { to: "/early-access", label: "Early Access" },
+    { to: "/blog", label: "Blog" }
   ];
 };

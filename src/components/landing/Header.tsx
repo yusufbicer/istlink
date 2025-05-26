@@ -4,8 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from '@/components/common/LanguageSwitcher';
 import Logo from '@/components/common/Logo';
 import { useNavigationLinks } from '@/config/navigation';
 
@@ -14,7 +12,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const location = useLocation();
-  const { t } = useTranslation();
   const links = useNavigationLinks();
 
   useEffect(() => {
@@ -59,10 +56,9 @@ const Header = () => {
             </div>
             
             <div className="ml-4 flex items-center gap-2">
-              <LanguageSwitcher />
               <Button asChild size="sm" variant="outline">
                 <Link to="/early-access">
-                  {t('common.buttons.getStarted')}
+                  Get Started
                 </Link>
               </Button>
             </div>
@@ -70,7 +66,6 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
-            <LanguageSwitcher />
             <Button 
               onClick={() => setIsOpen(!isOpen)} 
               size="icon" 
@@ -102,7 +97,7 @@ const Header = () => {
 
               <Button asChild className="mt-2 w-full">
                 <Link to="/early-access">
-                  {t('common.buttons.getStarted')}
+                  Get Started
                 </Link>
               </Button>
             </div>

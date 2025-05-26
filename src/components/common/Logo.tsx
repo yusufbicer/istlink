@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Zap } from 'lucide-react';
+import { Package, Layers3 } from 'lucide-react';
 import { BRAND } from '@/config/brand';
 
 interface LogoProps {
@@ -30,17 +30,18 @@ const Logo = ({ className = '', showTagline = true, size = 'md' }: LogoProps) =>
 
   return (
     <Link to="/" className={`inline-flex items-center ${className}`}>
-      <div className={`flex items-center justify-center ${sizeClasses[size]} rounded-lg bg-gradient-to-r ${BRAND.colors.gradient} relative overflow-hidden`}>
-        <Zap className={`${size === 'sm' ? 'w-4 h-4' : size === 'lg' ? 'w-6 h-6' : 'w-5 h-5'} text-white absolute`} />
+      <div className={`flex items-center justify-center ${sizeClasses[size]} rounded-xl bg-gradient-to-br ${BRAND.colors.gradient} relative overflow-hidden shadow-lg`}>
+        <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+        <Layers3 className={`${size === 'sm' ? 'w-4 h-4' : size === 'lg' ? 'w-6 h-6' : 'w-5 h-5'} text-white relative z-10`} />
       </div>
       <div className="ml-3">
         <span className={`font-bold ${textSizeClasses[size]} text-gray-900`}>
           {BRAND.name}
         </span>
         {showTagline && (
-          <span className={`block ${taglineSizeClasses[size]} text-${BRAND.colors.primary} font-medium tracking-wide uppercase`}>
+          <div className={`${taglineSizeClasses[size]} text-${BRAND.colors.primary} font-medium`}>
             {BRAND.tagline}
-          </span>
+          </div>
         )}
       </div>
     </Link>

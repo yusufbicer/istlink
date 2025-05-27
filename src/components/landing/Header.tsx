@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useIsTablet } from '@/hooks/use-mobile';
+import SilkLinkLogo from '@/components/common/SilkLinkLogo';
 
 const Header = () => {
   const { user } = useAuth();
@@ -45,13 +46,10 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                {/* Metallic blue logo */}
-                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
-                  <Zap className="w-5 h-5 text-white absolute" />
-                </div>
+                <SilkLinkLogo size="md" />
                 {/* Fixed: Always show the text - on mobile too */}
                 <div className="ml-3">
-                  <span className="font-bold text-xl text-gray-900">GROOP</span>
+                  <span className="font-bold text-xl text-gray-900">SilkLink</span>
                   <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
                 </div>
               </div>

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { Menu, X } from 'lucide-react';
 import { useIsTablet } from '@/hooks/use-mobile';
-import SilkLinkLogo from '@/components/common/SilkLinkLogo';
+import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Header = () => {
   const { user } = useAuth();
@@ -46,11 +46,10 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                <SilkLinkLogo size="md" />
-                {/* Fixed: Always show the text - on mobile too */}
+                <IstLinqLogo size="md" />
                 <div className="ml-3">
-                  <span className="font-bold text-xl text-gray-900">SilkLink</span>
-                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
+                  <span className="font-bold text-xl text-gray-900">IstLinq</span>
+                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">SMART EXPORT CONSOLIDATION</span>
                 </div>
               </div>
             </div>

@@ -91,7 +91,6 @@ const Hero = () => {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
                           <IstLinqLogo size="sm" className="mr-3" />
-                          <span className="font-bold text-base">IstLinq</span>
                         </div>
                       </div>
                       

@@ -44,15 +44,7 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <div className="flex items-center">
-              <div className="flex items-center justify-center">
-                <IstLinqLogo size="md" />
-                <div className="ml-3">
-                  <span className="font-bold text-xl text-gray-900">IstLinq</span>
-                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">SMART EXPORT CONSOLIDATION</span>
-                </div>
-              </div>
-            </div>
+            <IstLinqLogo size={isTablet ? "sm" : "md"} />
           </Link>
 
           {/* Desktop Navigation */}

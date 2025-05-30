@@ -32,7 +32,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <span className="inline-block py-1 px-3 text-sm font-medium bg-lime-400 text-gray-800 rounded-full mb-3">
+            <span className="inline-block py-1 px-3 text-sm font-medium bg-lavender-100 text-metallic-blue rounded-full mb-3">
               Smart Consolidation Solutions
             </span>
           </div>
@@ -42,7 +42,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-cyan-600">Elegantly Resolved</span>
+            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-metallic-blue to-lavender-500">Elegantly Resolved</span>
           </h1>
           
           <p 
@@ -60,7 +60,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="lg" className="h-12 px-8 text-md bg-cyan-400 hover:bg-cyan-500 text-white">
+            <Button asChild size="lg" className="h-12 px-8 text-md bg-metallic-blue hover:bg-metallic-dark text-white">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-2 h-5 w-5" /> Talk to Our Team
               </a>
@@ -90,13 +90,13 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
-                          <IstLinqLogo customHeight="h-32" className="mr-3" />
+                          <IstLinqLogo size="sm" className="mr-3" />
                         </div>
                       </div>
                       
                       {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
                       <div className="flex mb-3 bg-gray-200 rounded-lg p-1.5 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
-                        <div className="px-2.5 py-1.5 flex items-center text-white bg-cyan-400 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
                           <Package className="h-3.5 w-3.5 mr-1" /> Orders
                         </div>
                         <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
@@ -236,11 +236,11 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <IstLinqLogo customHeight="h-32" className="mr-4" />
+                          <IstLinqLogo size="md" className="mr-4" />
                         </div>
                         
                         <div className="flex space-x-2">
-                          <div className="flex items-center px-3 py-1.5 bg-cyan-400 text-white rounded-lg text-sm font-medium">
+                          <div className="flex items-center px-3 py-1.5 bg-metallic-blue text-white rounded-lg text-sm font-medium">
                             <Activity className="h-4 w-4 mr-2" /> Dashboard
                           </div>
                           <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">

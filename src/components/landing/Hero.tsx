@@ -90,11 +90,11 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
-                          <IstLinqLogo size="h-32" className="mr-3" />
+                          <IstLinqLogo size="sm" className="mr-3" />
                         </div>
                       </div>
                       
-                      {/* Mobile dashboard content */}
+                      {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
                       <div className="flex mb-3 bg-gray-200 rounded-lg p-1.5 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
                         <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-metallic-blue rounded-md transition-colors">
                           <Package className="h-3.5 w-3.5 mr-1" /> Orders
@@ -236,7 +236,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <IstLinqLogo size="h-32" className="mr-4" />
+                          <IstLinqLogo size="md" className="mr-4" />
                         </div>
                         
                         <div className="flex space-x-2">

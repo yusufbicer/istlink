@@ -44,7 +44,7 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <IstLinqLogo size={isTablet ? "sm" : "md"} />
+            <IstLinqLogo customHeight="h-46" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -82,14 +82,14 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <Button 
-                className="bg-metallic-blue hover:bg-metallic-dark"
+                className="bg-cyan-400 hover:bg-cyan-500"
                 onClick={() => handleNavigate('/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className="bg-metallic-blue hover:bg-metallic-dark text-white whitespace-nowrap"
+                className="bg-cyan-400 hover:bg-cyan-500 text-white whitespace-nowrap"
                 onClick={() => handleNavigate('/early-access')}
               >
                 {isTablet ? "Early Access" : "Request Early Access"}
@@ -142,14 +142,14 @@ const Header = () => {
               <div className="pt-2 border-t border-gray-100">
                 {user ? (
                   <Button 
-                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                    className="w-full bg-cyan-400 hover:bg-cyan-500"
                     onClick={() => handleNavigate('/dashboard')}
                   >
                     Dashboard
                   </Button>
                 ) : (
                   <Button 
-                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                    className="w-full bg-cyan-400 hover:bg-cyan-500"
                     onClick={() => handleNavigate('/early-access')}
                   >
                     Request Early Access

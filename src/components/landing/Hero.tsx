@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
-import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database } from 'lucide-react';
+import { MessageSquare, Network, Activity, Zap, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -90,7 +89,10 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
-                          <IstLinqLogo size="sm" className="mr-3" />
+                          <div className="flex items-center justify-center h-8 w-8 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-3">
+                            <Zap className="w-4 h-4 text-white absolute" />
+                          </div>
+                          <span className="font-bold text-base">GROOP</span>
                         </div>
                       </div>
                       
@@ -166,7 +168,7 @@ const Hero = () => {
                               <div className="text-xs font-bold">$32.5K</div>
                             </div>
                             <div className="px-1 py-1 bg-white rounded border border-gray-200">
-                              <div className="text-[9px] text-gray-600">IstLinq</div>
+                              <div className="text-[9px] text-gray-600">GROOP</div>
                               <div className="text-xs font-bold text-metallic-blue">$19.7K</div>
                             </div>
                             <div className="px-1 py-1 bg-white rounded border border-gray-200">
@@ -236,7 +238,9 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <IstLinqLogo size="md" className="mr-4" />
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden mr-4">
+                            <Zap className="w-5 h-5 text-white absolute" />
+                          </div>
                         </div>
                         
                         <div className="flex space-x-2">
@@ -328,7 +332,7 @@ const Hero = () => {
                             </div>
                             
                             <div className="text-center p-2 bg-white rounded-lg shadow-sm border-l-4 border-metallic-blue w-full">
-                              <div className="text-sm text-metallic-blue mb-1">IstLinq Consolidation</div>
+                              <div className="text-sm text-metallic-blue mb-1">GROOP Consolidation</div>
                               <div className="text-xl font-bold text-metallic-blue">$19,750</div>
                             </div>
                             

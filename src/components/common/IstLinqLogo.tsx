@@ -3,7 +3,7 @@ import React from 'react';
 
 interface IstLinqLogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'h-32' | 'h-42';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'h-32' | 'h-38' | 'h-42';
 }
 
 const IstLinqLogo = ({ className = '', size = 'md' }: IstLinqLogoProps) => {
@@ -13,6 +13,7 @@ const IstLinqLogo = ({ className = '', size = 'md' }: IstLinqLogoProps) => {
     lg: 'h-20',
     xl: 'h-24',
     'h-32': 'h-32',
+    'h-38': 'h-38',
     'h-42': 'h-42'
   };
 

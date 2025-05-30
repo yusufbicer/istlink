@@ -44,7 +44,7 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <IstLinqLogo size="h-42" />
+            <IstLinqLogo size="h-32" />
           </Link>
 
           {/* Desktop Navigation */}

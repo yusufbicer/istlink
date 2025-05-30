@@ -57,9 +57,6 @@ const Footer = () => {
               <Link to="/" className="inline-flex items-center mb-4">
                 <IstLinqLogo size="h-42" />
               </Link>
-              <p className="text-gray-600 mb-4 max-w-xs">
-                Simplifying cross-border commerce with consolidated shipping solutions.
-              </p>
               
               {/* Social Icons - Compact Row */}
               <div className="flex space-x-6 mb-2">
@@ -122,9 +119,6 @@ const Footer = () => {
               <Link to="/" className="inline-flex items-center mb-6">
                 <IstLinqLogo size="h-42" />
               </Link>
-              <p className="text-gray-600 mb-6">
-                Simplifying cross-border commerce with consolidated shipping solutions.
-              </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-metallic-blue transition-colors">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

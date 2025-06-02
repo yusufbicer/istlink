@@ -52,8 +52,8 @@ const Index = () => {
       description: "Our most popular option for growing businesses with regular shipments",
       additionalInfo: "+ Bank transfer fees",
       icon: FileText,
-      iconColor: "text-blue-800",
-      iconBg: "bg-blue-100",
+      iconColor: "text-[#00C4FF]",
+      iconBg: "bg-[#00C4FF]/20",
       features: [
         "Multiple consolidated shipments",
         "Digital procurement dashboard",
@@ -102,7 +102,7 @@ const Index = () => {
         <section id="pricing" className={`py-16 md:py-20 bg-white ${isMobile ? "mt-0" : ""}`}>
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-              <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-900 rounded-full mb-3">
+              <span className="inline-block py-1 px-3 text-sm font-medium bg-[#00C4FF] text-white rounded-full mb-3">
                 Pricing
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -170,12 +170,12 @@ const Index = () => {
                     <div 
                       key={index} 
                       className={`bg-white rounded-xl border 
-                        ${isPopular ? 'border-blue-200 shadow-lg relative' : 'border-gray-100 shadow-sm'} 
+                        ${isPopular ? 'border-[#00C4FF]/30 shadow-lg relative' : 'border-gray-100 shadow-sm'} 
                         overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-md
                         ${isTablet ? 'flex-1' : ''}`}
                     >
                       {isPopular && (
-                        <div className="absolute top-0 left-0 right-0 bg-blue-800 text-white text-xs font-bold text-center py-1">
+                        <div className="absolute top-0 left-0 right-0 bg-[#00C4FF] text-white text-xs font-bold text-center py-1">
                           MOST POPULAR
                         </div>
                       )}
@@ -216,7 +216,7 @@ const Index = () => {
             )}
             
             <div className="text-center">
-              <Button asChild size="lg" className="bg-blue-800 hover:bg-blue-900 text-white">
+              <Button asChild size="lg" className="bg-[#00C4FF] hover:bg-[#00B8F0] text-white">
                 <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                   Request Early Access
                 </a>

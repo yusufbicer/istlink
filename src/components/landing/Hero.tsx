@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -31,7 +32,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-900 rounded-full mb-3">
+            <span className="inline-block py-1 px-3 text-sm font-medium bg-[#00C4FF] text-white rounded-full mb-3">
               Smart Export Consolidation Services
             </span>
           </div>
@@ -41,7 +42,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-800 to-blue-600">Elegantly Resolved</span>
+            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00C4FF] to-[#00B8F0]">Elegantly Resolved</span>
           </h1>
           
           <p 
@@ -59,7 +60,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="lg" className="h-12 px-8 text-md bg-blue-800 hover:bg-blue-900 text-white">
+            <Button asChild size="lg" className="h-12 px-8 text-md bg-[#00C4FF] hover:bg-[#00B8F0] text-white">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-2 h-5 w-5" /> Talk to Our Team
               </a>
@@ -72,7 +73,7 @@ const Hero = () => {
             }`}
           >
             <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <div className="bg-gradient-to-r from-blue-800 to-blue-600 p-0.5 rounded-xl">
+              <div className="bg-gradient-to-r from-[#00C4FF] to-[#00B8F0] p-0.5 rounded-xl">
                 <div className="rounded-xl overflow-hidden bg-white border-0">
                   <div className="relative bg-gray-100 px-2 pt-2 pb-1 flex items-center rounded-t-xl">
                     <div className="flex space-x-1.5 absolute left-4">
@@ -92,26 +93,26 @@ const Hero = () => {
                           <img 
                             src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                             alt="IstLinq Logo" 
-                            className="h-12 w-auto mr-2"
+                            className="h-18 w-auto mr-2"
                           />
                         </div>
                       </div>
                       
                       {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
                       <div className="flex mb-3 bg-gray-200 rounded-lg p-1.5 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-800 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-[#00C4FF] rounded-md transition-colors">
                           <Package className="h-3.5 w-3.5 mr-1" /> Orders
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-800 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-[#00C4FF] rounded-md transition-colors">
                           <GitMerge className="h-3.5 w-3.5 mr-1" /> Consolidations
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-800 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-[#00C4FF] rounded-md transition-colors">
                           <Users className="h-3.5 w-3.5 mr-1" /> Suppliers
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-800 rounded-md transition-colors">
+                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-[#00C4FF] rounded-md transition-colors">
                           <BarChart2 className="h-3.5 w-3.5 mr-1" /> Analytics
                         </div>
-                        <div className="ml-1 w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-xs text-blue-800 font-medium">
+                        <div className="ml-1 w-7 h-7 rounded-full bg-[#00C4FF]/20 flex items-center justify-center text-xs text-[#00C4FF] font-medium">
                           JD
                         </div>
                       </div>
@@ -120,7 +121,7 @@ const Hero = () => {
                         <div className="bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-700 text-[10px] font-medium">Active Orders</span>
-                            <Package className="h-3 w-3 text-blue-800" />
+                            <Package className="h-3 w-3 text-[#00C4FF]" />
                           </div>
                           <div className="text-sm font-bold">28</div>
                           <div className="flex items-center mt-1 text-green-600 text-[10px]">
@@ -132,7 +133,7 @@ const Hero = () => {
                         <div className="bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-700 text-[10px] font-medium">Active Consolidations</span>
-                            <GitMerge className="h-3 w-3 text-blue-800" />
+                            <GitMerge className="h-3 w-3 text-[#00C4FF]" />
                           </div>
                           <div className="text-sm font-bold">5</div>
                           <div className="flex items-center mt-1 text-green-600 text-[10px]">
@@ -144,7 +145,7 @@ const Hero = () => {
                         <div className="bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-700 text-[10px] font-medium">Space Utilization</span>
-                            <Truck className="h-3 w-3 text-blue-800" />
+                            <Truck className="h-3 w-3 text-[#00C4FF]" />
                           </div>
                           <div className="text-sm font-bold">92%</div>
                         </div>
@@ -152,15 +153,15 @@ const Hero = () => {
                         <div className="bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-700 text-[10px] font-medium">Time Saved</span>
-                            <Timer className="h-3 w-3 text-blue-800" />
+                            <Timer className="h-3 w-3 text-[#00C4FF]" />
                           </div>
                           <div className="text-sm font-bold">68%</div>
                         </div>
                         
-                        <div className="col-span-2 bg-blue-50 p-2 rounded-lg border border-blue-200 shadow-sm">
+                        <div className="col-span-2 bg-[#00C4FF]/10 p-2 rounded-lg border border-[#00C4FF]/30 shadow-sm">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-700 text-[10px] font-semibold">Shipping Cost Analysis</span>
-                            <Activity className="h-3 w-3 text-blue-800" />
+                            <Activity className="h-3 w-3 text-[#00C4FF]" />
                           </div>
                           
                           <div className="grid grid-cols-3 gap-1 text-center">
@@ -170,7 +171,7 @@ const Hero = () => {
                             </div>
                             <div className="px-1 py-1 bg-white rounded border border-gray-200">
                               <div className="text-[9px] text-gray-600">IstLinq</div>
-                              <div className="text-xs font-bold text-blue-800">$19.7K</div>
+                              <div className="text-xs font-bold text-[#00C4FF]">$19.7K</div>
                             </div>
                             <div className="px-1 py-1 bg-white rounded border border-gray-200">
                               <div className="text-[9px] text-gray-600">Saved</div>
@@ -182,7 +183,7 @@ const Hero = () => {
                         <div className="col-span-2 bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-gray-700 text-[10px] font-semibold">Active Consolidations</span>
-                            <GitMerge className="h-3 w-3 text-blue-800" />
+                            <GitMerge className="h-3 w-3 text-[#00C4FF]" />
                           </div>
                           <div className="space-y-1.5">
                             <div className="bg-white p-1.5 rounded border border-gray-200">
@@ -192,7 +193,7 @@ const Hero = () => {
                                   <div className="text-[8px] text-gray-600">Apr 15, 2025</div>
                                 </div>
                                 <div className="text-right">
-                                  <div className="text-[10px] font-medium text-blue-800">95%</div>
+                                  <div className="text-[10px] font-medium text-[#00C4FF]">95%</div>
                                 </div>
                               </div>
                             </div>
@@ -203,7 +204,7 @@ const Hero = () => {
                                   <div className="text-[8px] text-gray-600">Apr 25, 2025</div>
                                 </div>
                                 <div className="text-right">
-                                  <div className="text-[10px] font-medium text-blue-800">75%</div>
+                                  <div className="text-[10px] font-medium text-[#00C4FF]">75%</div>
                                 </div>
                               </div>
                             </div>
@@ -214,7 +215,7 @@ const Hero = () => {
                       <div className="mt-2 bg-gray-200 rounded-lg border border-gray-300 p-2 shadow-sm">
                         <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
-                            <CreditCard className="h-3 w-3 text-blue-800 mr-1" />
+                            <CreditCard className="h-3 w-3 text-[#00C4FF] mr-1" />
                             <span className="text-[10px] font-medium">Payment Status</span>
                           </div>
                           <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-[8px] rounded-full font-medium">Active</span>
@@ -242,12 +243,12 @@ const Hero = () => {
                           <img 
                             src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                             alt="IstLinq Logo" 
-                            className="h-16 w-auto mr-4"
+                            className="h-18 w-auto mr-4"
                           />
                         </div>
                         
                         <div className="flex space-x-2">
-                          <div className="flex items-center px-3 py-1.5 bg-blue-800 text-white rounded-lg text-sm font-medium">
+                          <div className="flex items-center px-3 py-1.5 bg-[#00C4FF] text-white rounded-lg text-sm font-medium">
                             <Activity className="h-4 w-4 mr-2" /> Dashboard
                           </div>
                           <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
@@ -262,7 +263,7 @@ const Hero = () => {
                           <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
                             <BarChart2 className="h-4 w-4 mr-0" /> Analytics
                           </div>
-                          <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-sm font-medium text-blue-800">
+                          <div className="h-8 w-8 rounded-full bg-[#00C4FF]/20 flex items-center justify-center text-sm font-medium text-[#00C4FF]">
                             JD
                           </div>
                         </div>

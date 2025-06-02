@@ -18,7 +18,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="pt-28 pb-8 md:pt-36 md:pb-16 overflow-hidden relative bg-gradient-to-b from-lavender-50 to-white">
+    <section className="pt-40 pb-8 md:pt-48 md:pb-16 overflow-hidden relative bg-gradient-to-b from-lavender-50 to-white">
       {/* Background gradients and effects */}
       <div className="absolute inset-0 bg-gradient-radial from-lavender-100/70 via-transparent to-transparent opacity-80" />
       <div className="absolute top-1/4 right-1/3 w-64 h-64 bg-lavender-200 rounded-full filter blur-3xl opacity-30 animate-float pointer-events-none" />
@@ -92,7 +92,7 @@ const Hero = () => {
                           <img 
                             src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                             alt="IstLinq Logo" 
-                            className="h-8 w-auto mr-2"
+                            className="h-24 w-auto mr-2"
                           />
                         </div>
                       </div>
@@ -242,7 +242,7 @@ const Hero = () => {
                           <img 
                             src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                             alt="IstLinq Logo" 
-                            className="h-10 w-auto mr-4"
+                            className="h-30 w-auto mr-4"
                           />
                         </div>
                         

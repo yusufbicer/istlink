@@ -38,19 +38,19 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'py-2 bg-white/80 backdrop-blur-md shadow-sm' : 'py-4 bg-transparent'
+      isScrolled ? 'py-4 bg-white/80 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent'
     }`}>
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                {/* IstLinq logo - adjusted sizing for header */}
+                {/* IstLinq logo - made 3 times bigger */}
                 <div className="flex items-center justify-center">
                   <img 
                     src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                     alt="IstLinq Logo" 
-                    className="h-12 w-auto"
+                    className="h-36 w-auto"
                   />
                 </div>
               </div>

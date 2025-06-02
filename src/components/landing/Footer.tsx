@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -52,12 +53,12 @@ const Footer = () => {
         {isMobile ? (
           // Mobile Footer - Compact with Collapsibles
           <div className="space-y-6">
-            <div className="flex flex-col items-center text-center mb-8">
-              <Link to="/" className="inline-flex items-center mb-4">
+            <div className="flex flex-col items-center text-center mb-12">
+              <Link to="/" className="inline-flex items-center mb-6">
                 <img 
                   src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                   alt="IstLinq Logo" 
-                  className="h-16 w-auto"
+                  className="h-48 w-auto"
                 />
               </Link>
               
@@ -119,11 +120,11 @@ const Footer = () => {
           // Desktop Footer - Original Layout
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-1">
-              <Link to="/" className="inline-flex items-center mb-6">
+              <Link to="/" className="inline-flex items-center mb-8">
                 <img 
                   src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                   alt="IstLinq Logo" 
-                  className="h-16 w-auto"
+                  className="h-48 w-auto"
                 />
               </Link>
               <div className="flex space-x-4">

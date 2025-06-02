@@ -1,9 +1,9 @@
+
 import { useState } from 'react';
 import { Link } from "react-router-dom";
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Zap, ChevronDown, ChevronUp } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const footerLinks = [
   {
@@ -55,7 +55,13 @@ const Footer = () => {
           <div className="space-y-6">
             <div className="flex flex-col items-center text-center mb-8">
               <Link to="/" className="inline-flex items-center mb-4">
-                <IstLinqLogo size="md" />
+                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
+                  <Zap className="w-5 h-5 text-white absolute" />
+                </div>
+                <div className="ml-3">
+                  <span className="font-bold text-xl text-gray-900">GROOP</span>
+                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
+                </div>
               </Link>
               <p className="text-gray-600 mb-4 max-w-xs">
                 Simplifying cross-border commerce with consolidated shipping solutions.
@@ -120,7 +126,13 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-1">
               <Link to="/" className="inline-flex items-center mb-6">
-                <IstLinqLogo size="lg" />
+                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
+                  <Zap className="w-5 h-5 text-white absolute" />
+                </div>
+                <div className="ml-3">
+                  <span className="font-bold text-xl text-gray-900">GROOP</span>
+                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
+                </div>
               </Link>
               <p className="text-gray-600 mb-6">
                 Simplifying cross-border commerce with consolidated shipping solutions.
@@ -170,7 +182,7 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-gray-100">
           <p className="text-center text-gray-500 text-sm">
-            &copy; {currentYear} IstLinq. All rights reserved.
+            &copy; {currentYear} GROOP. All rights reserved.
           </p>
         </div>
       </div>

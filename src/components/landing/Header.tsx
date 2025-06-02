@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Zap } from 'lucide-react';
 import { useIsTablet } from '@/hooks/use-mobile';
-import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Header = () => {
   const { user } = useAuth();
@@ -44,7 +43,19 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <IstLinqLogo size={isTablet ? "sm" : "md"} />
+            <div className="flex items-center">
+              <div className="flex items-center justify-center">
+                {/* Metallic blue logo */}
+                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
+                  <Zap className="w-5 h-5 text-white absolute" />
+                </div>
+                {/* Fixed: Always show the text - on mobile too */}
+                <div className="ml-3">
+                  <span className="font-bold text-xl text-gray-900">GROOP</span>
+                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
+                </div>
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

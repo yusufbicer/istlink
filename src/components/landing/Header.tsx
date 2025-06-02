@@ -38,7 +38,7 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'py-1 bg-white/80 backdrop-blur-md shadow-sm' : 'py-1.5 bg-transparent'
+      isScrolled ? 'py-2 bg-white/80 backdrop-blur-md shadow-sm' : 'py-3 bg-transparent'
     }`}>
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
@@ -50,7 +50,7 @@ const Header = () => {
                   <img 
                     src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                     alt="IstLinq Logo" 
-                    className="h-38 w-auto"
+                    className="h-36 w-auto"
                   />
                 </div>
               </div>
@@ -63,25 +63,25 @@ const Header = () => {
             <div className={`flex ${isTablet ? 'space-x-3' : 'space-x-8'}`}>
               <button 
                 onClick={() => scrollToSection('features')}
-                className={`text-sm font-medium text-gray-700 hover:text-[#00C4FF] transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-blue-800 transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className={`text-sm font-medium text-gray-700 hover:text-[#00C4FF] transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-blue-800 transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 How It Works
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className={`text-sm font-medium text-gray-700 hover:text-[#00C4FF] transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-blue-800 transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Pricing
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
-                className={`text-sm font-medium text-gray-700 hover:text-[#00C4FF] transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-blue-800 transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Blog
               </button>
@@ -92,14 +92,14 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <Button 
-                className="bg-[#00C4FF] hover:bg-[#00B8F0]"
+                className="bg-blue-800 hover:bg-blue-900"
                 onClick={() => handleNavigate('/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className="bg-[#00C4FF] hover:bg-[#00B8F0] text-white whitespace-nowrap"
+                className="bg-blue-800 hover:bg-blue-900 text-white whitespace-nowrap"
                 onClick={() => handleNavigate('/early-access')}
               >
                 {isTablet ? "Early Access" : "Request Early Access"}
@@ -126,25 +126,25 @@ const Header = () => {
             <div className="flex flex-col py-4 px-6 space-y-4">
               <button 
                 onClick={() => scrollToSection('features')}
-                className="text-sm font-medium text-gray-700 hover:text-[#00C4FF] transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-blue-800 transition-colors py-2 text-left"
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className="text-sm font-medium text-gray-700 hover:text-[#00C4FF] transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-blue-800 transition-colors py-2 text-left"
               >
                 How It Works
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className="text-sm font-medium text-gray-700 hover:text-[#00C4FF] transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-blue-800 transition-colors py-2 text-left"
               >
                 Pricing
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
-                className="text-sm font-medium text-gray-700 hover:text-[#00C4FF] transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-blue-800 transition-colors py-2 text-left"
               >
                 Blog
               </button>
@@ -152,14 +152,14 @@ const Header = () => {
               <div className="pt-2 border-t border-gray-100">
                 {user ? (
                   <Button 
-                    className="w-full bg-[#00C4FF] hover:bg-[#00B8F0]"
+                    className="w-full bg-blue-800 hover:bg-blue-900"
                     onClick={() => handleNavigate('/dashboard')}
                   >
                     Dashboard
                   </Button>
                 ) : (
                   <Button 
-                    className="w-full bg-[#00C4FF] hover:bg-[#00B8F0]"
+                    className="w-full bg-blue-800 hover:bg-blue-900"
                     onClick={() => handleNavigate('/early-access')}
                   >
                     Request Early Access

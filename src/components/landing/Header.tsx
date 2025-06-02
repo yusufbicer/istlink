@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useIsTablet } from '@/hooks/use-mobile';
 
 const Header = () => {
@@ -45,14 +45,17 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                {/* Metallic blue logo */}
-                <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-r from-metallic-blue to-metallic-light relative overflow-hidden">
-                  <Zap className="w-5 h-5 text-white absolute" />
+                {/* IstLinq logo */}
+                <div className="flex items-center justify-center">
+                  <img 
+                    src="/lovable-uploads/05498c43-1f13-49d8-9bcb-8921887a48e4.png" 
+                    alt="IstLinq Logo" 
+                    className="h-10 w-auto"
+                  />
                 </div>
-                {/* Fixed: Always show the text - on mobile too */}
+                {/* Updated tagline */}
                 <div className="ml-3">
-                  <span className="font-bold text-xl text-gray-900">GROOP</span>
-                  <span className="block text-xs text-metallic-blue font-medium tracking-wide">BEYOND BORDERS</span>
+                  <span className="block text-xs text-blue-600 font-medium tracking-wide">SMART EXPORT CONSOLIDATION SERVICES</span>
                 </div>
               </div>
             </div>
@@ -64,25 +67,25 @@ const Header = () => {
             <div className={`flex ${isTablet ? 'space-x-3' : 'space-x-8'}`}>
               <button 
                 onClick={() => scrollToSection('features')}
-                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 How It Works
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Pricing
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
-                className={`text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors ${isTablet ? 'px-1' : ''}`}
               >
                 Blog
               </button>
@@ -93,14 +96,14 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <Button 
-                className="bg-metallic-blue hover:bg-metallic-dark"
+                className="bg-blue-600 hover:bg-blue-700"
                 onClick={() => handleNavigate('/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className="bg-metallic-blue hover:bg-metallic-dark text-white whitespace-nowrap"
+                className="bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap"
                 onClick={() => handleNavigate('/early-access')}
               >
                 {isTablet ? "Early Access" : "Request Early Access"}
@@ -127,25 +130,25 @@ const Header = () => {
             <div className="flex flex-col py-4 px-6 space-y-4">
               <button 
                 onClick={() => scrollToSection('features')}
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2 text-left"
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2 text-left"
               >
                 How It Works
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2 text-left"
               >
                 Pricing
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
-                className="text-sm font-medium text-gray-700 hover:text-metallic-blue transition-colors py-2 text-left"
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors py-2 text-left"
               >
                 Blog
               </button>
@@ -153,14 +156,14 @@ const Header = () => {
               <div className="pt-2 border-t border-gray-100">
                 {user ? (
                   <Button 
-                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                    className="w-full bg-blue-600 hover:bg-blue-700"
                     onClick={() => handleNavigate('/dashboard')}
                   >
                     Dashboard
                   </Button>
                 ) : (
                   <Button 
-                    className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                    className="w-full bg-blue-600 hover:bg-blue-700"
                     onClick={() => handleNavigate('/early-access')}
                   >
                     Request Early Access

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -56,13 +55,10 @@ const Footer = () => {
             <div className="flex flex-col items-center text-center mb-8">
               <Link to="/" className="inline-flex items-center mb-4">
                 <img 
-                  src="/lovable-uploads/05498c43-1f13-49d8-9bcb-8921887a48e4.png" 
+                  src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                   alt="IstLinq Logo" 
-                  className="h-10 w-auto"
+                  className="h-16 w-auto"
                 />
-                <div className="ml-3">
-                  <span className="block text-xs text-blue-600 font-medium tracking-wide">SMART EXPORT CONSOLIDATION SERVICES</span>
-                </div>
               </Link>
               
               {/* Social Icons - Compact Row */}
@@ -125,13 +121,10 @@ const Footer = () => {
             <div className="col-span-1 md:col-span-1">
               <Link to="/" className="inline-flex items-center mb-6">
                 <img 
-                  src="/lovable-uploads/05498c43-1f13-49d8-9bcb-8921887a48e4.png" 
+                  src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                   alt="IstLinq Logo" 
-                  className="h-10 w-auto"
+                  className="h-16 w-auto"
                 />
-                <div className="ml-3">
-                  <span className="block text-xs text-blue-600 font-medium tracking-wide">SMART EXPORT CONSOLIDATION SERVICES</span>
-                </div>
               </Link>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-blue-600 transition-colors">

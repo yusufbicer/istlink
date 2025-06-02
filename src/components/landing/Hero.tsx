@@ -90,11 +90,10 @@ const Hero = () => {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
                           <img 
-                            src="/lovable-uploads/05498c43-1f13-49d8-9bcb-8921887a48e4.png" 
+                            src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                             alt="IstLinq Logo" 
-                            className="h-6 w-auto mr-2"
+                            className="h-8 w-auto mr-2"
                           />
-                          <span className="font-bold text-base">IstLinq</span>
                         </div>
                       </div>
                       
@@ -241,9 +240,9 @@ const Hero = () => {
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
                           <img 
-                            src="/lovable-uploads/05498c43-1f13-49d8-9bcb-8921887a48e4.png" 
+                            src="/lovable-uploads/ce24fa9b-38c9-4f16-9441-75d25c7169fc.png" 
                             alt="IstLinq Logo" 
-                            className="h-8 w-auto mr-4"
+                            className="h-10 w-auto mr-4"
                           />
                         </div>
                         

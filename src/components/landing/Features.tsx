@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Package, TruckIcon, UsersIcon, FileTextIcon, CreditCardIcon, GlobeIcon, ShieldCheck } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -126,11 +125,11 @@ const Features = () => {
           </p>
         </div>
 
-        {/* Desktop Bento Grid Layout */}
-        <div className="hidden md:grid grid-cols-3 gap-4 auto-rows-fr">
-          {/* Main featured item (spans 1 column and 1 row like the rest) */}
+        {/* Desktop Asymmetric Bento Grid Layout */}
+        <div className="hidden md:grid grid-cols-6 gap-4 auto-rows-fr">
+          {/* Main featured item (spans 2 columns and 2 rows) */}
           <div 
-            className={`${features[0].color} rounded-xl border p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 flex flex-col ${
+            className={`${features[0].color} rounded-xl border p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 flex flex-col col-span-2 row-span-2 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             style={{ transitionDelay: '100ms' }}
@@ -159,22 +158,89 @@ const Features = () => {
             </div>
           </div>
           
-          {/* Regular feature items */}
-          {features.slice(1).map((feature, index) => (
-            <div 
-              key={index} 
-              className={`${feature.color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: `${(index + 1) * 100 + 100}ms` }}
-            >
-              <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
-                {React.createElement(feature.icon, { className: "w-6 h-6" })}
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+          {/* Second feature - spans 2 columns */}
+          <div 
+            className={`${features[1].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            <div className={`w-12 h-12 ${features[1].iconColor} rounded-lg flex items-center justify-center mb-4`}>
+              {React.createElement(features[1].icon, { className: "w-6 h-6" })}
             </div>
-          ))}
+            <h3 className="text-xl font-semibold mb-2">{features[1].title}</h3>
+            <p className="text-gray-600">{features[1].description}</p>
+          </div>
+
+          {/* Third feature - spans 2 columns */}
+          <div 
+            className={`${features[2].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '300ms' }}
+          >
+            <div className={`w-12 h-12 ${features[2].iconColor} rounded-lg flex items-center justify-center mb-4`}>
+              {React.createElement(features[2].icon, { className: "w-6 h-6" })}
+            </div>
+            <h3 className="text-xl font-semibold mb-2">{features[2].title}</h3>
+            <p className="text-gray-600">{features[2].description}</p>
+          </div>
+
+          {/* Fourth feature - spans 1 column */}
+          <div 
+            className={`${features[3].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-1 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '400ms' }}
+          >
+            <div className={`w-12 h-12 ${features[3].iconColor} rounded-lg flex items-center justify-center mb-4`}>
+              {React.createElement(features[3].icon, { className: "w-6 h-6" })}
+            </div>
+            <h3 className="text-lg font-semibold mb-2">{features[3].title}</h3>
+            <p className="text-gray-600 text-sm">{features[3].description}</p>
+          </div>
+
+          {/* Fifth feature - spans 1 column */}
+          <div 
+            className={`${features[4].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-1 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '500ms' }}
+          >
+            <div className={`w-12 h-12 ${features[4].iconColor} rounded-lg flex items-center justify-center mb-4`}>
+              {React.createElement(features[4].icon, { className: "w-6 h-6" })}
+            </div>
+            <h3 className="text-lg font-semibold mb-2">{features[4].title}</h3>
+            <p className="text-gray-600 text-sm">{features[4].description}</p>
+          </div>
+
+          {/* Sixth feature - spans 2 columns */}
+          <div 
+            className={`${features[5].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '600ms' }}
+          >
+            <div className={`w-12 h-12 ${features[5].iconColor} rounded-lg flex items-center justify-center mb-4`}>
+              {React.createElement(features[5].icon, { className: "w-6 h-6" })}
+            </div>
+            <h3 className="text-xl font-semibold mb-2">{features[5].title}</h3>
+            <p className="text-gray-600">{features[5].description}</p>
+          </div>
+
+          {/* Seventh feature - spans 2 columns */}
+          <div 
+            className={`${features[6].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '700ms' }}
+          >
+            <div className={`w-12 h-12 ${features[6].iconColor} rounded-lg flex items-center justify-center mb-4`}>
+              {React.createElement(features[6].icon, { className: "w-6 h-6" })}
+            </div>
+            <h3 className="text-xl font-semibold mb-2">{features[6].title}</h3>
+            <p className="text-gray-600">{features[6].description}</p>
+          </div>
         </div>
 
         {/* Improved Mobile Feature Spotlight Carousel */}

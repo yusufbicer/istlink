@@ -29,66 +29,28 @@ const IstLinqLogo = ({ size = 'md', className = '' }: IstLinqLogoProps) => {
           strokeWidth="2"
         />
         
-        {/* Enhanced network pattern with linking effect */}
-        <circle cx="25" cy="30" r="2.5" fill="white" opacity="0.9" />
-        <circle cx="50" cy="20" r="2.5" fill="white" opacity="0.9" />
-        <circle cx="75" cy="30" r="2.5" fill="white" opacity="0.9" />
-        <circle cx="30" cy="50" r="2.5" fill="white" opacity="0.9" />
-        <circle cx="70" cy="50" r="2.5" fill="white" opacity="0.9" />
-        <circle cx="25" cy="70" r="2.5" fill="white" opacity="0.9" />
-        <circle cx="75" cy="70" r="2.5" fill="white" opacity="0.9" />
+        {/* Network pattern */}
+        <circle cx="30" cy="35" r="3" fill="white" opacity="0.9" />
+        <circle cx="50" cy="25" r="3" fill="white" opacity="0.9" />
+        <circle cx="70" cy="35" r="3" fill="white" opacity="0.9" />
+        <circle cx="35" cy="55" r="3" fill="white" opacity="0.9" />
+        <circle cx="65" cy="55" r="3" fill="white" opacity="0.9" />
+        <circle cx="50" cy="70" r="3" fill="white" opacity="0.9" />
         
-        {/* Connection lines forming a network */}
-        <line x1="25" y1="30" x2="50" y2="20" stroke="white" strokeWidth="1.5" opacity="0.7" />
-        <line x1="50" y1="20" x2="75" y2="30" stroke="white" strokeWidth="1.5" opacity="0.7" />
-        <line x1="25" y1="30" x2="30" y2="50" stroke="white" strokeWidth="1.5" opacity="0.7" />
-        <line x1="75" y1="30" x2="70" y2="50" stroke="white" strokeWidth="1.5" opacity="0.7" />
-        <line x1="30" y1="50" x2="25" y2="70" stroke="white" strokeWidth="1.5" opacity="0.7" />
-        <line x1="70" y1="50" x2="75" y2="70" stroke="white" strokeWidth="1.5" opacity="0.7" />
-        <line x1="25" y1="70" x2="75" y2="70" stroke="white" strokeWidth="1.5" opacity="0.7" />
+        {/* Connection lines */}
+        <line x1="30" y1="35" x2="50" y2="25" stroke="white" strokeWidth="1.5" opacity="0.7" />
+        <line x1="50" y1="25" x2="70" y2="35" stroke="white" strokeWidth="1.5" opacity="0.7" />
+        <line x1="30" y1="35" x2="35" y2="55" stroke="white" strokeWidth="1.5" opacity="0.7" />
+        <line x1="70" y1="35" x2="65" y2="55" stroke="white" strokeWidth="1.5" opacity="0.7" />
+        <line x1="35" y1="55" x2="50" y2="70" stroke="white" strokeWidth="1.5" opacity="0.7" />
+        <line x1="65" y1="55" x2="50" y2="70" stroke="white" strokeWidth="1.5" opacity="0.7" />
         
-        {/* Central hub representing consolidation */}
-        <circle cx="50" cy="50" r="8" fill="white" opacity="0.95" />
-        <circle cx="50" cy="50" r="5" fill="url(#centerGradient)" />
+        {/* Central hub */}
+        <circle cx="50" cy="50" r="6" fill="white" />
+        <circle cx="50" cy="50" r="3" fill="url(#centerGradient)" />
         
-        {/* Enhanced "Q" effect - proper Q shape with linking tail */}
-        <g transform="translate(50, 50)">
-          {/* Q circle part */}
-          <circle cx="0" cy="0" r="2.5" fill="none" stroke="white" strokeWidth="1.2" opacity="0.9" />
-          
-          {/* Q tail extending outward to show linking */}
-          <path 
-            d="M 1.5 1.5 L 4 4 L 6 6" 
-            stroke="white" 
-            strokeWidth="1.2" 
-            fill="none" 
-            opacity="0.9"
-            strokeLinecap="round"
-          />
-          
-          {/* Small connection point at the end of Q tail */}
-          <circle cx="6" cy="6" r="1" fill="white" opacity="0.8" />
-          
-          {/* Animated linking lines extending from Q */}
-          <g className="animate-pulse" opacity="0.6">
-            <line x1="6" y1="6" x2="12" y2="12" stroke="white" strokeWidth="0.8" strokeDasharray="2,2" />
-            <line x1="6" y1="6" x2="10" y2="2" stroke="white" strokeWidth="0.8" strokeDasharray="2,2" />
-          </g>
-        </g>
-        
-        {/* Additional linking effects around the logo */}
-        <g className="animate-pulse" opacity="0.4">
-          <circle cx="20" cy="20" r="1" fill="white" />
-          <circle cx="80" cy="20" r="1" fill="white" />
-          <circle cx="20" cy="80" r="1" fill="white" />
-          <circle cx="80" cy="80" r="1" fill="white" />
-          
-          {/* Subtle connection lines */}
-          <line x1="20" y1="20" x2="25" y2="30" stroke="white" strokeWidth="0.5" strokeDasharray="1,1" />
-          <line x1="80" y1="20" x2="75" y2="30" stroke="white" strokeWidth="0.5" strokeDasharray="1,1" />
-          <line x1="20" y1="80" x2="25" y2="70" stroke="white" strokeWidth="0.5" strokeDasharray="1,1" />
-          <line x1="80" y1="80" x2="75" y2="70" stroke="white" strokeWidth="0.5" strokeDasharray="1,1" />
-        </g>
+        {/* Letter Q indicator - small tail to distinguish from O */}
+        <path d="M52 52 L54 54" stroke="white" strokeWidth="1" opacity="0.8" />
         
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">

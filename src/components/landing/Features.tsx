@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Package, TruckIcon, UsersIcon, FileTextIcon, CreditCardIcon, GlobeIcon, ShieldCheck } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -106,11 +105,11 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className="py-12 md:py-16 bg-gray-50">
+    <section id="features" className={`${isMobile ? "py-8" : "py-12 md:py-16"} bg-gray-50`}>
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
-          className={`text-center max-w-3xl mx-auto mb-8 md:mb-10 transition-all duration-700 ${
+          className={`text-center max-w-3xl mx-auto ${isMobile ? "mb-6" : "mb-8 md:mb-10"} transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -239,7 +238,7 @@ const Features = () => {
         {/* Enhanced Mobile Experience */}
         <div className="md:hidden">
           {/* Mobile Progress Indicator */}
-          <div className="flex justify-center items-center mb-6">
+          <div className="flex justify-center items-center mb-4">
             <div className="flex space-x-2">
               {features.map((_, idx) => (
                 <button
@@ -255,7 +254,7 @@ const Features = () => {
           </div>
 
           {/* Enhanced Feature Counter */}
-          <div className="text-center mb-4">
+          <div className="text-center mb-3">
             <span className="text-sm text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {activeFeature + 1} of {features.length}
             </span>
@@ -272,18 +271,18 @@ const Features = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {features.map((feature, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4">
-                  <div className={`h-full ${feature.color} rounded-xl border-2 p-6 shadow-sm transition-all duration-300 ${
+                  <div className={`h-full ${feature.color} rounded-xl border-2 p-5 shadow-sm transition-all duration-300 ${
                     isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}>
-                    <div className={`w-16 h-16 ${feature.iconColor} rounded-xl flex items-center justify-center mb-6 mx-auto shadow-sm`}>
-                      {React.createElement(feature.icon, { className: "w-8 h-8" })}
+                    <div className={`w-14 h-14 ${feature.iconColor} rounded-xl flex items-center justify-center mb-4 mx-auto shadow-sm`}>
+                      {React.createElement(feature.icon, { className: "w-7 h-7" })}
                     </div>
-                    <h3 className="text-xl font-semibold mb-4 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-                    <p className="text-gray-600 text-center leading-relaxed mb-6" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+                    <h3 className="text-lg font-semibold mb-3 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                    <p className="text-gray-600 text-center leading-relaxed mb-4 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
                     
                     {index === 0 && (
-                      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-                        <div className="text-sm font-medium text-gray-800 text-center mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Customers typically save:</div>
+                      <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100">
+                        <div className="text-sm font-medium text-gray-800 text-center mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Customers typically save:</div>
                         <div className="grid grid-cols-3 gap-2">
                           <div className="text-center">
                             <div className="text-lg font-bold text-metallic-blue mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>35%</div>
@@ -306,14 +305,14 @@ const Features = () => {
             </CarouselContent>
             
             {/* Enhanced Navigation Controls */}
-            <div className="flex justify-between items-center mt-6">
-              <CarouselPrevious className="relative translate-y-0 h-10 w-10 border-2 hover:bg-metallic-blue hover:text-white hover:border-metallic-blue transition-colors" />
-              <div className="flex space-x-3">
+            <div className="flex justify-between items-center mt-4">
+              <CarouselPrevious className="relative translate-y-0 h-9 w-9 border-2 hover:bg-metallic-blue hover:text-white hover:border-metallic-blue transition-colors" />
+              <div className="flex space-x-2">
                 {features.map((feature, idx) => (
                   <button
                     key={idx}
                     onClick={() => scrollToFeature(idx)}
-                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
                       activeFeature === idx 
                         ? 'bg-metallic-blue text-white shadow-sm' 
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -324,12 +323,12 @@ const Features = () => {
                   </button>
                 ))}
               </div>
-              <CarouselNext className="relative translate-y-0 h-10 w-10 border-2 hover:bg-metallic-blue hover:text-white hover:border-metallic-blue transition-colors" />
+              <CarouselNext className="relative translate-y-0 h-9 w-9 border-2 hover:bg-metallic-blue hover:text-white hover:border-metallic-blue transition-colors" />
             </div>
           </Carousel>
 
           {/* Swipe Indicator */}
-          <div className="text-center mt-4">
+          <div className="text-center mt-3">
             <p className="text-xs text-gray-400" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Swipe or tap numbers to explore features
             </p>

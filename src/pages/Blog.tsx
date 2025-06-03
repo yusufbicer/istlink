@@ -114,7 +114,7 @@ const Blog = () => {
               Expert analysis, industry trends, and practical tips for optimizing your Turkish supply chain.
             </p>
 
-            {/* Admin Controls */}
+            {/* Admin Controls - Only show if admin */}
             {isAdmin && (
               <div className="mb-8">
                 <Link to="/blog/editor">
@@ -163,7 +163,8 @@ const Blog = () => {
           {filteredPosts.length === 0 ? (
             <div className="text-center py-16">
               <p className="text-gray-600 mb-4">No blog posts published yet.</p>
-              {isAdmin && (
+              {/* Only show create first post button if user is admin and there are no posts at all */}
+              {isAdmin && blogPosts.length === 0 && (
                 <Link to="/blog/editor">
                   <Button className="bg-blue-600 hover:bg-blue-700">
                     <Plus className="w-4 h-4 mr-2" />

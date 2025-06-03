@@ -111,6 +111,9 @@ const BlogEditor = () => {
       return;
     }
 
+    console.log('Current user:', user);
+    console.log('User ID:', user.id);
+
     setIsLoading(true);
 
     try {
@@ -120,12 +123,14 @@ const BlogEditor = () => {
         slug: values.slug,
         excerpt: values.excerpt || null,
         category: values.category,
-        author_id: user.id, // This is the key fix - ensuring author_id is set
+        author_id: user.id,
         author_name: user.email,
         updated_at: new Date().toISOString(),
         read_time: '5 min read',
         published: true
       };
+
+      console.log('Post data being inserted:', postData);
 
       if (editingPost) {
         const { error } = await supabase
@@ -133,7 +138,10 @@ const BlogEditor = () => {
           .update(postData)
           .eq('id', editingPost.id);
 
-        if (error) throw error;
+        if (error) {
+          console.error('Update error:', error);
+          throw error;
+        }
 
         toast({
           title: "Success",
@@ -144,7 +152,10 @@ const BlogEditor = () => {
           .from('blog_posts')
           .insert(postData);
 
-        if (error) throw error;
+        if (error) {
+          console.error('Insert error:', error);
+          throw error;
+        }
 
         toast({
           title: "Success",

@@ -1,10 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '@/lib/auth';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,6 +32,7 @@ const formSchema = z.object({
 })
 
 const BlogEditor = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
   const [editingPost, setEditingPost] = useState<any>(null);
@@ -48,6 +52,37 @@ const BlogEditor = () => {
     mode: "onChange",
   })
 
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (id) {
+        try {
+          const { data, error } = await supabase
+            .from('blog_posts')
+            .select('*')
+            .eq('id', id)
+            .single();
+
+          if (error) throw error;
+
+          setEditingPost(data);
+          setFormData({
+            title: data.title,
+            slug: data.slug,
+            content: data.content,
+          });
+          form.setValue("title", data.title)
+          form.setValue("slug", data.slug)
+          form.setValue("content", data.content)
+        } catch (error) {
+          console.error('Error fetching post:', error);
+          alert('Error fetching post');
+        }
+      }
+    };
+
+    fetchPost();
+  }, [id, form]);
+
   const handleInputChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -58,9 +93,39 @@ const BlogEditor = () => {
       return;
     }
 
-    // TODO: Implement save functionality when Supabase is integrated
-    console.log('Saving post:', formData);
-    navigate('/blog');
+    try {
+      const postData = {
+        title: formData.title,
+        content: formData.content,
+        slug: formData.slug,
+        author_id: user?.id || '',
+        author_name: user?.email || 'Anonymous',
+        updated_at: new Date().toISOString(),
+        category: 'General',
+        read_time: '5 min read',
+        published: true
+      };
+
+      if (editingPost) {
+        const { error } = await supabase
+          .from('blog_posts')
+          .update(postData)
+          .eq('id', editingPost.id);
+
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from('blog_posts')
+          .insert(postData);
+
+        if (error) throw error;
+      }
+
+      navigate('/blog');
+    } catch (error) {
+      console.error('Error saving post:', error);
+      alert('Error saving post');
+    }
   };
 
   return (

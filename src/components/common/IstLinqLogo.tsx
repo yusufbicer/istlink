@@ -49,8 +49,27 @@ const IstLinqLogo = ({ size = 'md', className = '' }: IstLinqLogoProps) => {
         <circle cx="50" cy="50" r="6" fill="white" />
         <circle cx="50" cy="50" r="3" fill="url(#centerGradient)" />
         
-        {/* Letter Q indicator - small tail to distinguish from O */}
-        <path d="M52 52 L54 54" stroke="white" strokeWidth="1" opacity="0.8" />
+        {/* Enhanced Q indicator - linking chain effect */}
+        <g opacity="0.9">
+          {/* Main Q tail - curved like a chain link */}
+          <path 
+            d="M52 52 Q55 54 57 57 Q59 60 62 58 Q64 56 62 54 Q60 52 57 54" 
+            stroke="white" 
+            strokeWidth="1.2" 
+            fill="none"
+            strokeLinecap="round"
+          />
+          
+          {/* Additional small chain link to emphasize connection */}
+          <circle cx="60" cy="56" r="1.5" fill="none" stroke="white" strokeWidth="0.8" opacity="0.8" />
+          
+          {/* Connecting element between center and Q tail */}
+          <line x1="53" y1="53" x2="55" y2="55" stroke="white" strokeWidth="1" opacity="0.7" strokeLinecap="round" />
+          
+          {/* Small connecting dots to show linking */}
+          <circle cx="54" cy="54" r="0.5" fill="white" opacity="0.9" />
+          <circle cx="58" cy="58" r="0.5" fill="white" opacity="0.8" />
+        </g>
         
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">

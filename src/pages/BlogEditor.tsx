@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,8 +15,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useForm } from 'react-hook-form';
-import {z} from "zod"
+import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useToast } from "@/components/ui/use-toast";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -26,8 +28,12 @@ const formSchema = z.object({
   slug: z.string().min(2, {
     message: "Slug must be at least 2 characters.",
   }),
+  excerpt: z.string().optional(),
   content: z.string().min(10, {
     message: "Content must be at least 10 characters.",
+  }),
+  category: z.string().min(1, {
+    message: "Category is required.",
   }),
 })
 
@@ -35,22 +41,33 @@ const BlogEditor = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
+  const { toast } = useToast();
   const [editingPost, setEditingPost] = useState<any>(null);
-  const [formData, setFormData] = useState({
-    title: '',
-    slug: '',
-    content: '',
-  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
       slug: "",
+      excerpt: "",
       content: "",
+      category: "General",
     },
     mode: "onChange",
   })
+
+  // Redirect if not admin
+  useEffect(() => {
+    if (user && user.role !== 'admin') {
+      toast({
+        title: "Access Denied",
+        description: "You don't have permission to access this page.",
+        variant: "destructive"
+      });
+      navigate('/blog');
+    }
+  }, [user, navigate, toast]);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -65,43 +82,47 @@ const BlogEditor = () => {
           if (error) throw error;
 
           setEditingPost(data);
-          setFormData({
-            title: data.title,
-            slug: data.slug,
-            content: data.content,
-          });
-          form.setValue("title", data.title)
-          form.setValue("slug", data.slug)
-          form.setValue("content", data.content)
+          form.setValue("title", data.title);
+          form.setValue("slug", data.slug);
+          form.setValue("excerpt", data.excerpt || "");
+          form.setValue("content", data.content);
+          form.setValue("category", data.category);
         } catch (error) {
           console.error('Error fetching post:', error);
-          alert('Error fetching post');
+          toast({
+            title: "Error",
+            description: "Failed to load blog post.",
+            variant: "destructive"
+          });
         }
       }
     };
 
     fetchPost();
-  }, [id, form]);
+  }, [id, form, toast]);
 
-  const handleInputChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSave = async () => {
-    if (!formData.title || !formData.content || !formData.slug) {
-      alert('Please fill in all required fields');
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!user) {
+      toast({
+        title: "Error",
+        description: "You must be logged in to create posts.",
+        variant: "destructive"
+      });
       return;
     }
 
+    setIsLoading(true);
+
     try {
       const postData = {
-        title: formData.title,
-        content: formData.content,
-        slug: formData.slug,
-        author_id: user?.id || '',
-        author_name: user?.email || 'Anonymous',
+        title: values.title,
+        content: values.content,
+        slug: values.slug,
+        excerpt: values.excerpt || null,
+        category: values.category,
+        author_id: user.id,
+        author_name: user.email,
         updated_at: new Date().toISOString(),
-        category: 'General',
         read_time: '5 min read',
         published: true
       };
@@ -113,78 +134,170 @@ const BlogEditor = () => {
           .eq('id', editingPost.id);
 
         if (error) throw error;
+
+        toast({
+          title: "Success",
+          description: "Blog post updated successfully!"
+        });
       } else {
         const { error } = await supabase
           .from('blog_posts')
           .insert(postData);
 
         if (error) throw error;
+
+        toast({
+          title: "Success",
+          description: "Blog post created successfully!"
+        });
       }
 
       navigate('/blog');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving post:', error);
-      alert('Error saving post');
+      toast({
+        title: "Error",
+        description: error.message || "Failed to save blog post.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  // Auto-generate slug from title
+  const handleTitleChange = (title: string) => {
+    const slug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+    form.setValue('slug', slug);
+  };
+
+  if (user && user.role !== 'admin') {
+    return null; // Will redirect in useEffect
+  }
+
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">{editingPost ? 'Edit Post' : 'Create New Post'}</h1>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSave)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter post title" {...field} onChange={(e) => {
-                    field.onChange(e)
-                    handleInputChange(e)
-                  }} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="slug"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Slug</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter post slug" {...field} onChange={(e) => {
-                    field.onChange(e)
-                    handleInputChange(e)
-                  }} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="content"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Content</FormLabel>
-                <FormControl>
-                  <Textarea placeholder="Enter post content" {...field} onChange={(e) => {
-                    field.onChange(e)
-                    handleInputChange(e)
-                  }} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="bg-blue-500 text-white">{editingPost ? 'Update Post' : 'Create Post'}</Button>
-          <Button variant="outline" onClick={() => navigate('/blog')}>Cancel</Button>
-        </form>
-      </Form>
+    <div className="container mx-auto py-10 px-6">
+      <div className="mb-8">
+        <Link to="/blog" className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to blog
+        </Link>
+      </div>
+
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6">
+          {editingPost ? 'Edit Post' : 'Create New Post'}
+        </h1>
+        
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input 
+                      placeholder="Enter post title" 
+                      {...field} 
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleTitleChange(e.target.value);
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="slug"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Slug</FormLabel>
+                  <FormControl>
+                    <Input placeholder="enter-post-slug" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="excerpt"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Excerpt (Optional)</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      placeholder="Brief summary of the post..."
+                      rows={3}
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g. Supply Chain, E-commerce, Logistics" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Content</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      placeholder="Write your blog post content here..."
+                      rows={20}
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <div className="flex gap-4">
+              <Button 
+                type="submit" 
+                disabled={isLoading}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                {isLoading ? 'Saving...' : (editingPost ? 'Update Post' : 'Create Post')}
+              </Button>
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={() => navigate('/blog')}
+              >
+                Cancel
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 };

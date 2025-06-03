@@ -52,7 +52,7 @@ const Hero = () => {
           </div>
           
           <h1 
-            className={`text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight md:leading-tight mb-6 md:mb-8 transition-all duration-1000 delay-100 transform ${
+            className={`text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black leading-tight md:leading-tight mb-4 md:mb-6 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
             style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
@@ -79,11 +79,11 @@ const Hero = () => {
           </h1>
           
           <div 
-            className={`text-lg md:text-xl lg:text-xl mb-8 md:mb-10 max-w-5xl mx-auto transition-all duration-1000 delay-200 transform ${
+            className={`text-base md:text-lg lg:text-xl mb-6 md:mb-8 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-slate-600 font-medium leading-relaxed tracking-wide" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
+            <p className="text-gray-900 font-medium leading-relaxed tracking-wide" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
               <span className="text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded-md">single, streamlined shipment</span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
@@ -99,9 +99,9 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="lg" className="h-14 md:h-16 px-8 md:px-12 text-base md:text-lg font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 rounded-xl">
+            <Button asChild size="default" className="h-12 px-6 text-base font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 rounded-xl">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
-                <MessageSquare className="mr-3 h-5 w-5 md:h-6 md:w-6" /> Talk to Our Team
+                <MessageSquare className="mr-2 h-5 w-5" /> Talk to Our Team
               </a>
             </Button>
           </div>

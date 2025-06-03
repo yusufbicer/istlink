@@ -82,12 +82,19 @@ const AdminDashboard = () => {
     if (!confirm('Are you sure you want to delete this request?')) return;
     
     try {
+      console.log('Attempting to delete request with ID:', id);
+      
       const { error } = await supabase
         .from('early_access_requests')
         .delete()
         .eq('id', id);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Delete error:', error);
+        throw error;
+      }
+      
+      console.log('Delete successful, refreshing data...');
       
       // Refresh the data after deletion
       await fetchEarlyAccessRequests();
@@ -177,7 +184,10 @@ const AdminDashboard = () => {
                         <Button 
                           variant="outline" 
                           size="icon"
-                          onClick={() => deleteRequest(request.id)}
+                          onClick={() => {
+                            console.log('Delete button clicked for ID:', request.id);
+                            deleteRequest(request.id);
+                          }}
                           className="text-red-500 hover:text-red-700"
                         >
                           <Trash2 className="h-4 w-4" />

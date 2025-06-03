@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -127,65 +126,65 @@ const Hero = () => {
                     </div>
                   </div>
                   
-                  {/* Creative Mobile Dashboard */}
+                  {/* Creative Mobile Dashboard - More Compact */}
                   {isMobile ? (
-                    <div className="bg-white text-gray-800 p-3">
-                      <div className="flex items-center justify-between mb-2">
+                    <div className="bg-white text-gray-800 p-2">
+                      <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center">
-                          <IstLinqLogo size="sm" className="mr-2" />
+                          <IstLinqLogo size="xs" className="mr-1" />
                         </div>
                         <div className="flex items-center space-x-1">
                           <div className="relative">
-                            <Bell className="h-4 w-4 text-orange-500" />
-                            <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                            <Bell className="h-3 w-3 text-orange-500" />
+                            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-red-500 rounded-full"></div>
                           </div>
-                          <div className="w-5 h-5 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium">
+                          <div className="w-4 h-4 rounded-full bg-lavender-100 flex items-center justify-center text-[10px] text-lavender-700 font-medium">
                             JD
                           </div>
                         </div>
                       </div>
                       
-                      {/* Live Activity Banner */}
-                      <div className="bg-gradient-to-r from-emerald-50 to-blue-50 p-2 rounded-lg border border-emerald-200 mb-2">
+                      {/* Live Activity Banner - Compact */}
+                      <div className="bg-gradient-to-r from-emerald-50 to-blue-50 p-1.5 rounded border border-emerald-200 mb-1.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
-                            <span className="text-xs font-medium text-emerald-700">Live Consolidation</span>
+                            <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse mr-1.5"></div>
+                            <span className="text-[10px] font-medium text-emerald-700">Live Consolidation</span>
                           </div>
-                          <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">Active</span>
+                          <span className="text-[9px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">Active</span>
                         </div>
                       </div>
                       
-                      {/* Active Consolidation with Suppliers */}
-                      <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-2">
-                        <div className="flex justify-between items-center mb-1.5">
+                      {/* Active Consolidation with Suppliers - Compact */}
+                      <div className="bg-gray-50 p-1.5 rounded border border-gray-200 shadow-sm mb-1.5">
+                        <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
-                            <GitMerge className="h-3 w-3 text-blue-600 mr-1" />
-                            <span className="text-xs font-medium">IST-CON-2025-041</span>
+                            <GitMerge className="h-2.5 w-2.5 text-blue-600 mr-1" />
+                            <span className="text-[10px] font-medium">IST-CON-2025-041</span>
                           </div>
-                          <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full font-medium">75% Full</span>
+                          <span className="text-[9px] bg-blue-100 text-blue-700 px-1 py-0.5 rounded-full font-medium">75% Full</span>
                         </div>
-                        <div className="bg-white p-1.5 rounded border border-gray-200">
-                          <div className="flex justify-between items-center mb-1">
+                        <div className="bg-white p-1 rounded border border-gray-200">
+                          <div className="flex justify-between items-center mb-0.5">
                             <div>
-                              <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-[10px] text-gray-600">Departure: Apr 15, 2025</div>
+                              <div className="text-[9px] font-medium">Istanbul → Matadi</div>
+                              <div className="text-[8px] text-gray-600">Departure: Apr 15</div>
                             </div>
                             <div className="text-right">
-                              <div className="text-xs font-medium text-blue-600">$47,850</div>
-                              <div className="text-[10px] text-gray-600">Total Value</div>
+                              <div className="text-[9px] font-medium text-blue-600">$47,850</div>
+                              <div className="text-[8px] text-gray-600">Total</div>
                             </div>
                           </div>
-                          <div className="grid grid-cols-3 gap-1 text-center">
-                            <div className="text-[10px]">
+                          <div className="grid grid-cols-3 gap-0.5 text-center">
+                            <div className="text-[8px]">
                               <div className="font-bold">28</div>
                               <div className="text-gray-600">Orders</div>
                             </div>
-                            <div className="text-[10px]">
+                            <div className="text-[8px]">
                               <div className="font-bold">4</div>
                               <div className="text-gray-600">Suppliers</div>
                             </div>
-                            <div className="text-[10px]">
+                            <div className="text-[8px]">
                               <div className="font-bold">75%</div>
                               <div className="text-gray-600">Filled</div>
                             </div>
@@ -193,94 +192,67 @@ const Hero = () => {
                         </div>
                       </div>
 
-                      {/* Suppliers Overview */}
-                      <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-2">
-                        <div className="flex justify-between items-center mb-1.5">
+                      {/* Suppliers Overview - More Compact */}
+                      <div className="bg-gray-50 p-1.5 rounded border border-gray-200 shadow-sm mb-1.5">
+                        <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
-                            <Users className="h-3 w-3 text-blue-600 mr-1" />
-                            <span className="text-xs font-medium">Active Suppliers</span>
+                            <Users className="h-2.5 w-2.5 text-blue-600 mr-1" />
+                            <span className="text-[10px] font-medium">Active Suppliers</span>
                           </div>
                         </div>
-                        <div className="space-y-1">
-                          <div className="bg-white p-1.5 rounded border border-gray-100 flex justify-between items-center">
+                        <div className="space-y-0.5">
+                          <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
                             <div>
-                              <div className="text-xs font-medium">Textile Plus Ltd</div>
-                              <div className="text-[10px] text-gray-600">12 orders • $18,200</div>
+                              <div className="text-[9px] font-medium">Textile Plus Ltd</div>
+                              <div className="text-[8px] text-gray-600">12 orders • $18,200</div>
                             </div>
                             <div className="flex items-center">
-                              <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
-                              <span className="text-[10px] text-green-600">Paid</span>
+                              <CheckCircle className="h-2 w-2 text-green-500 mr-0.5" />
+                              <span className="text-[8px] text-green-600">Paid</span>
                             </div>
                           </div>
-                          <div className="bg-white p-1.5 rounded border border-gray-100 flex justify-between items-center">
+                          <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
                             <div>
-                              <div className="text-xs font-medium">Machinery Co</div>
-                              <div className="text-[10px] text-gray-600">8 orders • $15,420</div>
+                              <div className="text-[9px] font-medium">Machinery Co</div>
+                              <div className="text-[8px] text-gray-600">8 orders • $15,420</div>
                             </div>
                             <div className="flex items-center">
-                              <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
-                              <span className="text-[10px] text-green-600">Paid</span>
-                            </div>
-                          </div>
-                          <div className="bg-white p-1.5 rounded border border-gray-100 flex justify-between items-center">
-                            <div>
-                              <div className="text-xs font-medium">Auto Parts Inc</div>
-                              <div className="text-[10px] text-gray-600">5 orders • $9,630</div>
-                            </div>
-                            <div className="flex items-center">
-                              <Clock className="h-3 w-3 text-orange-500 mr-1" />
-                              <span className="text-[10px] text-orange-600">Processing</span>
-                            </div>
-                          </div>
-                          <div className="bg-white p-1.5 rounded border border-gray-100 flex justify-between items-center">
-                            <div>
-                              <div className="text-xs font-medium">Chemical Solutions</div>
-                              <div className="text-[10px] text-gray-600">3 orders • $4,600</div>
-                            </div>
-                            <div className="flex items-center">
-                              <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
-                              <span className="text-[10px] text-green-600">Paid</span>
+                              <Clock className="h-2 w-2 text-orange-500 mr-0.5" />
+                              <span className="text-[8px] text-orange-600">Processing</span>
                             </div>
                           </div>
                         </div>
                       </div>
                       
-                      {/* Recent Activities & Notifications */}
-                      <div className="bg-gray-50 rounded-lg border border-gray-200 p-2 shadow-sm">
-                        <div className="flex justify-between items-center mb-1.5">
+                      {/* Recent Activities & Notifications - Compact */}
+                      <div className="bg-gray-50 rounded border border-gray-200 p-1.5 shadow-sm">
+                        <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
-                            <Activity className="h-3 w-3 text-blue-600 mr-1" />
-                            <span className="text-xs font-medium">Recent Activity</span>
+                            <Activity className="h-2.5 w-2.5 text-blue-600 mr-1" />
+                            <span className="text-[10px] font-medium">Recent Activity</span>
                           </div>
-                          <span className="px-1 py-0.5 bg-orange-100 text-orange-700 text-[10px] rounded-full font-medium">3 New</span>
+                          <span className="px-1 py-0.5 bg-orange-100 text-orange-700 text-[8px] rounded-full font-medium">3 New</span>
                         </div>
-                        <div className="space-y-1">
-                          <div className="bg-white p-1.5 rounded shadow-sm flex items-center">
-                            <FileText className="h-3 w-3 text-green-500 mr-2" />
+                        <div className="space-y-0.5">
+                          <div className="bg-white p-1 rounded shadow-sm flex items-center">
+                            <FileText className="h-2 w-2 text-green-500 mr-1.5" />
                             <div className="flex-1">
-                              <div className="text-[10px] font-medium">BOL Generated</div>
-                              <div className="text-[9px] text-gray-600">5 min ago</div>
+                              <div className="text-[8px] font-medium">BOL Generated</div>
+                              <div className="text-[7px] text-gray-600">5 min ago</div>
                             </div>
                           </div>
-                          <div className="bg-white p-1.5 rounded shadow-sm flex items-center">
-                            <DollarSign className="h-3 w-3 text-blue-500 mr-2" />
+                          <div className="bg-white p-1 rounded shadow-sm flex items-center">
+                            <DollarSign className="h-2 w-2 text-blue-500 mr-1.5" />
                             <div className="flex-1">
-                              <div className="text-[10px] font-medium">Payment Processed</div>
-                              <div className="text-[9px] text-gray-600">12 min ago</div>
-                            </div>
-                          </div>
-                          <div className="bg-white p-1.5 rounded shadow-sm flex items-center">
-                            <Package className="h-3 w-3 text-purple-500 mr-2" />
-                            <div className="flex-1">
-                              <div className="text-[10px] font-medium">5 New Orders Added</div>
-                              <div className="text-[9px] text-gray-600">1 hr ago</div>
+                              <div className="text-[8px] font-medium">Payment Processed</div>
+                              <div className="text-[7px] text-gray-600">12 min ago</div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    // Desktop dashboard with creative consolidation view
+                    // ... keep existing code (desktop dashboard)
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">

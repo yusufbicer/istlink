@@ -45,17 +45,22 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                {/* Enhanced istLinq logo with attention-grabbing design */}
-                <div className="flex items-center justify-center h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 relative overflow-hidden shadow-xl border-2 border-white/30 ring-2 ring-blue-200/50">
-                  <Network className="w-6 h-6 text-white absolute animate-pulse" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-white/30"></div>
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-sm"></div>
+                {/* Enhanced istLinq logo with hexagonal attractive design */}
+                <div className="relative flex items-center justify-center h-12 w-12">
+                  {/* Hexagonal background with gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-emerald-500 to-teal-600 transform rotate-12 rounded-xl shadow-xl border-2 border-white/30 ring-2 ring-emerald-200/50"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-white/30 transform rotate-12 rounded-xl"></div>
+                  {/* Network icon */}
+                  <Network className="w-6 h-6 text-white relative z-10 animate-pulse" />
+                  {/* Decorative elements */}
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-cyan-400 to-emerald-500 rounded-full blur-sm animate-ping"></div>
+                  <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-gradient-to-r from-blue-400 to-teal-500 rounded-full blur-sm"></div>
                 </div>
                 {/* Enhanced istLinq branding with two-color text */}
                 <div className="ml-3">
                   <div className="flex items-baseline">
                     <span className="font-bold text-2xl text-blue-600 tracking-tight">ist</span>
-                    <span className="font-bold text-2xl text-purple-600 tracking-tight">Linq</span>
+                    <span className="font-bold text-2xl text-emerald-600 tracking-tight">Linq</span>
                   </div>
                   <div className="text-xs text-gray-600 font-medium leading-tight">
                     <div>Smart Export</div>

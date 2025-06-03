@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -52,7 +53,7 @@ const Hero = () => {
           </div>
           
           <h1 
-            className={`text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black leading-tight md:leading-tight mb-4 md:mb-6 transition-all duration-1000 delay-100 transform ${
+            className={`text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black leading-tight md:leading-tight mb-3 md:mb-5 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
             style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
@@ -79,11 +80,11 @@ const Hero = () => {
           </h1>
           
           <div 
-            className={`text-base md:text-lg lg:text-xl mb-6 md:mb-8 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
+            className={`text-sm md:text-base lg:text-lg mb-5 md:mb-7 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-gray-900 font-medium leading-relaxed tracking-wide" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+            <p className="text-gray-900 font-medium leading-relaxed tracking-wide px-2" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
               <span className="text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded-md">single, streamlined shipment</span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
@@ -108,7 +109,7 @@ const Hero = () => {
         
           
           <div 
-            className={`mt-8 md:mt-12 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
+            className={`mt-6 md:mt-10 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
             }`}
           >
@@ -136,20 +137,24 @@ const Hero = () => {
                       </div>
                       
                       {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
-                      <div className="flex mb-3 bg-gray-200 rounded-lg p-1 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
-                        <div className="px-2 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0">
-                          <Package className="h-3 w-3 mr-1" /> Orders
+                      <div className="flex mb-3 bg-gray-200 rounded-lg p-0.5 text-[10px] justify-between overflow-x-hidden whitespace-nowrap shadow-sm">
+                        <div className="px-1.5 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
+                          <Package className="h-2.5 w-2.5 mr-0.5" /> 
+                          <span className="truncate">Orders</span>
                         </div>
-                        <div className="px-2 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0">
-                          <GitMerge className="h-3 w-3 mr-1" /> Consol.
+                        <div className="px-1.5 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
+                          <GitMerge className="h-2.5 w-2.5 mr-0.5" /> 
+                          <span className="truncate">Consol</span>
                         </div>
-                        <div className="px-2 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0">
-                          <Users className="h-3 w-3 mr-1" /> Suppliers
+                        <div className="px-1.5 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
+                          <Users className="h-2.5 w-2.5 mr-0.5" /> 
+                          <span className="truncate">Supply</span>
                         </div>
-                        <div className="px-2 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0">
-                          <BarChart2 className="h-3 w-3 mr-1" /> Analytics
+                        <div className="px-1.5 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
+                          <BarChart2 className="h-2.5 w-2.5 mr-0.5" /> 
+                          <span className="truncate">Stats</span>
                         </div>
-                        <div className="ml-1 w-6 h-6 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium flex-shrink-0">
+                        <div className="ml-1 w-5 h-5 rounded-full bg-lavender-100 flex items-center justify-center text-[8px] text-lavender-700 font-medium flex-shrink-0">
                           JD
                         </div>
                       </div>

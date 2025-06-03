@@ -59,9 +59,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* E-mail */}
           <div>
-            <h3 className="font-semibold mb-4 text-gray-800">Contact</h3>
+            <h3 className="font-semibold mb-4 text-gray-800">E-mail</h3>
             <ul className="space-y-2">
               <li>
                 <a href="mailto:istlinq@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors">
@@ -73,7 +73,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-200 mt-8 pt-8 text-center text-gray-500">
-          <p>&copy; 2024 istLinq. All rights reserved.</p>
+          <p>&copy; 2024 İstLinq Ltd. All rights reserved.</p>
         </div>
       </div>
     </footer>

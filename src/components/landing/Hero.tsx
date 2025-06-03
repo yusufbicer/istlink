@@ -47,7 +47,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <span className="inline-block py-2 px-4 text-xs md:text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-4 md:mb-6 border border-blue-200 shadow-sm">
+            <span className="inline-block py-2 px-4 text-xs md:text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-4 md:mb-6 border border-blue-200 shadow-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               ✨ Smart Export Consolidation Solutions
             </span>
           </div>
@@ -100,7 +100,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg">
+            <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-2 h-4 w-4" /> Talk to Our Team
               </a>

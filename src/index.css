@@ -5,37 +5,6 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: 'SF Pro Display';
-    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: 'SF Pro Display';
-    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: 'SF Pro Display';
-    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: 'SF Mono';
-    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2') format('woff2');
-    font-style: normal;
-    font-display: swap;
-  }
-
   :root {
     --background: 210 20% 98%;
     --foreground: 222.2 84% 4.9%;

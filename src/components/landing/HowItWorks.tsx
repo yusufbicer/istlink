@@ -100,7 +100,7 @@ const HowItWorks = () => {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <span className="inline-block py-1 px-3 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-3">
+          <span className="inline-block py-1 px-3 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Simple Process
           </span>
           <h2 className={`${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-3xl md:text-4xl'} font-semibold mb-4`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -111,8 +111,8 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        {/* Desktop View (Timeline) */}
-        <div className="hidden lg:block max-w-5xl mx-auto">
+        {/* Desktop and Tablet View (Timeline) */}
+        <div className="hidden md:block max-w-5xl mx-auto">
           <div className="relative">
             {/* Connecting line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indigo-200 transform -translate-x-1/2 z-0"></div>
@@ -166,8 +166,8 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        {/* Tablet & Mobile View (Vertical Steps) */}
-        <div className="lg:hidden">
+        {/* Mobile View (Vertical Steps) */}
+        <div className="md:hidden">
           <div className="relative max-w-md mx-auto">
             {/* Connecting line */}
             <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-indigo-200 z-0"></div>

@@ -1,9 +1,15 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleNewsletterClick = () => {
+    navigate('/early-access', { state: { isNewsletter: true } });
+  };
+
   return (
     <footer className="bg-gray-50 border-t border-gray-200 py-12">
       <div className="container mx-auto px-6">
@@ -64,11 +70,12 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4 text-gray-800" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Stay Updated</h3>
             <div className="space-y-4">
-              <Link to="/early-access">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4">
-                  Subscribe to Newsletter
-                </Button>
-              </Link>
+              <Button 
+                onClick={handleNewsletterClick}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4"
+              >
+                Subscribe to Newsletter
+              </Button>
               <div>
                 <h4 className="font-medium mb-2 text-gray-700" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Contact</h4>
                 <a href="mailto:istlinq@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

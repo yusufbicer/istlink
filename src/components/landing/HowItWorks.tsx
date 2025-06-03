@@ -73,7 +73,7 @@ const steps: Step[] = [
 
 const HowItWorks = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
@@ -83,6 +83,12 @@ const HowItWorks = () => {
       (entries) => {
         if (entries[0].isIntersecting) {
           setIsVisible(true);
+          // Animate steps appearing one by one
+          steps.forEach((_, index) => {
+            setTimeout(() => {
+              setVisibleSteps(prev => [...prev, index]);
+            }, index * 200);
+          });
         }
       },
       { threshold: 0.1 }
@@ -109,17 +115,17 @@ const HowItWorks = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div 
           ref={titleRef}
-          className={`text-center max-w-4xl mx-auto ${isMobile ? 'mb-12' : 'mb-20'} transition-all duration-700 ${
+          className={`text-center max-w-4xl mx-auto ${isMobile ? 'mb-16' : 'mb-20'} transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/10 to-emerald-600/10 border border-blue-200/50 mb-6">
-            <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+            <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Simple Process
             </span>
           </div>
           
-          <h2 className={`${isMobile ? 'text-3xl' : isTablet ? 'text-4xl' : 'text-5xl'} font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-emerald-900 bg-clip-text text-transparent leading-tight`}>
+          <h2 className={`${isMobile ? 'text-3xl' : isTablet ? 'text-4xl' : 'text-5xl'} font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-emerald-900 bg-clip-text text-transparent leading-tight`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             7 Simple Steps to
             <br />
             <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
@@ -127,86 +133,113 @@ const HowItWorks = () => {
             </span>
           </h2>
           
-          <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-600 leading-relaxed max-w-2xl mx-auto`}>
+          <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-600 leading-relaxed max-w-2xl mx-auto`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support.
           </p>
         </div>
 
-        {/* Desktop and Tablet View (Modern Cards Grid) */}
-        <div className="hidden md:block max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {steps.map((step, index) => {
-              const StepIcon = step.icon;
-              
-              return (
-                <div 
-                  key={index}
-                  className={`group relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/50 hover:border-blue-200/50 hover:-translate-y-2 cursor-pointer`}
-                  onMouseEnter={() => setActiveStep(index)}
-                  onMouseLeave={() => setActiveStep(null)}
-                >
-                  {/* Step number badge */}
-                  <div className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                    {index + 1}
-                  </div>
-                  
-                  {/* Icon with modern background */}
-                  <div className={`relative mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br ${step.bgGradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <StepIcon className={`h-8 w-8 ${step.color}`} />
-                  </div>
-                  
-                  {/* Content */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                    {step.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    {step.description}
-                  </p>
-                  
-                  {/* Hover effect overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-br from-blue-600/5 to-emerald-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`}></div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile View (Vertical Modern Cards) */}
-        <div className="md:hidden">
-          <div className="space-y-6 max-w-md mx-auto">
-            {steps.map((step, index) => {
-              const StepIcon = step.icon;
-
-              return (
-                <div 
-                  key={index}
-                  className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50"
-                >
-                  {/* Step number badge */}
-                  <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 flex items-center justify-center text-white font-bold text-xs shadow-lg">
-                    {index + 1}
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    {/* Icon */}
-                    <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
-                      <StepIcon className={`h-6 w-6 ${step.color}`} />
+        {/* Timeline Design */}
+        <div className="max-w-6xl mx-auto">
+          {/* Desktop Timeline */}
+          <div className="hidden md:block relative">
+            {/* Central Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
+            
+            <div className="space-y-16">
+              {steps.map((step, index) => {
+                const StepIcon = step.icon;
+                const isLeft = index % 2 === 0;
+                const isVisible = visibleSteps.includes(index);
+                
+                return (
+                  <div 
+                    key={index}
+                    className={`relative flex items-center ${isLeft ? 'justify-start' : 'justify-end'}`}
+                  >
+                    {/* Timeline Node */}
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full bg-white border-4 border-gradient-to-r from-blue-200 to-emerald-200 shadow-lg flex items-center justify-center z-10 transition-all duration-500 ${
+                      isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                    }`}>
+                      <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
+                        <StepIcon className={`h-4 w-4 ${step.color}`} />
+                      </div>
                     </div>
                     
-                    {/* Content */}
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-gray-900 mb-2">
-                        {step.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {step.description}
-                      </p>
+                    {/* Step Number */}
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 -translate-y-12 w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-sm font-bold flex items-center justify-center shadow-lg transition-all duration-500 delay-200 ${
+                      isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                    }`}>
+                      {index + 1}
+                    </div>
+                    
+                    {/* Content Card */}
+                    <div 
+                      className={`${isLeft ? 'mr-8 pr-12' : 'ml-8 pl-12'} w-1/2 transition-all duration-700 delay-300 ${
+                        isVisible ? 'opacity-100 translate-x-0' : `opacity-0 ${isLeft ? '-translate-x-8' : 'translate-x-8'}`
+                      }`}
+                    >
+                      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 group hover:-translate-y-1">
+                        <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                          {step.title}
+                        </h3>
+                        <p className="text-gray-600 leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mobile Timeline */}
+          <div className="md:hidden">
+            <div className="relative pl-8">
+              {/* Mobile Timeline Line */}
+              <div className="absolute left-4 top-0 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
+              
+              <div className="space-y-8">
+                {steps.map((step, index) => {
+                  const StepIcon = step.icon;
+                  const isVisible = visibleSteps.includes(index);
+                  
+                  return (
+                    <div key={index} className="relative">
+                      {/* Mobile Timeline Node */}
+                      <div className={`absolute -left-4 w-8 h-8 rounded-full bg-white border-4 border-gradient-to-r from-blue-200 to-emerald-200 shadow-lg flex items-center justify-center transition-all duration-500 ${
+                        isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                      }`}>
+                        <div className={`w-4 h-4 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
+                          <StepIcon className={`h-2.5 w-2.5 ${step.color}`} />
+                        </div>
+                      </div>
+                      
+                      {/* Mobile Step Number */}
+                      <div className={`absolute -left-6 -top-3 w-6 h-6 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-xs font-bold flex items-center justify-center shadow-lg transition-all duration-500 delay-200 ${
+                        isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                      }`}>
+                        {index + 1}
+                      </div>
+                      
+                      {/* Mobile Content */}
+                      <div className={`ml-4 transition-all duration-700 delay-300 ${
+                        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                      }`}>
+                        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
+                          <h3 className="text-lg font-bold text-gray-900 mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                            {step.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                            {step.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>

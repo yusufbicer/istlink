@@ -9,7 +9,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { supabase } from "@/integrations/supabase/client";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft } from "lucide-react";
 
@@ -27,6 +27,10 @@ const EarlyAccess = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Check if coming from footer newsletter subscription
+  const isNewsletterSubscription = location.pathname === '/early-access' && location.state?.isNewsletter;
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -54,9 +58,13 @@ const EarlyAccess = () => {
       
       if (error) throw error;
       
+      const successMessage = isNewsletterSubscription 
+        ? "Successfully subscribed to our newsletter! We'll keep you updated."
+        : "Thank you for your interest in istLinq. We'll be in touch soon.";
+      
       toast({
-        title: "Request submitted successfully!",
-        description: "Thank you for your interest in istLinq. We'll be in touch soon.",
+        title: isNewsletterSubscription ? "Newsletter subscription successful!" : "Request submitted successfully!",
+        description: successMessage,
       });
       
       form.reset();
@@ -66,7 +74,9 @@ const EarlyAccess = () => {
       
       // Handle duplicate email error
       if (error.code === '23505') {
-        errorMessage = "This email has already been registered for early access.";
+        errorMessage = isNewsletterSubscription 
+          ? "This email is already subscribed to our newsletter."
+          : "This email has already been registered for early access.";
       }
       
       toast({
@@ -78,6 +88,11 @@ const EarlyAccess = () => {
       setIsSubmitting(false);
     }
   };
+  
+  const pageTitle = isNewsletterSubscription ? "Subscribe to Our Newsletter" : "Request Access";
+  const pageDescription = isNewsletterSubscription 
+    ? "Stay updated with the latest news and updates from istLinq's innovative supply chain solutions."
+    : "Join our exclusive early access program and be among the first to experience istLinq's innovative supply chain solutions.";
   
   return (
     <div className="container mx-auto p-6 min-h-screen">
@@ -91,9 +106,9 @@ const EarlyAccess = () => {
       
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Request Early Access</h1>
+          <h1 className="text-3xl font-bold mb-2">{pageTitle}</h1>
           <p className="text-gray-600">
-            Join our exclusive early access program and be among the first to experience istLinq's innovative supply chain solutions.
+            {pageDescription}
           </p>
         </div>
         
@@ -150,10 +165,18 @@ const EarlyAccess = () => {
                 name="reason"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Why are you interested in istLinq?</FormLabel>
+                    <FormLabel>
+                      {isNewsletterSubscription 
+                        ? "What interests you most about istLinq?" 
+                        : "Why are you interested in istLinq?"
+                      }
+                    </FormLabel>
                     <FormControl>
                       <Textarea 
-                        placeholder="Tell us about your business needs and how istLinq can help..."
+                        placeholder={isNewsletterSubscription 
+                          ? "Tell us what aspects of our supply chain solutions interest you most..."
+                          : "Tell us about your business needs and how istLinq can help..."
+                        }
                         className="min-h-[120px]"
                         {...field} 
                       />
@@ -168,7 +191,7 @@ const EarlyAccess = () => {
                 className="w-full bg-metallic-blue hover:bg-metallic-dark"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : "Submit Request"}
+                {isSubmitting ? "Submitting..." : (isNewsletterSubscription ? "Subscribe" : "Submit Request")}
               </Button>
             </form>
           </Form>

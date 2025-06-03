@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
@@ -38,7 +37,7 @@ const formSchema = z.object({
 })
 
 const BlogEditor = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
   const { toast } = useToast();
@@ -57,8 +56,18 @@ const BlogEditor = () => {
     mode: "onChange",
   })
 
-  // Redirect if not admin
+  // Redirect if not authenticated or not admin
   useEffect(() => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "You must be logged in to access this page.",
+        variant: "destructive"
+      });
+      navigate('/auth');
+      return;
+    }
+
     if (user && user.role !== 'admin') {
       toast({
         title: "Access Denied",
@@ -67,7 +76,7 @@ const BlogEditor = () => {
       });
       navigate('/blog');
     }
-  }, [user, navigate, toast]);
+  }, [user, isAuthenticated, navigate, toast]);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -102,9 +111,9 @@ const BlogEditor = () => {
   }, [id, form, toast]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!user) {
+    if (!user || !isAuthenticated) {
       toast({
-        title: "Error",
+        title: "Authentication Error",
         description: "You must be logged in to create posts.",
         variant: "destructive"
       });
@@ -113,6 +122,7 @@ const BlogEditor = () => {
 
     console.log('Current user:', user);
     console.log('User ID:', user.id);
+    console.log('User authenticated:', isAuthenticated);
 
     setIsLoading(true);
 
@@ -148,14 +158,23 @@ const BlogEditor = () => {
           description: "Blog post updated successfully!"
         });
       } else {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from('blog_posts')
-          .insert(postData);
+          .insert(postData)
+          .select();
 
         if (error) {
           console.error('Insert error:', error);
+          console.error('Error details:', {
+            message: error.message,
+            details: error.details,
+            hint: error.hint,
+            code: error.code
+          });
           throw error;
         }
+
+        console.log('Insert successful:', data);
 
         toast({
           title: "Success",
@@ -293,7 +312,7 @@ const BlogEditor = () => {
             <div className="flex gap-4">
               <Button 
                 type="submit" 
-                disabled={isLoading}
+                disabled={isLoading || !isAuthenticated}
                 className="bg-blue-600 hover:bg-blue-700"
               >
                 {isLoading ? 'Saving...' : (editingPost ? 'Update Post' : 'Create Post')}

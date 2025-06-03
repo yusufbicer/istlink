@@ -3,28 +3,23 @@ import { Link } from 'react-router-dom';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Mock blog data - will be replaced when blog functionality is implemented
+// Mock blog data with images
 const mockBlogPosts = [
   {
     id: '1',
     title: 'How to Optimize Your Turkish Supply Chain for Maximum Efficiency',
     excerpt: 'Discover proven strategies to streamline your Turkish sourcing operations and reduce costs.',
     date: '2024-12-15',
-    slug: 'optimize-turkish-supply-chain'
+    slug: 'optimize-turkish-supply-chain',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=200&fit=crop'
   },
   {
     id: '2',
     title: 'The Complete Guide to Consolidation Services in International Trade',
     excerpt: 'Learn how consolidation can save you up to 50% on shipping costs while simplifying logistics.',
     date: '2024-12-10',
-    slug: 'consolidation-services-guide'
-  },
-  {
-    id: '3',
-    title: 'Turkey Trade Regulations 2024: What Importers Need to Know',
-    excerpt: 'Stay compliant with the latest Turkish trade regulations and documentation requirements.',
-    date: '2024-12-05',
-    slug: 'turkey-trade-regulations-2024'
+    slug: 'consolidation-services-guide',
+    image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=200&fit=crop'
   }
 ];
 
@@ -44,53 +39,67 @@ const BlogPreview = () => {
         </div>
 
         {isMobile ? (
-          // Mobile: Single column, compact cards
+          // Mobile: Single column with images
           <div className="space-y-4">
-            {mockBlogPosts.slice(0, 2).map((post) => (
+            {mockBlogPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
-                className="block bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors group"
+                className="block bg-gray-50 rounded-lg overflow-hidden hover:bg-gray-100 transition-colors group"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-grow">
+                <div className="flex">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-20 h-20 object-cover flex-shrink-0"
+                  />
+                  <div className="p-4 flex-grow">
                     <h3 className="font-semibold text-sm text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                       {post.title}
                     </h3>
-                    <p className="text-xs text-gray-600 mb-2 line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    <p className="text-xs text-gray-600 mb-2 line-clamp-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                       {post.excerpt}
                     </p>
-                    <div className="flex items-center text-xs text-gray-500">
-                      <Calendar className="h-3 w-3 mr-1" />
-                      {new Date(post.date).toLocaleDateString()}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center text-xs text-gray-500">
+                        <Calendar className="h-3 w-3 mr-1" />
+                        {new Date(post.date).toLocaleDateString()}
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors ml-2 flex-shrink-0" />
                 </div>
               </Link>
             ))}
           </div>
         ) : (
-          // Desktop/Tablet: Three columns
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          // Desktop/Tablet: Two columns with images
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {mockBlogPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
-                className="block bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors group"
+                className="block bg-gray-50 rounded-lg overflow-hidden hover:bg-gray-100 transition-colors group"
               >
-                <h3 className="font-semibold text-sm text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  {post.title}
-                </h3>
-                <p className="text-xs text-gray-600 mb-3 line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  {post.excerpt}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-xs text-gray-500">
-                    <Calendar className="h-3 w-3 mr-1" />
-                    {new Date(post.date).toLocaleDateString()}
+                <img 
+                  src={post.image} 
+                  alt={post.title}
+                  className="w-full h-32 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="font-semibold text-sm text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    {post.title}
+                  </h3>
+                  <p className="text-xs text-gray-600 mb-3 line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-xs text-gray-500">
+                      <Calendar className="h-3 w-3 mr-1" />
+                      {new Date(post.date).toLocaleDateString()}
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                   </div>
-                  <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                 </div>
               </Link>
             ))}

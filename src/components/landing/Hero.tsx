@@ -50,16 +50,8 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-slate-700 font-medium leading-relaxed tracking-wide">
-              <span className="text-blue-600 font-semibold bg-blue-50 px-2 py-1 rounded-md">Transform fragmented Turkish supplier purchases</span>{' '}
-              into a single, streamlined shipment. Our{' '}
-              <span className="text-emerald-600 font-semibold bg-emerald-50 px-2 py-1 rounded-md">AI-powered platform</span>{' '}
-              simplifies the entire process—from{' '}
-              <span className="text-purple-600 font-semibold">payment consolidation</span>{' '}
-              to{' '}
-              <span className="text-indigo-600 font-semibold">documentation management</span>{' '}
-              and{' '}
-              <span className="text-teal-600 font-semibold">comprehensive tracking</span>.
+            <p className="text-gray-900 font-normal leading-relaxed tracking-wide font-serif text-lg md:text-xl">
+              Transform fragmented Turkish supplier purchases into a single, streamlined shipment. Our AI-powered platform simplifies the entire process—from payment consolidation to documentation management and comprehensive tracking.
             </p>
           </div>
           

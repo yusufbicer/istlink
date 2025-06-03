@@ -132,13 +132,13 @@ const Index = () => {
                       <TabsContent key={index} value={plan.name.toLowerCase()}>
                         <div className={`bg-white rounded-lg border-2 ${plan.borderColor} shadow-sm overflow-hidden relative`}>
                           {plan.isPopular && (
-                            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-20">
+                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
                               <div className="bg-blue-600 text-white px-3 py-1 rounded-full shadow-md">
                                 <span className="text-xs font-semibold">MOST POPULAR</span>
                               </div>
                             </div>
                           )}
-                          <div className={`p-5 ${plan.isPopular ? 'pt-6' : ''}`}>
+                          <div className={`p-5 ${plan.isPopular ? 'pt-8' : ''}`}>
                             <div className={`w-10 h-10 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>
                               <PlanIcon className={`h-5 w-5 ${plan.iconColor}`} />
                             </div>
@@ -174,7 +174,7 @@ const Index = () => {
                 </Tabs>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {pricingPlans.map((plan, index) => {
                   const PlanIcon = plan.icon;
                   
@@ -186,37 +186,37 @@ const Index = () => {
                       }`}
                     >
                       {plan.isPopular && (
-                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
-                          <div className="bg-blue-600 text-white px-4 py-1.5 rounded-full shadow-lg border-2 border-white">
+                        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                          <div className="bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg border-2 border-white">
                             <span className="text-xs font-semibold whitespace-nowrap">MOST POPULAR</span>
                           </div>
                         </div>
                       )}
                       
-                      <div className={`p-5 ${plan.isPopular ? 'pt-8' : ''} flex flex-col h-full`}>
+                      <div className={`p-6 ${plan.isPopular ? 'pt-10' : ''} flex flex-col h-full`}>
                         <div className="flex-grow">
-                          <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>
+                          <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-4 mx-auto`}>
                             <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
                           </div>
                           <h3 className="text-lg font-bold mb-2 text-center">{plan.name}</h3>
-                          <p className="text-gray-600 mb-3 text-center text-sm">{plan.description}</p>
+                          <p className="text-gray-600 mb-4 text-center text-sm">{plan.description}</p>
                           <div className="text-center mb-1">
                             <span className="text-2xl font-bold">{plan.price}</span>
                           </div>
                           <div className="text-gray-600 text-sm mb-2 text-center">{plan.period}</div>
                           {plan.additionalInfo && (
-                            <div className="text-xs text-gray-500 mb-3 text-center">{plan.additionalInfo}</div>
+                            <div className="text-xs text-gray-500 mb-4 text-center">{plan.additionalInfo}</div>
                           )}
                           
-                          <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-3`}>
+                          <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-4`}>
                             Get Started
                           </button>
                           
-                          <div className="border-t pt-3">
-                            <ul className="space-y-1.5">
+                          <div className="border-t pt-4">
+                            <ul className="space-y-2">
                               {plan.features.map((feature, i) => (
                                 <li key={i} className="flex items-start">
-                                  <CheckCircle2 className="h-3 w-3 text-emerald-500 mr-2 mt-0.5 flex-shrink-0" />
+                                  <CheckCircle2 className="h-4 w-4 text-emerald-500 mr-2 mt-0.5 flex-shrink-0" />
                                   <span className="text-gray-700 text-sm">{feature}</span>
                                 </li>
                               ))}

@@ -34,7 +34,6 @@ const Index = () => {
       iconColor: "text-slate-600",
       iconBg: "bg-slate-100",
       borderColor: "border-slate-200",
-      buttonColor: "bg-slate-600 hover:bg-slate-700",
       features: [
         "Single consolidated shipment",
         "Supplier payment handling",
@@ -52,7 +51,6 @@ const Index = () => {
       iconColor: "text-blue-600",
       iconBg: "bg-blue-100",
       borderColor: "border-blue-300",
-      buttonColor: "bg-blue-600 hover:bg-blue-700",
       features: [
         "Multiple consolidated shipments",
         "Digital procurement dashboard",
@@ -71,7 +69,6 @@ const Index = () => {
       iconColor: "text-emerald-600",
       iconBg: "bg-emerald-100",
       borderColor: "border-emerald-200",
-      buttonColor: "bg-emerald-600 hover:bg-emerald-700",
       features: [
         "Volume discount pricing",
         "Priority consolidation",
@@ -138,10 +135,6 @@ const Index = () => {
                               <div className="text-xs text-gray-500 mb-3 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.additionalInfo}</div>
                             )}
                             
-                            <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-3`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                              Request Access
-                            </button>
-                            
                             <div className="border-t pt-3">
                               <ul className="space-y-1.5">
                                 {plan.features.map((feature, i) => (
@@ -183,10 +176,6 @@ const Index = () => {
                           {plan.additionalInfo && (
                             <div className="text-xs text-gray-500 mb-4 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.additionalInfo}</div>
                           )}
-                          
-                          <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-4`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                            Request Access
-                          </button>
                           
                           <div className="border-t pt-4">
                             <ul className="space-y-2">

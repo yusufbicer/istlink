@@ -49,6 +49,9 @@ const IstLinqLogo = ({ size = 'md', className = '' }: IstLinqLogoProps) => {
         <circle cx="50" cy="50" r="6" fill="white" />
         <circle cx="50" cy="50" r="3" fill="url(#centerGradient)" />
         
+        {/* Letter Q indicator - small tail to distinguish from O */}
+        <path d="M52 52 L54 54" stroke="white" strokeWidth="1" opacity="0.8" />
+        
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#3B82F6" />

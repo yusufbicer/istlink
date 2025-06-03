@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
@@ -38,7 +39,7 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'py-2 bg-white/80 backdrop-blur-md shadow-sm' : 'py-4 bg-transparent'
+      isScrolled ? 'py-2 bg-white/85 backdrop-blur-lg shadow-sm border-b border-white/20' : 'py-4 bg-transparent'
     }`}>
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
@@ -59,35 +60,35 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
-            {/* Enhanced navigation with better styling */}
-            <div className={`flex ${isTablet ? 'space-x-4' : 'space-x-8'}`}>
+            {/* Enhanced navigation with modern glassmorphism styling */}
+            <div className={`flex ${isTablet ? 'space-x-1' : 'space-x-2'} bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-2 py-1.5 shadow-lg`}>
               <button 
                 onClick={() => scrollToSection('features')}
-                className={`relative text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-3 py-2 rounded-lg hover:bg-emerald-50`}
+                className={`relative text-sm font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-4 py-2.5 rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
                 Features
-                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className={`relative text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-3 py-2 rounded-lg hover:bg-emerald-50`}
+                className={`relative text-sm font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-4 py-2.5 rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
                 How It Works
-                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className={`relative text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-3 py-2 rounded-lg hover:bg-emerald-50`}
+                className={`relative text-sm font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-4 py-2.5 rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
                 Pricing
-                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
-                className={`relative text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-3 py-2 rounded-lg hover:bg-emerald-50`}
+                className={`relative text-sm font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-4 py-2.5 rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
                 Blog
-                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
             </div>
           </div>
@@ -96,14 +97,14 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <Button 
-                className="bg-emerald-600 hover:bg-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold"
+                className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full px-6"
                 onClick={() => handleNavigate('/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold"
+                className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full px-6"
                 onClick={() => handleNavigate('/early-access')}
               >
                 {isTablet ? "Early Access" : "Request Early Access"}
@@ -114,7 +115,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex items-center p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            className="md:hidden flex items-center p-2 rounded-full hover:bg-white/20 transition-colors duration-200 backdrop-blur-md"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -126,29 +127,29 @@ const Header = () => {
 
         {/* Mobile Menu - Improved visibility and spacing */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg animate-slide-down">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg animate-slide-down border-b border-white/20">
             <div className="flex flex-col py-4 px-6 space-y-4">
               <button 
                 onClick={() => scrollToSection('features')}
-                className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left"
+                className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left hover:bg-emerald-50 rounded-lg px-2"
               >
                 Features
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left"
+                className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left hover:bg-emerald-50 rounded-lg px-2"
               >
                 How It Works
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left"
+                className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left hover:bg-emerald-50 rounded-lg px-2"
               >
                 Pricing
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
-                className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left"
+                className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left hover:bg-emerald-50 rounded-lg px-2"
               >
                 Blog
               </button>
@@ -156,14 +157,14 @@ const Header = () => {
               <div className="pt-2 border-t border-gray-100">
                 {user ? (
                   <Button 
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 font-semibold"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 font-semibold rounded-full"
                     onClick={() => handleNavigate('/dashboard')}
                   >
                     Dashboard
                   </Button>
                 ) : (
                   <Button 
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 font-semibold"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 font-semibold rounded-full"
                     onClick={() => handleNavigate('/early-access')}
                   >
                     Request Early Access

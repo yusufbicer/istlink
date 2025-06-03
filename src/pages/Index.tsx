@@ -132,9 +132,9 @@ const Index = () => {
                       <TabsContent key={index} value={plan.name.toLowerCase()}>
                         <div className={`bg-white rounded-lg border-2 ${plan.borderColor} shadow-sm overflow-hidden relative`}>
                           {plan.isPopular && (
-                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
-                              <div className="bg-blue-600 text-white px-3 py-1 rounded-full shadow-md">
-                                <span className="text-xs font-semibold">MOST POPULAR</span>
+                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+                              <div className="bg-blue-600 text-white px-3 py-1 rounded-full shadow-md text-center">
+                                <span className="text-xs font-semibold whitespace-nowrap">MOST POPULAR</span>
                               </div>
                             </div>
                           )}
@@ -186,7 +186,7 @@ const Index = () => {
                       }`}
                     >
                       {plan.isPopular && (
-                        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                           <div className="bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg border-2 border-white">
                             <span className="text-xs font-semibold whitespace-nowrap">MOST POPULAR</span>
                           </div>

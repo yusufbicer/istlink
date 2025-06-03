@@ -50,7 +50,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-gray-900 font-normal leading-relaxed tracking-wide font-serif text-lg md:text-xl">
+            <p className="text-slate-700 font-normal leading-relaxed tracking-wide font-sans text-lg md:text-xl" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a single, streamlined shipment. Our AI-powered platform simplifies the entire process—from payment consolidation to documentation management and comprehensive tracking.
             </p>
           </div>

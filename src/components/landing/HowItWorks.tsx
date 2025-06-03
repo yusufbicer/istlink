@@ -9,12 +9,15 @@ import {
   ShipIcon, 
   MapPin
 } from 'lucide-react';
+import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import type { UseEmblaCarouselType } from "embla-carousel-react";
 
 interface Step {
   icon: React.ComponentType<any>;
   title: string;
   description: string;
-  color: string; // Add color property for each step
+  color: string;
 }
 
 const steps: Step[] = [
@@ -65,7 +68,11 @@ const steps: Step[] = [
 const HowItWorks = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const titleRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -88,28 +95,48 @@ const HowItWorks = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (emblaApi) {
+      const onSelect = () => {
+        setCurrentSlide(emblaApi.selectedScrollSnap());
+      };
+      
+      emblaApi.on("select", onSelect);
+      return () => {
+        emblaApi.off("select", onSelect);
+      };
+    }
+    return undefined;
+  }, [emblaApi]);
+
+  const scrollToSlide = (index: number) => {
+    if (emblaApi && emblaApi.scrollTo) {
+      emblaApi.scrollTo(index);
+    }
+  };
+
   return (
-    <section id="how-it-works" className="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
+    <section id="how-it-works" className={`${isMobile ? 'py-12' : 'py-20'} bg-gradient-to-b from-gray-50 to-gray-100`}>
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
-          className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${
+          className={`text-center max-w-3xl mx-auto ${isMobile ? 'mb-8' : 'mb-16'} transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <span className="inline-block py-1 px-3 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-3">
             Simple Process
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className={`${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-3xl md:text-4xl'} font-bold mb-4`}>
             7 Simple Steps to Supply Chain Success
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-600`}>
             Our streamlined process makes sourcing and shipping from Turkey effortless.
           </p>
         </div>
 
         {/* Desktop View (Timeline) */}
-        <div className="hidden md:block max-w-5xl mx-auto">
+        <div className="hidden lg:block max-w-5xl mx-auto">
           <div className="relative">
             {/* Connecting line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indigo-200 transform -translate-x-1/2 z-0"></div>
@@ -163,37 +190,91 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        {/* Mobile View (Cards) */}
-        <div className="md:hidden space-y-6">
-          {steps.map((step, index) => {
-            const StepIcon = step.icon;
-            
-            return (
-              <div 
-                key={index} 
-                className="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-emerald-500"
-              >
-                <div className="p-5">
-                  <div className="flex items-center mb-4">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 ${step.color}`}>
-                      <StepIcon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div className="flex items-center">
-                        <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm font-bold mr-2">
+        {/* Tablet View (Simplified Grid) */}
+        <div className="hidden md:block lg:hidden">
+          <div className="grid grid-cols-2 gap-4">
+            {steps.map((step, index) => {
+              const StepIcon = step.icon;
+              
+              return (
+                <div 
+                  key={index} 
+                  className="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-emerald-500"
+                >
+                  <div className="p-4">
+                    <div className="flex items-center mb-3">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${step.color}`}>
+                        <StepIcon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold mr-2">
                           {index + 1}
                         </span>
-                        <h3 className="font-bold text-lg text-gray-900">{step.title}</h3>
                       </div>
                     </div>
+                    <h3 className="font-bold text-sm text-gray-900 mb-2">{step.title}</h3>
+                    <p className="text-gray-600 text-xs">{step.description}</p>
                   </div>
-                  <p className="text-gray-600 pl-16">{step.description}</p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
+        {/* Mobile View (Compact Carousel) */}
+        <div className="md:hidden">
+          {/* Compact Navigation Pills */}
+          <div className="flex justify-center mb-4">
+            <div className="flex space-x-1 bg-white/50 backdrop-blur-sm rounded-full p-1">
+              {steps.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToSlide(idx)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    currentSlide === idx ? 'bg-emerald-600 w-4' : 'bg-gray-300'
+                  }`}
+                  aria-label={`Go to step ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <Carousel
+            className="w-full"
+            setApi={setEmblaApi}
+          >
+            <CarouselContent>
+              {steps.map((step, index) => {
+                const StepIcon = step.icon;
+                
+                return (
+                  <CarouselItem key={index}>
+                    <div className="bg-white rounded-xl shadow-lg border-l-4 border-emerald-500 p-5 mx-2">
+                      <div className="text-center">
+                        <div className={`w-12 h-12 ${step.color} rounded-xl flex items-center justify-center mb-4 mx-auto relative`}>
+                          <StepIcon className="w-6 h-6" />
+                          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">
+                            {index + 1}
+                          </div>
+                        </div>
+                        <h3 className="text-lg font-semibold mb-3 text-gray-900">{step.title}</h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            
+            <div className="flex justify-center items-center gap-4 mt-6">
+              <CarouselPrevious className="static translate-y-0 h-8 w-8 bg-white/80 hover:bg-white" />
+              <div className="text-sm text-gray-500 font-medium">
+                {currentSlide + 1} of {steps.length}
+              </div>
+              <CarouselNext className="static translate-y-0 h-8 w-8 bg-white/80 hover:bg-white" />
+            </div>
+          </Carousel>
+        </div>
       </div>
     </section>
   );

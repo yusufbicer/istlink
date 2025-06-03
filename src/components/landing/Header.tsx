@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { Menu, X } from 'lucide-react';
-import { useIsTablet } from '@/hooks/use-mobile';
+import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
 import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Header = () => {
@@ -13,6 +13,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const isTablet = useIsTablet();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,46 +47,46 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                <IstLinqLogo size="lg" />
-                {/* Enhanced istLinq branding with two-color text - removed tagline */}
-                <div className="ml-4">
+                <IstLinqLogo size={isMobile ? "md" : "lg"} />
+                {/* Enhanced istLinq branding with two-color text - responsive sizing */}
+                <div className={isMobile ? "ml-2" : "ml-4"}>
                   <div className="flex items-baseline">
-                    <span className="font-bold text-3xl text-blue-600 tracking-tight">ist</span>
-                    <span className="font-bold text-3xl text-emerald-600 tracking-tight">Linq</span>
+                    <span className={`font-bold ${isMobile ? "text-xl" : isTablet ? "text-2xl" : "text-3xl"} text-blue-600 tracking-tight`}>ist</span>
+                    <span className={`font-bold ${isMobile ? "text-xl" : isTablet ? "text-2xl" : "text-3xl"} text-emerald-600 tracking-tight`}>Linq</span>
                   </div>
                 </div>
               </div>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Improved tablet spacing */}
           <div className="hidden md:flex items-center">
-            {/* Enhanced navigation with modern glassmorphism styling */}
-            <div className={`flex ${isTablet ? 'space-x-1' : 'space-x-2'} bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-2 py-1.5 shadow-lg`}>
+            {/* Enhanced navigation with better tablet spacing */}
+            <div className={`flex ${isTablet ? 'space-x-1 mx-4' : 'space-x-2'} bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-2 py-1.5 shadow-lg`}>
               <button 
                 onClick={() => scrollToSection('features')}
-                className={`relative text-sm font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-4 py-2.5 rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
+                className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
                 Features
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className={`relative text-sm font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-4 py-2.5 rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
+                className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
                 How It Works
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className={`relative text-sm font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-4 py-2.5 rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
+                className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
                 Pricing
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
-                className={`relative text-sm font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group px-4 py-2.5 rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
+                className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
                 Blog
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
@@ -93,21 +94,21 @@ const Header = () => {
             </div>
           </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Improved tablet spacing */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <Button 
-                className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full px-6"
+                className={`bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full ${isTablet ? 'px-4 text-sm' : 'px-6'}`}
                 onClick={() => handleNavigate('/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full px-6"
+                className={`bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full ${isTablet ? 'px-4 text-sm' : 'px-6'}`}
                 onClick={() => handleNavigate('/early-access')}
               >
-                {isTablet ? "Request Access" : "Request Access"}
+                Request Access
               </Button>
             )}
           </div>

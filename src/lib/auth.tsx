@@ -43,10 +43,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         console.log('Auth state change:', event, session?.user?.email);
         if (session?.user) {
-          await setUserFromSession(session.user);
+          // Use setTimeout to defer admin checking and prevent potential deadlocks
+          setTimeout(() => {
+            setUserFromSession(session.user);
+          }, 0);
         } else {
           setUser(null);
         }
@@ -102,6 +105,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.log('User set:', userData);
     } catch (error) {
       console.error("Error setting user from session:", error);
+      // Set user without admin role if there's an error
+      const userData: User = {
+        id: supabaseUser.id,
+        name: supabaseUser.user_metadata?.name || null,
+        email: supabaseUser.email!,
+        role: 'user',
+      };
+      setUser(userData);
     }
   };
 
@@ -182,9 +193,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signUp
   };
   
+  // Don't render children until we've checked for existing session
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+  
   return (
     <AuthContext.Provider value={value}>
-      {!isLoading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

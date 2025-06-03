@@ -4,33 +4,13 @@ import { Link } from "react-router-dom";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 import { CalendarDays, Clock, ChevronRight, Plus } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import { format } from "date-fns";
-
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string | null;
-  created_at: string;
-  read_time: string;
-  category: string;
-  image_url: string | null;
-  author_name: string;
-  author_avatar: string | null;
-  slug: string;
-  published: boolean;
-}
 
 const Blog = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
   const [isVisible, setIsVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
   const { user } = useAuth();
+  const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,75 +19,6 @@ const Blog = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    fetchBlogPosts();
-    if (user) {
-      checkAdminStatus();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (activeCategory === "All") {
-      setFilteredPosts(blogPosts);
-    } else {
-      setFilteredPosts(blogPosts.filter(post => post.category === activeCategory));
-    }
-  }, [activeCategory, blogPosts]);
-
-  const fetchBlogPosts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('blog_posts')
-        .select('*')
-        .eq('published', true)
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setBlogPosts(data || []);
-    } catch (error) {
-      console.error('Error fetching blog posts:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const checkAdminStatus = async () => {
-    if (!user) return;
-    
-    try {
-      const { data, error } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('user_id', user.id)
-        .single();
-
-      if (!error && data) {
-        setIsAdmin(true);
-      }
-    } catch (error) {
-      console.error('Error checking admin status:', error);
-    }
-  };
-
-  // Get unique categories from blog posts
-  const categories = Array.from(new Set(blogPosts.map(post => post.category)));
-
-  if (isLoading) {
-    return (
-      <>
-        <Header />
-        <main className="pt-32 pb-16">
-          <div className="container mx-auto px-6">
-            <div className="text-center">
-              <p className="text-gray-600">Loading blog posts...</p>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </>
-    );
-  }
 
   return (
     <>
@@ -141,130 +52,22 @@ const Blog = () => {
                 </Link>
               </div>
             )}
-
-            {/* Category Filter */}
-            {categories.length > 0 && (
-              <div className="flex flex-wrap justify-center gap-2 mb-8">
-                <button
-                  onClick={() => setActiveCategory("All")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeCategory === "All" 
-                      ? "bg-blue-600 text-white" 
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  All Posts
-                </button>
-                
-                {categories.map(category => (
-                  <button
-                    key={category}
-                    onClick={() => setActiveCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                      activeCategory === category 
-                        ? "bg-blue-600 text-white" 
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
         </section>
 
         {/* Blog Posts Grid */}
         <section className="container mx-auto px-6">
-          {filteredPosts.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-gray-600 mb-4">No blog posts published yet.</p>
-              {isAdmin && (
-                <Link to="/blog/editor">
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create First Post
-                  </Button>
-                </Link>
-              )}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post, index) => (
-                <article 
-                  key={post.id}
-                  className={`bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  {post.image_url && (
-                    <div className="relative">
-                      <img 
-                        src={post.image_url} 
-                        alt={post.title}
-                        className="w-full h-48 object-cover"
-                      />
-                      <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                        {post.category}
-                      </span>
-                    </div>
-                  )}
-                  
-                  <div className="p-6">
-                    <h2 className="text-xl font-bold mb-2 line-clamp-2">
-                      {post.title}
-                    </h2>
-                    {post.excerpt && (
-                      <p className="text-gray-600 mb-4 line-clamp-3">
-                        {post.excerpt}
-                      </p>
-                    )}
-                    
-                    <div className="flex items-center mb-4">
-                      {post.author_avatar ? (
-                        <img 
-                          src={post.author_avatar} 
-                          alt={post.author_name}
-                          className="w-8 h-8 rounded-full object-cover mr-3"
-                        />
-                      ) : (
-                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                          <span className="text-blue-600 font-medium text-sm">
-                            {post.author_name.charAt(0)}
-                          </span>
-                        </div>
-                      )}
-                      <span className="text-sm font-medium">
-                        {post.author_name}
-                      </span>
-                    </div>
-                    
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center">
-                        <CalendarDays className="w-4 h-4 mr-1" />
-                        {format(new Date(post.created_at), 'MMM d, yyyy')}
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {post.read_time}
-                      </div>
-                    </div>
-                    
-                    <div className="mt-5 pt-5 border-t border-gray-100">
-                      <Link 
-                        to={`/blog/${post.slug}`}
-                        className="inline-flex items-center text-blue-600 font-medium hover:underline"
-                      >
-                        Read Article
-                        <ChevronRight className="w-4 h-4 ml-1" />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
+          <div className="text-center py-16">
+            <p className="text-gray-600 mb-4">Blog posts will be available after Supabase integration.</p>
+            {isAdmin && (
+              <Link to="/blog/editor">
+                <Button className="bg-blue-600 hover:bg-blue-700">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create First Post
+                </Button>
+              </Link>
+            )}
+          </div>
           
           <div className="mt-16 text-center">
             <p className="text-gray-500 mb-4">Want to stay updated with our latest insights?</p>

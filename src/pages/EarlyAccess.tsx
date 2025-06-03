@@ -8,7 +8,6 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, For
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate } from 'react-router-dom';
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft } from "lucide-react";
@@ -42,17 +41,8 @@ const EarlyAccess = () => {
     setIsSubmitting(true);
     
     try {
-      // Make sure to send the data as a single object, not an array
-      const { error } = await supabase
-        .from('early_access_requests')
-        .insert({
-          name: data.name,
-          email: data.email,
-          company: data.company || null, // Use null for empty optional fields
-          reason: data.reason
-        });
-      
-      if (error) throw error;
+      // TODO: Implement submission when Supabase is integrated
+      console.log('Early access request:', data);
       
       toast({
         title: "Request submitted successfully!",
@@ -62,16 +52,9 @@ const EarlyAccess = () => {
       form.reset();
       setTimeout(() => navigate('/'), 2000);
     } catch (error: any) {
-      let errorMessage = "Failed to submit your request. Please try again.";
-      
-      // Handle duplicate email error
-      if (error.code === '23505') {
-        errorMessage = "This email has already been registered for early access.";
-      }
-      
       toast({
         title: "Submission Error",
-        description: errorMessage,
+        description: "Failed to submit your request. Please try again.",
         variant: "destructive",
       });
     } finally {

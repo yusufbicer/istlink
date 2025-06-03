@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import IstLinqLogo from '@/components/common/IstLinqLogo';
@@ -71,23 +70,21 @@ const Footer = () => {
 
           {/* Newsletter & Contact */}
           <div>
-            <h3 className="font-semibold mb-4 text-gray-800" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Stay Updated</h3>
-            <div className="space-y-4">
-              <div className="flex justify-center">
-                <Button 
-                  onClick={handleNewsletterClick}
-                  size="sm"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs py-2 px-3"
-                >
-                  Subscribe to Newsletter
-                </Button>
-              </div>
-              <div>
-                <h4 className="font-medium mb-2 text-gray-700" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Contact</h4>
-                <a href="mailto:istlinq@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  istlinq@gmail.com
-                </a>
-              </div>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-gray-800" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Stay Updated</h3>
+              <Button 
+                onClick={handleNewsletterClick}
+                size="sm"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs py-1.5 px-2.5"
+              >
+                Subscribe to Newsletter
+              </Button>
+            </div>
+            <div>
+              <h4 className="font-medium mb-2 text-gray-700" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Contact</h4>
+              <a href="mailto:istlinq@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                istlinq@gmail.com
+              </a>
             </div>
           </div>
         </div>

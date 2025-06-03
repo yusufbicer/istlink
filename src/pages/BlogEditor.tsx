@@ -120,7 +120,7 @@ const BlogEditor = () => {
         slug: values.slug,
         excerpt: values.excerpt || null,
         category: values.category,
-        author_id: user.id,
+        author_id: user.id, // This is the key fix - ensuring author_id is set
         author_name: user.email,
         updated_at: new Date().toISOString(),
         read_time: '5 min read',

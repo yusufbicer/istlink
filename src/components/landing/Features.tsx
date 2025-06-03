@@ -128,32 +128,32 @@ const Features = () => {
 
         {/* Desktop Bento Grid Layout */}
         <div className="hidden md:grid grid-cols-3 gap-4 auto-rows-fr">
-          {/* Main featured item (spans 2 columns and rows) */}
+          {/* Main featured item (spans 1 column and 1 row like the rest) */}
           <div 
-            className={`${features[0].color} col-span-2 row-span-2 rounded-xl border p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 flex flex-col ${
+            className={`${features[0].color} rounded-xl border p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 flex flex-col ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             style={{ transitionDelay: '100ms' }}
           >
-            <div className={`w-16 h-16 ${features[0].iconColor} rounded-xl flex items-center justify-center mb-6`}>
-              {React.createElement(features[0].icon, { className: "w-8 h-8" })}
+            <div className={`w-12 h-12 ${features[0].iconColor} rounded-lg flex items-center justify-center mb-4`}>
+              {React.createElement(features[0].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-2xl font-semibold mb-3">{features[0].title}</h3>
-            <p className="text-gray-600 text-lg mb-4">{features[0].description}</p>
-            <div className="bg-white rounded-lg p-4 mt-auto">
-              <div className="text-sm font-medium text-gray-800">Our customers typically save:</div>
-              <div className="flex justify-between mt-2">
+            <h3 className="text-xl font-semibold mb-2">{features[0].title}</h3>
+            <p className="text-gray-600 mb-4">{features[0].description}</p>
+            <div className="bg-white rounded-lg p-3 mt-auto">
+              <div className="text-xs font-medium text-gray-800 mb-2">Our customers typically save:</div>
+              <div className="grid grid-cols-3 gap-1">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-metallic-blue">35%</div>
-                  <div className="text-xs text-gray-500">Shipping Costs</div>
+                  <div className="text-base font-bold text-metallic-blue">35%</div>
+                  <div className="text-[10px] text-gray-500">Shipping</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-metallic-blue">68%</div>
-                  <div className="text-xs text-gray-500">Paperwork Time</div>
+                  <div className="text-base font-bold text-metallic-blue">68%</div>
+                  <div className="text-[10px] text-gray-500">Paperwork</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-metallic-blue">92%</div>
-                  <div className="text-xs text-gray-500">Space Utilization</div>
+                  <div className="text-base font-bold text-metallic-blue">92%</div>
+                  <div className="text-[10px] text-gray-500">Space</div>
                 </div>
               </div>
             </div>

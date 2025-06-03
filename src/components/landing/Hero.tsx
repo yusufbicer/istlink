@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -53,7 +52,7 @@ const Hero = () => {
           </div>
           
           <h1 
-            className={`text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold leading-tight mb-3 md:mb-4 transition-all duration-1000 delay-100 transform ${
+            className={`text-xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold md:font-normal leading-tight mb-3 md:mb-4 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             } text-gray-900`}
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
@@ -61,16 +60,16 @@ const Hero = () => {
             <span className="block mb-2">
               Turkish Supply Chain Complexity,
             </span>
-            <span className="block relative h-8 md:h-10 lg:h-12 overflow-hidden">
+            <span className="block relative h-8 md:h-12 lg:h-16 xl:h-20 overflow-hidden">
               <span 
-                className={`absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent font-bold transition-all duration-700 ease-in-out ${
+                className={`absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent font-semibold md:font-medium transition-all duration-700 ease-in-out ${
                   currentTextIndex === 0 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
                 }`}
               >
                 {alternatingTexts[0]}
               </span>
               <span 
-                className={`absolute inset-0 bg-gradient-to-r from-emerald-600 to-purple-600 bg-clip-text text-transparent font-bold transition-all duration-700 ease-in-out ${
+                className={`absolute inset-0 bg-gradient-to-r from-emerald-600 to-purple-600 bg-clip-text text-transparent font-semibold md:font-medium transition-all duration-700 ease-in-out ${
                   currentTextIndex === 1 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'
                 }`}
               >
@@ -80,7 +79,7 @@ const Hero = () => {
           </h1>
           
           <div 
-            className={`text-sm md:text-base lg:text-lg mb-4 md:mb-6 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
+            className={`text-sm md:text-lg lg:text-xl mb-4 md:mb-6 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >

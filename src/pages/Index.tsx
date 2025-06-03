@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
@@ -145,7 +144,7 @@ const Index = () => {
                             )}
                             
                             <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-3`}>
-                              Get Started
+                              Request Access
                             </button>
                             
                             <div className="border-t pt-3">
@@ -191,7 +190,7 @@ const Index = () => {
                           )}
                           
                           <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-4`}>
-                            Get Started
+                            Request Access
                           </button>
                           
                           <div className="border-t pt-4">

@@ -99,7 +99,7 @@ const Header = () => {
             {user ? (
               <Button 
                 className={`bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full ${isTablet ? 'px-4 text-sm' : 'px-6'}`}
-                onClick={() => handleNavigate('/dashboard')}
+                onClick={() => handleNavigate('/admin/dashboard')}
               >
                 Dashboard
               </Button>
@@ -159,7 +159,7 @@ const Header = () => {
                 {user ? (
                   <Button 
                     className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 font-semibold rounded-full"
-                    onClick={() => handleNavigate('/dashboard')}
+                    onClick={() => handleNavigate('/admin/dashboard')}
                   >
                     Dashboard
                   </Button>

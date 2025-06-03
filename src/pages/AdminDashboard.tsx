@@ -89,8 +89,8 @@ const AdminDashboard = () => {
 
       if (error) throw error;
       
-      // Update local state
-      setEarlyAccessRequests(earlyAccessRequests.filter(request => request.id !== id));
+      // Refresh the data after deletion
+      await fetchEarlyAccessRequests();
       
       toast({
         title: "Success",
@@ -151,6 +151,7 @@ const AdminDashboard = () => {
                   <TableHead>Name</TableHead>
                   <TableHead>Email</TableHead>
                   <TableHead>Company</TableHead>
+                  <TableHead>Message</TableHead>
                   <TableHead>Created</TableHead>
                   <TableHead className="w-[160px] text-right">Actions</TableHead>
                 </TableRow>
@@ -161,6 +162,15 @@ const AdminDashboard = () => {
                     <TableCell className="font-medium">{request.name}</TableCell>
                     <TableCell>{request.email}</TableCell>
                     <TableCell>{request.company || '-'}</TableCell>
+                    <TableCell className="max-w-xs">
+                      {request.reason ? (
+                        <div className="truncate" title={request.reason}>
+                          {request.reason}
+                        </div>
+                      ) : (
+                        '-'
+                      )}
+                    </TableCell>
                     <TableCell>{format(new Date(request.created_at), 'MMM d, yyyy')}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end space-x-2">

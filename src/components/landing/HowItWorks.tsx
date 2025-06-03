@@ -166,39 +166,8 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        {/* Tablet View (Simplified Grid) */}
-        <div className="hidden md:block lg:hidden">
-          <div className="grid grid-cols-2 gap-4">
-            {steps.map((step, index) => {
-              const StepIcon = step.icon;
-              
-              return (
-                <div 
-                  key={index} 
-                  className="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-emerald-500"
-                >
-                  <div className="p-4">
-                    <div className="flex items-center mb-3">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${step.color}`}>
-                        <StepIcon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold mr-2">
-                          {index + 1}
-                        </span>
-                      </div>
-                    </div>
-                    <h3 className="font-bold text-sm text-gray-900 mb-2">{step.title}</h3>
-                    <p className="text-gray-600 text-xs">{step.description}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile View (Vertical Steps) */}
-        <div className="md:hidden">
+        {/* Tablet & Mobile View (Vertical Steps) */}
+        <div className="lg:hidden">
           <div className="relative max-w-md mx-auto">
             {/* Connecting line */}
             <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-indigo-200 z-0"></div>
@@ -216,11 +185,11 @@ const HowItWorks = () => {
                     {/* Icon circle */}
                     <div className="flex-shrink-0 relative z-10">
                       <div 
-                        className={`w-12 h-12 rounded-full flex items-center justify-center border-4 border-white ${step.color}`}
+                        className={`${isMobile ? 'w-12 h-12' : 'w-14 h-14'} rounded-full flex items-center justify-center border-4 border-white ${step.color}`}
                       >
-                        <StepIcon className="h-5 w-5" />
+                        <StepIcon className={`${isMobile ? 'h-5 w-5' : 'h-6 w-6'}`} />
                       </div>
-                      <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">
+                      <div className={`absolute -top-1 -right-1 ${isMobile ? 'w-6 h-6' : 'w-7 h-7'} rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold ${isMobile ? 'text-xs' : 'text-sm'}`}>
                         {index + 1}
                       </div>
                     </div>
@@ -228,8 +197,8 @@ const HowItWorks = () => {
                     {/* Content */}
                     <div className="ml-4 flex-1">
                       <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-emerald-500">
-                        <h3 className="font-bold text-lg text-gray-900 mb-2">{step.title}</h3>
-                        <p className="text-gray-600 text-sm">{step.description}</p>
+                        <h3 className={`font-bold ${isMobile ? 'text-lg' : 'text-xl'} text-gray-900 mb-2`}>{step.title}</h3>
+                        <p className={`text-gray-600 ${isMobile ? 'text-sm' : 'text-base'}`}>{step.description}</p>
                       </div>
                     </div>
                   </div>

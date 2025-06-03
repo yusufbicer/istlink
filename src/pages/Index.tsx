@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
@@ -87,11 +86,11 @@ const Index = () => {
       <main className="flex-grow">
         <Hero />
         
-        <div className={isMobile ? "mt-8" : "mt-12"}>
+        <div className={isMobile ? "mt-4" : "mt-6"}>
           <Features />
         </div>
         
-        <div className={isMobile ? "mt-8" : "mt-12"}>
+        <div className={isMobile ? "mt-4" : "mt-8"}>
           <HowItWorks />
         </div>
         

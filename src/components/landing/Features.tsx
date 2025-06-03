@@ -106,18 +106,18 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className="py-16 md:py-20 bg-gray-50">
+    <section id="features" className="py-12 md:py-16 bg-gray-50">
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
-          className={`text-center max-w-3xl mx-auto mb-12 transition-all duration-700 ${
+          className={`text-center max-w-3xl mx-auto mb-8 md:mb-10 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Features
           </span>
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <h2 className="text-3xl md:text-4xl font-semibold mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Simplifying Cross-Border Procurement
           </h2>
           <p className="text-sm md:text-xl text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

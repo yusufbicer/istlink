@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
@@ -103,7 +104,7 @@ const Index = () => {
           <HowItWorks />
         </div>
         
-        {/* Enhanced Pricing Section with Modern Styling */}
+        {/* Enhanced Pricing Section with Fixed Overlay Issue */}
         <section id="pricing" className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
           {/* Background decoration */}
           <div className="absolute inset-0 bg-gradient-radial from-blue-50/50 via-transparent to-transparent opacity-60" />
@@ -138,7 +139,7 @@ const Index = () => {
                     const PlanIcon = plan.icon;
                     return (
                       <TabsContent key={index} value={plan.name.toLowerCase()} className="pt-2">
-                        <div className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300`}>
+                        <div className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 relative`}>
                           {plan.isPopular && (
                             <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white text-center py-2">
                               <span className="text-xs font-bold flex items-center justify-center">
@@ -184,7 +185,7 @@ const Index = () => {
                 </Tabs>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 {pricingPlans.map((plan, index) => {
                   const PlanIcon = plan.icon;
                   
@@ -192,13 +193,13 @@ const Index = () => {
                     <div 
                       key={index} 
                       className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative group ${
-                        plan.isPopular ? 'transform scale-105' : ''
+                        plan.isPopular ? 'mt-6' : 'mt-12'
                       }`}
                     >
                       {plan.isPopular && (
-                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                          <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-4 py-1.5 rounded-full shadow-lg">
-                            <span className="text-xs font-bold flex items-center">
+                        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                          <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-4 py-2 rounded-full shadow-lg">
+                            <span className="text-xs font-bold flex items-center whitespace-nowrap">
                               <Star className="w-3 h-3 mr-1" />
                               MOST POPULAR
                             </span>
@@ -243,25 +244,6 @@ const Index = () => {
                 })}
               </div>
             )}
-            
-            {/* Trust indicators */}
-            <div className="text-center">
-              <p className="text-gray-600 mb-4">Trusted by businesses worldwide</p>
-              <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
-                <span className="flex items-center">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 mr-1" />
-                  No setup fees
-                </span>
-                <span className="flex items-center">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 mr-1" />
-                  Cancel anytime
-                </span>
-                <span className="flex items-center">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 mr-1" />
-                  24/7 support
-                </span>
-              </div>
-            </div>
           </div>
         </section>
         

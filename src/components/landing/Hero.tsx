@@ -83,7 +83,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-black font-medium leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className="text-black leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
               <span className="text-blue-700 font-semibold bg-blue-50 px-1 py-0.5 rounded">single, streamlined shipment</span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
@@ -384,7 +384,7 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        {/* Updated Efficiency Metrics with Total Savings */}
+                        {/* Updated Efficiency Metrics without Total Savings */}
                         <div className="col-span-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
                           <div className="flex justify-between items-center mb-2">
                             <span className="font-medium text-gray-700">Efficiency Metrics</span>
@@ -412,7 +412,7 @@ const Hero = () => {
                               </div>
                             </div>
                             
-                            <div>
+                            <div className="col-span-2">
                               <div className="flex justify-between text-sm mb-1">
                                 <span className="text-gray-500">Time Saved</span>
                                 <span className="font-medium">68%</span>
@@ -420,14 +420,6 @@ const Hero = () => {
                               <div className="w-full bg-gray-200 h-2 rounded-full">
                                 <div className="bg-lavender-500 h-full rounded-full" style={{width: '68%'}}></div>
                               </div>
-                            </div>
-                            
-                            <div>
-                              <div className="flex justify-between text-sm mb-1">
-                                <span className="text-gray-500">Total Savings</span>
-                                <span className="font-medium text-green-600">$12,750</span>
-                              </div>
-                              <div className="text-xs text-gray-500">Monthly</div>
                             </div>
                           </div>
                         </div>

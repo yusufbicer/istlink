@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -19,39 +20,42 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="pt-28 pb-8 md:pt-36 md:pb-16 overflow-hidden relative bg-gradient-to-b from-lavender-50 to-white">
+    <section className="pt-32 pb-12 md:pt-40 md:pb-20 overflow-hidden relative bg-gradient-to-b from-lavender-50 to-white">
       {/* Background gradients and effects */}
       <div className="absolute inset-0 bg-gradient-radial from-lavender-100/70 via-transparent to-transparent opacity-80" />
       <div className="absolute top-1/4 right-1/3 w-64 h-64 bg-lavender-200 rounded-full filter blur-3xl opacity-30 animate-float pointer-events-none" />
       <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-lavender-100 rounded-full filter blur-3xl opacity-20 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
       
       <div className="container mx-auto px-4 sm:px-6 relative">
-        <div className="max-w-4xl mx-auto text-center mb-6 md:mb-8">
+        <div className="max-w-5xl mx-auto text-center mb-8 md:mb-12">
           <div 
             className={`transition-all duration-1000 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <span className="inline-block py-1 px-3 text-sm font-medium bg-lavender-100 text-blue-600 rounded-full mb-3">
+            <span className="inline-block py-2 px-4 text-sm font-medium bg-gradient-to-r from-blue-100 to-lavender-100 text-blue-700 rounded-full mb-6 border border-blue-200">
               Smart Export Consolidation Solutions
             </span>
           </div>
           
           <h1 
-            className={`text-3xl md:text-5xl lg:text-6xl font-bold leading-tight md:leading-tight mb-5 transition-all duration-1000 delay-100 transform ${
+            className={`text-4xl md:text-6xl lg:text-7xl font-bold leading-tight md:leading-tight mb-8 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-lavender-600 to-emerald-600">Simplified & Streamlined</span>
+            <span className="block text-gray-900 mb-2">Turkish Supply Chain Complexity,</span>
+            <span className="block bg-gradient-to-r from-blue-600 via-lavender-600 to-emerald-600 bg-clip-text text-transparent font-extrabold">
+              Simplified & Streamlined
+            </span>
           </h1>
           
           <div 
-            className={`text-lg md:text-xl mb-6 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
+            className={`text-xl md:text-2xl mb-8 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-slate-700 font-normal leading-relaxed tracking-wide font-sans text-lg md:text-xl" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-              Transform fragmented Turkish supplier purchases into a single, streamlined shipment. Our AI-powered platform simplifies the entire process—from payment consolidation to documentation management and comprehensive tracking.
+            <p className="text-gray-600 font-medium leading-relaxed tracking-wide" style={{ fontFamily: 'SF Pro Display, Inter, system-ui, -apple-system, sans-serif' }}>
+              Transform fragmented Turkish supplier purchases into a <span className="text-blue-600 font-semibold">single, streamlined shipment</span>. Our AI-powered platform simplifies the entire process—from <span className="text-emerald-600 font-semibold">payment consolidation</span> to <span className="text-lavender-600 font-semibold">documentation management</span> and comprehensive tracking.
             </p>
           </div>
           
@@ -60,15 +64,15 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="lg" className="h-12 px-8 text-md bg-emerald-600 hover:bg-emerald-700 text-white">
+            <Button asChild size="lg" className="h-14 px-10 text-lg bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white shadow-lg hover:shadow-xl transition-all duration-300">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
-                <MessageSquare className="mr-2 h-5 w-5" /> Talk to Our Team
+                <MessageSquare className="mr-3 h-6 w-6" /> Talk to Our Team
               </a>
             </Button>
           </div>
         
           <div 
-            className={`mt-2 md:mt-4 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
+            className={`mt-8 md:mt-12 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
             }`}
           >

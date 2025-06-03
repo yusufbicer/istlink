@@ -127,152 +127,169 @@ const Hero = () => {
                   </div>
                   
                   {isMobile ? (
-                    <div className="bg-white text-gray-800 p-3">
-                      <div className="flex items-center justify-between mb-2">
+                    <div className="bg-white text-gray-800 p-4">
+                      <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
                           <IstLinqLogo size="sm" className="mr-3" />
-                          <span className="font-bold text-base tracking-tight">istLinq</span>
+                          <span className="font-bold text-lg tracking-tight">istLinq</span>
                         </div>
-                      </div>
-                      
-                      {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
-                      <div className="flex mb-3 bg-gray-200 rounded-lg p-0.5 text-[8px] justify-between overflow-hidden whitespace-nowrap shadow-sm">
-                        <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
-                          <Package className="h-2 w-2 mr-0.5" /> 
-                          <span className="truncate">Orders</span>
-                        </div>
-                        <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
-                          <GitMerge className="h-2 w-2 mr-0.5" /> 
-                          <span className="truncate">Consol</span>
-                        </div>
-                        <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
-                          <Users className="h-2 w-2 mr-0.5" /> 
-                          <span className="truncate">Supply</span>
-                        </div>
-                        <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
-                          <BarChart2 className="h-2 w-2 mr-0.5" /> 
-                          <span className="truncate">Stats</span>
-                        </div>
-                        <div className="ml-1 w-4 h-4 rounded-full bg-lavender-100 flex items-center justify-center text-[7px] text-lavender-700 font-medium flex-shrink-0">
+                        <div className="w-6 h-6 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium">
                           JD
                         </div>
                       </div>
                       
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-[10px] font-medium">Active Orders</span>
-                            <Package className="h-3 w-3 text-blue-600" />
+                      <div className="grid grid-cols-2 gap-3 mb-4">
+                        <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 shadow-sm">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-gray-700 text-xs font-medium">Active Orders</span>
+                            <Package className="h-4 w-4 text-blue-600" />
                           </div>
-                          <div className="text-sm font-bold">28</div>
-                          <div className="flex items-center mt-1 text-green-600 text-[10px]">
-                            <TrendingUp className="h-2.5 w-2.5 mr-0.5" />
+                          <div className="text-lg font-bold">28</div>
+                          <div className="flex items-center mt-1 text-green-600 text-xs">
+                            <TrendingUp className="h-3 w-3 mr-1" />
                             <span>+5 this week</span>
                           </div>
                         </div>
                         
-                        <div className="bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-[10px] font-medium">Active Consolidations</span>
-                            <GitMerge className="h-3 w-3 text-blue-600" />
+                        <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 shadow-sm">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-gray-700 text-xs font-medium">Consolidations</span>
+                            <GitMerge className="h-4 w-4 text-blue-600" />
                           </div>
-                          <div className="text-sm font-bold">5</div>
-                          <div className="flex items-center mt-1 text-green-600 text-[10px]">
-                            <TrendingUp className="h-2.5 w-2.5 mr-0.5" />
+                          <div className="text-lg font-bold">5</div>
+                          <div className="flex items-center mt-1 text-green-600 text-xs">
+                            <TrendingUp className="h-3 w-3 mr-1" />
                             <span>2 ready to ship</span>
                           </div>
                         </div>
                         
-                        <div className="bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-[10px] font-medium">Space Utilization</span>
-                            <Truck className="h-3 w-3 text-blue-600" />
+                        <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 shadow-sm">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-gray-700 text-xs font-medium">Space Utilization</span>
+                            <Truck className="h-4 w-4 text-blue-600" />
                           </div>
-                          <div className="text-sm font-bold">92%</div>
-                        </div>
-                        
-                        <div className="bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-[10px] font-medium">Time Saved</span>
-                            <Timer className="h-3 w-3 text-blue-600" />
-                          </div>
-                          <div className="text-sm font-bold">68%</div>
-                        </div>
-                        
-                        <div className="col-span-2 bg-lavender-100 p-2 rounded-lg border border-lavender-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-[10px] font-semibold">Shipping Cost Analysis</span>
-                            <Activity className="h-3 w-3 text-lavender-600" />
-                          </div>
-                          
-                          <div className="grid grid-cols-3 gap-1 text-center">
-                            <div className="px-1 py-1 bg-white rounded border border-gray-200">
-                              <div className="text-[9px] text-gray-600">Standard</div>
-                              <div className="text-xs font-bold">$32.5K</div>
-                            </div>
-                            <div className="px-1 py-1 bg-white rounded border border-gray-200">
-                              <div className="text-[9px] text-gray-600">istLinq</div>
-                              <div className="text-xs font-bold text-blue-600">$19.7K</div>
-                            </div>
-                            <div className="px-1 py-1 bg-white rounded border border-gray-200">
-                              <div className="text-[9px] text-gray-600">Saved</div>
-                              <div className="text-xs font-bold text-green-600">$12.7K</div>
-                            </div>
+                          <div className="text-lg font-bold">92%</div>
+                          <div className="w-full bg-gray-200 h-1.5 rounded-full mt-2">
+                            <div className="bg-blue-600 h-full rounded-full" style={{width: '92%'}}></div>
                           </div>
                         </div>
                         
-                        <div className="col-span-2 bg-gray-100 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-[10px] font-semibold">Active Consolidations</span>
-                            <GitMerge className="h-3 w-3 text-blue-600" />
+                        <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 shadow-sm">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-gray-700 text-xs font-medium">Time Saved</span>
+                            <Timer className="h-4 w-4 text-blue-600" />
                           </div>
-                          <div className="space-y-1.5">
-                            <div className="bg-white p-1.5 rounded border border-gray-200">
-                              <div className="flex justify-between items-center">
-                                <div>
-                                  <div className="text-[10px] font-medium">Istanbul → Lagos</div>
-                                  <div className="text-[8px] text-gray-600">Apr 15, 2025</div>
-                                </div>
-                                <div className="text-right">
-                                  <div className="text-[10px] font-medium text-blue-600">95%</div>
-                                </div>
+                          <div className="text-lg font-bold">68%</div>
+                          <div className="w-full bg-gray-200 h-1.5 rounded-full mt-2">
+                            <div className="bg-green-500 h-full rounded-full" style={{width: '68%'}}></div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 shadow-sm mb-4">
+                        <div className="flex justify-between items-center mb-3">
+                          <div className="flex items-center">
+                            <GitMerge className="h-4 w-4 text-blue-600 mr-2" />
+                            <span className="text-xs font-medium">Active Consolidations</span>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="bg-white p-2 rounded border border-gray-200">
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <div className="text-xs font-medium">Istanbul → Lagos</div>
+                                <div className="text-xs text-gray-600">Apr 15, 2025</div>
+                              </div>
+                              <div className="text-right">
+                                <div className="text-xs font-medium text-blue-600">95%</div>
                               </div>
                             </div>
-                            <div className="bg-white p-1.5 rounded border border-gray-200">
-                              <div className="flex justify-between items-center">
-                                <div>
-                                  <div className="text-[10px] font-medium">Istanbul → Matadi</div>
-                                  <div className="text-[8px] text-gray-600">Apr 25, 2025</div>
-                                </div>
-                                <div className="text-right">
-                                  <div className="text-[10px] font-medium text-blue-600">75%</div>
-                                </div>
+                          </div>
+                          <div className="bg-white p-2 rounded border border-gray-200">
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <div className="text-xs font-medium">Istanbul → Matadi</div>
+                                <div className="text-xs text-gray-600">Apr 25, 2025</div>
+                              </div>
+                              <div className="text-right">
+                                <div className="text-xs font-medium text-blue-600">75%</div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      
-                      <div className="mt-2 bg-gray-200 rounded-lg border border-gray-300 p-2 shadow-sm">
-                        <div className="flex justify-between items-center mb-1">
+
+                      <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 shadow-sm mb-4">
+                        <div className="flex justify-between items-center mb-3">
                           <div className="flex items-center">
-                            <CreditCard className="h-3 w-3 text-blue-600 mr-1" />
-                            <span className="text-[10px] font-medium">Payment Status</span>
+                            <Truck className="h-4 w-4 text-blue-600 mr-2" />
+                            <span className="text-xs font-medium">Next Shipment</span>
                           </div>
-                          <span className="px-1.5 py-0.5 bg-green-100 text-green-700 text-[8px] rounded-full font-medium">Active</span>
+                        </div>
+                        <div className="bg-white p-2 rounded border border-gray-200">
+                          <div className="flex justify-between items-center mb-2">
+                            <div>
+                              <div className="text-xs font-medium">Istanbul → Matadi</div>
+                              <div className="text-xs text-gray-600">40ft Container</div>
+                            </div>
+                            <div className="text-xs font-bold text-blue-600">Apr 15</div>
+                          </div>
+                          <div className="grid grid-cols-3 gap-1 text-center">
+                            <div className="text-xs">
+                              <div className="font-bold">28</div>
+                              <div className="text-gray-600">Orders</div>
+                            </div>
+                            <div className="text-xs">
+                              <div className="font-bold">3</div>
+                              <div className="text-gray-600">Suppliers</div>
+                            </div>
+                            <div className="text-xs">
+                              <div className="font-bold">75%</div>
+                              <div className="text-gray-600">Filled</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="bg-gray-50 p-3 rounded-lg border border-gray-200 shadow-sm mb-4">
+                        <div className="flex justify-between items-center mb-3">
+                          <div className="flex items-center">
+                            <Activity className="h-4 w-4 text-blue-600 mr-2" />
+                            <span className="text-xs font-medium">Efficiency Metrics</span>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="bg-white p-2 rounded border border-gray-200">
+                            <div className="text-xs text-gray-600">Cost Savings</div>
+                            <div className="text-sm font-bold text-green-600">39%</div>
+                          </div>
+                          <div className="bg-white p-2 rounded border border-gray-200">
+                            <div className="text-xs text-gray-600">Processing Time</div>
+                            <div className="text-sm font-bold text-purple-600">-68%</div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gray-200 rounded-lg border border-gray-300 p-3 shadow-sm">
+                        <div className="flex justify-between items-center mb-2">
+                          <div className="flex items-center">
+                            <CreditCard className="h-4 w-4 text-blue-600 mr-2" />
+                            <span className="text-xs font-medium">Payment Status</span>
+                          </div>
+                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">Active</span>
                         </div>
                         <div className="grid grid-cols-3 gap-1">
-                          <div className="bg-white p-1.5 rounded shadow-sm">
-                            <div className="text-[8px] text-gray-600">Available</div>
-                            <div className="text-[10px] font-medium">$32,080</div>
+                          <div className="bg-white p-2 rounded shadow-sm">
+                            <div className="text-xs text-gray-600">Available</div>
+                            <div className="text-xs font-medium">$32,080</div>
                           </div>
-                          <div className="bg-white p-1.5 rounded shadow-sm">
-                            <div className="text-[8px] text-gray-600">To Suppliers</div>
-                            <div className="text-[10px] font-medium">$24,850</div>
+                          <div className="bg-white p-2 rounded shadow-sm">
+                            <div className="text-xs text-gray-600">To Suppliers</div>
+                            <div className="text-xs font-medium">$24,850</div>
                           </div>
-                          <div className="bg-white p-1.5 rounded shadow-sm">
-                            <div className="text-[8px] text-gray-600">Service (2%)</div>
-                            <div className="text-[10px] font-medium">$497</div>
+                          <div className="bg-white p-2 rounded shadow-sm">
+                            <div className="text-xs text-gray-600">Service (2%)</div>
+                            <div className="text-xs font-medium">$497</div>
                           </div>
                         </div>
                       </div>

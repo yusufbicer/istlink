@@ -10,8 +10,6 @@ import {
   MapPin
 } from 'lucide-react';
 import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import type { UseEmblaCarouselType } from "embla-carousel-react";
 
 interface Step {
   icon: React.ComponentType<any>;
@@ -68,11 +66,9 @@ const steps: Step[] = [
 const HowItWorks = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeStep, setActiveStep] = useState<number | null>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
-  const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -94,26 +90,6 @@ const HowItWorks = () => {
       }
     };
   }, []);
-
-  useEffect(() => {
-    if (emblaApi) {
-      const onSelect = () => {
-        setCurrentSlide(emblaApi.selectedScrollSnap());
-      };
-      
-      emblaApi.on("select", onSelect);
-      return () => {
-        emblaApi.off("select", onSelect);
-      };
-    }
-    return undefined;
-  }, [emblaApi]);
-
-  const scrollToSlide = (index: number) => {
-    if (emblaApi && emblaApi.scrollTo) {
-      emblaApi.scrollTo(index);
-    }
-  };
 
   return (
     <section id="how-it-works" className={`${isMobile ? 'py-12' : 'py-20'} bg-gradient-to-b from-gray-50 to-gray-100`}>
@@ -221,59 +197,46 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        {/* Mobile View (Compact Carousel) */}
+        {/* Mobile View (Vertical Steps) */}
         <div className="md:hidden">
-          {/* Compact Navigation Pills */}
-          <div className="flex justify-center mb-4">
-            <div className="flex space-x-1 bg-white/50 backdrop-blur-sm rounded-full p-1">
-              {steps.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => scrollToSlide(idx)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    currentSlide === idx ? 'bg-emerald-600 w-4' : 'bg-gray-300'
-                  }`}
-                  aria-label={`Go to step ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-
-          <Carousel
-            className="w-full"
-            setApi={setEmblaApi}
-          >
-            <CarouselContent>
+          <div className="relative max-w-md mx-auto">
+            {/* Connecting line */}
+            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-indigo-200 z-0"></div>
+            
+            {/* Steps */}
+            <div className="space-y-6 relative z-10">
               {steps.map((step, index) => {
                 const StepIcon = step.icon;
-                
+
                 return (
-                  <CarouselItem key={index}>
-                    <div className="bg-white rounded-xl shadow-lg border-l-4 border-emerald-500 p-5 mx-2">
-                      <div className="text-center">
-                        <div className={`w-12 h-12 ${step.color} rounded-xl flex items-center justify-center mb-4 mx-auto relative`}>
-                          <StepIcon className="w-6 h-6" />
-                          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">
-                            {index + 1}
-                          </div>
-                        </div>
-                        <h3 className="text-lg font-semibold mb-3 text-gray-900">{step.title}</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                  <div 
+                    key={index}
+                    className="flex items-start"
+                  >
+                    {/* Icon circle */}
+                    <div className="flex-shrink-0 relative z-10">
+                      <div 
+                        className={`w-12 h-12 rounded-full flex items-center justify-center border-4 border-white ${step.color}`}
+                      >
+                        <StepIcon className="h-5 w-5" />
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">
+                        {index + 1}
                       </div>
                     </div>
-                  </CarouselItem>
+                    
+                    {/* Content */}
+                    <div className="ml-4 flex-1">
+                      <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-emerald-500">
+                        <h3 className="font-bold text-lg text-gray-900 mb-2">{step.title}</h3>
+                        <p className="text-gray-600 text-sm">{step.description}</p>
+                      </div>
+                    </div>
+                  </div>
                 );
               })}
-            </CarouselContent>
-            
-            <div className="flex justify-center items-center gap-4 mt-6">
-              <CarouselPrevious className="static translate-y-0 h-8 w-8 bg-white/80 hover:bg-white" />
-              <div className="text-sm text-gray-500 font-medium">
-                {currentSlide + 1} of {steps.length}
-              </div>
-              <CarouselNext className="static translate-y-0 h-8 w-8 bg-white/80 hover:bg-white" />
             </div>
-          </Carousel>
+          </div>
         </div>
       </div>
     </section>

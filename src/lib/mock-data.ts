@@ -1,3 +1,3 @@
 
-// This file will be used for mock data in the future
-export const mockBlogPosts = [];
+// Mock data for blog posts will be added when blog functionality is implemented
+export const mockBlogPosts: any[] = [];

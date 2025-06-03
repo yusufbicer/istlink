@@ -99,7 +99,6 @@ const Features = () => {
     return undefined;
   }, [emblaApi]);
 
-  // Function to navigate to a specific feature
   const scrollToFeature = (index: number) => {
     if (emblaApi && emblaApi.scrollTo) {
       emblaApi.scrollTo(index);
@@ -159,95 +158,31 @@ const Features = () => {
             </div>
           </div>
           
-          {/* Second feature - spans 2 columns */}
-          <div 
-            className={`${features[1].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '200ms' }}
-          >
-            <div className={`w-12 h-12 ${features[1].iconColor} rounded-lg flex items-center justify-center mb-4`}>
-              {React.createElement(features[1].icon, { className: "w-6 h-6" })}
-            </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[1].title}</h3>
-            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[1].description}</p>
-          </div>
-
-          {/* Third feature - spans 2 columns */}
-          <div 
-            className={`${features[2].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '300ms' }}
-          >
-            <div className={`w-12 h-12 ${features[2].iconColor} rounded-lg flex items-center justify-center mb-4`}>
-              {React.createElement(features[2].icon, { className: "w-6 h-6" })}
-            </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[2].title}</h3>
-            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[2].description}</p>
-          </div>
-
-          {/* Fourth feature - Documentation (spans 2 columns for better alignment) */}
-          <div 
-            className={`${features[3].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '400ms' }}
-          >
-            <div className={`w-12 h-12 ${features[3].iconColor} rounded-lg flex items-center justify-center mb-4`}>
-              {React.createElement(features[3].icon, { className: "w-6 h-6" })}
-            </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[3].title}</h3>
-            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[3].description}</p>
-          </div>
-
-          {/* Fifth feature - Global Compliance (spans 2 columns for better alignment) */}
-          <div 
-            className={`${features[4].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '500ms' }}
-          >
-            <div className={`w-12 h-12 ${features[4].iconColor} rounded-lg flex items-center justify-center mb-4`}>
-              {React.createElement(features[4].icon, { className: "w-6 h-6" })}
-            </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[4].title}</h3>
-            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[4].description}</p>
-          </div>
-
-          {/* Sixth feature - spans 2 columns */}
-          <div 
-            className={`${features[5].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '600ms' }}
-          >
-            <div className={`w-12 h-12 ${features[5].iconColor} rounded-lg flex items-center justify-center mb-4`}>
-              {React.createElement(features[5].icon, { className: "w-6 h-6" })}
-            </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[5].title}</h3>
-            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[5].description}</p>
-          </div>
-
-          {/* Seventh feature - spans 2 columns */}
-          <div 
-            className={`${features[6].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '700ms' }}
-          >
-            <div className={`w-12 h-12 ${features[6].iconColor} rounded-lg flex items-center justify-center mb-4`}>
-              {React.createElement(features[6].icon, { className: "w-6 h-6" })}
-            </div>
-            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[6].title}</h3>
-            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[6].description}</p>
-          </div>
+          {/* Remaining features in grid layout */}
+          {features.slice(1).map((feature, index) => {
+            const actualIndex = index + 1;
+            return (
+              <div 
+                key={actualIndex}
+                className={`${feature.color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${(actualIndex + 1) * 100}ms` }}
+              >
+                <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center mb-4`}>
+                  {React.createElement(feature.icon, { className: "w-6 h-6" })}
+                </div>
+                <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Improved Tablet Layout with better spacing */}
+        {/* Tablet Layout */}
         <div className="hidden md:block lg:hidden">
           <div className="grid grid-cols-6 gap-4">
-            {/* Row 1: Featured item (3 cols) + Single Bill (3 cols) */}
+            {/* Featured item (3 cols) + Single Bill (3 cols) */}
             <div 
               className={`${features[0].color} rounded-xl border p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 flex flex-col col-span-3 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -278,141 +213,89 @@ const Features = () => {
               </div>
             </div>
             
-            <div 
-              className={`${features[1].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-3 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: '200ms' }}
-            >
-              <div className={`w-10 h-10 ${features[1].iconColor} rounded-lg flex items-center justify-center mb-3`}>
-                {React.createElement(features[1].icon, { className: "w-5 h-5" })}
-              </div>
-              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[1].title}</h3>
-              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[1].description}</p>
-            </div>
-
-            {/* Row 2: Centralized Payments (2 cols) + Documentation (2 cols) + Compliance (2 cols) */}
-            <div 
-              className={`${features[2].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: '300ms' }}
-            >
-              <div className={`w-10 h-10 ${features[2].iconColor} rounded-lg flex items-center justify-center mb-3`}>
-                {React.createElement(features[2].icon, { className: "w-5 h-5" })}
-              </div>
-              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[2].title}</h3>
-              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[2].description}</p>
-            </div>
-
-            <div 
-              className={`${features[3].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: '400ms' }}
-            >
-              <div className={`w-10 h-10 ${features[3].iconColor} rounded-lg flex items-center justify-center mb-3`}>
-                {React.createElement(features[3].icon, { className: "w-5 h-5" })}
-              </div>
-              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[3].title}</h3>
-              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[3].description}</p>
-            </div>
-
-            <div 
-              className={`${features[4].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: '500ms' }}
-            >
-              <div className={`w-10 h-10 ${features[4].iconColor} rounded-lg flex items-center justify-center mb-3`}>
-                {React.createElement(features[4].icon, { className: "w-5 h-5" })}
-              </div>
-              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[4].title}</h3>
-              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[4].description}</p>
-            </div>
-
-            {/* Row 3: Supplier Management (3 cols) + Quality Assurance (3 cols) */}
-            <div 
-              className={`${features[5].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-3 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: '600ms' }}
-            >
-              <div className={`w-10 h-10 ${features[5].iconColor} rounded-lg flex items-center justify-center mb-3`}>
-                {React.createElement(features[5].icon, { className: "w-5 h-5" })}
-              </div>
-              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[5].title}</h3>
-              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[5].description}</p>
-            </div>
-
-            <div 
-              className={`${features[6].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-3 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: '700ms' }}
-            >
-              <div className={`w-10 h-10 ${features[6].iconColor} rounded-lg flex items-center justify-center mb-3`}>
-                {React.createElement(features[6].icon, { className: "w-5 h-5" })}
-              </div>
-              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[6].title}</h3>
-              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[6].description}</p>
-            </div>
+            {/* Remaining features in tablet grid */}
+            {features.slice(1).map((feature, index) => {
+              const actualIndex = index + 1;
+              const colSpan = actualIndex === 1 ? 'col-span-3' : actualIndex <= 4 ? 'col-span-2' : 'col-span-3';
+              return (
+                <div 
+                  key={actualIndex}
+                  className={`${feature.color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${colSpan} ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${(actualIndex + 1) * 100}ms` }}
+                >
+                  <div className={`w-10 h-10 ${feature.iconColor} rounded-lg flex items-center justify-center mb-3`}>
+                    {React.createElement(feature.icon, { className: "w-5 h-5" })}
+                  </div>
+                  <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                  <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Improved Mobile Feature Spotlight Carousel */}
+        {/* Enhanced Mobile Experience */}
         <div className="md:hidden">
-          {/* Feature Quick Nav - NEW */}
-          <div className="mb-4 overflow-x-auto hide-scrollbar">
-            <div className="flex space-x-2 pb-2">
-              {features.map((feature, idx) => (
+          {/* Mobile Progress Indicator */}
+          <div className="flex justify-center items-center mb-6">
+            <div className="flex space-x-2">
+              {features.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => scrollToFeature(idx)}
-                  className={`flex-shrink-0 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
-                    activeFeature === idx 
-                      ? 'bg-metallic-blue text-white' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    activeFeature === idx ? 'w-8 bg-metallic-blue' : 'w-2 bg-gray-300'
                   }`}
-                  style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-                >
-                  {feature.title}
-                </button>
+                  aria-label={`Go to feature ${idx + 1}`}
+                />
               ))}
             </div>
+          </div>
+
+          {/* Enhanced Feature Counter */}
+          <div className="text-center mb-4">
+            <span className="text-sm text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              {activeFeature + 1} of {features.length}
+            </span>
           </div>
 
           <Carousel
             className="w-full"
             setApi={setEmblaApi}
+            opts={{
+              align: "center",
+              loop: true,
+            }}
           >
-            <CarouselContent>
+            <CarouselContent className="-ml-2 md:-ml-4">
               {features.map((feature, index) => (
-                <CarouselItem key={index}>
-                  <div className={`h-full ${feature.color} rounded-xl border p-6 shadow-sm flex flex-col ${
-                    isVisible ? 'opacity-100' : 'opacity-0'
+                <CarouselItem key={index} className="pl-2 md:pl-4">
+                  <div className={`h-full ${feature.color} rounded-xl border-2 p-6 shadow-sm transition-all duration-300 ${
+                    isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}>
-                    <div className={`w-16 h-16 ${feature.iconColor} rounded-xl flex items-center justify-center mb-6 mx-auto`}>
+                    <div className={`w-16 h-16 ${feature.iconColor} rounded-xl flex items-center justify-center mb-6 mx-auto shadow-sm`}>
                       {React.createElement(feature.icon, { className: "w-8 h-8" })}
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-                    <p className="text-gray-600 text-center mb-6" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+                    <h3 className="text-xl font-semibold mb-4 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                    <p className="text-gray-600 text-center leading-relaxed mb-6" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
                     
                     {index === 0 && (
-                      <div className="bg-white rounded-lg p-3 mt-auto">
-                        <div className="text-xs font-medium text-gray-800 text-center mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Customers typically save:</div>
-                        <div className="grid grid-cols-3 gap-1">
+                      <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                        <div className="text-sm font-medium text-gray-800 text-center mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Customers typically save:</div>
+                        <div className="grid grid-cols-3 gap-2">
                           <div className="text-center">
-                            <div className="text-base font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>35%</div>
-                            <div className="text-[10px] text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Shipping</div>
+                            <div className="text-lg font-bold text-metallic-blue mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>35%</div>
+                            <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Shipping</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-base font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>68%</div>
-                            <div className="text-[10px] text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Paperwork</div>
+                            <div className="text-lg font-bold text-metallic-blue mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>68%</div>
+                            <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Paperwork</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-base font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>92%</div>
-                            <div className="text-[10px] text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Space</div>
+                            <div className="text-lg font-bold text-metallic-blue mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>92%</div>
+                            <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Space</div>
                           </div>
                         </div>
                       </div>
@@ -421,40 +304,38 @@ const Features = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="absolute -bottom-10 left-0 right-0">
-              <div className="flex justify-center items-center gap-4 mt-4">
-                <CarouselPrevious className="static translate-y-0 h-8 w-8" />
-                <div className="flex space-x-1 items-center">
-                  {features.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => scrollToFeature(idx)}
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        activeFeature === idx ? 'w-6 bg-metallic-blue' : 'w-2 bg-gray-300 hover:bg-gray-400'
-                      }`}
-                      aria-label={`Go to feature ${idx + 1}`}
-                    />
-                  ))}
-                </div>
-                <CarouselNext className="static translate-y-0 h-8 w-8" />
+            
+            {/* Enhanced Navigation Controls */}
+            <div className="flex justify-between items-center mt-6">
+              <CarouselPrevious className="relative translate-y-0 h-10 w-10 border-2 hover:bg-metallic-blue hover:text-white hover:border-metallic-blue transition-colors" />
+              <div className="flex space-x-3">
+                {features.map((feature, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => scrollToFeature(idx)}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
+                      activeFeature === idx 
+                        ? 'bg-metallic-blue text-white shadow-sm' 
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                    style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+                  >
+                    {idx + 1}
+                  </button>
+                ))}
               </div>
+              <CarouselNext className="relative translate-y-0 h-10 w-10 border-2 hover:bg-metallic-blue hover:text-white hover:border-metallic-blue transition-colors" />
             </div>
           </Carousel>
+
+          {/* Swipe Indicator */}
+          <div className="text-center mt-4">
+            <p className="text-xs text-gray-400" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              Swipe or tap numbers to explore features
+            </p>
+          </div>
         </div>
       </div>
-
-      {/* Replace style jsx with a style element or move to CSS */}
-      <style>
-        {`
-          .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-          }
-          .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-          }
-        `}
-      </style>
     </section>
   );
 };

@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
-import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database } from 'lucide-react';
+import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database, Bell, FileText, CheckCircle, AlertCircle, Clock, DollarSign } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import IstLinqLogo from '@/components/common/IstLinqLogo';
 
@@ -126,92 +127,54 @@ const Hero = () => {
                     </div>
                   </div>
                   
-                  {/* Optimized Mobile Dashboard */}
+                  {/* Creative Mobile Dashboard */}
                   {isMobile ? (
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
                           <IstLinqLogo size="sm" className="mr-2" />
                         </div>
-                        <div className="w-5 h-5 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium">
-                          JD
+                        <div className="flex items-center space-x-1">
+                          <div className="relative">
+                            <Bell className="h-4 w-4 text-orange-500" />
+                            <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                          </div>
+                          <div className="w-5 h-5 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium">
+                            JD
+                          </div>
                         </div>
                       </div>
                       
-                      {/* Optimized top stats in a compact grid */}
-                      <div className="grid grid-cols-4 gap-1 mb-2">
-                        <div className="bg-gray-50 p-1.5 rounded-md border border-gray-200">
-                          <div className="flex justify-between items-center mb-0.5">
-                            <span className="text-gray-700 text-[10px] font-medium">Orders</span>
-                            <Package className="h-2.5 w-2.5 text-blue-600" />
+                      {/* Live Activity Banner */}
+                      <div className="bg-gradient-to-r from-emerald-50 to-blue-50 p-2 rounded-lg border border-emerald-200 mb-2">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
+                            <span className="text-xs font-medium text-emerald-700">Live Consolidation</span>
                           </div>
-                          <div className="text-xs font-bold">28</div>
-                        </div>
-                        
-                        <div className="bg-gray-50 p-1.5 rounded-md border border-gray-200">
-                          <div className="flex justify-between items-center mb-0.5">
-                            <span className="text-gray-700 text-[10px] font-medium">Consol</span>
-                            <GitMerge className="h-2.5 w-2.5 text-blue-600" />
-                          </div>
-                          <div className="text-xs font-bold">5</div>
-                        </div>
-                        
-                        <div className="bg-gray-50 p-1.5 rounded-md border border-gray-200">
-                          <div className="flex justify-between items-center mb-0.5">
-                            <span className="text-gray-700 text-[10px] font-medium">Space</span>
-                            <Truck className="h-2.5 w-2.5 text-blue-600" />
-                          </div>
-                          <div className="text-xs font-bold">92%</div>
-                        </div>
-                        
-                        <div className="bg-gray-50 p-1.5 rounded-md border border-gray-200">
-                          <div className="flex justify-between items-center mb-0.5">
-                            <span className="text-gray-700 text-[10px] font-medium">Savings</span>
-                            <TrendingUp className="h-2.5 w-2.5 text-green-600" />
-                          </div>
-                          <div className="text-xs font-bold">39%</div>
+                          <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">Active</span>
                         </div>
                       </div>
                       
-                      {/* Consolidated Shipment Info */}
+                      {/* Active Consolidation with Suppliers */}
                       <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-2">
                         <div className="flex justify-between items-center mb-1.5">
                           <div className="flex items-center">
                             <GitMerge className="h-3 w-3 text-blue-600 mr-1" />
-                            <span className="text-xs font-medium">Active Consolidation</span>
+                            <span className="text-xs font-medium">IST-CON-2025-041</span>
                           </div>
+                          <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full font-medium">75% Full</span>
                         </div>
                         <div className="bg-white p-1.5 rounded border border-gray-200">
                           <div className="flex justify-between items-center mb-1">
                             <div>
                               <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-[10px] text-gray-600">Apr 15, 2025</div>
+                              <div className="text-[10px] text-gray-600">Departure: Apr 15, 2025</div>
                             </div>
                             <div className="text-right">
-                              <div className="text-xs font-medium text-blue-600">75%</div>
-                              <div className="w-16 bg-gray-200 h-1.5 rounded-full mt-0.5">
-                                <div className="bg-blue-600 h-full rounded-full" style={{width: '75%'}}></div>
-                              </div>
+                              <div className="text-xs font-medium text-blue-600">$47,850</div>
+                              <div className="text-[10px] text-gray-600">Total Value</div>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Shipment Info */}
-                      <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-2">
-                        <div className="flex justify-between items-center mb-1.5">
-                          <div className="flex items-center">
-                            <Truck className="h-3 w-3 text-blue-600 mr-1" />
-                            <span className="text-xs font-medium">Next Shipment</span>
-                          </div>
-                        </div>
-                        <div className="bg-white p-1.5 rounded border border-gray-200">
-                          <div className="flex justify-between items-center mb-1">
-                            <div>
-                              <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-[10px] text-gray-600">40ft Container</div>
-                            </div>
-                            <div className="text-xs font-bold text-blue-600">Apr 15</div>
                           </div>
                           <div className="grid grid-cols-3 gap-1 text-center">
                             <div className="text-[10px]">
@@ -219,7 +182,7 @@ const Hero = () => {
                               <div className="text-gray-600">Orders</div>
                             </div>
                             <div className="text-[10px]">
-                              <div className="font-bold">3</div>
+                              <div className="font-bold">4</div>
                               <div className="text-gray-600">Suppliers</div>
                             </div>
                             <div className="text-[10px]">
@@ -229,30 +192,95 @@ const Hero = () => {
                           </div>
                         </div>
                       </div>
+
+                      {/* Suppliers Overview */}
+                      <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-2">
+                        <div className="flex justify-between items-center mb-1.5">
+                          <div className="flex items-center">
+                            <Users className="h-3 w-3 text-blue-600 mr-1" />
+                            <span className="text-xs font-medium">Active Suppliers</span>
+                          </div>
+                        </div>
+                        <div className="space-y-1">
+                          <div className="bg-white p-1.5 rounded border border-gray-100 flex justify-between items-center">
+                            <div>
+                              <div className="text-xs font-medium">Textile Plus Ltd</div>
+                              <div className="text-[10px] text-gray-600">12 orders • $18,200</div>
+                            </div>
+                            <div className="flex items-center">
+                              <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
+                              <span className="text-[10px] text-green-600">Paid</span>
+                            </div>
+                          </div>
+                          <div className="bg-white p-1.5 rounded border border-gray-100 flex justify-between items-center">
+                            <div>
+                              <div className="text-xs font-medium">Machinery Co</div>
+                              <div className="text-[10px] text-gray-600">8 orders • $15,420</div>
+                            </div>
+                            <div className="flex items-center">
+                              <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
+                              <span className="text-[10px] text-green-600">Paid</span>
+                            </div>
+                          </div>
+                          <div className="bg-white p-1.5 rounded border border-gray-100 flex justify-between items-center">
+                            <div>
+                              <div className="text-xs font-medium">Auto Parts Inc</div>
+                              <div className="text-[10px] text-gray-600">5 orders • $9,630</div>
+                            </div>
+                            <div className="flex items-center">
+                              <Clock className="h-3 w-3 text-orange-500 mr-1" />
+                              <span className="text-[10px] text-orange-600">Processing</span>
+                            </div>
+                          </div>
+                          <div className="bg-white p-1.5 rounded border border-gray-100 flex justify-between items-center">
+                            <div>
+                              <div className="text-xs font-medium">Chemical Solutions</div>
+                              <div className="text-[10px] text-gray-600">3 orders • $4,600</div>
+                            </div>
+                            <div className="flex items-center">
+                              <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
+                              <span className="text-[10px] text-green-600">Paid</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       
-                      {/* Payment Status */}
+                      {/* Recent Activities & Notifications */}
                       <div className="bg-gray-50 rounded-lg border border-gray-200 p-2 shadow-sm">
                         <div className="flex justify-between items-center mb-1.5">
                           <div className="flex items-center">
-                            <CreditCard className="h-3 w-3 text-blue-600 mr-1" />
-                            <span className="text-xs font-medium">Payment Status</span>
+                            <Activity className="h-3 w-3 text-blue-600 mr-1" />
+                            <span className="text-xs font-medium">Recent Activity</span>
                           </div>
-                          <span className="px-1 py-0.5 bg-green-100 text-green-700 text-[10px] rounded-full font-medium">Active</span>
+                          <span className="px-1 py-0.5 bg-orange-100 text-orange-700 text-[10px] rounded-full font-medium">3 New</span>
                         </div>
-                        <div className="grid grid-cols-2 gap-1">
-                          <div className="bg-white p-1.5 rounded shadow-sm">
-                            <div className="text-[10px] text-gray-600">Available</div>
-                            <div className="text-xs font-medium">$32,080</div>
+                        <div className="space-y-1">
+                          <div className="bg-white p-1.5 rounded shadow-sm flex items-center">
+                            <FileText className="h-3 w-3 text-green-500 mr-2" />
+                            <div className="flex-1">
+                              <div className="text-[10px] font-medium">BOL Generated</div>
+                              <div className="text-[9px] text-gray-600">5 min ago</div>
+                            </div>
                           </div>
-                          <div className="bg-white p-1.5 rounded shadow-sm">
-                            <div className="text-[10px] text-gray-600">Service (2%)</div>
-                            <div className="text-xs font-medium">$497</div>
+                          <div className="bg-white p-1.5 rounded shadow-sm flex items-center">
+                            <DollarSign className="h-3 w-3 text-blue-500 mr-2" />
+                            <div className="flex-1">
+                              <div className="text-[10px] font-medium">Payment Processed</div>
+                              <div className="text-[9px] text-gray-600">12 min ago</div>
+                            </div>
+                          </div>
+                          <div className="bg-white p-1.5 rounded shadow-sm flex items-center">
+                            <Package className="h-3 w-3 text-purple-500 mr-2" />
+                            <div className="flex-1">
+                              <div className="text-[10px] font-medium">5 New Orders Added</div>
+                              <div className="text-[9px] text-gray-600">1 hr ago</div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    // ... keep existing code (Desktop dashboard view)
+                    // Desktop dashboard with creative consolidation view
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
@@ -272,8 +300,9 @@ const Hero = () => {
                           <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
                             <Users className="h-4 w-4 mr-2" /> Suppliers
                           </div>
-                          <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">
-                            <BarChart2 className="h-4 w-4 mr-0" /> Analytics
+                          <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium relative">
+                            <Bell className="h-4 w-4 mr-0" />
+                            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
                           </div>
                           <div className="h-8 w-8 rounded-full bg-lavender-100 flex items-center justify-center text-sm font-medium text-lavender-700">
                             JD
@@ -281,209 +310,157 @@ const Hero = () => {
                         </div>
                       </div>
                       
+                      {/* Live Activity Banner */}
+                      <div className="bg-gradient-to-r from-emerald-50 to-blue-50 p-3 rounded-xl border border-emerald-200 mb-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse mr-3"></div>
+                            <span className="text-sm font-medium text-emerald-700">Live Consolidation Activity</span>
+                          </div>
+                          <span className="text-sm bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-medium">IST-CON-2025-041 Active</span>
+                        </div>
+                      </div>
+                      
                       <div className="grid grid-cols-12 gap-3">
-                        <div className="col-span-3 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-500 text-sm">Active Orders</span>
-                            <Package className="h-4 w-4 text-blue-600" />
-                          </div>
-                          <div className="text-2xl font-bold">28</div>
-                          <div className="flex items-center mt-1 text-green-500 text-xs">
-                            <TrendingUp className="h-3 w-3 mr-1" />
-                            <span>+5 since last week</span>
-                          </div>
-                        </div>
-                        
-                        <div className="col-span-3 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-500 text-sm">Active Consolidations</span>
-                            <GitMerge className="h-4 w-4 text-blue-600" />
-                          </div>
-                          <div className="text-2xl font-bold">5</div>
-                          <div className="flex items-center mt-1 text-green-500 text-xs">
-                            <TrendingUp className="h-3 w-3 mr-1" />
-                            <span>2 ready to ship</span>
-                          </div>
-                        </div>
-                        
-                        <div className="col-span-3 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-500 text-sm">Space Utilization</span>
-                            <Truck className="h-4 w-4 text-blue-600" />
-                          </div>
-                          <div className="text-2xl font-bold">92%</div>
-                          <div className="flex items-center mt-1 text-green-500 text-xs">
-                            <TrendingUp className="h-3 w-3 mr-1" />
-                            <span>+8% improved</span>
-                          </div>
-                        </div>
-                        
-                        <div className="col-span-3 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-500 text-sm">Time Saved</span>
-                            <Timer className="h-4 w-4 text-blue-600" />
-                          </div>
-                          <div className="text-2xl font-bold">68%</div>
-                          <div className="flex items-center mt-1 text-green-500 text-xs">
-                            <TrendingUp className="h-3 w-3 mr-1" />
-                            <span>+12% this month</span>
-                          </div>
-                        </div>
-                        
-                        {/* Payment Status - moved up and redesigned */}
-                        <div className="col-span-6 bg-gray-50 rounded-xl border border-gray-200 p-3">
-                          <div className="flex justify-between items-center mb-2">
+                        {/* Active Consolidation Overview */}
+                        <div className="col-span-8 bg-gray-50 p-4 rounded-xl border border-gray-200">
+                          <div className="flex justify-between items-center mb-3">
                             <div className="flex items-center">
-                              <CreditCard className="h-4 w-4 text-blue-600 mr-2" />
-                              <span className="font-medium text-gray-700">Payment Dashboard</span>
+                              <GitMerge className="h-5 w-5 text-blue-600 mr-2" />
+                              <span className="font-medium text-gray-700">Active Consolidation: IST-CON-2025-041</span>
                             </div>
-                            <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">Active Account</span>
-                          </div>
-                          <div className="grid grid-cols-2 gap-2">
-                            <div className="bg-white rounded-lg p-2">
-                              <div className="text-sm text-gray-500">Available Balance</div>
-                              <div className="text-lg font-bold mt-1">$32,080</div>
-                            </div>
-                            <div className="bg-white rounded-lg p-2">
-                              <div className="text-sm text-gray-500">Paid to Suppliers</div>
-                              <div className="text-lg font-bold mt-1">$24,850</div>
-                            </div>
-                            <div className="bg-white rounded-lg p-2">
-                              <div className="text-sm text-gray-500">Upcoming Payments</div>
-                              <div className="text-lg font-bold mt-1">$7,230</div>
-                            </div>
-                            <div className="bg-white rounded-lg p-2">
-                              <div className="text-sm text-gray-500">Service Fee (2%)</div>
-                              <div className="text-lg font-bold mt-1 text-blue-600">$497</div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {/* Updated Efficiency Metrics without Total Savings */}
-                        <div className="col-span-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                          <div className="flex justify-between items-center mb-2">
-                            <span className="font-medium text-gray-700">Efficiency Metrics</span>
-                            <Activity className="h-4 w-4 text-blue-600" />
+                            <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full font-medium">75% Filled</span>
                           </div>
                           
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
+                          <div className="bg-white p-4 rounded-lg border border-gray-100 mb-3">
+                            <div className="grid grid-cols-4 gap-4 mb-4">
+                              <div className="text-center">
+                                <div className="text-2xl font-bold text-blue-600">28</div>
+                                <div className="text-sm text-gray-500">Total Orders</div>
+                              </div>
+                              <div className="text-center">
+                                <div className="text-2xl font-bold text-green-600">4</div>
+                                <div className="text-sm text-gray-500">Suppliers</div>
+                              </div>
+                              <div className="text-center">
+                                <div className="text-2xl font-bold text-purple-600">$47,850</div>
+                                <div className="text-sm text-gray-500">Total Value</div>
+                              </div>
+                              <div className="text-center">
+                                <div className="text-2xl font-bold text-orange-600">Apr 15</div>
+                                <div className="text-sm text-gray-500">Departure</div>
+                              </div>
+                            </div>
+                            
+                            <div className="mb-3">
                               <div className="flex justify-between text-sm mb-1">
-                                <span className="text-gray-500">Space Utilization</span>
-                                <span className="font-medium">92%</span>
-                              </div>
-                              <div className="w-full bg-gray-200 h-2 rounded-full">
-                                <div className="bg-blue-600 h-full rounded-full" style={{width: '92%'}}></div>
-                              </div>
-                            </div>
-                            
-                            <div>
-                              <div className="flex justify-between text-sm mb-1">
-                                <span className="text-gray-500">Cost Savings</span>
-                                <span className="font-medium">39%</span>
-                              </div>
-                              <div className="w-full bg-gray-200 h-2 rounded-full">
-                                <div className="bg-green-500 h-full rounded-full" style={{width: '39%'}}></div>
-                              </div>
-                            </div>
-                            
-                            <div className="col-span-2">
-                              <div className="flex justify-between text-sm mb-1">
-                                <span className="text-gray-500">Time Saved</span>
-                                <span className="font-medium">68%</span>
-                              </div>
-                              <div className="w-full bg-gray-200 h-2 rounded-full">
-                                <div className="bg-lavender-500 h-full rounded-full" style={{width: '68%'}}></div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="col-span-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                          <div className="font-medium text-gray-700 mb-2 flex items-center">
-                            <GitMerge className="h-4 w-4 mr-2 text-blue-600" />
-                            Active Consolidations
-                          </div>
-                          <div className="space-y-2">
-                            <div className="bg-white p-2 rounded-lg border border-gray-100">
-                              <div className="flex justify-between">
-                                <div>
-                                  <div className="text-sm font-medium">Istanbul → Lagos</div>
-                                  <div className="text-xs text-gray-500">Apr 10, 2025</div>
-                                </div>
-                                <div className="text-right">
-                                  <div className="text-sm font-medium text-blue-600">9 Orders</div>
-                                  <div className="text-xs text-gray-500">4 Suppliers</div>
-                                </div>
-                              </div>
-                              <div className="mt-2 w-full bg-gray-200 h-1.5 rounded-full">
-                                <div className="bg-green-500 h-full rounded-full" style={{width: '95%'}}></div>
-                              </div>
-                              <div className="mt-1 text-xs text-right text-gray-500">95% Filled</div>
-                            </div>
-                            
-                            <div className="bg-white p-2 rounded-lg border border-gray-100">
-                              <div className="flex justify-between">
-                                <div>
-                                  <div className="text-sm font-medium">Istanbul → Matadi</div>
-                                  <div className="text-xs text-gray-500">Apr 15, 2025</div>
-                                </div>
-                                <div className="text-right">
-                                  <div className="text-sm font-medium text-blue-600">28 Orders</div>
-                                  <div className="text-xs text-gray-500">3 Suppliers</div>
-                                </div>
-                              </div>
-                              <div className="mt-2 w-full bg-gray-200 h-1.5 rounded-full">
-                                <div className="bg-blue-600 h-full rounded-full" style={{width: '75%'}}></div>
-                              </div>
-                              <div className="mt-1 text-xs text-right text-gray-500">75% Filled</div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="col-span-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                          <div className="font-medium text-gray-700 mb-2 flex items-center">
-                            <Truck className="h-4 w-4 mr-2 text-blue-600" />
-                            Next Shipment
-                          </div>
-                          <div className="bg-white p-3 rounded-lg border border-gray-100">
-                            <div className="flex items-center space-x-3 mb-3">
-                              <div className="h-12 w-12 bg-lavender-100 rounded-lg flex items-center justify-center">
-                                <Truck className="h-6 w-6 text-blue-600" />
-                              </div>
-                              <div>
-                                <div className="text-lg font-medium">Istanbul → Matadi</div>
-                                <div className="text-sm text-gray-500">Container: 40ft High Cube</div>
-                              </div>
-                              <div className="ml-auto text-right">
-                                <div className="text-sm font-medium">Departure</div>
-                                <div className="text-base text-blue-600 font-bold">Apr 15, 2025</div>
-                              </div>
-                            </div>
-                            
-                            <div className="grid grid-cols-3 gap-3 mb-3">
-                              <div className="text-center p-2 bg-gray-50 rounded-lg">
-                                <div className="text-xs text-gray-500">Orders</div>
-                                <div className="text-lg font-semibold">28</div>
-                              </div>
-                              <div className="text-center p-2 bg-gray-50 rounded-lg">
-                                <div className="text-xs text-gray-500">Suppliers</div>
-                                <div className="text-lg font-semibold">3</div>
-                              </div>
-                              <div className="text-center p-2 bg-gray-50 rounded-lg">
-                                <div className="text-xs text-gray-500">Items</div>
-                                <div className="text-lg font-semibold">312</div>
-                              </div>
-                            </div>
-                            
-                            <div>
-                              <div className="flex justify-between text-sm mb-1">
-                                <span className="text-gray-500">Container Space</span>
+                                <span className="text-gray-500">Container Space (40ft)</span>
                                 <span className="font-medium">75% Filled</span>
                               </div>
-                              <div className="w-full bg-gray-200 h-2 rounded-full">
+                              <div className="w-full bg-gray-200 h-3 rounded-full">
                                 <div className="bg-blue-600 h-full rounded-full" style={{width: '75%'}}></div>
                               </div>
+                            </div>
+                            
+                            <div className="text-sm text-gray-600">
+                              <span className="font-medium">Route:</span> Istanbul Warehouse → Matadi Port, DRC
+                            </div>
+                          </div>
+                          
+                          {/* Suppliers in this consolidation */}
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex justify-between items-center mb-2">
+                                <div className="font-medium text-sm">Textile Plus Ltd</div>
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                              </div>
+                              <div className="text-xs text-gray-600 mb-1">12 orders • $18,200</div>
+                              <div className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full inline-block">Payment Complete</div>
+                            </div>
+                            
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex justify-between items-center mb-2">
+                                <div className="font-medium text-sm">Machinery Co</div>
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                              </div>
+                              <div className="text-xs text-gray-600 mb-1">8 orders • $15,420</div>
+                              <div className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full inline-block">Payment Complete</div>
+                            </div>
+                            
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex justify-between items-center mb-2">
+                                <div className="font-medium text-sm">Auto Parts Inc</div>
+                                <Clock className="h-4 w-4 text-orange-500" />
+                              </div>
+                              <div className="text-xs text-gray-600 mb-1">5 orders • $9,630</div>
+                              <div className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full inline-block">Processing Payment</div>
+                            </div>
+                            
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex justify-between items-center mb-2">
+                                <div className="font-medium text-sm">Chemical Solutions</div>
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                              </div>
+                              <div className="text-xs text-gray-600 mb-1">3 orders • $4,600</div>
+                              <div className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full inline-block">Payment Complete</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Recent Activity & Notifications */}
+                        <div className="col-span-4 bg-gray-50 p-4 rounded-xl border border-gray-200">
+                          <div className="flex justify-between items-center mb-3">
+                            <div className="flex items-center">
+                              <Activity className="h-4 w-4 text-blue-600 mr-2" />
+                              <span className="font-medium text-gray-700">Live Activity</span>
+                            </div>
+                            <span className="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-medium">5 New</span>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex items-center mb-1">
+                                <FileText className="h-4 w-4 text-green-500 mr-2" />
+                                <span className="text-sm font-medium">BOL Generated</span>
+                              </div>
+                              <div className="text-xs text-gray-600">Bill of Lading #BL-041-2025 created</div>
+                              <div className="text-xs text-gray-500 mt-1">5 minutes ago</div>
+                            </div>
+                            
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex items-center mb-1">
+                                <DollarSign className="h-4 w-4 text-blue-500 mr-2" />
+                                <span className="text-sm font-medium">Payment Processed</span>
+                              </div>
+                              <div className="text-xs text-gray-600">$18,200 to Textile Plus Ltd</div>
+                              <div className="text-xs text-gray-500 mt-1">12 minutes ago</div>
+                            </div>
+                            
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex items-center mb-1">
+                                <Package className="h-4 w-4 text-purple-500 mr-2" />
+                                <span className="text-sm font-medium">New Orders Added</span>
+                              </div>
+                              <div className="text-xs text-gray-600">5 orders from Auto Parts Inc</div>
+                              <div className="text-xs text-gray-500 mt-1">1 hour ago</div>
+                            </div>
+                            
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex items-center mb-1">
+                                <CheckCircle className="h-4 w-4 text-emerald-500 mr-2" />
+                                <span className="text-sm font-medium">Documentation Complete</span>
+                              </div>
+                              <div className="text-xs text-gray-600">All export docs verified</div>
+                              <div className="text-xs text-gray-500 mt-1">2 hours ago</div>
+                            </div>
+                            
+                            <div className="bg-white p-3 rounded-lg border border-gray-100">
+                              <div className="flex items-center mb-1">
+                                <Truck className="h-4 w-4 text-orange-500 mr-2" />
+                                <span className="text-sm font-medium">Warehouse Arrival</span>
+                              </div>
+                              <div className="text-xs text-gray-600">12 packages from Machinery Co</div>
+                              <div className="text-xs text-gray-500 mt-1">3 hours ago</div>
                             </div>
                           </div>
                         </div>

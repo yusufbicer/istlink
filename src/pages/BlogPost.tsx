@@ -30,17 +30,13 @@ const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
     if (slug) {
       fetchPost();
     }
-    if (user) {
-      checkAdminStatus();
-    }
-  }, [slug, user]);
+  }, [slug]);
 
   const fetchPost = async () => {
     try {
@@ -60,23 +56,8 @@ const BlogPost = () => {
     }
   };
 
-  const checkAdminStatus = async () => {
-    if (!user) return;
-    
-    try {
-      const { data, error } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('user_id', user.id)
-        .single();
-
-      if (!error && data) {
-        setIsAdmin(true);
-      }
-    } catch (error) {
-      console.error('Error checking admin status:', error);
-    }
-  };
+  // Check if user is admin based on role in auth context
+  const isAdmin = user?.role === 'admin';
 
   if (isLoading) {
     return (

@@ -33,6 +33,9 @@ const Blog = () => {
 
   // Check if user is admin
   const isAdmin = user?.role === 'admin';
+  
+  console.log('Blog page - user:', user);
+  console.log('Blog page - isAdmin:', isAdmin);
 
   useEffect(() => {
     const timer = setTimeout(() => {

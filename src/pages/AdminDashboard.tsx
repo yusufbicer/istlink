@@ -61,8 +61,20 @@ const AdminDashboard = () => {
   }, []);
 
   // Handle logout
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast({
+        title: "Success",
+        description: "You have been logged out successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to logout. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   // Delete a request
@@ -96,17 +108,22 @@ const AdminDashboard = () => {
 
   return (
     <div className="container mx-auto p-6 min-h-screen">
-      {/* Back link */}
+      {/* Header with back link and logout */}
       <div className="mb-8 flex justify-between items-center">
         <Link to="/" className="flex items-center text-gray-600 hover:text-metallic-blue transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to home
         </Link>
         
-        <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2">
-          <LogOut className="h-4 w-4" />
-          Logout
-        </Button>
+        <div className="flex items-center gap-4">
+          <Link to="/blog" className="text-gray-600 hover:text-blue-600 transition-colors">
+            View Blog
+          </Link>
+          <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2">
+            <LogOut className="h-4 w-4" />
+            Sign Out
+          </Button>
+        </div>
       </div>
     
       <div className="max-w-6xl mx-auto">
@@ -114,6 +131,7 @@ const AdminDashboard = () => {
           <div>
             <h1 className="text-3xl font-bold">Admin Dashboard</h1>
             <p className="text-gray-600 mt-1">Welcome, {user?.name || user?.email}</p>
+            <p className="text-sm text-blue-600 mt-1">Role: {user?.role}</p>
           </div>
         </div>
       

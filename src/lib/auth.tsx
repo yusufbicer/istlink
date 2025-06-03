@@ -76,23 +76,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       console.log('Setting user from session:', supabaseUser.email);
       
-      // Check if user is admin - but with error handling
-      let isAdmin = false;
-      try {
-        const { data: adminData, error } = await supabase
-          .from('admin_users')
-          .select('role')
-          .eq('user_id', supabaseUser.id)
-          .maybeSingle();
-
-        if (error) {
-          console.log('Error checking admin status (continuing as regular user):', error);
-        } else {
-          isAdmin = !!adminData;
-        }
-      } catch (adminError) {
-        console.log('Failed to check admin status, continuing as regular user:', adminError);
-      }
+      // Check if user is admin by email - simplified check for known admin emails
+      const adminEmails = ['admin@istlinq.com', 'yusufbicer@gmail.com'];
+      const isAdmin = adminEmails.includes(supabaseUser.email || '');
+      
+      console.log('Is admin check:', supabaseUser.email, isAdmin);
 
       const userData: User = {
         id: supabaseUser.id,
@@ -102,7 +90,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       };
 
       setUser(userData);
-      console.log('User set:', userData);
+      console.log('User set with role:', userData);
     } catch (error) {
       console.error("Error setting user from session:", error);
       // Set user without admin role if there's an error
@@ -151,21 +139,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (error) throw error;
     if (!data.user) throw new Error("Failed to login");
 
-    // Check if user is admin - but with error handling
-    let isAdmin = false;
-    try {
-      const { data: adminData, error: adminError } = await supabase
-        .from('admin_users')
-        .select('role')
-        .eq('user_id', data.user.id)
-        .maybeSingle();
-
-      if (!adminError && adminData) {
-        isAdmin = true;
-      }
-    } catch (adminError) {
-      console.log('Failed to check admin status during login:', adminError);
-    }
+    // Check if user is admin by email
+    const adminEmails = ['admin@istlinq.com', 'yusufbicer@gmail.com'];
+    const isAdmin = adminEmails.includes(data.user.email || '');
+    
+    console.log('Login admin check:', data.user.email, isAdmin);
 
     const userData: User = {
       id: data.user.id,
@@ -175,6 +153,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     setUser(userData);
+    console.log('Login user set with role:', userData);
     return userData;
   };
 

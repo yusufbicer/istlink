@@ -56,7 +56,7 @@ const EarlyAccess = () => {
       
       toast({
         title: "Request submitted successfully!",
-        description: "Thank you for your interest in GROOP. We'll be in touch soon.",
+        description: "Thank you for your interest in istLinq. We'll be in touch soon.",
       });
       
       form.reset();
@@ -93,7 +93,7 @@ const EarlyAccess = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">Request Early Access</h1>
           <p className="text-gray-600">
-            Join our exclusive early access program and be among the first to experience GROOP's innovative supply chain solutions.
+            Join our exclusive early access program and be among the first to experience istLinq's innovative supply chain solutions.
           </p>
         </div>
         
@@ -150,10 +150,10 @@ const EarlyAccess = () => {
                 name="reason"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Why are you interested in GROOP?</FormLabel>
+                    <FormLabel>Why are you interested in istLinq?</FormLabel>
                     <FormControl>
                       <Textarea 
-                        placeholder="Tell us about your business needs and how GROOP can help..."
+                        placeholder="Tell us about your business needs and how istLinq can help..."
                         className="min-h-[120px]"
                         {...field} 
                       />

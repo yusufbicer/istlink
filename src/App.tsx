@@ -14,6 +14,8 @@ import WhatsAppButton from "@/components/common/WhatsAppButton";
 import Index from "./pages/Index";
 import EarlyAccess from "./pages/EarlyAccess";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import BlogEditor from "./pages/BlogEditor";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -41,6 +43,8 @@ const AppRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/early-access" element={<EarlyAccess />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
+      <Route path="/blog/editor" element={<BlogEditor />} />
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/dashboard" element={
         <AdminRoute>

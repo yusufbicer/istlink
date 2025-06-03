@@ -1,5 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 // Define what a user object looks like
 export type User = {
@@ -13,28 +15,13 @@ export type User = {
 type AuthContextType = {
   user: User | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<User>; // Updated return type
+  login: (email: string, password: string) => Promise<User>;
   logout: () => void;
+  signUp: (email: string, password: string, name?: string) => Promise<User>;
 };
 
 // Create the context with a default value
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// Demo users for testing - now with an admin user
-const demoUsers: User[] = [
-  { 
-    id: "1", 
-    name: "Demo User", 
-    email: "demo@example.com",
-    role: 'user' 
-  },
-  { 
-    id: "2", 
-    name: "Admin User", 
-    email: "admin@groop.ai", 
-    role: 'admin' 
-  }
-];
 
 // Hook for components to access the auth context
 export const useAuth = () => {
@@ -50,46 +37,116 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  // Check for saved user on mount
+  // Check for existing session on mount
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (error) {
-        console.error("Failed to parse saved user:", error);
-        localStorage.removeItem("user");
+    getSession();
+    
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (session?.user) {
+          await setUserFromSession(session.user);
+        } else {
+          setUser(null);
+        }
       }
-    }
-    setIsLoading(false);
+    );
+
+    return () => subscription.unsubscribe();
   }, []);
+
+  const getSession = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        await setUserFromSession(session.user);
+      }
+    } catch (error) {
+      console.error("Error getting session:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const setUserFromSession = async (supabaseUser: SupabaseUser) => {
+    try {
+      // Check if user is admin
+      const { data: adminData } = await supabase
+        .from('admin_users')
+        .select('role')
+        .eq('user_id', supabaseUser.id)
+        .single();
+
+      const userData: User = {
+        id: supabaseUser.id,
+        name: supabaseUser.user_metadata?.name || null,
+        email: supabaseUser.email!,
+        role: adminData ? 'admin' : 'user',
+      };
+
+      setUser(userData);
+    } catch (error) {
+      console.error("Error setting user from session:", error);
+    }
+  };
+
+  // Sign up function
+  const signUp = async (email: string, password: string, name?: string): Promise<User> => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          name: name,
+        },
+      },
+    });
+
+    if (error) throw error;
+    if (!data.user) throw new Error("Failed to create user");
+
+    const userData: User = {
+      id: data.user.id,
+      name: name || null,
+      email: data.user.email!,
+      role: 'user',
+    };
+
+    return userData;
+  };
 
   // Login function
   const login = async (email: string, password: string): Promise<User> => {
-    // For early access mode, use a simple hardcoded credential check
-    if (password !== "password") {
-      throw new Error("Invalid credentials");
-    }
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-    const foundUser = demoUsers.find(u => u.email === email);
-    if (!foundUser) {
-      throw new Error("User not found");
-    }
-    
-    // Set the user in state
-    setUser(foundUser);
-    
-    // Save to localStorage
-    localStorage.setItem("user", JSON.stringify(foundUser));
-    
-    console.log("Login successful for:", foundUser);
-    return foundUser;
+    if (error) throw error;
+    if (!data.user) throw new Error("Failed to login");
+
+    // Check if user is admin
+    const { data: adminData } = await supabase
+      .from('admin_users')
+      .select('role')
+      .eq('user_id', data.user.id)
+      .single();
+
+    const userData: User = {
+      id: data.user.id,
+      name: data.user.user_metadata?.name || null,
+      email: data.user.email!,
+      role: adminData ? 'admin' : 'user',
+    };
+
+    setUser(userData);
+    return userData;
   };
 
   // Logout function
-  const logout = () => {
+  const logout = async () => {
+    await supabase.auth.signOut();
     setUser(null);
-    localStorage.removeItem("user");
   };
 
   // Value provided to consuming components
@@ -97,7 +154,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     user,
     isAuthenticated: !!user,
     login,
-    logout
+    logout,
+    signUp
   };
   
   return (

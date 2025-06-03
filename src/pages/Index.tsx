@@ -92,66 +92,7 @@ const Index = () => {
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
       <main className="flex-grow">
-        {/* Enhanced Hero Section */}
-        <section className="relative py-16 md:py-24 bg-gradient-to-br from-blue-50 via-white to-emerald-50 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%)]"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(16,185,129,0.08),transparent_50%)]"></div>
-          
-          <div className="container mx-auto px-6 relative">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="mb-6">
-                <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
-                  🚀 AI-Powered Supply Chain Platform
-                </span>
-              </div>
-              
-              <h1 className="text-4xl md:text-6xl font-bold mb-8 text-gray-900 leading-tight">
-                Streamline Your{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
-                  Turkish Supply Chain
-                </span>
-              </h1>
-              
-              <div className="max-w-3xl mx-auto mb-12">
-                <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-light">
-                  Transform{' '}
-                  <span className="font-semibold text-gray-900 relative">
-                    fragmented Turkish supplier purchases
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-emerald-500"></span>
-                  </span>
-                  {' '}into a single, streamlined shipment.
-                </p>
-                
-                <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-base md:text-lg text-gray-600">
-                  <div className="flex items-center justify-center md:justify-start">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                    <span className="font-medium">AI-powered platform</span>
-                  </div>
-                  <div className="flex items-center justify-center md:justify-center">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
-                    <span className="font-medium">Payment consolidation</span>
-                  </div>
-                  <div className="flex items-center justify-center md:justify-end">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                    <span className="font-medium">Complete tracking</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link 
-                  to="/early-access"
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                >
-                  Get Early Access
-                </Link>
-                <button className="text-gray-700 px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 hover:bg-gray-50">
-                  Watch Demo
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Hero />
         
         {/* Improved spacing for mobile/tablet */}
         <div className={isMobile ? "mt-8" : "mt-12"}>
@@ -163,7 +104,7 @@ const Index = () => {
           <HowItWorks />
         </div>
         
-        {/* Compact Pricing Section with Fixed Badge */}
+        {/* Compact Pricing Section */}
         <section id="pricing" className="py-8 md:py-12 bg-gray-50">
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-8">
@@ -191,13 +132,13 @@ const Index = () => {
                       <TabsContent key={index} value={plan.name.toLowerCase()}>
                         <div className={`bg-white rounded-lg border-2 ${plan.borderColor} shadow-sm overflow-hidden relative`}>
                           {plan.isPopular && (
-                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
-                              <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-1.5 rounded-full shadow-lg border-2 border-white">
+                            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-20">
+                              <div className="bg-blue-600 text-white px-3 py-1 rounded-full shadow-md">
                                 <span className="text-xs font-semibold">MOST POPULAR</span>
                               </div>
                             </div>
                           )}
-                          <div className={`p-5 ${plan.isPopular ? 'pt-8' : ''}`}>
+                          <div className={`p-5 ${plan.isPopular ? 'pt-6' : ''}`}>
                             <div className={`w-10 h-10 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>
                               <PlanIcon className={`h-5 w-5 ${plan.iconColor}`} />
                             </div>
@@ -245,14 +186,14 @@ const Index = () => {
                       }`}
                     >
                       {plan.isPopular && (
-                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
-                          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-1.5 rounded-full shadow-lg border-2 border-white">
+                        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-20">
+                          <div className="bg-blue-600 text-white px-3 py-1 rounded-full shadow-md">
                             <span className="text-xs font-semibold">MOST POPULAR</span>
                           </div>
                         </div>
                       )}
                       
-                      <div className={`p-5 ${plan.isPopular ? 'pt-8' : ''} flex flex-col h-full`}>
+                      <div className={`p-5 ${plan.isPopular ? 'pt-6' : ''} flex flex-col h-full`}>
                         <div className="flex-grow">
                           <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>
                             <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />

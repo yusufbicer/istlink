@@ -137,22 +137,22 @@ const Features = () => {
             <div className={`w-12 h-12 ${features[0].iconColor} rounded-lg flex items-center justify-center mb-4`}>
               {React.createElement(features[0].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-xl font-semibold mb-2">{features[0].title}</h3>
-            <p className="text-gray-600 mb-4">{features[0].description}</p>
-            <div className="bg-white rounded-lg p-3 mt-auto">
-              <div className="text-xs font-medium text-gray-800 mb-2">Our customers typically save:</div>
-              <div className="grid grid-cols-3 gap-1">
+            <h3 className="text-xl font-semibold mb-3">{features[0].title}</h3>
+            <p className="text-gray-600 mb-6 flex-grow">{features[0].description}</p>
+            <div className="bg-white rounded-lg p-4 mt-auto">
+              <div className="text-sm font-medium text-gray-800 mb-3 text-center">Our customers typically save:</div>
+              <div className="grid grid-cols-3 gap-3">
                 <div className="text-center">
-                  <div className="text-base font-bold text-metallic-blue">35%</div>
-                  <div className="text-[10px] text-gray-500">Shipping</div>
+                  <div className="text-lg font-bold text-metallic-blue mb-1">35%</div>
+                  <div className="text-xs text-gray-500">Shipping</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-base font-bold text-metallic-blue">68%</div>
-                  <div className="text-[10px] text-gray-500">Paperwork</div>
+                  <div className="text-lg font-bold text-metallic-blue mb-1">68%</div>
+                  <div className="text-xs text-gray-500">Paperwork</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-base font-bold text-metallic-blue">92%</div>
-                  <div className="text-[10px] text-gray-500">Space</div>
+                  <div className="text-lg font-bold text-metallic-blue mb-1">92%</div>
+                  <div className="text-xs text-gray-500">Space</div>
                 </div>
               </div>
             </div>

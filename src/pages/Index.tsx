@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
@@ -130,15 +129,15 @@ const Index = () => {
                     const PlanIcon = plan.icon;
                     return (
                       <TabsContent key={index} value={plan.name.toLowerCase()}>
-                        <div className={`bg-white rounded-lg border-2 ${plan.borderColor} shadow-sm overflow-hidden relative`}>
+                        <div className={`bg-white rounded-lg border-2 ${plan.borderColor} shadow-sm overflow-hidden relative ${plan.isPopular ? 'mt-6' : ''}`}>
                           {plan.isPopular && (
-                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+                            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                               <div className="bg-blue-600 text-white px-3 py-1 rounded-full shadow-md text-center">
                                 <span className="text-xs font-semibold whitespace-nowrap">MOST POPULAR</span>
                               </div>
                             </div>
                           )}
-                          <div className={`p-5 ${plan.isPopular ? 'pt-8' : ''}`}>
+                          <div className={`p-5 ${plan.isPopular ? 'pt-10' : ''}`}>
                             <div className={`w-10 h-10 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>
                               <PlanIcon className={`h-5 w-5 ${plan.iconColor}`} />
                             </div>
@@ -174,7 +173,7 @@ const Index = () => {
                 </Tabs>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 {pricingPlans.map((plan, index) => {
                   const PlanIcon = plan.icon;
                   
@@ -182,18 +181,18 @@ const Index = () => {
                     <div 
                       key={index} 
                       className={`bg-white rounded-lg border-2 ${plan.borderColor} shadow-sm overflow-hidden transition-all hover:shadow-md relative ${
-                        plan.isPopular ? 'ring-2 ring-blue-200' : ''
+                        plan.isPopular ? 'ring-2 ring-blue-200 mt-6' : ''
                       }`}
                     >
                       {plan.isPopular && (
-                        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                        <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-10">
                           <div className="bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg border-2 border-white">
                             <span className="text-xs font-semibold whitespace-nowrap">MOST POPULAR</span>
                           </div>
                         </div>
                       )}
                       
-                      <div className={`p-6 ${plan.isPopular ? 'pt-10' : ''} flex flex-col h-full`}>
+                      <div className={`p-6 ${plan.isPopular ? 'pt-12' : ''} flex flex-col h-full`}>
                         <div className="flex-grow">
                           <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-4 mx-auto`}>
                             <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />

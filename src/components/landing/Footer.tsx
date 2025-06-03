@@ -10,15 +10,11 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
-              <IstLinqLogo size="md" />
-              <div className="ml-3">
+              <IstLinqLogo size="lg" />
+              <div className="ml-4">
                 <div className="flex items-baseline">
-                  <span className="font-bold text-xl text-blue-600">ist</span>
-                  <span className="font-bold text-xl text-emerald-600">Linq</span>
-                </div>
-                <div className="text-xs text-gray-500 font-medium leading-tight">
-                  <div>Smart Export</div>
-                  <div>Consolidation Solutions</div>
+                  <span className="font-bold text-2xl text-blue-600">ist</span>
+                  <span className="font-bold text-2xl text-emerald-600">Linq</span>
                 </div>
               </div>
             </div>

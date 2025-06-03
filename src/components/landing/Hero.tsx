@@ -59,7 +59,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="lg" className="h-12 px-8 text-md bg-blue-600 hover:bg-blue-700 text-white">
+            <Button asChild size="lg" className="h-12 px-8 text-md bg-emerald-600 hover:bg-emerald-700 text-white">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-2 h-5 w-5" /> Talk to Our Team
               </a>
@@ -89,7 +89,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-8 w-8 rounded-xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 relative overflow-hidden shadow-sm border border-blue-300/20 mr-3">
+                          <div className="flex items-center justify-center h-8 w-8 rounded-xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-800 relative overflow-hidden shadow-sm border border-emerald-300/20 mr-3">
                             <Network className="w-4 h-4 text-white absolute" />
                             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20"></div>
                           </div>
@@ -239,14 +239,14 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 relative overflow-hidden shadow-lg border border-blue-300/20 mr-4">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-800 relative overflow-hidden shadow-lg border border-emerald-300/20 mr-4">
                             <Network className="w-5 h-5 text-white absolute" />
                             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20"></div>
                           </div>
                         </div>
                         
                         <div className="flex space-x-2">
-                          <div className="flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-medium">
+                          <div className="flex items-center px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-sm font-medium">
                             <Activity className="h-4 w-4 mr-2" /> Dashboard
                           </div>
                           <div className="flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 font-medium">

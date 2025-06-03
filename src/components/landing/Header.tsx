@@ -46,16 +46,12 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                <IstLinqLogo size="md" />
-                {/* Enhanced istLinq branding with two-color text */}
-                <div className="ml-3">
+                <IstLinqLogo size="lg" />
+                {/* Enhanced istLinq branding with two-color text - removed tagline */}
+                <div className="ml-4">
                   <div className="flex items-baseline">
-                    <span className="font-bold text-2xl text-blue-600 tracking-tight">ist</span>
-                    <span className="font-bold text-2xl text-emerald-600 tracking-tight">Linq</span>
-                  </div>
-                  <div className="text-xs text-gray-600 font-medium leading-tight">
-                    <div>Smart Export</div>
-                    <div>Consolidation Solutions</div>
+                    <span className="font-bold text-3xl text-blue-600 tracking-tight">ist</span>
+                    <span className="font-bold text-3xl text-emerald-600 tracking-tight">Linq</span>
                   </div>
                 </div>
               </div>
@@ -97,14 +93,14 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <Button 
-                className="bg-blue-600 hover:bg-blue-700"
+                className="bg-emerald-600 hover:bg-emerald-700"
                 onClick={() => handleNavigate('/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className="bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white whitespace-nowrap"
                 onClick={() => handleNavigate('/early-access')}
               >
                 {isTablet ? "Early Access" : "Request Early Access"}
@@ -157,14 +153,14 @@ const Header = () => {
               <div className="pt-2 border-t border-gray-100">
                 {user ? (
                   <Button 
-                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700"
                     onClick={() => handleNavigate('/dashboard')}
                   >
                     Dashboard
                   </Button>
                 ) : (
                   <Button 
-                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700"
                     onClick={() => handleNavigate('/early-access')}
                   >
                     Request Early Access

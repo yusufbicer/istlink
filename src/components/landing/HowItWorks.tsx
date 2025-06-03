@@ -131,12 +131,12 @@ const HowItWorks = () => {
                     <div className="flex-shrink-0 relative z-10">
                       <div 
                         className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border-4 ${
-                          activeStep === index ? 'border-indigo-500 scale-110' : 'border-white'
+                          activeStep === index ? 'border-emerald-500 scale-110' : 'border-white'
                         } ${step.color}`}
                       >
                         <StepIcon className="h-7 w-7" />
                       </div>
-                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-sm">
                         {index + 1}
                       </div>
                     </div>
@@ -148,7 +148,7 @@ const HowItWorks = () => {
                       <div 
                         className={`p-5 rounded-lg transition-all duration-300 ${
                           activeStep === index 
-                            ? 'bg-white shadow-xl transform -translate-y-1 border-l-4 border-indigo-500' 
+                            ? 'bg-white shadow-xl transform -translate-y-1 border-l-4 border-emerald-500' 
                             : 'bg-white shadow-md'
                         }`}
                       >
@@ -171,7 +171,7 @@ const HowItWorks = () => {
             return (
               <div 
                 key={index} 
-                className="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-indigo-500"
+                className="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-emerald-500"
               >
                 <div className="p-5">
                   <div className="flex items-center mb-4">
@@ -180,7 +180,7 @@ const HowItWorks = () => {
                     </div>
                     <div>
                       <div className="flex items-center">
-                        <span className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold mr-2">
+                        <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm font-bold mr-2">
                           {index + 1}
                         </span>
                         <h3 className="font-bold text-lg text-gray-900">{step.title}</h3>

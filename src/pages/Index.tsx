@@ -101,10 +101,10 @@ const Index = () => {
         <section id="pricing" className="py-8 md:py-12 bg-gray-50">
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 Choose Your Plan
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 Transparent pricing that scales with your business needs.
               </p>
             </div>
@@ -114,9 +114,9 @@ const Index = () => {
               <div className="mb-6">
                 <Tabs defaultValue="growth" className="w-full">
                   <TabsList className="grid grid-cols-3 mb-4 bg-white p-1 rounded-lg shadow-sm border">
-                    <TabsTrigger value="starter" className="text-xs py-2 data-[state=active]:bg-slate-600 data-[state=active]:text-white rounded transition-all">Starter</TabsTrigger>
-                    <TabsTrigger value="growth" className="text-xs py-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded transition-all">Growth</TabsTrigger>
-                    <TabsTrigger value="enterprise" className="text-xs py-2 data-[state=active]:bg-emerald-600 data-[state=active]:text-white rounded transition-all">Enterprise</TabsTrigger>
+                    <TabsTrigger value="starter" className="text-xs py-2 data-[state=active]:bg-slate-600 data-[state=active]:text-white rounded transition-all" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Starter</TabsTrigger>
+                    <TabsTrigger value="growth" className="text-xs py-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded transition-all" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Growth</TabsTrigger>
+                    <TabsTrigger value="enterprise" className="text-xs py-2 data-[state=active]:bg-emerald-600 data-[state=active]:text-white rounded transition-all" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Enterprise</TabsTrigger>
                   </TabsList>
                   
                   {pricingPlans.map((plan, index) => {
@@ -128,17 +128,17 @@ const Index = () => {
                             <div className={`w-10 h-10 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>
                               <PlanIcon className={`h-5 w-5 ${plan.iconColor}`} />
                             </div>
-                            <h3 className="text-lg font-bold mb-2 text-center">{plan.name}</h3>
-                            <p className="text-gray-600 mb-3 text-center text-sm">{plan.description}</p>
+                            <h3 className="text-lg font-bold mb-2 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.name}</h3>
+                            <p className="text-gray-600 mb-3 text-center text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.description}</p>
                             <div className="text-center mb-1">
-                              <span className="text-2xl font-bold">{plan.price}</span>
+                              <span className="text-2xl font-bold" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.price}</span>
                             </div>
-                            <div className="text-gray-600 text-sm mb-2 text-center">{plan.period}</div>
+                            <div className="text-gray-600 text-sm mb-2 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.period}</div>
                             {plan.additionalInfo && (
-                              <div className="text-xs text-gray-500 mb-3 text-center">{plan.additionalInfo}</div>
+                              <div className="text-xs text-gray-500 mb-3 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.additionalInfo}</div>
                             )}
                             
-                            <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-3`}>
+                            <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-3`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                               Request Access
                             </button>
                             
@@ -147,7 +147,7 @@ const Index = () => {
                                 {plan.features.map((feature, i) => (
                                   <li key={i} className="flex items-center text-xs text-gray-700">
                                     <CheckCircle2 className="h-3 w-3 text-emerald-500 mr-2 flex-shrink-0" />
-                                    {feature}
+                                    <span style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -174,17 +174,17 @@ const Index = () => {
                           <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-4 mx-auto`}>
                             <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
                           </div>
-                          <h3 className="text-lg font-bold mb-2 text-center">{plan.name}</h3>
-                          <p className="text-gray-600 mb-4 text-center text-sm">{plan.description}</p>
+                          <h3 className="text-lg font-bold mb-2 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.name}</h3>
+                          <p className="text-gray-600 mb-4 text-center text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.description}</p>
                           <div className="text-center mb-1">
-                            <span className="text-2xl font-bold">{plan.price}</span>
+                            <span className="text-2xl font-bold" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.price}</span>
                           </div>
-                          <div className="text-gray-600 text-sm mb-2 text-center">{plan.period}</div>
+                          <div className="text-gray-600 text-sm mb-2 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.period}</div>
                           {plan.additionalInfo && (
-                            <div className="text-xs text-gray-500 mb-4 text-center">{plan.additionalInfo}</div>
+                            <div className="text-xs text-gray-500 mb-4 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.additionalInfo}</div>
                           )}
                           
-                          <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-4`}>
+                          <button className={`w-full ${plan.buttonColor} text-white py-2 px-4 rounded-lg font-medium transition-colors mb-4`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                             Request Access
                           </button>
                           
@@ -193,7 +193,7 @@ const Index = () => {
                               {plan.features.map((feature, i) => (
                                 <li key={i} className="flex items-start">
                                   <CheckCircle2 className="h-4 w-4 text-emerald-500 mr-2 mt-0.5 flex-shrink-0" />
-                                  <span className="text-gray-700 text-sm">{feature}</span>
+                                  <span className="text-gray-700 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature}</span>
                                 </li>
                               ))}
                             </ul>

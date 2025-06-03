@@ -115,7 +115,7 @@ const Features = () => {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
+          <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Features
           </span>
           <h2 className="text-3xl md:text-4xl font-semibold mb-4" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -144,16 +144,16 @@ const Features = () => {
               <div className="text-sm font-medium text-gray-800 mb-3 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Our customers typically save:</div>
               <div className="grid grid-cols-3 gap-3">
                 <div className="text-center">
-                  <div className="text-lg font-bold text-metallic-blue mb-1">35%</div>
-                  <div className="text-xs text-gray-500">Shipping</div>
+                  <div className="text-lg font-bold text-metallic-blue mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>35%</div>
+                  <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Shipping</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg font-bold text-metallic-blue mb-1">68%</div>
-                  <div className="text-xs text-gray-500">Paperwork</div>
+                  <div className="text-lg font-bold text-metallic-blue mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>68%</div>
+                  <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Paperwork</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg font-bold text-metallic-blue mb-1">92%</div>
-                  <div className="text-xs text-gray-500">Space</div>
+                  <div className="text-lg font-bold text-metallic-blue mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>92%</div>
+                  <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Space</div>
                 </div>
               </div>
             </div>
@@ -263,16 +263,16 @@ const Features = () => {
                 <div className="text-xs font-medium text-gray-800 mb-2 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Customers save:</div>
                 <div className="grid grid-cols-3 gap-2">
                   <div className="text-center">
-                    <div className="text-sm font-bold text-metallic-blue">35%</div>
-                    <div className="text-xs text-gray-500">Shipping</div>
+                    <div className="text-sm font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>35%</div>
+                    <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Shipping</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-sm font-bold text-metallic-blue">68%</div>
-                    <div className="text-xs text-gray-500">Paperwork</div>
+                    <div className="text-sm font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>68%</div>
+                    <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Paperwork</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-sm font-bold text-metallic-blue">92%</div>
-                    <div className="text-xs text-gray-500">Space</div>
+                    <div className="text-sm font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>92%</div>
+                    <div className="text-xs text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Space</div>
                   </div>
                 </div>
               </div>
@@ -403,16 +403,16 @@ const Features = () => {
                         <div className="text-xs font-medium text-gray-800 text-center mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Customers typically save:</div>
                         <div className="grid grid-cols-3 gap-1">
                           <div className="text-center">
-                            <div className="text-base font-bold text-metallic-blue">35%</div>
-                            <div className="text-[10px] text-gray-500">Shipping</div>
+                            <div className="text-base font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>35%</div>
+                            <div className="text-[10px] text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Shipping</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-base font-bold text-metallic-blue">68%</div>
-                            <div className="text-[10px] text-gray-500">Paperwork</div>
+                            <div className="text-base font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>68%</div>
+                            <div className="text-[10px] text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Paperwork</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-base font-bold text-metallic-blue">92%</div>
-                            <div className="text-[10px] text-gray-500">Space</div>
+                            <div className="text-base font-bold text-metallic-blue" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>92%</div>
+                            <div className="text-[10px] text-gray-500" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Space</div>
                           </div>
                         </div>
                       </div>

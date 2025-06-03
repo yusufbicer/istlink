@@ -139,7 +139,7 @@ const HowItWorks = () => {
                       >
                         <StepIcon className="h-7 w-7" />
                       </div>
-                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-sm">
+                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                         {index + 1}
                       </div>
                     </div>
@@ -189,7 +189,7 @@ const HowItWorks = () => {
                       >
                         <StepIcon className={`${isMobile ? 'h-5 w-5' : 'h-6 w-6'}`} />
                       </div>
-                      <div className={`absolute -top-1 -right-1 ${isMobile ? 'w-6 h-6' : 'w-7 h-7'} rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                      <div className={`absolute -top-1 -right-1 ${isMobile ? 'w-6 h-6' : 'w-7 h-7'} rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold ${isMobile ? 'text-xs' : 'text-sm'}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                         {index + 1}
                       </div>
                     </div>

@@ -186,14 +186,14 @@ const Index = () => {
                       }`}
                     >
                       {plan.isPopular && (
-                        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-20">
-                          <div className="bg-blue-600 text-white px-3 py-1 rounded-full shadow-md">
-                            <span className="text-xs font-semibold">MOST POPULAR</span>
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
+                          <div className="bg-blue-600 text-white px-4 py-1.5 rounded-full shadow-lg border-2 border-white">
+                            <span className="text-xs font-semibold whitespace-nowrap">MOST POPULAR</span>
                           </div>
                         </div>
                       )}
                       
-                      <div className={`p-5 ${plan.isPopular ? 'pt-6' : ''} flex flex-col h-full`}>
+                      <div className={`p-5 ${plan.isPopular ? 'pt-8' : ''} flex flex-col h-full`}>
                         <div className="flex-grow">
                           <div className={`w-12 h-12 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>
                             <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />

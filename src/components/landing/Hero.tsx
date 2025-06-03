@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -45,15 +46,19 @@ const Hero = () => {
             Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-lavender-600 to-emerald-600">Simplified & Streamlined</span>
           </h1>
           
-          <p 
-            className={`text-lg md:text-xl text-gray-600 mb-6 max-w-2xl mx-auto transition-all duration-1000 delay-200 transform ${
+          <div 
+            className={`text-lg md:text-xl mb-6 max-w-3xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Transform fragmented Turkish supplier purchases into a single, streamlined shipment. 
-            Our AI-powered platform simplifies the entire process—from payment consolidation to 
-            documentation management and comprehensive tracking.
-          </p>
+            <div className="bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 bg-clip-text text-transparent font-medium leading-relaxed">
+              <span className="text-blue-700 font-semibold">Transform fragmented Turkish supplier purchases</span> into a single, streamlined shipment. 
+              Our <span className="text-lavender-600 font-semibold">AI-powered platform</span> simplifies the entire process—from 
+              <span className="text-emerald-600 font-semibold"> payment consolidation</span> to 
+              <span className="text-blue-600 font-semibold"> documentation management</span> and 
+              <span className="text-lavender-700 font-semibold">comprehensive tracking</span>.
+            </div>
+          </div>
           
           <div 
             className={`flex justify-center transition-all duration-1000 delay-300 transform ${

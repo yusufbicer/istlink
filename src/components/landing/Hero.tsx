@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -53,12 +52,12 @@ const Hero = () => {
           </div>
           
           <h1 
-            className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight md:leading-tight mb-8 transition-all duration-1000 delay-100 transform ${
+            className={`text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight md:leading-tight mb-6 md:mb-8 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
             style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
           >
-            <span className="block text-slate-800 mb-3 font-extrabold tracking-tight">
+            <span className="block text-slate-800 mb-2 md:mb-3 font-extrabold tracking-tight">
               Turkish Supply Chain Complexity,
             </span>
             <span className="block relative h-[1.2em] overflow-hidden">
@@ -80,7 +79,7 @@ const Hero = () => {
           </h1>
           
           <div 
-            className={`text-xl md:text-2xl lg:text-2xl mb-10 max-w-5xl mx-auto transition-all duration-1000 delay-200 transform ${
+            className={`text-lg md:text-xl lg:text-xl mb-8 md:mb-10 max-w-5xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
@@ -100,9 +99,9 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="lg" className="h-16 px-12 text-lg font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 rounded-xl">
+            <Button asChild size="lg" className="h-14 md:h-16 px-8 md:px-12 text-base md:text-lg font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 rounded-xl">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
-                <MessageSquare className="mr-3 h-6 w-6" /> Talk to Our Team
+                <MessageSquare className="mr-3 h-5 w-5 md:h-6 md:w-6" /> Talk to Our Team
               </a>
             </Button>
           </div>
@@ -137,20 +136,20 @@ const Hero = () => {
                       </div>
                       
                       {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
-                      <div className="flex mb-3 bg-gray-200 rounded-lg p-1.5 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors">
-                          <Package className="h-3.5 w-3.5 mr-1" /> Orders
+                      <div className="flex mb-3 bg-gray-200 rounded-lg p-1 text-xs justify-between overflow-x-auto whitespace-nowrap shadow-sm">
+                        <div className="px-2 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0">
+                          <Package className="h-3 w-3 mr-1" /> Orders
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors">
-                          <GitMerge className="h-3.5 w-3.5 mr-1" /> Consolidations
+                        <div className="px-2 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0">
+                          <GitMerge className="h-3 w-3 mr-1" /> Consol.
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors">
-                          <Users className="h-3.5 w-3.5 mr-1" /> Suppliers
+                        <div className="px-2 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0">
+                          <Users className="h-3 w-3 mr-1" /> Suppliers
                         </div>
-                        <div className="px-2.5 py-1.5 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors">
-                          <BarChart2 className="h-3.5 w-3.5 mr-1" /> Analytics
+                        <div className="px-2 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0">
+                          <BarChart2 className="h-3 w-3 mr-1" /> Analytics
                         </div>
-                        <div className="ml-1 w-7 h-7 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium">
+                        <div className="ml-1 w-6 h-6 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium flex-shrink-0">
                           JD
                         </div>
                       </div>

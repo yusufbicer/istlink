@@ -10,12 +10,11 @@ import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { login, signUp, user } = useAuth();
+  const { login, user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -39,24 +38,15 @@ const Auth = () => {
     setIsLoading(true);
 
     try {
-      if (isLogin) {
-        await login(email, password);
-        toast({
-          title: "Success",
-          description: "Successfully logged in!"
-        });
-        navigate('/admin/dashboard');
-      } else {
-        await signUp(email, password);
-        toast({
-          title: "Success",
-          description: "Account created successfully! Please check your email to verify your account."
-        });
-        setIsLogin(true);
-      }
+      await login(email, password);
+      toast({
+        title: "Success",
+        description: "Successfully logged in!"
+      });
+      navigate('/admin/dashboard');
     } catch (error: any) {
       toast({
-        title: isLogin ? "Login Failed" : "Sign Up Failed",
+        title: "Login Failed",
         description: error.message || "An unexpected error occurred",
         variant: "destructive"
       });
@@ -94,10 +84,10 @@ const Auth = () => {
           <div className="p-8">
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                {isLogin ? 'Welcome Back' : 'Create Account'}
+                Admin Login
               </h2>
               <p className="text-gray-600 text-sm">
-                {isLogin ? 'Sign in to your admin account' : 'Sign up for a new admin account'}
+                Sign in to your admin account
               </p>
             </div>
 
@@ -149,36 +139,13 @@ const Auth = () => {
                 {isLoading ? (
                   <div className="flex items-center justify-center">
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    {isLogin ? 'Signing in...' : 'Creating account...'}
+                    Signing in...
                   </div>
                 ) : (
-                  isLogin ? 'Sign In' : 'Create Account'
+                  'Sign In'
                 )}
               </Button>
             </form>
-
-            {/* Toggle Auth Mode */}
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => setIsLogin(!isLogin)}
-                className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
-              >
-                {isLogin ? (
-                  <>Don't have an account? <span className="font-medium">Sign up</span></>
-                ) : (
-                  <>Already have an account? <span className="font-medium">Sign in</span></>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Demo Credentials */}
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <h3 className="text-sm font-medium text-blue-900 mb-2">Demo Admin Credentials:</h3>
-          <div className="text-xs text-blue-700 space-y-1">
-            <p><strong>Email:</strong> admin@istlinq.com</p>
-            <p><strong>Password:</strong> admin123456</p>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
@@ -34,6 +35,10 @@ const formSchema = z.object({
   category: z.string().min(1, {
     message: "Category is required.",
   }),
+  author_name: z.string().min(2, {
+    message: "Author name must be at least 2 characters.",
+  }),
+  image_url: z.string().url().optional().or(z.literal("")),
 })
 
 const BlogEditor = () => {
@@ -52,6 +57,8 @@ const BlogEditor = () => {
       excerpt: "",
       content: "",
       category: "General",
+      author_name: "",
+      image_url: "",
     },
     mode: "onChange",
   })
@@ -96,6 +103,8 @@ const BlogEditor = () => {
           form.setValue("excerpt", data.excerpt || "");
           form.setValue("content", data.content);
           form.setValue("category", data.category);
+          form.setValue("author_name", data.author_name || "");
+          form.setValue("image_url", data.image_url || "");
         } catch (error) {
           console.error('Error fetching post:', error);
           toast({
@@ -134,7 +143,8 @@ const BlogEditor = () => {
         excerpt: values.excerpt || null,
         category: values.category,
         author_id: user.id,
-        author_name: user.email,
+        author_name: values.author_name,
+        image_url: values.image_url || null,
         updated_at: new Date().toISOString(),
         read_time: '5 min read',
         published: true
@@ -253,6 +263,40 @@ const BlogEditor = () => {
                   <FormLabel>Slug</FormLabel>
                   <FormControl>
                     <Input placeholder="enter-post-slug" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="author_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Author Name</FormLabel>
+                  <FormControl>
+                    <Input 
+                      placeholder="Enter author name"
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="image_url"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Subject Image URL (Optional)</FormLabel>
+                  <FormControl>
+                    <Input 
+                      placeholder="https://example.com/image.jpg"
+                      {...field} 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

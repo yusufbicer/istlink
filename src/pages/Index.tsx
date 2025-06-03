@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
@@ -138,16 +139,18 @@ const Index = () => {
                     const PlanIcon = plan.icon;
                     return (
                       <TabsContent key={index} value={plan.name.toLowerCase()} className="pt-2">
-                        <div className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300`}>
+                        <div className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 relative`}>
                           {plan.isPopular && (
-                            <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white text-center py-2">
-                              <span className="text-xs font-bold flex items-center justify-center">
-                                <Star className="w-3 h-3 mr-1" />
-                                MOST POPULAR
-                              </span>
+                            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-10">
+                              <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-3 py-1 rounded-full shadow-lg">
+                                <span className="text-xs font-bold flex items-center">
+                                  <Star className="w-3 h-3 mr-1" />
+                                  MOST POPULAR
+                                </span>
+                              </div>
                             </div>
                           )}
-                          <div className="p-6">
+                          <div className={`p-6 ${plan.isPopular ? 'pt-8' : ''}`}>
                             <div className={`w-12 h-12 ${plan.iconBg} rounded-xl flex items-center justify-center mb-4 mx-auto shadow-md`}>
                               <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
                             </div>
@@ -192,11 +195,11 @@ const Index = () => {
                     <div 
                       key={index} 
                       className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative group ${
-                        plan.isPopular ? 'transform scale-105' : ''
+                        plan.isPopular ? 'scale-105' : ''
                       }`}
                     >
                       {plan.isPopular && (
-                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
                           <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-4 py-1.5 rounded-full shadow-lg">
                             <span className="text-xs font-bold flex items-center">
                               <Star className="w-3 h-3 mr-1" />

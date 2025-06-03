@@ -42,7 +42,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-emerald-600">Simplified & Streamlined</span>
+            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-blue-600 to-emerald-700 animate-gradient-x">Simplified & Streamlined</span>
           </h1>
           
           <p 

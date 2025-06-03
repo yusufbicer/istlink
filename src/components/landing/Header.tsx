@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
@@ -64,27 +63,31 @@ const Header = () => {
             <div className={`flex ${isTablet ? 'space-x-3' : 'space-x-8'}`}>
               <button 
                 onClick={() => scrollToSection('features')}
-                className={`text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`relative text-sm font-medium text-gray-700 hover:text-emerald-600 transition-all duration-300 group ${isTablet ? 'px-1' : ''}`}
               >
                 Features
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
-                className={`text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`relative text-sm font-medium text-gray-700 hover:text-emerald-600 transition-all duration-300 group ${isTablet ? 'px-1' : ''}`}
               >
                 How It Works
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className={`text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`relative text-sm font-medium text-gray-700 hover:text-emerald-600 transition-all duration-300 group ${isTablet ? 'px-1' : ''}`}
               >
                 Pricing
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
-                className={`text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors ${isTablet ? 'px-1' : ''}`}
+                className={`relative text-sm font-medium text-gray-700 hover:text-emerald-600 transition-all duration-300 group ${isTablet ? 'px-1' : ''}`}
               >
                 Blog
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
               </button>
             </div>
           </div>
@@ -93,14 +96,14 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <Button 
-                className="bg-emerald-600 hover:bg-emerald-700"
+                className="bg-emerald-600 hover:bg-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 onClick={() => handleNavigate('/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white whitespace-nowrap"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 onClick={() => handleNavigate('/early-access')}
               >
                 {isTablet ? "Early Access" : "Request Early Access"}
@@ -111,7 +114,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex items-center"
+            className="md:hidden flex items-center p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />

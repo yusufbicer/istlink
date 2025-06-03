@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
@@ -105,41 +104,41 @@ const Index = () => {
         </div>
         
         {/* Enhanced Pricing Section with Modern Styling */}
-        <section id="pricing" className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <section id="pricing" className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
           {/* Background decoration */}
           <div className="absolute inset-0 bg-gradient-radial from-blue-50/50 via-transparent to-transparent opacity-60" />
           <div className="absolute top-1/4 right-1/3 w-64 h-64 bg-emerald-100 rounded-full filter blur-3xl opacity-20 animate-pulse" />
           <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-blue-100 rounded-full filter blur-3xl opacity-15" />
           
           <div className="container mx-auto px-6 relative">
-            <div className="text-center max-w-4xl mx-auto mb-16">
-              <div className="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-100 to-emerald-100 text-blue-800 rounded-full mb-6">
+            <div className="text-center max-w-4xl mx-auto mb-12">
+              <div className="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-100 to-emerald-100 text-blue-800 rounded-full mb-4">
                 <Star className="w-4 h-4 mr-2" />
                 <span className="text-sm font-semibold">Transparent Pricing</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-blue-900 to-emerald-900">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-blue-900 to-emerald-900">
                 Choose Your Consolidation Plan
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 leading-relaxed">
                 Flexible pricing designed to scale with your business needs. No hidden fees, just transparent value.
               </p>
             </div>
             
             {/* Mobile: Enhanced Pricing Tabs */}
             {isMobile ? (
-              <div className="mb-10">
+              <div className="mb-8">
                 <Tabs defaultValue="growth" className="w-full">
-                  <TabsList className="grid grid-cols-3 mb-8 bg-white p-1.5 rounded-xl shadow-lg border border-gray-200">
-                    <TabsTrigger value="starter" className="text-xs py-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-lg transition-all">Starter</TabsTrigger>
-                    <TabsTrigger value="growth" className="text-xs py-3 data-[state=active]:bg-emerald-600 data-[state=active]:text-white rounded-lg transition-all">Growth</TabsTrigger>
-                    <TabsTrigger value="enterprise" className="text-xs py-3 data-[state=active]:bg-purple-600 data-[state=active]:text-white rounded-lg transition-all">Enterprise</TabsTrigger>
+                  <TabsList className="grid grid-cols-3 mb-6 bg-white p-1.5 rounded-xl shadow-lg border border-gray-200">
+                    <TabsTrigger value="starter" className="text-xs py-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded-lg transition-all">Starter</TabsTrigger>
+                    <TabsTrigger value="growth" className="text-xs py-2 data-[state=active]:bg-emerald-600 data-[state=active]:text-white rounded-lg transition-all">Growth</TabsTrigger>
+                    <TabsTrigger value="enterprise" className="text-xs py-2 data-[state=active]:bg-purple-600 data-[state=active]:text-white rounded-lg transition-all">Enterprise</TabsTrigger>
                   </TabsList>
                   
                   {pricingPlans.map((plan, index) => {
                     const PlanIcon = plan.icon;
                     return (
                       <TabsContent key={index} value={plan.name.toLowerCase()} className="pt-2">
-                        <div className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300`}>
+                        <div className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300`}>
                           {plan.isPopular && (
                             <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white text-center py-2">
                               <span className="text-xs font-bold flex items-center justify-center">
@@ -148,30 +147,30 @@ const Index = () => {
                               </span>
                             </div>
                           )}
-                          <div className="p-8">
-                            <div className={`w-16 h-16 ${plan.iconBg} rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg`}>
-                              <PlanIcon className={`h-8 w-8 ${plan.iconColor}`} />
+                          <div className="p-6">
+                            <div className={`w-12 h-12 ${plan.iconBg} rounded-xl flex items-center justify-center mb-4 mx-auto shadow-md`}>
+                              <PlanIcon className={`h-6 w-6 ${plan.iconColor}`} />
                             </div>
-                            <h3 className="text-2xl font-bold mb-2 text-center">{plan.name}</h3>
-                            <p className="text-gray-600 mb-6 text-center min-h-[60px]">{plan.description}</p>
+                            <h3 className="text-xl font-bold mb-2 text-center">{plan.name}</h3>
+                            <p className="text-gray-600 mb-4 text-center text-sm min-h-[48px]">{plan.description}</p>
                             <div className="text-center mb-2">
-                              <span className="text-4xl font-bold">{plan.price}</span>
+                              <span className="text-3xl font-bold">{plan.price}</span>
                             </div>
-                            <div className="text-gray-600 text-sm mb-4 text-center">{plan.period}</div>
+                            <div className="text-gray-600 text-sm mb-3 text-center">{plan.period}</div>
                             {plan.additionalInfo && (
-                              <div className="text-sm text-gray-500 mb-6 text-center">{plan.additionalInfo}</div>
+                              <div className="text-xs text-gray-500 mb-4 text-center">{plan.additionalInfo}</div>
                             )}
                             
-                            <button className={`w-full ${plan.buttonColor} text-white py-3 px-6 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg mb-6`}>
+                            <button className={`w-full ${plan.buttonColor} text-white py-2.5 px-6 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-md mb-4`}>
                               Get Started
                             </button>
                             
-                            <div className="border-t border-gray-100 pt-6">
-                              <h4 className="font-semibold mb-4 text-center">What's included</h4>
-                              <ul className="space-y-3">
+                            <div className="border-t border-gray-100 pt-4">
+                              <h4 className="font-semibold mb-3 text-center text-sm">What's included</h4>
+                              <ul className="space-y-2">
                                 {plan.features.map((feature, i) => (
-                                  <li key={i} className="flex items-center text-sm text-gray-700">
-                                    <CheckCircle2 className="h-5 w-5 text-emerald-500 mr-3 flex-shrink-0" />
+                                  <li key={i} className="flex items-center text-xs text-gray-700">
+                                    <CheckCircle2 className="h-4 w-4 text-emerald-500 mr-2 flex-shrink-0" />
                                     {feature}
                                   </li>
                                 ))}
@@ -185,20 +184,20 @@ const Index = () => {
                 </Tabs>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 {pricingPlans.map((plan, index) => {
                   const PlanIcon = plan.icon;
                   
                   return (
                     <div 
                       key={index} 
-                      className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative group ${
+                      className={`bg-white rounded-2xl border-2 ${plan.borderColor} shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative group ${
                         plan.isPopular ? 'transform scale-105' : ''
                       }`}
                     >
                       {plan.isPopular && (
-                        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                          <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg">
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                          <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white px-4 py-1.5 rounded-full shadow-lg">
                             <span className="text-xs font-bold flex items-center">
                               <Star className="w-3 h-3 mr-1" />
                               MOST POPULAR
@@ -207,32 +206,32 @@ const Index = () => {
                         </div>
                       )}
                       
-                      <div className={`p-8 ${plan.isPopular ? 'pt-12' : ''} flex flex-col h-full`}>
+                      <div className={`p-6 ${plan.isPopular ? 'pt-8' : ''} flex flex-col h-full`}>
                         <div className="flex-grow">
-                          <div className={`w-16 h-16 ${plan.iconBg} rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                            <PlanIcon className={`h-8 w-8 ${plan.iconColor}`} />
+                          <div className={`w-14 h-14 ${plan.iconBg} rounded-xl flex items-center justify-center mb-4 mx-auto shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                            <PlanIcon className={`h-7 w-7 ${plan.iconColor}`} />
                           </div>
-                          <h3 className="text-2xl font-bold mb-2 text-center">{plan.name}</h3>
-                          <p className="text-gray-600 mb-6 text-center min-h-[60px]">{plan.description}</p>
+                          <h3 className="text-xl font-bold mb-2 text-center">{plan.name}</h3>
+                          <p className="text-gray-600 mb-4 text-center text-sm min-h-[48px]">{plan.description}</p>
                           <div className="text-center mb-2">
-                            <span className="text-4xl font-bold">{plan.price}</span>
+                            <span className="text-3xl font-bold">{plan.price}</span>
                           </div>
-                          <div className="text-gray-600 text-sm mb-4 text-center">{plan.period}</div>
+                          <div className="text-gray-600 text-sm mb-3 text-center">{plan.period}</div>
                           {plan.additionalInfo && (
-                            <div className="text-sm text-gray-500 mb-6 text-center">{plan.additionalInfo}</div>
+                            <div className="text-xs text-gray-500 mb-4 text-center">{plan.additionalInfo}</div>
                           )}
                           
-                          <button className={`w-full ${plan.buttonColor} text-white py-3 px-6 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg mb-6`}>
+                          <button className={`w-full ${plan.buttonColor} text-white py-2.5 px-6 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-md mb-4`}>
                             Get Started
                           </button>
                           
-                          <div className="border-t border-gray-100 pt-6">
-                            <h4 className="font-semibold mb-4 text-center">What's included</h4>
-                            <ul className="space-y-3">
+                          <div className="border-t border-gray-100 pt-4">
+                            <h4 className="font-semibold mb-3 text-center text-sm">What's included</h4>
+                            <ul className="space-y-2">
                               {plan.features.map((feature, i) => (
                                 <li key={i} className="flex items-start">
-                                  <CheckCircle2 className="h-5 w-5 text-emerald-500 mr-3 mt-0.5 flex-shrink-0" />
-                                  <span className="text-gray-700">{feature}</span>
+                                  <CheckCircle2 className="h-4 w-4 text-emerald-500 mr-2 mt-0.5 flex-shrink-0" />
+                                  <span className="text-gray-700 text-sm">{feature}</span>
                                 </li>
                               ))}
                             </ul>

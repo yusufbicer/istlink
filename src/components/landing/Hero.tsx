@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -41,7 +42,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-lavender-500">Elegantly Resolved</span>
+            Turkish Supply Chain Complexity, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-emerald-600">Simplified & Streamlined</span>
           </h1>
           
           <p 
@@ -89,10 +90,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-8 w-8 rounded-xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-800 relative overflow-hidden shadow-sm border border-emerald-300/20 mr-3">
-                            <Network className="w-4 h-4 text-white absolute" />
-                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20"></div>
-                          </div>
+                          <IstLinqLogo size="sm" className="mr-3" />
                           <span className="font-bold text-base tracking-tight">istLinq</span>
                         </div>
                       </div>
@@ -239,10 +237,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-800 relative overflow-hidden shadow-lg border border-emerald-300/20 mr-4">
-                            <Network className="w-5 h-5 text-white absolute" />
-                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20"></div>
-                          </div>
+                          <IstLinqLogo size="md" className="mr-4" />
                         </div>
                         
                         <div className="flex space-x-2">

@@ -34,43 +34,43 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="pt-32 pb-12 md:pt-40 md:pb-20 overflow-hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <section className="pt-24 pb-8 md:pt-32 md:pb-16 overflow-hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Enhanced background gradients and effects */}
       <div className="absolute inset-0 bg-gradient-radial from-blue-100/40 via-transparent to-transparent opacity-60" />
       <div className="absolute top-1/4 right-1/3 w-72 h-72 bg-gradient-to-r from-blue-200 to-lavender-200 rounded-full filter blur-3xl opacity-20 animate-float pointer-events-none" />
       <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-gradient-to-r from-emerald-100 to-blue-100 rounded-full filter blur-3xl opacity-15 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
       
       <div className="container mx-auto px-4 sm:px-6 relative">
-        <div className="max-w-6xl mx-auto text-center mb-8 md:mb-12">
+        <div className="max-w-5xl mx-auto text-center mb-6 md:mb-10">
           <div 
             className={`transition-all duration-1000 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <span className="inline-block py-3 px-6 text-sm font-semibold bg-gradient-to-r from-blue-50 to-emerald-50 text-blue-800 rounded-full mb-8 border border-blue-200/50 shadow-sm backdrop-blur-sm">
+            <span className="inline-block py-2 px-4 text-xs md:text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-4 md:mb-6 border border-blue-200 shadow-sm">
               ✨ Smart Export Consolidation Solutions
             </span>
           </div>
           
           <h1 
-            className={`text-lg md:text-xl lg:text-2xl xl:text-3xl font-black leading-tight md:leading-tight mb-3 md:mb-5 transition-all duration-1000 delay-100 transform ${
+            className={`text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold leading-tight mb-3 md:mb-4 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}
-            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
+            } text-gray-900`}
+            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
-            <span className="block text-slate-800 mb-2 md:mb-3 font-extrabold tracking-tight">
+            <span className="block mb-2">
               Turkish Supply Chain Complexity,
             </span>
-            <span className="block relative h-[1.2em] overflow-hidden">
+            <span className="block relative h-8 md:h-10 lg:h-12 overflow-hidden">
               <span 
-                className={`absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 bg-clip-text text-transparent font-black tracking-tight transition-all duration-700 ease-in-out text-base md:text-lg lg:text-xl xl:text-2xl ${
+                className={`absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent font-bold transition-all duration-700 ease-in-out ${
                   currentTextIndex === 0 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
                 }`}
               >
                 {alternatingTexts[0]}
               </span>
               <span 
-                className={`absolute inset-0 bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 bg-clip-text text-transparent font-black tracking-tight transition-all duration-700 ease-in-out text-base md:text-lg lg:text-xl xl:text-2xl ${
+                className={`absolute inset-0 bg-gradient-to-r from-emerald-600 to-purple-600 bg-clip-text text-transparent font-bold transition-all duration-700 ease-in-out ${
                   currentTextIndex === 1 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'
                 }`}
               >
@@ -80,17 +80,17 @@ const Hero = () => {
           </h1>
           
           <div 
-            className={`text-xs md:text-sm lg:text-base mb-4 md:mb-6 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
+            className={`text-sm md:text-base lg:text-lg mb-4 md:mb-6 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-black font-medium leading-relaxed tracking-wide px-2" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+            <p className="text-black font-medium leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
-              <span className="text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded-md">single, streamlined shipment</span>. 
+              <span className="text-blue-700 font-semibold bg-blue-50 px-1 py-0.5 rounded">single, streamlined shipment</span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
-              <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-1 rounded-md">payment consolidation</span>{' '}
+              <span className="text-emerald-700 font-semibold bg-emerald-50 px-1 py-0.5 rounded">payment consolidation</span>{' '}
               to{' '}
-              <span className="text-purple-700 font-bold bg-purple-50 px-2 py-1 rounded-md">documentation management</span>{' '}
+              <span className="text-purple-700 font-semibold bg-purple-50 px-1 py-0.5 rounded">documentation management</span>{' '}
               and comprehensive tracking.
             </p>
           </div>
@@ -100,7 +100,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="sm" className="h-10 px-5 text-sm font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 rounded-xl">
+            <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-2 h-4 w-4" /> Talk to Our Team
               </a>
@@ -109,7 +109,7 @@ const Hero = () => {
         
           
           <div 
-            className={`mt-6 md:mt-10 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
+            className={`mt-6 md:mt-8 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
             }`}
           >
@@ -137,7 +137,7 @@ const Hero = () => {
                       </div>
                       
                       {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
-                      <div className="flex mb-3 bg-gray-200 rounded-lg p-0.5 text-[9px] justify-between overflow-hidden whitespace-nowrap shadow-sm">
+                      <div className="flex mb-3 bg-gray-200 rounded-lg p-0.5 text-[8px] justify-between overflow-hidden whitespace-nowrap shadow-sm">
                         <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
                           <Package className="h-2 w-2 mr-0.5" /> 
                           <span className="truncate">Orders</span>

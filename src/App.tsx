@@ -30,10 +30,6 @@ const AdminRoute = ({ children }: { children: React.ReactNode }) => {
     return <Navigate to="/auth" replace />;
   }
   
-  if (user.role !== 'admin') {
-    return <Navigate to="/blog" replace />;
-  }
-  
   return <>{children}</>;
 };
 
@@ -45,11 +41,6 @@ const AppRoutes = () => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/blog/editor" element={
-        <AdminRoute>
-          <BlogEditor />
-        </AdminRoute>
-      } />
-      <Route path="/blog/editor/:id" element={
         <AdminRoute>
           <BlogEditor />
         </AdminRoute>

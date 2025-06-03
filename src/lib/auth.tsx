@@ -43,13 +43,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        console.log('Auth state change:', event, session?.user?.email);
+      async (event, session) => {
         if (session?.user) {
-          // Use setTimeout to defer admin checking and prevent potential deadlocks
-          setTimeout(() => {
-            setUserFromSession(session.user);
-          }, 0);
+          await setUserFromSession(session.user);
         } else {
           setUser(null);
         }
@@ -74,45 +70,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const setUserFromSession = async (supabaseUser: SupabaseUser) => {
     try {
-      console.log('Setting user from session:', supabaseUser.email);
-      
-      // Check if user is admin - but with error handling
-      let isAdmin = false;
-      try {
-        const { data: adminData, error } = await supabase
-          .from('admin_users')
-          .select('role')
-          .eq('user_id', supabaseUser.id)
-          .maybeSingle();
-
-        if (error) {
-          console.log('Error checking admin status (continuing as regular user):', error);
-        } else {
-          isAdmin = !!adminData;
-        }
-      } catch (adminError) {
-        console.log('Failed to check admin status, continuing as regular user:', adminError);
-      }
+      // Check if user is admin
+      const { data: adminData } = await supabase
+        .from('admin_users')
+        .select('role')
+        .eq('user_id', supabaseUser.id)
+        .single();
 
       const userData: User = {
         id: supabaseUser.id,
         name: supabaseUser.user_metadata?.name || null,
         email: supabaseUser.email!,
-        role: isAdmin ? 'admin' : 'user',
+        role: adminData ? 'admin' : 'user',
       };
 
       setUser(userData);
-      console.log('User set:', userData);
     } catch (error) {
       console.error("Error setting user from session:", error);
-      // Set user without admin role if there's an error
-      const userData: User = {
-        id: supabaseUser.id,
-        name: supabaseUser.user_metadata?.name || null,
-        email: supabaseUser.email!,
-        role: 'user',
-      };
-      setUser(userData);
     }
   };
 
@@ -151,27 +125,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (error) throw error;
     if (!data.user) throw new Error("Failed to login");
 
-    // Check if user is admin - but with error handling
-    let isAdmin = false;
-    try {
-      const { data: adminData, error: adminError } = await supabase
-        .from('admin_users')
-        .select('role')
-        .eq('user_id', data.user.id)
-        .maybeSingle();
-
-      if (!adminError && adminData) {
-        isAdmin = true;
-      }
-    } catch (adminError) {
-      console.log('Failed to check admin status during login:', adminError);
-    }
+    // Check if user is admin
+    const { data: adminData } = await supabase
+      .from('admin_users')
+      .select('role')
+      .eq('user_id', data.user.id)
+      .single();
 
     const userData: User = {
       id: data.user.id,
       name: data.user.user_metadata?.name || null,
       email: data.user.email!,
-      role: isAdmin ? 'admin' : 'user',
+      role: adminData ? 'admin' : 'user',
     };
 
     setUser(userData);
@@ -193,18 +158,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signUp
   };
   
-  // Don't render children until we've checked for existing session
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
-  
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!isLoading && children}
     </AuthContext.Provider>
   );
 };

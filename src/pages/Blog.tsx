@@ -29,10 +29,8 @@ const Blog = () => {
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { user } = useAuth();
-
-  // Check if user is admin
-  const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,7 +42,10 @@ const Blog = () => {
 
   useEffect(() => {
     fetchBlogPosts();
-  }, []);
+    if (user) {
+      checkAdminStatus();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (activeCategory === "All") {
@@ -68,6 +69,24 @@ const Blog = () => {
       console.error('Error fetching blog posts:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const checkAdminStatus = async () => {
+    if (!user) return;
+    
+    try {
+      const { data, error } = await supabase
+        .from('admin_users')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+
+      if (!error && data) {
+        setIsAdmin(true);
+      }
+    } catch (error) {
+      console.error('Error checking admin status:', error);
     }
   };
 
@@ -232,7 +251,7 @@ const Blog = () => {
                       </div>
                     </div>
                     
-                    <div className="mt-5 pt-5 border-t border-gray-100 flex justify-between items-center">
+                    <div className="mt-5 pt-5 border-t border-gray-100">
                       <Link 
                         to={`/blog/${post.slug}`}
                         className="inline-flex items-center text-blue-600 font-medium hover:underline"
@@ -240,15 +259,6 @@ const Blog = () => {
                         Read Article
                         <ChevronRight className="w-4 h-4 ml-1" />
                       </Link>
-                      
-                      {isAdmin && (
-                        <Link 
-                          to={`/blog/editor/${post.id}`}
-                          className="text-gray-500 hover:text-gray-700"
-                        >
-                          Edit
-                        </Link>
-                      )}
                     </div>
                   </div>
                 </article>

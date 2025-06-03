@@ -126,9 +126,10 @@ const Hero = () => {
                     </div>
                   </div>
                   
+                  {/* Optimized Mobile Dashboard */}
                   {isMobile ? (
                     <div className="bg-white text-gray-800 p-3">
-                      <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
                           <IstLinqLogo size="sm" className="mr-2" />
                         </div>
@@ -137,85 +138,91 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      <div className="grid grid-cols-2 gap-2 mb-3">
-                        <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-xs font-medium">Orders</span>
-                            <Package className="h-3 w-3 text-blue-600" />
+                      {/* Optimized top stats in a compact grid */}
+                      <div className="grid grid-cols-4 gap-1 mb-2">
+                        <div className="bg-gray-50 p-1.5 rounded-md border border-gray-200">
+                          <div className="flex justify-between items-center mb-0.5">
+                            <span className="text-gray-700 text-[10px] font-medium">Orders</span>
+                            <Package className="h-2.5 w-2.5 text-blue-600" />
                           </div>
-                          <div className="text-sm font-bold">28</div>
+                          <div className="text-xs font-bold">28</div>
                         </div>
                         
-                        <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-xs font-medium">Consolidations</span>
-                            <GitMerge className="h-3 w-3 text-blue-600" />
+                        <div className="bg-gray-50 p-1.5 rounded-md border border-gray-200">
+                          <div className="flex justify-between items-center mb-0.5">
+                            <span className="text-gray-700 text-[10px] font-medium">Consol</span>
+                            <GitMerge className="h-2.5 w-2.5 text-blue-600" />
                           </div>
-                          <div className="text-sm font-bold">5</div>
+                          <div className="text-xs font-bold">5</div>
                         </div>
                         
-                        <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-xs font-medium">Space Used</span>
-                            <Truck className="h-3 w-3 text-blue-600" />
+                        <div className="bg-gray-50 p-1.5 rounded-md border border-gray-200">
+                          <div className="flex justify-between items-center mb-0.5">
+                            <span className="text-gray-700 text-[10px] font-medium">Space</span>
+                            <Truck className="h-2.5 w-2.5 text-blue-600" />
                           </div>
-                          <div className="text-sm font-bold">92%</div>
+                          <div className="text-xs font-bold">92%</div>
                         </div>
                         
-                        <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-700 text-xs font-medium">Savings</span>
-                            <TrendingUp className="h-3 w-3 text-green-600" />
+                        <div className="bg-gray-50 p-1.5 rounded-md border border-gray-200">
+                          <div className="flex justify-between items-center mb-0.5">
+                            <span className="text-gray-700 text-[10px] font-medium">Savings</span>
+                            <TrendingUp className="h-2.5 w-2.5 text-green-600" />
                           </div>
-                          <div className="text-sm font-bold">39%</div>
+                          <div className="text-xs font-bold">39%</div>
                         </div>
                       </div>
                       
-                      <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-3">
-                        <div className="flex justify-between items-center mb-2">
+                      {/* Consolidated Shipment Info */}
+                      <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-2">
+                        <div className="flex justify-between items-center mb-1.5">
                           <div className="flex items-center">
                             <GitMerge className="h-3 w-3 text-blue-600 mr-1" />
                             <span className="text-xs font-medium">Active Consolidation</span>
                           </div>
                         </div>
-                        <div className="bg-white p-2 rounded border border-gray-200">
-                          <div className="flex justify-between items-center">
+                        <div className="bg-white p-1.5 rounded border border-gray-200">
+                          <div className="flex justify-between items-center mb-1">
                             <div>
                               <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-xs text-gray-600">Apr 15, 2025</div>
+                              <div className="text-[10px] text-gray-600">Apr 15, 2025</div>
                             </div>
                             <div className="text-right">
                               <div className="text-xs font-medium text-blue-600">75%</div>
+                              <div className="w-16 bg-gray-200 h-1.5 rounded-full mt-0.5">
+                                <div className="bg-blue-600 h-full rounded-full" style={{width: '75%'}}></div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-3">
-                        <div className="flex justify-between items-center mb-2">
+                      {/* Shipment Info */}
+                      <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 shadow-sm mb-2">
+                        <div className="flex justify-between items-center mb-1.5">
                           <div className="flex items-center">
                             <Truck className="h-3 w-3 text-blue-600 mr-1" />
                             <span className="text-xs font-medium">Next Shipment</span>
                           </div>
                         </div>
-                        <div className="bg-white p-2 rounded border border-gray-200">
+                        <div className="bg-white p-1.5 rounded border border-gray-200">
                           <div className="flex justify-between items-center mb-1">
                             <div>
                               <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-xs text-gray-600">40ft Container</div>
+                              <div className="text-[10px] text-gray-600">40ft Container</div>
                             </div>
                             <div className="text-xs font-bold text-blue-600">Apr 15</div>
                           </div>
                           <div className="grid grid-cols-3 gap-1 text-center">
-                            <div className="text-xs">
+                            <div className="text-[10px]">
                               <div className="font-bold">28</div>
                               <div className="text-gray-600">Orders</div>
                             </div>
-                            <div className="text-xs">
+                            <div className="text-[10px]">
                               <div className="font-bold">3</div>
                               <div className="text-gray-600">Suppliers</div>
                             </div>
-                            <div className="text-xs">
+                            <div className="text-[10px]">
                               <div className="font-bold">75%</div>
                               <div className="text-gray-600">Filled</div>
                             </div>
@@ -223,27 +230,29 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      <div className="bg-gray-200 rounded-lg border border-gray-300 p-2 shadow-sm">
-                        <div className="flex justify-between items-center mb-2">
+                      {/* Payment Status */}
+                      <div className="bg-gray-50 rounded-lg border border-gray-200 p-2 shadow-sm">
+                        <div className="flex justify-between items-center mb-1.5">
                           <div className="flex items-center">
                             <CreditCard className="h-3 w-3 text-blue-600 mr-1" />
                             <span className="text-xs font-medium">Payment Status</span>
                           </div>
-                          <span className="px-1 py-0.5 bg-green-100 text-green-700 text-xs rounded-full font-medium">Active</span>
+                          <span className="px-1 py-0.5 bg-green-100 text-green-700 text-[10px] rounded-full font-medium">Active</span>
                         </div>
                         <div className="grid grid-cols-2 gap-1">
                           <div className="bg-white p-1.5 rounded shadow-sm">
-                            <div className="text-xs text-gray-600">Available</div>
+                            <div className="text-[10px] text-gray-600">Available</div>
                             <div className="text-xs font-medium">$32,080</div>
                           </div>
                           <div className="bg-white p-1.5 rounded shadow-sm">
-                            <div className="text-xs text-gray-600">Service (2%)</div>
+                            <div className="text-[10px] text-gray-600">Service (2%)</div>
                             <div className="text-xs font-medium">$497</div>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
+                    // ... keep existing code (Desktop dashboard view)
                     <div className="bg-white text-gray-800 p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">

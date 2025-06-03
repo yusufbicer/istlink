@@ -118,10 +118,10 @@ const Features = () => {
           <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3">
             Features
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-4" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Simplifying Cross-Border Procurement
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Our platform streamlines the entire process of purchasing and shipping products from multiple Turkish suppliers.
           </p>
         </div>
@@ -138,10 +138,10 @@ const Features = () => {
             <div className={`w-12 h-12 ${features[0].iconColor} rounded-lg flex items-center justify-center mb-4`}>
               {React.createElement(features[0].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-xl font-semibold mb-3">{features[0].title}</h3>
-            <p className="text-gray-600 mb-6 flex-grow">{features[0].description}</p>
+            <h3 className="text-xl font-semibold mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[0].title}</h3>
+            <p className="text-gray-600 mb-6 flex-grow" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[0].description}</p>
             <div className="bg-white rounded-lg p-4 mt-auto">
-              <div className="text-sm font-medium text-gray-800 mb-3 text-center">Our customers typically save:</div>
+              <div className="text-sm font-medium text-gray-800 mb-3 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Our customers typically save:</div>
               <div className="grid grid-cols-3 gap-3">
                 <div className="text-center">
                   <div className="text-lg font-bold text-metallic-blue mb-1">35%</div>
@@ -169,8 +169,8 @@ const Features = () => {
             <div className={`w-12 h-12 ${features[1].iconColor} rounded-lg flex items-center justify-center mb-4`}>
               {React.createElement(features[1].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-xl font-semibold mb-2">{features[1].title}</h3>
-            <p className="text-gray-600">{features[1].description}</p>
+            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[1].title}</h3>
+            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[1].description}</p>
           </div>
 
           {/* Third feature - spans 2 columns */}
@@ -183,13 +183,13 @@ const Features = () => {
             <div className={`w-12 h-12 ${features[2].iconColor} rounded-lg flex items-center justify-center mb-4`}>
               {React.createElement(features[2].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-xl font-semibold mb-2">{features[2].title}</h3>
-            <p className="text-gray-600">{features[2].description}</p>
+            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[2].title}</h3>
+            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[2].description}</p>
           </div>
 
-          {/* Fourth feature - spans 1 column */}
+          {/* Fourth feature - Documentation (spans 2 columns for better alignment) */}
           <div 
-            className={`${features[3].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-1 ${
+            className={`${features[3].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             style={{ transitionDelay: '400ms' }}
@@ -197,13 +197,13 @@ const Features = () => {
             <div className={`w-12 h-12 ${features[3].iconColor} rounded-lg flex items-center justify-center mb-4`}>
               {React.createElement(features[3].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-lg font-semibold mb-2">{features[3].title}</h3>
-            <p className="text-gray-600 text-sm">{features[3].description}</p>
+            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[3].title}</h3>
+            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[3].description}</p>
           </div>
 
-          {/* Fifth feature - spans 1 column */}
+          {/* Fifth feature - Global Compliance (spans 2 columns for better alignment) */}
           <div 
-            className={`${features[4].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-1 ${
+            className={`${features[4].color} rounded-xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             style={{ transitionDelay: '500ms' }}
@@ -211,8 +211,8 @@ const Features = () => {
             <div className={`w-12 h-12 ${features[4].iconColor} rounded-lg flex items-center justify-center mb-4`}>
               {React.createElement(features[4].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-lg font-semibold mb-2">{features[4].title}</h3>
-            <p className="text-gray-600 text-sm">{features[4].description}</p>
+            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[4].title}</h3>
+            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[4].description}</p>
           </div>
 
           {/* Sixth feature - spans 2 columns */}
@@ -225,8 +225,8 @@ const Features = () => {
             <div className={`w-12 h-12 ${features[5].iconColor} rounded-lg flex items-center justify-center mb-4`}>
               {React.createElement(features[5].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-xl font-semibold mb-2">{features[5].title}</h3>
-            <p className="text-gray-600">{features[5].description}</p>
+            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[5].title}</h3>
+            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[5].description}</p>
           </div>
 
           {/* Seventh feature - spans 2 columns */}
@@ -239,12 +239,12 @@ const Features = () => {
             <div className={`w-12 h-12 ${features[6].iconColor} rounded-lg flex items-center justify-center mb-4`}>
               {React.createElement(features[6].icon, { className: "w-6 h-6" })}
             </div>
-            <h3 className="text-xl font-semibold mb-2">{features[6].title}</h3>
-            <p className="text-gray-600">{features[6].description}</p>
+            <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[6].title}</h3>
+            <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[6].description}</p>
           </div>
         </div>
 
-        {/* Improved Tablet Layout with better spacing for narrow items */}
+        {/* Improved Tablet Layout with better spacing */}
         <div className="hidden md:block lg:hidden">
           <div className="grid grid-cols-6 gap-4">
             {/* Row 1: Featured item (3 cols) + Single Bill (3 cols) */}
@@ -257,10 +257,10 @@ const Features = () => {
               <div className={`w-12 h-12 ${features[0].iconColor} rounded-lg flex items-center justify-center mb-4`}>
                 {React.createElement(features[0].icon, { className: "w-6 h-6" })}
               </div>
-              <h3 className="text-lg font-semibold mb-3">{features[0].title}</h3>
-              <p className="text-gray-600 text-sm mb-4 flex-grow">{features[0].description}</p>
+              <h3 className="text-lg font-semibold mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[0].title}</h3>
+              <p className="text-gray-600 text-sm mb-4 flex-grow" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[0].description}</p>
               <div className="bg-white rounded-lg p-3">
-                <div className="text-xs font-medium text-gray-800 mb-2 text-center">Customers save:</div>
+                <div className="text-xs font-medium text-gray-800 mb-2 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Customers save:</div>
                 <div className="grid grid-cols-3 gap-2">
                   <div className="text-center">
                     <div className="text-sm font-bold text-metallic-blue">35%</div>
@@ -287,13 +287,13 @@ const Features = () => {
               <div className={`w-10 h-10 ${features[1].iconColor} rounded-lg flex items-center justify-center mb-3`}>
                 {React.createElement(features[1].icon, { className: "w-5 h-5" })}
               </div>
-              <h3 className="text-sm font-semibold mb-2">{features[1].title}</h3>
-              <p className="text-gray-600 text-xs">{features[1].description}</p>
+              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[1].title}</h3>
+              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[1].description}</p>
             </div>
 
-            {/* Row 2: Centralized Payments (3 cols) + Documentation (2 cols) + Compliance (1 col) */}
+            {/* Row 2: Centralized Payments (2 cols) + Documentation (2 cols) + Compliance (2 cols) */}
             <div 
-              className={`${features[2].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-3 ${
+              className={`${features[2].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: '300ms' }}
@@ -301,8 +301,8 @@ const Features = () => {
               <div className={`w-10 h-10 ${features[2].iconColor} rounded-lg flex items-center justify-center mb-3`}>
                 {React.createElement(features[2].icon, { className: "w-5 h-5" })}
               </div>
-              <h3 className="text-sm font-semibold mb-2">{features[2].title}</h3>
-              <p className="text-gray-600 text-xs">{features[2].description}</p>
+              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[2].title}</h3>
+              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[2].description}</p>
             </div>
 
             <div 
@@ -314,21 +314,21 @@ const Features = () => {
               <div className={`w-10 h-10 ${features[3].iconColor} rounded-lg flex items-center justify-center mb-3`}>
                 {React.createElement(features[3].icon, { className: "w-5 h-5" })}
               </div>
-              <h3 className="text-sm font-semibold mb-2">{features[3].title}</h3>
-              <p className="text-gray-600 text-xs">{features[3].description}</p>
+              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[3].title}</h3>
+              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[3].description}</p>
             </div>
 
             <div 
-              className={`${features[4].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-1 ${
+              className={`${features[4].color} rounded-xl border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 col-span-2 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: '500ms' }}
             >
-              <div className={`w-8 h-8 ${features[4].iconColor} rounded-lg flex items-center justify-center mb-2`}>
-                {React.createElement(features[4].icon, { className: "w-4 h-4" })}
+              <div className={`w-10 h-10 ${features[4].iconColor} rounded-lg flex items-center justify-center mb-3`}>
+                {React.createElement(features[4].icon, { className: "w-5 h-5" })}
               </div>
-              <h3 className="text-xs font-semibold mb-1">{features[4].title}</h3>
-              <p className="text-gray-600 text-xs leading-tight">{features[4].description}</p>
+              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[4].title}</h3>
+              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[4].description}</p>
             </div>
 
             {/* Row 3: Supplier Management (3 cols) + Quality Assurance (3 cols) */}
@@ -341,8 +341,8 @@ const Features = () => {
               <div className={`w-10 h-10 ${features[5].iconColor} rounded-lg flex items-center justify-center mb-3`}>
                 {React.createElement(features[5].icon, { className: "w-5 h-5" })}
               </div>
-              <h3 className="text-sm font-semibold mb-2">{features[5].title}</h3>
-              <p className="text-gray-600 text-xs">{features[5].description}</p>
+              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[5].title}</h3>
+              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[5].description}</p>
             </div>
 
             <div 
@@ -354,8 +354,8 @@ const Features = () => {
               <div className={`w-10 h-10 ${features[6].iconColor} rounded-lg flex items-center justify-center mb-3`}>
                 {React.createElement(features[6].icon, { className: "w-5 h-5" })}
               </div>
-              <h3 className="text-sm font-semibold mb-2">{features[6].title}</h3>
-              <p className="text-gray-600 text-xs">{features[6].description}</p>
+              <h3 className="text-sm font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[6].title}</h3>
+              <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{features[6].description}</p>
             </div>
           </div>
         </div>
@@ -374,6 +374,7 @@ const Features = () => {
                       ? 'bg-metallic-blue text-white' 
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
+                  style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
                 >
                   {feature.title}
                 </button>
@@ -394,12 +395,12 @@ const Features = () => {
                     <div className={`w-16 h-16 ${feature.iconColor} rounded-xl flex items-center justify-center mb-6 mx-auto`}>
                       {React.createElement(feature.icon, { className: "w-8 h-8" })}
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 text-center">{feature.title}</h3>
-                    <p className="text-gray-600 text-center mb-6">{feature.description}</p>
+                    <h3 className="text-xl font-semibold mb-3 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                    <p className="text-gray-600 text-center mb-6" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
                     
                     {index === 0 && (
                       <div className="bg-white rounded-lg p-3 mt-auto">
-                        <div className="text-xs font-medium text-gray-800 text-center mb-2">Customers typically save:</div>
+                        <div className="text-xs font-medium text-gray-800 text-center mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Customers typically save:</div>
                         <div className="grid grid-cols-3 gap-1">
                           <div className="text-center">
                             <div className="text-base font-bold text-metallic-blue">35%</div>

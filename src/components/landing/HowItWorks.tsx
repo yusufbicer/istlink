@@ -103,10 +103,10 @@ const HowItWorks = () => {
           <span className="inline-block py-1 px-3 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-3">
             Simple Process
           </span>
-          <h2 className={`${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-3xl md:text-4xl'} font-bold mb-4`}>
+          <h2 className={`${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-3xl md:text-4xl'} font-semibold mb-4`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             7 Simple Steps to Supply Chain Success
           </h2>
-          <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-600`}>
+          <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Our streamlined process makes sourcing and shipping from Turkey effortless.
           </p>
         </div>
@@ -155,8 +155,8 @@ const HowItWorks = () => {
                             : 'bg-white shadow-md'
                         }`}
                       >
-                        <h3 className="font-bold text-xl text-gray-900 mb-2">{step.title}</h3>
-                        <p className="text-gray-600">{step.description}</p>
+                        <h3 className="font-semibold text-xl text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{step.title}</h3>
+                        <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{step.description}</p>
                       </div>
                     </div>
                   </div>
@@ -197,8 +197,8 @@ const HowItWorks = () => {
                     {/* Content */}
                     <div className="ml-4 flex-1">
                       <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-emerald-500">
-                        <h3 className={`font-bold ${isMobile ? 'text-lg' : 'text-xl'} text-gray-900 mb-2`}>{step.title}</h3>
-                        <p className={`text-gray-600 ${isMobile ? 'text-sm' : 'text-base'}`}>{step.description}</p>
+                        <h3 className={`font-semibold ${isMobile ? 'text-lg' : 'text-xl'} text-gray-900 mb-2`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{step.title}</h3>
+                        <p className={`text-gray-600 ${isMobile ? 'text-sm' : 'text-base'}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{step.description}</p>
                       </div>
                     </div>
                   </div>

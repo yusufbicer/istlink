@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('Auth state change:', event, session?.user?.email);
         if (session?.user) {
           await setUserFromSession(session.user);
         } else {
@@ -70,21 +71,35 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const setUserFromSession = async (supabaseUser: SupabaseUser) => {
     try {
-      // Check if user is admin
-      const { data: adminData } = await supabase
-        .from('admin_users')
-        .select('role')
-        .eq('user_id', supabaseUser.id)
-        .single();
+      console.log('Setting user from session:', supabaseUser.email);
+      
+      // Check if user is admin - but with error handling
+      let isAdmin = false;
+      try {
+        const { data: adminData, error } = await supabase
+          .from('admin_users')
+          .select('role')
+          .eq('user_id', supabaseUser.id)
+          .maybeSingle();
+
+        if (error) {
+          console.log('Error checking admin status (continuing as regular user):', error);
+        } else {
+          isAdmin = !!adminData;
+        }
+      } catch (adminError) {
+        console.log('Failed to check admin status, continuing as regular user:', adminError);
+      }
 
       const userData: User = {
         id: supabaseUser.id,
         name: supabaseUser.user_metadata?.name || null,
         email: supabaseUser.email!,
-        role: adminData ? 'admin' : 'user',
+        role: isAdmin ? 'admin' : 'user',
       };
 
       setUser(userData);
+      console.log('User set:', userData);
     } catch (error) {
       console.error("Error setting user from session:", error);
     }
@@ -125,18 +140,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (error) throw error;
     if (!data.user) throw new Error("Failed to login");
 
-    // Check if user is admin
-    const { data: adminData } = await supabase
-      .from('admin_users')
-      .select('role')
-      .eq('user_id', data.user.id)
-      .single();
+    // Check if user is admin - but with error handling
+    let isAdmin = false;
+    try {
+      const { data: adminData, error: adminError } = await supabase
+        .from('admin_users')
+        .select('role')
+        .eq('user_id', data.user.id)
+        .maybeSingle();
+
+      if (!adminError && adminData) {
+        isAdmin = true;
+      }
+    } catch (adminError) {
+      console.log('Failed to check admin status during login:', adminError);
+    }
 
     const userData: User = {
       id: data.user.id,
       name: data.user.user_metadata?.name || null,
       email: data.user.email!,
-      role: adminData ? 'admin' : 'user',
+      role: isAdmin ? 'admin' : 'user',
     };
 
     setUser(userData);

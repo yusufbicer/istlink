@@ -46,10 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       (event, session) => {
         console.log('Auth state change:', event, session?.user?.email);
         if (session?.user) {
-          // Use setTimeout to defer admin checking and prevent potential deadlocks
-          setTimeout(() => {
-            setUserFromSession(session.user);
-          }, 0);
+          setUserFromSession(session.user);
         } else {
           setUser(null);
         }
@@ -63,7 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
-        await setUserFromSession(session.user);
+        setUserFromSession(session.user);
       }
     } catch (error) {
       console.error("Error getting session:", error);
@@ -72,36 +69,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const setUserFromSession = async (supabaseUser: SupabaseUser) => {
-    try {
-      console.log('Setting user from session:', supabaseUser.email);
-      
-      // Check if user is admin by email - simplified check for known admin emails
-      const adminEmails = ['admin@istlinq.com', 'yusufbicer@gmail.com'];
-      const isAdmin = adminEmails.includes(supabaseUser.email || '');
-      
-      console.log('Is admin check:', supabaseUser.email, isAdmin);
+  const setUserFromSession = (supabaseUser: SupabaseUser) => {
+    console.log('Setting user from session:', supabaseUser.email);
+    
+    // Check if user is admin by email - simplified check for known admin emails
+    const adminEmails = ['admin@istlinq.com', 'yusufbicer@gmail.com'];
+    const isAdmin = adminEmails.includes(supabaseUser.email || '');
+    
+    console.log('Is admin check:', supabaseUser.email, isAdmin);
 
-      const userData: User = {
-        id: supabaseUser.id,
-        name: supabaseUser.user_metadata?.name || null,
-        email: supabaseUser.email!,
-        role: isAdmin ? 'admin' : 'user',
-      };
+    const userData: User = {
+      id: supabaseUser.id,
+      name: supabaseUser.user_metadata?.name || null,
+      email: supabaseUser.email!,
+      role: isAdmin ? 'admin' : 'user',
+    };
 
-      setUser(userData);
-      console.log('User set with role:', userData);
-    } catch (error) {
-      console.error("Error setting user from session:", error);
-      // Set user without admin role if there's an error
-      const userData: User = {
-        id: supabaseUser.id,
-        name: supabaseUser.user_metadata?.name || null,
-        email: supabaseUser.email!,
-        role: 'user',
-      };
-      setUser(userData);
-    }
+    setUser(userData);
+    console.log('User set with role:', userData);
   };
 
   // Sign up function

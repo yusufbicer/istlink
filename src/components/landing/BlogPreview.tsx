@@ -1,30 +1,52 @@
 
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { supabase } from '@/integrations/supabase/client';
+import { format } from 'date-fns';
 
-// Mock blog data with images
-const mockBlogPosts = [
-  {
-    id: '1',
-    title: 'How to Optimize Your Turkish Supply Chain for Maximum Efficiency',
-    excerpt: 'Discover proven strategies to streamline your Turkish sourcing operations and reduce costs.',
-    date: '2024-12-15',
-    slug: 'optimize-turkish-supply-chain',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=200&fit=crop'
-  },
-  {
-    id: '2',
-    title: 'The Complete Guide to Consolidation Services in International Trade',
-    excerpt: 'Learn how consolidation can save you up to 50% on shipping costs while simplifying logistics.',
-    date: '2024-12-10',
-    slug: 'consolidation-services-guide',
-    image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=200&fit=crop'
-  }
-];
+interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string | null;
+  created_at: string;
+  slug: string;
+  image_url: string | null;
+  published: boolean;
+}
 
 const BlogPreview = () => {
   const isMobile = useIsMobile();
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchLatestBlogPosts();
+  }, []);
+
+  const fetchLatestBlogPosts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('id, title, excerpt, created_at, slug, image_url, published')
+        .eq('published', true)
+        .order('created_at', { ascending: false })
+        .limit(3);
+
+      if (error) throw error;
+      setBlogPosts(data || []);
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Don't render the section if there are no blog posts or still loading
+  if (isLoading || blogPosts.length === 0) {
+    return null;
+  }
 
   return (
     <section className={`${isMobile ? 'py-8' : 'py-12'} bg-white border-t border-gray-100`}>
@@ -41,29 +63,33 @@ const BlogPreview = () => {
         {isMobile ? (
           // Mobile: Single column with images
           <div className="space-y-4">
-            {mockBlogPosts.map((post) => (
+            {blogPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
                 className="block bg-gray-50 rounded-lg overflow-hidden hover:bg-gray-100 transition-colors group"
               >
                 <div className="flex">
-                  <img 
-                    src={post.image} 
-                    alt={post.title}
-                    className="w-20 h-20 object-cover flex-shrink-0"
-                  />
+                  {post.image_url && (
+                    <img 
+                      src={post.image_url} 
+                      alt={post.title}
+                      className="w-20 h-20 object-cover flex-shrink-0"
+                    />
+                  )}
                   <div className="p-4 flex-grow">
                     <h3 className="font-semibold text-sm text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                       {post.title}
                     </h3>
-                    <p className="text-xs text-gray-600 mb-2 line-clamp-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                      {post.excerpt}
-                    </p>
+                    {post.excerpt && (
+                      <p className="text-xs text-gray-600 mb-2 line-clamp-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        {post.excerpt}
+                      </p>
+                    )}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center text-xs text-gray-500">
                         <Calendar className="h-3 w-3 mr-1" />
-                        {new Date(post.date).toLocaleDateString()}
+                        {format(new Date(post.created_at), 'MMM d, yyyy')}
                       </div>
                       <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                     </div>
@@ -74,29 +100,33 @@ const BlogPreview = () => {
           </div>
         ) : (
           // Desktop/Tablet: Two columns with images
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {mockBlogPosts.map((post) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {blogPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
                 className="block bg-gray-50 rounded-lg overflow-hidden hover:bg-gray-100 transition-colors group"
               >
-                <img 
-                  src={post.image} 
-                  alt={post.title}
-                  className="w-full h-32 object-cover"
-                />
+                {post.image_url && (
+                  <img 
+                    src={post.image_url} 
+                    alt={post.title}
+                    className="w-full h-32 object-cover"
+                  />
+                )}
                 <div className="p-4">
                   <h3 className="font-semibold text-sm text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                     {post.title}
                   </h3>
-                  <p className="text-xs text-gray-600 mb-3 line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                    {post.excerpt}
-                  </p>
+                  {post.excerpt && (
+                    <p className="text-xs text-gray-600 mb-3 line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      {post.excerpt}
+                    </p>
+                  )}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-xs text-gray-500">
                       <Calendar className="h-3 w-3 mr-1" />
-                      {new Date(post.date).toLocaleDateString()}
+                      {format(new Date(post.created_at), 'MMM d, yyyy')}
                     </div>
                     <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                   </div>

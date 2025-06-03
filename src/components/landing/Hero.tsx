@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -33,56 +34,64 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="pt-32 pb-12 md:pt-40 md:pb-20 overflow-hidden relative bg-gradient-to-b from-lavender-50 to-white">
-      {/* Background gradients and effects */}
-      <div className="absolute inset-0 bg-gradient-radial from-lavender-100/70 via-transparent to-transparent opacity-80" />
-      <div className="absolute top-1/4 right-1/3 w-64 h-64 bg-lavender-200 rounded-full filter blur-3xl opacity-30 animate-float pointer-events-none" />
-      <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-lavender-100 rounded-full filter blur-3xl opacity-20 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
+    <section className="pt-32 pb-12 md:pt-40 md:pb-20 overflow-hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      {/* Enhanced background gradients and effects */}
+      <div className="absolute inset-0 bg-gradient-radial from-blue-100/40 via-transparent to-transparent opacity-60" />
+      <div className="absolute top-1/4 right-1/3 w-72 h-72 bg-gradient-to-r from-blue-200 to-lavender-200 rounded-full filter blur-3xl opacity-20 animate-float pointer-events-none" />
+      <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-gradient-to-r from-emerald-100 to-blue-100 rounded-full filter blur-3xl opacity-15 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
       
       <div className="container mx-auto px-4 sm:px-6 relative">
-        <div className="max-w-5xl mx-auto text-center mb-8 md:mb-12">
+        <div className="max-w-6xl mx-auto text-center mb-8 md:mb-12">
           <div 
             className={`transition-all duration-1000 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <span className="inline-block py-2 px-4 text-sm font-medium bg-gradient-to-r from-blue-100 to-lavender-100 text-blue-700 rounded-full mb-6 border border-blue-200">
-              Smart Export Consolidation Solutions
+            <span className="inline-block py-3 px-6 text-sm font-semibold bg-gradient-to-r from-blue-50 to-emerald-50 text-blue-800 rounded-full mb-8 border border-blue-200/50 shadow-sm backdrop-blur-sm">
+              ✨ Smart Export Consolidation Solutions
             </span>
           </div>
           
           <h1 
-            className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight md:leading-tight mb-6 transition-all duration-1000 delay-100 transform ${
+            className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight md:leading-tight mb-8 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
+            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
           >
-            <span className="block text-gray-900 mb-2">Turkish Supply Chain Complexity,</span>
-            <span className="block bg-gradient-to-r from-blue-600 via-lavender-600 to-emerald-600 bg-clip-text text-transparent font-extrabold relative">
+            <span className="block text-slate-800 mb-3 font-extrabold tracking-tight">
+              Turkish Supply Chain Complexity,
+            </span>
+            <span className="block relative h-[1.2em] overflow-hidden">
               <span 
-                className={`absolute inset-0 transition-all duration-500 ${
-                  currentTextIndex === 0 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-2'
+                className={`absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 bg-clip-text text-transparent font-black tracking-tight transition-all duration-700 ease-in-out ${
+                  currentTextIndex === 0 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
                 }`}
               >
                 {alternatingTexts[0]}
               </span>
               <span 
-                className={`absolute inset-0 transition-all duration-500 ${
-                  currentTextIndex === 1 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-2'
+                className={`absolute inset-0 bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 bg-clip-text text-transparent font-black tracking-tight transition-all duration-700 ease-in-out ${
+                  currentTextIndex === 1 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'
                 }`}
               >
                 {alternatingTexts[1]}
               </span>
-              <span className="invisible">{alternatingTexts[0]}</span>
             </span>
           </h1>
           
           <div 
-            className={`text-xl md:text-2xl mb-8 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
+            className={`text-xl md:text-2xl lg:text-2xl mb-10 max-w-5xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-slate-700 font-medium leading-relaxed tracking-wide" style={{ fontFamily: 'Inter, SF Pro Display, system-ui, -apple-system, sans-serif' }}>
-              Transform fragmented Turkish supplier purchases into a <span className="text-blue-600 font-semibold">single, streamlined shipment</span>. Our AI-powered platform simplifies the entire process—from <span className="text-emerald-600 font-semibold">payment consolidation</span> to <span className="text-lavender-600 font-semibold">documentation management</span> and comprehensive tracking.
+            <p className="text-slate-600 font-medium leading-relaxed tracking-wide" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
+              Transform fragmented Turkish supplier purchases into a{' '}
+              <span className="text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded-md">single, streamlined shipment</span>. 
+              Our AI-powered platform simplifies the entire process—from{' '}
+              <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-1 rounded-md">payment consolidation</span>{' '}
+              to{' '}
+              <span className="text-purple-700 font-bold bg-purple-50 px-2 py-1 rounded-md">documentation management</span>{' '}
+              and comprehensive tracking.
             </p>
           </div>
           
@@ -91,7 +100,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="lg" className="h-14 px-10 text-lg bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white shadow-lg hover:shadow-xl transition-all duration-300">
+            <Button asChild size="lg" className="h-16 px-12 text-lg font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 rounded-xl">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-3 h-6 w-6" /> Talk to Our Team
               </a>

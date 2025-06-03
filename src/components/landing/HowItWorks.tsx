@@ -1,184 +1,279 @@
-import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Package, CreditCard, Truck, BarChart3 } from 'lucide-react';
+
+import { useState, useRef, useEffect } from 'react';
+import { 
+  Search, 
+  ShieldCheck, 
+  CreditCard, 
+  PackagePlus, 
+  ClipboardCheck, 
+  ShipIcon, 
+  MapPin
+} from 'lucide-react';
 import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import type { UseEmblaCarouselType } from "embla-carousel-react";
+
+interface Step {
+  icon: React.ComponentType<any>;
+  title: string;
+  description: string;
+  color: string;
+}
+
+const steps: Step[] = [
+  {
+    icon: Search,
+    title: "Find Your Suppliers",
+    description: "Find your suppliers, get your proforma invoices and send them all to our team for review and processing.",
+    color: "bg-blue-100 text-blue-600"
+  },
+  {
+    icon: ShieldCheck,
+    title: "Supplier Verification",
+    description: "Our team will verify your suppliers and after confirmation we will sign a master contract to act on your behalf.",
+    color: "bg-green-100 text-green-600"
+  },
+  {
+    icon: CreditCard,
+    title: "Payment Processing",
+    description: "We will handle all your order payments on behalf of you from your account balance with complete transparency.",
+    color: "bg-purple-100 text-purple-600"
+  },
+  {
+    icon: PackagePlus,
+    title: "Order Consolidation",
+    description: "Our team will receive and verify all your orders, then combine them into a single optimized shipment.",
+    color: "bg-amber-100 text-amber-600"
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Documentation Simplified",
+    description: "We handle all export paperwork, customs forms, and create a single bill of lading for your consolidated shipment.",
+    color: "bg-indigo-100 text-indigo-600"
+  },
+  {
+    icon: ShipIcon,
+    title: "Global Shipping",
+    description: "Your consolidated order is shipped to your destination with real-time tracking and updates.",
+    color: "bg-cyan-100 text-cyan-600"
+  },
+  {
+    icon: MapPin,
+    title: "Easy Delivery",
+    description: "Receive your multiple orders as a single shipment, saving time and reducing customs complexity.",
+    color: "bg-pink-100 text-pink-600"
+  }
+];
 
 const HowItWorks = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
 
-  const steps = [
-    {
-      icon: Package,
-      title: "1. Order & Upload",
-      description: "Upload your supplier invoices and product details. Our system automatically processes and organizes your orders from multiple Turkish suppliers.",
-      details: ["Upload invoices in any format", "Automatic data extraction", "Multi-supplier coordination", "Order validation & verification"]
-    },
-    {
-      icon: CreditCard,
-      title: "2. Secure Payment",
-      description: "Make a single payment to istLinq. We handle all individual supplier payments securely, ensuring complete transparency and protection.",
-      details: ["Single consolidated payment", "Secure escrow protection", "Real-time payment tracking", "Automated supplier disbursement"]
-    },
-    {
-      icon: Truck,
-      title: "3. Smart Consolidation",
-      description: "Our AI optimizes container space and shipping routes, consolidating your orders into cost-effective shipments with maximum efficiency.",
-      details: ["AI-powered space optimization", "Route planning & scheduling", "Container loading coordination", "Multi-order consolidation"]
-    },
-    {
-      icon: BarChart3,
-      title: "4. Track & Receive",
-      description: "Monitor your shipment progress in real-time through our dashboard until delivery, with complete visibility at every step.",
-      details: ["Real-time tracking updates", "Complete shipment visibility", "Delivery coordination", "Performance analytics"]
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
     }
-  ];
 
-  const nextStep = () => {
-    setCurrentStep((prev) => (prev + 1) % steps.length);
-  };
+    return () => {
+      if (titleRef.current) {
+        observer.unobserve(titleRef.current);
+      }
+    };
+  }, []);
 
-  const prevStep = () => {
-    setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length);
+  useEffect(() => {
+    if (emblaApi) {
+      const onSelect = () => {
+        setCurrentSlide(emblaApi.selectedScrollSnap());
+      };
+      
+      emblaApi.on("select", onSelect);
+      return () => {
+        emblaApi.off("select", onSelect);
+      };
+    }
+    return undefined;
+  }, [emblaApi]);
+
+  const scrollToSlide = (index: number) => {
+    if (emblaApi && emblaApi.scrollTo) {
+      emblaApi.scrollTo(index);
+    }
   };
 
   return (
-    <section id="how-it-works" className="py-12 md:py-16 bg-gray-50">
+    <section id="how-it-works" className={`${isMobile ? 'py-12' : 'py-20'} bg-gradient-to-b from-gray-50 to-gray-100`}>
       <div className="container mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
-            How istLinq Works
+        <div 
+          ref={titleRef}
+          className={`text-center max-w-3xl mx-auto ${isMobile ? 'mb-8' : 'mb-16'} transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <span className="inline-block py-1 px-3 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-3">
+            Simple Process
+          </span>
+          <h2 className={`${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-3xl md:text-4xl'} font-bold mb-4`}>
+            7 Simple Steps to Supply Chain Success
           </h2>
-          <p className="text-gray-600 text-sm md:text-base lg:text-lg">
-            Four simple steps to transform your Turkish supply chain operations.
+          <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-600`}>
+            Our streamlined process makes sourcing and shipping from Turkey effortless.
           </p>
         </div>
 
-        {isMobile ? (
-          // Mobile: Vertical step-by-step layout
-          <div className="space-y-6">
-            {steps.map((step, index) => {
-              const IconComponent = step.icon;
-              return (
-                <div key={index} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-                  <div className="flex items-start space-x-3 mb-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <IconComponent className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-base mb-1 text-gray-900">{step.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed mb-2">{step.description}</p>
-                    </div>
-                  </div>
-                  <div className="ml-13">
-                    <ul className="space-y-1">
-                      {step.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="text-xs text-gray-500 flex items-center">
-                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></div>
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : isTablet ? (
-          // Tablet: 2x2 grid layout
-          <div className="grid grid-cols-2 gap-4">
-            {steps.map((step, index) => {
-              const IconComponent = step.icon;
-              return (
-                <div key={index} className="bg-white rounded-xl p-5 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3 mx-auto">
-                    <IconComponent className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <h3 className="font-semibold text-base mb-2 text-center text-gray-900">{step.title}</h3>
-                  <p className="text-gray-600 text-sm text-center leading-relaxed mb-3">{step.description}</p>
-                  <ul className="space-y-1">
-                    {step.details.map((detail, detailIndex) => (
-                      <li key={detailIndex} className="text-xs text-gray-500 flex items-center">
-                        <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 flex-shrink-0"></div>
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          // Desktop: Keep existing carousel layout
+        {/* Desktop View (Timeline) */}
+        <div className="hidden lg:block max-w-5xl mx-auto">
           <div className="relative">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 max-w-4xl mx-auto">
-              <div className="flex items-center justify-between mb-6">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={prevStep}
-                  className="p-2 rounded-full border-gray-200 hover:bg-gray-50"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                
-                <div className="flex space-x-2">
-                  {steps.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentStep(index)}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        index === currentStep ? 'bg-blue-600' : 'bg-gray-300'
-                      }`}
-                    />
-                  ))}
-                </div>
-                
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={nextStep}
-                  className="p-2 rounded-full border-gray-200 hover:bg-gray-50"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  {React.createElement(steps[currentStep].icon, {
-                    className: "h-8 w-8 text-blue-600"
-                  })}
-                </div>
-                
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">
-                  {steps[currentStep].title}
-                </h3>
-                
-                <p className="text-gray-600 text-lg mb-6 max-w-2xl mx-auto leading-relaxed">
-                  {steps[currentStep].description}
-                </p>
-                
-                <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
-                  {steps[currentStep].details.map((detail, index) => (
-                    <div key={index} className="flex items-center text-sm text-gray-700">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
-                      {detail}
+            {/* Connecting line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indigo-200 transform -translate-x-1/2 z-0"></div>
+            
+            {/* Steps */}
+            <div className="space-y-16 relative z-10">
+              {steps.map((step, index) => {
+                const isOdd = index % 2 === 1;
+                const StepIcon = step.icon;
+
+                return (
+                  <div 
+                    key={index}
+                    className={`flex ${isOdd ? 'flex-row-reverse' : 'flex-row'} items-center`}
+                    onMouseEnter={() => setActiveStep(index)}
+                    onMouseLeave={() => setActiveStep(null)}
+                  >
+                    {/* Icon circle */}
+                    <div className="flex-shrink-0 relative z-10">
+                      <div 
+                        className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border-4 ${
+                          activeStep === index ? 'border-emerald-500 scale-110' : 'border-white'
+                        } ${step.color}`}
+                      >
+                        <StepIcon className="h-7 w-7" />
+                      </div>
+                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-sm">
+                        {index + 1}
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
+                    
+                    {/* Content */}
+                    <div 
+                      className={`${isOdd ? 'mr-8 text-right' : 'ml-8'} w-5/12`}
+                    >
+                      <div 
+                        className={`p-5 rounded-lg transition-all duration-300 ${
+                          activeStep === index 
+                            ? 'bg-white shadow-xl transform -translate-y-1 border-l-4 border-emerald-500' 
+                            : 'bg-white shadow-md'
+                        }`}
+                      >
+                        <h3 className="font-bold text-xl text-gray-900 mb-2">{step.title}</h3>
+                        <p className="text-gray-600">{step.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        )}
-        
-        <div className="text-center mt-8">
-          <Button asChild size="lg" className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg px-8 py-3">
-            <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
-              Get Started Today
-            </a>
-          </Button>
+        </div>
+
+        {/* Tablet View (Simplified Grid) */}
+        <div className="hidden md:block lg:hidden">
+          <div className="grid grid-cols-2 gap-4">
+            {steps.map((step, index) => {
+              const StepIcon = step.icon;
+              
+              return (
+                <div 
+                  key={index} 
+                  className="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-emerald-500"
+                >
+                  <div className="p-4">
+                    <div className="flex items-center mb-3">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${step.color}`}>
+                        <StepIcon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold mr-2">
+                          {index + 1}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="font-bold text-sm text-gray-900 mb-2">{step.title}</h3>
+                    <p className="text-gray-600 text-xs">{step.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Mobile View (Compact Carousel) */}
+        <div className="md:hidden">
+          {/* Compact Navigation Pills */}
+          <div className="flex justify-center mb-4">
+            <div className="flex space-x-1 bg-white/50 backdrop-blur-sm rounded-full p-1">
+              {steps.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToSlide(idx)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    currentSlide === idx ? 'bg-emerald-600 w-4' : 'bg-gray-300'
+                  }`}
+                  aria-label={`Go to step ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <Carousel
+            className="w-full"
+            setApi={setEmblaApi}
+          >
+            <CarouselContent>
+              {steps.map((step, index) => {
+                const StepIcon = step.icon;
+                
+                return (
+                  <CarouselItem key={index}>
+                    <div className="bg-white rounded-xl shadow-lg border-l-4 border-emerald-500 p-5 mx-2">
+                      <div className="text-center">
+                        <div className={`w-12 h-12 ${step.color} rounded-xl flex items-center justify-center mb-4 mx-auto relative`}>
+                          <StepIcon className="w-6 h-6" />
+                          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">
+                            {index + 1}
+                          </div>
+                        </div>
+                        <h3 className="text-lg font-semibold mb-3 text-gray-900">{step.title}</h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            
+            <div className="flex justify-center items-center gap-4 mt-6">
+              <CarouselPrevious className="static translate-y-0 h-8 w-8 bg-white/80 hover:bg-white" />
+              <div className="text-sm text-gray-500 font-medium">
+                {currentSlide + 1} of {steps.length}
+              </div>
+              <CarouselNext className="static translate-y-0 h-8 w-8 bg-white/80 hover:bg-white" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>

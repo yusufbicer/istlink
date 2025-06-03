@@ -355,36 +355,36 @@ const Hero = () => {
                           </div>
                         </div>
                         
-                        <div className="col-span-6 bg-lavender-50 p-4 rounded-xl border border-lavender-200">
-                          <div className="flex justify-between items-center mb-3">
-                            <div className="font-medium text-gray-700 flex items-center">
-                              <Activity className="h-4 w-4 text-lavender-600 mr-2" />
-                              Shipping Cost Analysis
+                        {/* Payment Status - moved up and redesigned */}
+                        <div className="col-span-6 bg-gray-50 rounded-xl border border-gray-200 p-3">
+                          <div className="flex justify-between items-center mb-2">
+                            <div className="flex items-center">
+                              <CreditCard className="h-4 w-4 text-blue-600 mr-2" />
+                              <span className="font-medium text-gray-700">Payment Dashboard</span>
                             </div>
-                            <div className="flex space-x-2">
-                              <div className="px-2 py-1 bg-lavender-100 text-lavender-700 rounded text-xs font-medium">Monthly</div>
-                            </div>
+                            <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">Active Account</span>
                           </div>
-                          
-                          <div className="grid grid-cols-3 gap-3">
-                            <div className="text-center p-2 bg-white rounded-lg shadow-sm w-full">
-                              <div className="text-sm text-gray-500 mb-1">Standard Shipping</div>
-                              <div className="text-xl font-bold">$32,500</div>
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="bg-white rounded-lg p-2">
+                              <div className="text-sm text-gray-500">Available Balance</div>
+                              <div className="text-lg font-bold mt-1">$32,080</div>
                             </div>
-                            
-                            <div className="text-center p-2 bg-white rounded-lg shadow-sm border-l-4 border-blue-600 w-full">
-                              <div className="text-sm text-blue-600 mb-1">istLinq Consolidation</div>
-                              <div className="text-xl font-bold text-blue-600">$19,750</div>
+                            <div className="bg-white rounded-lg p-2">
+                              <div className="text-sm text-gray-500">Paid to Suppliers</div>
+                              <div className="text-lg font-bold mt-1">$24,850</div>
                             </div>
-                            
-                            <div className="text-center p-2 bg-green-50 rounded-lg shadow-sm w-full">
-                              <div className="text-sm text-green-600 mb-1">Total Savings</div>
-                              <div className="text-xl font-bold text-green-600">$12,750</div>
-                              <div className="text-xs font-medium text-green-600">39% reduction</div>
+                            <div className="bg-white rounded-lg p-2">
+                              <div className="text-sm text-gray-500">Upcoming Payments</div>
+                              <div className="text-lg font-bold mt-1">$7,230</div>
+                            </div>
+                            <div className="bg-white rounded-lg p-2">
+                              <div className="text-sm text-gray-500">Service Fee (2%)</div>
+                              <div className="text-lg font-bold mt-1 text-blue-600">$497</div>
                             </div>
                           </div>
                         </div>
                         
+                        {/* Updated Efficiency Metrics with Total Savings */}
                         <div className="col-span-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
                           <div className="flex justify-between items-center mb-2">
                             <span className="font-medium text-gray-700">Efficiency Metrics</span>
@@ -424,12 +424,10 @@ const Hero = () => {
                             
                             <div>
                               <div className="flex justify-between text-sm mb-1">
-                                <span className="text-gray-500">Documentation</span>
-                                <span className="font-medium">78%</span>
+                                <span className="text-gray-500">Total Savings</span>
+                                <span className="font-medium text-green-600">$12,750</span>
                               </div>
-                              <div className="w-full bg-gray-200 h-2 rounded-full">
-                                <div className="bg-amber-500 h-full rounded-full" style={{width: '78%'}}></div>
-                              </div>
+                              <div className="text-xs text-gray-500">Monthly</div>
                             </div>
                           </div>
                         </div>
@@ -519,34 +517,6 @@ const Hero = () => {
                               <div className="w-full bg-gray-200 h-2 rounded-full">
                                 <div className="bg-blue-600 h-full rounded-full" style={{width: '75%'}}></div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="col-span-12 bg-gray-50 rounded-xl border border-gray-200 p-3">
-                          <div className="flex justify-between items-center mb-2">
-                            <div className="flex items-center">
-                              <CreditCard className="h-4 w-4 text-blue-600 mr-2" />
-                              <span className="font-medium text-gray-700">Payment Status</span>
-                            </div>
-                            <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">Active Account</span>
-                          </div>
-                          <div className="grid grid-cols-4 gap-2">
-                            <div className="bg-white rounded-lg p-2">
-                              <div className="text-sm text-gray-500">Available Balance</div>
-                              <div className="text-lg font-bold mt-1">$32,080</div>
-                            </div>
-                            <div className="bg-white rounded-lg p-2">
-                              <div className="text-sm text-gray-500">Paid to Suppliers</div>
-                              <div className="text-lg font-bold mt-1">$24,850</div>
-                            </div>
-                            <div className="bg-white rounded-lg p-2">
-                              <div className="text-sm text-gray-500">Upcoming Payments</div>
-                              <div className="text-lg font-bold mt-1">$7,230</div>
-                            </div>
-                            <div className="bg-white rounded-lg p-2">
-                              <div className="text-sm text-gray-500">Service Fee (2%)</div>
-                              <div className="text-lg font-bold mt-1 text-blue-600">$497</div>
                             </div>
                           </div>
                         </div>

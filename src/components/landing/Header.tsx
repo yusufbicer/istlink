@@ -107,7 +107,7 @@ const Header = () => {
                 className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full px-6"
                 onClick={() => handleNavigate('/early-access')}
               >
-                {isTablet ? "Early Access" : "Request Early Access"}
+                {isTablet ? "Request Access" : "Request Access"}
               </Button>
             )}
           </div>
@@ -167,7 +167,7 @@ const Header = () => {
                     className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 font-semibold rounded-full"
                     onClick={() => handleNavigate('/early-access')}
                   >
-                    Request Early Access
+                    Request Access
                   </Button>
                 )}
               </div>

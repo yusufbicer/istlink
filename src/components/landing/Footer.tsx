@@ -68,11 +68,6 @@ const Footer = () => {
                   istlinq@gmail.com
                 </a>
               </li>
-              <li>
-                <Link to="/early-access" className="text-gray-600 hover:text-gray-800 transition-colors">
-                  Request Early Access
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

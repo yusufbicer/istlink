@@ -45,15 +45,22 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                {/* Elegant istLinq logo with Network icon */}
-                <div className="flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 relative overflow-hidden shadow-lg border border-blue-300/20">
-                  <Network className="w-5 h-5 text-white absolute" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20"></div>
+                {/* Enhanced istLinq logo with attention-grabbing design */}
+                <div className="flex items-center justify-center h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 relative overflow-hidden shadow-xl border-2 border-white/30 ring-2 ring-blue-200/50">
+                  <Network className="w-6 h-6 text-white absolute animate-pulse" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-white/30"></div>
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-sm"></div>
                 </div>
-                {/* istLinq branding */}
+                {/* Enhanced istLinq branding with two-color text */}
                 <div className="ml-3">
-                  <span className="font-bold text-xl text-gray-900 tracking-tight">istLinq</span>
-                  <span className="block text-xs text-blue-600 font-medium tracking-wide uppercase">Smart Export Consolidation</span>
+                  <div className="flex items-baseline">
+                    <span className="font-bold text-2xl text-blue-600 tracking-tight">ist</span>
+                    <span className="font-bold text-2xl text-purple-600 tracking-tight">Linq</span>
+                  </div>
+                  <div className="text-xs text-gray-600 font-medium leading-tight">
+                    <div>Smart Export</div>
+                    <div>Consolidation Solutions</div>
+                  </div>
                 </div>
               </div>
             </div>

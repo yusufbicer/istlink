@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -58,7 +57,7 @@ const Hero = () => {
             } text-gray-900`}
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
-            <span className="block mb-2">
+            <span className="block mb-2 font-bold">
               Turkish Supply Chain Complexity,
             </span>
             <span className="block relative h-8 md:h-12 lg:h-16 xl:h-20 overflow-hidden">
@@ -169,7 +168,7 @@ const Hero = () => {
                           <div className="flex justify-between items-center mb-1">
                             <div>
                               <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-[10px] text-gray-600">Departure: Apr 15, 2025</div>
+                              <div className="text-[10px] text-emerald-600 font-medium">Departure: Apr 15, 2025</div>
                             </div>
                             <div className="text-right">
                               <div className="text-xs font-medium text-blue-600">$47,850</div>

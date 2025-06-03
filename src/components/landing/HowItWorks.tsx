@@ -106,7 +106,7 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section id="how-it-works" className={`${isMobile ? 'py-16' : 'py-24'} relative overflow-hidden`}>
+    <section id="how-it-works" className={`${isMobile ? 'py-12' : 'py-16'} relative overflow-hidden`}>
       {/* Modern gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
@@ -115,17 +115,17 @@ const HowItWorks = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div 
           ref={titleRef}
-          className={`text-center max-w-4xl mx-auto ${isMobile ? 'mb-16' : 'mb-20'} transition-all duration-700 ${
+          className={`text-center max-w-4xl mx-auto ${isMobile ? 'mb-12' : 'mb-14'} transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/10 to-emerald-600/10 border border-blue-200/50 mb-6">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/10 to-emerald-600/10 border border-blue-200/50 mb-4 md:mb-6">
             <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Simple Process
             </span>
           </div>
           
-          <h2 className={`${isMobile ? 'text-3xl' : isTablet ? 'text-4xl' : 'text-5xl'} font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-emerald-900 bg-clip-text text-transparent leading-tight`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <h2 className={`${isMobile ? 'text-3xl' : isTablet ? 'text-4xl' : 'text-5xl'} font-bold mb-4 md:mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-emerald-900 bg-clip-text text-transparent leading-tight`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             7 Simple Steps to
             <br />
             <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
@@ -145,7 +145,7 @@ const HowItWorks = () => {
             {/* Central Timeline Line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
             
-            <div className="space-y-16">
+            <div className="space-y-8 md:space-y-12">
               {steps.map((step, index) => {
                 const StepIcon = step.icon;
                 const isLeft = index % 2 === 0;
@@ -157,16 +157,16 @@ const HowItWorks = () => {
                     className={`relative flex items-center ${isLeft ? 'justify-start' : 'justify-end'}`}
                   >
                     {/* Timeline Node */}
-                    <div className={`absolute left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full bg-white border-4 border-gradient-to-r from-blue-200 to-emerald-200 shadow-lg flex items-center justify-center z-10 transition-all duration-500 ${
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border-4 border-gradient-to-r from-blue-200 to-emerald-200 shadow-lg flex items-center justify-center z-10 transition-all duration-500 ${
                       isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                     }`}>
-                      <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
-                        <StepIcon className={`h-4 w-4 ${step.color}`} />
+                      <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
+                        <StepIcon className={`h-3 w-3 md:h-4 md:w-4 ${step.color}`} />
                       </div>
                     </div>
                     
                     {/* Step Number */}
-                    <div className={`absolute left-1/2 transform -translate-x-1/2 -translate-y-12 w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-sm font-bold flex items-center justify-center shadow-lg transition-all duration-500 delay-200 ${
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 -translate-y-10 md:-translate-y-12 w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-xs md:text-sm font-bold flex items-center justify-center shadow-lg transition-all duration-500 delay-200 ${
                       isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                     }`}>
                       {index + 1}
@@ -178,11 +178,11 @@ const HowItWorks = () => {
                         isVisible ? 'opacity-100 translate-x-0' : `opacity-0 ${isLeft ? '-translate-x-8' : 'translate-x-8'}`
                       }`}
                     >
-                      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 group hover:-translate-y-1">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 group hover:-translate-y-1">
+                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4 group-hover:text-blue-600 transition-colors duration-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {step.title}
                         </h3>
-                        <p className="text-gray-600 leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <p className="text-gray-600 leading-relaxed text-sm md:text-base" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {step.description}
                         </p>
                       </div>
@@ -199,7 +199,7 @@ const HowItWorks = () => {
               {/* Mobile Timeline Line */}
               <div className="absolute left-4 top-0 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
               
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {steps.map((step, index) => {
                   const StepIcon = step.icon;
                   const isVisible = visibleSteps.includes(index);
@@ -226,7 +226,7 @@ const HowItWorks = () => {
                       <div className={`ml-4 transition-all duration-700 delay-300 ${
                         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                       }`}>
-                        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50">
+                        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 shadow-lg border border-white/50">
                           <h3 className="text-lg font-bold text-gray-900 mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                             {step.title}
                           </h3>

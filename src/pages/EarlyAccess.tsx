@@ -98,7 +98,7 @@ const EarlyAccess = () => {
     <div className="container mx-auto p-6 min-h-screen">
       {/* Back to home link */}
       <div className="mb-8">
-        <Link to="/" className="flex items-center text-gray-600 hover:text-metallic-blue transition-colors">
+        <Link to="/" className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to home
         </Link>
@@ -188,7 +188,7 @@ const EarlyAccess = () => {
               
               <Button 
                 type="submit" 
-                className="w-full bg-metallic-blue hover:bg-metallic-dark"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Submitting..." : (isNewsletterSubscription ? "Subscribe" : "Submit Request")}

@@ -1,16 +1,19 @@
-
 import { useEffect, useState } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
 import Features from '@/components/landing/Features';
 import HowItWorks from '@/components/landing/HowItWorks';
 import Footer from '@/components/landing/Footer';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { PackageCheck, FileText, Receipt, CheckCircle2 } from 'lucide-react';
+import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
+import { PackageCheck, FileText, Receipt, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, ListIcon, CheckIcon, CheckCircle2, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  const [blogCollapsed, setBlogCollapsed] = useState(true);
 
   // Scroll to section if hash is present in URL
   useEffect(() => {
@@ -89,15 +92,17 @@ const Index = () => {
       <main className="flex-grow">
         <Hero />
         
+        {/* Improved spacing for mobile/tablet */}
         <div className={isMobile ? "mt-8" : "mt-12"}>
           <Features />
         </div>
         
+        {/* Improved spacing for mobile/tablet */}
         <div className={isMobile ? "mt-8" : "mt-12"}>
           <HowItWorks />
         </div>
         
-        {/* Pricing Section */}
+        {/* Compact Pricing Section */}
         <section id="pricing" className="py-8 md:py-12 bg-gray-50">
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-8">
@@ -109,7 +114,7 @@ const Index = () => {
               </p>
             </div>
             
-            {/* Mobile: Pricing Tabs */}
+            {/* Mobile: Enhanced Pricing Tabs */}
             {isMobile ? (
               <div className="mb-6">
                 <Tabs defaultValue="growth" className="w-full">

@@ -111,8 +111,8 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        {/* Desktop & Tablet View (Timeline) */}
-        <div className="hidden md:block max-w-5xl mx-auto">
+        {/* Desktop View (Timeline) */}
+        <div className="hidden lg:block max-w-5xl mx-auto">
           <div className="relative">
             {/* Connecting line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indigo-200 transform -translate-x-1/2 z-0"></div>
@@ -166,8 +166,8 @@ const HowItWorks = () => {
           </div>
         </div>
 
-        {/* Mobile View (Vertical Steps) */}
-        <div className="md:hidden">
+        {/* Tablet & Mobile View (Vertical Steps) */}
+        <div className="lg:hidden">
           <div className="relative max-w-md mx-auto">
             {/* Connecting line */}
             <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-indigo-200 z-0"></div>

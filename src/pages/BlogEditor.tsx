@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -94,13 +95,15 @@ const BlogEditor = () => {
 
     try {
       const postData = {
-        ...formData,
+        title: formData.title,
+        content: formData.content,
+        slug: formData.slug,
         author_id: user?.id || '',
         author_name: user?.email || 'Anonymous',
         updated_at: new Date().toISOString(),
-        title: formData.title,
-        content: formData.content,
-        slug: formData.slug
+        category: 'General',
+        read_time: '5 min read',
+        published: true
       };
 
       if (editingPost) {
@@ -113,7 +116,7 @@ const BlogEditor = () => {
       } else {
         const { error } = await supabase
           .from('blog_posts')
-          .insert([postData]);
+          .insert(postData);
 
         if (error) throw error;
       }

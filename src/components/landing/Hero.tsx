@@ -33,14 +33,14 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="pt-24 pb-8 md:pt-32 md:pb-16 overflow-hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <section className="pt-24 pb-6 md:pt-32 md:pb-8 overflow-hidden relative bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Enhanced background gradients and effects */}
       <div className="absolute inset-0 bg-gradient-radial from-blue-100/40 via-transparent to-transparent opacity-60" />
       <div className="absolute top-1/4 right-1/3 w-72 h-72 bg-gradient-to-r from-blue-200 to-lavender-200 rounded-full filter blur-3xl opacity-20 animate-float pointer-events-none" />
       <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-gradient-to-r from-emerald-100 to-blue-100 rounded-full filter blur-3xl opacity-15 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
       
       <div className="container mx-auto px-4 sm:px-6 relative">
-        <div className="max-w-5xl mx-auto text-center mb-6 md:mb-10">
+        <div className="max-w-5xl mx-auto text-center mb-4 md:mb-6">
           <div 
             className={`transition-all duration-1000 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
@@ -83,7 +83,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-black leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
               <span className="text-blue-700 font-semibold bg-blue-50 px-1 py-0.5 rounded">single, streamlined shipment</span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
@@ -108,7 +108,7 @@ const Hero = () => {
         
           
           <div 
-            className={`mt-6 md:mt-8 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
+            className={`mt-4 md:mt-6 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
             }`}
           >
@@ -168,7 +168,7 @@ const Hero = () => {
                           <div className="flex justify-between items-center mb-1">
                             <div>
                               <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-[10px] text-emerald-600 font-medium">Departure: Apr 15, 2025</div>
+                              <div className="text-[10px] text-blue-600 font-medium">Departure: Apr 15, 2025</div>
                             </div>
                             <div className="text-right">
                               <div className="text-xs font-medium text-blue-600">$47,850</div>

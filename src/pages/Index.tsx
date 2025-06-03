@@ -86,11 +86,11 @@ const Index = () => {
       <main className="flex-grow">
         <Hero />
         
-        <div className={isMobile ? "mt-2" : "mt-6"}>
+        <div className={isMobile ? "-mt-2" : "-mt-4"}>
           <Features />
         </div>
         
-        <div className={isMobile ? "mt-4" : "mt-8"}>
+        <div className={isMobile ? "mt-2" : "mt-4"}>
           <HowItWorks />
         </div>
         

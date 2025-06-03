@@ -23,6 +23,9 @@ const Footer = () => {
                   <span className="font-bold text-2xl text-blue-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>ist</span>
                   <span className="font-bold text-2xl text-emerald-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Linq</span>
                 </div>
+                <p className="text-xs text-gray-700 mt-1 font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Simplifying Cross Border Procurement
+                </p>
               </div>
             </div>
             <p className="text-gray-600 mb-4 max-w-md" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -70,12 +73,15 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4 text-gray-800" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Stay Updated</h3>
             <div className="space-y-4">
-              <Button 
-                onClick={handleNewsletterClick}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm py-2 px-4"
-              >
-                Subscribe to Newsletter
-              </Button>
+              <div className="flex justify-center">
+                <Button 
+                  onClick={handleNewsletterClick}
+                  size="sm"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs py-2 px-3"
+                >
+                  Subscribe to Newsletter
+                </Button>
+              </div>
               <div>
                 <h4 className="font-medium mb-2 text-gray-700" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Contact</h4>
                 <a href="mailto:istlinq@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

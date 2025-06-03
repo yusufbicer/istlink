@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Package, TruckIcon, UsersIcon, FileTextIcon, CreditCardIcon, GlobeIcon, ShieldCheck } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -214,20 +215,20 @@ const Features = () => {
                     <p className="text-gray-600 text-center mb-6">{feature.description}</p>
                     
                     {index === 0 && (
-                      <div className="bg-white rounded-lg p-4 mt-auto">
-                        <div className="text-sm font-medium text-gray-800 text-center mb-2">Our customers typically save:</div>
-                        <div className="flex justify-between">
+                      <div className="bg-white rounded-lg p-3 mt-auto">
+                        <div className="text-xs font-medium text-gray-800 text-center mb-2">Customers typically save:</div>
+                        <div className="grid grid-cols-3 gap-1">
                           <div className="text-center">
-                            <div className="text-xl font-bold text-metallic-blue">35%</div>
-                            <div className="text-xs text-gray-500">Shipping Costs</div>
+                            <div className="text-base font-bold text-metallic-blue">35%</div>
+                            <div className="text-[10px] text-gray-500">Shipping</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-xl font-bold text-metallic-blue">68%</div>
-                            <div className="text-xs text-gray-500">Paperwork Time</div>
+                            <div className="text-base font-bold text-metallic-blue">68%</div>
+                            <div className="text-[10px] text-gray-500">Paperwork</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-xl font-bold text-metallic-blue">92%</div>
-                            <div className="text-xs text-gray-500">Space Utilization</div>
+                            <div className="text-base font-bold text-metallic-blue">92%</div>
+                            <div className="text-[10px] text-gray-500">Space</div>
                           </div>
                         </div>
                       </div>

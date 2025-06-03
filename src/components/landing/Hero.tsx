@@ -53,7 +53,7 @@ const Hero = () => {
           </div>
           
           <h1 
-            className={`text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black leading-tight md:leading-tight mb-3 md:mb-5 transition-all duration-1000 delay-100 transform ${
+            className={`text-lg md:text-xl lg:text-2xl xl:text-3xl font-black leading-tight md:leading-tight mb-3 md:mb-5 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
             style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
@@ -63,14 +63,14 @@ const Hero = () => {
             </span>
             <span className="block relative h-[1.2em] overflow-hidden">
               <span 
-                className={`absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 bg-clip-text text-transparent font-black tracking-tight transition-all duration-700 ease-in-out ${
+                className={`absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 bg-clip-text text-transparent font-black tracking-tight transition-all duration-700 ease-in-out text-base md:text-lg lg:text-xl xl:text-2xl ${
                   currentTextIndex === 0 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
                 }`}
               >
                 {alternatingTexts[0]}
               </span>
               <span 
-                className={`absolute inset-0 bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 bg-clip-text text-transparent font-black tracking-tight transition-all duration-700 ease-in-out ${
+                className={`absolute inset-0 bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 bg-clip-text text-transparent font-black tracking-tight transition-all duration-700 ease-in-out text-base md:text-lg lg:text-xl xl:text-2xl ${
                   currentTextIndex === 1 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'
                 }`}
               >
@@ -80,11 +80,11 @@ const Hero = () => {
           </h1>
           
           <div 
-            className={`text-sm md:text-base lg:text-lg mb-5 md:mb-7 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
+            className={`text-xs md:text-sm lg:text-base mb-4 md:mb-6 max-w-4xl mx-auto transition-all duration-1000 delay-200 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-gray-900 font-medium leading-relaxed tracking-wide px-2" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+            <p className="text-black font-medium leading-relaxed tracking-wide px-2" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
               <span className="text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded-md">single, streamlined shipment</span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
@@ -100,9 +100,9 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="default" className="h-12 px-6 text-base font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 rounded-xl">
+            <Button asChild size="sm" className="h-10 px-5 text-sm font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-0 rounded-xl">
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
-                <MessageSquare className="mr-2 h-5 w-5" /> Talk to Our Team
+                <MessageSquare className="mr-2 h-4 w-4" /> Talk to Our Team
               </a>
             </Button>
           </div>
@@ -137,24 +137,24 @@ const Hero = () => {
                       </div>
                       
                       {/* Mobile navigation bar with Orders, Consolidations, Suppliers, Analytics */}
-                      <div className="flex mb-3 bg-gray-200 rounded-lg p-0.5 text-[10px] justify-between overflow-x-hidden whitespace-nowrap shadow-sm">
-                        <div className="px-1.5 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
-                          <Package className="h-2.5 w-2.5 mr-0.5" /> 
+                      <div className="flex mb-3 bg-gray-200 rounded-lg p-0.5 text-[9px] justify-between overflow-hidden whitespace-nowrap shadow-sm">
+                        <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
+                          <Package className="h-2 w-2 mr-0.5" /> 
                           <span className="truncate">Orders</span>
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
-                          <GitMerge className="h-2.5 w-2.5 mr-0.5" /> 
+                        <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
+                          <GitMerge className="h-2 w-2 mr-0.5" /> 
                           <span className="truncate">Consol</span>
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
-                          <Users className="h-2.5 w-2.5 mr-0.5" /> 
+                        <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
+                          <Users className="h-2 w-2 mr-0.5" /> 
                           <span className="truncate">Supply</span>
                         </div>
-                        <div className="px-1.5 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
-                          <BarChart2 className="h-2.5 w-2.5 mr-0.5" /> 
+                        <div className="px-1 py-1 flex items-center text-gray-700 hover:bg-white/80 hover:text-blue-600 rounded-md transition-colors flex-shrink-0 min-w-0">
+                          <BarChart2 className="h-2 w-2 mr-0.5" /> 
                           <span className="truncate">Stats</span>
                         </div>
-                        <div className="ml-1 w-5 h-5 rounded-full bg-lavender-100 flex items-center justify-center text-[8px] text-lavender-700 font-medium flex-shrink-0">
+                        <div className="ml-1 w-4 h-4 rounded-full bg-lavender-100 flex items-center justify-center text-[7px] text-lavender-700 font-medium flex-shrink-0">
                           JD
                         </div>
                       </div>

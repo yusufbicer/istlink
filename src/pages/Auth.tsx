@@ -15,7 +15,7 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { login, signUp, user } = useAuth();
+  const { signIn, signUp, user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -40,23 +40,39 @@ const Auth = () => {
 
     try {
       if (isLogin) {
-        await login(email, password);
-        toast({
-          title: "Success",
-          description: "Successfully logged in!"
-        });
-        navigate('/admin/dashboard');
+        const { error } = await signIn(email, password);
+        if (error) {
+          toast({
+            title: "Login Failed",
+            description: error.message,
+            variant: "destructive"
+          });
+        } else {
+          toast({
+            title: "Success",
+            description: "Successfully logged in!"
+          });
+          navigate('/admin/dashboard');
+        }
       } else {
-        await signUp(email, password);
-        toast({
-          title: "Success",
-          description: "Account created successfully! Please check your email to verify your account."
-        });
-        setIsLogin(true);
+        const { error } = await signUp(email, password);
+        if (error) {
+          toast({
+            title: "Sign Up Failed",
+            description: error.message,
+            variant: "destructive"
+          });
+        } else {
+          toast({
+            title: "Success",
+            description: "Account created successfully! Please check your email to verify your account."
+          });
+          setIsLogin(true);
+        }
       }
     } catch (error: any) {
       toast({
-        title: isLogin ? "Login Failed" : "Sign Up Failed",
+        title: "Error",
         description: error.message || "An unexpected error occurred",
         variant: "destructive"
       });

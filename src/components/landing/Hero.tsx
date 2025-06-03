@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -9,7 +8,13 @@ import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const isMobile = useIsMobile();
+
+  const alternatingTexts = [
+    "Simplified & Streamlined",
+    "Elegantly Resolved"
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,6 +22,14 @@ const Hero = () => {
     }, 100);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTextIndex((prev) => (prev + 1) % alternatingTexts.length);
+    }, 3000); // Change text every 3 seconds
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -39,13 +52,27 @@ const Hero = () => {
           </div>
           
           <h1 
-            className={`text-4xl md:text-6xl lg:text-7xl font-bold leading-tight md:leading-tight mb-8 transition-all duration-1000 delay-100 transform ${
+            className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight md:leading-tight mb-6 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
             <span className="block text-gray-900 mb-2">Turkish Supply Chain Complexity,</span>
-            <span className="block bg-gradient-to-r from-blue-600 via-lavender-600 to-emerald-600 bg-clip-text text-transparent font-extrabold">
-              Simplified & Streamlined
+            <span className="block bg-gradient-to-r from-blue-600 via-lavender-600 to-emerald-600 bg-clip-text text-transparent font-extrabold relative">
+              <span 
+                className={`absolute inset-0 transition-all duration-500 ${
+                  currentTextIndex === 0 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-2'
+                }`}
+              >
+                {alternatingTexts[0]}
+              </span>
+              <span 
+                className={`absolute inset-0 transition-all duration-500 ${
+                  currentTextIndex === 1 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-2'
+                }`}
+              >
+                {alternatingTexts[1]}
+              </span>
+              <span className="invisible">{alternatingTexts[0]}</span>
             </span>
           </h1>
           
@@ -54,7 +81,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-gray-600 font-medium leading-relaxed tracking-wide" style={{ fontFamily: 'SF Pro Display, Inter, system-ui, -apple-system, sans-serif' }}>
+            <p className="text-slate-700 font-medium leading-relaxed tracking-wide" style={{ fontFamily: 'Inter, SF Pro Display, system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a <span className="text-blue-600 font-semibold">single, streamlined shipment</span>. Our AI-powered platform simplifies the entire process—from <span className="text-emerald-600 font-semibold">payment consolidation</span> to <span className="text-lavender-600 font-semibold">documentation management</span> and comprehensive tracking.
             </p>
           </div>
@@ -71,6 +98,7 @@ const Hero = () => {
             </Button>
           </div>
         
+          
           <div 
             className={`mt-8 md:mt-12 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'

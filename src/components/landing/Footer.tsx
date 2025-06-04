@@ -1,3 +1,4 @@
+
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import IstLinqLogo from '@/components/common/IstLinqLogo';
@@ -70,12 +71,11 @@ const Footer = () => {
 
           {/* Newsletter & Contact */}
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-gray-800" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Stay Updated</h3>
+            <div className="mb-4">
               <Button 
                 onClick={handleNewsletterClick}
                 size="sm"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs py-1.5 px-2.5"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm py-2 px-4 w-full"
               >
                 Subscribe to Newsletter
               </Button>

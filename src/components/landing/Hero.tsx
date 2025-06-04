@@ -85,11 +85,23 @@ const Hero = () => {
           >
             <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
-              <span className="text-blue-700 font-semibold bg-blue-50 px-1 py-0.5 rounded">single, streamlined shipment</span>. 
+              <span className="relative inline-block text-emerald-700 font-semibold">
+                <span className="relative z-10">single, streamlined shipment</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-emerald-200 to-emerald-300 rounded-md opacity-30 animate-pulse"></span>
+                <span className="absolute inset-0 bg-emerald-100 rounded-md blur-sm animate-pulse"></span>
+              </span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
-              <span className="text-emerald-700 font-semibold bg-emerald-50 px-1 py-0.5 rounded">payment consolidation</span>{' '}
+              <span className="relative inline-block text-emerald-700 font-semibold">
+                <span className="relative z-10">payment consolidation</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-emerald-200 to-emerald-300 rounded-md opacity-30 animate-pulse" style={{ animationDelay: '0.5s' }}></span>
+                <span className="absolute inset-0 bg-emerald-100 rounded-md blur-sm animate-pulse" style={{ animationDelay: '0.5s' }}></span>
+              </span>{' '}
               to{' '}
-              <span className="text-purple-700 font-semibold bg-purple-50 px-1 py-0.5 rounded">documentation management</span>{' '}
+              <span className="relative inline-block text-emerald-700 font-semibold">
+                <span className="relative z-10">documentation management</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-emerald-200 to-emerald-300 rounded-md opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></span>
+                <span className="absolute inset-0 bg-emerald-100 rounded-md blur-sm animate-pulse" style={{ animationDelay: '1s' }}></span>
+              </span>{' '}
               and comprehensive tracking.
             </p>
           </div>
@@ -168,7 +180,7 @@ const Hero = () => {
                           <div className="flex justify-between items-center mb-1">
                             <div>
                               <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-[10px] text-blue-600 font-medium">Departure: Apr 15, 2025</div>
+                              <div className="text-[10px] text-emerald-600 font-medium">Departure: Apr 15, 2025</div>
                             </div>
                             <div className="text-right">
                               <div className="text-xs font-medium text-blue-600">$47,850</div>
@@ -346,7 +358,7 @@ const Hero = () => {
                                 <div className="text-sm text-gray-500">Total Value</div>
                               </div>
                               <div className="text-center">
-                                <div className="text-2xl font-bold text-orange-600">Apr 15</div>
+                                <div className="text-2xl font-bold text-emerald-600">Apr 15</div>
                                 <div className="text-sm text-gray-500">Departure</div>
                               </div>
                             </div>

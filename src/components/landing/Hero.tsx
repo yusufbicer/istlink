@@ -86,16 +86,25 @@ const Hero = () => {
           >
             <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
-              <span className="font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-md border border-emerald-100">
-                single, streamlined shipment
+              <span className="relative inline-block">
+                <span className="relative z-10 font-medium text-slate-800">
+                  single, streamlined shipment
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-200/60 to-lavender-200/60 rounded-md transform -skew-x-12 -rotate-1"></span>
               </span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
-              <span className="font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-md border border-emerald-100">
-                payment consolidation
+              <span className="relative inline-block">
+                <span className="relative z-10 font-medium text-slate-800">
+                  payment consolidation
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-lavender-200/60 to-blue-200/60 rounded-md transform skew-x-12 rotate-1"></span>
               </span>{' '}
               to{' '}
-              <span className="font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-md border border-emerald-100">
-                documentation management
+              <span className="relative inline-block">
+                <span className="relative z-10 font-medium text-slate-800">
+                  documentation management
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-200/60 to-slate-200/60 rounded-md transform -skew-x-6"></span>
               </span>{' '}
               and comprehensive tracking.
             </p>

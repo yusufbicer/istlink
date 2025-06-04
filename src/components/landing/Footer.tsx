@@ -71,11 +71,11 @@ const Footer = () => {
 
           {/* Newsletter & Contact */}
           <div>
-            <div className="mb-4">
+            <div className="mb-4 flex justify-center md:justify-start">
               <Button 
                 onClick={handleNewsletterClick}
                 size="sm"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm py-2 px-4 w-full"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm py-2 px-3 w-auto"
               >
                 Subscribe to Newsletter
               </Button>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -85,22 +86,19 @@ const Hero = () => {
           >
             <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
-              <span className="relative inline-block text-emerald-700 font-semibold">
-                <span className="relative z-10">single, streamlined shipment</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-emerald-200 to-emerald-300 rounded-md opacity-30 animate-pulse"></span>
-                <span className="absolute inset-0 bg-emerald-100 rounded-md blur-sm animate-pulse"></span>
+              <span className="relative inline-block text-emerald-700 font-bold bg-gradient-to-r from-emerald-100 via-emerald-50 to-emerald-100 px-2 py-1 rounded-lg border-2 border-emerald-200 shadow-lg transform hover:scale-105 transition-all duration-300">
+                <span className="relative z-10 bg-gradient-to-r from-emerald-700 to-emerald-600 bg-clip-text text-transparent">single, streamlined shipment</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-emerald-500/20 rounded-lg animate-pulse"></div>
               </span>. 
               Our AI-powered platform simplifies the entire process—from{' '}
-              <span className="relative inline-block text-emerald-700 font-semibold">
-                <span className="relative z-10">payment consolidation</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-emerald-200 to-emerald-300 rounded-md opacity-30 animate-pulse" style={{ animationDelay: '0.5s' }}></span>
-                <span className="absolute inset-0 bg-emerald-100 rounded-md blur-sm animate-pulse" style={{ animationDelay: '0.5s' }}></span>
+              <span className="relative inline-block text-emerald-700 font-bold bg-gradient-to-r from-emerald-100 via-emerald-50 to-emerald-100 px-2 py-1 rounded-lg border-2 border-emerald-200 shadow-lg transform hover:scale-105 transition-all duration-300" style={{ animationDelay: '0.5s' }}>
+                <span className="relative z-10 bg-gradient-to-r from-emerald-700 to-emerald-600 bg-clip-text text-transparent">payment consolidation</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-emerald-500/20 rounded-lg animate-pulse" style={{ animationDelay: '0.5s' }}></div>
               </span>{' '}
               to{' '}
-              <span className="relative inline-block text-emerald-700 font-semibold">
-                <span className="relative z-10">documentation management</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-emerald-200 to-emerald-300 rounded-md opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></span>
-                <span className="absolute inset-0 bg-emerald-100 rounded-md blur-sm animate-pulse" style={{ animationDelay: '1s' }}></span>
+              <span className="relative inline-block text-emerald-700 font-bold bg-gradient-to-r from-emerald-100 via-emerald-50 to-emerald-100 px-2 py-1 rounded-lg border-2 border-emerald-200 shadow-lg transform hover:scale-105 transition-all duration-300" style={{ animationDelay: '1s' }}>
+                <span className="relative z-10 bg-gradient-to-r from-emerald-700 to-emerald-600 bg-clip-text text-transparent">documentation management</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-emerald-500/20 rounded-lg animate-pulse" style={{ animationDelay: '1s' }}></div>
               </span>{' '}
               and comprehensive tracking.
             </p>
@@ -144,6 +142,7 @@ const Hero = () => {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
                           <IstLinqLogo size="sm" className="mr-2" />
+                          <div className="text-[8px] text-gray-500 font-medium">Master Contract Customer</div>
                         </div>
                         <div className="flex items-center space-x-1">
                           <div className="relative">
@@ -270,21 +269,21 @@ const Hero = () => {
                             <FileText className="h-3 w-3 text-green-500 mr-2" />
                             <div className="flex-1">
                               <div className="text-[10px] font-medium">BOL Generated</div>
-                              <div className="text-[9px] text-gray-600">5 min ago</div>
+                              <div className="text-[9px] text-gray-600">2 hours ago</div>
                             </div>
                           </div>
                           <div className="bg-white p-1.5 rounded shadow-sm flex items-center">
                             <DollarSign className="h-3 w-3 text-blue-500 mr-2" />
                             <div className="flex-1">
                               <div className="text-[10px] font-medium">Payment Processed</div>
-                              <div className="text-[9px] text-gray-600">12 min ago</div>
+                              <div className="text-[9px] text-gray-600">5 hours ago</div>
                             </div>
                           </div>
                           <div className="bg-white p-1.5 rounded shadow-sm flex items-center">
                             <Package className="h-3 w-3 text-purple-500 mr-2" />
                             <div className="flex-1">
                               <div className="text-[10px] font-medium">5 New Orders Added</div>
-                              <div className="text-[9px] text-gray-600">1 hr ago</div>
+                              <div className="text-[9px] text-gray-600">1 day ago</div>
                             </div>
                           </div>
                         </div>
@@ -296,6 +295,7 @@ const Hero = () => {
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
                           <IstLinqLogo size="md" className="mr-4" />
+                          <div className="text-xs text-gray-500 font-medium">Master Contract Customer</div>
                         </div>
                         
                         <div className="flex space-x-2">
@@ -435,7 +435,7 @@ const Hero = () => {
                                 <span className="text-sm font-medium">BOL Generated</span>
                               </div>
                               <div className="text-xs text-gray-600">Bill of Lading #BL-041-2025 created</div>
-                              <div className="text-xs text-gray-500 mt-1">5 minutes ago</div>
+                              <div className="text-xs text-gray-500 mt-1">2 hours ago</div>
                             </div>
                             
                             <div className="bg-white p-3 rounded-lg border border-gray-100">
@@ -444,7 +444,7 @@ const Hero = () => {
                                 <span className="text-sm font-medium">Payment Processed</span>
                               </div>
                               <div className="text-xs text-gray-600">$18,200 to Textile Plus Ltd</div>
-                              <div className="text-xs text-gray-500 mt-1">12 minutes ago</div>
+                              <div className="text-xs text-gray-500 mt-1">5 hours ago</div>
                             </div>
                             
                             <div className="bg-white p-3 rounded-lg border border-gray-100">
@@ -453,7 +453,7 @@ const Hero = () => {
                                 <span className="text-sm font-medium">New Orders Added</span>
                               </div>
                               <div className="text-xs text-gray-600">5 orders from Auto Parts Inc</div>
-                              <div className="text-xs text-gray-500 mt-1">1 hour ago</div>
+                              <div className="text-xs text-gray-500 mt-1">1 day ago</div>
                             </div>
                             
                             <div className="bg-white p-3 rounded-lg border border-gray-100">
@@ -462,7 +462,7 @@ const Hero = () => {
                                 <span className="text-sm font-medium">Documentation Complete</span>
                               </div>
                               <div className="text-xs text-gray-600">All export docs verified</div>
-                              <div className="text-xs text-gray-500 mt-1">2 hours ago</div>
+                              <div className="text-xs text-gray-500 mt-1">2 days ago</div>
                             </div>
                             
                             <div className="bg-white p-3 rounded-lg border border-gray-100">
@@ -471,7 +471,7 @@ const Hero = () => {
                                 <span className="text-sm font-medium">Warehouse Arrival</span>
                               </div>
                               <div className="text-xs text-gray-600">12 packages from Machinery Co</div>
-                              <div className="text-xs text-gray-500 mt-1">3 hours ago</div>
+                              <div className="text-xs text-gray-500 mt-1">3 days ago</div>
                             </div>
                           </div>
                         </div>

@@ -49,8 +49,8 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    title: "Quality Assurance",
-    description: "Our team conducts pre-shipment inspections to ensure all products meet your quality standards.",
+    title: "Delivery Guarantee",
+    description: "We guarantee you receive all goods as specified. Full accountability and insurance.",
     color: "bg-indigo-50 border-indigo-200",
     iconColor: "text-indigo-600 bg-indigo-100"
   }

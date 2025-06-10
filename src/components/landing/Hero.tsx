@@ -92,21 +92,20 @@ const Hero = () => {
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-200/60 to-lavender-200/60 rounded-md transform -skew-x-12 -rotate-1"></span>
               </span>. 
-              Our AI-powered platform simplifies the entire process—from{' '}
+              Buy from multiple Turkish suppliers with{' '}
               <span className="relative inline-block">
                 <span className="relative z-10 font-medium text-slate-800">
-                  payment consolidation
+                  one payment, one contract, one Bill of Lading
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-lavender-200/60 to-blue-200/60 rounded-md transform skew-x-12 rotate-1"></span>
               </span>{' '}
-              to{' '}
+              and{' '}
               <span className="relative inline-block">
                 <span className="relative z-10 font-medium text-slate-800">
-                  documentation management
+                  one shipment
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-200/60 to-slate-200/60 rounded-md transform -skew-x-6"></span>
-              </span>{' '}
-              and comprehensive tracking.
+              </span>.
             </p>
           </div>
           

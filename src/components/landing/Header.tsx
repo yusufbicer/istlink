@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { Menu, X } from 'lucide-react';
 import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
-import IstLinqLogo from '@/components/common/IstLinqLogo';
+import IstLinkLogo from '@/components/common/IstLinkLogo';
 
 const Header = () => {
   const { user } = useAuth();
@@ -47,12 +47,12 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center">
-                <IstLinqLogo size={isMobile ? "md" : "lg"} />
-                {/* Enhanced istLinq branding with two-color text - responsive sizing */}
+                <IstLinkLogo size={isMobile ? "md" : "lg"} />
+                {/* Enhanced istLink branding with two-color text - responsive sizing */}
                 <div className={isMobile ? "ml-2" : "ml-4"}>
                   <div className="flex items-baseline">
                     <span className={`font-bold ${isMobile ? "text-xl" : isTablet ? "text-2xl" : "text-3xl"} text-blue-600 tracking-tight`}>ist</span>
-                    <span className={`font-bold ${isMobile ? "text-xl" : isTablet ? "text-2xl" : "text-3xl"} text-emerald-600 tracking-tight`}>Linq</span>
+                    <span className={`font-bold ${isMobile ? "text-xl" : isTablet ? "text-2xl" : "text-3xl"} text-emerald-600 tracking-tight`}>Link</span>
                   </div>
                 </div>
               </div>

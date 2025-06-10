@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database, Bell, FileText, CheckCircle, AlertCircle, Clock, DollarSign } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import IstLinqLogo from '@/components/common/IstLinqLogo';
+import IstLinkLogo from '@/components/common/IstLinkLogo';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -147,7 +147,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-2">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center">
-                          <IstLinqLogo size="sm" className="mr-2" />
+                          <IstLinkLogo size="sm" className="mr-2" />
                         </div>
                         <div className="flex items-center space-x-1">
                           <div className="relative">
@@ -299,7 +299,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2.5">
                         <div className="flex items-center">
-                          <IstLinqLogo size="md" className="mr-3" />
+                          <IstLinkLogo size="md" className="mr-3" />
                         </div>
                         
                         <div className="flex space-x-1.5">

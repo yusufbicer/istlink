@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log('Setting user from session:', supabaseUser.email);
     
     // Check if user is admin by email - simplified check for known admin emails
-    const adminEmails = ['admin@istlinq.com', 'yusufbicer@gmail.com'];
+    const adminEmails = ['admin@istlink.com', 'yusufbicer@gmail.com'];
     const isAdmin = adminEmails.includes(supabaseUser.email || '');
     
     console.log('Is admin check:', supabaseUser.email, isAdmin);
@@ -125,7 +125,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (!data.user) throw new Error("Failed to login");
 
     // Check if user is admin by email
-    const adminEmails = ['admin@istlinq.com', 'yusufbicer@gmail.com'];
+    const adminEmails = ['admin@istlink.com', 'yusufbicer@gmail.com'];
     const isAdmin = adminEmails.includes(data.user.email || '');
     
     console.log('Login admin check:', data.user.email, isAdmin);

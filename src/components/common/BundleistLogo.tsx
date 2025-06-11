@@ -20,53 +20,107 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Simple elegant background circle */}
-        <circle
-          cx="50"
-          cy="50"
-          r="45"
-          fill="url(#gradient)"
-          stroke="rgba(255,255,255,0.3)"
+        {/* Diamond-shaped modern container */}
+        <path
+          d="M50 10 L80 30 L80 70 L50 90 L20 70 L20 30 Z"
+          fill="url(#mainGradient)"
+          stroke="rgba(255,255,255,0.2)"
           strokeWidth="1"
         />
         
-        {/* Three simple parcels being bundled */}
+        {/* Individual parcels - representing items being bundled */}
         <g className="parcels">
-          {/* Left parcel */}
-          <rect x="28" y="38" width="12" height="12" rx="2" fill="white" opacity="0.9" />
-          <rect x="30" y="40" width="8" height="8" rx="1" fill="url(#parcelGradient)" />
+          {/* Top left parcel */}
+          <rect
+            x="30"
+            y="25"
+            width="10"
+            height="10"
+            rx="1.5"
+            fill="white"
+            opacity="0.9"
+          />
           
-          {/* Right parcel */}
-          <rect x="60" y="38" width="12" height="12" rx="2" fill="white" opacity="0.9" />
-          <rect x="62" y="40" width="8" height="8" rx="1" fill="url(#parcelGradient)" />
+          {/* Top right parcel */}
+          <rect
+            x="60"
+            y="25"
+            width="10"
+            height="10"
+            rx="1.5"
+            fill="white"
+            opacity="0.9"
+          />
           
-          {/* Center bundle (slightly larger) */}
-          <rect x="43" y="50" width="14" height="14" rx="2" fill="white" opacity="0.95" />
-          <rect x="45" y="52" width="10" height="10" rx="1" fill="url(#bundleGradient)" />
+          {/* Bottom left parcel */}
+          <rect
+            x="30"
+            y="65"
+            width="10"
+            height="10"
+            rx="1.5"
+            fill="white"
+            opacity="0.9"
+          />
+          
+          {/* Bottom right parcel */}
+          <rect
+            x="60"
+            y="65"
+            width="10"
+            height="10"
+            rx="1.5"
+            fill="white"
+            opacity="0.9"
+          />
+          
+          {/* Central bundle - larger to show consolidation */}
+          <rect
+            x="40"
+            y="40"
+            width="20"
+            height="20"
+            rx="3"
+            fill="url(#bundleGradient)"
+            opacity="0.95"
+          />
         </g>
         
-        {/* Simple connecting lines */}
-        <g className="bundle-lines" stroke="white" strokeWidth="2" opacity="0.6">
-          <path d="M40 44 L48 56" strokeLinecap="round" />
-          <path d="M60 44 L52 56" strokeLinecap="round" />
+        {/* Elegant connection lines showing consolidation */}
+        <g className="consolidation-lines" stroke="white" strokeWidth="1.5" opacity="0.7">
+          <path d="M35 35 L45 45" strokeLinecap="round" />
+          <path d="M65 35 L55 45" strokeLinecap="round" />
+          <path d="M35 70 L45 55" strokeLinecap="round" />
+          <path d="M65 70 L55 55" strokeLinecap="round" />
         </g>
         
-        {/* Central bundling symbol */}
-        <circle cx="50" cy="57" r="2" fill="white" opacity="0.9" />
+        {/* Central binding element */}
+        <circle
+          cx="50"
+          cy="50"
+          r="4"
+          fill="white"
+          opacity="0.8"
+        />
+        <circle
+          cx="50"
+          cy="50"
+          r="2"
+          fill="url(#centerGradient)"
+        />
         
         <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#059669" />
-            <stop offset="100%" stopColor="#2563eb" />
-          </linearGradient>
-          <linearGradient id="parcelGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="100%" stopColor="#3b82f6" />
+            <stop offset="100%" stopColor="#2563EB" />
           </linearGradient>
           <linearGradient id="bundleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#10B981" />
+            <stop offset="100%" stopColor="#3B82F6" />
+          </linearGradient>
+          <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#059669" />
-            <stop offset="50%" stopColor="#0891b2" />
-            <stop offset="100%" stopColor="#2563eb" />
+            <stop offset="100%" stopColor="#2563EB" />
           </linearGradient>
         </defs>
       </svg>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database, Bell, FileText, CheckCircle, AlertCircle, Clock, DollarSign } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import BundleistLogo from '@/components/common/BundleistLogo';
+import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -86,17 +86,27 @@ const Hero = () => {
           >
             <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
-              <span className="font-medium text-slate-800">
-                single, streamlined shipment
+              <span className="relative inline-block">
+                <span className="relative z-10 font-medium text-slate-800">
+                  single, streamlined shipment
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-200/60 to-lavender-200/60 rounded-md transform -skew-x-12 -rotate-1"></span>
               </span>. 
-              Buy from multiple Turkish suppliers with{' '}
-              <span className="font-medium text-slate-800">
-                one payment, one contract, one Bill of Lading
+              Our AI-powered platform simplifies the entire process—from{' '}
+              <span className="relative inline-block">
+                <span className="relative z-10 font-medium text-slate-800">
+                  payment consolidation
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-lavender-200/60 to-blue-200/60 rounded-md transform skew-x-12 rotate-1"></span>
               </span>{' '}
-              and{' '}
-              <span className="font-medium text-slate-800">
-                one shipment
-              </span>.
+              to{' '}
+              <span className="relative inline-block">
+                <span className="relative z-10 font-medium text-slate-800">
+                  documentation management
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-200/60 to-slate-200/60 rounded-md transform -skew-x-6"></span>
+              </span>{' '}
+              and comprehensive tracking.
             </p>
           </div>
           
@@ -137,7 +147,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-2">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center">
-                          <BundleistLogo size="sm" className="mr-2" />
+                          <IstLinqLogo size="sm" className="mr-2" />
                         </div>
                         <div className="flex items-center space-x-1">
                           <div className="relative">
@@ -289,7 +299,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-3">
                       <div className="flex items-center justify-between mb-2.5">
                         <div className="flex items-center">
-                          <BundleistLogo size="md" className="mr-3" />
+                          <IstLinqLogo size="md" className="mr-3" />
                         </div>
                         
                         <div className="flex space-x-1.5">

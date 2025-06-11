@@ -1,7 +1,7 @@
 
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import BundleistLogo from '@/components/common/BundleistLogo';
+import IstLinqLogo from '@/components/common/IstLinqLogo';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -17,11 +17,11 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
-              <BundleistLogo size="lg" />
+              <IstLinqLogo size="lg" />
               <div className="ml-4">
                 <div className="flex items-baseline">
-                  <span className="font-bold text-2xl text-emerald-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>bundle</span>
                   <span className="font-bold text-2xl text-blue-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>ist</span>
+                  <span className="font-bold text-2xl text-emerald-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Linq</span>
                 </div>
                 <p className="text-xs text-gray-700 mt-1 font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Simplifying Cross Border Procurement
@@ -82,15 +82,15 @@ const Footer = () => {
             </div>
             <div>
               <h4 className="font-medium mb-2 text-gray-700" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Contact</h4>
-              <a href="mailto:bundleist@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                bundleist@gmail.com
+              <a href="mailto:istlinq@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                istlinq@gmail.com
               </a>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-200 mt-8 pt-8 text-center text-gray-500">
-          <p style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>&copy; 2024 İstLink Ltd. All rights reserved.</p>
+          <p style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>&copy; 2024 İstLinq Ltd. All rights reserved.</p>
         </div>
       </div>
     </footer>

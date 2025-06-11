@@ -60,7 +60,7 @@ const EarlyAccess = () => {
       
       const successMessage = isNewsletterSubscription 
         ? "Successfully subscribed to our newsletter! We'll keep you updated."
-        : "Thank you for your interest in istLink. We'll be in touch soon.";
+        : "Thank you for your interest in Bundleist. We'll be in touch soon.";
       
       toast({
         title: isNewsletterSubscription ? "Newsletter subscription successful!" : "Request submitted successfully!",
@@ -91,8 +91,8 @@ const EarlyAccess = () => {
   
   const pageTitle = isNewsletterSubscription ? "Subscribe to Our Newsletter" : "Request Access";
   const pageDescription = isNewsletterSubscription 
-    ? "Stay updated with the latest news and updates from istLink's innovative supply chain solutions."
-    : "Join our exclusive early access program and be among the first to experience istLink's innovative supply chain solutions.";
+    ? "Stay updated with the latest news and updates from Bundleist's innovative supply chain solutions."
+    : "Join our exclusive early access program and be among the first to experience Bundleist's innovative supply chain solutions.";
   
   return (
     <div className="container mx-auto p-6 min-h-screen">
@@ -167,15 +167,15 @@ const EarlyAccess = () => {
                   <FormItem>
                     <FormLabel>
                       {isNewsletterSubscription 
-                        ? "What interests you most about istLink?" 
-                        : "Why are you interested in istLink?"
+                        ? "What interests you most about Bundleist?" 
+                        : "Why are you interested in Bundleist?"
                       }
                     </FormLabel>
                     <FormControl>
                       <Textarea 
                         placeholder={isNewsletterSubscription 
                           ? "Tell us what aspects of our supply chain solutions interest you most..."
-                          : "Tell us about your business needs and how istLink can help..."
+                          : "Tell us about your business needs and how Bundleist can help..."
                         }
                         className="min-h-[120px]"
                         {...field} 

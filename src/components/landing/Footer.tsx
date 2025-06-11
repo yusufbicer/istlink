@@ -82,8 +82,8 @@ const Footer = () => {
             </div>
             <div>
               <h4 className="font-medium mb-2 text-gray-700" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Contact</h4>
-              <a href="mailto:istlink@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                istlink@gmail.com
+              <a href="mailto:bundleist@gmail.com" className="text-gray-600 hover:text-gray-800 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                bundleist@gmail.com
               </a>
             </div>
           </div>

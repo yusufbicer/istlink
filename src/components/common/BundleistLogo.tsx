@@ -1,11 +1,11 @@
 import React from 'react';
 
-interface IstLinkLogoProps {
+interface BundleistLogoProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
-const BundleistLogo = ({ size = 'md', className = '' }: IstLinkLogoProps) => {
+const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-12 h-12',
@@ -20,88 +20,26 @@ const BundleistLogo = ({ size = 'md', className = '' }: IstLinkLogoProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Elegant circular background with subtle gradient */}
-        <circle
-          cx="50"
-          cy="50"
-          r="45"
-          fill="url(#gradient)"
-          stroke="rgba(255,255,255,0.2)"
-          strokeWidth="1"
-        />
-        
-        {/* Supply chain network - elegant connection pattern */}
-        <g className="supply-chain-network">
-          {/* Origin nodes (suppliers) */}
-          <circle cx="20" cy="25" r="3" fill="white" opacity="0.9" />
-          <circle cx="35" cy="15" r="2.5" fill="white" opacity="0.8" />
-          <circle cx="15" cy="40" r="2.5" fill="white" opacity="0.8" />
-          <circle cx="30" cy="35" r="2" fill="white" opacity="0.7" />
+        {/* Simple parcels representing bundling */}
+        <g className="parcels">
+          {/* Left parcel */}
+          <rect x="25" y="40" width="16" height="20" rx="2" fill="#10B981" />
+          <path d="M25 50 L41 50" stroke="white" strokeWidth="2" />
+          <path d="M33 40 L33 60" stroke="white" strokeWidth="2" />
           
-          {/* Central consolidation hub */}
-          <circle cx="50" cy="50" r="8" fill="white" opacity="0.95" />
-          <circle cx="50" cy="50" r="5" fill="url(#centerGradient)" />
+          {/* Right parcel */}
+          <rect x="59" y="40" width="16" height="20" rx="2" fill="#3B82F6" />
+          <path d="M59 50 L75 50" stroke="white" strokeWidth="2" />
+          <path d="M67 40 L67 60" stroke="white" strokeWidth="2" />
           
-          {/* Destination nodes */}
-          <circle cx="80" cy="25" r="3" fill="white" opacity="0.9" />
-          <circle cx="85" cy="40" r="2.5" fill="white" opacity="0.8" />
-          <circle cx="75" cy="35" r="2" fill="white" opacity="0.7" />
-          
-          {/* Distribution nodes */}
-          <circle cx="70" cy="70" r="2.5" fill="white" opacity="0.8" />
-          <circle cx="85" cy="75" r="2" fill="white" opacity="0.7" />
-          <circle cx="60" cy="80" r="2" fill="white" opacity="0.7" />
-        </g>
-        
-        {/* Elegant connection lines representing supply chain flow */}
-        <g className="connection-lines" stroke="white" strokeWidth="1.5" opacity="0.6">
-          {/* Inbound connections to hub */}
-          <path d="M20 25 Q35 35 42 50" fill="none" strokeLinecap="round" />
-          <path d="M35 15 Q42 30 42 50" fill="none" strokeLinecap="round" />
-          <path d="M15 40 Q30 45 42 50" fill="none" strokeLinecap="round" />
-          <path d="M30 35 Q40 42 42 50" fill="none" strokeLinecap="round" />
-          
-          {/* Outbound connections from hub */}
-          <path d="M58 50 Q65 35 80 25" fill="none" strokeLinecap="round" />
-          <path d="M58 50 Q70 45 85 40" fill="none" strokeLinecap="round" />
-          <path d="M58 50 Q65 60 70 70" fill="none" strokeLinecap="round" />
-          <path d="M58 50 Q70 65 85 75" fill="none" strokeLinecap="round" />
-        </g>
-        
-        {/* Central "Link" symbol - elegant chain link design */}
-        <g transform="translate(50, 50)" className="link-symbol">
-          {/* First link */}
-          <ellipse cx="-3" cy="0" rx="4" ry="2.5" fill="none" stroke="white" strokeWidth="1.2" opacity="0.9" />
-          {/* Second link interlocked */}
-          <ellipse cx="3" cy="0" rx="4" ry="2.5" fill="none" stroke="white" strokeWidth="1.2" opacity="0.9" />
-          
-          {/* Subtle connecting elements */}
-          <circle cx="0" cy="0" r="1" fill="white" opacity="0.8" />
-        </g>
-        
-        {/* Animated flow indicators */}
-        <g className="animate-pulse" opacity="0.4">
-          {/* Flow direction indicators */}
-          <circle cx="30" cy="30" r="0.8" fill="white">
-            <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="70" cy="30" r="0.8" fill="white">
-            <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite" begin="0.5s" />
-          </circle>
-          <circle cx="70" cy="70" r="0.8" fill="white">
-            <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite" begin="1s" />
-          </circle>
+          {/* Connecting band showing bundling */}
+          <rect x="45" y="48" width="10" height="4" rx="2" fill="url(#gradient)" />
         </g>
         
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#DC2626" />
-            <stop offset="50%" stopColor="#EA580C" />
-            <stop offset="100%" stopColor="#7C3AED" />
-          </linearGradient>
-          <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#EF4444" />
-            <stop offset="100%" stopColor="#8B5CF6" />
+            <stop offset="0%" stopColor="#10B981" />
+            <stop offset="100%" stopColor="#3B82F6" />
           </linearGradient>
         </defs>
       </svg>

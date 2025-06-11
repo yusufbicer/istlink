@@ -1,7 +1,7 @@
 
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import IstLinkLogo from '@/components/common/IstLinkLogo';
+import BundleistLogo from '@/components/common/BundleistLogo';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -17,11 +17,11 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
-              <IstLinkLogo size="lg" />
+              <BundleistLogo size="lg" />
               <div className="ml-4">
                 <div className="flex items-baseline">
-                  <span className="font-bold text-2xl text-blue-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>ist</span>
-                  <span className="font-bold text-2xl text-emerald-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Link</span>
+                  <span className="font-bold text-2xl text-red-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>bundle</span>
+                  <span className="font-bold text-2xl text-purple-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>ist</span>
                 </div>
                 <p className="text-xs text-gray-700 mt-1 font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Simplifying Cross Border Procurement

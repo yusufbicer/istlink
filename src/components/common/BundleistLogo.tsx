@@ -5,7 +5,7 @@ interface IstLinkLogoProps {
   className?: string;
 }
 
-const IstLinkLogo = ({ size = 'md', className = '' }: IstLinkLogoProps) => {
+const BundleistLogo = ({ size = 'md', className = '' }: IstLinkLogoProps) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-12 h-12',
@@ -95,13 +95,13 @@ const IstLinkLogo = ({ size = 'md', className = '' }: IstLinkLogoProps) => {
         
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#1E40AF" />
-            <stop offset="50%" stopColor="#059669" />
-            <stop offset="100%" stopColor="#0D9488" />
+            <stop offset="0%" stopColor="#DC2626" />
+            <stop offset="50%" stopColor="#EA580C" />
+            <stop offset="100%" stopColor="#7C3AED" />
           </linearGradient>
           <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="100%" stopColor="#10B981" />
+            <stop offset="0%" stopColor="#EF4444" />
+            <stop offset="100%" stopColor="#8B5CF6" />
           </linearGradient>
         </defs>
       </svg>
@@ -109,4 +109,4 @@ const IstLinkLogo = ({ size = 'md', className = '' }: IstLinkLogoProps) => {
   );
 };
 
-export default IstLinkLogo;
+export default BundleistLogo;

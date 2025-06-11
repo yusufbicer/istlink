@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
-import IstLinkLogo from '@/components/common/IstLinkLogo';
+import BundleistLogo from '@/components/common/BundleistLogo';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -71,11 +71,11 @@ const Auth = () => {
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-8 text-center text-white">
             <div className="flex justify-center mb-4">
-              <IstLinkLogo size="lg" />
+              <BundleistLogo size="lg" />
             </div>
             <div className="flex items-baseline justify-center mb-2">
-              <span className="font-bold text-2xl">ist</span>
-              <span className="font-bold text-2xl">Link</span>
+              <span className="font-bold text-2xl text-red-300">bundle</span>
+              <span className="font-bold text-2xl text-purple-300">ist</span>
             </div>
             <p className="text-blue-100 text-sm">Admin Portal</p>
           </div>

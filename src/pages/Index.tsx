@@ -87,47 +87,47 @@ const Index = () => {
         <Hero />
         
         {/* Statistics Section */}
-        <section className={`${isMobile ? "py-8" : "py-12"} bg-white`}>
+        <section className={`${isMobile ? "py-6" : "py-12"} bg-white`}>
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <div className={`text-center max-w-3xl mx-auto ${isMobile ? "mb-6" : "mb-8"}`}>
+              <h2 className={`${isMobile ? "text-xl" : "text-2xl md:text-3xl"} font-bold ${isMobile ? "mb-2" : "mb-4"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 Results That Speak for Themselves
               </h2>
-              <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <p className={`text-gray-600 ${isMobile ? "text-sm" : ""}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 See how our consolidation platform transforms your procurement efficiency
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-100 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-blue-600" />
+            <div className={`grid grid-cols-1 md:grid-cols-3 ${isMobile ? "gap-4" : "gap-6"} max-w-4xl mx-auto`}>
+              <div className={`bg-gradient-to-br from-blue-50 to-purple-50 ${isMobile ? "p-4" : "p-6"} rounded-xl border border-blue-100 text-center`}>
+                <div className={`${isMobile ? "w-10 h-10 mb-3" : "w-12 h-12 mb-4"} mx-auto bg-blue-100 rounded-full flex items-center justify-center`}>
+                  <FileText className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-blue-600`} />
                 </div>
-                <div className="text-3xl font-bold text-blue-600 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>15x</div>
-                <div className="font-semibold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Faster Documentation</div>
-                <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <div className={`${isMobile ? "text-2xl" : "text-3xl"} font-bold text-blue-600 ${isMobile ? "mb-1" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>15x</div>
+                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Faster Documentation</div>
+                <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Single Bill of Lading instead of multiple documents
                 </div>
               </div>
               
-              <div className="bg-gradient-to-br from-emerald-50 to-blue-50 p-6 rounded-xl border border-emerald-100 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 bg-emerald-100 rounded-full flex items-center justify-center">
-                  <DollarSign className="h-6 w-6 text-emerald-600" />
+              <div className={`bg-gradient-to-br from-emerald-50 to-blue-50 ${isMobile ? "p-4" : "p-6"} rounded-xl border border-emerald-100 text-center`}>
+                <div className={`${isMobile ? "w-10 h-10 mb-3" : "w-12 h-12 mb-4"} mx-auto bg-emerald-100 rounded-full flex items-center justify-center`}>
+                  <DollarSign className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-emerald-600`} />
                 </div>
-                <div className="text-3xl font-bold text-emerald-600 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>65%</div>
-                <div className="font-semibold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Cost Reduction</div>
-                <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <div className={`${isMobile ? "text-2xl" : "text-3xl"} font-bold text-emerald-600 ${isMobile ? "mb-1" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>65%</div>
+                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Cost Reduction</div>
+                <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Lower shipping costs through intelligent consolidation
                 </div>
               </div>
               
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
-                  <Timer className="h-6 w-6 text-purple-600" />
+              <div className={`bg-gradient-to-br from-purple-50 to-pink-50 ${isMobile ? "p-4" : "p-6"} rounded-xl border border-purple-100 text-center`}>
+                <div className={`${isMobile ? "w-10 h-10 mb-3" : "w-12 h-12 mb-4"} mx-auto bg-purple-100 rounded-full flex items-center justify-center`}>
+                  <Timer className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-purple-600`} />
                 </div>
-                <div className="text-3xl font-bold text-purple-600 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>80%</div>
-                <div className="font-semibold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Time Savings</div>
-                <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <div className={`${isMobile ? "text-2xl" : "text-3xl"} font-bold text-purple-600 ${isMobile ? "mb-1" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>80%</div>
+                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Time Savings</div>
+                <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Streamlined procurement process management
                 </div>
               </div>

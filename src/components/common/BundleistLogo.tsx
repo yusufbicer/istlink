@@ -24,12 +24,13 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
         <g>
           {/* Main B shape with elegant curves */}
           <path
-            d="M30 25 L30 75 L50 75 C57 75 62 70 62 63 C62 58 59 54 55 52 C58 50 60 46 60 41 C60 34 55 25 48 25 L30 25 Z M35 30 L47 30 C51 30 54 33 54 37 C54 41 51 44 47 44 L35 44 L35 30 Z M35 49 L49 49 C53 49 57 52 57 56 C57 60 53 63 49 63 L35 63 L35 49 Z"
+            d="M28 22 L28 78 L52 78 C59 78 65 73 65 66 C65 61 62 57 58 55 C61 53 63 49 63 44 C63 37 58 22 50 22 L28 22 Z M34 28 L49 28 C53 28 56 31 56 35 C56 39 53 42 49 42 L34 42 L34 28 Z M34 48 L51 48 C55 48 59 51 59 55 C59 59 55 62 51 62 L34 62 L34 48 Z"
             fill="url(#bGradient)"
-            className="drop-shadow-sm"
+            className="drop-shadow-lg"
           />
-          {/* Subtle accent dot */}
-          <circle cx="65" cy="35" r="2" fill="url(#bGradient)" opacity="0.8" />
+          {/* Refined accent elements */}
+          <circle cx="67" cy="33" r="1.5" fill="url(#bGradient)" opacity="0.9" />
+          <circle cx="70" cy="37" r="1" fill="url(#bGradient)" opacity="0.7" />
         </g>
         
         <defs>

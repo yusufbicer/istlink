@@ -86,14 +86,6 @@ const Index = () => {
       <main className="flex-grow">
         <Hero />
         
-        <div className={isMobile ? "-mt-2" : "-mt-4"}>
-          <Features />
-        </div>
-        
-        <div className={isMobile ? "mt-2" : "mt-4"}>
-          <HowItWorks />
-        </div>
-        
         {/* Statistics Section */}
         <section className={`${isMobile ? "py-8" : "py-12"} bg-white`}>
           <div className="container mx-auto px-6">
@@ -313,6 +305,14 @@ const Index = () => {
             </div>
           </div>
         </section>
+        
+        <div className={isMobile ? "-mt-2" : "-mt-4"}>
+          <Features />
+        </div>
+        
+        <div className={isMobile ? "mt-2" : "mt-4"}>
+          <HowItWorks />
+        </div>
         
         {/* Pricing Section */}
         <section id="pricing" className={`${isMobile ? "py-8" : "py-10 md:py-12"} bg-gray-50`}>

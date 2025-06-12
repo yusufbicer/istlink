@@ -20,22 +20,19 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Simple line-based bundling concept */}
-        <g className="lines">
-          {/* Multiple lines coming together */}
-          <path d="M20 30 L45 50" stroke="#10B981" strokeWidth="3" strokeLinecap="round" />
-          <path d="M20 45 L45 50" stroke="#10B981" strokeWidth="3" strokeLinecap="round" />
-          <path d="M20 60 L45 50" stroke="#10B981" strokeWidth="3" strokeLinecap="round" />
-          
-          {/* Central convergence point */}
-          <circle cx="45" cy="50" r="3" fill="#3B82F6" />
-          
-          {/* Single output line */}
-          <path d="M45 50 L80 50" stroke="#3B82F6" strokeWidth="4" strokeLinecap="round" />
-          
-          {/* Arrow indicating bundling */}
-          <path d="M75 47 L80 50 L75 53" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        </g>
+        {/* Elegant B letter design */}
+        <path
+          d="M25 20 L25 80 L55 80 C62 80 68 76 68 68 C68 62 64 58 58 56 C62 54 65 50 65 44 C65 36 59 20 50 20 L25 20 Z M35 30 L48 30 C52 30 55 33 55 37 C55 41 52 44 48 44 L35 44 L35 30 Z M35 54 L50 54 C54 54 58 57 58 61 C58 65 54 68 50 68 L35 68 L35 54 Z"
+          fill="url(#bGradient)"
+          strokeWidth="0"
+        />
+        
+        <defs>
+          <linearGradient id="bGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#10B981" />
+            <stop offset="100%" stopColor="#3B82F6" />
+          </linearGradient>
+        </defs>
       </svg>
     </div>
   );

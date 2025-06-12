@@ -140,10 +140,10 @@ const Index = () => {
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-8">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                Traditional Procurement vs. Smart Consolidation
+                Fragmented Imports vs. Bundled Excellence
               </h2>
               <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                See why modern businesses are moving away from fragmented procurement
+                Transform how you source from Turkey with our intelligent consolidation platform
               </p>
             </div>
             
@@ -156,9 +156,9 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <div className="mb-6">
+                <div className="mb-6 text-center">
                   <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                    Traditional Fragmented Procurement
+                    Fragmented Import Process
                   </h3>
                 </div>
                 
@@ -232,12 +232,12 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <div className="mb-6">
+                <div className="mb-6 text-center">
                   <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                    Smart Consolidation Platform
+                    Bundleist Consolidation Platform
                   </h3>
                   <div className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full inline-block font-medium">
-                    Bundleist
+                    One Platform, Multiple Suppliers
                   </div>
                 </div>
                 

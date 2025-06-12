@@ -117,10 +117,10 @@ const Features = () => {
             Features
           </span>
           <h2 className="text-3xl md:text-4xl font-semibold mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            Simplifying Cross-Border Procurement
+            Turkish Import Consolidation Made Simple
           </h2>
           <p className="text-sm md:text-xl text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            Our platform streamlines the entire process of purchasing and shipping products from multiple Turkish suppliers.
+            Bundle multiple Turkish supplier orders into one shipment with single payment and documentation.
           </p>
         </div>
 

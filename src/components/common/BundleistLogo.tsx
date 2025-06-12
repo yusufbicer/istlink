@@ -20,14 +20,16 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Modern geometric B inspired by convrt logo */}
+        {/* Simple elegant B logo */}
         <g>
-          <rect x="20" y="20" width="6" height="60" fill="url(#bGradient)" rx="3" />
-          <rect x="20" y="20" width="35" height="6" fill="url(#bGradient)" rx="3" />
-          <rect x="20" y="47" width="30" height="6" fill="url(#bGradient)" rx="3" />
-          <rect x="20" y="74" width="35" height="6" fill="url(#bGradient)" rx="3" />
-          <rect x="49" y="26" width="6" height="15" fill="url(#bGradient)" rx="3" />
-          <rect x="49" y="59" width="6" height="15" fill="url(#bGradient)" rx="3" />
+          {/* Main B shape with elegant curves */}
+          <path
+            d="M30 25 L30 75 L50 75 C57 75 62 70 62 63 C62 58 59 54 55 52 C58 50 60 46 60 41 C60 34 55 25 48 25 L30 25 Z M35 30 L47 30 C51 30 54 33 54 37 C54 41 51 44 47 44 L35 44 L35 30 Z M35 49 L49 49 C53 49 57 52 57 56 C57 60 53 63 49 63 L35 63 L35 49 Z"
+            fill="url(#bGradient)"
+            className="drop-shadow-sm"
+          />
+          {/* Subtle accent dot */}
+          <circle cx="65" cy="35" r="2" fill="url(#bGradient)" opacity="0.8" />
         </g>
         
         <defs>

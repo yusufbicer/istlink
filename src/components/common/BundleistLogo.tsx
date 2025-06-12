@@ -20,12 +20,15 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Elegant B letter design */}
-        <path
-          d="M25 20 L25 80 L55 80 C62 80 68 76 68 68 C68 62 64 58 58 56 C62 54 65 50 65 44 C65 36 59 20 50 20 L25 20 Z M35 30 L48 30 C52 30 55 33 55 37 C55 41 52 44 48 44 L35 44 L35 30 Z M35 54 L50 54 C54 54 58 57 58 61 C58 65 54 68 50 68 L35 68 L35 54 Z"
-          fill="url(#bGradient)"
-          strokeWidth="0"
-        />
+        {/* Modern geometric B inspired by convrt logo */}
+        <g>
+          <rect x="20" y="20" width="6" height="60" fill="url(#bGradient)" rx="3" />
+          <rect x="20" y="20" width="35" height="6" fill="url(#bGradient)" rx="3" />
+          <rect x="20" y="47" width="30" height="6" fill="url(#bGradient)" rx="3" />
+          <rect x="20" y="74" width="35" height="6" fill="url(#bGradient)" rx="3" />
+          <rect x="49" y="26" width="6" height="15" fill="url(#bGradient)" rx="3" />
+          <rect x="49" y="59" width="6" height="15" fill="url(#bGradient)" rx="3" />
+        </g>
         
         <defs>
           <linearGradient id="bGradient" x1="0%" y1="0%" x2="100%" y2="100%">

@@ -20,28 +20,22 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Simple parcels representing bundling */}
-        <g className="parcels">
-          {/* Left parcel */}
-          <rect x="25" y="40" width="16" height="20" rx="2" fill="#10B981" />
-          <path d="M25 50 L41 50" stroke="white" strokeWidth="2" />
-          <path d="M33 40 L33 60" stroke="white" strokeWidth="2" />
+        {/* Simple line-based bundling concept */}
+        <g className="lines">
+          {/* Multiple lines coming together */}
+          <path d="M20 30 L45 50" stroke="#10B981" strokeWidth="3" strokeLinecap="round" />
+          <path d="M20 45 L45 50" stroke="#10B981" strokeWidth="3" strokeLinecap="round" />
+          <path d="M20 60 L45 50" stroke="#10B981" strokeWidth="3" strokeLinecap="round" />
           
-          {/* Right parcel */}
-          <rect x="59" y="40" width="16" height="20" rx="2" fill="#3B82F6" />
-          <path d="M59 50 L75 50" stroke="white" strokeWidth="2" />
-          <path d="M67 40 L67 60" stroke="white" strokeWidth="2" />
+          {/* Central convergence point */}
+          <circle cx="45" cy="50" r="3" fill="#3B82F6" />
           
-          {/* Connecting band showing bundling */}
-          <rect x="45" y="48" width="10" height="4" rx="2" fill="url(#gradient)" />
+          {/* Single output line */}
+          <path d="M45 50 L80 50" stroke="#3B82F6" strokeWidth="4" strokeLinecap="round" />
+          
+          {/* Arrow indicating bundling */}
+          <path d="M75 47 L80 50 L75 53" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
         </g>
-        
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#10B981" />
-            <stop offset="100%" stopColor="#3B82F6" />
-          </linearGradient>
-        </defs>
       </svg>
     </div>
   );

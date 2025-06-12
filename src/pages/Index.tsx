@@ -6,7 +6,7 @@ import HowItWorks from '@/components/landing/HowItWorks';
 import BlogPreview from '@/components/landing/BlogPreview';
 import Footer from '@/components/landing/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { PackageCheck, FileText, Receipt, CheckCircle2 } from 'lucide-react';
+import { PackageCheck, FileText, Receipt, CheckCircle2, DollarSign, Timer, AlertCircle, Package, CreditCard, CheckCircle, GitMerge, Database, Archive } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
@@ -93,6 +93,226 @@ const Index = () => {
         <div className={isMobile ? "mt-2" : "mt-4"}>
           <HowItWorks />
         </div>
+        
+        {/* Statistics Section */}
+        <section className={`${isMobile ? "py-8" : "py-12"} bg-white`}>
+          <div className="container mx-auto px-6">
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                Results That Speak for Themselves
+              </h2>
+              <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                See how our consolidation platform transforms your procurement efficiency
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-100 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                  <FileText className="h-6 w-6 text-blue-600" />
+                </div>
+                <div className="text-3xl font-bold text-blue-600 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>15x</div>
+                <div className="font-semibold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Faster Documentation</div>
+                <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Single Bill of Lading instead of multiple documents
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-emerald-50 to-blue-50 p-6 rounded-xl border border-emerald-100 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-emerald-100 rounded-full flex items-center justify-center">
+                  <DollarSign className="h-6 w-6 text-emerald-600" />
+                </div>
+                <div className="text-3xl font-bold text-emerald-600 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>65%</div>
+                <div className="font-semibold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Cost Reduction</div>
+                <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Lower shipping costs through intelligent consolidation
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100 text-center">
+                <div className="w-12 h-12 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                  <Timer className="h-6 w-6 text-purple-600" />
+                </div>
+                <div className="text-3xl font-bold text-purple-600 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>80%</div>
+                <div className="font-semibold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Time Savings</div>
+                <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Streamlined procurement process management
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Comparison Section */}
+        <section className={`${isMobile ? "py-8" : "py-12"} bg-gray-50`}>
+          <div className="container mx-auto px-6">
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                Traditional Procurement vs. Smart Consolidation
+              </h2>
+              <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                See why modern businesses are moving away from fragmented procurement
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {/* Traditional Approach */}
+              <div className="bg-white p-6 rounded-xl border border-red-100 relative">
+                <div className="absolute top-4 right-4">
+                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                    <AlertCircle className="h-5 w-5 text-red-500" />
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    Traditional Fragmented Procurement
+                  </h3>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <span className="text-red-500 text-sm">×</span>
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Multiple separate shipments
+                      </div>
+                      <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Each supplier ships independently
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <span className="text-red-500 text-sm">×</span>
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Complex documentation management
+                      </div>
+                      <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Multiple Bills of Lading and customs forms
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <span className="text-red-500 text-sm">×</span>
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Individual payment handling
+                      </div>
+                      <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Separate transactions increase risk and costs
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-center space-x-6 text-xs text-gray-500">
+                    <div className="text-center">
+                      <Package className="h-4 w-4 text-red-400 mx-auto mb-1" />
+                      <span>Fragmented</span>
+                    </div>
+                    <div className="text-center">
+                      <FileText className="h-4 w-4 text-red-400 mx-auto mb-1" />
+                      <span>Complex Docs</span>
+                    </div>
+                    <div className="text-center">
+                      <CreditCard className="h-4 w-4 text-red-400 mx-auto mb-1" />
+                      <span>Multiple Payments</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Smart Consolidation */}
+              <div className="bg-white p-6 rounded-xl border border-emerald-100 relative">
+                <div className="absolute top-4 right-4">
+                  <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-5 w-5 text-emerald-500" />
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    Smart Consolidation Platform
+                  </h3>
+                  <div className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full inline-block font-medium">
+                    Bundleist
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-emerald-500" />
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Single consolidated shipment
+                      </div>
+                      <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        All suppliers bundled into one efficient shipment
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-emerald-500" />
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Streamlined documentation
+                      </div>
+                      <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Single Bill of Lading and simplified customs
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <CheckCircle className="h-3 w-3 text-emerald-500" />
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Protected payment system
+                      </div>
+                      <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        Single secure transaction with payment protection
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-center space-x-6 text-xs text-gray-500">
+                    <div className="text-center">
+                      <GitMerge className="h-4 w-4 text-emerald-500 mx-auto mb-1" />
+                      <span>Consolidated</span>
+                    </div>
+                    <div className="text-center">
+                      <Database className="h-4 w-4 text-emerald-500 mx-auto mb-1" />
+                      <span>Simple Docs</span>
+                    </div>
+                    <div className="text-center">
+                      <Archive className="h-4 w-4 text-emerald-500 mx-auto mb-1" />
+                      <span>Single Payment</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         
         {/* Pricing Section */}
         <section id="pricing" className={`${isMobile ? "py-8" : "py-10 md:py-12"} bg-gray-50`}>

@@ -142,178 +142,215 @@ const Blog = () => {
   return (
     <>
       <Header />
-      <main className="pt-32 pb-16">
-        {/* Hero Section */}
-        <section className="container mx-auto px-6 mb-16">
-          <div 
-            className={`max-w-3xl mx-auto text-center transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-50 text-blue-600 rounded-full mb-3">
-              {t('ourBlog')}
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {t('insightsOnCrossBorderCommerce')}
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              {t('expertAnalysisDesc')}
-            </p>
-
-            {/* Admin Controls - Only show if admin */}
-            {isAdmin && (
-              <div className="mb-8">
-                <Link to="/blog/editor">
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    <Plus className="w-4 h-4 mr-2" />
-                    {t('createNewPost')}
-                  </Button>
-                </Link>
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+        {/* Enhanced Hero Section */}
+        <section className="relative pt-32 pb-20 overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-indigo-200/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-teal-200/20 to-blue-200/20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+          
+          <div className="relative container mx-auto px-6">
+            <div 
+              className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+            >
+              <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm border border-blue-200/50 text-blue-700 rounded-full text-sm font-medium mb-6 shadow-sm">
+                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
+                {t('ourBlog')}
               </div>
-            )}
+              
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight">
+                {t('insightsOnCrossBorderCommerce')}
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+                {t('expertAnalysisDesc')}
+              </p>
 
-            {/* Category Filter */}
-            {categories.length > 0 && (
-              <div className="flex flex-wrap justify-center gap-2 mb-8">
-                <button
-                  onClick={() => setActiveCategory("All")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeCategory === "All" 
-                      ? "bg-blue-600 text-white" 
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  {t('allPosts')}
-                </button>
-                
-                {categories.map(category => (
+              {/* Admin Controls */}
+              {isAdmin && (
+                <div className="mb-10">
+                  <Link to="/blog/editor">
+                    <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 text-lg font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                      <Plus className="w-5 h-5 mr-3" />
+                      {t('createNewPost')}
+                    </Button>
+                  </Link>
+                </div>
+              )}
+
+              {/* Enhanced Category Filter */}
+              {categories.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-3 mb-12">
                   <button
-                    key={category}
-                    onClick={() => setActiveCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                      activeCategory === category 
-                        ? "bg-blue-600 text-white" 
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    onClick={() => setActiveCategory("All")}
+                    className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:-translate-y-0.5 ${
+                      activeCategory === "All" 
+                        ? "bg-white text-blue-700 shadow-lg border border-blue-200" 
+                        : "bg-white/50 backdrop-blur-sm text-slate-700 hover:bg-white/80 border border-slate-200/50"
                     }`}
                   >
-                    {t(category)}
+                    {t('allPosts')}
                   </button>
-                ))}
-              </div>
-            )}
+                  
+                  {categories.map(category => (
+                    <button
+                      key={category}
+                      onClick={() => setActiveCategory(category)}
+                      className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:-translate-y-0.5 ${
+                        activeCategory === category 
+                          ? "bg-white text-blue-700 shadow-lg border border-blue-200" 
+                          : "bg-white/50 backdrop-blur-sm text-slate-700 hover:bg-white/80 border border-slate-200/50"
+                      }`}
+                    >
+                      {t(category)}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
-        {/* Blog Posts Grid */}
-        <section className="container mx-auto px-6">
-          {filteredPosts.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-gray-600 mb-4">{t('noBlogPostsYet')}</p>
-              {/* Only show create first post button if user is admin and there are no posts at all */}
-              {isAdmin && blogPosts.length === 0 && (
-                <Link to="/blog/editor">
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    <Plus className="w-4 h-4 mr-2" />
-                    {t('createFirstPost')}
-                  </Button>
-                </Link>
-              )}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post, index) => (
-                <article 
-                  key={post.id}
-                  className={`bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  {post.image_url && (
-                    <div className="relative">
-                      <img 
-                        src={post.image_url} 
-                        alt={getTranslatedContent(post, 'title')}
-                        className="w-full h-48 object-cover"
-                      />
-                      <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                        {t(post.category)}
-                      </span>
-                    </div>
-                  )}
-                  
-                   <div className="p-6">
-                     <h2 className="text-xl font-bold mb-2 line-clamp-2">
-                       {getTranslatedContent(post, 'title')}
-                     </h2>
-                     {getTranslatedContent(post, 'excerpt') && (
-                       <p className="text-gray-600 mb-4 line-clamp-3">
-                         {getTranslatedContent(post, 'excerpt')}
-                       </p>
-                     )}
-                    
-                    <div className="flex items-center mb-4">
-                      {post.author_avatar ? (
+        {/* Enhanced Blog Posts Grid */}
+        <section className="relative pb-20">
+          <div className="container mx-auto px-6">
+            {filteredPosts.length === 0 ? (
+              <div className="text-center py-20">
+                <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Plus className="w-12 h-12 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">{t('noBlogPostsYet')}</h3>
+                {isAdmin && blogPosts.length === 0 && (
+                  <Link to="/blog/editor">
+                    <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                      <Plus className="w-5 h-5 mr-2" />
+                      {t('createFirstPost')}
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                {filteredPosts.map((post, index) => (
+                  <article 
+                    key={post.id}
+                    className={`group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-200/50 hover:border-blue-200 shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 ${
+                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    }`}
+                    style={{ transitionDelay: `${index * 150}ms` }}
+                  >
+                    {/* Enhanced Image Container */}
+                    {post.image_url && (
+                      <div className="relative overflow-hidden h-48 bg-gradient-to-br from-blue-50 to-indigo-50">
                         <img 
-                          src={post.author_avatar} 
-                          alt={post.author_name}
-                          className="w-8 h-8 rounded-full object-cover mr-3"
+                          src={post.image_url} 
+                          alt={getTranslatedContent(post, 'title')}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />
-                      ) : (
-                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                          <span className="text-blue-600 font-medium text-sm">
-                            {post.author_name.charAt(0)}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent group-hover:from-black/30 transition-all duration-300"></div>
+                        <div className="absolute top-4 right-4">
+                          <span className="inline-flex items-center px-3 py-1.5 bg-white/95 backdrop-blur-sm text-blue-700 rounded-full text-xs font-medium border border-blue-200/50 shadow-sm">
+                            {t(post.category)}
                           </span>
                         </div>
-                      )}
-                      <span className="text-sm font-medium">
-                        {post.author_name}
-                      </span>
-                    </div>
+                      </div>
+                    )}
                     
-                     <div className="flex items-center justify-between text-sm text-gray-500">
-                       <div className="flex items-center">
-                         <CalendarDays className="w-4 h-4 mr-1" />
-                         {getFormattedDate(post.created_at)}
-                       </div>
-                       <div className="flex items-center">
-                         <Clock className="w-4 h-4 mr-1" />
-                         {getFormattedReadTime(post.read_time)}
-                       </div>
-                     </div>
-                    
-                    <div className="mt-5 pt-5 border-t border-gray-100 flex justify-between items-center">
-                      <Link 
-                        to={`/blog/${post.slug}`}
-                        className="inline-flex items-center text-blue-600 font-medium hover:underline"
-                      >
-                        {t('readArticle')}
-                        <ChevronRight className="w-4 h-4 ml-1" />
-                      </Link>
+                    <div className="p-8">
+                      {/* Enhanced Title */}
+                      <h2 className="text-xl font-bold mb-4 text-slate-900 group-hover:text-blue-700 transition-colors duration-300 line-clamp-2 leading-tight">
+                        {getTranslatedContent(post, 'title')}
+                      </h2>
                       
-                      {isAdmin && (
-                        <Link 
-                          to={`/blog/editor/${post.id}`}
-                          className="text-gray-500 hover:text-gray-700"
-                        >
-                          {t('edit')}
-                        </Link>
+                      {/* Enhanced Excerpt */}
+                      {getTranslatedContent(post, 'excerpt') && (
+                        <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed">
+                          {getTranslatedContent(post, 'excerpt')}
+                        </p>
                       )}
+                     
+                      {/* Enhanced Author Section */}
+                      <div className="flex items-center mb-6">
+                        {post.author_avatar ? (
+                          <img 
+                            src={post.author_avatar} 
+                            alt={post.author_name}
+                            className="w-10 h-10 rounded-full object-cover mr-4 border-2 border-blue-100"
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center mr-4 border-2 border-blue-200">
+                            <span className="text-blue-700 font-semibold text-sm">
+                              {post.author_name.charAt(0)}
+                            </span>
+                          </div>
+                        )}
+                        <div>
+                          <p className="text-sm font-medium text-slate-900">{post.author_name}</p>
+                          <p className="text-xs text-slate-500">Author</p>
+                        </div>
+                      </div>
+                      
+                      {/* Enhanced Meta Information */}
+                      <div className="flex items-center justify-between text-sm text-slate-500 mb-6 pt-4 border-t border-slate-100">
+                        <div className="flex items-center">
+                          <CalendarDays className="w-4 h-4 mr-2 text-blue-500" />
+                          {getFormattedDate(post.created_at)}
+                        </div>
+                        <div className="flex items-center">
+                          <Clock className="w-4 h-4 mr-2 text-indigo-500" />
+                          {getFormattedReadTime(post.read_time)}
+                        </div>
+                      </div>
+                      
+                      {/* Enhanced Action Section */}
+                      <div className="flex justify-between items-center">
+                        <Link 
+                          to={`/blog/${post.slug}`}
+                          className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 group"
+                        >
+                          {t('readArticle')}
+                          <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                        </Link>
+                        
+                        {isAdmin && (
+                          <Link 
+                            to={`/blog/editor/${post.id}`}
+                            className="text-slate-400 hover:text-slate-600 transition-colors duration-300 text-sm font-medium"
+                          >
+                            {t('edit')}
+                          </Link>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
+            )}
+            
+            {/* Enhanced Newsletter CTA */}
+            <div className="mt-20 max-w-4xl mx-auto">
+              <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-3xl p-12 text-center overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/10 opacity-20"></div>
+                <div className="relative">
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    {t('wantToStayUpdated')}
+                  </h3>
+                  <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+                    Get exclusive insights, industry trends, and expert analysis delivered directly to your inbox.
+                  </p>
+                  <Link 
+                    to="/early-access"
+                    className="inline-flex items-center bg-white text-blue-700 px-8 py-4 font-semibold rounded-xl hover:bg-blue-50 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                  >
+                    {t('subscribeToNewsletterBtn')}
+                    <ChevronRight className="w-5 h-5 ml-2" />
+                  </Link>
+                </div>
+              </div>
             </div>
-          )}
-          
-          <div className="mt-16 text-center">
-            <p className="text-gray-500 mb-4">{t('wantToStayUpdated')}</p>
-            <Link 
-              to="/early-access"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-            >
-              {t('subscribeToNewsletterBtn')}
-            </Link>
           </div>
         </section>
       </main>

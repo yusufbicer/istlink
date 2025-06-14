@@ -142,6 +142,9 @@ const resources = {
       "Logistics": "Logistics",
       "International Trade": "International Trade",
       
+      // Date and time translations
+      "minRead": "min read",
+      
       "navigation": "Navigation",
       "stayUpdated": "Stay Updated",
       "stayUpdatedDesc": "Get the latest updates on supply chain optimization and international trade insights.",
@@ -316,6 +319,9 @@ const resources = {
       "Logistics": "Logistique",
       "International Trade": "Commerce International",
       
+      // Date and time translations
+      "minRead": "min de lecture",
+      
       "navigation": "Navigation",
       "stayUpdated": "Restez Informé",
       "stayUpdatedDesc": "Recevez les dernières mises à jour sur l'optimisation de la chaîne d'approvisionnement et les insights du commerce international.",
@@ -488,6 +494,9 @@ const resources = {
       "E-commerce": "E-ticaret", 
       "Logistics": "Lojistik",
       "International Trade": "Uluslararası Ticaret",
+      
+      // Date and time translations
+      "minRead": "dk okuma",
       
       "navigation": "Navigasyon",
       "stayUpdated": "Güncel Kalın",

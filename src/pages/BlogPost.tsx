@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Edit, Trash2, Share2 } from 'lucide-react';
 import { format } from 'date-fns';
+import { enUS, tr, fr } from 'date-fns/locale';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { supabase } from '@/integrations/supabase/client';
@@ -75,6 +76,28 @@ const BlogPost = () => {
           return post.content_en || post.content;
       }
     }
+  };
+
+  // Helper function to get date locale
+  const getDateLocale = () => {
+    switch (i18n.language) {
+      case 'tr':
+        return tr;
+      case 'fr':
+        return fr;
+      default:
+        return enUS;
+    }
+  };
+
+  // Helper function to format reading time
+  const getFormattedReadTime = (readTime: string) => {
+    const match = readTime.match(/(\d+)/);
+    if (match) {
+      const number = match[1];
+      return `${number} ${t('minRead')}`;
+    }
+    return readTime;
   };
 
   useEffect(() => {
@@ -185,7 +208,7 @@ const BlogPost = () => {
                       <div>
                         <p className="font-medium text-gray-900">{post.author_name}</p>
                         <time className="text-sm text-gray-500" dateTime={post.created_at}>
-                          {format(new Date(post.created_at), 'MMMM d, yyyy')} • {post.read_time}
+                          {format(new Date(post.created_at), 'MMMM d, yyyy', { locale: getDateLocale() })} • {getFormattedReadTime(post.read_time)}
                         </time>
                       </div>
                     </div>

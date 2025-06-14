@@ -1,19 +1,21 @@
 import React from 'react';
 
 interface BundleistLogoProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   className?: string;
   showText?: boolean;
 }
 
 const BundleistLogo = ({ size = 'md', className = '', showText = true }: BundleistLogoProps) => {
   const sizeClasses = {
+    xs: 'w-10 h-10',
     sm: 'w-16 h-16',
     md: 'w-24 h-24',
     lg: 'w-32 h-32'
   };
 
   const textSizes = {
+    xs: 'text-sm',
     sm: 'text-lg',
     md: 'text-2xl',
     lg: 'text-4xl'

@@ -110,11 +110,11 @@ const HowItWorks = () => {
   }, [steps]);
 
   return (
-    <section id="how-it-works" className={`${isMobile ? 'py-2' : 'py-10'} relative overflow-hidden`} key={`how-it-works-${i18n.language}`}>
-      {/* Modern gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(16,185,129,0.1),transparent_50%)]"></div>
+    <section id="how-it-works" className={`${isMobile ? 'py-2' : 'py-20'} relative overflow-hidden`} key={`how-it-works-${i18n.language}`}>
+      {/* Professional gradient background to match blog design */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200/10 to-indigo-200/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-slate-200/10 to-blue-200/10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div 
@@ -123,17 +123,18 @@ const HowItWorks = () => {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <div className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/10 to-emerald-600/10 border border-blue-200/50 ${isMobile ? 'mb-2' : 'mb-3 md:mb-4'}`}>
-            <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <div className={`inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-blue-200/50 text-blue-700 ${isMobile ? 'mb-2' : 'mb-6'} shadow-sm`}>
+            <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
+            <span className="text-sm font-semibold" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('simpleProcess')}
             </span>
           </div>
           
-          <h2 className={`${isMobile ? 'text-xl mb-2' : 'text-2xl md:text-3xl mb-4'} font-bold text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <h2 className={`${isMobile ? 'text-xl mb-2' : 'text-3xl md:text-4xl mb-6'} font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             {t('howItWorks')}
           </h2>
           
-          <p className={`text-gray-600 ${isMobile ? 'text-sm' : ''}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <p className={`text-slate-600 ${isMobile ? 'text-sm' : 'text-lg'} max-w-3xl mx-auto leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             {t('howItWorksDesc')}
           </p>
         </div>
@@ -178,11 +179,11 @@ const HowItWorks = () => {
                         isVisible ? 'opacity-100 translate-x-0' : `opacity-0 ${isLeft ? '-translate-x-8' : 'translate-x-8'}`
                       }`}
                     >
-                      <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-5 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 group hover:-translate-y-1">
-                        <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-200/50 hover:border-blue-200 group hover:-translate-y-2">
+                        <h3 className="text-base md:text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {step.title}
                         </h3>
-                        <p className="text-gray-600 leading-relaxed text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <p className="text-slate-600 leading-relaxed text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {step.description}
                         </p>
                       </div>
@@ -226,11 +227,11 @@ const HowItWorks = () => {
                       <div className={`ml-3 transition-all duration-700 delay-300 ${
                         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                       }`}>
-                        <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2.5 shadow-md border border-white/50">
-                          <h3 className="text-sm font-bold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-slate-200/50 hover:border-blue-200 transition-all duration-300 hover:shadow-xl">
+                          <h3 className="text-sm font-bold text-slate-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                             {step.title}
                           </h3>
-                          <p className="text-gray-600 text-xs leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                          <p className="text-slate-600 text-xs leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                             {step.description}
                           </p>
                         </div>

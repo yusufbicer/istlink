@@ -1,0 +1,327 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+// Translation resources
+const resources = {
+  en: {
+    translation: {
+      // Header
+      "features": "Features",
+      "howItWorks": "How It Works", 
+      "pricing": "Pricing",
+      "blog": "Blog",
+      "getStarted": "Get Started",
+
+      // Hero Section
+      "heroTitle": "Streamline Your Turkish Supply Chain",
+      "heroSubtitle": "Transform fragmented imports into intelligent consolidation. Reduce costs by 65% and accelerate documentation by 15x with our AI-powered platform.",
+      "heroButton": "Start Your Journey",
+      "heroSecondaryButton": "Watch Demo",
+
+      // Statistics
+      "statisticsTitle": "Results That Speak for Themselves",
+      "statisticsSubtitle": "See how our consolidation platform transforms your procurement efficiency",
+      "fasterDocumentation": "Faster Documentation",
+      "singleBillOfLading": "Single Bill of Lading instead of multiple documents",
+      "costReduction": "Cost Reduction", 
+      "lowerShippingCosts": "Lower shipping costs through intelligent consolidation",
+      "timeSavings": "Time Savings",
+      "streamlinedProcess": "Streamlined procurement process management",
+
+      // Comparison Section
+      "comparisonTitle": "Traditional vs. Smart Consolidation",
+      "comparisonSubtitle": "See how Bundleist transforms fragmented import processes into streamlined consolidation",
+      "traditionalImports": "Traditional Imports",
+      "fragmentedComplex": "Fragmented & Complex",
+      "multipleShipments": "Multiple separate shipments",
+      "multipleShipmentsDesc": "Each supplier ships independently, increasing costs",
+      "complexDocumentation": "Complex documentation",
+      "complexDocumentationDesc": "Multiple Bills of Lading and customs forms",
+      "paymentRisks": "Payment risks",
+      "paymentRisksDesc": "Multiple individual payments without protection",
+      "responseRate": "Response Rate",
+      "delays": "Delays",
+      "protection": "Protection",
+      "bundleistSolution": "Bundleist Solution",
+      "smartConsolidated": "Smart & Consolidated",
+      "recommended": "RECOMMENDED",
+      "singleConsolidatedShipment": "Single consolidated shipment",
+      "singleConsolidatedShipmentDesc": "All suppliers ship to our warehouse for consolidation",
+      "streamlinedDocumentation": "Streamlined documentation",
+      "streamlinedDocumentationDesc": "Single Bill of Lading for the entire shipment",
+      "securePaymentHandling": "Secure payment handling",
+      "securePaymentHandlingDesc": "We handle all supplier payments with protection",
+      "fasterProcess": "Faster Process",
+      "costSavings": "Cost Savings",
+      "protected": "Protected",
+
+      // Pricing Section
+      "choosePlan": "Choose Your Plan",
+      "transparentPricing": "Transparent pricing that scales with your business needs.",
+      "starter": "Starter",
+      "growth": "Growth", 
+      "enterprise": "Enterprise",
+      "oneTimeFee": "One-time fee",
+      "totalOrderValue": "Of the total order value",
+      "after5Consolidations": "After 5 consolidations/month",
+      "starterDesc": "Perfect for first-time users exploring Turkish supply chain services",
+      "growthDesc": "Our most popular option for growing businesses with regular shipments",
+      "enterpriseDesc": "For businesses with high-volume international shipping needs",
+      "bankTransferFees": "+ Bank transfer fees",
+      "volumeDiscounting": "Volume-based discounting after 5 consolidations/month",
+      "singleConsolidatedShipmentFeature": "Single consolidated shipment",
+      "supplierPaymentHandling": "Supplier payment handling",
+      "singleBillOfLadingFeature": "Single Bill of Lading",
+      "documentationSupport": "Documentation support",
+      "multipleConsolidatedShipments": "Multiple consolidated shipments",
+      "digitalProcurementDashboard": "Digital procurement dashboard",
+      "realTimeTracking": "Real-time tracking",
+      "preferredShippingRates": "Preferred shipping rates",
+      "paymentHandlingProtection": "Payment handling & protection",
+      "volumeDiscountPricing": "Volume discount pricing",
+      "priorityConsolidation": "Priority consolidation",
+      "customizedShippingSchedule": "Customized shipping schedule",
+      "advancedAnalyticsReporting": "Advanced analytics & reporting",
+      "warehouseStorageOptions": "Warehouse storage options",
+      "strategicSourcingAssistance": "Strategic sourcing assistance",
+
+      // Footer
+      "navigation": "Navigation",
+      "stayUpdated": "Stay Updated",
+      "stayUpdatedDesc": "Get the latest updates on supply chain optimization and international trade insights.",
+      "subscribeNewsletter": "Subscribe to Newsletter",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "allRightsReserved": "All rights reserved.",
+      "madeWith": "Made with",
+      "inIstanbul": "in Istanbul",
+      "brandTagline": "Simplifying Cross Border Procurement",
+      "brandDesc": "Transform your Turkish supply chain with intelligent consolidation services. Reduce costs, optimize logistics, and scale your international business with confidence.",
+      "contactEmail": "bundleist@gmail.com",
+      "locationIstanbul": "Istanbul, Turkey"
+    }
+  },
+  fr: {
+    translation: {
+      // Header
+      "features": "Fonctionnalités",
+      "howItWorks": "Comment ça marche",
+      "pricing": "Tarifs",
+      "blog": "Blog",
+      "getStarted": "Commencer",
+
+      // Hero Section
+      "heroTitle": "Optimisez Votre Chaîne d'Approvisionnement Turque",
+      "heroSubtitle": "Transformez les importations fragmentées en consolidation intelligente. Réduisez les coûts de 65% et accélérez la documentation de 15x avec notre plateforme IA.",
+      "heroButton": "Commencez Votre Parcours",
+      "heroSecondaryButton": "Voir la Démo",
+
+      // Statistics
+      "statisticsTitle": "Des Résultats Qui Parlent d'Eux-Mêmes",
+      "statisticsSubtitle": "Découvrez comment notre plateforme de consolidation transforme votre efficacité d'approvisionnement",
+      "fasterDocumentation": "Documentation Plus Rapide",
+      "singleBillOfLading": "Connaissement unique au lieu de plusieurs documents",
+      "costReduction": "Réduction des Coûts",
+      "lowerShippingCosts": "Coûts d'expédition réduits grâce à la consolidation intelligente",
+      "timeSavings": "Gain de Temps",
+      "streamlinedProcess": "Gestion rationalisée du processus d'approvisionnement",
+
+      // Comparison Section
+      "comparisonTitle": "Traditionnel vs. Consolidation Intelligente",
+      "comparisonSubtitle": "Découvrez comment Bundleist transforme les processus d'importation fragmentés en consolidation rationalisée",
+      "traditionalImports": "Importations Traditionnelles",
+      "fragmentedComplex": "Fragmenté et Complexe",
+      "multipleShipments": "Expéditions multiples séparées",
+      "multipleShipmentsDesc": "Chaque fournisseur expédie indépendamment, augmentant les coûts",
+      "complexDocumentation": "Documentation complexe",
+      "complexDocumentationDesc": "Plusieurs connaissements et formulaires douaniers",
+      "paymentRisks": "Risques de paiement",
+      "paymentRisksDesc": "Paiements individuels multiples sans protection",
+      "responseRate": "Taux de Réponse",
+      "delays": "Retards",
+      "protection": "Protection",
+      "bundleistSolution": "Solution Bundleist",
+      "smartConsolidated": "Intelligent et Consolidé",
+      "recommended": "RECOMMANDÉ",
+      "singleConsolidatedShipment": "Expédition consolidée unique",
+      "singleConsolidatedShipmentDesc": "Tous les fournisseurs expédient vers notre entrepôt pour consolidation",
+      "streamlinedDocumentation": "Documentation rationalisée",
+      "streamlinedDocumentationDesc": "Connaissement unique pour toute l'expédition",
+      "securePaymentHandling": "Gestion sécurisée des paiements",
+      "securePaymentHandlingDesc": "Nous gérons tous les paiements fournisseurs avec protection",
+      "fasterProcess": "Processus Plus Rapide",
+      "costSavings": "Économies",
+      "protected": "Protégé",
+
+      // Pricing Section
+      "choosePlan": "Choisissez Votre Plan",
+      "transparentPricing": "Tarification transparente qui évolue avec les besoins de votre entreprise.",
+      "starter": "Débutant",
+      "growth": "Croissance",
+      "enterprise": "Entreprise",
+      "oneTimeFee": "Frais uniques",
+      "totalOrderValue": "De la valeur totale de la commande",
+      "after5Consolidations": "Après 5 consolidations/mois",
+      "starterDesc": "Parfait pour les nouveaux utilisateurs explorant les services de chaîne d'approvisionnement turque",
+      "growthDesc": "Notre option la plus populaire pour les entreprises en croissance avec des expéditions régulières",
+      "enterpriseDesc": "Pour les entreprises avec des besoins d'expédition internationale à haut volume",
+      "bankTransferFees": "+ Frais de virement bancaire",
+      "volumeDiscounting": "Remise basée sur le volume après 5 consolidations/mois",
+      "singleConsolidatedShipmentFeature": "Expédition consolidée unique",
+      "supplierPaymentHandling": "Gestion des paiements fournisseurs",
+      "singleBillOfLadingFeature": "Connaissement unique",
+      "documentationSupport": "Support de documentation",
+      "multipleConsolidatedShipments": "Expéditions consolidées multiples",
+      "digitalProcurementDashboard": "Tableau de bord d'approvisionnement numérique",
+      "realTimeTracking": "Suivi en temps réel",
+      "preferredShippingRates": "Tarifs d'expédition préférentiels",
+      "paymentHandlingProtection": "Gestion et protection des paiements",
+      "volumeDiscountPricing": "Tarification avec remise sur volume",
+      "priorityConsolidation": "Consolidation prioritaire",
+      "customizedShippingSchedule": "Planning d'expédition personnalisé",
+      "advancedAnalyticsReporting": "Analyses et rapports avancés",
+      "warehouseStorageOptions": "Options de stockage d'entrepôt",
+      "strategicSourcingAssistance": "Assistance au sourcing stratégique",
+
+      // Footer
+      "navigation": "Navigation",
+      "stayUpdated": "Restez Informé",
+      "stayUpdatedDesc": "Recevez les dernières mises à jour sur l'optimisation de la chaîne d'approvisionnement et les insights du commerce international.",
+      "subscribeNewsletter": "S'abonner à la Newsletter",
+      "privacyPolicy": "Politique de Confidentialité",
+      "termsOfService": "Conditions d'Utilisation",
+      "allRightsReserved": "Tous droits réservés.",
+      "madeWith": "Fait avec",
+      "inIstanbul": "à Istanbul",
+      "brandTagline": "Simplification des Achats Transfrontaliers",
+      "brandDesc": "Transformez votre chaîne d'approvisionnement turque avec des services de consolidation intelligents. Réduisez les coûts, optimisez la logistique et développez votre entreprise internationale en toute confiance.",
+      "contactEmail": "bundleist@gmail.com",
+      "locationIstanbul": "Istanbul, Turquie"
+    }
+  },
+  tr: {
+    translation: {
+      // Header
+      "features": "Özellikler",
+      "howItWorks": "Nasıl Çalışır",
+      "pricing": "Fiyatlandırma",
+      "blog": "Blog",
+      "getStarted": "Başlayın",
+
+      // Hero Section
+      "heroTitle": "Türk Tedarik Zincirinizi Optimize Edin",
+      "heroSubtitle": "Parçalanmış ithalatları akıllı konsolidasyona dönüştürün. AI destekli platformumuzla maliyetleri %65 azaltın ve belgelendirmeyi 15 kat hızlandırın.",
+      "heroButton": "Yolculuğunuza Başlayın",
+      "heroSecondaryButton": "Demo İzleyin",
+
+      // Statistics
+      "statisticsTitle": "Kendi Kendini Anlatan Sonuçlar",
+      "statisticsSubtitle": "Konsolidasyon platformumuzun tedarik verimliliğinizi nasıl dönüştürdüğünü görün",
+      "fasterDocumentation": "Daha Hızlı Belgelendirme",
+      "singleBillOfLading": "Birden fazla belge yerine tek Konşimento",
+      "costReduction": "Maliyet Azaltma",
+      "lowerShippingCosts": "Akıllı konsolidasyon ile daha düşük nakliye maliyetleri",
+      "timeSavings": "Zaman Tasarrufu",
+      "streamlinedProcess": "Düzenlenmiş tedarik süreci yönetimi",
+
+      // Comparison Section
+      "comparisonTitle": "Geleneksel vs. Akıllı Konsolidasyon",
+      "comparisonSubtitle": "Bundleist'in parçalanmış ithalat süreçlerini nasıl düzenli konsolidasyona dönüştürdüğünü görün",
+      "traditionalImports": "Geleneksel İthalatlar",
+      "fragmentedComplex": "Parçalanmış ve Karmaşık",
+      "multipleShipments": "Birden fazla ayrı sevkiyat",
+      "multipleShipmentsDesc": "Her tedarikçi bağımsız olarak sevkiyat yapar, maliyetleri artırır",
+      "complexDocumentation": "Karmaşık belgelendirme",
+      "complexDocumentationDesc": "Birden fazla Konşimento ve gümrük formu",
+      "paymentRisks": "Ödeme riskleri",
+      "paymentRisksDesc": "Korumasız birden fazla bireysel ödeme",
+      "responseRate": "Yanıt Oranı",
+      "delays": "Gecikmeler",
+      "protection": "Koruma",
+      "bundleistSolution": "Bundleist Çözümü",
+      "smartConsolidated": "Akıllı ve Konsolide",
+      "recommended": "ÖNERİLEN",
+      "singleConsolidatedShipment": "Tek konsolide sevkiyat",
+      "singleConsolidatedShipmentDesc": "Tüm tedarikçiler konsolidasyon için depomıza sevkiyat yapar",
+      "streamlinedDocumentation": "Düzenlenmiş belgelendirme",
+      "streamlinedDocumentationDesc": "Tüm sevkiyat için tek Konşimento",
+      "securePaymentHandling": "Güvenli ödeme işleme",
+      "securePaymentHandlingDesc": "Tüm tedarikçi ödemelerini koruma ile yönetiriz",
+      "fasterProcess": "Daha Hızlı Süreç",
+      "costSavings": "Maliyet Tasarrufu",
+      "protected": "Korumalı",
+
+      // Pricing Section
+      "choosePlan": "Planınızı Seçin",
+      "transparentPricing": "İş ihtiyaçlarınızla birlikte ölçeklenen şeffaf fiyatlandırma.",
+      "starter": "Başlangıç",
+      "growth": "Büyüme",
+      "enterprise": "Kurumsal",
+      "oneTimeFee": "Tek seferlik ücret",
+      "totalOrderValue": "Toplam sipariş değerinin",
+      "after5Consolidations": "Ayda 5 konsolidasyon sonrası",
+      "starterDesc": "Türk tedarik zinciri hizmetlerini keşfeden ilk kez kullanıcılar için mükemmel",
+      "growthDesc": "Düzenli sevkiyatları olan büyüyen işletmeler için en popüler seçeneğimiz",
+      "enterpriseDesc": "Yüksek hacimli uluslararası nakliye ihtiyaçları olan işletmeler için",
+      "bankTransferFees": "+ Banka transfer ücretleri",
+      "volumeDiscounting": "Ayda 5 konsolidasyon sonrası hacim bazlı indirim",
+      "singleConsolidatedShipmentFeature": "Tek konsolide sevkiyat",
+      "supplierPaymentHandling": "Tedarikçi ödeme işleme",
+      "singleBillOfLadingFeature": "Tek Konşimento",
+      "documentationSupport": "Belgelendirme desteği",
+      "multipleConsolidatedShipments": "Birden fazla konsolide sevkiyat",
+      "digitalProcurementDashboard": "Dijital tedarik panosu",
+      "realTimeTracking": "Gerçek zamanlı takip",
+      "preferredShippingRates": "Tercihli nakliye oranları",
+      "paymentHandlingProtection": "Ödeme işleme ve koruma",
+      "volumeDiscountPricing": "Hacim indirimli fiyatlandırma",
+      "priorityConsolidation": "Öncelikli konsolidasyon",
+      "customizedShippingSchedule": "Özelleştirilmiş sevkiyat programı",
+      "advancedAnalyticsReporting": "Gelişmiş analitik ve raporlama",
+      "warehouseStorageOptions": "Depo depolama seçenekleri",
+      "strategicSourcingAssistance": "Stratejik kaynak temin yardımı",
+
+      // Footer
+      "navigation": "Navigasyon",
+      "stayUpdated": "Güncel Kalın",
+      "stayUpdatedDesc": "Tedarik zinciri optimizasyonu ve uluslararası ticaret içgörüleri hakkında en son güncellemeleri alın.",
+      "subscribeNewsletter": "Bültene Abone Ol",
+      "privacyPolicy": "Gizlilik Politikası",
+      "termsOfService": "Hizmet Şartları",
+      "allRightsReserved": "Tüm hakları saklıdır.",
+      "madeWith": "İle yapıldı",
+      "inIstanbul": "İstanbul'da",
+      "brandTagline": "Sınır Ötesi Tedariki Basitleştirme",
+      "brandDesc": "Akıllı konsolidasyon hizmetleriyle Türk tedarik zincirinizi dönüştürün. Maliyetleri azaltın, lojistiği optimize edin ve uluslararası işinizi güvenle büyütün.",
+      "contactEmail": "bundleist@gmail.com",
+      "locationIstanbul": "İstanbul, Türkiye"
+    }
+  }
+};
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: 'en',
+    
+    // Language detection options
+    detection: {
+      order: ['navigator', 'htmlTag', 'path', 'subdomain'],
+      lookupFromPathIndex: 0,
+      lookupFromSubdomainIndex: 0,
+      caches: ['localStorage'],
+      excludeCacheFor: ['cimode']
+    },
+
+    // Only use these languages
+    supportedLngs: ['en', 'fr', 'tr'],
+    
+    interpolation: {
+      escapeValue: false,
+    },
+  });
+
+export default i18n;

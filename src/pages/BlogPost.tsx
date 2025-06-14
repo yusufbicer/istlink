@@ -172,11 +172,11 @@ const BlogPost = () => {
             <div className="p-8">
               <div className="max-w-3xl mx-auto">
                 {post.image_url && (
-                  <div className="w-full aspect-[16/9] max-h-64 md:max-h-80 overflow-hidden rounded-xl mb-8">
+                  <div className="w-[calc(100%-2.5rem)] mx-auto aspect-[16/9] max-h-64 md:max-h-80 overflow-hidden rounded-2xl mb-8 shadow-lg">
                     <img 
                       src={post.image_url} 
                       alt={getTranslatedContent(post, 'title')}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                     />
                   </div>

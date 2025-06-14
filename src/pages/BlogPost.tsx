@@ -41,7 +41,7 @@ const BlogPost = () => {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Helper function to get translated content
   const getTranslatedContent = (post: BlogPost, field: 'title' | 'excerpt' | 'content') => {
@@ -111,7 +111,7 @@ const BlogPost = () => {
         <div className="bg-gray-50 min-h-screen pt-24 pb-12">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <p className="text-gray-600">Loading blog post...</p>
+              <p className="text-gray-600">{t('loadingBlogPosts')}</p>
             </div>
           </div>
         </div>
@@ -127,10 +127,10 @@ const BlogPost = () => {
         <div className="bg-gray-50 min-h-screen pt-24 pb-12">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
-              <p className="text-gray-600 mb-4">The blog post you're looking for doesn't exist.</p>
+              <h1 className="text-2xl font-bold mb-4">{t('postNotFound')}</h1>
+              <p className="text-gray-600 mb-4">{t('blogPostNotExist')}</p>
               <Link to="/blog">
-                <Button>Back to Blog</Button>
+                <Button>{t('backToBlog')}</Button>
               </Link>
             </div>
           </div>
@@ -148,7 +148,7 @@ const BlogPost = () => {
           <div className="max-w-4xl mx-auto mb-8">
             <Link to="/blog" className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to blog
+              {t('backToBlog')}
             </Link>
           </div>
 
@@ -194,13 +194,13 @@ const BlogPost = () => {
                         <Link to={`/blog/editor?id=${post.id}`}>
                           <Button variant="outline" size="sm">
                             <Edit className="h-4 w-4 mr-1" />
-                            Edit
+                            {t('edit')}
                           </Button>
                         </Link>
                       )}
                       <Button variant="ghost" size="sm" className="flex items-center">
                         <Share2 className="h-4 w-4 mr-1" />
-                        Share
+                        {t('share')}
                       </Button>
                     </div>
                   </div>

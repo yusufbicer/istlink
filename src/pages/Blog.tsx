@@ -37,7 +37,7 @@ const Blog = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Helper function to get translated content
   const getTranslatedContent = (post: BlogPost, field: 'title' | 'excerpt') => {
@@ -114,7 +114,7 @@ const Blog = () => {
         <main className="pt-32 pb-16">
           <div className="container mx-auto px-6">
             <div className="text-center">
-              <p className="text-gray-600">Loading blog posts...</p>
+              <p className="text-gray-600">{t('loadingBlogPosts')}</p>
             </div>
           </div>
         </main>
@@ -135,13 +135,13 @@ const Blog = () => {
             }`}
           >
             <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-50 text-blue-600 rounded-full mb-3">
-              Our Blog
+              {t('ourBlog')}
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Insights on Cross-Border Commerce
+              {t('insightsOnCrossBorderCommerce')}
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Expert analysis, industry trends, and practical tips for optimizing your Turkish supply chain.
+              {t('expertAnalysisDesc')}
             </p>
 
             {/* Admin Controls - Only show if admin */}
@@ -150,7 +150,7 @@ const Blog = () => {
                 <Link to="/blog/editor">
                   <Button className="bg-blue-600 hover:bg-blue-700">
                     <Plus className="w-4 h-4 mr-2" />
-                    Create New Post
+                    {t('createNewPost')}
                   </Button>
                 </Link>
               </div>
@@ -167,7 +167,7 @@ const Blog = () => {
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
-                  All Posts
+                  {t('allPosts')}
                 </button>
                 
                 {categories.map(category => (
@@ -192,13 +192,13 @@ const Blog = () => {
         <section className="container mx-auto px-6">
           {filteredPosts.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-gray-600 mb-4">No blog posts published yet.</p>
+              <p className="text-gray-600 mb-4">{t('noBlogPostsYet')}</p>
               {/* Only show create first post button if user is admin and there are no posts at all */}
               {isAdmin && blogPosts.length === 0 && (
                 <Link to="/blog/editor">
                   <Button className="bg-blue-600 hover:bg-blue-700">
                     <Plus className="w-4 h-4 mr-2" />
-                    Create First Post
+                    {t('createFirstPost')}
                   </Button>
                 </Link>
               )}
@@ -271,7 +271,7 @@ const Blog = () => {
                         to={`/blog/${post.slug}`}
                         className="inline-flex items-center text-blue-600 font-medium hover:underline"
                       >
-                        Read Article
+                        {t('readArticle')}
                         <ChevronRight className="w-4 h-4 ml-1" />
                       </Link>
                       
@@ -280,7 +280,7 @@ const Blog = () => {
                           to={`/blog/editor/${post.id}`}
                           className="text-gray-500 hover:text-gray-700"
                         >
-                          Edit
+                          {t('edit')}
                         </Link>
                       )}
                     </div>
@@ -291,12 +291,12 @@ const Blog = () => {
           )}
           
           <div className="mt-16 text-center">
-            <p className="text-gray-500 mb-4">Want to stay updated with our latest insights?</p>
+            <p className="text-gray-500 mb-4">{t('wantToStayUpdated')}</p>
             <Link 
               to="/early-access"
               className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
-              Subscribe to Our Newsletter
+              {t('subscribeToNewsletterBtn')}
             </Link>
           </div>
         </section>

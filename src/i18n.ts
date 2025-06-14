@@ -58,7 +58,6 @@ const resources = {
 
       // Pricing Section
       "choosePlan": "Choose Your Plan",
-      "transparentPricing": "Transparent pricing that scales with your business needs.",
       "starter": "Starter",
       "growth": "Growth", 
       "enterprise": "Enterprise",
@@ -136,7 +135,14 @@ const resources = {
       "globalShipping": "Global Shipping", 
       "globalShippingDesc": "Efficient shipping worldwide through our established logistics network",
       "easyDelivery": "Easy Delivery",
-      "easyDeliveryDesc": "Track and receive your consolidated shipment at your destination"
+      "easyDeliveryDesc": "Track and receive your consolidated shipment at your destination",
+      
+      // How It Works Section
+      "simpleProcess": "Simple Process",
+      "howItWorksDesc": "Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support.",
+      
+      // Pricing Section
+      "transparentPricing": "Transparent pricing that scales with your business needs."
     }
   },
   fr: {
@@ -193,7 +199,6 @@ const resources = {
 
       // Pricing Section
       "choosePlan": "Choisissez Votre Plan",
-      "transparentPricing": "Tarification transparente qui évolue avec les besoins de votre entreprise.",
       "starter": "Débutant",
       "growth": "Croissance",
       "enterprise": "Entreprise",
@@ -271,7 +276,14 @@ const resources = {
       "globalShipping": "Expédition Mondiale",
       "globalShippingDesc": "Expédition efficace dans le monde entier via notre réseau logistique établi",
       "easyDelivery": "Livraison Facile",
-      "easyDeliveryDesc": "Suivez et recevez votre envoi consolidé à votre destination"
+      "easyDeliveryDesc": "Suivez et recevez votre envoi consolidé à votre destination",
+      
+      // How It Works Section
+      "simpleProcess": "Processus Simple",
+      "howItWorksDesc": "Notre processus rationalisé rend l'approvisionnement et l'expédition depuis la Turquie simples grâce à une technologie de pointe et un support expert.",
+      
+      // Pricing Section
+      "transparentPricing": "Tarification transparente qui évolue avec les besoins de votre entreprise."
     }
   },
   tr: {
@@ -328,7 +340,6 @@ const resources = {
 
       // Pricing Section
       "choosePlan": "Planınızı Seçin",
-      "transparentPricing": "İş ihtiyaçlarınızla birlikte ölçeklenen şeffaf fiyatlandırma.",
       "starter": "Başlangıç",
       "growth": "Büyüme",
       "enterprise": "Kurumsal",
@@ -406,7 +417,14 @@ const resources = {
       "globalShipping": "Küresel Nakliye",
       "globalShippingDesc": "Kurulmuş lojistik ağımız aracılığıyla dünya çapında verimli nakliye",
       "easyDelivery": "Kolay Teslimat",
-      "easyDeliveryDesc": "Birleştirilmiş gönderinizi takip edin ve varış noktanızda teslim alın"
+      "easyDeliveryDesc": "Birleştirilmiş gönderinizi takip edin ve varış noktanızda teslim alın",
+      
+      // How It Works Section
+      "simpleProcess": "Basit Süreç",
+      "howItWorksDesc": "Modern teknolojimiz ve uzman desteğimizle Türkiye'den kaynak bulma ve nakliye sürecimiz zahmetsizdir.",
+      
+      // Pricing Section
+      "transparentPricing": "İş ihtiyaçlarınızla birlikte ölçeklenen şeffaf fiyatlandırma."
     }
   }
 };

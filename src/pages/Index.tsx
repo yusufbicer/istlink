@@ -336,7 +336,7 @@ const Index = () => {
                 {t('choosePlan')}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                Transparent pricing that scales with your business needs.
+                {t('transparentPricing')}
               </p>
             </div>
             

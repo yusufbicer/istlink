@@ -124,7 +124,7 @@ const HowItWorks = () => {
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/10 to-emerald-600/10 border border-blue-200/50 mb-3 md:mb-4">
             <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              Simple Process
+              {t('simpleProcess')}
             </span>
           </div>
           

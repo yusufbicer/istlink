@@ -78,7 +78,7 @@ const BlogPreview = () => {
       if (error) throw error;
       setBlogPosts(data || []);
     } catch (error) {
-      console.error('Error fetching blog posts:', error);
+      // Silent error handling for production
     } finally {
       setIsLoading(false);
     }
@@ -90,49 +90,54 @@ const BlogPreview = () => {
   }
 
   return (
-    <section className={`${isMobile ? 'py-8' : 'py-12'} bg-white border-t border-gray-100`}>
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-6">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+    <section className={`${isMobile ? 'py-16' : 'py-20'} bg-gradient-to-b from-gray-50 to-white`}>
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-4">
+            Latest Insights
+          </div>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             {t('latestInsights')}
           </h2>
-          <p className="text-gray-600 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {t('stayUpdatedWithTrends')}
           </p>
         </div>
 
         {isMobile ? (
-          // Mobile: Single column with images
-          <div className="space-y-4">
+          // Mobile: Professional card layout
+          <div className="space-y-6">
             {blogPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
-                className="block bg-gray-50 rounded-lg overflow-hidden hover:bg-gray-100 transition-colors group"
+                className="block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 group"
               >
                 <div className="flex">
                   {post.image_url && (
-                    <img 
-                      src={post.image_url} 
-                      alt={post.title}
-                      className="w-20 h-20 object-cover flex-shrink-0"
-                    />
+                    <div className="w-24 h-24 flex-shrink-0">
+                      <img 
+                        src={post.image_url} 
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   )}
-                  <div className="p-4 flex-grow">
-                    <h3 className="font-semibold text-sm text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  <div className="p-5 flex-grow">
+                    <h3 className="font-semibold text-base text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
                       {getTranslatedContent(post, 'title')}
                     </h3>
                     {getTranslatedContent(post, 'excerpt') && (
-                      <p className="text-xs text-gray-600 mb-2 line-clamp-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">
                         {getTranslatedContent(post, 'excerpt')}
                       </p>
                     )}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center text-xs text-gray-500">
-                        <Calendar className="h-3 w-3 mr-1" />
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Calendar className="h-4 w-4 mr-2" />
                         {format(new Date(post.created_at), 'MMM d, yyyy')}
                       </div>
-                      <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                      <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
                     </div>
                   </div>
                 </div>
@@ -140,36 +145,41 @@ const BlogPreview = () => {
             ))}
           </div>
         ) : (
-          // Desktop/Tablet: Two columns with images
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          // Desktop: Professional card grid
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
-                className="block bg-gray-50 rounded-lg overflow-hidden hover:bg-gray-100 transition-colors group"
+                className="block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
               >
                 {post.image_url && (
-                  <img 
-                    src={post.image_url} 
-                    alt={post.title}
-                    className="w-full h-32 object-cover"
-                  />
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={post.image_url} 
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                 )}
-                <div className="p-4">
-                  <h3 className="font-semibold text-sm text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <div className="p-6">
+                  <h3 className="font-semibold text-lg text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
                     {getTranslatedContent(post, 'title')}
                   </h3>
                   {getTranslatedContent(post, 'excerpt') && (
-                    <p className="text-xs text-gray-600 mb-3 line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
                       {getTranslatedContent(post, 'excerpt')}
                     </p>
                   )}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center text-xs text-gray-500">
-                      <Calendar className="h-3 w-3 mr-1" />
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div className="flex items-center text-sm text-gray-500">
+                      <Calendar className="h-4 w-4 mr-2" />
                       {format(new Date(post.created_at), 'MMM d, yyyy')}
                     </div>
-                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                    <div className="flex items-center text-blue-600 text-sm font-medium">
+                      Read more
+                      <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -177,14 +187,13 @@ const BlogPreview = () => {
           </div>
         )}
 
-        <div className="text-center mt-6">
+        <div className="text-center mt-12">
           <Link
             to="/blog"
-            className="inline-flex items-center text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
           >
             {t('viewAllArticles')}
-            <ArrowRight className="h-4 w-4 ml-1" />
+            <ArrowRight className="h-5 w-5 ml-2" />
           </Link>
         </div>
       </div>

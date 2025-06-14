@@ -30,10 +30,6 @@ const Index = () => {
     }
   }, []);
 
-  // Debug translation
-  useEffect(() => {
-    console.log('Pricing Description:', t('transparentPricing'), 'Current language:', i18n.language);
-  }, [t, i18n.language]);
 
   const pricingPlans = [
     {

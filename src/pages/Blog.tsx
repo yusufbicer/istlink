@@ -66,9 +66,6 @@ const Blog = () => {
 
   // Check if user is admin
   const isAdmin = user?.role === 'admin';
-  
-  console.log('Blog page - user:', user);
-  console.log('Blog page - isAdmin:', isAdmin);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -101,7 +98,7 @@ const Blog = () => {
       if (error) throw error;
       setBlogPosts(data || []);
     } catch (error) {
-      console.error('Error fetching blog posts:', error);
+      // Silent error handling for production
     } finally {
       setIsLoading(false);
     }

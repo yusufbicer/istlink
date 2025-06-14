@@ -44,7 +44,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        console.log('Auth state change:', event, session?.user?.email);
         if (session?.user) {
           setUserFromSession(session.user);
         } else {
@@ -63,20 +62,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUserFromSession(session.user);
       }
     } catch (error) {
-      console.error("Error getting session:", error);
+      // Silent error handling for production  
     } finally {
       setIsLoading(false);
     }
   };
 
   const setUserFromSession = (supabaseUser: SupabaseUser) => {
-    console.log('Setting user from session:', supabaseUser.email);
-    
     // Check if user is admin by email - simplified check for known admin emails
     const adminEmails = ['admin@istlink.com', 'yusufbicer@gmail.com'];
     const isAdmin = adminEmails.includes(supabaseUser.email || '');
-    
-    console.log('Is admin check:', supabaseUser.email, isAdmin);
 
     const userData: User = {
       id: supabaseUser.id,
@@ -86,7 +81,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     setUser(userData);
-    console.log('User set with role:', userData);
   };
 
   // Sign up function
@@ -127,8 +121,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Check if user is admin by email
     const adminEmails = ['admin@istlink.com', 'yusufbicer@gmail.com'];
     const isAdmin = adminEmails.includes(data.user.email || '');
-    
-    console.log('Login admin check:', data.user.email, isAdmin);
 
     const userData: User = {
       id: data.user.id,
@@ -138,7 +130,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     setUser(userData);
-    console.log('Login user set with role:', userData);
     return userData;
   };
 

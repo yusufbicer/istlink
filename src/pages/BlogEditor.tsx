@@ -115,7 +115,6 @@ const BlogEditor = () => {
           form.setValue("author_name", data.author_name || "");
           form.setValue("image_url", data.image_url || "");
         } catch (error) {
-          console.error('Error fetching post:', error);
           toast({
             title: "Error",
             description: "Failed to load blog post.",
@@ -138,9 +137,6 @@ const BlogEditor = () => {
       return;
     }
 
-    console.log('Current user:', user);
-    console.log('User ID:', user.id);
-    console.log('User authenticated:', isAuthenticated);
 
     setIsLoading(true);
 
@@ -159,7 +155,7 @@ const BlogEditor = () => {
         published: true
       };
 
-      console.log('Post data being inserted:', postData);
+      
 
       if (editingPost) {
         const { error } = await supabase
@@ -168,7 +164,6 @@ const BlogEditor = () => {
           .eq('id', editingPost.id);
 
         if (error) {
-          console.error('Update error:', error);
           throw error;
         }
 
@@ -183,17 +178,8 @@ const BlogEditor = () => {
           .select();
 
         if (error) {
-          console.error('Insert error:', error);
-          console.error('Error details:', {
-            message: error.message,
-            details: error.details,
-            hint: error.hint,
-            code: error.code
-          });
           throw error;
         }
-
-        console.log('Insert successful:', data);
 
         toast({
           title: "Success",
@@ -203,7 +189,6 @@ const BlogEditor = () => {
 
       navigate('/blog');
     } catch (error: any) {
-      console.error('Error saving post:', error);
       toast({
         title: "Error",
         description: error.message || "Failed to save blog post.",

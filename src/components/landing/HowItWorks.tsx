@@ -81,9 +81,6 @@ const HowItWorks = () => {
     }
   ];
 
-  useEffect(() => {
-    console.log('HowItWorks Description:', t('howItWorksDesc'), 'Current language:', i18n.language);
-  }, [t, i18n.language]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

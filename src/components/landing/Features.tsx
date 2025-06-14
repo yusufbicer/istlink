@@ -5,58 +5,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import type { UseEmblaCarouselType } from "embla-carousel-react";
 import { useTranslation } from 'react-i18next';
 
-const features = [
-  {
-    icon: Package,
-    title: "Consolidated Shipping",
-    description: "Combine multiple purchases from various suppliers into a single shipment, saving on shipping costs and paperwork.",
-    color: "bg-blue-50 border-blue-200",
-    iconColor: "text-blue-600 bg-blue-100"
-  },
-  {
-    icon: TruckIcon,
-    title: "Single Bill of Lading",
-    description: "We handle the export declaration and create a single bill of lading for all your shipments from Turkey.",
-    color: "bg-green-50 border-green-200",
-    iconColor: "text-green-600 bg-green-100"
-  },
-  {
-    icon: CreditCardIcon,
-    title: "Centralized Payments",
-    description: "Make a single payment to us instead of multiple international transfers to different suppliers.",
-    color: "bg-purple-50 border-purple-200",
-    iconColor: "text-purple-600 bg-purple-100"
-  },
-  {
-    icon: FileTextIcon,
-    title: "Simplified Documentation",
-    description: "We handle all the complex documentation required for international shipping and customs clearance.",
-    color: "bg-amber-50 border-amber-200",
-    iconColor: "text-amber-600 bg-amber-100"
-  },
-  {
-    icon: GlobeIcon,
-    title: "Global Compliance",
-    description: "Our platform ensures that all shipments comply with international trade regulations and requirements.",
-    color: "bg-cyan-50 border-cyan-200",
-    iconColor: "text-cyan-600 bg-cyan-100"
-  },
-  {
-    icon: UsersIcon,
-    title: "Supplier Management",
-    description: "Easily manage all your Turkish suppliers in one place, streamlining your procurement process.",
-    color: "bg-pink-50 border-pink-200",
-    iconColor: "text-pink-600 bg-pink-100"
-  },
-  {
-    icon: ShieldCheck,
-    title: "Delivery Guarantee",
-    description: "We guarantee you receive all goods as specified. Full accountability and insurance.",
-    color: "bg-indigo-50 border-indigo-200",
-    iconColor: "text-indigo-600 bg-indigo-100"
-  }
-];
-
 const Features = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
@@ -64,6 +12,58 @@ const Features = () => {
   const isMobile = useIsMobile();
   const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
   const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: Package,
+      title: t('consolidatedShipping'),
+      description: t('consolidatedShippingDesc'),
+      color: "bg-blue-50 border-blue-200",
+      iconColor: "text-blue-600 bg-blue-100"
+    },
+    {
+      icon: TruckIcon,
+      title: t('singleBillOfLadingTitle'),
+      description: t('singleBillOfLadingDesc'),
+      color: "bg-green-50 border-green-200",
+      iconColor: "text-green-600 bg-green-100"
+    },
+    {
+      icon: CreditCardIcon,
+      title: t('centralizedPayments'),
+      description: t('centralizedPaymentsDesc'),
+      color: "bg-purple-50 border-purple-200",
+      iconColor: "text-purple-600 bg-purple-100"
+    },
+    {
+      icon: FileTextIcon,
+      title: t('simplifiedDocumentation'),
+      description: t('simplifiedDocumentationDesc'),
+      color: "bg-amber-50 border-amber-200",
+      iconColor: "text-amber-600 bg-amber-100"
+    },
+    {
+      icon: GlobeIcon,
+      title: t('globalCompliance'),
+      description: t('globalComplianceDesc'),
+      color: "bg-cyan-50 border-cyan-200",
+      iconColor: "text-cyan-600 bg-cyan-100"
+    },
+    {
+      icon: UsersIcon,
+      title: t('supplierManagement'),
+      description: t('supplierManagementDesc'),
+      color: "bg-pink-50 border-pink-200",
+      iconColor: "text-pink-600 bg-pink-100"
+    },
+    {
+      icon: ShieldCheck,
+      title: t('deliveryGuarantee'),
+      description: t('deliveryGuaranteeDesc'),
+      color: "bg-indigo-50 border-indigo-200",
+      iconColor: "text-indigo-600 bg-indigo-100"
+    }
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -119,10 +119,10 @@ const Features = () => {
             {t('features')}
           </span>
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            Turkish Import Consolidation Made Simple
+            {t('importConsolidation')}
           </h2>
           <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            Bundle multiple Turkish supplier orders into one shipment with single payment and documentation.
+            {t('importConsolidationDesc')}
           </p>
         </div>
 

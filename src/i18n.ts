@@ -86,6 +86,24 @@ const resources = {
       "warehouseStorageOptions": "Warehouse storage options",
       "strategicSourcingAssistance": "Strategic sourcing assistance",
 
+      // Features
+      "importConsolidation": "Turkish Import Consolidation Made Simple",
+      "importConsolidationDesc": "Bundle multiple Turkish supplier orders into one shipment with single payment and documentation.",
+      "consolidatedShipping": "Consolidated Shipping",
+      "consolidatedShippingDesc": "Combine multiple purchases from various suppliers into a single shipment, saving on shipping costs and paperwork.",
+      "singleBillOfLadingTitle": "Single Bill of Lading", 
+      "singleBillOfLadingDesc": "We handle the export declaration and create a single bill of lading for all your shipments from Turkey.",
+      "centralizedPayments": "Centralized Payments",
+      "centralizedPaymentsDesc": "Make a single payment to us instead of multiple international transfers to different suppliers.",
+      "simplifiedDocumentation": "Simplified Documentation",
+      "simplifiedDocumentationDesc": "We handle all the complex documentation required for international shipping and customs clearance.",
+      "globalCompliance": "Global Compliance",
+      "globalComplianceDesc": "Our platform ensures that all shipments comply with international trade regulations and requirements.",
+      "supplierManagement": "Supplier Management", 
+      "supplierManagementDesc": "Easily manage all your Turkish suppliers in one place, streamlining your procurement process.",
+      "deliveryGuarantee": "Delivery Guarantee",
+      "deliveryGuaranteeDesc": "We guarantee you receive all goods as specified. Full accountability and insurance.",
+
       // BlogPreview
       "latestInsights": "Latest Insights",
       "stayUpdatedWithTrends": "Stay updated with supply chain trends and best practices",
@@ -187,6 +205,24 @@ const resources = {
       "warehouseStorageOptions": "Options de stockage d'entrepôt",
       "strategicSourcingAssistance": "Assistance au sourcing stratégique",
 
+      // Features  
+      "importConsolidation": "Consolidation d'Importation Turque Simplifiée",
+      "importConsolidationDesc": "Regroupez plusieurs commandes de fournisseurs turcs en une seule expédition avec un paiement et une documentation uniques.",
+      "consolidatedShipping": "Expédition Consolidée",
+      "consolidatedShippingDesc": "Combinez plusieurs achats de divers fournisseurs en une seule expédition.",
+      "singleBillOfLadingTitle": "Connaissement Unique",
+      "singleBillOfLadingDesc": "Nous gérons la déclaration d'exportation et créons un connaissement unique.",
+      "centralizedPayments": "Paiements Centralisés", 
+      "centralizedPaymentsDesc": "Effectuez un seul paiement au lieu de multiples virements internationaux.",
+      "simplifiedDocumentation": "Documentation Simplifiée",
+      "simplifiedDocumentationDesc": "Nous gérons toute la documentation complexe requise.",
+      "globalCompliance": "Conformité Mondiale",
+      "globalComplianceDesc": "Notre plateforme assure la conformité avec les réglementations commerciales.",
+      "supplierManagement": "Gestion des Fournisseurs",
+      "supplierManagementDesc": "Gérez facilement tous vos fournisseurs turcs en un seul endroit.",
+      "deliveryGuarantee": "Garantie de Livraison", 
+      "deliveryGuaranteeDesc": "Nous garantissons que vous recevez tous les biens comme spécifié.",
+
       // BlogPreview
       "latestInsights": "Dernières Perspectives",
       "stayUpdatedWithTrends": "Restez à jour avec les tendances de la chaîne d'approvisionnement",
@@ -287,6 +323,24 @@ const resources = {
       "advancedAnalyticsReporting": "Gelişmiş analitik ve raporlama",
       "warehouseStorageOptions": "Depo depolama seçenekleri",
       "strategicSourcingAssistance": "Stratejik kaynak temin yardımı",
+
+      // Features
+      "importConsolidation": "Türk İthalat Konsolidasyonu Basitleştirildi", 
+      "importConsolidationDesc": "Birden fazla Türk tedarikçi siparişini tek ödeme ve belgelerle tek sevkiyatta birleştirin.",
+      "consolidatedShipping": "Konsolide Nakliye",
+      "consolidatedShippingDesc": "Çeşitli tedarikçilerden birden fazla satın alma işlemini tek sevkiyatta birleştirin.",
+      "singleBillOfLadingTitle": "Tek Konşimento",
+      "singleBillOfLadingDesc": "İhracat beyannamesini işler ve tüm sevkiyatlarınız için tek konşimento oluştururuz.",
+      "centralizedPayments": "Merkezi Ödemeler",
+      "centralizedPaymentsDesc": "Farklı tedarikçilere birden fazla uluslararası transfer yerine tek ödeme yapın.",
+      "simplifiedDocumentation": "Basitleştirilmiş Belgelendirme", 
+      "simplifiedDocumentationDesc": "Uluslararası nakliye için gerekli tüm karmaşık belgeleri yönetiriz.",
+      "globalCompliance": "Küresel Uyumluluk",
+      "globalComplianceDesc": "Platformumuz tüm sevkiyatların ticaret düzenlemelerine uygun olmasını sağlar.",
+      "supplierManagement": "Tedarikçi Yönetimi",
+      "supplierManagementDesc": "Tüm Türk tedarikçilerinizi tek yerde kolayca yönetin.",
+      "deliveryGuarantee": "Teslimat Garantisi",
+      "deliveryGuaranteeDesc": "Belirtildiği gibi tüm malları almanızı garanti ediyoruz.",
 
       // BlogPreview
       "latestInsights": "Son Görüşler",

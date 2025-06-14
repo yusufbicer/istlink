@@ -97,6 +97,9 @@ const BlogPreview = () => {
           <div className="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-medium mb-3">
             {t('latestInsights')}
           </div>
+          <h2 className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl lg:text-4xl'} font-bold text-gray-900 mb-3`}>
+            {t('latestInsights')}
+          </h2>
           <p className={`${isMobile ? 'text-sm' : 'text-lg'} text-gray-600 max-w-2xl mx-auto`}>
             {t('stayUpdatedWithTrends')}
           </p>

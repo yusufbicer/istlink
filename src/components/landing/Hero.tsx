@@ -6,11 +6,13 @@ import { useAuth } from '@/lib/auth';
 import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database, Bell, FileText, CheckCircle, AlertCircle, Clock, DollarSign } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BundleistLogo from '@/components/common/BundleistLogo';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   const alternatingTexts = [
     "Simplified & Streamlined",
@@ -52,14 +54,14 @@ const Hero = () => {
             </span>
           </div>
           
-          <h1 
+            <h1 
             className={`text-xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold md:font-normal leading-tight mb-3 md:mb-4 transition-all duration-1000 delay-100 transform ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             } text-gray-900`}
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
             <span className="block mb-2 font-bold">
-              Turkish Supply Chain Complexity,
+              {t('heroTitle')}
             </span>
             <span className="block relative h-8 md:h-12 lg:h-16 xl:h-20 overflow-hidden">
               <span 
@@ -85,18 +87,7 @@ const Hero = () => {
             }`}
           >
             <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              Transform fragmented Turkish supplier purchases into a{' '}
-              <span className="font-bold text-gray-900">
-                single, streamlined shipment
-              </span>. 
-              Buy from multiple Turkish suppliers with{' '}
-              <span className="font-bold text-gray-900">
-                one payment, one contract, one Bill of Lading
-              </span>{' '}
-              and{' '}
-              <span className="font-bold text-gray-900">
-                one shipment
-              </span>.
+              {t('heroSubtitle')}
             </p>
           </div>
           
@@ -107,7 +98,7 @@ const Hero = () => {
           >
             <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
-                <MessageSquare className="mr-2 h-4 w-4" /> Talk to Our Team
+                <MessageSquare className="mr-2 h-4 w-4" /> {t('heroButton')}
               </a>
             </Button>
           </div>

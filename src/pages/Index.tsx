@@ -8,9 +8,11 @@ import Footer from '@/components/landing/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { PackageCheck, FileText, Receipt, CheckCircle2, DollarSign, Timer, AlertCircle, Package, CreditCard, CheckCircle, GitMerge, Database, Archive } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   // Scroll to section if hash is present in URL
   useEffect(() => {
@@ -25,57 +27,57 @@ const Index = () => {
 
   const pricingPlans = [
     {
-      name: "Starter",
+      name: t('starter'),
       price: "$499",
-      period: "One-time fee",
-      description: "Perfect for first-time users exploring Turkish supply chain services",
-      additionalInfo: "+ Bank transfer fees",
+      period: t('oneTimeFee'),
+      description: t('starterDesc'),
+      additionalInfo: t('bankTransferFees'),
       icon: PackageCheck,
       iconColor: "text-slate-600",
       iconBg: "bg-slate-100",
       borderColor: "border-slate-200",
       features: [
-        "Single consolidated shipment",
-        "Supplier payment handling",
-        "Single Bill of Lading",
-        "Documentation support"
+        t('singleConsolidatedShipmentFeature'),
+        t('supplierPaymentHandling'),
+        t('singleBillOfLadingFeature'),
+        t('documentationSupport')
       ]
     },
     {
-      name: "Growth",
+      name: t('growth'),
       price: "2%",
-      period: "Of the total order value",
-      description: "Our most popular option for growing businesses with regular shipments",
-      additionalInfo: "+ Bank transfer fees",
+      period: t('totalOrderValue'),
+      description: t('growthDesc'),
+      additionalInfo: t('bankTransferFees'),
       icon: FileText,
       iconColor: "text-blue-600",
       iconBg: "bg-blue-100",
       borderColor: "border-blue-300",
       features: [
-        "Multiple consolidated shipments",
-        "Digital procurement dashboard",
-        "Real-time tracking",
-        "Preferred shipping rates",
-        "Payment handling & protection"
+        t('multipleConsolidatedShipments'),
+        t('digitalProcurementDashboard'),
+        t('realTimeTracking'),
+        t('preferredShippingRates'),
+        t('paymentHandlingProtection')
       ]
     },
     {
-      name: "Enterprise",
+      name: t('enterprise'),
       price: "1.5%",
-      period: "After 5 consolidations/month",
-      description: "For businesses with high-volume international shipping needs",
-      additionalInfo: "Volume-based discounting after 5 consolidations/month",
+      period: t('after5Consolidations'),
+      description: t('enterpriseDesc'),
+      additionalInfo: t('volumeDiscounting'),
       icon: Receipt,
       iconColor: "text-emerald-600",
       iconBg: "bg-emerald-100",
       borderColor: "border-emerald-200",
       features: [
-        "Volume discount pricing",
-        "Priority consolidation",
-        "Customized shipping schedule",
-        "Advanced analytics & reporting",
-        "Warehouse storage options",
-        "Strategic sourcing assistance"
+        t('volumeDiscountPricing'),
+        t('priorityConsolidation'),
+        t('customizedShippingSchedule'),
+        t('advancedAnalyticsReporting'),
+        t('warehouseStorageOptions'),
+        t('strategicSourcingAssistance')
       ]
     }
   ];
@@ -91,10 +93,10 @@ const Index = () => {
           <div className="container mx-auto px-6">
             <div className={`text-center max-w-3xl mx-auto ${isMobile ? "mb-6" : "mb-8"}`}>
               <h2 className={`${isMobile ? "text-xl" : "text-2xl md:text-3xl"} font-bold ${isMobile ? "mb-2" : "mb-4"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                Results That Speak for Themselves
+                {t('statisticsTitle')}
               </h2>
               <p className={`text-gray-600 ${isMobile ? "text-sm" : ""}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                See how our consolidation platform transforms your procurement efficiency
+                {t('statisticsSubtitle')}
               </p>
             </div>
             
@@ -104,9 +106,9 @@ const Index = () => {
                   <FileText className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-blue-600`} />
                 </div>
                 <div className={`${isMobile ? "text-2xl" : "text-3xl"} font-bold text-blue-600 ${isMobile ? "mb-1" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>15x</div>
-                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Faster Documentation</div>
+                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{t('fasterDocumentation')}</div>
                 <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  Single Bill of Lading instead of multiple documents
+                  {t('singleBillOfLading')}
                 </div>
               </div>
               
@@ -115,9 +117,9 @@ const Index = () => {
                   <DollarSign className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-emerald-600`} />
                 </div>
                 <div className={`${isMobile ? "text-2xl" : "text-3xl"} font-bold text-emerald-600 ${isMobile ? "mb-1" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>65%</div>
-                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Cost Reduction</div>
+                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{t('costReduction')}</div>
                 <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  Lower shipping costs through intelligent consolidation
+                  {t('lowerShippingCosts')}
                 </div>
               </div>
               
@@ -126,9 +128,9 @@ const Index = () => {
                   <Timer className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-purple-600`} />
                 </div>
                 <div className={`${isMobile ? "text-2xl" : "text-3xl"} font-bold text-purple-600 ${isMobile ? "mb-1" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>80%</div>
-                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Time Savings</div>
+                <div className={`font-semibold text-gray-900 ${isMobile ? "mb-1 text-sm" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{t('timeSavings')}</div>
                 <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  Streamlined procurement process management
+                  {t('streamlinedProcess')}
                 </div>
               </div>
             </div>
@@ -140,10 +142,10 @@ const Index = () => {
           <div className="container mx-auto px-6">
             <div className="text-center max-w-4xl mx-auto mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                Traditional vs. Smart Consolidation
+                {t('comparisonTitle')}
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                See how Bundleist transforms fragmented import processes into streamlined consolidation
+                {t('comparisonSubtitle')}
               </p>
             </div>
             
@@ -159,9 +161,9 @@ const Index = () => {
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Traditional Imports
+                          {t('traditionalImports')}
                         </h3>
-                        <p className="text-sm text-red-500 font-medium">Fragmented & Complex</p>
+                        <p className="text-sm text-red-500 font-medium">{t('fragmentedComplex')}</p>
                       </div>
                     </div>
                   </div>
@@ -174,10 +176,10 @@ const Index = () => {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Multiple separate shipments
+                          {t('multipleShipments')}
                         </div>
                         <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Each supplier ships independently, increasing costs
+                          {t('multipleShipmentsDesc')}
                         </div>
                       </div>
                     </div>
@@ -188,10 +190,10 @@ const Index = () => {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Complex documentation
+                          {t('complexDocumentation')}
                         </div>
                         <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Multiple Bills of Lading and customs forms
+                          {t('complexDocumentationDesc')}
                         </div>
                       </div>
                     </div>
@@ -202,10 +204,10 @@ const Index = () => {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Payment risks
+                          {t('paymentRisks')}
                         </div>
                         <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Multiple individual payments without protection
+                          {t('paymentRisksDesc')}
                         </div>
                       </div>
                     </div>
@@ -216,15 +218,15 @@ const Index = () => {
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div className="text-center">
                         <div className="text-2xl font-bold text-red-500 mb-1">5%</div>
-                        <div className="text-xs text-gray-600">Response Rate</div>
+                        <div className="text-xs text-gray-600">{t('responseRate')}</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-red-500 mb-1">80%</div>
-                        <div className="text-xs text-gray-600">Delays</div>
+                        <div className="text-xs text-gray-600">{t('delays')}</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-red-500 mb-1">0%</div>
-                        <div className="text-xs text-gray-600">Protection</div>
+                        <div className="text-xs text-gray-600">{t('protection')}</div>
                       </div>
                     </div>
                   </div>
@@ -240,13 +242,13 @@ const Index = () => {
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Bundleist Solution
+                          {t('bundleistSolution')}
                         </h3>
-                        <p className="text-sm text-blue-600 font-medium">Smart & Consolidated</p>
+                        <p className="text-sm text-blue-600 font-medium">{t('smartConsolidated')}</p>
                       </div>
                     </div>
                     <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-xs font-medium">
-                      RECOMMENDED
+                      {t('recommended')}
                     </div>
                   </div>
                   
@@ -258,10 +260,10 @@ const Index = () => {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Single consolidated shipment
+                          {t('singleConsolidatedShipment')}
                         </div>
                         <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          All suppliers ship to our warehouse for consolidation
+                          {t('singleConsolidatedShipmentDesc')}
                         </div>
                       </div>
                     </div>
@@ -272,10 +274,10 @@ const Index = () => {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Streamlined documentation
+                          {t('streamlinedDocumentation')}
                         </div>
                         <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Single Bill of Lading for the entire shipment
+                          {t('streamlinedDocumentationDesc')}
                         </div>
                       </div>
                     </div>
@@ -286,10 +288,10 @@ const Index = () => {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          Secure payment handling
+                          {t('securePaymentHandling')}
                         </div>
                         <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          We handle all supplier payments with protection
+                          {t('securePaymentHandlingDesc')}
                         </div>
                       </div>
                     </div>
@@ -300,15 +302,15 @@ const Index = () => {
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div className="text-center">
                         <div className="text-2xl font-bold text-blue-600 mb-1">15x</div>
-                        <div className="text-xs text-gray-600">Faster Process</div>
+                        <div className="text-xs text-gray-600">{t('fasterProcess')}</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-blue-600 mb-1">65%</div>
-                        <div className="text-xs text-gray-600">Cost Savings</div>
+                        <div className="text-xs text-gray-600">{t('costSavings')}</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-blue-600 mb-1">100%</div>
-                        <div className="text-xs text-gray-600">Protected</div>
+                        <div className="text-xs text-gray-600">{t('protected')}</div>
                       </div>
                     </div>
                   </div>
@@ -331,7 +333,7 @@ const Index = () => {
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8">
               <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                Choose Your Plan
+                {t('choosePlan')}
               </h2>
               <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 Transparent pricing that scales with your business needs.

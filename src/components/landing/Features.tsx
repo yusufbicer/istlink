@@ -3,6 +3,7 @@ import { Package, TruckIcon, UsersIcon, FileTextIcon, CreditCardIcon, GlobeIcon,
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useIsMobile } from '@/hooks/use-mobile';
 import type { UseEmblaCarouselType } from "embla-carousel-react";
+import { useTranslation } from 'react-i18next';
 
 const features = [
   {
@@ -62,6 +63,7 @@ const Features = () => {
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -114,7 +116,7 @@ const Features = () => {
           }`}
         >
           <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            Features
+            {t('features')}
           </span>
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Turkish Import Consolidation Made Simple

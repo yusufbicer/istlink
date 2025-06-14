@@ -134,8 +134,8 @@ const BlogPreview = () => {
                       {formatBlogDate(post.created_at, i18n.language, t, 'short')}
                     </div>
                   </div>
-                  <div className="flex items-center pr-3">
-                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                  <div className="flex items-start pr-3">
+                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors mt-1" />
                   </div>
                 </div>
               </Link>

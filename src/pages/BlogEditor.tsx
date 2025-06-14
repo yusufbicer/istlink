@@ -108,9 +108,18 @@ const BlogEditor = () => {
 
           setEditingPost(data);
           form.setValue("title", data.title);
+          form.setValue("title_en", data.title_en || "");
+          form.setValue("title_tr", data.title_tr || "");
+          form.setValue("title_fr", data.title_fr || "");
           form.setValue("slug", data.slug);
           form.setValue("excerpt", data.excerpt || "");
+          form.setValue("excerpt_en", data.excerpt_en || "");
+          form.setValue("excerpt_tr", data.excerpt_tr || "");
+          form.setValue("excerpt_fr", data.excerpt_fr || "");
           form.setValue("content", data.content);
+          form.setValue("content_en", data.content_en || "");
+          form.setValue("content_tr", data.content_tr || "");
+          form.setValue("content_fr", data.content_fr || "");
           form.setValue("category", data.category);
           form.setValue("author_name", data.author_name || "");
           form.setValue("image_url", data.image_url || "");
@@ -143,9 +152,18 @@ const BlogEditor = () => {
     try {
       const postData = {
         title: values.title,
+        title_en: values.title_en || null,
+        title_tr: values.title_tr || null,
+        title_fr: values.title_fr || null,
         content: values.content,
+        content_en: values.content_en || null,
+        content_tr: values.content_tr || null,
+        content_fr: values.content_fr || null,
         slug: values.slug,
         excerpt: values.excerpt || null,
+        excerpt_en: values.excerpt_en || null,
+        excerpt_tr: values.excerpt_tr || null,
+        excerpt_fr: values.excerpt_fr || null,
         category: values.category,
         author_id: user.id,
         author_name: values.author_name,
@@ -346,6 +364,143 @@ const BlogEditor = () => {
                 </FormItem>
               )}
             />
+
+            {/* Translation Fields */}
+            <div className="border-t pt-6">
+              <h3 className="text-lg font-semibold mb-4">Translations (Optional)</h3>
+              
+              {/* English Translations */}
+              <div className="space-y-4 mb-6">
+                <h4 className="text-md font-medium text-gray-700">English 🇺🇸</h4>
+                <FormField
+                  control={form.control}
+                  name="title_en"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Title (English)</FormLabel>
+                      <FormControl>
+                        <Input placeholder="English title..." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="excerpt_en"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Excerpt (English)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="English excerpt..." rows={2} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="content_en"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Content (English)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="English content..." rows={10} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Turkish Translations */}
+              <div className="space-y-4 mb-6">
+                <h4 className="text-md font-medium text-gray-700">Turkish 🇹🇷</h4>
+                <FormField
+                  control={form.control}
+                  name="title_tr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Title (Turkish)</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Turkish title..." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="excerpt_tr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Excerpt (Turkish)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Turkish excerpt..." rows={2} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="content_tr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Content (Turkish)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Turkish content..." rows={10} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* French Translations */}
+              <div className="space-y-4 mb-6">
+                <h4 className="text-md font-medium text-gray-700">French 🇫🇷</h4>
+                <FormField
+                  control={form.control}
+                  name="title_fr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Title (French)</FormLabel>
+                      <FormControl>
+                        <Input placeholder="French title..." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="excerpt_fr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Excerpt (French)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="French excerpt..." rows={2} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="content_fr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Content (French)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="French content..." rows={10} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
             
             <div className="flex gap-4">
               <Button 

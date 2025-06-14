@@ -312,8 +312,19 @@ const Hero = () => {
                      // Desktop dashboard with creative consolidation view
                      <div className="bg-white text-slate-800 p-3">
                        <div className="flex items-center justify-between mb-2.5">
-                         <div className="flex items-center">
+                         <div className="flex items-center space-x-4">
                            <BundleistLogo size="sm" className="mr-3" showText={false} />
+                           <div className="flex items-center space-x-3 text-xs">
+                             <span className="text-slate-600 hover:text-slate-800 cursor-pointer font-medium">
+                               {i18n.language === 'tr' ? 'Konsolidasyonlar' : i18n.language === 'fr' ? 'Consolidations' : 'Consolidations'}
+                             </span>
+                             <span className="text-slate-600 hover:text-slate-800 cursor-pointer font-medium">
+                               {i18n.language === 'tr' ? 'Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
+                             </span>
+                             <span className="text-slate-600 hover:text-slate-800 cursor-pointer font-medium">
+                               {i18n.language === 'tr' ? 'Analitik' : i18n.language === 'fr' ? 'Analytique' : 'Analytics'}
+                             </span>
+                           </div>
                          </div>
                          <div className="flex items-center space-x-2">
                            <div className="relative">

@@ -12,7 +12,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+    <footer className="bg-gray-50 border-t border-gray-200">
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           
@@ -23,30 +23,30 @@ const Footer = () => {
               <div className="ml-4">
                 <div className="flex items-center">
                   <span className="font-bold text-2xl tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                    <span className="text-teal-400">BUNDLE</span><span className="text-blue-400">IST</span>
+                    <span className="text-teal-600">BUNDLE</span><span className="text-blue-600">IST</span>
                   </span>
                 </div>
-                <p className="text-sm text-gray-300 mt-1 font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <p className="text-sm text-gray-600 mt-1 font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Simplifying Cross Border Procurement
                 </p>
               </div>
             </div>
             
-            <p className="text-gray-300 mb-6 max-w-md leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className="text-gray-600 mb-6 max-w-md leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform your Turkish supply chain with intelligent consolidation services. 
               Reduce costs, optimize logistics, and scale your international business with confidence.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-3">
-              <div className="flex items-center text-gray-300">
-                <Mail className="h-4 w-4 mr-3 text-blue-400" />
-                <a href="mailto:bundleist@gmail.com" className="hover:text-white transition-colors" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <div className="flex items-center text-gray-700">
+                <Mail className="h-4 w-4 mr-3 text-blue-600" />
+                <a href="mailto:bundleist@gmail.com" className="hover:text-blue-600 transition-colors" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   bundleist@gmail.com
                 </a>
               </div>
-              <div className="flex items-center text-gray-300">
-                <MapPin className="h-4 w-4 mr-3 text-teal-400" />
+              <div className="flex items-center text-gray-700">
+                <MapPin className="h-4 w-4 mr-3 text-teal-600" />
                 <span style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Istanbul, Turkey
                 </span>
@@ -56,30 +56,30 @@ const Footer = () => {
 
           {/* Navigation Links */}
           <div className="lg:col-span-3">
-            <h3 className="font-semibold mb-6 text-white text-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <h3 className="font-semibold mb-6 text-gray-900 text-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Navigation
             </h3>
             <ul className="space-y-4">
               <li>
-                <a href="#features" className="text-gray-300 hover:text-white transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Features
                   <ArrowUpRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="text-gray-300 hover:text-white transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   How It Works
                   <ArrowUpRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
               <li>
-                <a href="#pricing" className="text-gray-300 hover:text-white transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Pricing
                   <ArrowUpRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
               <li>
-                <Link to="/blog" className="text-gray-300 hover:text-white transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <Link to="/blog" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Blog
                   <ArrowUpRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
@@ -89,10 +89,10 @@ const Footer = () => {
 
           {/* Newsletter & CTA */}
           <div className="lg:col-span-4">
-            <h3 className="font-semibold mb-6 text-white text-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <h3 className="font-semibold mb-6 text-gray-900 text-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Stay Updated
             </h3>
-            <p className="text-gray-300 mb-6" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className="text-gray-600 mb-6" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Get the latest updates on supply chain optimization and international trade insights.
             </p>
             
@@ -107,10 +107,10 @@ const Footer = () => {
               
               {/* Legal Links */}
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-4">
-                <a href="#" className="text-gray-400 hover:text-gray-300 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <a href="#" className="text-gray-500 hover:text-gray-700 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Privacy Policy
                 </a>
-                <a href="#" className="text-gray-400 hover:text-gray-300 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <a href="#" className="text-gray-500 hover:text-gray-700 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Terms of Service
                 </a>
               </div>
@@ -119,17 +119,17 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-700 mt-12 pt-8">
+        <div className="border-t border-gray-200 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className="text-gray-500 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               &copy; 2024 İstLink Ltd. All rights reserved.
             </p>
             <div className="flex items-center mt-4 md:mt-0">
-              <span className="text-gray-400 text-sm mr-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <span className="text-gray-500 text-sm mr-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 Made with
               </span>
-              <span className="text-red-400">♥</span>
-              <span className="text-gray-400 text-sm ml-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <span className="text-red-500">♥</span>
+              <span className="text-gray-500 text-sm ml-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 in Istanbul
               </span>
             </div>

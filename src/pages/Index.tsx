@@ -365,12 +365,6 @@ const Index = () => {
                             <p className="text-lg font-bold text-gray-900">{plan.price}</p>
                           </div>
                         </div>
-                        <Button 
-                          className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 text-xs rounded-lg transition-all"
-                          onClick={() => navigate('/early-access')}
-                        >
-                          {t('getStarted')}
-                        </Button>
                       </div>
                       <ul className="space-y-1 text-xs text-gray-600">
                         {plan.features.slice(0, 3).map((feature, featureIndex) => (

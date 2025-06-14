@@ -188,10 +188,10 @@ const EarlyAccess = () => {
               
               <Button 
                 type="submit" 
-                className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : (isNewsletterSubscription ? "Subscribe" : "Get Started")}
+                {isSubmitting ? "Submitting..." : (isNewsletterSubscription ? "Subscribe" : "Request Early Access")}
               </Button>
             </form>
           </Form>

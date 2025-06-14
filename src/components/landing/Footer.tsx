@@ -92,7 +92,7 @@ const Footer = () => {
             <div className="space-y-4">
               <Button 
                 onClick={handleNewsletterClick}
-                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white border-0 w-full md:w-auto px-6 py-3 font-medium"
+                className="bg-blue-600 hover:bg-blue-700 text-white border-0 w-full md:w-auto px-6 py-3 font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
               >
                 {t('subscribeNewsletter')}

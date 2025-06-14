@@ -20,8 +20,8 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
   };
 
   return (
-    <div className={`flex items-center space-x-3 ${className}`}>
-      {/* Professional Bundling Logo */}
+    <div className={`flex items-center space-x-2 ${className}`}>
+      {/* Line-Based Bundling Logo */}
       <div className={`${sizeClasses[size]} relative`}>
         <svg
           viewBox="0 0 48 48"
@@ -30,78 +30,52 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
           className="w-full h-full"
         >
           <defs>
-            <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1e40af" />
-              <stop offset="50%" stopColor="#0369a1" />
-              <stop offset="100%" stopColor="#0284c7" />
-            </linearGradient>
-            <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#dc2626" />
-              <stop offset="100%" stopColor="#ea580c" />
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="50%" stopColor="#0891b2" />
+              <stop offset="100%" stopColor="#dc2626" />
             </linearGradient>
           </defs>
           
-          {/* Professional network design representing bundling and logistics */}
-          <g strokeLinecap="round" strokeLinejoin="round">
-            {/* Central hub - refined circle */}
-            <circle 
-              cx="24" 
-              cy="24" 
-              r="5" 
-              fill="url(#primaryGradient)" 
-              stroke="white" 
-              strokeWidth="1.5"
-            />
+          {/* Abstract line art representing bundling and logistics */}
+          <g stroke="url(#lineGradient)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            {/* Central bundling point */}
+            <circle cx="24" cy="24" r="4" />
             
-            {/* Primary connection nodes */}
-            <g fill="url(#accentGradient)" stroke="white" strokeWidth="1">
-              <circle cx="12" cy="12" r="2.5" />
-              <circle cx="36" cy="12" r="2.5" />
-              <circle cx="12" cy="36" r="2.5" />
-              <circle cx="36" cy="36" r="2.5" />
-            </g>
+            {/* Connecting lines representing bundling network */}
+            <path d="M 8 12 Q 16 8, 24 20" />
+            <path d="M 40 12 Q 32 8, 24 20" />
+            <path d="M 8 36 Q 16 40, 24 28" />
+            <path d="M 40 36 Q 32 40, 24 28" />
             
-            {/* Connection lines - clean and professional */}
-            <g stroke="url(#primaryGradient)" strokeWidth="2" fill="none">
-              <path d="M 14.5 14.5 L 21.5 21.5" opacity="0.8" />
-              <path d="M 33.5 14.5 L 26.5 21.5" opacity="0.8" />
-              <path d="M 14.5 33.5 L 21.5 26.5" opacity="0.8" />
-              <path d="M 33.5 33.5 L 26.5 26.5" opacity="0.8" />
-            </g>
+            {/* Horizontal bundling lines */}
+            <path d="M 6 24 L 18 24" />
+            <path d="M 30 24 L 42 24" />
             
-            {/* Secondary network points */}
-            <g fill="url(#primaryGradient)" opacity="0.6">
-              <circle cx="24" cy="8" r="1.5" />
-              <circle cx="24" cy="40" r="1.5" />
-              <circle cx="8" cy="24" r="1.5" />
-              <circle cx="40" cy="24" r="1.5" />
-            </g>
+            {/* Istanbul-inspired architectural element */}
+            <path d="M 16 6 Q 24 2, 32 6" strokeWidth="2" opacity="0.7" />
             
-            {/* Subtle connecting lines to secondary points */}
-            <g stroke="url(#primaryGradient)" strokeWidth="1.5" fill="none" opacity="0.4">
-              <path d="M 24 19 L 24 13" />
-              <path d="M 24 29 L 24 35" />
-              <path d="M 19 24 L 13 24" />
-              <path d="M 29 24 L 35 24" />
-            </g>
-            
-            {/* Professional accent - geometric element */}
-            <path 
-              d="M 20 4 Q 24 2, 28 4" 
-              stroke="url(#accentGradient)" 
-              strokeWidth="2" 
-              fill="none" 
-              opacity="0.7"
-            />
+            {/* Small connection dots */}
+            <circle cx="8" cy="12" r="1.5" fill="url(#lineGradient)" />
+            <circle cx="40" cy="12" r="1.5" fill="url(#lineGradient)" />
+            <circle cx="8" cy="36" r="1.5" fill="url(#lineGradient)" />
+            <circle cx="40" cy="36" r="1.5" fill="url(#lineGradient)" />
+            <circle cx="6" cy="24" r="1.5" fill="url(#lineGradient)" />
+            <circle cx="42" cy="24" r="1.5" fill="url(#lineGradient)" />
           </g>
         </svg>
       </div>
       
-      {/* Professional Typography */}
+      {/* Bundleist Text */}
       {showText && (
-        <div className={`text-gray-900 dark:text-gray-100 ${textSizes[size]} font-semibold tracking-wide`}>
-          <span className="text-blue-700 dark:text-blue-400 font-bold">BUNDLE</span>
-          <span className="text-gray-700 dark:text-gray-300 font-medium">IST</span>
+        <div 
+          className={`text-gray-800 dark:text-gray-200 ${textSizes[size]} tracking-widest uppercase font-precision`}
+          style={{ 
+            letterSpacing: '0.12em'
+          }}
+        >
+          <span className="font-light">BUNDLE</span>
+          <span className="font-medium">IST</span>
         </div>
       )}
     </div>

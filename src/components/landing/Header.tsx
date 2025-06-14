@@ -48,7 +48,7 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className={`flex items-center ${isMobile ? '-ml-6' : ''}`}>
-            <BundleistLogo size="md" showText={true} />
+            <BundleistLogo size={isMobile ? "sm" : "md"} showText={true} />
           </Link>
 
           {/* Desktop Navigation - Improved tablet spacing */}

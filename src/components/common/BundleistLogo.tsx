@@ -8,19 +8,19 @@ interface BundleistLogoProps {
 
 const BundleistLogo = ({ size = 'md', className = '', showText = true }: BundleistLogoProps) => {
   const sizeClasses = {
-    sm: 'w-12 h-12',
-    md: 'w-24 h-24',
+    sm: 'w-10 h-10',
+    md: 'w-20 h-20',
     lg: 'w-28 h-28'
   };
 
   const textSizes = {
-    sm: 'text-base',
-    md: 'text-2xl',
+    sm: 'text-sm',
+    md: 'text-xl',
     lg: 'text-3xl'
   };
 
   return (
-    <div className={`flex items-center space-x-0 ${className}`}>
+    <div className={`flex items-center -space-x-1 ${className}`}>
       {/* Geometric B Logo */}
       <div className={`${sizeClasses[size]} relative`}>
         <svg 

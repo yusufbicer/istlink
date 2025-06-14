@@ -20,57 +20,6 @@ interface Step {
   bgGradient: string;
 }
 
-const steps: Step[] = [
-  {
-    icon: Search,
-    title: "Find Your Suppliers",
-    description: "Find your suppliers, get your proforma invoices and send them all to our team for review and processing.",
-    color: "text-blue-600",
-    bgGradient: "from-blue-50 to-blue-100"
-  },
-  {
-    icon: ShieldCheck,
-    title: "Supplier Verification",
-    description: "Our team will verify your suppliers and after confirmation we will sign a master contract to act on your behalf.",
-    color: "text-emerald-600",
-    bgGradient: "from-emerald-50 to-emerald-100"
-  },
-  {
-    icon: CreditCard,
-    title: "Payment Processing",
-    description: "We will handle all your order payments on behalf of you from your account balance with complete transparency.",
-    color: "text-purple-600",
-    bgGradient: "from-purple-50 to-purple-100"
-  },
-  {
-    icon: PackagePlus,
-    title: "Order Consolidation",
-    description: "Our team will receive and verify all your orders, then combine them into a single optimized shipment.",
-    color: "text-amber-600",
-    bgGradient: "from-amber-50 to-amber-100"
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Documentation Simplified",
-    description: "We handle all export paperwork, customs forms, and create a single bill of lading for your consolidated shipment.",
-    color: "text-indigo-600",
-    bgGradient: "from-indigo-50 to-indigo-100"
-  },
-  {
-    icon: ShipIcon,
-    title: "Global Shipping",
-    description: "Your consolidated order is shipped to your destination with real-time tracking and updates.",
-    color: "text-cyan-600",
-    bgGradient: "from-cyan-50 to-cyan-100"
-  },
-  {
-    icon: MapPin,
-    title: "Easy Delivery",
-    description: "Receive your multiple orders as a single shipment, saving time and reducing customs complexity.",
-    color: "text-pink-600",
-    bgGradient: "from-pink-50 to-pink-100"
-  }
-];
 
 const HowItWorks = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -79,6 +28,58 @@ const HowItWorks = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
   const { t } = useTranslation();
+
+  const steps: Step[] = [
+    {
+      icon: Search,
+      title: t('findSuppliers'),
+      description: t('findSuppliersDesc'),
+      color: "text-blue-600",
+      bgGradient: "from-blue-50 to-blue-100"
+    },
+    {
+      icon: ShieldCheck,
+      title: t('supplierVerification'),
+      description: t('supplierVerificationDesc'),
+      color: "text-emerald-600",
+      bgGradient: "from-emerald-50 to-emerald-100"
+    },
+    {
+      icon: CreditCard,
+      title: t('paymentProcessing'),
+      description: t('paymentProcessingDesc'),
+      color: "text-purple-600",
+      bgGradient: "from-purple-50 to-purple-100"
+    },
+    {
+      icon: PackagePlus,
+      title: t('orderConsolidation'),
+      description: t('orderConsolidationDesc'),
+      color: "text-amber-600",
+      bgGradient: "from-amber-50 to-amber-100"
+    },
+    {
+      icon: ClipboardCheck,
+      title: t('documentationSimplified'),
+      description: t('documentationSimplifiedDesc'),
+      color: "text-indigo-600",
+      bgGradient: "from-indigo-50 to-indigo-100"
+    },
+    {
+      icon: ShipIcon,
+      title: t('globalShipping'),
+      description: t('globalShippingDesc'),
+      color: "text-cyan-600",
+      bgGradient: "from-cyan-50 to-cyan-100"
+    },
+    {
+      icon: MapPin,
+      title: t('easyDelivery'),
+      description: t('easyDeliveryDesc'),
+      color: "text-pink-600",
+      bgGradient: "from-pink-50 to-pink-100"
+    }
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -132,7 +133,7 @@ const HowItWorks = () => {
           </h2>
           
           <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support.
+            {t('howItWorksDesc')}
           </p>
         </div>
 

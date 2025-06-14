@@ -161,7 +161,7 @@ const Blog = () => {
                 {t('ourBlog')}
               </div>
               
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight px-4">
                 {t('insightsOnCrossBorderCommerce')}
               </h1>
               
@@ -331,22 +331,22 @@ const Blog = () => {
             )}
             
             {/* Enhanced Newsletter CTA */}
-            <div className="mt-20 max-w-4xl mx-auto">
-              <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-3xl p-12 text-center overflow-hidden">
+            <div className="mt-20 max-w-2xl mx-auto">
+              <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-2xl p-8 md:p-10 text-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/10 opacity-20"></div>
                 <div className="relative">
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                     {t('wantToStayUpdated')}
                   </h3>
-                  <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+                  <p className="text-blue-100 text-base md:text-lg mb-6 max-w-xl mx-auto">
                     Get exclusive insights, industry trends, and expert analysis delivered directly to your inbox.
                   </p>
                   <Link 
                     to="/early-access"
-                    className="inline-flex items-center bg-white text-blue-700 px-8 py-4 font-semibold rounded-xl hover:bg-blue-50 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                    className="inline-flex items-center bg-white text-blue-700 px-6 py-3 font-semibold rounded-xl hover:bg-blue-50 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
                   >
                     {t('subscribeToNewsletterBtn')}
-                    <ChevronRight className="w-5 h-5 ml-2" />
+                    <ChevronRight className="w-4 h-4 ml-2" />
                   </Link>
                 </div>
               </div>

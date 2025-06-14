@@ -127,19 +127,8 @@ const Hero = () => {
                   {/* Creative Mobile Dashboard */}
                   {isMobile ? (
                     <div className="bg-white text-slate-800 p-2">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <div className="flex items-center">
-                          <BundleistLogo size="sm" className="mr-2" showText={false} />
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <div className="relative">
-                            <Bell className="h-3 w-3 text-slate-600" />
-                            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
-                          </div>
-                          <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-700 font-medium">
-                            J
-                          </div>
-                        </div>
+                      <div className="flex items-center justify-center mb-1.5">
+                        <BundleistLogo size="sm" className="mr-2" showText={true} />
                       </div>
                       
                       {/* Live Activity Banner */}
@@ -346,37 +335,9 @@ const Hero = () => {
                   ) : (
                      // Desktop dashboard with creative consolidation view
                      <div className="bg-white text-slate-800 p-3">
-                       <div className="flex items-center justify-between mb-2.5">
-                         <div className="flex items-center">
-                           <BundleistLogo size="md" className="mr-3" showText={true} />
-                         </div>
-                         
-                         <div className="flex space-x-1.5">
-                           <div className="flex items-center px-2 py-1 bg-slate-600 text-white rounded-lg text-xs font-medium">
-                             <Activity className="h-3 w-3 mr-1.5" /> 
-                             {i18n.language === 'tr' ? 'Kontrol Paneli' : i18n.language === 'fr' ? 'Tableau de bord' : 'Dashboard'}
-                           </div>
-                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
-                             <Package className="h-3 w-3 mr-1.5" /> 
-                             {i18n.language === 'tr' ? 'Siparişler' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
-                           </div>
-                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
-                             <GitMerge className="h-3 w-3 mr-1.5" /> 
-                             {i18n.language === 'tr' ? 'Konsolidasyonlar' : i18n.language === 'fr' ? 'Consolidations' : 'Consolidations'}
-                           </div>
-                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
-                             <Users className="h-3 w-3 mr-1.5" /> 
-                             {i18n.language === 'tr' ? 'Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
-                           </div>
-                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium relative">
-                             <Bell className="h-3 w-3 mr-0" />
-                            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-blue-600 rounded-full"></div>
-                          </div>
-                          <div className="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-medium text-slate-700">
-                            J
-                          </div>
-                        </div>
-                      </div>
+                       <div className="flex items-center justify-center mb-2.5">
+                         <BundleistLogo size="md" className="" showText={true} />
+                       </div>
                       
                       {/* Live Activity Banner */}
                       <div className="bg-gradient-to-r from-blue-50 to-slate-50 p-2 rounded-lg border border-blue-200 mb-2.5">

@@ -95,11 +95,8 @@ const BlogPreview = () => {
       <div className="container mx-auto px-4 max-w-7xl">
         <div className={`text-center ${isMobile ? 'mb-6' : 'mb-12'}`}>
           <div className="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-medium mb-3">
-            Latest Insights
-          </div>
-          <h2 className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl lg:text-4xl'} font-bold text-gray-900 mb-3`}>
             {t('latestInsights')}
-          </h2>
+          </div>
           <p className={`${isMobile ? 'text-sm' : 'text-lg'} text-gray-600 max-w-2xl mx-auto`}>
             {t('stayUpdatedWithTrends')}
           </p>
@@ -173,7 +170,7 @@ const BlogPreview = () => {
                       {formatBlogDate(post.created_at, i18n.language, t, 'medium')}
                     </div>
                     <div className="flex items-center text-blue-600 text-sm font-medium">
-                      Read more
+                      {t('readMore')}
                       <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>

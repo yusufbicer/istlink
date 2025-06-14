@@ -180,7 +180,9 @@ const resources = {
       
       // How It Works Section
       "simpleProcess": "Simple Process",
-      "howItWorksDesc": "Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support."
+      "howItWorksDesc": "Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support.",
+      "start": "START",
+      "done": "DONE"
     }
   },
   fr: {
@@ -358,7 +360,9 @@ const resources = {
       
       // How It Works Section
       "simpleProcess": "Processus Simple",
-      "howItWorksDesc": "Notre processus rationalisé rend l'approvisionnement et l'expédition depuis la Turquie simples grâce à une technologie de pointe et un support expert."
+      "howItWorksDesc": "Notre processus rationalisé rend l'approvisionnement et l'expédition depuis la Turquie simples grâce à une technologie de pointe et un support expert.",
+      "start": "DÉBUT",
+      "done": "FINI"
     }
   },
   tr: {
@@ -536,7 +540,9 @@ const resources = {
       
       // How It Works Section
       "simpleProcess": "Basit Süreç",
-      "howItWorksDesc": "Modern teknolojimiz ve uzman desteğimizle Türkiye'den kaynak bulma ve nakliye sürecimiz zahmetsizdir."
+      "howItWorksDesc": "Modern teknolojimiz ve uzman desteğimizle Türkiye'den kaynak bulma ve nakliye sürecimiz zahmetsizdir.",
+      "start": "BAŞLA",
+      "done": "BİTTİ"
     }
   }
 };

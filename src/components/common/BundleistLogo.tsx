@@ -21,7 +21,7 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
 
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
-      {/* Clean AI Tech Logo */}
+      {/* AI Logistics Tech Logo */}
       <div className={`${sizeClasses[size]} relative`}>
         <svg
           viewBox="0 0 48 48"
@@ -29,45 +29,58 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
         >
-          {/* Clean, Modern Logo Design */}
+          {/* AI Logistics Design */}
           <g>
-            {/* Outer circle with gradient */}
-            <circle
-              cx="24"
-              cy="24"
-              r="22"
+            {/* Main container/box shape */}
+            <rect
+              x="8"
+              y="8"
+              width="32"
+              height="32"
+              rx="6"
               fill="url(#primaryGradient)"
               className="drop-shadow-sm"
             />
             
-            {/* Inner design - network/connection concept */}
+            {/* AI Brain/Circuit pattern */}
             <g transform="translate(24, 24)">
-              {/* Central hub */}
-              <circle 
-                cx="0" 
-                cy="0" 
-                r="4" 
+              {/* Central processing unit */}
+              <rect 
+                x="-4" 
+                y="-4" 
+                width="8" 
+                height="8" 
+                rx="2"
                 fill="white"
                 opacity="0.9"
               />
               
-              {/* Connection nodes */}
-              <circle cx="0" cy="-12" r="2.5" fill="white" opacity="0.8" />
-              <circle cx="10" cy="-6" r="2.5" fill="white" opacity="0.8" />
-              <circle cx="10" cy="6" r="2.5" fill="white" opacity="0.8" />
-              <circle cx="0" cy="12" r="2.5" fill="white" opacity="0.8" />
-              <circle cx="-10" cy="6" r="2.5" fill="white" opacity="0.8" />
-              <circle cx="-10" cy="-6" r="2.5" fill="white" opacity="0.8" />
-              
-              {/* Connection lines */}
-              <g stroke="white" strokeWidth="1.5" opacity="0.6">
-                <line x1="0" y1="-4" x2="0" y2="-9.5" />
-                <line x1="3" y1="-2" x2="7.5" y2="-4.5" />
-                <line x1="3" y1="2" x2="7.5" y2="4.5" />
-                <line x1="0" y1="4" x2="0" y2="9.5" />
-                <line x1="-3" y1="2" x2="-7.5" y2="4.5" />
-                <line x1="-3" y1="-2" x2="-7.5" y2="-4.5" />
+              {/* Circuit pathways - representing logistics routes */}
+              <g stroke="white" strokeWidth="2" opacity="0.7" fill="none">
+                {/* Horizontal paths */}
+                <path d="M -4 -8 L -12 -8 L -12 -4" strokeLinecap="round" />
+                <path d="M 4 -8 L 12 -8 L 12 -4" strokeLinecap="round" />
+                <path d="M -4 8 L -12 8 L -12 4" strokeLinecap="round" />
+                <path d="M 4 8 L 12 8 L 12 4" strokeLinecap="round" />
+                
+                {/* Vertical paths */}
+                <path d="M -8 -4 L -8 -12 L -4 -12" strokeLinecap="round" />
+                <path d="M -8 4 L -8 12 L -4 12" strokeLinecap="round" />
+                <path d="M 8 -4 L 8 -12 L 4 -12" strokeLinecap="round" />
+                <path d="M 8 4 L 8 12 L 4 12" strokeLinecap="round" />
               </g>
+              
+              {/* Data nodes - representing logistics hubs */}
+              <circle cx="-12" cy="-8" r="2" fill="white" opacity="0.8" />
+              <circle cx="12" cy="-8" r="2" fill="white" opacity="0.8" />
+              <circle cx="-12" cy="8" r="2" fill="white" opacity="0.8" />
+              <circle cx="12" cy="8" r="2" fill="white" opacity="0.8" />
+              
+              {/* Corner connection points */}
+              <circle cx="-8" cy="-12" r="1.5" fill="white" opacity="0.6" />
+              <circle cx="8" cy="-12" r="1.5" fill="white" opacity="0.6" />
+              <circle cx="-8" cy="12" r="1.5" fill="white" opacity="0.6" />
+              <circle cx="8" cy="12" r="1.5" fill="white" opacity="0.6" />
             </g>
           </g>
           

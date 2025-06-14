@@ -90,32 +90,32 @@ const BlogPreview = () => {
   }
 
   return (
-    <section className={`${isMobile ? 'py-16' : 'py-20'} bg-gradient-to-b from-gray-50 to-white`}>
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-4">
+    <section className={`${isMobile ? 'py-8' : 'py-20'} bg-gradient-to-b from-gray-50 to-white`}>
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className={`text-center ${isMobile ? 'mb-6' : 'mb-12'}`}>
+          <div className="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-medium mb-3">
             Latest Insights
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl lg:text-4xl'} font-bold text-gray-900 mb-3`}>
             {t('latestInsights')}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className={`${isMobile ? 'text-sm' : 'text-lg'} text-gray-600 max-w-2xl mx-auto`}>
             {t('stayUpdatedWithTrends')}
           </p>
         </div>
 
         {isMobile ? (
-          // Mobile: Professional card layout
-          <div className="space-y-6">
+          // Mobile: Compact card layout
+          <div className="space-y-3">
             {blogPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
-                className="block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 group"
+                className="block bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 group"
               >
                 <div className="flex">
                   {post.image_url && (
-                    <div className="w-24 h-24 flex-shrink-0">
+                    <div className="w-16 h-16 flex-shrink-0">
                       <img 
                         src={post.image_url} 
                         alt={post.title}
@@ -123,22 +123,17 @@ const BlogPreview = () => {
                       />
                     </div>
                   )}
-                  <div className="p-5 flex-grow">
-                    <h3 className="font-semibold text-base text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                  <div className="p-3 flex-grow min-w-0">
+                    <h3 className="font-medium text-sm text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-2">
                       {getTranslatedContent(post, 'title')}
                     </h3>
-                    {getTranslatedContent(post, 'excerpt') && (
-                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                        {getTranslatedContent(post, 'excerpt')}
-                      </p>
-                    )}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Calendar className="h-4 w-4 mr-2" />
-                        {format(new Date(post.created_at), 'MMM d, yyyy')}
-                      </div>
-                      <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                    <div className="flex items-center text-xs text-gray-500">
+                      <Calendar className="h-3 w-3 mr-1" />
+                      {format(new Date(post.created_at), 'MMM d')}
                     </div>
+                  </div>
+                  <div className="flex items-center pr-3">
+                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                   </div>
                 </div>
               </Link>
@@ -187,13 +182,13 @@ const BlogPreview = () => {
           </div>
         )}
 
-        <div className="text-center mt-12">
+        <div className={`text-center ${isMobile ? 'mt-6' : 'mt-12'}`}>
           <Link
             to="/blog"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+            className={`inline-flex items-center ${isMobile ? 'px-4 py-2 text-sm' : 'px-6 py-3'} bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm`}
           >
             {t('viewAllArticles')}
-            <ArrowRight className="h-5 w-5 ml-2" />
+            <ArrowRight className={`${isMobile ? 'h-4 w-4' : 'h-5 w-5'} ml-2`} />
           </Link>
         </div>
       </div>

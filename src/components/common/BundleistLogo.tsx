@@ -1,13 +1,14 @@
 import React from 'react';
 
 interface BundleistLogoProps {
-  size?: 'xs' | 'sm' | 'md' | 'lg';
+  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
   className?: string;
   showText?: boolean;
 }
 
 const BundleistLogo = ({ size = 'md', className = '', showText = true }: BundleistLogoProps) => {
   const sizeClasses = {
+    xxs: 'w-6 h-6',
     xs: 'w-10 h-10',
     sm: 'w-16 h-16',
     md: 'w-24 h-24',
@@ -15,6 +16,7 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
   };
 
   const textSizes = {
+    xxs: 'text-xs',
     xs: 'text-sm',
     sm: 'text-lg',
     md: 'text-2xl',

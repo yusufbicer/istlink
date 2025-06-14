@@ -94,7 +94,7 @@ const Hero = () => {
                     <div className="bg-white text-slate-800 p-2">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center">
-                          <BundleistLogo size="xs" className="mr-2" showText={false} />
+                          <BundleistLogo size="xxs" className="mr-2" showText={false} />
                         </div>
                         <div className="flex items-center space-x-1">
                           <div className="relative">

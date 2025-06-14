@@ -126,23 +126,93 @@ const Features = () => {
           </p>
         </div>
 
-        {/* Vertical Features Grid - All Layouts */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${isMobile ? "gap-3" : "gap-4"} max-w-6xl mx-auto`}>
-          {features.map((feature, index) => (
-            <div 
-              key={index}
-              className={`${feature.color} rounded-lg border ${isMobile ? "p-3" : "p-4"} shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: `${index * 50}ms` }}
-            >
-              <div className={`${isMobile ? "w-8 h-8 mb-2" : "w-10 h-10 mb-3"} ${feature.iconColor} rounded-lg flex items-center justify-center`}>
-                {React.createElement(feature.icon, { className: isMobile ? "w-4 h-4" : "w-5 h-5" })}
+        {/* Mobile: Keep original simple grid */}
+        <div className={`${isMobile ? 'block' : 'hidden'}`}>
+          <div className="grid grid-cols-1 gap-3 max-w-6xl mx-auto">
+            {features.map((feature, index) => (
+              <div 
+                key={index}
+                className={`${feature.color} rounded-lg border p-3 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 50}ms` }}
+              >
+                <div className="w-8 h-8 mb-2 flex items-center justify-center rounded-lg">
+                  <div className={`w-8 h-8 ${feature.iconColor} rounded-lg flex items-center justify-center`}>
+                    {React.createElement(feature.icon, { className: "w-4 h-4" })}
+                  </div>
+                </div>
+                <h3 className="text-base font-semibold mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
               </div>
-              <h3 className={`${isMobile ? "text-base" : "text-lg"} font-semibold ${isMobile ? "mb-1" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-              <p className={`text-gray-600 ${isMobile ? "text-xs" : "text-sm"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop & Tablet: Staggered Layout */}
+        <div className={`${isMobile ? 'hidden' : 'block'} max-w-6xl mx-auto`}>
+          {/* First Row: 3 regular cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            {features.slice(0, 3).map((feature, index) => (
+              <div 
+                key={index}
+                className={`${feature.color} rounded-lg border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 50}ms` }}
+              >
+                <div className="w-10 h-10 mb-3 flex items-center justify-center rounded-lg">
+                  <div className={`w-10 h-10 ${feature.iconColor} rounded-lg flex items-center justify-center`}>
+                    {React.createElement(feature.icon, { className: "w-5 h-5" })}
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                <p className="text-gray-600 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Second Row: 2 larger cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {features.slice(3, 5).map((feature, index) => (
+              <div 
+                key={index + 3}
+                className={`${feature.color} rounded-lg border p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${(index + 3) * 50}ms` }}
+              >
+                <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg">
+                  <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center`}>
+                    {React.createElement(feature.icon, { className: "w-6 h-6" })}
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                <p className="text-gray-600 text-base leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Third Row: 2 centered cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            {features.slice(5, 7).map((feature, index) => (
+              <div 
+                key={index + 5}
+                className={`${feature.color} rounded-lg border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${(index + 5) * 50}ms` }}
+              >
+                <div className="w-11 h-11 mb-3 flex items-center justify-center rounded-lg">
+                  <div className={`w-11 h-11 ${feature.iconColor} rounded-lg flex items-center justify-center`}>
+                    {React.createElement(feature.icon, { className: "w-5 h-5" })}
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                <p className="text-gray-600 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

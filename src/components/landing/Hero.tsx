@@ -312,24 +312,31 @@ const Hero = () => {
                      // Desktop dashboard with creative consolidation view
                      <div className="bg-white text-slate-800 p-3">
                        <div className="flex items-center justify-between mb-2.5">
-                         <div className="flex items-center space-x-4">
-                           <BundleistLogo size="sm" className="mr-3" showText={false} />
-                           <div className="flex items-center space-x-3 text-xs">
-                             <span className="text-slate-600 hover:text-slate-800 cursor-pointer font-medium">
+                         <div className="flex items-center space-x-3">
+                           <BundleistLogo size="sm" showText={true} />
+                           <div className="flex items-center space-x-2">
+                             <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                               <span className="mr-1">📊</span>
+                               {i18n.language === 'tr' ? 'Dashboard' : i18n.language === 'fr' ? 'Tableau de bord' : 'Dashboard'}
+                             </button>
+                             <button className="text-slate-600 hover:text-slate-800 px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                               <span className="mr-1">📦</span>
+                               {i18n.language === 'tr' ? 'Siparişler' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
+                             </button>
+                             <button className="text-slate-600 hover:text-slate-800 px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                               <span className="mr-1">🔗</span>
                                {i18n.language === 'tr' ? 'Konsolidasyonlar' : i18n.language === 'fr' ? 'Consolidations' : 'Consolidations'}
-                             </span>
-                             <span className="text-slate-600 hover:text-slate-800 cursor-pointer font-medium">
+                             </button>
+                             <button className="text-slate-600 hover:text-slate-800 px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                               <span className="mr-1">👥</span>
                                {i18n.language === 'tr' ? 'Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
-                             </span>
-                             <span className="text-slate-600 hover:text-slate-800 cursor-pointer font-medium">
-                               {i18n.language === 'tr' ? 'Analitik' : i18n.language === 'fr' ? 'Analytique' : 'Analytics'}
-                             </span>
+                             </button>
                            </div>
                          </div>
                          <div className="flex items-center space-x-2">
                            <div className="relative">
                              <Bell className="h-4 w-4 text-slate-600" />
-                             <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-600 rounded-full"></div>
+                             <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
                            </div>
                            <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-sm text-slate-700 font-medium">
                              J

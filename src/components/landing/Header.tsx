@@ -91,14 +91,14 @@ const Header = () => {
             <LanguageSwitcher />
             {user ? (
               <Button 
-                className={`bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full ${isTablet ? 'px-4 text-sm' : 'px-6'}`}
+                className={`bg-gray-900 hover:bg-gray-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-4 text-sm rounded-md' : 'px-6 rounded-lg'}`}
                 onClick={() => handleNavigate('/admin/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className={`bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full ${isTablet ? 'px-4 text-sm' : 'px-6'}`}
+                className={`bg-gray-900 hover:bg-gray-800 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-4 text-sm rounded-md' : 'px-6 rounded-lg'}`}
                 onClick={() => handleNavigate('/early-access')}
               >
                 {t('getStarted')}
@@ -154,14 +154,14 @@ const Header = () => {
                 </div>
                 {user ? (
                   <Button 
-                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 font-semibold rounded-full"
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     onClick={() => handleNavigate('/admin/dashboard')}
                   >
                     Dashboard
                   </Button>
                 ) : (
                   <Button 
-                    className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 font-semibold rounded-full"
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     onClick={() => handleNavigate('/early-access')}
                   >
                     {t('getStarted')}

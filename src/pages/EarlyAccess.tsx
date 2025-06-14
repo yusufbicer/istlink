@@ -89,10 +89,10 @@ const EarlyAccess = () => {
     }
   };
   
-  const pageTitle = isNewsletterSubscription ? "Subscribe to Our Newsletter" : "Request Access";
+  const pageTitle = isNewsletterSubscription ? "Subscribe to Our Newsletter" : "Get Started";
   const pageDescription = isNewsletterSubscription 
     ? "Stay updated with the latest news and updates from Bundleist's innovative supply chain solutions."
-    : "Join our exclusive early access program and be among the first to experience Bundleist's innovative supply chain solutions.";
+    : "Get started with Bundleist's innovative supply chain solutions and streamline your Turkish supplier management.";
   
   return (
     <div className="container mx-auto p-6 min-h-screen">
@@ -188,10 +188,10 @@ const EarlyAccess = () => {
               
               <Button 
                 type="submit" 
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : (isNewsletterSubscription ? "Subscribe" : "Submit Request")}
+                {isSubmitting ? "Submitting..." : (isNewsletterSubscription ? "Subscribe" : "Get Started")}
               </Button>
             </form>
           </Form>

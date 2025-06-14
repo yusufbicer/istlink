@@ -17,16 +17,16 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
-      <div className={`container mx-auto px-6 ${isMobile ? "py-2" : "py-16"}`}>
-        <div className={`grid grid-cols-1 lg:grid-cols-12 ${isMobile ? "gap-3" : "gap-8 lg:gap-12"}`}>
+      <div className={`container mx-auto px-6 ${isMobile ? "py-3" : "py-16"}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-12 ${isMobile ? "gap-2" : "gap-8 lg:gap-12"}`}>
           
           {/* Brand Section */}
           <div className="lg:col-span-5">
-            <div className={`flex items-center ${isMobile ? "mb-2" : "mb-6"}`}>
+            <div className={`flex items-center ${isMobile ? "mb-1" : "mb-6"}`}>
               <BundleistLogo size="lg" showText={true} />
             </div>
             
-            <p className={`text-gray-600 ${isMobile ? "mb-2" : "mb-6"} max-w-md leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className={`text-gray-600 ${isMobile ? "mb-1 text-sm" : "mb-6"} max-w-md leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('brandDesc')}
             </p>
 
@@ -49,10 +49,10 @@ const Footer = () => {
 
           {/* Navigation Links */}
           <div className="lg:col-span-3">
-            <h3 className={`font-semibold ${isMobile ? "mb-2" : "mb-6"} text-gray-900 text-lg`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <h3 className={`font-semibold ${isMobile ? "mb-1 text-base" : "mb-6 text-lg"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('navigation')}
             </h3>
-            <ul className="space-y-4">
+            <ul className={`${isMobile ? "space-y-1" : "space-y-4"}`}>
               <li>
                 <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   {t('features')}
@@ -82,10 +82,10 @@ const Footer = () => {
 
           {/* Newsletter & CTA */}
           <div className="lg:col-span-4">
-            <h3 className={`font-semibold ${isMobile ? "mb-2" : "mb-6"} text-gray-900 text-lg`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <h3 className={`font-semibold ${isMobile ? "mb-1 text-base" : "mb-6 text-lg"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('stayUpdated')}
             </h3>
-            <p className={`text-gray-600 ${isMobile ? "mb-2" : "mb-6"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className={`text-gray-600 ${isMobile ? "mb-1 text-sm" : "mb-6"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('stayUpdatedDesc')}
             </p>
             
@@ -112,7 +112,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className={`border-t border-gray-200 ${isMobile ? "mt-3 pt-2" : "mt-12 pt-8"}`}>
+        <div className={`border-t border-gray-200 ${isMobile ? "mt-2 pt-1" : "mt-12 pt-8"}`}>
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               &copy; 2025 Bundleist Ltd. {t('allRightsReserved')}

@@ -48,7 +48,7 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <BundleistLogo size="md" showText={true} />
+            <BundleistLogo size="lg" showText={true} />
           </Link>
 
           {/* Desktop Navigation - Improved tablet spacing */}
@@ -101,7 +101,7 @@ const Header = () => {
                 className={`bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-4 text-sm rounded-md' : 'px-6 rounded-lg'}`}
                 onClick={() => handleNavigate('/early-access')}
               >
-                {t('getStarted')}
+                Early Access
               </Button>
             )}
           </div>
@@ -164,7 +164,7 @@ const Header = () => {
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     onClick={() => handleNavigate('/early-access')}
                   >
-                    {t('getStarted')}
+                    Early Access
                   </Button>
                 )}
               </div>

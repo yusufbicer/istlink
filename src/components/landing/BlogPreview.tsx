@@ -114,7 +114,7 @@ const BlogPreview = () => {
                 to={`/blog/${post.slug}`}
                 className="block bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 group"
               >
-                <div className="flex">
+                <div className="flex items-start">
                   {post.image_url && (
                     <div className="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                       <img 

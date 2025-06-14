@@ -335,7 +335,7 @@ const Index = () => {
               <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 {t('choosePlan')}
               </h2>
-              <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <p className="text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 Transparent pricing that scales with your business needs.
               </p>
             </div>

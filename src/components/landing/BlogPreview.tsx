@@ -5,6 +5,7 @@ import { Calendar, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 interface BlogPost {
   id: string;
@@ -20,6 +21,7 @@ const BlogPreview = () => {
   const isMobile = useIsMobile();
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchLatestBlogPosts();
@@ -53,10 +55,10 @@ const BlogPreview = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            Latest Insights
+            {t('latestInsights')}
           </h2>
           <p className="text-gray-600 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            Stay updated with supply chain trends and best practices
+            {t('stayUpdatedWithTrends')}
           </p>
         </div>
 
@@ -142,7 +144,7 @@ const BlogPreview = () => {
             className="inline-flex items-center text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
-            View all articles
+            {t('viewAllArticles')}
             <ArrowRight className="h-4 w-4 ml-1" />
           </Link>
         </div>

@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '@/lib/auth';
 import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database, Bell, FileText, CheckCircle, AlertCircle, Clock, DollarSign } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -12,12 +12,13 @@ const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const isMobile = useIsMobile();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const alternatingTexts = [
-    "Simplified & Streamlined",
-    "Elegantly Resolved"
-  ];
+  const alternatingTexts = {
+    en: ["Simplified & Streamlined", "Elegantly Resolved"],
+    tr: ["Basitleştirilmiş ve Düzenli", "Zarif Bir Şekilde Çözümlenmiş"],
+    fr: ["Simplifié et Rationalisé", "Résolu avec élégance"]
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,7 +30,7 @@ const Hero = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTextIndex((prev) => (prev + 1) % alternatingTexts.length);
+      setCurrentTextIndex((prev) => (prev + 1) % 2);
     }, 3000); // Change text every 3 seconds
 
     return () => clearInterval(interval);
@@ -61,7 +62,7 @@ const Hero = () => {
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
             <span className="block mb-2 font-bold">
-              {t('heroTitle')}
+              Turkish Supply Chain Complexity,
             </span>
             <span className="block relative h-8 md:h-12 lg:h-16 xl:h-20 overflow-hidden">
               <span 
@@ -69,14 +70,14 @@ const Hero = () => {
                   currentTextIndex === 0 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
                 }`}
               >
-                {alternatingTexts[0]}
+                {alternatingTexts[i18n.language as keyof typeof alternatingTexts]?.[0] || alternatingTexts.en[0]}
               </span>
               <span 
                 className={`absolute inset-0 bg-gradient-to-r from-emerald-600 to-purple-600 bg-clip-text text-transparent font-semibold md:font-medium transition-all duration-700 ease-in-out ${
                   currentTextIndex === 1 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'
                 }`}
               >
-                {alternatingTexts[1]}
+                {alternatingTexts[i18n.language as keyof typeof alternatingTexts]?.[1] || alternatingTexts.en[1]}
               </span>
             </span>
           </h1>
@@ -87,7 +88,18 @@ const Hero = () => {
             }`}
           >
             <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              {t('heroSubtitle')}
+              Transform fragmented Turkish supplier purchases into a{' '}
+              <span className="font-bold text-gray-900">
+                single, streamlined shipment
+              </span>. 
+              Buy from multiple Turkish suppliers with{' '}
+              <span className="font-bold text-gray-900">
+                one payment, one contract, one Bill of Lading
+              </span>{' '}
+              and{' '}
+              <span className="font-bold text-gray-900">
+                one shipment
+              </span>.
             </p>
           </div>
           
@@ -98,7 +110,7 @@ const Hero = () => {
           >
             <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
-                <MessageSquare className="mr-2 h-4 w-4" /> {t('heroButton')}
+                <MessageSquare className="mr-2 h-4 w-4" /> Talk to Our Team
               </a>
             </Button>
           </div>

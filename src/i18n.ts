@@ -86,7 +86,10 @@ const resources = {
       "warehouseStorageOptions": "Warehouse storage options",
       "strategicSourcingAssistance": "Strategic sourcing assistance",
 
-      // Footer
+      // BlogPreview
+      "latestInsights": "Latest Insights",
+      "stayUpdatedWithTrends": "Stay updated with supply chain trends and best practices",
+      "viewAllArticles": "View all articles",
       "navigation": "Navigation",
       "stayUpdated": "Stay Updated",
       "stayUpdatedDesc": "Get the latest updates on supply chain optimization and international trade insights.",
@@ -184,7 +187,10 @@ const resources = {
       "warehouseStorageOptions": "Options de stockage d'entrepôt",
       "strategicSourcingAssistance": "Assistance au sourcing stratégique",
 
-      // Footer
+      // BlogPreview
+      "latestInsights": "Dernières Perspectives",
+      "stayUpdatedWithTrends": "Restez à jour avec les tendances de la chaîne d'approvisionnement",
+      "viewAllArticles": "Voir tous les articles",
       "navigation": "Navigation",
       "stayUpdated": "Restez Informé",
       "stayUpdatedDesc": "Recevez les dernières mises à jour sur l'optimisation de la chaîne d'approvisionnement et les insights du commerce international.",
@@ -282,7 +288,10 @@ const resources = {
       "warehouseStorageOptions": "Depo depolama seçenekleri",
       "strategicSourcingAssistance": "Stratejik kaynak temin yardımı",
 
-      // Footer
+      // BlogPreview
+      "latestInsights": "Son Görüşler",
+      "stayUpdatedWithTrends": "Tedarik zinciri trendleri ve en iyi uygulamaları hakkında güncel kalın",
+      "viewAllArticles": "Tüm makaleleri görüntüle",
       "navigation": "Navigasyon",
       "stayUpdated": "Güncel Kalın",
       "stayUpdatedDesc": "Tedarik zinciri optimizasyonu ve uluslararası ticaret içgörüleri hakkında en son güncellemeleri alın.",

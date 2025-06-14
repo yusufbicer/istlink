@@ -10,6 +10,7 @@ import {
   MapPin
 } from 'lucide-react';
 import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
+import { useTranslation } from 'react-i18next';
 
 interface Step {
   icon: React.ComponentType<any>;
@@ -77,6 +78,7 @@ const HowItWorks = () => {
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -126,9 +128,7 @@ const HowItWorks = () => {
           </div>
           
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-            7 Simple Steps to
-            <br />
-            Supply Chain Success
+            {t('howItWorks')}
           </h2>
           
           <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

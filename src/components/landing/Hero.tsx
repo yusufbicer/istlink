@@ -278,27 +278,31 @@ const Hero = () => {
                     </div>
                   ) : (
                     // Desktop dashboard with creative consolidation view
-                    <div className="bg-white text-gray-800 p-3">
-                      <div className="flex items-center justify-between mb-2.5">
-                        <div className="flex items-center">
-                          <BundleistLogo size="md" className="mr-3" />
-                        </div>
-                        
-                        <div className="flex space-x-1.5">
-                          <div className="flex items-center px-2 py-1 bg-emerald-600 text-white rounded-lg text-xs font-medium">
-                            <Activity className="h-3 w-3 mr-1.5" /> Dashboard
-                          </div>
-                          <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
-                            <Package className="h-3 w-3 mr-1.5" /> Orders
-                          </div>
-                          <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
-                            <GitMerge className="h-3 w-3 mr-1.5" /> Consolidations
-                          </div>
-                          <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
-                            <Users className="h-3 w-3 mr-1.5" /> Suppliers
-                          </div>
-                          <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium relative">
-                            <Bell className="h-3 w-3 mr-0" />
+                     <div className="bg-white text-gray-800 p-3">
+                       <div className="flex items-center justify-between mb-2.5">
+                         <div className="flex items-center">
+                           <BundleistLogo size="md" className="mr-3" />
+                         </div>
+                         
+                         <div className="flex space-x-1.5">
+                           <div className="flex items-center px-2 py-1 bg-emerald-600 text-white rounded-lg text-xs font-medium">
+                             <Activity className="h-3 w-3 mr-1.5" /> 
+                             {i18n.language === 'tr' ? 'Kontrol Paneli' : i18n.language === 'fr' ? 'Tableau de bord' : 'Dashboard'}
+                           </div>
+                           <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
+                             <Package className="h-3 w-3 mr-1.5" /> 
+                             {i18n.language === 'tr' ? 'Siparişler' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
+                           </div>
+                           <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
+                             <GitMerge className="h-3 w-3 mr-1.5" /> 
+                             {i18n.language === 'tr' ? 'Konsolidasyonlar' : i18n.language === 'fr' ? 'Consolidations' : 'Consolidations'}
+                           </div>
+                           <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
+                             <Users className="h-3 w-3 mr-1.5" /> 
+                             {i18n.language === 'tr' ? 'Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
+                           </div>
+                           <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium relative">
+                             <Bell className="h-3 w-3 mr-0" />
                             <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full"></div>
                           </div>
                           <div className="h-6 w-6 rounded-full bg-lavender-100 flex items-center justify-center text-xs font-medium text-lavender-700">

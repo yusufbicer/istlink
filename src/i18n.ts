@@ -125,6 +125,7 @@ const resources = {
       "brandDesc": "Transform your Turkish supply chain with intelligent consolidation services. Reduce costs, optimize logistics, and scale your international business with confidence.",
       "contactEmail": "bundleist@gmail.com",
       "locationIstanbul": "Istanbul, Turkey",
+      "dashboardAlt": "Bundleist Dashboard Interface",
       
       // Features Section
       "findSuppliers": "Find Suppliers",

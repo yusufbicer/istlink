@@ -123,14 +123,8 @@ const Footer = () => {
         <div className="border-t border-gray-200 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              &copy; 2024 İstLink Ltd. {t('allRightsReserved')}
+              &copy; 2025 Bundleist Ltd. {t('allRightsReserved')}
             </p>
-            <div className="flex items-center mt-4 md:mt-0">
-              <span className="text-gray-500 text-sm mr-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                {t('madeWith')}
-              </span>
-              <span className="text-red-500">♥</span>
-            </div>
           </div>
         </div>
       </div>

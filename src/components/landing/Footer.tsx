@@ -23,17 +23,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-5">
             <div className={`flex items-center ${isMobile ? "mb-2" : "mb-6"}`}>
-              <BundleistLogo size="lg" />
-              <div className="ml-4">
-                <div className="flex items-center">
-                  <span className="font-bold text-2xl tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                    <span className="text-teal-600">BUNDLE</span><span className="text-blue-600">IST</span>
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 mt-1 font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  {t('brandTagline')}
-                </p>
-              </div>
+              <BundleistLogo size="lg" showText={true} />
             </div>
             
             <p className={`text-gray-600 ${isMobile ? "mb-2" : "mb-6"} max-w-md leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

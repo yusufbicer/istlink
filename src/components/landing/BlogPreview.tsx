@@ -125,7 +125,7 @@ const BlogPreview = () => {
                     </div>
                   )}
                   <div className="p-3 flex-grow min-w-0">
-                    <h3 className="font-medium text-sm text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    <h3 className="font-medium text-sm text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
                       {getTranslatedContent(post, 'title')}
                     </h3>
                     <div className="flex items-center text-xs text-gray-500">
@@ -159,7 +159,7 @@ const BlogPreview = () => {
                   </div>
                 )}
                 <div className="p-4">
-                  <h3 className="font-medium text-base text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                  <h3 className="font-medium text-base text-gray-900 mb-2 group-hover:text-blue-600 transition-colors leading-snug">
                     {getTranslatedContent(post, 'title')}
                   </h3>
                   {getTranslatedContent(post, 'excerpt') && (

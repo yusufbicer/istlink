@@ -178,6 +178,18 @@ const resources = {
       "easyDelivery": "Easy Delivery",
       "easyDeliveryDesc": "Track and receive your consolidated shipment at your destination",
       
+      // Footnotes for features
+      "saveShippingCosts": "Save up to 40% on shipping costs",
+      "reduceDocumentation": "Reduces documentation by 70%",
+      "onePaymentAllSuppliers": "One payment for all suppliers",
+      "digitalFirstApproach": "Digital-first approach",
+      "countriesSupported": "150+ countries supported",
+      "unlimitedSupplierNetwork": "Unlimited supplier network",
+      "onTimeDeliveryRate": "99.5% on-time delivery rate",
+      "mostPopularFeature": "Most Popular Feature",
+      "essentialFeature": "Essential Feature",
+      "premiumSupportIncluded": "Premium Support Included",
+      
       // How It Works Section
       "simpleProcess": "Simple Process",
       "howItWorksDesc": "Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support.",
@@ -358,6 +370,18 @@ const resources = {
       "easyDelivery": "Livraison Facile",
       "easyDeliveryDesc": "Suivez et recevez votre envoi consolidé à votre destination",
       
+      // Footnotes for features
+      "saveShippingCosts": "Économisez jusqu'à 40% sur les coûts d'expédition",
+      "reduceDocumentation": "Réduit la documentation de 70%",
+      "onePaymentAllSuppliers": "Un paiement pour tous les fournisseurs",
+      "digitalFirstApproach": "Approche numérique prioritaire",
+      "countriesSupported": "150+ pays supportés",
+      "unlimitedSupplierNetwork": "Réseau de fournisseurs illimité",
+      "onTimeDeliveryRate": "99,5% de taux de livraison à temps",
+      "mostPopularFeature": "Fonctionnalité la Plus Populaire",
+      "essentialFeature": "Fonctionnalité Essentielle",
+      "premiumSupportIncluded": "Support Premium Inclus",
+      
       // How It Works Section
       "simpleProcess": "Processus Simple",
       "howItWorksDesc": "Notre processus rationalisé rend l'approvisionnement et l'expédition depuis la Turquie simples grâce à une technologie de pointe et un support expert.",
@@ -537,6 +561,18 @@ const resources = {
       "globalShippingDesc": "Kurulmuş lojistik ağımız aracılığıyla dünya çapında verimli nakliye",
       "easyDelivery": "Kolay Teslimat",
       "easyDeliveryDesc": "Birleştirilmiş gönderinizi takip edin ve varış noktanızda teslim alın",
+      
+      // Footnotes for features
+      "saveShippingCosts": "Nakliye maliyetlerinde %40'a kadar tasarruf",
+      "reduceDocumentation": "Belgelendirmeyi %70 azaltır",
+      "onePaymentAllSuppliers": "Tüm tedarikçiler için tek ödeme",
+      "digitalFirstApproach": "Dijital öncelikli yaklaşım",
+      "countriesSupported": "150+ ülke desteklenir",
+      "unlimitedSupplierNetwork": "Sınırsız tedarikçi ağı",
+      "onTimeDeliveryRate": "%99,5 zamanında teslimat oranı",
+      "mostPopularFeature": "En Popüler Özellik",
+      "essentialFeature": "Temel Özellik",
+      "premiumSupportIncluded": "Premium Destek Dahil",
       
       // How It Works Section
       "simpleProcess": "Basit Süreç",

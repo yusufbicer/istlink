@@ -8,15 +8,15 @@ interface BundleistLogoProps {
 
 const BundleistLogo = ({ size = 'md', className = '', showText = true }: BundleistLogoProps) => {
   const sizeClasses = {
-    sm: 'w-7 h-7',
-    md: 'w-9 h-9',
-    lg: 'w-12 h-12'
+    sm: 'w-8 h-8',
+    md: 'w-12 h-12',
+    lg: 'w-16 h-16'
   };
 
   const textSizes = {
-    sm: 'text-sm',
-    md: 'text-base',
-    lg: 'text-lg'
+    sm: 'text-base',
+    md: 'text-xl',
+    lg: 'text-2xl'
   };
 
   return (

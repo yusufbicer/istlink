@@ -97,7 +97,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-blue-900 hover:bg-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-2 h-4 w-4" /> {t('talkToOurTeam')}
               </a>
@@ -111,74 +111,74 @@ const Hero = () => {
             }`}
           >
             <div className="relative overflow-hidden rounded-lg shadow-lg">
-              <div className="bg-gray-800 p-0.5 rounded-lg">
+              <div className="bg-slate-800 p-0.5 rounded-lg">
                 <div className="rounded-lg overflow-hidden bg-white border-0">
-                  <div className="relative bg-gray-100 px-2 pt-1.5 pb-1 flex items-center rounded-t-lg">
+                  <div className="relative bg-slate-100 px-2 pt-1.5 pb-1 flex items-center rounded-t-lg">
                     <div className="flex space-x-1 absolute left-3">
                       <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
                       <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
                       <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                     </div>
                     <div className="mx-auto">
-                      <div className="h-3 w-48 bg-gray-200 rounded-full"></div>
+                      <div className="h-3 w-48 bg-slate-200 rounded-full"></div>
                     </div>
                   </div>
                   
                   {/* Creative Mobile Dashboard */}
                   {isMobile ? (
-                    <div className="bg-white text-gray-800 p-2">
+                    <div className="bg-white text-slate-800 p-2">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center">
                           <BundleistLogo size="sm" className="mr-2" showText={false} />
                         </div>
                         <div className="flex items-center space-x-1">
                           <div className="relative">
-                            <Bell className="h-3 w-3 text-orange-500" />
-                            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                            <Bell className="h-3 w-3 text-slate-600" />
+                            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
                           </div>
-                          <div className="w-4 h-4 rounded-full bg-lavender-100 flex items-center justify-center text-xs text-lavender-700 font-medium">
+                          <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-700 font-medium">
                             J
                           </div>
                         </div>
                       </div>
                       
                       {/* Live Activity Banner */}
-                      <div className="bg-gradient-to-r from-emerald-50 to-blue-50 p-1.5 rounded-lg border border-emerald-200 mb-1.5">
+                      <div className="bg-gradient-to-r from-blue-50 to-slate-50 p-1.5 rounded-lg border border-blue-200 mb-1.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse mr-1.5"></div>
-                            <span className="text-xs font-medium text-emerald-700">
+                            <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse mr-1.5"></div>
+                            <span className="text-xs font-medium text-blue-700">
                               {i18n.language === 'tr' ? 'Canlı Konsolidasyon' : i18n.language === 'fr' ? 'Consolidation en Direct' : 'Live Consolidation'}
                             </span>
                           </div>
-                          <span className="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">
+                          <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
                             {i18n.language === 'tr' ? 'Aktif' : i18n.language === 'fr' ? 'Actif' : 'Active'}
                           </span>
                         </div>
                       </div>
                       
                       {/* Active Consolidation with Suppliers */}
-                      <div className="bg-gray-50 p-1.5 rounded-lg border border-gray-200 shadow-sm mb-1.5">
+                      <div className="bg-slate-50 p-1.5 rounded-lg border border-slate-200 shadow-sm mb-1.5">
                         <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
-                            <GitMerge className="h-2.5 w-2.5 text-blue-600 mr-1" />
+                            <GitMerge className="h-2.5 w-2.5 text-slate-600 mr-1" />
                             <span className="text-xs font-medium">IST-CON-2025-041</span>
                           </div>
-                          <span className="text-xs bg-blue-100 text-blue-700 px-1 py-0.5 rounded-full font-medium">
+                          <span className="text-xs bg-slate-100 text-slate-700 px-1 py-0.5 rounded-full font-medium">
                             {i18n.language === 'tr' ? '%75 Dolu' : i18n.language === 'fr' ? '75% Plein' : '75% Full'}
                           </span>
                         </div>
-                        <div className="bg-white p-1.5 rounded border border-gray-200">
+                        <div className="bg-white p-1.5 rounded border border-slate-200">
                           <div className="flex justify-between items-center mb-1">
                             <div>
                               <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-[10px] text-emerald-600 font-medium">
+                              <div className="text-[10px] text-slate-600 font-medium">
                                 {i18n.language === 'tr' ? 'Kalkış: 15 Nis 2025' : i18n.language === 'fr' ? 'Départ: 15 Avr 2025' : 'Departure: Apr 15, 2025'}
                               </div>
                             </div>
                             <div className="text-right">
-                              <div className="text-xs font-medium text-blue-600">$47,850</div>
-                              <div className="text-[10px] text-gray-600">
+                              <div className="text-xs font-medium text-slate-700">$47,850</div>
+                              <div className="text-[10px] text-slate-500">
                                 {i18n.language === 'tr' ? 'Toplam Değer' : i18n.language === 'fr' ? 'Valeur Totale' : 'Total Value'}
                               </div>
                             </div>
@@ -186,19 +186,19 @@ const Hero = () => {
                           <div className="grid grid-cols-3 gap-1 text-center">
                             <div className="text-[10px]">
                               <div className="font-bold">28</div>
-                              <div className="text-gray-600">
+                              <div className="text-slate-500">
                                 {i18n.language === 'tr' ? 'Sipariş' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
                               </div>
                             </div>
                             <div className="text-[10px]">
                               <div className="font-bold">4</div>
-                              <div className="text-gray-600">
+                              <div className="text-slate-500">
                                 {i18n.language === 'tr' ? 'Tedarikçi' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
                               </div>
                             </div>
                             <div className="text-[10px]">
                               <div className="font-bold">75%</div>
-                              <div className="text-gray-600">
+                              <div className="text-slate-500">
                                 {i18n.language === 'tr' ? 'Dolu' : i18n.language === 'fr' ? 'Rempli' : 'Filled'}
                               </div>
                             </div>
@@ -207,76 +207,76 @@ const Hero = () => {
                       </div>
 
                       {/* Suppliers Overview */}
-                      <div className="bg-gray-50 p-1.5 rounded-lg border border-gray-200 shadow-sm mb-1.5">
+                      <div className="bg-slate-50 p-1.5 rounded-lg border border-slate-200 shadow-sm mb-1.5">
                         <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
-                            <Users className="h-2.5 w-2.5 text-blue-600 mr-1" />
+                            <Users className="h-2.5 w-2.5 text-slate-600 mr-1" />
                             <span className="text-xs font-medium">
                               {i18n.language === 'tr' ? 'Aktif Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs Actifs' : 'Active Suppliers'}
                             </span>
                           </div>
                         </div>
                         <div className="space-y-0.5">
-                          <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
+                          <div className="bg-white p-1 rounded border border-slate-100 flex justify-between items-center">
                             <div>
                               <div className="text-xs font-medium">
                                 {i18n.language === 'tr' ? 'Tekstil Plus Ltd' : i18n.language === 'fr' ? 'Textile Plus Ltée' : 'Textile Plus Ltd'}
                               </div>
-                              <div className="text-[9px] text-gray-600">
+                              <div className="text-[9px] text-slate-500">
                                 {i18n.language === 'tr' ? '12 sipariş • $18,200' : i18n.language === 'fr' ? '12 commandes • $18,200' : '12 orders • $18,200'}
                               </div>
                             </div>
                             <div className="flex items-center">
-                              <CheckCircle className="h-2.5 w-2.5 text-green-500 mr-0.5" />
-                              <span className="text-[9px] text-green-600">
+                              <CheckCircle className="h-2.5 w-2.5 text-emerald-600 mr-0.5" />
+                              <span className="text-[9px] text-emerald-600">
                                 {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
                               </span>
                             </div>
                           </div>
-                          <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
+                          <div className="bg-white p-1 rounded border border-slate-100 flex justify-between items-center">
                             <div>
                               <div className="text-xs font-medium">
                                 {i18n.language === 'tr' ? 'Makine Şirketi' : i18n.language === 'fr' ? 'Société de Machines' : 'Machinery Co'}
                               </div>
-                              <div className="text-[9px] text-gray-600">
+                              <div className="text-[9px] text-slate-500">
                                 {i18n.language === 'tr' ? '8 sipariş • $15,420' : i18n.language === 'fr' ? '8 commandes • $15,420' : '8 orders • $15,420'}
                               </div>
                             </div>
                             <div className="flex items-center">
-                              <CheckCircle className="h-2.5 w-2.5 text-green-500 mr-0.5" />
-                              <span className="text-[9px] text-green-600">
+                              <CheckCircle className="h-2.5 w-2.5 text-emerald-600 mr-0.5" />
+                              <span className="text-[9px] text-emerald-600">
                                 {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
                               </span>
                             </div>
                           </div>
-                          <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
+                          <div className="bg-white p-1 rounded border border-slate-100 flex justify-between items-center">
                             <div>
                               <div className="text-xs font-medium">
                                 {i18n.language === 'tr' ? 'Oto Parça A.Ş.' : i18n.language === 'fr' ? 'Pièces Auto Inc' : 'Auto Parts Inc'}
                               </div>
-                              <div className="text-[9px] text-gray-600">
+                              <div className="text-[9px] text-slate-500">
                                 {i18n.language === 'tr' ? '5 sipariş • $9,630' : i18n.language === 'fr' ? '5 commandes • $9,630' : '5 orders • $9,630'}
                               </div>
                             </div>
                             <div className="flex items-center">
-                              <Clock className="h-2.5 w-2.5 text-orange-500 mr-0.5" />
-                              <span className="text-[9px] text-orange-600">
+                              <Clock className="h-2.5 w-2.5 text-amber-500 mr-0.5" />
+                              <span className="text-[9px] text-amber-600">
                                 {i18n.language === 'tr' ? 'İşleniyor' : i18n.language === 'fr' ? 'Traitement' : 'Processing'}
                               </span>
                             </div>
                           </div>
-                          <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
+                          <div className="bg-white p-1 rounded border border-slate-100 flex justify-between items-center">
                             <div>
                               <div className="text-xs font-medium">
                                 {i18n.language === 'tr' ? 'Kimyasal Çözümler' : i18n.language === 'fr' ? 'Solutions Chimiques' : 'Chemical Solutions'}
                               </div>
-                              <div className="text-[9px] text-gray-600">
+                              <div className="text-[9px] text-slate-500">
                                 {i18n.language === 'tr' ? '3 sipariş • $4,600' : i18n.language === 'fr' ? '3 commandes • $4,600' : '3 orders • $4,600'}
                               </div>
                             </div>
                             <div className="flex items-center">
-                              <CheckCircle className="h-2.5 w-2.5 text-green-500 mr-0.5" />
-                              <span className="text-[9px] text-green-600">
+                              <CheckCircle className="h-2.5 w-2.5 text-emerald-600 mr-0.5" />
+                              <span className="text-[9px] text-emerald-600">
                                 {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
                               </span>
                             </div>
@@ -285,143 +285,152 @@ const Hero = () => {
                       </div>
                       
                       {/* Recent Activities & Notifications */}
-                      <div className="bg-gray-50 rounded-lg border border-gray-200 p-1.5 shadow-sm">
+                      <div className="bg-slate-50 rounded-lg border border-slate-200 p-1.5 shadow-sm">
                         <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
-                            <Activity className="h-2.5 w-2.5 text-blue-600 mr-1" />
+                            <Activity className="h-2.5 w-2.5 text-slate-600 mr-1" />
                             <span className="text-xs font-medium">
                               {i18n.language === 'tr' ? 'Son Aktiviteler' : i18n.language === 'fr' ? 'Activité Récente' : 'Recent Activity'}
                             </span>
                           </div>
-                          <span className="px-1 py-0.5 bg-orange-100 text-orange-700 text-[9px] rounded-full font-medium">
+                          <span className="px-1 py-0.5 bg-amber-100 text-amber-700 text-[9px] rounded-full font-medium">
                             {i18n.language === 'tr' ? '3 Yeni' : i18n.language === 'fr' ? '3 Nouveau' : '3 New'}
                           </span>
                         </div>
                         <div className="space-y-0.5">
-                          <div className="bg-white p-1 rounded shadow-sm flex items-center">
-                            <FileText className="h-2.5 w-2.5 text-green-500 mr-1.5" />
-                            <div className="flex-1">
-                              <div className="text-[9px] font-medium">
-                                {i18n.language === 'tr' ? 'Konşimento Oluşturuldu' : i18n.language === 'fr' ? 'Connaissement Généré' : 'BOL Generated'}
-                              </div>
-                              <div className="text-[8px] text-gray-600">
-                                {i18n.language === 'tr' ? '3 saat önce' : i18n.language === 'fr' ? 'Il y a 3 heures' : '3 hours ago'}
+                          <div className="bg-white p-1 rounded border border-slate-100 flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5"></div>
+                              <div>
+                                <div className="text-[10px] font-medium">
+                                  {i18n.language === 'tr' ? 'Ödeme alındı - Tekstil Plus' : i18n.language === 'fr' ? 'Paiement reçu - Textile Plus' : 'Payment received - Textile Plus'}
+                                </div>
+                                <div className="text-[9px] text-slate-500">
+                                  {i18n.language === 'tr' ? '2 dakika önce' : i18n.language === 'fr' ? 'Il y a 2 minutes' : '2 min ago'}
+                                </div>
                               </div>
                             </div>
+                            <span className="text-[9px] text-emerald-600 font-medium">$18,200</span>
                           </div>
-                          <div className="bg-white p-1 rounded shadow-sm flex items-center">
-                            <DollarSign className="h-2.5 w-2.5 text-blue-500 mr-1.5" />
-                            <div className="flex-1">
-                              <div className="text-[9px] font-medium">
-                                {i18n.language === 'tr' ? 'Ödeme İşlendi' : i18n.language === 'fr' ? 'Paiement Traité' : 'Payment Processed'}
-                              </div>
-                              <div className="text-[8px] text-gray-600">
-                                {i18n.language === 'tr' ? '8 saat önce' : i18n.language === 'fr' ? 'Il y a 8 heures' : '8 hours ago'}
+                          <div className="bg-white p-1 rounded border border-slate-100 flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></div>
+                              <div>
+                                <div className="text-[10px] font-medium">
+                                  {i18n.language === 'tr' ? 'Yeni sipariş eklendi' : i18n.language === 'fr' ? 'Nouvelle commande ajoutée' : 'New order added'}
+                                </div>
+                                <div className="text-[9px] text-slate-500">
+                                  {i18n.language === 'tr' ? '5 dakika önce' : i18n.language === 'fr' ? 'Il y a 5 minutes' : '5 min ago'}
+                                </div>
                               </div>
                             </div>
+                            <span className="text-[9px] text-slate-600 font-medium">+4 items</span>
                           </div>
-                          <div className="bg-white p-1 rounded shadow-sm flex items-center">
-                            <Package className="h-2.5 w-2.5 text-purple-500 mr-1.5" />
-                            <div className="flex-1">
-                              <div className="text-[9px] font-medium">
-                                {i18n.language === 'tr' ? '5 Yeni Sipariş Eklendi' : i18n.language === 'fr' ? '5 Nouvelles Commandes Ajoutées' : '5 New Orders Added'}
-                              </div>
-                              <div className="text-[8px] text-gray-600">
-                                {i18n.language === 'tr' ? '2 gün önce' : i18n.language === 'fr' ? 'Il y a 2 jours' : '2 days ago'}
+                          <div className="bg-white p-1 rounded border border-slate-100 flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-1.5"></div>
+                              <div>
+                                <div className="text-[10px] font-medium">
+                                  {i18n.language === 'tr' ? 'Sevkiyat güncellendi' : i18n.language === 'fr' ? 'Expédition mise à jour' : 'Shipment updated'}
+                                </div>
+                                <div className="text-[9px] text-slate-500">
+                                  {i18n.language === 'tr' ? '12 dakika önce' : i18n.language === 'fr' ? 'Il y a 12 minutes' : '12 min ago'}
+                                </div>
                               </div>
                             </div>
+                            <span className="text-[9px] text-slate-600 font-medium">75% full</span>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
                      // Desktop dashboard with creative consolidation view
-                     <div className="bg-white text-gray-800 p-3">
+                     <div className="bg-white text-slate-800 p-3">
                        <div className="flex items-center justify-between mb-2.5">
                          <div className="flex items-center">
                            <BundleistLogo size="md" className="mr-3" showText={true} />
                          </div>
                          
                          <div className="flex space-x-1.5">
-                           <div className="flex items-center px-2 py-1 bg-emerald-600 text-white rounded-lg text-xs font-medium">
+                           <div className="flex items-center px-2 py-1 bg-slate-600 text-white rounded-lg text-xs font-medium">
                              <Activity className="h-3 w-3 mr-1.5" /> 
                              {i18n.language === 'tr' ? 'Kontrol Paneli' : i18n.language === 'fr' ? 'Tableau de bord' : 'Dashboard'}
                            </div>
-                           <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
+                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
                              <Package className="h-3 w-3 mr-1.5" /> 
                              {i18n.language === 'tr' ? 'Siparişler' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
                            </div>
-                           <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
+                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
                              <GitMerge className="h-3 w-3 mr-1.5" /> 
                              {i18n.language === 'tr' ? 'Konsolidasyonlar' : i18n.language === 'fr' ? 'Consolidations' : 'Consolidations'}
                            </div>
-                           <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium">
+                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
                              <Users className="h-3 w-3 mr-1.5" /> 
                              {i18n.language === 'tr' ? 'Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
                            </div>
-                           <div className="flex items-center px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs text-gray-700 font-medium relative">
+                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium relative">
                              <Bell className="h-3 w-3 mr-0" />
-                            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full"></div>
+                            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-blue-600 rounded-full"></div>
                           </div>
-                          <div className="h-6 w-6 rounded-full bg-lavender-100 flex items-center justify-center text-xs font-medium text-lavender-700">
+                          <div className="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-medium text-slate-700">
                             J
                           </div>
                         </div>
                       </div>
                       
                       {/* Live Activity Banner */}
-                      <div className="bg-gradient-to-r from-emerald-50 to-blue-50 p-2 rounded-lg border border-emerald-200 mb-2.5">
+                      <div className="bg-gradient-to-r from-blue-50 to-slate-50 p-2 rounded-lg border border-blue-200 mb-2.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
-                            <span className="text-sm font-medium text-emerald-700">Live Consolidation Activity</span>
+                            <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse mr-2"></div>
+                            <span className="text-sm font-medium text-blue-700">Live Consolidation Activity</span>
                           </div>
-                          <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium">IST-CON-2025-041 Active</span>
+                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">IST-CON-2025-041 Active</span>
                         </div>
                       </div>
                       
                       <div className="grid grid-cols-12 gap-2">
                         {/* Active Consolidation Overview */}
-                        <div className="col-span-8 bg-gray-50 p-2.5 rounded-lg border border-gray-200">
+                        <div className="col-span-8 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
                           <div className="flex justify-between items-center mb-2">
                             <div className="flex items-center">
-                              <GitMerge className="h-4 w-4 text-blue-600 mr-1.5" />
-                              <span className="font-medium text-gray-700 text-sm">Active Consolidation: IST-CON-2025-041</span>
+                              <GitMerge className="h-4 w-4 text-slate-600 mr-1.5" />
+                              <span className="font-medium text-slate-700 text-sm">Active Consolidation: IST-CON-2025-041</span>
                             </div>
-                            <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">75% Filled</span>
+                            <span className="px-2 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-full font-medium">75% Filled</span>
                           </div>
                           
-                          <div className="bg-white p-2.5 rounded-lg border border-gray-100 mb-2">
+                          <div className="bg-white p-2.5 rounded-lg border border-slate-100 mb-2">
                             <div className="grid grid-cols-4 gap-3 mb-2.5">
                               <div className="text-center">
-                                <div className="text-lg font-bold text-blue-600">28</div>
-                                <div className="text-xs text-gray-500">Total Orders</div>
+                                <div className="text-lg font-bold text-slate-700">28</div>
+                                <div className="text-xs text-slate-500">Total Orders</div>
                               </div>
                               <div className="text-center">
-                                <div className="text-lg font-bold text-green-600">4</div>
-                                <div className="text-xs text-gray-500">Suppliers</div>
+                                <div className="text-lg font-bold text-slate-700">4</div>
+                                <div className="text-xs text-slate-500">Suppliers</div>
                               </div>
                               <div className="text-center">
-                                <div className="text-lg font-bold text-purple-600">$47,850</div>
-                                <div className="text-xs text-gray-500">Total Value</div>
+                                <div className="text-lg font-bold text-slate-700">$47,850</div>
+                                <div className="text-xs text-slate-500">Total Value</div>
                               </div>
                               <div className="text-center">
-                                <div className="text-lg font-bold text-emerald-600">Apr 15</div>
-                                <div className="text-xs text-gray-500">Departure</div>
+                                <div className="text-lg font-bold text-slate-700">Apr 15</div>
+                                <div className="text-xs text-slate-500">Departure</div>
                               </div>
                             </div>
                             
                             <div className="mb-2">
                               <div className="flex justify-between text-xs mb-1">
-                                <span className="text-gray-500">Container Space (40ft)</span>
+                                <span className="text-slate-500">Container Space (40ft)</span>
                                 <span className="font-medium">75% Filled</span>
                               </div>
-                              <div className="w-full bg-gray-200 h-2 rounded-full">
-                                <div className="bg-blue-600 h-full rounded-full" style={{width: '75%'}}></div>
+                              <div className="w-full bg-slate-200 h-2 rounded-full">
+                                <div className="bg-slate-600 h-full rounded-full" style={{width: '75%'}}></div>
                               </div>
                             </div>
                             
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-slate-600">
                               <span className="font-medium">Route:</span> Istanbul Warehouse → Matadi Port, DRC
                             </div>
                           </div>

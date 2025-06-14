@@ -114,7 +114,7 @@ const BlogPreview = () => {
                 to={`/blog/${post.slug}`}
                 className="block bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 group"
               >
-                <div className="flex items-start">
+                <div className="flex items-center">
                   {post.image_url && (
                     <div className="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                       <img 
@@ -134,8 +134,8 @@ const BlogPreview = () => {
                       {formatBlogDate(post.created_at, i18n.language, t, 'short')}
                     </div>
                   </div>
-                  <div className="flex items-start pr-3">
-                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors mt-1" />
+                  <div className="flex items-center pr-3">
+                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                   </div>
                 </div>
               </Link>

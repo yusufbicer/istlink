@@ -309,11 +309,17 @@ i18n
     
     // Language detection options
     detection: {
-      order: ['navigator', 'htmlTag', 'path', 'subdomain'],
+      order: ['navigator', 'localStorage', 'htmlTag'],
       lookupFromPathIndex: 0,
       lookupFromSubdomainIndex: 0,
       caches: ['localStorage'],
-      excludeCacheFor: ['cimode']
+      excludeCacheFor: ['cimode'],
+      convertDetectedLanguage: (lng) => {
+        // Convert browser language codes to our supported languages
+        if (lng.startsWith('tr')) return 'tr';
+        if (lng.startsWith('fr')) return 'fr';
+        return 'en'; // Default to English for any other language
+      }
     },
 
     // Only use these languages

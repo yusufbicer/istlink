@@ -6,9 +6,11 @@ import { useAuth } from '@/lib/auth';
 import { Menu, X } from 'lucide-react';
 import { useIsMobile, useIsTablet } from '@/hooks/use-mobile';
 import BundleistLogo from '@/components/common/BundleistLogo';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -68,28 +70,28 @@ const Header = () => {
                 onClick={() => scrollToSection('features')}
                 className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
-                Features
+                {t('features')}
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
                 className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
-                How It Works
+                {t('howItWorks')}
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
                 className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
-                Pricing
+                {t('pricing')}
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
                 className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
               >
-                Blog
+                {t('blog')}
                 <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-emerald-600 to-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 rounded-full"></span>
               </button>
             </div>
@@ -109,7 +111,7 @@ const Header = () => {
                 className={`bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-semibold border-0 rounded-full ${isTablet ? 'px-4 text-sm' : 'px-6'}`}
                 onClick={() => handleNavigate('/early-access')}
               >
-                Request Access
+                {t('getStarted')}
               </Button>
             )}
           </div>
@@ -135,25 +137,25 @@ const Header = () => {
                 onClick={() => scrollToSection('features')}
                 className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left hover:bg-emerald-50 rounded-lg px-2"
               >
-                Features
+                {t('features')}
               </button>
               <button 
                 onClick={() => scrollToSection('how-it-works')}
                 className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left hover:bg-emerald-50 rounded-lg px-2"
               >
-                How It Works
+                {t('howItWorks')}
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
                 className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left hover:bg-emerald-50 rounded-lg px-2"
               >
-                Pricing
+                {t('pricing')}
               </button>
               <button
                 onClick={() => handleNavigate('/blog')}
                 className="text-sm font-semibold text-gray-800 hover:text-emerald-600 transition-colors py-2 text-left hover:bg-emerald-50 rounded-lg px-2"
               >
-                Blog
+                {t('blog')}
               </button>
               
               <div className="pt-2 border-t border-gray-100">
@@ -169,7 +171,7 @@ const Header = () => {
                     className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 font-semibold rounded-full"
                     onClick={() => handleNavigate('/early-access')}
                   >
-                    Request Access
+                    {t('getStarted')}
                   </Button>
                 )}
               </div>

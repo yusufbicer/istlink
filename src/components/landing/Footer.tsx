@@ -20,12 +20,9 @@ const Footer = () => {
               <BundleistLogo size="lg" />
               <div className="ml-4">
                 <div className="flex items-center">
-                  <span className="font-bold text-xl bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                    BUNDLEIST
+                  <span className="font-bold text-xl tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    <span className="text-teal-600">BUNDLE</span><span className="text-blue-600">IST</span>
                   </span>
-                </div>
-                <div className="text-xs text-gray-600 font-medium tracking-widest uppercase mt-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  Supply Chain Hub
                 </div>
                 <p className="text-xs text-gray-700 mt-2 font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   Simplifying Cross Border Procurement

@@ -51,12 +51,9 @@ const Header = () => {
                 {/* Enhanced Bundleist branding with two-color text - responsive sizing */}
                 <div className={isMobile ? "ml-3" : "ml-4"}>
                   <div className="flex items-center">
-                    <span className={`font-bold ${isMobile ? "text-lg" : isTablet ? "text-xl" : "text-2xl"} bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent tracking-wide`}>
-                      BUNDLEIST
+                    <span className={`font-bold ${isMobile ? "text-lg" : isTablet ? "text-xl" : "text-2xl"} tracking-wide`}>
+                      <span className="text-teal-600">BUNDLE</span><span className="text-blue-600">IST</span>
                     </span>
-                  </div>
-                  <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600 font-medium tracking-widest uppercase`}>
-                    Supply Chain Hub
                   </div>
                 </div>
               </div>

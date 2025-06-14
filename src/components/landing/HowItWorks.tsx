@@ -27,7 +27,7 @@ const HowItWorks = () => {
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const steps: Step[] = [
     {
@@ -80,6 +80,10 @@ const HowItWorks = () => {
       bgGradient: "from-pink-50 to-pink-100"
     }
   ];
+
+  useEffect(() => {
+    console.log('HowItWorks Description:', t('howItWorksDesc'), 'Current language:', i18n.language);
+  }, [t, i18n.language]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

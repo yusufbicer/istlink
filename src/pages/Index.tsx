@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 const Index = () => {
   const isMobile = useIsMobile();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Scroll to section if hash is present in URL
   useEffect(() => {
@@ -24,6 +24,11 @@ const Index = () => {
       }
     }
   }, []);
+
+  // Debug translation
+  useEffect(() => {
+    console.log('Pricing Description:', t('transparentPricing'), 'Current language:', i18n.language);
+  }, [t, i18n.language]);
 
   const pricingPlans = [
     {

@@ -125,15 +125,13 @@ const HowItWorks = () => {
             </span>
           </div>
           
-          <h2 className={`${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-4xl'} font-bold mb-3 md:mb-4 bg-gradient-to-r from-gray-900 via-blue-900 to-emerald-900 bg-clip-text text-transparent leading-tight`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             7 Simple Steps to
             <br />
-            <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
-              Supply Chain Success
-            </span>
+            Supply Chain Success
           </h2>
           
-          <p className={`${isMobile ? 'text-base' : 'text-lg'} text-gray-600 leading-relaxed max-w-2xl mx-auto`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support.
           </p>
         </div>

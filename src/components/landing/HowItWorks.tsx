@@ -143,95 +143,63 @@ const HowItWorks = () => {
         <div className="max-w-5xl mx-auto">
           {/* Desktop Timeline - More Compact */}
           <div className="hidden md:block relative">
-            {/* Central Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
-            
-            <div className="space-y-4">
-              {steps.map((step, index) => {
-                const StepIcon = step.icon;
-                const isLeft = index % 2 === 0;
-                const isVisible = visibleSteps.includes(index);
-                
-                return (
-                  <div 
-                    key={index}
-                    className={`relative flex items-center ${isLeft ? 'justify-start' : 'justify-end'}`}
-                  >
-                    {/* Timeline Node */}
-                    <div className={`absolute left-1/2 transform -translate-x-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border-4 border-gradient-to-r from-blue-200 to-emerald-200 shadow-lg flex items-center justify-center z-10 transition-all duration-500 ${
-                      isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                    }`}>
-                      <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
-                        <StepIcon className={`h-3 w-3 md:h-3.5 md:w-3.5 ${step.color}`} />
-                      </div>
-                    </div>
-                    
-                    {/* Step Number */}
-                    <div className={`absolute left-1/2 transform -translate-x-1/2 -translate-y-8 w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-xs font-bold flex items-center justify-center shadow-lg transition-all duration-500 delay-200 ${
-                      isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                    }`}>
-                      {index + 1}
-                    </div>
-                    
-                    {/* Content Card */}
-                    <div 
-                      className={`${isLeft ? 'mr-8 pr-10' : 'ml-8 pl-10'} w-1/2 transition-all duration-700 delay-300 ${
-                        isVisible ? 'opacity-100 translate-x-0' : `opacity-0 ${isLeft ? '-translate-x-8' : 'translate-x-8'}`
-                      }`}
-                    >
-                      <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-200/50 hover:border-blue-200 group hover:-translate-y-2">
-                        <h3 className="text-base md:text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          {step.title}
-                        </h3>
-                        <p className="text-slate-600 leading-relaxed text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Mobile Timeline - Compact */}
-          <div className="md:hidden">
-            <div className="relative pl-6">
-              {/* Mobile Timeline Line */}
-              <div className="absolute left-3 top-0 w-0.5 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
+            {/* Timeline Container with Visual Boundaries */}
+            <div className="relative bg-white/50 backdrop-blur-sm rounded-3xl p-8 border border-slate-200/50 shadow-lg">
+              {/* Start Indicator */}
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4">
+                <div className="w-12 h-8 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                  <span className="text-white text-xs font-bold">START</span>
+                </div>
+              </div>
               
-              <div className="space-y-1">
+              {/* Central Timeline Line */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full top-8 bottom-8"></div>
+              
+              {/* End Indicator */}
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4">
+                <div className="w-12 h-8 bg-gradient-to-r from-emerald-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                  <span className="text-white text-xs font-bold">DONE</span>
+                </div>
+              </div>
+            
+              <div className="space-y-4 relative z-10">
                 {steps.map((step, index) => {
                   const StepIcon = step.icon;
+                  const isLeft = index % 2 === 0;
                   const isVisible = visibleSteps.includes(index);
                   
                   return (
-                    <div key={index} className="relative">
-                      {/* Mobile Timeline Node */}
-                      <div className={`absolute -left-3 w-6 h-6 rounded-full bg-white border-2 border-blue-200 shadow-md flex items-center justify-center transition-all duration-500 ${
+                    <div 
+                      key={index}
+                      className={`relative flex items-center ${isLeft ? 'justify-start' : 'justify-end'}`}
+                    >
+                      {/* Timeline Node */}
+                      <div className={`absolute left-1/2 transform -translate-x-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border-4 border-gradient-to-r from-blue-200 to-emerald-200 shadow-lg flex items-center justify-center z-10 transition-all duration-500 ${
                         isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                       }`}>
-                        <div className={`w-3 h-3 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
-                          <StepIcon className={`h-1.5 w-1.5 ${step.color}`} />
+                        <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
+                          <StepIcon className={`h-3 w-3 md:h-3.5 md:w-3.5 ${step.color}`} />
                         </div>
                       </div>
                       
-                      {/* Mobile Step Number */}
-                      <div className={`absolute -left-4 -top-1 w-4 h-4 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-[10px] font-bold flex items-center justify-center shadow-md transition-all duration-500 delay-200 ${
+                      {/* Step Number */}
+                      <div className={`absolute left-1/2 transform -translate-x-1/2 -translate-y-8 w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-xs font-bold flex items-center justify-center shadow-lg transition-all duration-500 delay-200 ${
                         isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                       }`}>
                         {index + 1}
                       </div>
                       
-                      {/* Mobile Content */}
-                      <div className={`ml-3 transition-all duration-700 delay-300 ${
-                        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                      }`}>
-                        <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-slate-200/50 hover:border-blue-200 transition-all duration-300 hover:shadow-xl">
-                          <h3 className="text-sm font-bold text-slate-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      {/* Content Card */}
+                      <div 
+                        className={`${isLeft ? 'mr-8 pr-10' : 'ml-8 pl-10'} w-1/2 transition-all duration-700 delay-300 ${
+                          isVisible ? 'opacity-100 translate-x-0' : `opacity-0 ${isLeft ? '-translate-x-8' : 'translate-x-8'}`
+                        }`}
+                      >
+                        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-200/50 hover:border-blue-200 group hover:-translate-y-2">
+                          <h3 className="text-base md:text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                             {step.title}
                           </h3>
-                          <p className="text-slate-600 text-xs leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                          <p className="text-slate-600 leading-relaxed text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                             {step.description}
                           </p>
                         </div>
@@ -239,6 +207,72 @@ const HowItWorks = () => {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Timeline - Compact */}
+          <div className="md:hidden">
+            {/* Mobile Timeline Container */}
+            <div className="relative bg-white/50 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 shadow-lg">
+              {/* Mobile Start Indicator */}
+              <div className="absolute top-0 left-3 transform -translate-y-2">
+                <div className="w-8 h-6 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-full flex items-center justify-center shadow-md">
+                  <span className="text-white text-[10px] font-bold">START</span>
+                </div>
+              </div>
+              
+              <div className="relative pl-6">
+                {/* Mobile Timeline Line */}
+                <div className="absolute left-3 top-4 w-0.5 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full bottom-4"></div>
+                
+                {/* Mobile End Indicator */}
+                <div className="absolute bottom-0 left-3 transform translate-y-2">
+                  <div className="w-8 h-6 bg-gradient-to-r from-emerald-600 to-blue-600 rounded-full flex items-center justify-center shadow-md">
+                    <span className="text-white text-[10px] font-bold">DONE</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-1 relative z-10 pt-4 pb-4">
+                  {steps.map((step, index) => {
+                    const StepIcon = step.icon;
+                    const isVisible = visibleSteps.includes(index);
+                    
+                    return (
+                      <div key={index} className="relative">
+                        {/* Mobile Timeline Node */}
+                        <div className={`absolute -left-3 w-6 h-6 rounded-full bg-white border-2 border-blue-200 shadow-md flex items-center justify-center transition-all duration-500 ${
+                          isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                        }`}>
+                          <div className={`w-3 h-3 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
+                            <StepIcon className={`h-1.5 w-1.5 ${step.color}`} />
+                          </div>
+                        </div>
+                        
+                        {/* Mobile Step Number */}
+                        <div className={`absolute -left-4 -top-1 w-4 h-4 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-[10px] font-bold flex items-center justify-center shadow-md transition-all duration-500 delay-200 ${
+                          isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                        }`}>
+                          {index + 1}
+                        </div>
+                        
+                        {/* Mobile Content */}
+                        <div className={`ml-3 transition-all duration-700 delay-300 ${
+                          isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                        }`}>
+                          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-slate-200/50 hover:border-blue-200 transition-all duration-300 hover:shadow-xl">
+                            <h3 className="text-sm font-bold text-slate-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                              {step.title}
+                            </h3>
+                            <p className="text-slate-600 text-xs leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                              {step.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

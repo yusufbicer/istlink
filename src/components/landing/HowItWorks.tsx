@@ -106,7 +106,7 @@ const HowItWorks = () => {
         observer.unobserve(titleRef.current);
       }
     };
-  }, []);
+  }, [steps]);
 
   return (
     <section id="how-it-works" className={`${isMobile ? 'py-8' : 'py-10'} relative overflow-hidden`}>

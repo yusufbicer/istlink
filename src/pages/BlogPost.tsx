@@ -170,7 +170,7 @@ const BlogPost = () => {
 
           <article className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
             {post.image_url && (
-              <div className="w-full aspect-[16/9] max-h-96 overflow-hidden">
+              <div className="w-full aspect-[16/9] max-h-64 md:max-h-80 overflow-hidden rounded-t-xl">
                 <img 
                   src={post.image_url} 
                   alt={getTranslatedContent(post, 'title')}

@@ -107,11 +107,11 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className={`${isMobile ? "py-8" : "py-12 md:py-16"} bg-gray-50`} key={`features-${i18n.language}`}>
+    <section id="features" className={`${isMobile ? "py-6" : "py-12 md:py-16"} bg-gray-50`} key={`features-${i18n.language}`}>
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}
-          className={`text-center max-w-3xl mx-auto ${isMobile ? "mb-6" : "mb-8 md:mb-10"} transition-all duration-700 ${
+          className={`text-center max-w-3xl mx-auto ${isMobile ? "mb-4" : "mb-8 md:mb-10"} transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -127,20 +127,20 @@ const Features = () => {
         </div>
 
         {/* Vertical Features Grid - All Layouts */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${isMobile ? "gap-3" : "gap-4"} max-w-6xl mx-auto`}>
           {features.map((feature, index) => (
             <div 
               key={index}
-              className={`${feature.color} rounded-lg border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
+              className={`${feature.color} rounded-lg border ${isMobile ? "p-3" : "p-4"} shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${index * 50}ms` }}
             >
-              <div className={`w-10 h-10 ${feature.iconColor} rounded-lg flex items-center justify-center mb-3`}>
-                {React.createElement(feature.icon, { className: "w-5 h-5" })}
+              <div className={`${isMobile ? "w-8 h-8 mb-2" : "w-10 h-10 mb-3"} ${feature.iconColor} rounded-lg flex items-center justify-center`}>
+                {React.createElement(feature.icon, { className: isMobile ? "w-4 h-4" : "w-5 h-5" })}
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-              <p className="text-gray-600 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+              <h3 className={`${isMobile ? "text-base" : "text-lg"} font-semibold ${isMobile ? "mb-1" : "mb-2"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+              <p className={`text-gray-600 ${isMobile ? "text-xs" : "text-sm"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
             </div>
           ))}
         </div>

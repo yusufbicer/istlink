@@ -62,7 +62,7 @@ const Hero = () => {
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
             <span className="block mb-2 font-bold">
-              {t('turkishSupplyChainComplexity')}
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{t('turkishSupplyChain')}</span> <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">{t('complexity')}</span>
             </span>
             <span className="block relative h-8 md:h-12 lg:h-16 xl:h-20 overflow-hidden">
               <span 

@@ -97,106 +97,147 @@ const EarlyAccess = () => {
     : t('getStartedDesc');
   
   return (
-    <div className="container mx-auto p-6 min-h-screen">
-      {/* Back to home link */}
-      <div className="mb-8">
-        <Link to="/" className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          {t('backToHome')}
-        </Link>
-      </div>
-      
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">{pageTitle}</h1>
-          <p className="text-gray-600">
-            {pageDescription}
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      <div className="container mx-auto px-4 py-6 sm:py-8 lg:py-12">
+        {/* Back to home link */}
+        <div className="mb-6 sm:mb-8">
+          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors group">
+            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            {t('backToHome')}
+          </Link>
         </div>
         
-        <div className="bg-white rounded-xl shadow-md p-8">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('fullName')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder="John Doe" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('businessEmail')}</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="you@company.com" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      {t('neverShareEmail')}
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="company"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('companyOptional')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('company')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="reason"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {isNewsletterSubscription 
-                        ? t('whatInterests')
-                        : t('whyInterested')
-                      }
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder={isNewsletterSubscription 
-                          ? t('tellUsInterests')
-                          : t('tellUsAboutNeeds')
+        <div className="max-w-lg mx-auto">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-10">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
+              <div className="w-8 h-8 bg-primary rounded-full"></div>
+            </div>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 text-foreground">
+              {pageTitle}
+            </h1>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-md mx-auto">
+              {pageDescription}
+            </p>
+          </div>
+          
+          {/* Form Card */}
+          <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl shadow-xl p-6 sm:p-8">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-foreground">
+                        {t('fullName')}
+                      </FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="John Doe" 
+                          className="h-12 bg-background/50 border-border/60 focus:border-primary/60 focus:ring-primary/20 rounded-xl transition-all duration-200"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-foreground">
+                        {t('businessEmail')}
+                      </FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="email" 
+                          placeholder="you@company.com" 
+                          className="h-12 bg-background/50 border-border/60 focus:border-primary/60 focus:ring-primary/20 rounded-xl transition-all duration-200"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormDescription className="text-xs text-muted-foreground">
+                        {t('neverShareEmail')}
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-foreground">
+                        {t('companyOptional')}
+                      </FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder={t('company')} 
+                          className="h-12 bg-background/50 border-border/60 focus:border-primary/60 focus:ring-primary/20 rounded-xl transition-all duration-200"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="reason"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-foreground">
+                        {isNewsletterSubscription 
+                          ? t('whatInterests')
+                          : t('whyInterested')
                         }
-                        className="min-h-[120px]"
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <Button 
-                type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? t('submitting') : (isNewsletterSubscription ? t('subscribe') : t('requestEarlyAccess'))}
-              </Button>
-            </form>
-          </Form>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder={isNewsletterSubscription 
+                            ? t('tellUsInterests')
+                            : t('tellUsAboutNeeds')
+                          }
+                          className="min-h-[120px] bg-background/50 border-border/60 focus:border-primary/60 focus:ring-primary/20 rounded-xl resize-none transition-all duration-200"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button 
+                  type="submit" 
+                  size="lg"
+                  className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin"></div>
+                      {t('submitting')}
+                    </div>
+                  ) : (
+                    isNewsletterSubscription ? t('subscribe') : t('requestEarlyAccess')
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </div>
+          
+          {/* Trust indicators */}
+          <div className="text-center mt-6 text-xs text-muted-foreground">
+            <p>🔒 Your information is secure and will never be shared</p>
+          </div>
         </div>
       </div>
     </div>

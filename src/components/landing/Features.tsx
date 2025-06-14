@@ -1,16 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Package, TruckIcon, UsersIcon, FileTextIcon, CreditCardIcon, GlobeIcon, ShieldCheck } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useIsMobile } from '@/hooks/use-mobile';
-import type { UseEmblaCarouselType } from "embla-carousel-react";
 import { useTranslation } from 'react-i18next';
 
 const Features = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeFeature, setActiveFeature] = useState(0);
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
   const { t, i18n } = useTranslation();
 
   const features = [
@@ -19,49 +15,56 @@ const Features = () => {
       title: t('consolidatedShipping'),
       description: t('consolidatedShippingDesc'),
       color: "bg-blue-50 border-blue-200",
-      iconColor: "text-blue-600 bg-blue-100"
+      iconColor: "text-blue-600 bg-blue-100",
+      footnote: "Save up to 40% on shipping costs"
     },
     {
       icon: TruckIcon,
       title: t('singleBillOfLadingTitle'),
       description: t('singleBillOfLadingDesc'),
       color: "bg-green-50 border-green-200",
-      iconColor: "text-green-600 bg-green-100"
+      iconColor: "text-green-600 bg-green-100",
+      footnote: "Reduces documentation by 70%"
     },
     {
       icon: CreditCardIcon,
       title: t('centralizedPayments'),
       description: t('centralizedPaymentsDesc'),
       color: "bg-purple-50 border-purple-200",
-      iconColor: "text-purple-600 bg-purple-100"
+      iconColor: "text-purple-600 bg-purple-100",
+      footnote: "One payment for all suppliers"
     },
     {
       icon: FileTextIcon,
       title: t('simplifiedDocumentation'),
       description: t('simplifiedDocumentationDesc'),
       color: "bg-amber-50 border-amber-200",
-      iconColor: "text-amber-600 bg-amber-100"
+      iconColor: "text-amber-600 bg-amber-100",
+      footnote: "Digital-first approach"
     },
     {
       icon: GlobeIcon,
       title: t('globalCompliance'),
       description: t('globalComplianceDesc'),
       color: "bg-cyan-50 border-cyan-200",
-      iconColor: "text-cyan-600 bg-cyan-100"
+      iconColor: "text-cyan-600 bg-cyan-100",
+      footnote: "150+ countries supported"
     },
     {
       icon: UsersIcon,
       title: t('supplierManagement'),
       description: t('supplierManagementDesc'),
       color: "bg-pink-50 border-pink-200",
-      iconColor: "text-pink-600 bg-pink-100"
+      iconColor: "text-pink-600 bg-pink-100",
+      footnote: "Unlimited supplier network"
     },
     {
       icon: ShieldCheck,
       title: t('deliveryGuarantee'),
       description: t('deliveryGuaranteeDesc'),
       color: "bg-indigo-50 border-indigo-200",
-      iconColor: "text-indigo-600 bg-indigo-100"
+      iconColor: "text-indigo-600 bg-indigo-100",
+      footnote: "99.5% on-time delivery rate"
     }
   ];
 
@@ -86,25 +89,6 @@ const Features = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (emblaApi) {
-      const onSelect = () => {
-        setActiveFeature(emblaApi.selectedScrollSnap());
-      };
-      
-      emblaApi.on("select", onSelect);
-      return () => {
-        emblaApi.off("select", onSelect);
-      };
-    }
-    return undefined;
-  }, [emblaApi]);
-
-  const scrollToFeature = (index: number) => {
-    if (emblaApi && emblaApi.scrollTo) {
-      emblaApi.scrollTo(index);
-    }
-  };
 
   return (
     <section id="features" className={`${isMobile ? "py-6" : "py-12 md:py-16"} bg-gray-50`} key={`features-${i18n.language}`}>
@@ -143,7 +127,8 @@ const Features = () => {
                   </div>
                 </div>
                 <h3 className="text-base font-semibold mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-                <p className="text-gray-600 text-xs" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+                <p className="text-gray-600 text-xs mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+                <div className="text-xs text-gray-500 italic">{feature.footnote}</div>
               </div>
             ))}
           </div>
@@ -187,12 +172,16 @@ const Features = () => {
                     {feature.title}
                   </h3>
                   
-                  <p className={`text-gray-600 leading-relaxed ${
+                  <p className={`text-gray-600 leading-relaxed mb-3 ${
                     variant.textSize === 'text-xl' ? 'text-base' : 
                     variant.textSize === 'text-lg' ? 'text-sm' : 'text-sm'
                   }`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                     {feature.description}
                   </p>
+                  
+                  <div className="text-xs text-gray-500 italic font-medium">
+                    {feature.footnote}
+                  </div>
                   
                   {/* Add extra content for some cards to create height variation */}
                   {index === 1 && (

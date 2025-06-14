@@ -141,41 +141,38 @@ const BlogPreview = () => {
             ))}
           </div>
         ) : (
-          // Desktop: Professional card grid
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          // Desktop: Elegant professional card grid
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {blogPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
-                className="block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+                className="block bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
               >
                 {post.image_url && (
-                  <div className="aspect-video overflow-hidden">
+                  <div className="aspect-[16/10] overflow-hidden">
                     <img 
                       src={post.image_url} 
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-200"
                     />
                   </div>
                 )}
-                <div className="p-6">
-                  <h3 className="font-semibold text-lg text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
+                <div className="p-4">
+                  <h3 className="font-medium text-base text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
                     {getTranslatedContent(post, 'title')}
                   </h3>
                   {getTranslatedContent(post, 'excerpt') && (
-                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                    <p className="text-gray-600 text-sm mb-3 line-clamp-2 leading-relaxed">
                       {getTranslatedContent(post, 'excerpt')}
                     </p>
                   )}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      {formatBlogDate(post.created_at, i18n.language, t, 'medium')}
+                  <div className="flex items-center justify-between pt-3 border-t border-gray-50">
+                    <div className="flex items-center text-xs text-gray-500">
+                      <Calendar className="h-3 w-3 mr-1.5" />
+                      {formatBlogDate(post.created_at, i18n.language, t, 'short')}
                     </div>
-                    <div className="flex items-center text-blue-600 text-sm font-medium">
-                      {t('readMore')}
-                      <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all duration-200" />
                   </div>
                 </div>
               </Link>

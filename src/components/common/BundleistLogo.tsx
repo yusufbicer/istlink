@@ -15,68 +15,75 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
   return (
     <div className={`${sizeClasses[size]} ${className}`}>
       <svg
-        viewBox="0 0 100 100"
+        viewBox="0 0 80 80"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Premium minimalist B logo */}
+        {/* Modern hexagonal logo with interconnected elements */}
         <g>
-          {/* Subtle outer glow */}
-          <circle 
-            cx="50" 
-            cy="50" 
-            r="45" 
-            stroke="url(#glowGradient)" 
-            strokeWidth="1" 
-            fill="none"
-            opacity="0.1"
-          />
-          
-          {/* Clean geometric B with perfect proportions */}
+          {/* Main hexagonal shape */}
           <path
-            d="M25 20 L25 80 L55 80 C63 80 70 74 70 66 C70 61 67.5 57 64 55 C67 53 69 49 69 44 C69 36 63 20 54 20 L25 20 Z M32 27 L53 27 C57.5 27 61 30 61 34 C61 38 57.5 41 53 41 L32 41 L32 27 Z M32 48 L55 48 C59.5 48 63 51 63 55 C63 59 59.5 62 55 62 L32 62 L32 48 Z"
-            fill="url(#primaryGradient)"
-            className="drop-shadow-sm"
+            d="M40 8 L60 20 L60 44 L40 56 L20 44 L20 20 Z"
+            fill="url(#hexGradient)"
+            stroke="url(#borderGradient)"
+            strokeWidth="1.5"
+            className="drop-shadow-md"
           />
           
-          {/* Premium highlight effect */}
-          <path
-            d="M32 27 L53 27 C57.5 27 61 30 61 34 C61 35.2 60.6 36.3 59.9 37.2 L32 37.2 L32 27 Z"
-            fill="url(#shineGradient)"
-            opacity="0.4"
-          />
-          
-          {/* Elegant connecting elements */}
-          <circle cx="73" cy="38" r="1.8" fill="url(#accentGradient)" opacity="0.9" />
-          <circle cx="76" cy="43" r="1.2" fill="url(#accentGradient)" opacity="0.7" />
-          <circle cx="74" cy="48" r="0.8" fill="url(#accentGradient)" opacity="0.5" />
+          {/* Inner geometric pattern representing consolidation */}
+          <g transform="translate(40, 32)">
+            {/* Central hub */}
+            <circle cx="0" cy="0" r="4" fill="url(#centerGradient)" />
+            
+            {/* Connection lines radiating outward */}
+            <line x1="0" y1="0" x2="0" y2="-12" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.8" />
+            <line x1="0" y1="0" x2="10" y2="-6" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.8" />
+            <line x1="0" y1="0" x2="10" y2="6" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.8" />
+            <line x1="0" y1="0" x2="0" y2="12" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.8" />
+            <line x1="0" y1="0" x2="-10" y2="6" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.8" />
+            <line x1="0" y1="0" x2="-10" y2="-6" stroke="url(#lineGradient)" strokeWidth="2" opacity="0.8" />
+            
+            {/* Outer nodes */}
+            <circle cx="0" cy="-12" r="2" fill="url(#nodeGradient)" />
+            <circle cx="10" cy="-6" r="2" fill="url(#nodeGradient)" />
+            <circle cx="10" cy="6" r="2" fill="url(#nodeGradient)" />
+            <circle cx="0" cy="12" r="2" fill="url(#nodeGradient)" />
+            <circle cx="-10" cy="6" r="2" fill="url(#nodeGradient)" />
+            <circle cx="-10" cy="-6" r="2" fill="url(#nodeGradient)" />
+          </g>
         </g>
         
         <defs>
-          {/* Primary sophisticated gradient */}
-          <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#059669" />
-            <stop offset="40%" stopColor="#0891b2" />
-            <stop offset="100%" stopColor="#1d4ed8" />
+          {/* Hexagon gradient */}
+          <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#0f766e" />
+            <stop offset="50%" stopColor="#0891b2" />
+            <stop offset="100%" stopColor="#1e40af" />
           </linearGradient>
           
-          {/* Subtle glow effect */}
-          <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#34d399" />
+          {/* Border gradient */}
+          <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#14b8a6" />
             <stop offset="100%" stopColor="#3b82f6" />
           </linearGradient>
           
-          {/* Premium shine effect */}
-          <linearGradient id="shineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          {/* Center hub gradient */}
+          <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="100%" stopColor="#f8fafc" />
+            <stop offset="100%" stopColor="#e2e8f0" />
+          </radialGradient>
+          
+          {/* Connection lines gradient */}
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="100%" stopColor="#cbd5e1" />
           </linearGradient>
           
-          {/* Refined accent gradient */}
-          <radialGradient id="accentGradient" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#22c55e" />
-            <stop offset="100%" stopColor="#16a34a" />
+          {/* Node gradient */}
+          <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fbbf24" />
+            <stop offset="100%" stopColor="#f59e0b" />
           </radialGradient>
         </defs>
       </svg>

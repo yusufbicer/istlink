@@ -49,10 +49,14 @@ const Header = () => {
               <div className="flex items-center justify-center">
                 <BundleistLogo size={isMobile ? "md" : "lg"} />
                 {/* Enhanced Bundleist branding with two-color text - responsive sizing */}
-                <div className={isMobile ? "ml-2" : "ml-4"}>
-                  <div className="flex items-baseline">
-                    <span className={`font-bold ${isMobile ? "text-xl" : isTablet ? "text-2xl" : "text-3xl"} text-emerald-600 tracking-tight`}>Bundle</span>
-                    <span className={`font-bold ${isMobile ? "text-xl" : isTablet ? "text-2xl" : "text-3xl"} text-blue-600 tracking-tight`}>ist</span>
+                <div className={isMobile ? "ml-3" : "ml-4"}>
+                  <div className="flex items-center">
+                    <span className={`font-bold ${isMobile ? "text-lg" : isTablet ? "text-xl" : "text-2xl"} bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent tracking-wide`}>
+                      BUNDLEIST
+                    </span>
+                  </div>
+                  <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600 font-medium tracking-widest uppercase`}>
+                    Supply Chain Hub
                   </div>
                 </div>
               </div>

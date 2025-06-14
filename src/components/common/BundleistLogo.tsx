@@ -21,7 +21,7 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
 
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
-      {/* AI Logistics Tech Logo */}
+      {/* Istanbul Bridge AI Logo */}
       <div className={`${sizeClasses[size]} relative`}>
         <svg
           viewBox="0 0 48 48"
@@ -29,80 +29,77 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
         >
-          {/* AI Logistics Design */}
+          {/* Istanbul Bridge Inspired Design */}
           <g>
-            {/* Main container/box shape */}
-            <rect
-              x="8"
-              y="8"
-              width="32"
-              height="32"
-              rx="6"
-              fill="url(#primaryGradient)"
-              className="drop-shadow-sm"
+            {/* Main circular background */}
+            <circle
+              cx="24"
+              cy="24"
+              r="22"
+              fill="url(#bridgeGradient)"
+              className="drop-shadow-lg"
             />
             
-            {/* AI Brain/Circuit pattern */}
+            {/* Bridge structure - representing connection between continents */}
             <g transform="translate(24, 24)">
-              {/* Central processing unit */}
-              <rect 
-                x="-4" 
-                y="-4" 
-                width="8" 
-                height="8" 
-                rx="2"
-                fill="white"
-                opacity="0.9"
-              />
+              {/* Bridge towers */}
+              <rect x="-2" y="-15" width="4" height="30" fill="white" opacity="0.9" rx="1" />
+              <rect x="-12" y="-10" width="3" height="20" fill="white" opacity="0.7" rx="1" />
+              <rect x="9" y="-10" width="3" height="20" fill="white" opacity="0.7" rx="1" />
               
-              {/* Circuit pathways - representing logistics routes */}
-              <g stroke="white" strokeWidth="2" opacity="0.7" fill="none">
-                {/* Horizontal paths */}
-                <path d="M -4 -8 L -12 -8 L -12 -4" strokeLinecap="round" />
-                <path d="M 4 -8 L 12 -8 L 12 -4" strokeLinecap="round" />
-                <path d="M -4 8 L -12 8 L -12 4" strokeLinecap="round" />
-                <path d="M 4 8 L 12 8 L 12 4" strokeLinecap="round" />
+              {/* Bridge cables - AI neural network pattern */}
+              <g stroke="white" strokeWidth="1.5" opacity="0.8">
+                {/* Main suspension cables */}
+                <path d="M -15 0 Q 0 -8 15 0" fill="none" strokeLinecap="round" />
+                <path d="M -15 4 Q 0 -4 15 4" fill="none" strokeLinecap="round" />
                 
-                {/* Vertical paths */}
-                <path d="M -8 -4 L -8 -12 L -4 -12" strokeLinecap="round" />
-                <path d="M -8 4 L -8 12 L -4 12" strokeLinecap="round" />
-                <path d="M 8 -4 L 8 -12 L 4 -12" strokeLinecap="round" />
-                <path d="M 8 4 L 8 12 L 4 12" strokeLinecap="round" />
+                {/* Vertical support cables */}
+                <line x1="-8" y1="0" x2="-8" y2="-6" strokeLinecap="round" />
+                <line x1="-4" y1="0" x2="-4" y2="-7" strokeLinecap="round" />
+                <line x1="4" y1="0" x2="4" y2="-7" strokeLinecap="round" />
+                <line x1="8" y1="0" x2="8" y2="-6" strokeLinecap="round" />
               </g>
               
-              {/* Data nodes - representing logistics hubs */}
-              <circle cx="-12" cy="-8" r="2" fill="white" opacity="0.8" />
-              <circle cx="12" cy="-8" r="2" fill="white" opacity="0.8" />
-              <circle cx="-12" cy="8" r="2" fill="white" opacity="0.8" />
-              <circle cx="12" cy="8" r="2" fill="white" opacity="0.8" />
+              {/* AI nodes at connection points */}
+              <circle cx="-15" cy="0" r="2" fill="white" opacity="0.9" />
+              <circle cx="15" cy="0" r="2" fill="white" opacity="0.9" />
+              <circle cx="0" cy="-8" r="2.5" fill="white" opacity="1" />
               
-              {/* Corner connection points */}
-              <circle cx="-8" cy="-12" r="1.5" fill="white" opacity="0.6" />
-              <circle cx="8" cy="-12" r="1.5" fill="white" opacity="0.6" />
-              <circle cx="-8" cy="12" r="1.5" fill="white" opacity="0.6" />
-              <circle cx="8" cy="12" r="1.5" fill="white" opacity="0.6" />
+              {/* Data flow indicators */}
+              <circle cx="-8" cy="2" r="1" fill="#fbbf24" opacity="0.8" />
+              <circle cx="0" cy="2" r="1" fill="#fbbf24" opacity="0.8" />
+              <circle cx="8" cy="2" r="1" fill="#fbbf24" opacity="0.8" />
             </g>
           </g>
           
           <defs>
-            {/* Primary gradient for logo */}
-            <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#3b82f6" />
-              <stop offset="50%" stopColor="#06b6d4" />
+            {/* Istanbul bridge inspired gradient */}
+            <linearGradient id="bridgeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1e40af" />
+              <stop offset="30%" stopColor="#3b82f6" />
+              <stop offset="70%" stopColor="#06b6d4" />
               <stop offset="100%" stopColor="#0891b2" />
             </linearGradient>
           </defs>
         </svg>
       </div>
       
-      {/* Clean Bundleist Text */}
+      {/* Istanbul AI Logistics Text */}
       {showText && (
-        <span 
-          className={`font-semibold text-gray-800 ${textSizes[size]} tracking-wide`}
-          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-        >
-          Bundleist
-        </span>
+        <div className="flex flex-col">
+          <span 
+            className={`font-bold text-gray-800 ${textSizes[size]} tracking-tight leading-tight`}
+            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+          >
+            BridgeLogist
+          </span>
+          <span 
+            className="text-xs text-gray-500 tracking-wider font-medium"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+          >
+            Istanbul AI
+          </span>
+        </div>
       )}
     </div>
   );

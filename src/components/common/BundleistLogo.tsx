@@ -21,7 +21,7 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
 
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
-      {/* Geometric B Logo */}
+      {/* Geometric B Logo - Two separate blocks forming B */}
       <div className={`${sizeClasses[size]} relative`}>
         <svg
           viewBox="0 0 100 100"
@@ -29,10 +29,19 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
         >
-          {/* Geometric B shape - identical to reference */}
-          <path
-            d="M15 10 L15 90 L55 90 C68 90 78 80 78 67 C78 58 72 50 64 47 C70 44 74 37 74 29 C74 18 66 10 55 10 L15 10 Z M30 25 L50 25 C55 25 59 29 59 34 C59 39 55 43 50 43 L30 43 L30 25 Z M30 57 L52 57 C58 57 63 62 63 68 C63 74 58 75 52 75 L30 75 L30 57 Z"
-            fill="#1e88e5"
+          {/* Left vertical block */}
+          <rect x="10" y="10" width="15" height="80" fill="#1976d2" />
+          
+          {/* Top right block */}
+          <polygon 
+            points="25,10 70,10 85,25 70,40 25,40 25,25" 
+            fill="#1976d2" 
+          />
+          
+          {/* Bottom right block */}
+          <polygon 
+            points="25,50 75,50 90,65 75,80 25,80 25,65" 
+            fill="#1976d2" 
           />
         </svg>
       </div>

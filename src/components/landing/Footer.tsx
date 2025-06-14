@@ -17,7 +17,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
-      <div className={`container mx-auto px-6 ${isMobile ? "py-3" : "py-16"}`}>
+      <div className={`container mx-auto px-6 ${isMobile ? "py-2" : "py-16"}`}>
         <div className={`grid grid-cols-1 lg:grid-cols-12 ${isMobile ? "gap-3" : "gap-8 lg:gap-12"}`}>
           
           {/* Brand Section */}

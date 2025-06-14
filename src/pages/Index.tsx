@@ -8,11 +8,14 @@ import Footer from '@/components/landing/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { PackageCheck, FileText, Receipt, CheckCircle2, DollarSign, Timer, AlertCircle, Package, CreditCard, CheckCircle, GitMerge, Database, Archive } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const isMobile = useIsMobile();
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   // Scroll to section if hash is present in URL
   useEffect(() => {
@@ -345,51 +348,41 @@ const Index = () => {
               </p>
             </div>
             
-            {/* Mobile: Enhanced Pricing Tabs */}
+            {/* Mobile: Vertical Pricing Cards */}
             {isMobile ? (
-              <div className="mb-6">
-                <Tabs defaultValue="growth" className="w-full">
-                  <TabsList className="grid grid-cols-3 mb-4 bg-white p-1 rounded-lg shadow-sm border">
-                    <TabsTrigger value="starter" className="text-xs py-2 data-[state=active]:bg-slate-600 data-[state=active]:text-white rounded transition-all" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Starter</TabsTrigger>
-                    <TabsTrigger value="growth" className="text-xs py-2 data-[state=active]:bg-blue-600 data-[state=active]:text-white rounded transition-all" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Growth</TabsTrigger>
-                    <TabsTrigger value="enterprise" className="text-xs py-2 data-[state=active]:bg-emerald-600 data-[state=active]:text-white rounded transition-all" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Enterprise</TabsTrigger>
-                  </TabsList>
-                  
-                  {pricingPlans.map((plan, index) => {
-                    const PlanIcon = plan.icon;
-                    return (
-                      <TabsContent key={index} value={index === 0 ? 'starter' : index === 1 ? 'growth' : 'enterprise'}>
-                        <div className={`bg-white rounded-lg border-2 ${plan.borderColor} shadow-sm overflow-hidden relative`}>
-                          <div className="p-5">
-                            <div className={`w-10 h-10 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>
-                              <PlanIcon className={`h-5 w-5 ${plan.iconColor}`} />
-                            </div>
-                            <h3 className="text-lg font-bold mb-2 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.name}</h3>
-                            <p className="text-gray-600 mb-3 text-center text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.description}</p>
-                            <div className="text-center mb-1">
-                              <span className="text-2xl font-bold" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.price}</span>
-                            </div>
-                            <div className="text-gray-600 text-sm mb-2 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.period}</div>
-                            {plan.additionalInfo && (
-                              <div className="text-xs text-gray-500 mb-3 text-center" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{plan.additionalInfo}</div>
-                            )}
-                            
-                            <div className="border-t pt-3">
-                              <ul className="space-y-1.5">
-                                {plan.features.map((feature, i) => (
-                                  <li key={i} className="flex items-center text-xs text-gray-700">
-                                    <CheckCircle2 className="h-3 w-3 text-emerald-500 mr-2 flex-shrink-0" />
-                                    <span style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
+              <div className="space-y-3">
+                {pricingPlans.map((plan, index) => {
+                  const PlanIcon = plan.icon;
+                  return (
+                    <div key={index} className={`bg-white rounded-lg p-3 border-2 ${plan.borderColor} hover:shadow-md transition-all`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center">
+                          <div className={`${plan.iconBg} p-1.5 rounded-lg mr-2`}>
+                            <PlanIcon className="h-3 w-3 text-emerald-600" />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-sm text-gray-900">{plan.name}</h3>
+                            <p className="text-lg font-bold text-gray-900">{plan.price}</p>
                           </div>
                         </div>
-                      </TabsContent>
-                    );
-                  })}
-                </Tabs>
+                        <Button 
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 text-xs rounded-lg transition-all"
+                          onClick={() => navigate('/early-access')}
+                        >
+                          {t('getStarted')}
+                        </Button>
+                      </div>
+                      <ul className="space-y-1 text-xs text-gray-600">
+                        {plan.features.slice(0, 3).map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center">
+                            <CheckCircle2 className="h-3 w-3 text-emerald-500 mr-2 flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-8">

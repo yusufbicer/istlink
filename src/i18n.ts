@@ -15,7 +15,8 @@ const resources = {
 
       // Hero Section
       "smartExportConsolidation": "Smart Export Consolidation Solutions",
-      "turkishSupplyChainComplexity": "Turkish Supply Chain Complexity,",
+      "turkishSupplyChain": "Turkish Supply Chain",
+      "complexity": "Complexity,",
       "heroDescription": "Transform fragmented Turkish supplier purchases into a single, streamlined shipment. Buy from multiple Turkish suppliers with one payment, one contract, one Bill of Lading and one shipment.",
       "talkToOurTeam": "Talk to Our Team",
       "heroTitle": "Streamline Your Turkish Supply Chain",
@@ -159,7 +160,8 @@ const resources = {
 
       // Hero Section
       "smartExportConsolidation": "Solutions de Consolidation d'Exportation Intelligentes",
-      "turkishSupplyChainComplexity": "Complexité de la Chaîne d'Approvisionnement Turque,",
+      "turkishSupplyChain": "Chaîne d'Approvisionnement Turque",
+      "complexity": "Complexité,",
       "heroDescription": "Transformez les achats fragmentés de fournisseurs turcs en un seul envoi rationalisé. Achetez auprès de plusieurs fournisseurs turcs avec un seul paiement, un contrat unique, un connaissement unique et un envoi unique.",
       "talkToOurTeam": "Parlez à Notre Équipe",
       "heroTitle": "Optimisez Votre Chaîne d'Approvisionnement Turque",
@@ -302,7 +304,8 @@ const resources = {
 
       // Hero Section
       "smartExportConsolidation": "Akıllı İhracat Konsolidasyon Çözümleri",
-      "turkishSupplyChainComplexity": "Türk Tedarik Zinciri Karmaşıklığı,",
+      "turkishSupplyChain": "Türk Tedarik Zinciri",
+      "complexity": "Karmaşıklığı,",
       "heroDescription": "Parçalanmış Türk tedarikçi satın alımlarını tek, akılı bir sevkiyata dönüştürün. Birden fazla Türk tedarikçiden tek ödeme, tek sözleşme, tek Konşimento ve tek sevkiyat ile satın alın.",
       "talkToOurTeam": "Ekibimizle Konuşun",
       "heroTitle": "Türk Tedarik Zincirinizi Optimize Edin",

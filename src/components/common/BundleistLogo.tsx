@@ -57,21 +57,21 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
         <defs>
           {/* Hexagon gradient */}
           <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#0f766e" />
-            <stop offset="50%" stopColor="#0891b2" />
-            <stop offset="100%" stopColor="#1e40af" />
+            <stop offset="0%" stopColor="#0d9488" />
+            <stop offset="50%" stopColor="#0ea5e9" />
+            <stop offset="100%" stopColor="#2563eb" />
           </linearGradient>
           
           {/* Border gradient */}
           <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#14b8a6" />
+            <stop offset="0%" stopColor="#06b6d4" />
             <stop offset="100%" stopColor="#3b82f6" />
           </linearGradient>
           
           {/* Center hub gradient */}
           <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="100%" stopColor="#e2e8f0" />
+            <stop offset="100%" stopColor="#cbd5e1" />
           </radialGradient>
           
           {/* Connection lines gradient */}

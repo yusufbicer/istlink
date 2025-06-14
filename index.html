@@ -154,21 +154,13 @@
     
     <!-- Performance monitoring -->
     <script>
-      // Core Web Vitals tracking
-      function getCLS(onPerfEntry) {
-        if (onPerfEntry && onPerfEntry instanceof Function) {
-          import('web-vitals').then(({ getCLS }) => getCLS(onPerfEntry));
-        }
-      }
-      function getFID(onPerfEntry) {
-        if (onPerfEntry && onPerfEntry instanceof Function) {
-          import('web-vitals').then(({ getFID }) => getFID(onPerfEntry));
-        }
-      }
-      function getLCP(onPerfEntry) {
-        if (onPerfEntry && onPerfEntry instanceof Function) {
-          import('web-vitals').then(({ getLCP }) => getLCP(onPerfEntry));
-        }
+      // Basic performance tracking without external dependencies
+      if ('PerformanceObserver' in window) {
+        // Track page load time
+        window.addEventListener('load', () => {
+          const loadTime = performance.now();
+          console.log('Page load time:', loadTime);
+        });
       }
     </script>
   </body>

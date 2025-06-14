@@ -17,7 +17,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
-      <div className={`container mx-auto px-6 ${isMobile ? "py-8" : "py-16"}`}>
+      <div className={`container mx-auto px-6 ${isMobile ? "py-4" : "py-16"}`}>
         <div className={`grid grid-cols-1 lg:grid-cols-12 ${isMobile ? "gap-6" : "gap-8 lg:gap-12"}`}>
           
           {/* Brand Section */}
@@ -122,7 +122,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className={`border-t border-gray-200 ${isMobile ? "mt-6 pt-4" : "mt-12 pt-8"}`}>
+        <div className={`border-t border-gray-200 ${isMobile ? "mt-3 pt-2" : "mt-12 pt-8"}`}>
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               &copy; 2025 Bundleist Ltd. {t('allRightsReserved')}

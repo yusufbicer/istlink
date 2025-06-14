@@ -87,8 +87,10 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              {t('heroDescription')}
+            <p className="leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <span className="bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent font-medium">
+                {t('heroDescription')}
+              </span>
             </p>
           </div>
           

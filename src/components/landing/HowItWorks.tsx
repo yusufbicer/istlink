@@ -113,7 +113,7 @@ const HowItWorks = () => {
   }, [steps]);
 
   return (
-    <section id="how-it-works" className={`${isMobile ? 'py-8' : 'py-10'} relative overflow-hidden`} key={`how-it-works-${i18n.language}`}>
+    <section id="how-it-works" className={`${isMobile ? 'py-4' : 'py-10'} relative overflow-hidden`} key={`how-it-works-${i18n.language}`}>
       {/* Modern gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
@@ -122,7 +122,7 @@ const HowItWorks = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div 
           ref={titleRef}
-          className={`text-center max-w-4xl mx-auto ${isMobile ? 'mb-8' : 'mb-10'} transition-all duration-700 ${
+          className={`text-center max-w-4xl mx-auto ${isMobile ? 'mb-4' : 'mb-10'} transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -148,7 +148,7 @@ const HowItWorks = () => {
             {/* Central Timeline Line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
             
-            <div className="space-y-6">
+            <div className="space-y-4">
               {steps.map((step, index) => {
                 const StepIcon = step.icon;
                 const isLeft = index % 2 === 0;
@@ -202,7 +202,7 @@ const HowItWorks = () => {
               {/* Mobile Timeline Line */}
               <div className="absolute left-4 top-0 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
               
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {steps.map((step, index) => {
                   const StepIcon = step.icon;
                   const isVisible = visibleSteps.includes(index);

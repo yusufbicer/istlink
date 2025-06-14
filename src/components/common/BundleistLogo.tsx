@@ -68,15 +68,15 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
       
       {/* Bundleist Text */}
       {showText && (
-        <span 
-          className={`font-light text-gray-800 ${textSizes[size]} tracking-widest uppercase`}
+        <div 
+          className={`text-gray-800 dark:text-gray-200 ${textSizes[size]} tracking-widest uppercase font-precision`}
           style={{ 
-            fontFamily: '"Helvetica Neue", "Arial", sans-serif',
-            letterSpacing: '0.15em'
+            letterSpacing: '0.12em'
           }}
         >
-          Bundleist
-        </span>
+          <span className="font-light">BUNDLE</span>
+          <span className="font-medium">IST</span>
+        </div>
       )}
     </div>
   );

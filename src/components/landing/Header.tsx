@@ -47,7 +47,7 @@ const Header = () => {
     }`}>
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className={`flex items-center ${isMobile ? '-ml-2' : ''}`}>
             <BundleistLogo size="md" showText={true} />
           </Link>
 

@@ -149,69 +149,83 @@ const Features = () => {
           </div>
         </div>
 
-        {/* Desktop & Tablet: Staggered Layout */}
+        {/* Desktop & Tablet: Masonry/Pinterest Style Layout */}
         <div className={`${isMobile ? 'hidden' : 'block'} max-w-6xl mx-auto`}>
-          {/* First Row: 3 regular cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            {features.slice(0, 3).map((feature, index) => (
-              <div 
-                key={index}
-                className={`${feature.color} rounded-lg border p-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{ transitionDelay: `${index * 50}ms` }}
-              >
-                <div className="w-10 h-10 mb-3 flex items-center justify-center rounded-lg">
-                  <div className={`w-10 h-10 ${feature.iconColor} rounded-lg flex items-center justify-center`}>
-                    {React.createElement(feature.icon, { className: "w-5 h-5" })}
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+            {features.map((feature, index) => {
+              // Different heights and content for masonry effect
+              const cardVariants = [
+                { height: 'h-auto', padding: 'p-4', iconSize: 'w-10 h-10', textSize: 'text-lg' },
+                { height: 'h-auto', padding: 'p-6', iconSize: 'w-12 h-12', textSize: 'text-xl' },
+                { height: 'h-auto', padding: 'p-5', iconSize: 'w-11 h-11', textSize: 'text-lg' },
+                { height: 'h-auto', padding: 'p-4', iconSize: 'w-10 h-10', textSize: 'text-base' },
+                { height: 'h-auto', padding: 'p-6', iconSize: 'w-12 h-12', textSize: 'text-lg' },
+                { height: 'h-auto', padding: 'p-5', iconSize: 'w-11 h-11', textSize: 'text-lg' },
+                { height: 'h-auto', padding: 'p-4', iconSize: 'w-10 h-10', textSize: 'text-base' }
+              ];
+              
+              const variant = cardVariants[index];
+              
+              return (
+                <div 
+                  key={index}
+                  className={`${feature.color} rounded-lg border ${variant.padding} shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 break-inside-avoid mb-4 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <div className={`${variant.iconSize} mb-4 flex items-center justify-center rounded-lg`}>
+                    <div className={`${variant.iconSize} ${feature.iconColor} rounded-lg flex items-center justify-center`}>
+                      {React.createElement(feature.icon, { 
+                        className: variant.iconSize === 'w-12 h-12' ? "w-6 h-6" : 
+                                  variant.iconSize === 'w-11 h-11' ? "w-5 h-5" : "w-5 h-5" 
+                      })}
+                    </div>
                   </div>
+                  
+                  <h3 className={`${variant.textSize} font-semibold mb-3`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    {feature.title}
+                  </h3>
+                  
+                  <p className={`text-gray-600 leading-relaxed ${
+                    variant.textSize === 'text-xl' ? 'text-base' : 
+                    variant.textSize === 'text-lg' ? 'text-sm' : 'text-sm'
+                  }`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    {feature.description}
+                  </p>
+                  
+                  {/* Add extra content for some cards to create height variation */}
+                  {index === 1 && (
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="flex items-center text-xs text-gray-500">
+                        <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                        <span>Most Popular</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {index === 4 && (
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="flex items-center text-xs text-gray-500">
+                        <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                        <span>Essential Feature</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {index === 6 && (
+                    <div className="mt-4">
+                      <div className="bg-white/50 rounded-lg p-3 mt-3">
+                        <div className="flex items-center text-xs text-gray-600">
+                          <div className="w-2 h-2 bg-indigo-400 rounded-full mr-2"></div>
+                          <span>Premium Support Included</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-                <p className="text-gray-600 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Second Row: 2 larger cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            {features.slice(3, 5).map((feature, index) => (
-              <div 
-                key={index + 3}
-                className={`${feature.color} rounded-lg border p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{ transitionDelay: `${(index + 3) * 50}ms` }}
-              >
-                <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg">
-                  <div className={`w-12 h-12 ${feature.iconColor} rounded-lg flex items-center justify-center`}>
-                    {React.createElement(feature.icon, { className: "w-6 h-6" })}
-                  </div>
-                </div>
-                <h3 className="text-xl font-semibold mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-                <p className="text-gray-600 text-base leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Third Row: 2 centered cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {features.slice(5, 7).map((feature, index) => (
-              <div 
-                key={index + 5}
-                className={`${feature.color} rounded-lg border p-5 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{ transitionDelay: `${(index + 5) * 50}ms` }}
-              >
-                <div className="w-11 h-11 mb-3 flex items-center justify-center rounded-lg">
-                  <div className={`w-11 h-11 ${feature.iconColor} rounded-lg flex items-center justify-center`}>
-                    {React.createElement(feature.icon, { className: "w-5 h-5" })}
-                  </div>
-                </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-                <p className="text-gray-600 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

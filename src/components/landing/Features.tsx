@@ -128,7 +128,9 @@ const Features = () => {
                 </div>
                 <h3 className="text-base font-semibold mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
                 <p className="text-gray-600 text-xs mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
-                <div className="text-xs text-gray-500 font-medium">{t(feature.footnote)}</div>
+                <div className="pt-2 border-t border-gray-200/50">
+                  <div className="text-xs text-gray-500 font-medium">{t(feature.footnote)}</div>
+                </div>
               </div>
             ))}
           </div>

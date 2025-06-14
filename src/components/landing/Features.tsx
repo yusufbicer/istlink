@@ -11,7 +11,7 @@ const Features = () => {
   const titleRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const [emblaApi, setEmblaApi] = useState<UseEmblaCarouselType[1] | null>(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const features = [
     {
@@ -107,7 +107,7 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className={`${isMobile ? "py-8" : "py-12 md:py-16"} bg-gray-50`}>
+    <section id="features" className={`${isMobile ? "py-8" : "py-12 md:py-16"} bg-gray-50`} key={`features-${i18n.language}`}>
       <div className="container mx-auto px-6">
         <div 
           ref={titleRef}

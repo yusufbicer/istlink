@@ -113,7 +113,7 @@ const HowItWorks = () => {
   }, [steps]);
 
   return (
-    <section id="how-it-works" className={`${isMobile ? 'py-8' : 'py-10'} relative overflow-hidden`}>
+    <section id="how-it-works" className={`${isMobile ? 'py-8' : 'py-10'} relative overflow-hidden`} key={`how-it-works-${i18n.language}`}>
       {/* Modern gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>

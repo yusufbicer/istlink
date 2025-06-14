@@ -88,7 +88,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col" key={i18n.language}>
       <Header />
       <main className="flex-grow">
         <Hero />

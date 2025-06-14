@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
+import { formatBlogDate } from '@/lib/dateUtils';
 import { useTranslation } from "react-i18next";
 
 interface BlogPost {
@@ -66,7 +67,7 @@ const Blog = () => {
 
   // Helper function to format date
   const getFormattedDate = (dateString: string) => {
-    return format(new Date(dateString), 'MMM d, yyyy');
+    return formatBlogDate(dateString, i18n.language, t, 'medium');
   };
 
   // Helper function to format reading time

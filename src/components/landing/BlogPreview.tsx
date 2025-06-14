@@ -5,6 +5,7 @@ import { Calendar, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
+import { formatBlogDate } from '@/lib/dateUtils';
 import { useTranslation } from 'react-i18next';
 
 interface BlogPost {
@@ -129,7 +130,7 @@ const BlogPreview = () => {
                     </h3>
                     <div className="flex items-center text-xs text-gray-500">
                       <Calendar className="h-3 w-3 mr-1" />
-                      {format(new Date(post.created_at), 'MMM d')}
+                      {formatBlogDate(post.created_at, i18n.language, t, 'short')}
                     </div>
                   </div>
                   <div className="flex items-center pr-3">
@@ -169,7 +170,7 @@ const BlogPreview = () => {
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="flex items-center text-sm text-gray-500">
                       <Calendar className="h-4 w-4 mr-2" />
-                      {format(new Date(post.created_at), 'MMM d, yyyy')}
+                      {formatBlogDate(post.created_at, i18n.language, t, 'medium')}
                     </div>
                     <div className="flex items-center text-blue-600 text-sm font-medium">
                       Read more

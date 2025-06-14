@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Edit, Trash2, Share2 } from 'lucide-react';
 import { format } from 'date-fns';
+import { formatBlogDate } from '@/lib/dateUtils';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { supabase } from '@/integrations/supabase/client';
@@ -79,7 +80,7 @@ const BlogPost = () => {
 
   // Helper function to format date
   const getFormattedDate = (dateString: string) => {
-    return format(new Date(dateString), 'MMMM d, yyyy');
+    return formatBlogDate(dateString, i18n.language, t, 'long');
   };
 
   // Helper function to format reading time

@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { formatBlogDate } from '@/lib/dateUtils';
 import { useTranslation } from "react-i18next";
+import { useIsMobile } from '@/hooks/use-mobile';
 import SEOHead from '@/components/SEO/SEOHead';
 import StructuredData from '@/components/SEO/StructuredData';
 
@@ -41,6 +42,7 @@ const Blog = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
   const { t, i18n } = useTranslation();
+  const isMobile = useIsMobile();
 
   // Helper function to get translated content
   const getTranslatedContent = (post: BlogPost, field: 'title' | 'excerpt') => {
@@ -152,37 +154,37 @@ const Blog = () => {
       <Header />
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         {/* Enhanced Hero Section */}
-        <section className="relative pt-32 pb-20 overflow-hidden">
+        <section className={`relative ${isMobile ? 'pt-20 pb-8' : 'pt-32 pb-20'} overflow-hidden`}>
           {/* Background Elements */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5"></div>
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-indigo-200/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-teal-200/20 to-blue-200/20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
           
-          <div className="relative container mx-auto px-6">
+          <div className={`relative container mx-auto ${isMobile ? 'px-4' : 'px-6'}`}>
             <div 
               className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm border border-blue-200/50 text-blue-700 rounded-full text-sm font-medium mb-6 shadow-sm">
+              <div className={`inline-flex items-center ${isMobile ? 'px-3 py-1.5 text-xs mb-3' : 'px-4 py-2 text-sm mb-6'} bg-white/80 backdrop-blur-sm border border-blue-200/50 text-blue-700 rounded-full font-medium shadow-sm`}>
                 <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
                 {t('ourBlog')}
               </div>
               
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight px-8 text-center break-words">
+              <h1 className={`${isMobile ? 'text-lg px-2' : 'text-2xl md:text-3xl lg:text-4xl px-8'} font-bold ${isMobile ? 'mb-3' : 'mb-6'} bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight text-center break-words`}>
                 {t('insightsOnCrossBorderCommerce')}
               </h1>
               
-              <p className="text-xl md:text-2xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+              <p className={`${isMobile ? 'text-sm mb-6' : 'text-xl md:text-2xl mb-10'} text-slate-600 max-w-3xl mx-auto leading-relaxed`}>
                 {t('expertAnalysisDesc')}
               </p>
 
               {/* Admin Controls */}
               {isAdmin && (
-                <div className="mb-10">
+                <div className={`${isMobile ? 'mb-6' : 'mb-10'}`}>
                   <Link to="/blog/editor">
-                    <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 text-lg font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                      <Plus className="w-5 h-5 mr-3" />
+                    <Button className={`bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white ${isMobile ? 'px-4 py-2 text-sm' : 'px-8 py-4 text-lg'} font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}>
+                      <Plus className={`${isMobile ? 'w-4 h-4 mr-2' : 'w-5 h-5 mr-3'}`} />
                       {t('createNewPost')}
                     </Button>
                   </Link>
@@ -191,10 +193,10 @@ const Blog = () => {
 
               {/* Enhanced Category Filter */}
               {categories.length > 0 && (
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
+                <div className={`flex flex-wrap justify-center ${isMobile ? 'gap-2 mb-6' : 'gap-3 mb-12'}`}>
                   <button
                     onClick={() => setActiveCategory("All")}
-                    className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:-translate-y-0.5 ${
+                    className={`${isMobile ? 'px-3 py-2 text-xs' : 'px-6 py-3 text-sm'} rounded-xl font-medium transition-all duration-300 transform hover:-translate-y-0.5 ${
                       activeCategory === "All" 
                         ? "bg-white text-blue-700 shadow-lg border border-blue-200" 
                         : "bg-white/50 backdrop-blur-sm text-slate-700 hover:bg-white/80 border border-slate-200/50"
@@ -207,7 +209,7 @@ const Blog = () => {
                     <button
                       key={category}
                       onClick={() => setActiveCategory(category)}
-                      className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:-translate-y-0.5 ${
+                      className={`${isMobile ? 'px-3 py-2 text-xs' : 'px-6 py-3 text-sm'} rounded-xl font-medium transition-all duration-300 transform hover:-translate-y-0.5 ${
                         activeCategory === category 
                           ? "bg-white text-blue-700 shadow-lg border border-blue-200" 
                           : "bg-white/50 backdrop-blur-sm text-slate-700 hover:bg-white/80 border border-slate-200/50"
@@ -223,25 +225,25 @@ const Blog = () => {
         </section>
 
         {/* Enhanced Blog Posts Grid */}
-        <section className="relative pb-20">
-          <div className="container mx-auto px-6">
+        <section className={`relative ${isMobile ? 'pb-8' : 'pb-20'}`}>
+          <div className={`container mx-auto ${isMobile ? 'px-4' : 'px-6'}`}>
             {filteredPosts.length === 0 ? (
-              <div className="text-center py-20">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Plus className="w-12 h-12 text-blue-600" />
+              <div className={`text-center ${isMobile ? 'py-12' : 'py-20'}`}>
+                <div className={`${isMobile ? 'w-16 h-16' : 'w-24 h-24'} bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mx-auto ${isMobile ? 'mb-4' : 'mb-6'}`}>
+                  <Plus className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} text-blue-600`} />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">{t('noBlogPostsYet')}</h3>
+                <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-slate-900 mb-4`}>{t('noBlogPostsYet')}</h3>
                 {isAdmin && blogPosts.length === 0 && (
                   <Link to="/blog/editor">
-                    <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      <Plus className="w-5 h-5 mr-2" />
+                    <Button className={`bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white ${isMobile ? 'px-4 py-2 text-sm' : 'px-8 py-4'} font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-300`}>
+                      <Plus className={`${isMobile ? 'w-4 h-4 mr-1' : 'w-5 h-5 mr-2'}`} />
                       {t('createFirstPost')}
                     </Button>
                   </Link>
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              <div className={`grid grid-cols-1 ${isMobile ? 'gap-4' : 'md:grid-cols-2 lg:grid-cols-3 gap-8'} max-w-7xl mx-auto`}>
                 {filteredPosts.map((post, index) => (
                   <article 
                     key={post.id}
@@ -252,63 +254,63 @@ const Blog = () => {
                   >
                     {/* Enhanced Image Container */}
                     {post.image_url && (
-                      <div className="relative overflow-hidden h-48 bg-gradient-to-br from-blue-50 to-indigo-50">
+                      <div className={`relative overflow-hidden ${isMobile ? 'h-32' : 'h-48'} bg-gradient-to-br from-blue-50 to-indigo-50`}>
                         <img 
                           src={post.image_url} 
                           alt={getTranslatedContent(post, 'title')}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent group-hover:from-black/30 transition-all duration-300"></div>
-                        <div className="absolute top-4 right-4">
-                          <span className="inline-flex items-center px-3 py-1.5 bg-white/95 backdrop-blur-sm text-blue-700 rounded-full text-xs font-medium border border-blue-200/50 shadow-sm">
+                        <div className={`absolute ${isMobile ? 'top-2 right-2' : 'top-4 right-4'}`}>
+                          <span className={`inline-flex items-center ${isMobile ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-xs'} bg-white/95 backdrop-blur-sm text-blue-700 rounded-full font-medium border border-blue-200/50 shadow-sm`}>
                             {t(post.category)}
                           </span>
                         </div>
                       </div>
                     )}
                     
-                    <div className="p-8">
+                    <div className={`${isMobile ? 'p-4' : 'p-8'}`}>
                       {/* Enhanced Title */}
-                      <h2 className="text-xl font-bold mb-4 text-slate-900 group-hover:text-blue-700 transition-colors duration-300 line-clamp-2 leading-tight">
+                      <h2 className={`${isMobile ? 'text-base' : 'text-xl'} font-bold ${isMobile ? 'mb-2' : 'mb-4'} text-slate-900 group-hover:text-blue-700 transition-colors duration-300 line-clamp-2 leading-tight`}>
                         {getTranslatedContent(post, 'title')}
                       </h2>
                       
                       {/* Enhanced Excerpt */}
                       {getTranslatedContent(post, 'excerpt') && (
-                        <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed">
+                        <p className={`text-slate-600 ${isMobile ? 'mb-3 text-sm' : 'mb-6'} line-clamp-2 leading-relaxed`}>
                           {getTranslatedContent(post, 'excerpt')}
                         </p>
                       )}
                      
                       {/* Enhanced Author Section */}
-                      <div className="flex items-center mb-6">
+                      <div className={`flex items-center ${isMobile ? 'mb-3' : 'mb-6'}`}>
                         {post.author_avatar ? (
                           <img 
                             src={post.author_avatar} 
                             alt={post.author_name}
-                            className="w-10 h-10 rounded-full object-cover mr-4 border-2 border-blue-100"
+                            className={`${isMobile ? 'w-6 h-6 mr-2' : 'w-10 h-10 mr-4'} rounded-full object-cover border-2 border-blue-100`}
                           />
                         ) : (
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center mr-4 border-2 border-blue-200">
-                            <span className="text-blue-700 font-semibold text-sm">
+                          <div className={`${isMobile ? 'w-6 h-6 mr-2' : 'w-10 h-10 mr-4'} rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center border-2 border-blue-200`}>
+                            <span className={`text-blue-700 font-semibold ${isMobile ? 'text-xs' : 'text-sm'}`}>
                               {post.author_name.charAt(0)}
                             </span>
                           </div>
                         )}
                         <div>
-                          <p className="text-sm font-medium text-slate-900">{post.author_name}</p>
-                          <p className="text-xs text-slate-500">Author</p>
+                          <p className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium text-slate-900`}>{post.author_name}</p>
+                          {!isMobile && <p className="text-xs text-slate-500">Author</p>}
                         </div>
                       </div>
                       
                       {/* Enhanced Meta Information */}
-                      <div className="flex items-center justify-between text-sm text-slate-500 mb-6 pt-4 border-t border-slate-100">
+                      <div className={`flex items-center justify-between ${isMobile ? 'text-xs mb-3 pt-2' : 'text-sm mb-6 pt-4'} text-slate-500 border-t border-slate-100`}>
                         <div className="flex items-center">
-                          <CalendarDays className="w-4 h-4 mr-2 text-blue-500" />
+                          <CalendarDays className={`${isMobile ? 'w-3 h-3 mr-1' : 'w-4 h-4 mr-2'} text-blue-500`} />
                           {getFormattedDate(post.created_at)}
                         </div>
                         <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-2 text-indigo-500" />
+                          <Clock className={`${isMobile ? 'w-3 h-3 mr-1' : 'w-4 h-4 mr-2'} text-indigo-500`} />
                           {getFormattedReadTime(post.read_time)}
                         </div>
                       </div>
@@ -317,16 +319,16 @@ const Blog = () => {
                       <div className="flex justify-between items-center">
                         <Link 
                           to={`/blog/${post.slug}`}
-                          className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 group"
+                          className={`inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 group ${isMobile ? 'text-sm' : ''}`}
                         >
                           {t('readArticle')}
-                          <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                          <ChevronRight className={`${isMobile ? 'w-3 h-3 ml-1' : 'w-4 h-4 ml-1'} group-hover:translate-x-1 transition-transform duration-300`} />
                         </Link>
                         
                         {isAdmin && (
                           <Link 
                             to={`/blog/editor/${post.id}`}
-                            className="text-slate-400 hover:text-slate-600 transition-colors duration-300 text-sm font-medium"
+                            className={`text-slate-400 hover:text-slate-600 transition-colors duration-300 ${isMobile ? 'text-xs' : 'text-sm'} font-medium`}
                           >
                             {t('edit')}
                           </Link>
@@ -339,22 +341,22 @@ const Blog = () => {
             )}
             
             {/* Enhanced Newsletter CTA */}
-            <div className="mt-20 max-w-2xl mx-auto">
-              <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-2xl p-8 md:p-10 text-center overflow-hidden">
+            <div className={`${isMobile ? 'mt-8' : 'mt-20'} max-w-2xl mx-auto`}>
+              <div className={`relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-2xl ${isMobile ? 'p-4' : 'p-8 md:p-10'} text-center overflow-hidden`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/10 opacity-20"></div>
                 <div className="relative">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl md:text-3xl'} font-bold text-white ${isMobile ? 'mb-2' : 'mb-3'}`}>
                     {t('wantToStayUpdated')}
                   </h3>
-                  <p className="text-blue-100 text-base md:text-lg mb-6 max-w-xl mx-auto">
+                  <p className={`text-blue-100 ${isMobile ? 'text-sm mb-4' : 'text-base md:text-lg mb-6'} max-w-xl mx-auto`}>
                     Get exclusive insights, industry trends, and expert analysis delivered directly to your inbox.
                   </p>
                   <Link 
                     to="/early-access"
-                    className="inline-flex items-center bg-white text-blue-700 px-6 py-3 font-semibold rounded-xl hover:bg-blue-50 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                    className={`inline-flex items-center bg-white text-blue-700 ${isMobile ? 'px-4 py-2 text-sm' : 'px-6 py-3'} font-semibold rounded-xl hover:bg-blue-50 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl`}
                   >
                     {t('subscribeToNewsletterBtn')}
-                    <ChevronRight className="w-4 h-4 ml-2" />
+                    <ChevronRight className={`${isMobile ? 'w-3 h-3 ml-1' : 'w-4 h-4 ml-2'}`} />
                   </Link>
                 </div>
               </div>

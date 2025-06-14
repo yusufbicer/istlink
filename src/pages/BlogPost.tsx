@@ -169,19 +169,18 @@ const BlogPost = () => {
           </div>
 
           <article className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
-            {post.image_url && (
-              <div className="w-full aspect-[16/9] max-h-64 md:max-h-80 overflow-hidden rounded-t-xl">
-                <img 
-                  src={post.image_url} 
-                  alt={getTranslatedContent(post, 'title')}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            )}
-            
             <div className="p-8">
               <div className="max-w-3xl mx-auto">
+                {post.image_url && (
+                  <div className="w-full aspect-[16/9] max-h-64 md:max-h-80 overflow-hidden rounded-xl mb-8">
+                    <img 
+                      src={post.image_url} 
+                      alt={getTranslatedContent(post, 'title')}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                  <header className="mb-8">
                    <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">{getTranslatedContent(post, 'title')}</h1>
                   <div className="flex items-center justify-between">

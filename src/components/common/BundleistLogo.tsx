@@ -21,7 +21,7 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
 
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
-      {/* Istanbul Bridge AI Logo */}
+      {/* Istanbul Bundling Expert Logo */}
       <div className={`${sizeClasses[size]} relative`}>
         <svg
           viewBox="0 0 48 48"
@@ -29,77 +29,72 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
         >
-          {/* Istanbul Bridge Inspired Design */}
+          {/* Bundling/Packaging Design */}
           <g>
-            {/* Main circular background */}
+            {/* Main circular background with Istanbul blue */}
             <circle
               cx="24"
               cy="24"
               r="22"
-              fill="url(#bridgeGradient)"
+              fill="url(#bundlingGradient)"
               className="drop-shadow-lg"
             />
             
-            {/* Bridge structure - representing connection between continents */}
+            {/* Package bundling representation */}
             <g transform="translate(24, 24)">
-              {/* Bridge towers */}
-              <rect x="-2" y="-15" width="4" height="30" fill="white" opacity="0.9" rx="1" />
-              <rect x="-12" y="-10" width="3" height="20" fill="white" opacity="0.7" rx="1" />
-              <rect x="9" y="-10" width="3" height="20" fill="white" opacity="0.7" rx="1" />
+              {/* Main package/bundle */}
+              <rect x="-8" y="-6" width="16" height="12" fill="white" opacity="0.9" rx="2" />
               
-              {/* Bridge cables - AI neural network pattern */}
-              <g stroke="white" strokeWidth="1.5" opacity="0.8">
-                {/* Main suspension cables */}
-                <path d="M -15 0 Q 0 -8 15 0" fill="none" strokeLinecap="round" />
-                <path d="M -15 4 Q 0 -4 15 4" fill="none" strokeLinecap="round" />
-                
-                {/* Vertical support cables */}
-                <line x1="-8" y1="0" x2="-8" y2="-6" strokeLinecap="round" />
-                <line x1="-4" y1="0" x2="-4" y2="-7" strokeLinecap="round" />
-                <line x1="4" y1="0" x2="4" y2="-7" strokeLinecap="round" />
-                <line x1="8" y1="0" x2="8" y2="-6" strokeLinecap="round" />
+              {/* Bundling straps/ties */}
+              <rect x="-9" y="-2" width="18" height="2" fill="#fbbf24" opacity="0.9" rx="1" />
+              <rect x="-2" y="-7" width="4" height="14" fill="#fbbf24" opacity="0.9" rx="1" />
+              
+              {/* Multiple packages being bundled together */}
+              <rect x="-14" y="-3" width="8" height="6" fill="white" opacity="0.7" rx="1" />
+              <rect x="6" y="-3" width="8" height="6" fill="white" opacity="0.7" rx="1" />
+              <rect x="-6" y="-12" width="12" height="4" fill="white" opacity="0.7" rx="1" />
+              
+              {/* Istanbul crescent moon symbol (subtle) */}
+              <path 
+                d="M -16 -8 Q -14 -10 -12 -8 Q -14 -6 -16 -8" 
+                fill="white" 
+                opacity="0.6"
+              />
+              <circle cx="-13" cy="-9" r="0.8" fill="white" opacity="0.6" />
+              
+              {/* Smart bundling connections */}
+              <g stroke="white" strokeWidth="1" opacity="0.6">
+                <line x1="-10" y1="0" x2="-6" y2="0" strokeLinecap="round" />
+                <line x1="6" y1="0" x2="10" y2="0" strokeLinecap="round" />
+                <line x1="0" y1="-8" x2="0" y2="-4" strokeLinecap="round" />
               </g>
               
-              {/* AI nodes at connection points */}
-              <circle cx="-15" cy="0" r="2" fill="white" opacity="0.9" />
-              <circle cx="15" cy="0" r="2" fill="white" opacity="0.9" />
-              <circle cx="0" cy="-8" r="2.5" fill="white" opacity="1" />
-              
-              {/* Data flow indicators */}
-              <circle cx="-8" cy="2" r="1" fill="#fbbf24" opacity="0.8" />
-              <circle cx="0" cy="2" r="1" fill="#fbbf24" opacity="0.8" />
-              <circle cx="8" cy="2" r="1" fill="#fbbf24" opacity="0.8" />
+              {/* Tech dots for AI/smart bundling */}
+              <circle cx="-10" cy="-6" r="1" fill="#06b6d4" opacity="0.8" />
+              <circle cx="10" cy="-6" r="1" fill="#06b6d4" opacity="0.8" />
+              <circle cx="0" cy="8" r="1" fill="#06b6d4" opacity="0.8" />
             </g>
           </g>
           
           <defs>
-            {/* Istanbul bridge inspired gradient */}
-            <linearGradient id="bridgeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1e40af" />
-              <stop offset="30%" stopColor="#3b82f6" />
-              <stop offset="70%" stopColor="#06b6d4" />
+            {/* Istanbul/Turkish inspired gradient */}
+            <linearGradient id="bundlingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#dc2626" />
+              <stop offset="50%" stopColor="#3b82f6" />
               <stop offset="100%" stopColor="#0891b2" />
             </linearGradient>
           </defs>
         </svg>
       </div>
       
-      {/* Istanbul AI Logistics Text */}
+      {/* Bundleist Text */}
       {showText && (
-        <div className="flex flex-col">
-          <span 
-            className={`font-bold text-gray-800 ${textSizes[size]} tracking-tight leading-tight`}
-            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-          >
-            BridgeLogist
-          </span>
-          <span 
-            className="text-xs text-gray-500 tracking-wider font-medium"
-            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-          >
-            Istanbul AI
-          </span>
-        </div>
+        <span 
+          className={`font-bold text-gray-800 ${textSizes[size]} tracking-tight`}
+          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+        >
+          Bundleist
+        </span>
       )}
     </div>
   );

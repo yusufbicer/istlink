@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 // Validation schema
 const formSchema = z.object({
@@ -26,6 +27,7 @@ type FormValues = z.infer<typeof formSchema>;
 const EarlyAccess = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -59,28 +61,28 @@ const EarlyAccess = () => {
       if (error) throw error;
       
       const successMessage = isNewsletterSubscription 
-        ? "Successfully subscribed to our newsletter! We'll keep you updated."
-        : "Thank you for your interest in Bundleist. We'll be in touch soon.";
+        ? t('successfullySubscribed')
+        : t('thankYouInterest');
       
       toast({
-        title: isNewsletterSubscription ? "Newsletter subscription successful!" : "Request submitted successfully!",
+        title: isNewsletterSubscription ? t('newsletterSubscriptionSuccess') : t('requestSubmittedSuccess'),
         description: successMessage,
       });
       
       form.reset();
       setTimeout(() => navigate('/'), 2000);
     } catch (error: any) {
-      let errorMessage = "Failed to submit your request. Please try again.";
+      let errorMessage = t('failedToSubmit');
       
       // Handle duplicate email error
       if (error.code === '23505') {
         errorMessage = isNewsletterSubscription 
-          ? "This email is already subscribed to our newsletter."
-          : "This email has already been registered for early access.";
+          ? t('emailAlreadySubscribed')
+          : t('emailAlreadyRegistered');
       }
       
       toast({
-        title: "Submission Error",
+        title: t('submissionError'),
         description: errorMessage,
         variant: "destructive",
       });
@@ -89,10 +91,10 @@ const EarlyAccess = () => {
     }
   };
   
-  const pageTitle = isNewsletterSubscription ? "Subscribe to Our Newsletter" : "Get Started";
+  const pageTitle = isNewsletterSubscription ? t('subscribeToOurNewsletter') : t('getStartedPage');
   const pageDescription = isNewsletterSubscription 
-    ? "Stay updated with the latest news and updates from Bundleist's innovative supply chain solutions."
-    : "Get started with Bundleist's innovative supply chain solutions and streamline your Turkish supplier management.";
+    ? t('newsletterDesc')
+    : t('getStartedDesc');
   
   return (
     <div className="container mx-auto p-6 min-h-screen">
@@ -100,7 +102,7 @@ const EarlyAccess = () => {
       <div className="mb-8">
         <Link to="/" className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to home
+          {t('backToHome')}
         </Link>
       </div>
       
@@ -120,7 +122,7 @@ const EarlyAccess = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>{t('fullName')}</FormLabel>
                     <FormControl>
                       <Input placeholder="John Doe" {...field} />
                     </FormControl>
@@ -134,12 +136,12 @@ const EarlyAccess = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Business Email</FormLabel>
+                    <FormLabel>{t('businessEmail')}</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="you@company.com" {...field} />
                     </FormControl>
                     <FormDescription>
-                      We'll never share your email with anyone else.
+                      {t('neverShareEmail')}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -151,9 +153,9 @@ const EarlyAccess = () => {
                 name="company"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Company (Optional)</FormLabel>
+                    <FormLabel>{t('companyOptional')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your Company" {...field} />
+                      <Input placeholder={t('company')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -167,15 +169,15 @@ const EarlyAccess = () => {
                   <FormItem>
                     <FormLabel>
                       {isNewsletterSubscription 
-                        ? "What interests you most about Bundleist?" 
-                        : "Why are you interested in Bundleist?"
+                        ? t('whatInterests')
+                        : t('whyInterested')
                       }
                     </FormLabel>
                     <FormControl>
                       <Textarea 
                         placeholder={isNewsletterSubscription 
-                          ? "Tell us what aspects of our supply chain solutions interest you most..."
-                          : "Tell us about your business needs and how Bundleist can help..."
+                          ? t('tellUsInterests')
+                          : t('tellUsAboutNeeds')
                         }
                         className="min-h-[120px]"
                         {...field} 
@@ -191,7 +193,7 @@ const EarlyAccess = () => {
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : (isNewsletterSubscription ? "Subscribe" : "Request Early Access")}
+                {isSubmitting ? t('submitting') : (isNewsletterSubscription ? t('subscribe') : t('requestEarlyAccess'))}
               </Button>
             </form>
           </Form>

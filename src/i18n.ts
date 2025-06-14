@@ -194,7 +194,34 @@ const resources = {
       "simpleProcess": "Simple Process",
       "howItWorksDesc": "Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support.",
       "start": "START",
-      "done": "DONE"
+      "done": "DONE",
+
+      // Early Access Form
+      "fullName": "Full Name",
+      "businessEmail": "Business Email",
+      "company": "Company",
+      "companyOptional": "Company (Optional)",
+      "whyInterested": "Why are you interested in Bundleist?",
+      "whatInterests": "What interests you most about Bundleist?",
+      "tellUsAboutNeeds": "Tell us about your business needs and how Bundleist can help...",
+      "tellUsInterests": "Tell us what aspects of our supply chain solutions interest you most...",
+      "submitting": "Submitting...",
+      "requestEarlyAccess": "Request Early Access",
+      "subscribe": "Subscribe",
+      "backToHome": "Back to home",
+      "subscribeToOurNewsletter": "Subscribe to Our Newsletter",
+      "getStartedPage": "Get Started",
+      "getStartedDesc": "Get started with Bundleist's innovative supply chain solutions and streamline your Turkish supplier management.",
+      "newsletterDesc": "Stay updated with the latest news and updates from Bundleist's innovative supply chain solutions.",
+      "neverShareEmail": "We'll never share your email with anyone else.",
+      "requestSubmittedSuccess": "Request submitted successfully!",
+      "newsletterSubscriptionSuccess": "Newsletter subscription successful!",
+      "thankYouInterest": "Thank you for your interest in Bundleist. We'll be in touch soon.",
+      "successfullySubscribed": "Successfully subscribed to our newsletter! We'll keep you updated.",
+      "submissionError": "Submission Error",
+      "failedToSubmit": "Failed to submit your request. Please try again.",
+      "emailAlreadyRegistered": "This email has already been registered for early access.",
+      "emailAlreadySubscribed": "This email is already subscribed to our newsletter."
     }
   },
   fr: {
@@ -386,7 +413,34 @@ const resources = {
       "simpleProcess": "Processus Simple",
       "howItWorksDesc": "Notre processus rationalisé rend l'approvisionnement et l'expédition depuis la Turquie simples grâce à une technologie de pointe et un support expert.",
       "start": "DÉBUT",
-      "done": "FINI"
+      "done": "FINI",
+
+      // Early Access Form
+      "fullName": "Nom Complet",
+      "businessEmail": "E-mail Professionnel",
+      "company": "Entreprise",
+      "companyOptional": "Entreprise (Optionnel)",
+      "whyInterested": "Pourquoi êtes-vous intéressé par Bundleist?",
+      "whatInterests": "Qu'est-ce qui vous intéresse le plus chez Bundleist?",
+      "tellUsAboutNeeds": "Parlez-nous de vos besoins commerciaux et comment Bundleist peut vous aider...",
+      "tellUsInterests": "Dites-nous quels aspects de nos solutions de chaîne d'approvisionnement vous intéressent le plus...",
+      "submitting": "Envoi en cours...",
+      "requestEarlyAccess": "Demander l'Accès Anticipé",
+      "subscribe": "S'abonner",
+      "backToHome": "Retour à l'accueil",
+      "subscribeToOurNewsletter": "S'abonner à Notre Newsletter",
+      "getStartedPage": "Commencer",
+      "getStartedDesc": "Commencez avec les solutions innovantes de chaîne d'approvisionnement de Bundleist et rationalisez votre gestion des fournisseurs turcs.",
+      "newsletterDesc": "Restez informé des dernières nouvelles et mises à jour des solutions innovantes de chaîne d'approvisionnement de Bundleist.",
+      "neverShareEmail": "Nous ne partagerons jamais votre email avec qui que ce soit.",
+      "requestSubmittedSuccess": "Demande soumise avec succès!",
+      "newsletterSubscriptionSuccess": "Abonnement à la newsletter réussi!",
+      "thankYouInterest": "Merci pour votre intérêt envers Bundleist. Nous vous contacterons bientôt.",
+      "successfullySubscribed": "Abonné avec succès à notre newsletter! Nous vous tiendrons informé.",
+      "submissionError": "Erreur de Soumission",
+      "failedToSubmit": "Échec de la soumission de votre demande. Veuillez réessayer.",
+      "emailAlreadyRegistered": "Cet email a déjà été enregistré pour l'accès anticipé.",
+      "emailAlreadySubscribed": "Cet email est déjà abonné à notre newsletter."
     }
   },
   tr: {
@@ -578,7 +632,34 @@ const resources = {
       "simpleProcess": "Basit Süreç",
       "howItWorksDesc": "Modern teknolojimiz ve uzman desteğimizle Türkiye'den kaynak bulma ve nakliye sürecimiz zahmetsizdir.",
       "start": "BAŞLA",
-      "done": "BİTTİ"
+      "done": "BİTTİ",
+
+      // Early Access Form
+      "fullName": "Ad Soyad",
+      "businessEmail": "İş E-postası",
+      "company": "Şirket",
+      "companyOptional": "Şirket (İsteğe Bağlı)",
+      "whyInterested": "Bundleist'e neden ilgi duyuyorsunuz?",
+      "whatInterests": "Bundleist'te sizi en çok ne ilgilendiriyor?",
+      "tellUsAboutNeeds": "İş ihtiyaçlarınızdan ve Bundleist'in nasıl yardımcı olabileceğinden bahsedin...",
+      "tellUsInterests": "Tedarik zinciri çözümlerimizin hangi yönlerinin sizi en çok ilgilendirdiğini söyleyin...",
+      "submitting": "Gönderiliyor...",
+      "requestEarlyAccess": "Erken Erişim Talep Et",
+      "subscribe": "Abone Ol",
+      "backToHome": "Ana sayfaya dön",
+      "subscribeToOurNewsletter": "Bültenimize Abone Olun",
+      "getStartedPage": "Başlayın",
+      "getStartedDesc": "Bundleist'in yenilikçi tedarik zinciri çözümleriyle başlayın ve Türk tedarikçi yönetiminizi kolaylaştırın.",
+      "newsletterDesc": "Bundleist'in yenilikçi tedarik zinciri çözümlerinden en son haberler ve güncellemelerle güncel kalın.",
+      "neverShareEmail": "E-postanızı asla başkalarıyla paylaşmayacağız.",
+      "requestSubmittedSuccess": "Talep başarıyla gönderildi!",
+      "newsletterSubscriptionSuccess": "Bülten aboneliği başarılı!",
+      "thankYouInterest": "Bundleist'e olan ilginiz için teşekkür ederiz. Yakında sizinle iletişime geçeceğiz.",
+      "successfullySubscribed": "Bültenimize başarıyla abone oldunuz! Sizi bilgilendirmeye devam edeceğiz.",
+      "submissionError": "Gönderim Hatası",
+      "failedToSubmit": "Talebinizi göndermekte başarısız olduk. Lütfen tekrar deneyin.",
+      "emailAlreadyRegistered": "Bu e-posta zaten erken erişim için kayıtlı.",
+      "emailAlreadySubscribed": "Bu e-posta zaten bültenimize abone."
     }
   }
 };

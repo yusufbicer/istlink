@@ -157,7 +157,7 @@ const BlogPost = () => {
               <div className="w-full h-64 md:h-80">
                 <img 
                   src={post.image_url} 
-                  alt={post.title}
+                  alt={getTranslatedContent(post, 'title')}
                   className="w-full h-full object-cover"
                 />
               </div>

@@ -113,7 +113,7 @@ const HowItWorks = () => {
   }, [steps]);
 
   return (
-    <section id="how-it-works" className={`${isMobile ? 'py-3' : 'py-10'} relative overflow-hidden`} key={`how-it-works-${i18n.language}`}>
+    <section id="how-it-works" className={`${isMobile ? 'py-2' : 'py-10'} relative overflow-hidden`} key={`how-it-works-${i18n.language}`}>
       {/* Modern gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
@@ -122,21 +122,21 @@ const HowItWorks = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div 
           ref={titleRef}
-          className={`text-center max-w-4xl mx-auto ${isMobile ? 'mb-3' : 'mb-10'} transition-all duration-700 ${
+          className={`text-center max-w-4xl mx-auto ${isMobile ? 'mb-2' : 'mb-10'} transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/10 to-emerald-600/10 border border-blue-200/50 mb-3 md:mb-4">
+          <div className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/10 to-emerald-600/10 border border-blue-200/50 ${isMobile ? 'mb-2' : 'mb-3 md:mb-4'}`}>
             <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('simpleProcess')}
             </span>
           </div>
           
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <h2 className={`${isMobile ? 'text-xl mb-2' : 'text-2xl md:text-3xl mb-4'} font-bold text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             {t('howItWorks')}
           </h2>
           
-          <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <p className={`text-gray-600 ${isMobile ? 'text-sm' : ''}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             {t('howItWorksDesc')}
           </p>
         </div>
@@ -196,13 +196,13 @@ const HowItWorks = () => {
             </div>
           </div>
 
-          {/* Mobile Timeline - More Compact */}
+          {/* Mobile Timeline - Compact */}
           <div className="md:hidden">
-            <div className="relative pl-8">
+            <div className="relative pl-6">
               {/* Mobile Timeline Line */}
-              <div className="absolute left-4 top-0 w-1 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
+              <div className="absolute left-3 top-0 w-0.5 bg-gradient-to-b from-blue-200 via-emerald-200 to-blue-200 h-full rounded-full"></div>
               
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {steps.map((step, index) => {
                   const StepIcon = step.icon;
                   const isVisible = visibleSteps.includes(index);
@@ -210,30 +210,30 @@ const HowItWorks = () => {
                   return (
                     <div key={index} className="relative">
                       {/* Mobile Timeline Node */}
-                      <div className={`absolute -left-4 w-8 h-8 rounded-full bg-white border-4 border-gradient-to-r from-blue-200 to-emerald-200 shadow-lg flex items-center justify-center transition-all duration-500 ${
+                      <div className={`absolute -left-3 w-6 h-6 rounded-full bg-white border-2 border-blue-200 shadow-md flex items-center justify-center transition-all duration-500 ${
                         isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                       }`}>
-                        <div className={`w-4 h-4 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
-                          <StepIcon className={`h-2.5 w-2.5 ${step.color}`} />
+                        <div className={`w-3 h-3 rounded-full bg-gradient-to-br ${step.bgGradient} flex items-center justify-center`}>
+                          <StepIcon className={`h-1.5 w-1.5 ${step.color}`} />
                         </div>
                       </div>
                       
                       {/* Mobile Step Number */}
-                      <div className={`absolute -left-6 -top-2 w-5 h-5 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-xs font-bold flex items-center justify-center shadow-lg transition-all duration-500 delay-200 ${
+                      <div className={`absolute -left-4 -top-1 w-4 h-4 rounded-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-[10px] font-bold flex items-center justify-center shadow-md transition-all duration-500 delay-200 ${
                         isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                       }`}>
                         {index + 1}
                       </div>
                       
                       {/* Mobile Content */}
-                      <div className={`ml-4 transition-all duration-700 delay-300 ${
+                      <div className={`ml-3 transition-all duration-700 delay-300 ${
                         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                       }`}>
-                        <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-white/50">
-                          <h3 className="text-base font-bold text-gray-900 mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2.5 shadow-md border border-white/50">
+                          <h3 className="text-sm font-bold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                             {step.title}
                           </h3>
-                          <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                          <p className="text-gray-600 text-xs leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                             {step.description}
                           </p>
                         </div>

@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { formatBlogDate } from '@/lib/dateUtils';
 import { useTranslation } from "react-i18next";
+import SEOHead from '@/components/SEO/SEOHead';
+import StructuredData from '@/components/SEO/StructuredData';
 
 interface BlogPost {
   id: string;
@@ -141,6 +143,12 @@ const Blog = () => {
 
   return (
     <>
+      <SEOHead 
+        title="Export Insights & Industry Analysis - Turkish Supply Chain Blog"
+        description="Expert insights on Turkish export consolidation, supply chain optimization, and cross-border commerce. Stay updated with the latest trends and strategies."
+        keywords="Turkish export insights, supply chain blog, export consolidation articles, logistics analysis, Turkish suppliers insights, cross-border commerce trends"
+      />
+      <StructuredData pageType="blog" />
       <Header />
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         {/* Enhanced Hero Section */}

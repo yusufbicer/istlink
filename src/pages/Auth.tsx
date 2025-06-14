@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import BundleistLogo from '@/components/common/BundleistLogo';
+import SEOHead from '@/components/SEO/SEOHead';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -56,7 +57,13 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50 flex items-center justify-center p-6">
+    <>
+      <SEOHead 
+        title="Admin Login | Bundleist"
+        description="Admin portal for Bundleist Turkish export consolidation platform."
+        noindex={true}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         {/* Back to home link */}
         <div className="mb-8">
@@ -150,6 +157,7 @@ const Auth = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -13,6 +13,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft } from "lucide-react";
 import { useTranslation } from 'react-i18next';
+import SEOHead from '@/components/SEO/SEOHead';
+import StructuredData from '@/components/SEO/StructuredData';
 
 // Validation schema
 const formSchema = z.object({
@@ -97,7 +99,18 @@ const EarlyAccess = () => {
     : t('getStartedDesc');
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <>
+      <SEOHead 
+        title={isNewsletterSubscription ? "Subscribe to Newsletter | Bundleist" : "Get Early Access | Bundleist"}
+        description={isNewsletterSubscription 
+          ? "Subscribe to Bundleist newsletter for latest insights on Turkish export consolidation and supply chain optimization."
+          : "Get early access to Bundleist's revolutionary Turkish export consolidation platform. Join leading companies streamlining their supply chain."
+        }
+        keywords="Bundleist early access, Turkish export platform, supply chain newsletter, export consolidation signup"
+        noindex={true}
+      />
+      <StructuredData pageType="contact" />
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       <div className="container mx-auto px-4 py-6 sm:py-8 lg:py-12">
         {/* Back to home link */}
         <div className="mb-6 sm:mb-8">
@@ -241,6 +254,7 @@ const EarlyAccess = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

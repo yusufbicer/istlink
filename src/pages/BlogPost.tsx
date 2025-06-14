@@ -12,6 +12,8 @@ import { useAuth } from '@/lib/auth';
 import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import { useTranslation } from 'react-i18next';
+import SEOHead from '@/components/SEO/SEOHead';
+import StructuredData from '@/components/SEO/StructuredData';
 
 interface BlogPost {
   id: string;
@@ -158,6 +160,44 @@ const BlogPost = () => {
 
   return (
     <>
+      {post && (
+        <>
+          <SEOHead 
+            title={`${getTranslatedContent(post, 'title')} | Bundleist Blog`}
+            description={getTranslatedContent(post, 'excerpt') || `Read ${getTranslatedContent(post, 'title')} on Bundleist Blog. Expert insights on Turkish export consolidation and supply chain management.`}
+            keywords={`${getTranslatedContent(post, 'title')}, Turkish export, supply chain, ${post.category}, export consolidation`}
+            ogImage={post.image_url || '/og-image.png'}
+            canonical={`https://bundleist.com/blog/${post.slug}`}
+          />
+          <StructuredData 
+            type="Article" 
+            data={{
+              "@type": "Article",
+              "headline": getTranslatedContent(post, 'title'),
+              "description": getTranslatedContent(post, 'excerpt'),
+              "image": post.image_url,
+              "author": {
+                "@type": "Person",
+                "name": post.author_name
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Bundleist",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://bundleist.com/logo.png"
+                }
+              },
+              "datePublished": post.created_at,
+              "dateModified": post.created_at,
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://bundleist.com/blog/${post.slug}`
+              }
+            }}
+          />
+        </>
+      )}
       <Header />
       <div className="bg-gray-50 min-h-screen pt-24 pb-12">
         <div className="container mx-auto px-4">

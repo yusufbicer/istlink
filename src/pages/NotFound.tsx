@@ -3,6 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { HomeIcon } from "lucide-react";
+import SEOHead from '@/components/SEO/SEOHead';
 
 const NotFound = () => {
   const location = useLocation();
@@ -15,7 +16,13 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <>
+      <SEOHead 
+        title="Page Not Found | Bundleist"
+        description="The page you're looking for doesn't exist. Return to Bundleist's Turkish export consolidation platform."
+        noindex={true}
+      />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="text-center max-w-md">
         <h1 className="text-9xl font-bold text-gray-200 mb-6">404</h1>
         <div className="mb-8">
@@ -42,6 +49,7 @@ const NotFound = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

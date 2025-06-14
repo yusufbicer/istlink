@@ -315,10 +315,10 @@ const Hero = () => {
                          <div className="flex items-center space-x-3">
                            <BundleistLogo size="sm" showText={true} />
                            <div className="flex items-center space-x-2">
-                             <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
-                               <span className="mr-1">📊</span>
-                               {i18n.language === 'tr' ? 'Dashboard' : i18n.language === 'fr' ? 'Tableau de bord' : 'Dashboard'}
-                             </button>
+                              <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                                <span className="mr-1">📊</span>
+                                {i18n.language === 'tr' ? 'Dashboard' : i18n.language === 'fr' ? 'Tableau de bord' : 'Dashboard'}
+                              </button>
                              <button className="text-slate-600 hover:text-slate-800 px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
                                <span className="mr-1">📦</span>
                                {i18n.language === 'tr' ? 'Siparişler' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}

@@ -11,6 +11,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import SEOHead from '@/components/SEO/SEOHead';
+import StructuredData from '@/components/SEO/StructuredData';
 
 const Index = () => {
   const isMobile = useIsMobile();
@@ -91,7 +93,14 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col" key={i18n.language}>
+    <>
+      <SEOHead 
+        title="Turkish Export Consolidation Platform - Streamline Your Supply Chain"
+        description="Revolutionize your Turkish supply chain with Bundleist's AI-powered export consolidation platform. Reduce shipping costs by 65%, streamline documentation 15x faster, save 80% time. Connect with verified Turkish suppliers seamlessly."
+        keywords="Turkish export consolidation, supply chain management Turkey, Turkish suppliers platform, export logistics Turkey, shipping consolidation, supplier management software, Turkey B2B marketplace, export documentation, freight consolidation, Turkish trade platform, Istanbul suppliers, supply chain optimization, export streamlining, consolidation services Turkey, Turkish manufacturer sourcing"
+      />
+      <StructuredData pageType="home" />
+      <div className="min-h-screen bg-white flex flex-col" key={i18n.language}>
       <Header />
       <main className="flex-grow">
         <Hero />
@@ -436,7 +445,8 @@ const Index = () => {
         
         <Footer />
       </main>
-    </div>
+      </div>
+    </>
   );
 };
 

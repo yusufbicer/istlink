@@ -8,124 +8,123 @@ interface BundleistLogoProps {
 
 const BundleistLogo = ({ size = 'md', className = '', showText = true }: BundleistLogoProps) => {
   const sizeClasses = {
-    sm: showText ? 'h-6' : 'w-6 h-6',
-    md: showText ? 'h-8' : 'w-8 h-8',
+    sm: showText ? 'h-7' : 'w-7 h-7',
+    md: showText ? 'h-9' : 'w-9 h-9',
     lg: showText ? 'h-12' : 'w-12 h-12'
   };
 
   const textSizes = {
-    sm: 'text-sm',
-    md: 'text-base',
-    lg: 'text-xl'
+    sm: 'text-lg',
+    md: 'text-xl',
+    lg: 'text-2xl'
   };
 
   return (
-    <div className={`flex items-center ${className}`}>
-      {/* Logo Icon */}
-      <div className={`${sizeClasses[size]} ${showText ? 'mr-2' : ''}`}>
+    <div className={`flex items-center gap-3 ${className}`}>
+      {/* AI Tech-Oriented Logo Icon */}
+      <div className={`${sizeClasses[size]} flex-shrink-0`}>
         <svg
           viewBox="0 0 100 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
         >
-          {/* Elegant geometric logo with consolidation concept */}
+          {/* AI Tech-Oriented Logo Design */}
           <g>
-            {/* Outer circle with sophisticated gradient */}
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="url(#mainGradient)"
+            {/* Modern hexagonal outer frame */}
+            <path
+              d="M 50 8 L 78 25 L 78 59 L 50 76 L 22 59 L 22 25 Z"
+              fill="url(#techGradient)"
               stroke="url(#borderGradient)"
-              strokeWidth="2"
+              strokeWidth="1.5"
               className="drop-shadow-lg"
             />
             
-            {/* Inner design representing smart consolidation */}
+            {/* Central AI brain/chip design */}
             <g transform="translate(50, 50)">
-              {/* Central sophisticated hub */}
-              <circle 
-                cx="0" 
-                cy="0" 
-                r="8" 
-                fill="url(#centerGradient)" 
-                stroke="rgba(255,255,255,0.3)"
+              {/* Core processor */}
+              <rect 
+                x="-12" 
+                y="-12" 
+                width="24" 
+                height="24" 
+                rx="3"
+                fill="url(#coreGradient)"
+                stroke="rgba(255,255,255,0.4)"
                 strokeWidth="1"
               />
               
-              {/* Elegant connecting paths */}
-              <path
-                d="M 0,-20 Q -15,-10 0,0 Q 15,-10 0,-20"
-                fill="none"
-                stroke="url(#pathGradient)"
-                strokeWidth="2.5"
-                opacity="0.9"
-              />
-              <path
-                d="M 20,0 Q 10,15 0,0 Q 10,-15 20,0"
-                fill="none"
-                stroke="url(#pathGradient)"
-                strokeWidth="2.5"
-                opacity="0.9"
-              />
-              <path
-                d="M 0,20 Q 15,10 0,0 Q -15,10 0,20"
-                fill="none"
-                stroke="url(#pathGradient)"
-                strokeWidth="2.5"
-                opacity="0.9"
-              />
-              <path
-                d="M -20,0 Q -10,-15 0,0 Q -10,15 -20,0"
-                fill="none"
-                stroke="url(#pathGradient)"
-                strokeWidth="2.5"
-                opacity="0.9"
-              />
+              {/* Circuit connections */}
+              <g opacity="0.9">
+                {/* Horizontal circuits */}
+                <rect x="-18" y="-2" width="6" height="4" rx="2" fill="url(#circuitGradient)" />
+                <rect x="12" y="-2" width="6" height="4" rx="2" fill="url(#circuitGradient)" />
+                <rect x="-18" y="6" width="6" height="4" rx="2" fill="url(#circuitGradient)" />
+                <rect x="12" y="6" width="6" height="4" rx="2" fill="url(#circuitGradient)" />
+                
+                {/* Vertical circuits */}
+                <rect x="-2" y="-18" width="4" height="6" rx="2" fill="url(#circuitGradient)" />
+                <rect x="-2" y="12" width="4" height="6" rx="2" fill="url(#circuitGradient)" />
+                <rect x="6" y="-18" width="4" height="6" rx="2" fill="url(#circuitGradient)" />
+                <rect x="6" y="12" width="4" height="6" rx="2" fill="url(#circuitGradient)" />
+              </g>
               
-              {/* Sophisticated outer nodes */}
-              <circle cx="0" cy="-20" r="3" fill="url(#nodeGradient)" className="drop-shadow-sm" />
-              <circle cx="20" cy="0" r="3" fill="url(#nodeGradient)" className="drop-shadow-sm" />
-              <circle cx="0" cy="20" r="3" fill="url(#nodeGradient)" className="drop-shadow-sm" />
-              <circle cx="-20" cy="0" r="3" fill="url(#nodeGradient)" className="drop-shadow-sm" />
+              {/* Data flow lines */}
+              <g stroke="url(#dataFlowGradient)" strokeWidth="2" fill="none" opacity="0.7">
+                <path d="M -12,0 L -18,0" />
+                <path d="M 12,0 L 18,0" />
+                <path d="M 0,-12 L 0,-18" />
+                <path d="M 0,12 L 0,18" />
+                <path d="M -12,8 L -18,8" />
+                <path d="M 12,8 L 18,8" />
+                <path d="M 8,-12 L 8,-18" />
+                <path d="M 8,12 L 8,18" />
+              </g>
               
-              {/* Accent dots for elegance */}
-              <circle cx="14" cy="-14" r="1.5" fill="url(#accentGradient)" opacity="0.8" />
-              <circle cx="14" cy="14" r="1.5" fill="url(#accentGradient)" opacity="0.8" />
-              <circle cx="-14" cy="14" r="1.5" fill="url(#accentGradient)" opacity="0.8" />
-              <circle cx="-14" cy="-14" r="1.5" fill="url(#accentGradient)" opacity="0.8" />
+              {/* AI neural nodes */}
+              <circle cx="-8" cy="-8" r="2" fill="url(#nodeGradient)" className="drop-shadow-sm" />
+              <circle cx="8" cy="-8" r="2" fill="url(#nodeGradient)" className="drop-shadow-sm" />
+              <circle cx="-8" cy="8" r="2" fill="url(#nodeGradient)" className="drop-shadow-sm" />
+              <circle cx="8" cy="8" r="2" fill="url(#nodeGradient)" className="drop-shadow-sm" />
+              
+              {/* Central processing indicator */}
+              <circle cx="0" cy="0" r="3" fill="url(#processingGradient)" opacity="0.8" />
             </g>
           </g>
           
           <defs>
-            {/* Main sophisticated gradient */}
-            <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0f766e" />
-              <stop offset="30%" stopColor="#0d9488" />
-              <stop offset="70%" stopColor="#0ea5e9" />
-              <stop offset="100%" stopColor="#2563eb" />
+            {/* Tech-oriented gradients */}
+            <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1e40af" />
+              <stop offset="30%" stopColor="#3b82f6" />
+              <stop offset="70%" stopColor="#06b6d4" />
+              <stop offset="100%" stopColor="#0891b2" />
             </linearGradient>
             
             {/* Border gradient */}
             <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#06b6d4" />
+              <stop offset="0%" stopColor="#0ea5e9" />
               <stop offset="50%" stopColor="#3b82f6" />
               <stop offset="100%" stopColor="#1d4ed8" />
             </linearGradient>
             
-            {/* Center hub gradient */}
-            <radialGradient id="centerGradient" cx="50%" cy="50%" r="70%">
-              <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="50%" stopColor="#f1f5f9" />
-              <stop offset="100%" stopColor="#cbd5e1" />
-            </radialGradient>
+            {/* Core processor gradient */}
+            <linearGradient id="coreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1f2937" />
+              <stop offset="50%" stopColor="#374151" />
+              <stop offset="100%" stopColor="#4b5563" />
+            </linearGradient>
             
-            {/* Path gradient */}
-            <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="50%" stopColor="#e2e8f0" />
-              <stop offset="100%" stopColor="#cbd5e1" />
+            {/* Circuit gradient */}
+            <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#10b981" />
+              <stop offset="100%" stopColor="#059669" />
+            </linearGradient>
+            
+            {/* Data flow gradient */}
+            <linearGradient id="dataFlowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#60a5fa" />
+              <stop offset="100%" stopColor="#3b82f6" />
             </linearGradient>
             
             {/* Node gradient */}
@@ -135,20 +134,21 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
               <stop offset="100%" stopColor="#d97706" />
             </radialGradient>
             
-            {/* Accent gradient */}
-            <radialGradient id="accentGradient" cx="50%" cy="50%" r="70%">
-              <stop offset="0%" stopColor="#a78bfa" />
-              <stop offset="100%" stopColor="#7c3aed" />
+            {/* Processing indicator gradient */}
+            <radialGradient id="processingGradient" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="50%" stopColor="#e0f2fe" />
+              <stop offset="100%" stopColor="#0ea5e9" />
             </radialGradient>
           </defs>
         </svg>
       </div>
       
-      {/* Elegant Bundleist Text */}
+      {/* AI Tech Bundleist Text */}
       {showText && (
         <span 
-          className={`font-semibold bg-gradient-to-r from-slate-800 via-blue-900 to-emerald-800 bg-clip-text text-transparent ${textSizes[size]} tracking-wide`}
-          style={{ fontFamily: 'Playfair Display, serif' }}
+          className={`font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 bg-clip-text text-transparent ${textSizes[size]} tracking-wider uppercase`}
+          style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '0.15em' }}
         >
           Bundleist
         </span>

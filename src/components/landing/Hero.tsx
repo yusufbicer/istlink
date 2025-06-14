@@ -1,9 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from '@/lib/auth';
-import { MessageSquare, Network, Activity, TrendingUp, GitMerge, Truck, Package, Users, BarChart2, Archive, CreditCard, Timer, Database, Bell, FileText, CheckCircle, AlertCircle, Clock, DollarSign } from 'lucide-react';
+import { MessageSquare, Activity, GitMerge, Truck, Package, Users, Bell, FileText, CheckCircle, Clock, DollarSign } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BundleistLogo from '@/components/common/BundleistLogo';
 import { useTranslation } from 'react-i18next';
@@ -346,94 +344,66 @@ const Hero = () => {
                   ) : (
                      // Desktop dashboard with creative consolidation view
                      <div className="bg-white text-slate-800 p-3">
-                       <div className="flex items-center justify-between mb-2.5">
-                         <div className="flex items-center">
-                           <BundleistLogo size="md" className="mr-3" showText={true} />
+                       <div className="flex items-center justify-center mb-2.5">
+                         <BundleistLogo size="sm" className="" showText={false} />
+                       </div>
+                       
+                       {/* Live Activity Banner */}
+                       <div className="bg-gradient-to-r from-blue-50 to-slate-50 p-2 rounded-lg border border-blue-200 mb-2.5">
+                         <div className="flex items-center justify-between">
+                           <div className="flex items-center">
+                             <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse mr-2"></div>
+                             <span className="text-sm font-medium text-blue-700">Live Consolidation Activity</span>
+                           </div>
+                           <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">IST-CON-2025-041 Active</span>
                          </div>
-                         
-                         <div className="flex space-x-1.5">
-                           <div className="flex items-center px-2 py-1 bg-slate-600 text-white rounded-lg text-xs font-medium">
-                             <Activity className="h-3 w-3 mr-1.5" /> 
-                             {i18n.language === 'tr' ? 'Kontrol Paneli' : i18n.language === 'fr' ? 'Tableau de bord' : 'Dashboard'}
+                       </div>
+                       
+                       <div className="grid grid-cols-12 gap-2">
+                         {/* Active Consolidation Overview */}
+                         <div className="col-span-8 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                           <div className="flex justify-between items-center mb-2">
+                             <div className="flex items-center">
+                               <GitMerge className="h-4 w-4 text-slate-600 mr-1.5" />
+                               <span className="font-medium text-slate-700 text-sm">Active Consolidation: IST-CON-2025-041</span>
+                             </div>
+                             <span className="px-2 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-full font-medium">75% Filled</span>
                            </div>
-                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
-                             <Package className="h-3 w-3 mr-1.5" /> 
-                             {i18n.language === 'tr' ? 'Siparişler' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
+                           
+                           <div className="bg-white p-2.5 rounded-lg border border-slate-100 mb-2">
+                             <div className="grid grid-cols-4 gap-3 mb-2.5">
+                               <div className="text-center">
+                                 <div className="text-lg font-bold text-slate-700">28</div>
+                                 <div className="text-xs text-slate-500">Total Orders</div>
+                               </div>
+                               <div className="text-center">
+                                 <div className="text-lg font-bold text-slate-700">4</div>
+                                 <div className="text-xs text-slate-500">Suppliers</div>
+                               </div>
+                               <div className="text-center">
+                                 <div className="text-lg font-bold text-slate-700">$47,850</div>
+                                 <div className="text-xs text-slate-500">Total Value</div>
+                               </div>
+                               <div className="text-center">
+                                 <div className="text-lg font-bold text-slate-700">Apr 15</div>
+                                 <div className="text-xs text-slate-500">Departure</div>
+                               </div>
+                             </div>
+                             
+                             <div className="mb-2">
+                               <div className="flex justify-between text-xs mb-1">
+                                 <span className="text-slate-500">Container Space (40ft)</span>
+                                 <span className="font-medium">75% Filled</span>
+                               </div>
+                               <div className="w-full bg-slate-200 h-2 rounded-full">
+                                 <div className="bg-slate-600 h-full rounded-full" style={{width: '75%'}}></div>
+                               </div>
+                             </div>
+                             
+                             <div className="text-xs text-slate-600">
+                               <span className="font-medium">Route:</span> Istanbul Warehouse → Matadi Port, DRC
+                             </div>
                            </div>
-                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
-                             <GitMerge className="h-3 w-3 mr-1.5" /> 
-                             {i18n.language === 'tr' ? 'Konsolidasyonlar' : i18n.language === 'fr' ? 'Consolidations' : 'Consolidations'}
-                           </div>
-                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">
-                             <Users className="h-3 w-3 mr-1.5" /> 
-                             {i18n.language === 'tr' ? 'Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
-                           </div>
-                           <div className="flex items-center px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium relative">
-                             <Bell className="h-3 w-3 mr-0" />
-                            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-blue-600 rounded-full"></div>
-                          </div>
-                          <div className="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-medium text-slate-700">
-                            J
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Live Activity Banner */}
-                      <div className="bg-gradient-to-r from-blue-50 to-slate-50 p-2 rounded-lg border border-blue-200 mb-2.5">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse mr-2"></div>
-                            <span className="text-sm font-medium text-blue-700">Live Consolidation Activity</span>
-                          </div>
-                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">IST-CON-2025-041 Active</span>
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-12 gap-2">
-                        {/* Active Consolidation Overview */}
-                        <div className="col-span-8 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                          <div className="flex justify-between items-center mb-2">
-                            <div className="flex items-center">
-                              <GitMerge className="h-4 w-4 text-slate-600 mr-1.5" />
-                              <span className="font-medium text-slate-700 text-sm">Active Consolidation: IST-CON-2025-041</span>
-                            </div>
-                            <span className="px-2 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-full font-medium">75% Filled</span>
-                          </div>
-                          
-                          <div className="bg-white p-2.5 rounded-lg border border-slate-100 mb-2">
-                            <div className="grid grid-cols-4 gap-3 mb-2.5">
-                              <div className="text-center">
-                                <div className="text-lg font-bold text-slate-700">28</div>
-                                <div className="text-xs text-slate-500">Total Orders</div>
-                              </div>
-                              <div className="text-center">
-                                <div className="text-lg font-bold text-slate-700">4</div>
-                                <div className="text-xs text-slate-500">Suppliers</div>
-                              </div>
-                              <div className="text-center">
-                                <div className="text-lg font-bold text-slate-700">$47,850</div>
-                                <div className="text-xs text-slate-500">Total Value</div>
-                              </div>
-                              <div className="text-center">
-                                <div className="text-lg font-bold text-slate-700">Apr 15</div>
-                                <div className="text-xs text-slate-500">Departure</div>
-                              </div>
-                            </div>
-                            
-                            <div className="mb-2">
-                              <div className="flex justify-between text-xs mb-1">
-                                <span className="text-slate-500">Container Space (40ft)</span>
-                                <span className="font-medium">75% Filled</span>
-                              </div>
-                              <div className="w-full bg-slate-200 h-2 rounded-full">
-                                <div className="bg-slate-600 h-full rounded-full" style={{width: '75%'}}></div>
-                              </div>
-                            </div>
-                            
-                            <div className="text-xs text-slate-600">
-                              <span className="font-medium">Route:</span> Istanbul Warehouse → Matadi Port, DRC
-                            </div>
-                          </div>
                           
                           {/* Suppliers in this consolidation */}
                           <div className="grid grid-cols-2 gap-2">

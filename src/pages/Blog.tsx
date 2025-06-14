@@ -161,7 +161,7 @@ const Blog = () => {
                 {t('ourBlog')}
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight px-4">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight px-6">
                 {t('insightsOnCrossBorderCommerce')}
               </h1>
               

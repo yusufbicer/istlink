@@ -8,7 +8,7 @@ interface BundleistLogoProps {
 
 const BundleistLogo = ({ size = 'md', className = '', showText = true }: BundleistLogoProps) => {
   const sizeClasses = {
-    sm: 'w-14 h-14',
+    sm: 'w-16 h-16',
     md: 'w-24 h-24',
     lg: 'w-32 h-32'
   };

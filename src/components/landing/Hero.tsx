@@ -62,18 +62,18 @@ const Hero = () => {
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
             <span className="block mb-2 font-bold">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{t('turkishSupplyChain')}</span> <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">{t('complexity')}</span>
+              <span className="text-gray-900">{t('turkishSupplyChain')}</span> <span className="text-gray-700">{t('complexity')}</span>
             </span>
             <span className="block relative h-8 md:h-12 lg:h-16 xl:h-20 overflow-hidden">
               <span 
-                className={`absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent font-semibold md:font-medium transition-all duration-700 ease-in-out ${
+                className={`absolute inset-0 text-blue-900 font-semibold md:font-medium transition-all duration-700 ease-in-out ${
                   currentTextIndex === 0 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
                 }`}
               >
                 {alternatingTexts[i18n.language as keyof typeof alternatingTexts]?.[0] || alternatingTexts.en[0]}
               </span>
               <span 
-                className={`absolute inset-0 bg-gradient-to-r from-emerald-600 to-purple-600 bg-clip-text text-transparent font-semibold md:font-medium transition-all duration-700 ease-in-out ${
+                className={`absolute inset-0 text-gray-800 font-semibold md:font-medium transition-all duration-700 ease-in-out ${
                   currentTextIndex === 1 ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'
                 }`}
               >
@@ -87,10 +87,8 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <p className="leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent font-medium">
-                {t('heroDescription')}
-              </span>
+            <p className="leading-relaxed px-2 text-gray-700" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              {t('heroDescription')}
             </p>
           </div>
           
@@ -99,7 +97,7 @@ const Hero = () => {
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           >
-            <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-blue-900 hover:bg-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="mr-2 h-4 w-4" /> {t('talkToOurTeam')}
               </a>
@@ -113,7 +111,7 @@ const Hero = () => {
             }`}
           >
             <div className="relative overflow-hidden rounded-lg shadow-lg">
-              <div className="bg-gradient-to-r from-blue-600 to-lavender-500 p-0.5 rounded-lg">
+              <div className="bg-gray-800 p-0.5 rounded-lg">
                 <div className="rounded-lg overflow-hidden bg-white border-0">
                   <div className="relative bg-gray-100 px-2 pt-1.5 pb-1 flex items-center rounded-t-lg">
                     <div className="flex space-x-1 absolute left-3">

@@ -141,6 +141,8 @@ const resources = {
       "E-commerce": "E-commerce", 
       "Logistics": "Logistics",
       "International Trade": "International Trade",
+      "Sourcing from Türkiye": "Sourcing from Türkiye",
+      "Cross Border Procurement": "Cross Border Procurement",
       
       // Date and time translations
       "minRead": "min read",
@@ -318,6 +320,8 @@ const resources = {
       "E-commerce": "E-commerce", 
       "Logistics": "Logistique",
       "International Trade": "Commerce International",
+      "Sourcing from Türkiye": "Approvisionnement depuis la Türkiye",
+      "Cross Border Procurement": "Approvisionnement Transfrontalier",
       
       // Date and time translations
       "minRead": "min de lecture",
@@ -494,6 +498,8 @@ const resources = {
       "E-commerce": "E-ticaret", 
       "Logistics": "Lojistik",
       "International Trade": "Uluslararası Ticaret",
+      "Sourcing from Türkiye": "Türkiye'den Tedarik",
+      "Cross Border Procurement": "Sınır Ötesi Tedarik",
       
       // Date and time translations
       "minRead": "dk okuma",

@@ -131,7 +131,7 @@ const Hero = () => {
                     <div className="bg-white text-gray-800 p-2">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center">
-                          <BundleistLogo size="sm" className="mr-2" />
+                          <BundleistLogo size="sm" className="mr-2" showText={false} />
                         </div>
                         <div className="flex items-center space-x-1">
                           <div className="relative">
@@ -149,9 +149,13 @@ const Hero = () => {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse mr-1.5"></div>
-                            <span className="text-xs font-medium text-emerald-700">Live Consolidation</span>
+                            <span className="text-xs font-medium text-emerald-700">
+                              {i18n.language === 'tr' ? 'Canlı Konsolidasyon' : i18n.language === 'fr' ? 'Consolidation en Direct' : 'Live Consolidation'}
+                            </span>
                           </div>
-                          <span className="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">Active</span>
+                          <span className="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">
+                            {i18n.language === 'tr' ? 'Aktif' : i18n.language === 'fr' ? 'Actif' : 'Active'}
+                          </span>
                         </div>
                       </div>
                       
@@ -162,31 +166,43 @@ const Hero = () => {
                             <GitMerge className="h-2.5 w-2.5 text-blue-600 mr-1" />
                             <span className="text-xs font-medium">IST-CON-2025-041</span>
                           </div>
-                          <span className="text-xs bg-blue-100 text-blue-700 px-1 py-0.5 rounded-full font-medium">75% Full</span>
+                          <span className="text-xs bg-blue-100 text-blue-700 px-1 py-0.5 rounded-full font-medium">
+                            {i18n.language === 'tr' ? '%75 Dolu' : i18n.language === 'fr' ? '75% Plein' : '75% Full'}
+                          </span>
                         </div>
                         <div className="bg-white p-1.5 rounded border border-gray-200">
                           <div className="flex justify-between items-center mb-1">
                             <div>
                               <div className="text-xs font-medium">Istanbul → Matadi</div>
-                              <div className="text-[10px] text-emerald-600 font-medium">Departure: Apr 15, 2025</div>
+                              <div className="text-[10px] text-emerald-600 font-medium">
+                                {i18n.language === 'tr' ? 'Kalkış: 15 Nis 2025' : i18n.language === 'fr' ? 'Départ: 15 Avr 2025' : 'Departure: Apr 15, 2025'}
+                              </div>
                             </div>
                             <div className="text-right">
                               <div className="text-xs font-medium text-blue-600">$47,850</div>
-                              <div className="text-[10px] text-gray-600">Total Value</div>
+                              <div className="text-[10px] text-gray-600">
+                                {i18n.language === 'tr' ? 'Toplam Değer' : i18n.language === 'fr' ? 'Valeur Totale' : 'Total Value'}
+                              </div>
                             </div>
                           </div>
                           <div className="grid grid-cols-3 gap-1 text-center">
                             <div className="text-[10px]">
                               <div className="font-bold">28</div>
-                              <div className="text-gray-600">Orders</div>
+                              <div className="text-gray-600">
+                                {i18n.language === 'tr' ? 'Sipariş' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
+                              </div>
                             </div>
                             <div className="text-[10px]">
                               <div className="font-bold">4</div>
-                              <div className="text-gray-600">Suppliers</div>
+                              <div className="text-gray-600">
+                                {i18n.language === 'tr' ? 'Tedarikçi' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
+                              </div>
                             </div>
                             <div className="text-[10px]">
                               <div className="font-bold">75%</div>
-                              <div className="text-gray-600">Filled</div>
+                              <div className="text-gray-600">
+                                {i18n.language === 'tr' ? 'Dolu' : i18n.language === 'fr' ? 'Rempli' : 'Filled'}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -197,48 +213,74 @@ const Hero = () => {
                         <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
                             <Users className="h-2.5 w-2.5 text-blue-600 mr-1" />
-                            <span className="text-xs font-medium">Active Suppliers</span>
+                            <span className="text-xs font-medium">
+                              {i18n.language === 'tr' ? 'Aktif Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs Actifs' : 'Active Suppliers'}
+                            </span>
                           </div>
                         </div>
                         <div className="space-y-0.5">
                           <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
                             <div>
-                              <div className="text-xs font-medium">Textile Plus Ltd</div>
-                              <div className="text-[9px] text-gray-600">12 orders • $18,200</div>
+                              <div className="text-xs font-medium">
+                                {i18n.language === 'tr' ? 'Tekstil Plus Ltd' : i18n.language === 'fr' ? 'Textile Plus Ltée' : 'Textile Plus Ltd'}
+                              </div>
+                              <div className="text-[9px] text-gray-600">
+                                {i18n.language === 'tr' ? '12 sipariş • $18,200' : i18n.language === 'fr' ? '12 commandes • $18,200' : '12 orders • $18,200'}
+                              </div>
                             </div>
                             <div className="flex items-center">
                               <CheckCircle className="h-2.5 w-2.5 text-green-500 mr-0.5" />
-                              <span className="text-[9px] text-green-600">Paid</span>
+                              <span className="text-[9px] text-green-600">
+                                {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
+                              </span>
                             </div>
                           </div>
                           <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
                             <div>
-                              <div className="text-xs font-medium">Machinery Co</div>
-                              <div className="text-[9px] text-gray-600">8 orders • $15,420</div>
+                              <div className="text-xs font-medium">
+                                {i18n.language === 'tr' ? 'Makine Şirketi' : i18n.language === 'fr' ? 'Société de Machines' : 'Machinery Co'}
+                              </div>
+                              <div className="text-[9px] text-gray-600">
+                                {i18n.language === 'tr' ? '8 sipariş • $15,420' : i18n.language === 'fr' ? '8 commandes • $15,420' : '8 orders • $15,420'}
+                              </div>
                             </div>
                             <div className="flex items-center">
                               <CheckCircle className="h-2.5 w-2.5 text-green-500 mr-0.5" />
-                              <span className="text-[9px] text-green-600">Paid</span>
+                              <span className="text-[9px] text-green-600">
+                                {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
+                              </span>
                             </div>
                           </div>
                           <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
                             <div>
-                              <div className="text-xs font-medium">Auto Parts Inc</div>
-                              <div className="text-[9px] text-gray-600">5 orders • $9,630</div>
+                              <div className="text-xs font-medium">
+                                {i18n.language === 'tr' ? 'Oto Parça A.Ş.' : i18n.language === 'fr' ? 'Pièces Auto Inc' : 'Auto Parts Inc'}
+                              </div>
+                              <div className="text-[9px] text-gray-600">
+                                {i18n.language === 'tr' ? '5 sipariş • $9,630' : i18n.language === 'fr' ? '5 commandes • $9,630' : '5 orders • $9,630'}
+                              </div>
                             </div>
                             <div className="flex items-center">
                               <Clock className="h-2.5 w-2.5 text-orange-500 mr-0.5" />
-                              <span className="text-[9px] text-orange-600">Processing</span>
+                              <span className="text-[9px] text-orange-600">
+                                {i18n.language === 'tr' ? 'İşleniyor' : i18n.language === 'fr' ? 'Traitement' : 'Processing'}
+                              </span>
                             </div>
                           </div>
                           <div className="bg-white p-1 rounded border border-gray-100 flex justify-between items-center">
                             <div>
-                              <div className="text-xs font-medium">Chemical Solutions</div>
-                              <div className="text-[9px] text-gray-600">3 orders • $4,600</div>
+                              <div className="text-xs font-medium">
+                                {i18n.language === 'tr' ? 'Kimyasal Çözümler' : i18n.language === 'fr' ? 'Solutions Chimiques' : 'Chemical Solutions'}
+                              </div>
+                              <div className="text-[9px] text-gray-600">
+                                {i18n.language === 'tr' ? '3 sipariş • $4,600' : i18n.language === 'fr' ? '3 commandes • $4,600' : '3 orders • $4,600'}
+                              </div>
                             </div>
                             <div className="flex items-center">
                               <CheckCircle className="h-2.5 w-2.5 text-green-500 mr-0.5" />
-                              <span className="text-[9px] text-green-600">Paid</span>
+                              <span className="text-[9px] text-green-600">
+                                {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -249,41 +291,57 @@ const Hero = () => {
                         <div className="flex justify-between items-center mb-1">
                           <div className="flex items-center">
                             <Activity className="h-2.5 w-2.5 text-blue-600 mr-1" />
-                            <span className="text-xs font-medium">Recent Activity</span>
+                            <span className="text-xs font-medium">
+                              {i18n.language === 'tr' ? 'Son Aktiviteler' : i18n.language === 'fr' ? 'Activité Récente' : 'Recent Activity'}
+                            </span>
                           </div>
-                          <span className="px-1 py-0.5 bg-orange-100 text-orange-700 text-[9px] rounded-full font-medium">3 New</span>
+                          <span className="px-1 py-0.5 bg-orange-100 text-orange-700 text-[9px] rounded-full font-medium">
+                            {i18n.language === 'tr' ? '3 Yeni' : i18n.language === 'fr' ? '3 Nouveau' : '3 New'}
+                          </span>
                         </div>
                         <div className="space-y-0.5">
                           <div className="bg-white p-1 rounded shadow-sm flex items-center">
                             <FileText className="h-2.5 w-2.5 text-green-500 mr-1.5" />
                             <div className="flex-1">
-                              <div className="text-[9px] font-medium">BOL Generated</div>
-                              <div className="text-[8px] text-gray-600">3 hours ago</div>
+                              <div className="text-[9px] font-medium">
+                                {i18n.language === 'tr' ? 'Konşimento Oluşturuldu' : i18n.language === 'fr' ? 'Connaissement Généré' : 'BOL Generated'}
+                              </div>
+                              <div className="text-[8px] text-gray-600">
+                                {i18n.language === 'tr' ? '3 saat önce' : i18n.language === 'fr' ? 'Il y a 3 heures' : '3 hours ago'}
+                              </div>
                             </div>
                           </div>
                           <div className="bg-white p-1 rounded shadow-sm flex items-center">
                             <DollarSign className="h-2.5 w-2.5 text-blue-500 mr-1.5" />
                             <div className="flex-1">
-                              <div className="text-[9px] font-medium">Payment Processed</div>
-                              <div className="text-[8px] text-gray-600">8 hours ago</div>
+                              <div className="text-[9px] font-medium">
+                                {i18n.language === 'tr' ? 'Ödeme İşlendi' : i18n.language === 'fr' ? 'Paiement Traité' : 'Payment Processed'}
+                              </div>
+                              <div className="text-[8px] text-gray-600">
+                                {i18n.language === 'tr' ? '8 saat önce' : i18n.language === 'fr' ? 'Il y a 8 heures' : '8 hours ago'}
+                              </div>
                             </div>
                           </div>
                           <div className="bg-white p-1 rounded shadow-sm flex items-center">
                             <Package className="h-2.5 w-2.5 text-purple-500 mr-1.5" />
                             <div className="flex-1">
-                              <div className="text-[9px] font-medium">5 New Orders Added</div>
-                              <div className="text-[8px] text-gray-600">2 days ago</div>
+                              <div className="text-[9px] font-medium">
+                                {i18n.language === 'tr' ? '5 Yeni Sipariş Eklendi' : i18n.language === 'fr' ? '5 Nouvelles Commandes Ajoutées' : '5 New Orders Added'}
+                              </div>
+                              <div className="text-[8px] text-gray-600">
+                                {i18n.language === 'tr' ? '2 gün önce' : i18n.language === 'fr' ? 'Il y a 2 jours' : '2 days ago'}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    // Desktop dashboard with creative consolidation view
+                     // Desktop dashboard with creative consolidation view
                      <div className="bg-white text-gray-800 p-3">
                        <div className="flex items-center justify-between mb-2.5">
                          <div className="flex items-center">
-                           <BundleistLogo size="md" className="mr-3" />
+                           <BundleistLogo size="md" className="mr-3" showText={true} />
                          </div>
                          
                          <div className="flex space-x-1.5">

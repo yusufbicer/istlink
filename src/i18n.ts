@@ -120,7 +120,23 @@ const resources = {
       "brandTagline": "Simplifying Cross Border Procurement",
       "brandDesc": "Transform your Turkish supply chain with intelligent consolidation services. Reduce costs, optimize logistics, and scale your international business with confidence.",
       "contactEmail": "bundleist@gmail.com",
-      "locationIstanbul": "Istanbul, Turkey"
+      "locationIstanbul": "Istanbul, Turkey",
+      
+      // Features Section
+      "findSuppliers": "Find Suppliers",
+      "findSuppliersDesc": "Search and connect with verified Turkish suppliers for your specific product needs",
+      "supplierVerification": "Supplier Verification", 
+      "supplierVerificationDesc": "We vet suppliers to ensure reliability and quality standards for your business",
+      "paymentProcessing": "Payment Processing",
+      "paymentProcessingDesc": "Secure payment processing through our platform with transaction protection",
+      "orderConsolidation": "Order Consolidation",
+      "orderConsolidationDesc": "Combine multiple supplier orders into one cost-effective shipment",
+      "documentationSimplified": "Documentation Simplified",
+      "documentationSimplifiedDesc": "We handle all export/import documents for hassle-free processing",
+      "globalShipping": "Global Shipping", 
+      "globalShippingDesc": "Efficient shipping worldwide through our established logistics network",
+      "easyDelivery": "Easy Delivery",
+      "easyDeliveryDesc": "Track and receive your consolidated shipment at your destination"
     }
   },
   fr: {
@@ -239,7 +255,23 @@ const resources = {
       "brandTagline": "Simplification des Achats Transfrontaliers",
       "brandDesc": "Transformez votre chaîne d'approvisionnement turque avec des services de consolidation intelligents. Réduisez les coûts, optimisez la logistique et développez votre entreprise internationale en toute confiance.",
       "contactEmail": "bundleist@gmail.com",
-      "locationIstanbul": "Istanbul, Turquie"
+      "locationIstanbul": "Istanbul, Turquie",
+      
+      // Features Section
+      "findSuppliers": "Trouver des Fournisseurs",
+      "findSuppliersDesc": "Recherchez et connectez-vous avec des fournisseurs turcs vérifiés pour vos besoins spécifiques",
+      "supplierVerification": "Vérification des Fournisseurs",
+      "supplierVerificationDesc": "Nous sélectionnons les fournisseurs pour garantir fiabilité et normes de qualité",
+      "paymentProcessing": "Traitement des Paiements",
+      "paymentProcessingDesc": "Traitement sécurisé des paiements via notre plateforme avec protection des transactions",
+      "orderConsolidation": "Consolidation des Commandes",
+      "orderConsolidationDesc": "Regroupez plusieurs commandes de fournisseurs en un seul envoi économique",
+      "documentationSimplified": "Documentation Simplifiée",
+      "documentationSimplifiedDesc": "Nous gérons tous les documents d'exportation/importation pour un traitement sans tracas",
+      "globalShipping": "Expédition Mondiale",
+      "globalShippingDesc": "Expédition efficace dans le monde entier via notre réseau logistique établi",
+      "easyDelivery": "Livraison Facile",
+      "easyDeliveryDesc": "Suivez et recevez votre envoi consolidé à votre destination"
     }
   },
   tr: {
@@ -358,7 +390,23 @@ const resources = {
       "brandTagline": "Sınır Ötesi Tedariki Basitleştirme",
       "brandDesc": "Akıllı konsolidasyon hizmetleriyle Türk tedarik zincirinizi dönüştürün. Maliyetleri azaltın, lojistiği optimize edin ve uluslararası işinizi güvenle büyütün.",
       "contactEmail": "bundleist@gmail.com",
-      "locationIstanbul": "İstanbul, Türkiye"
+      "locationIstanbul": "İstanbul, Türkiye",
+      
+      // Features Section
+      "findSuppliers": "Tedarikçi Bul",
+      "findSuppliersDesc": "Belirli ürün ihtiyaçlarınız için doğrulanmış Türk tedarikçilerini arayın ve bağlantı kurun",
+      "supplierVerification": "Tedarikçi Doğrulaması",
+      "supplierVerificationDesc": "İşiniz için güvenilirlik ve kalite standartlarını sağlamak için tedarikçileri inceleriz",
+      "paymentProcessing": "Ödeme İşlemleri",
+      "paymentProcessingDesc": "İşlem koruması ile platformumuz üzerinden güvenli ödeme işleme",
+      "orderConsolidation": "Sipariş Birleştirme",
+      "orderConsolidationDesc": "Birden fazla tedarikçi siparişini tek, uygun maliyetli gönderide birleştirin",
+      "documentationSimplified": "Basitleştirilmiş Dokümantasyon",
+      "documentationSimplifiedDesc": "Sorunsuz işleme için tüm ihracat/ithalat belgelerini yönetiriz",
+      "globalShipping": "Küresel Nakliye",
+      "globalShippingDesc": "Kurulmuş lojistik ağımız aracılığıyla dünya çapında verimli nakliye",
+      "easyDelivery": "Kolay Teslimat",
+      "easyDeliveryDesc": "Birleştirilmiş gönderinizi takip edin ve varış noktanızda teslim alın"
     }
   }
 };

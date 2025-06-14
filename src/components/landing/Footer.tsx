@@ -18,92 +18,60 @@ const Footer = () => {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className={`container mx-auto px-6 ${isMobile ? "py-3" : "py-16"}`}>
-        <div className={`grid grid-cols-1 lg:grid-cols-12 ${isMobile ? "gap-2" : "gap-8 lg:gap-12"}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-8 ${isMobile ? "gap-2" : "gap-8 lg:gap-12"}`}>
           
           {/* Brand Section */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
             <div className={`flex items-center ${isMobile ? "mb-1" : "mb-6"}`}>
               <BundleistLogo size="lg" showText={true} />
             </div>
             
-            <p className={`text-gray-600 ${isMobile ? "mb-1 text-sm" : "mb-6"} max-w-md leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className={`text-gray-600 ${isMobile ? "mb-1 text-xs" : "mb-6"} max-w-md leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('brandDesc')}
             </p>
 
             {/* Contact Info */}
-            <div className="space-y-3">
+            <div className={isMobile ? "space-y-1" : "space-y-3"}>
               <div className="flex items-center text-gray-700">
-                <Mail className="h-4 w-4 mr-3 text-blue-600" />
-                <a href="mailto:bundleist@gmail.com" className="hover:text-blue-600 transition-colors" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <Mail className={`${isMobile ? "h-3 w-3" : "h-4 w-4"} mr-2 text-blue-600`} />
+                <a href="mailto:bundleist@gmail.com" className={`hover:text-blue-600 transition-colors ${isMobile ? "text-xs" : ""}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   {t('contactEmail')}
                 </a>
               </div>
               <div className="flex items-center text-gray-700">
-                <MapPin className="h-4 w-4 mr-3 text-teal-600" />
-                <span style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <MapPin className={`${isMobile ? "h-3 w-3" : "h-4 w-4"} mr-2 text-teal-600`} />
+                <span className={isMobile ? "text-xs" : ""} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   {t('locationIstanbul')}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Navigation Links */}
-          <div className="lg:col-span-3">
-            <h3 className={`font-semibold ${isMobile ? "mb-1 text-base" : "mb-6 text-lg"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              {t('navigation')}
-            </h3>
-            <ul className={`${isMobile ? "space-y-1" : "space-y-4"}`}>
-              <li>
-                <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  {t('features')}
-                  <ArrowUpRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
-              </li>
-              <li>
-                <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  {t('howItWorks')}
-                  <ArrowUpRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
-              </li>
-              <li>
-                <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  {t('pricing')}
-                  <ArrowUpRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
-              </li>
-              <li>
-                <Link to="/blog" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center group" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  {t('blog')}
-                  <ArrowUpRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              </li>
-            </ul>
-          </div>
 
           {/* Newsletter & CTA */}
           <div className="lg:col-span-4">
-            <h3 className={`font-semibold ${isMobile ? "mb-1 text-base" : "mb-6 text-lg"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <h3 className={`font-semibold ${isMobile ? "mb-1 text-sm" : "mb-6 text-lg"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('stayUpdated')}
             </h3>
-            <p className={`text-gray-600 ${isMobile ? "mb-1 text-sm" : "mb-6"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className={`text-gray-600 ${isMobile ? "mb-1 text-xs" : "mb-6"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('stayUpdatedDesc')}
             </p>
             
-            <div className="space-y-4">
+            <div className={isMobile ? "space-y-2" : "space-y-4"}>
               <Button 
                 onClick={handleNewsletterClick}
-                className="bg-blue-600 hover:bg-blue-700 text-white border-0 w-full md:w-auto px-6 py-3 font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className={`bg-blue-600 hover:bg-blue-700 text-white border-0 w-full md:w-auto ${isMobile ? "px-4 py-2 text-xs" : "px-6 py-3"} font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300`}
                 style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
               >
                 {t('subscribeNewsletter')}
               </Button>
               
               {/* Legal Links */}
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-4">
-                <button className="text-gray-500 hover:text-gray-700 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <div className={`flex flex-col sm:flex-row gap-2 sm:gap-4 ${isMobile ? "pt-2" : "pt-4"}`}>
+                <button className={`text-gray-500 hover:text-gray-700 transition-colors ${isMobile ? "text-xs" : "text-sm"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   {t('privacyPolicy')}
                 </button>
-                <button className="text-gray-500 hover:text-gray-700 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <button className={`text-gray-500 hover:text-gray-700 transition-colors ${isMobile ? "text-xs" : "text-sm"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   {t('termsOfService')}
                 </button>
               </div>
@@ -114,7 +82,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className={`border-t border-gray-200 ${isMobile ? "mt-2 pt-1" : "mt-12 pt-8"}`}>
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className={`text-gray-500 ${isMobile ? "text-xs" : "text-sm"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               &copy; 2025 Bundleist Ltd. {t('allRightsReserved')}
             </p>
           </div>

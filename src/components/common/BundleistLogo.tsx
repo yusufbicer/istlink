@@ -147,8 +147,8 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
       {/* Elegant Bundleist Text */}
       {showText && (
         <span 
-          className={`font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent ${textSizes[size]}`}
-          style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+          className={`font-semibold bg-gradient-to-r from-slate-800 via-blue-900 to-emerald-800 bg-clip-text text-transparent ${textSizes[size]} tracking-wide`}
+          style={{ fontFamily: 'Playfair Display, serif' }}
         >
           Bundleist
         </span>

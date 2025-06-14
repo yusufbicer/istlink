@@ -48,19 +48,7 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <div className="flex items-center">
-              <div className="flex items-center justify-center">
-                <BundleistLogo size={isMobile ? "md" : "lg"} />
-                {/* Enhanced Bundleist branding with two-color text - responsive sizing */}
-                <div className={isMobile ? "ml-3" : "ml-4"}>
-                  <div className="flex items-center">
-                    <span className={`font-bold ${isMobile ? "text-lg" : isTablet ? "text-xl" : "text-2xl"} tracking-wide`}>
-                      <span className="text-teal-600">BUNDLE</span><span className="text-blue-600">IST</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <BundleistLogo size="md" showText={true} />
           </Link>
 
           {/* Desktop Navigation - Improved tablet spacing */}

@@ -25,13 +25,22 @@ const formSchema = z.object({
   title: z.string().min(2, {
     message: "Title must be at least 2 characters.",
   }),
+  title_en: z.string().optional(),
+  title_tr: z.string().optional(),
+  title_fr: z.string().optional(),
   slug: z.string().min(2, {
     message: "Slug must be at least 2 characters.",
   }),
   excerpt: z.string().optional(),
+  excerpt_en: z.string().optional(),
+  excerpt_tr: z.string().optional(),
+  excerpt_fr: z.string().optional(),
   content: z.string().min(10, {
     message: "Content must be at least 10 characters.",
   }),
+  content_en: z.string().optional(),
+  content_tr: z.string().optional(),
+  content_fr: z.string().optional(),
   category: z.string().min(1, {
     message: "Category is required.",
   }),

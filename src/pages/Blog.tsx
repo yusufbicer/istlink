@@ -8,11 +8,18 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface BlogPost {
   id: string;
   title: string;
+  title_en?: string;
+  title_tr?: string;
+  title_fr?: string;
   excerpt: string | null;
+  excerpt_en?: string;
+  excerpt_tr?: string;
+  excerpt_fr?: string;
   created_at: string;
   read_time: string;
   category: string;
@@ -30,6 +37,32 @@ const Blog = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
+  const { i18n } = useTranslation();
+
+  // Helper function to get translated content
+  const getTranslatedContent = (post: BlogPost, field: 'title' | 'excerpt') => {
+    const currentLang = i18n.language;
+    
+    if (field === 'title') {
+      switch (currentLang) {
+        case 'tr':
+          return post.title_tr || post.title;
+        case 'fr':
+          return post.title_fr || post.title;
+        default:
+          return post.title_en || post.title;
+      }
+    } else {
+      switch (currentLang) {
+        case 'tr':
+          return post.excerpt_tr || post.excerpt;
+        case 'fr':
+          return post.excerpt_fr || post.excerpt;
+        default:
+          return post.excerpt_en || post.excerpt;
+      }
+    }
+  };
 
   // Check if user is admin
   const isAdmin = user?.role === 'admin';
@@ -196,15 +229,15 @@ const Blog = () => {
                     </div>
                   )}
                   
-                  <div className="p-6">
-                    <h2 className="text-xl font-bold mb-2 line-clamp-2">
-                      {post.title}
-                    </h2>
-                    {post.excerpt && (
-                      <p className="text-gray-600 mb-4 line-clamp-3">
-                        {post.excerpt}
-                      </p>
-                    )}
+                   <div className="p-6">
+                     <h2 className="text-xl font-bold mb-2 line-clamp-2">
+                       {getTranslatedContent(post, 'title')}
+                     </h2>
+                     {getTranslatedContent(post, 'excerpt') && (
+                       <p className="text-gray-600 mb-4 line-clamp-3">
+                         {getTranslatedContent(post, 'excerpt')}
+                       </p>
+                     )}
                     
                     <div className="flex items-center mb-4">
                       {post.author_avatar ? (

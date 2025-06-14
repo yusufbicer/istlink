@@ -10,13 +10,23 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth';
 import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
+import { useTranslation } from 'react-i18next';
 
 interface BlogPost {
   id: string;
   title: string;
+  title_en?: string;
+  title_tr?: string;
+  title_fr?: string;
   content: string;
+  content_en?: string;
+  content_tr?: string;
+  content_fr?: string;
   created_at: string;
   excerpt: string | null;
+  excerpt_en?: string;
+  excerpt_tr?: string;
+  excerpt_fr?: string;
   published: boolean;
   author_name: string;
   author_avatar: string | null;
@@ -31,6 +41,41 @@ const BlogPost = () => {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
+  const { i18n } = useTranslation();
+
+  // Helper function to get translated content
+  const getTranslatedContent = (post: BlogPost, field: 'title' | 'excerpt' | 'content') => {
+    const currentLang = i18n.language;
+    
+    if (field === 'title') {
+      switch (currentLang) {
+        case 'tr':
+          return post.title_tr || post.title;
+        case 'fr':
+          return post.title_fr || post.title;
+        default:
+          return post.title_en || post.title;
+      }
+    } else if (field === 'excerpt') {
+      switch (currentLang) {
+        case 'tr':
+          return post.excerpt_tr || post.excerpt;
+        case 'fr':
+          return post.excerpt_fr || post.excerpt;
+        default:
+          return post.excerpt_en || post.excerpt;
+      }
+    } else {
+      switch (currentLang) {
+        case 'tr':
+          return post.content_tr || post.content;
+        case 'fr':
+          return post.content_fr || post.content;
+        default:
+          return post.content_en || post.content;
+      }
+    }
+  };
 
   useEffect(() => {
     if (slug) {
@@ -120,8 +165,8 @@ const BlogPost = () => {
             
             <div className="p-8">
               <div className="max-w-3xl mx-auto">
-                <header className="mb-8">
-                  <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">{post.title}</h1>
+                 <header className="mb-8">
+                   <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">{getTranslatedContent(post, 'title')}</h1>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       {post.author_avatar ? (
@@ -161,17 +206,17 @@ const BlogPost = () => {
                   </div>
                 </header>
 
-                {post.excerpt && (
-                  <div className="mb-8">
-                    <p className="text-lg text-gray-600 italic border-l-4 border-blue-600 pl-4 py-1">
-                      {post.excerpt}
-                    </p>
-                  </div>
-                )}
+                 {getTranslatedContent(post, 'excerpt') && (
+                   <div className="mb-8">
+                     <p className="text-lg text-gray-600 italic border-l-4 border-blue-600 pl-4 py-1">
+                       {getTranslatedContent(post, 'excerpt')}
+                     </p>
+                   </div>
+                 )}
 
-                <div className="prose max-w-none text-gray-800">
-                  <div className="mb-6 leading-relaxed whitespace-pre-line">{post.content}</div>
-                </div>
+                 <div className="prose max-w-none text-gray-800">
+                   <div className="mb-6 leading-relaxed whitespace-pre-line">{getTranslatedContent(post, 'content')}</div>
+                 </div>
               </div>
             </div>
 

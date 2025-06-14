@@ -17,12 +17,12 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
-      <div className={`container mx-auto px-6 ${isMobile ? "py-4" : "py-16"}`}>
-        <div className={`grid grid-cols-1 lg:grid-cols-12 ${isMobile ? "gap-6" : "gap-8 lg:gap-12"}`}>
+      <div className={`container mx-auto px-6 ${isMobile ? "py-3" : "py-16"}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-12 ${isMobile ? "gap-3" : "gap-8 lg:gap-12"}`}>
           
           {/* Brand Section */}
           <div className="lg:col-span-5">
-            <div className={`flex items-center ${isMobile ? "mb-4" : "mb-6"}`}>
+            <div className={`flex items-center ${isMobile ? "mb-2" : "mb-6"}`}>
               <BundleistLogo size="lg" />
               <div className="ml-4">
                 <div className="flex items-center">
@@ -36,7 +36,7 @@ const Footer = () => {
               </div>
             </div>
             
-            <p className={`text-gray-600 ${isMobile ? "mb-4" : "mb-6"} max-w-md leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className={`text-gray-600 ${isMobile ? "mb-2" : "mb-6"} max-w-md leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('brandDesc')}
             </p>
 
@@ -59,7 +59,7 @@ const Footer = () => {
 
           {/* Navigation Links */}
           <div className="lg:col-span-3">
-            <h3 className={`font-semibold ${isMobile ? "mb-4" : "mb-6"} text-gray-900 text-lg`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <h3 className={`font-semibold ${isMobile ? "mb-2" : "mb-6"} text-gray-900 text-lg`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('navigation')}
             </h3>
             <ul className="space-y-4">
@@ -92,10 +92,10 @@ const Footer = () => {
 
           {/* Newsletter & CTA */}
           <div className="lg:col-span-4">
-            <h3 className={`font-semibold ${isMobile ? "mb-4" : "mb-6"} text-gray-900 text-lg`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <h3 className={`font-semibold ${isMobile ? "mb-2" : "mb-6"} text-gray-900 text-lg`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('stayUpdated')}
             </h3>
-            <p className={`text-gray-600 ${isMobile ? "mb-4" : "mb-6"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <p className={`text-gray-600 ${isMobile ? "mb-2" : "mb-6"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('stayUpdatedDesc')}
             </p>
             

@@ -86,15 +86,15 @@ const Hero = () => {
           >
             <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               Transform fragmented Turkish supplier purchases into a{' '}
-              <span className="font-medium text-slate-800">
+              <span className="font-bold text-gray-900">
                 single, streamlined shipment
               </span>. 
               Buy from multiple Turkish suppliers with{' '}
-              <span className="font-medium text-slate-800">
+              <span className="font-bold text-gray-900">
                 one payment, one contract, one Bill of Lading
               </span>{' '}
               and{' '}
-              <span className="font-medium text-slate-800">
+              <span className="font-bold text-gray-900">
                 one shipment
               </span>.
             </p>

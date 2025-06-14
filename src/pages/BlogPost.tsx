@@ -108,7 +108,7 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <div className="bg-gray-50 min-h-screen py-12">
+        <div className="bg-gray-50 min-h-screen pt-24 pb-12">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <p className="text-gray-600">Loading blog post...</p>
@@ -124,7 +124,7 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <div className="bg-gray-50 min-h-screen py-12">
+        <div className="bg-gray-50 min-h-screen pt-24 pb-12">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
@@ -143,10 +143,10 @@ const BlogPost = () => {
   return (
     <>
       <Header />
-      <div className="bg-gray-50 min-h-screen py-12">
+      <div className="bg-gray-50 min-h-screen pt-24 pb-12">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto mb-8">
-            <Link to="/blog" className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+            <Link to="/blog" className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to blog
             </Link>

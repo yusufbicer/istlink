@@ -110,11 +110,11 @@ const HowItWorks = () => {
   }, [steps]);
 
   return (
-    <section id="how-it-works" className={`${isMobile ? 'py-2' : 'py-20'} relative overflow-hidden`} key={`how-it-works-${i18n.language}`}>
-      {/* Professional gradient background to match blog design */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200/10 to-indigo-200/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-slate-200/10 to-blue-200/10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    <section id="how-it-works" className={`${isMobile ? 'py-2' : 'py-20'} relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50`} key={`how-it-works-${i18n.language}`}>
+      {/* Enhanced background elements to match blog design */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-indigo-600/5"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-indigo-200/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-teal-200/20 to-blue-200/20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div 

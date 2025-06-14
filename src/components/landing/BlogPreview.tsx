@@ -116,11 +116,12 @@ const BlogPreview = () => {
               >
                 <div className="flex">
                   {post.image_url && (
-                    <div className="w-16 h-16 flex-shrink-0">
+                    <div className="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                       <img 
                         src={post.image_url} 
                         alt={post.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+                        loading="lazy"
                       />
                     </div>
                   )}
@@ -150,11 +151,12 @@ const BlogPreview = () => {
                 className="block bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
               >
                 {post.image_url && (
-                  <div className="aspect-[16/10] overflow-hidden">
+                  <div className="aspect-[16/10] overflow-hidden rounded-t-lg">
                     <img 
                       src={post.image_url} 
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-200"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
                     />
                   </div>
                 )}

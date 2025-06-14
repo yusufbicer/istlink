@@ -8,9 +8,9 @@ interface BundleistLogoProps {
 
 const BundleistLogo = ({ size = 'md', className = '', showText = true }: BundleistLogoProps) => {
   const sizeClasses = {
-    sm: 'w-10 h-10',
-    md: 'w-16 h-16',
-    lg: 'w-20 h-20'
+    sm: 'w-12 h-12',
+    md: 'w-20 h-20',
+    lg: 'w-24 h-24'
   };
 
   const textSizes = {
@@ -20,8 +20,8 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
   };
 
   return (
-    <div className={`flex items-center space-x-2 ${className}`}>
-      {/* Geometric B Logo - Two separate blocks forming B */}
+    <div className={`${className}`}>
+      {/* Geometric B Logo */}
       <div className={`${sizeClasses[size]} relative`}>
         <svg 
           width="100%" 
@@ -43,19 +43,6 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
           <path d="M 188,140 L 187,141 L 187,317 L 275,317 L 275,316 L 288,303 L 289,303 L 289,302 L 325,266 L 265,206 L 263,206 L 258,211 L 232,211 L 232,246 L 258,246 L 271,259 L 271,260 L 277,266 L 277,267 L 262,282 L 223,282 L 222,281 L 222,177 L 223,176 L 262,176 L 277,191 L 277,192 L 271,198 L 294,221 L 324,191 L 324,190 L 274,140 Z" fill="#1976d2" />
         </svg>
       </div>
-      
-      {/* Bundleist Text */}
-      {showText && (
-        <div 
-          className={`text-gray-800 dark:text-gray-200 ${textSizes[size]} tracking-widest uppercase font-precision`}
-          style={{ 
-            letterSpacing: '0.12em'
-          }}
-        >
-          <span className="font-light">BUNDLE</span>
-          <span className="font-medium">IST</span>
-        </div>
-      )}
     </div>
   );
 };

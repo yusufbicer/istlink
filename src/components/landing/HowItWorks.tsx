@@ -148,7 +148,7 @@ const HowItWorks = () => {
               {/* Start Indicator */}
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4">
                 <div className="w-12 h-8 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white text-xs font-bold">START</span>
+                  <span className="text-white text-xs font-bold">{t('start')}</span>
                 </div>
               </div>
               
@@ -158,7 +158,7 @@ const HowItWorks = () => {
               {/* End Indicator */}
               <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4">
                 <div className="w-12 h-8 bg-gradient-to-r from-emerald-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white text-xs font-bold">DONE</span>
+                  <span className="text-white text-xs font-bold">{t('done')}</span>
                 </div>
               </div>
             
@@ -218,7 +218,7 @@ const HowItWorks = () => {
               {/* Mobile Start Indicator */}
               <div className="absolute top-0 left-3 transform -translate-y-2">
                 <div className="w-8 h-6 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-full flex items-center justify-center shadow-md">
-                  <span className="text-white text-[10px] font-bold">START</span>
+                  <span className="text-white text-[10px] font-bold">{t('start')}</span>
                 </div>
               </div>
               
@@ -229,7 +229,7 @@ const HowItWorks = () => {
                 {/* Mobile End Indicator */}
                 <div className="absolute bottom-0 left-3 transform translate-y-2">
                   <div className="w-8 h-6 bg-gradient-to-r from-emerald-600 to-blue-600 rounded-full flex items-center justify-center shadow-md">
-                    <span className="text-white text-[10px] font-bold">DONE</span>
+                    <span className="text-white text-[10px] font-bold">{t('done')}</span>
                   </div>
                 </div>
                 

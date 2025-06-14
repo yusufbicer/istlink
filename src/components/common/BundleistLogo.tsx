@@ -20,7 +20,7 @@ const BundleistLogo = ({ size = 'md', className = '', showText = true }: Bundlei
   };
 
   return (
-    <div className={`flex items-center ${size === 'md' ? 'space-x-1' : 'space-x-2'} ${className}`}>
+    <div className={`flex items-center space-x-0.5 ${className}`}>
       {/* Geometric B Logo */}
       <div className={`${sizeClasses[size]} relative`}>
         <svg 

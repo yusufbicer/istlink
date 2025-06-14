@@ -62,20 +62,21 @@ const resources = {
 
       // Pricing Section
       "choosePlan": "Choose Your Plan",
+      "transparentPricing": "Transparent pricing that scales with your business needs.",
       "starter": "Starter",
       "growth": "Growth", 
       "enterprise": "Enterprise",
-      "oneTimeFee": "One-time fee",
-      "totalOrderValue": "Of the total order value",
-      "after5Consolidations": "After 5 consolidations/month",
-      "starterDesc": "Perfect for first-time users exploring Turkish supply chain services",
-      "growthDesc": "Our most popular option for growing businesses with regular shipments",
-      "enterpriseDesc": "For businesses with high-volume international shipping needs",
-      "bankTransferFees": "+ Bank transfer fees",
-      "volumeDiscounting": "Volume-based discounting after 5 consolidations/month",
+      "starterDesc": "Perfect for small businesses testing international sourcing",
+      "growthDesc": "Ideal for growing companies with regular sourcing needs", 
+      "enterpriseDesc": "Comprehensive solution for large-scale operations",
+      "oneTimeFee": "one-time fee",
+      "totalOrderValue": "of total order value",
+      "after5Consolidations": "after 5+ consolidations",
+      "bankTransferFees": "+ bank transfer fees apply",
+      "volumeDiscounting": "volume discounting available",
       "singleConsolidatedShipmentFeature": "Single consolidated shipment",
       "supplierPaymentHandling": "Supplier payment handling",
-      "singleBillOfLadingFeature": "Single Bill of Lading",
+      "singleBillOfLadingFeature": "Single bill of lading",
       "documentationSupport": "Documentation support",
       "multipleConsolidatedShipments": "Multiple consolidated shipments",
       "digitalProcurementDashboard": "Digital procurement dashboard",
@@ -143,10 +144,7 @@ const resources = {
       
       // How It Works Section
       "simpleProcess": "Simple Process",
-      "howItWorksDesc": "Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support.",
-      
-      // Pricing Section
-      "transparentPricing": "Transparent pricing that scales with your business needs."
+      "howItWorksDesc": "Our streamlined process makes sourcing and shipping from Turkey effortless with cutting-edge technology and expert support."
     }
   },
   fr: {
@@ -207,32 +205,33 @@ const resources = {
 
       // Pricing Section
       "choosePlan": "Choisissez Votre Plan",
+      "transparentPricing": "Tarification transparente qui évolue avec les besoins de votre entreprise.",
       "starter": "Débutant",
       "growth": "Croissance",
       "enterprise": "Entreprise",
-      "oneTimeFee": "Frais uniques",
-      "totalOrderValue": "De la valeur totale de la commande",
-      "after5Consolidations": "Après 5 consolidations/mois",
-      "starterDesc": "Parfait pour les nouveaux utilisateurs explorant les services de chaîne d'approvisionnement turque",
-      "growthDesc": "Notre option la plus populaire pour les entreprises en croissance avec des expéditions régulières",
-      "enterpriseDesc": "Pour les entreprises avec des besoins d'expédition internationale à haut volume",
-      "bankTransferFees": "+ Frais de virement bancaire",
-      "volumeDiscounting": "Remise basée sur le volume après 5 consolidations/mois",
+      "starterDesc": "Parfait pour les petites entreprises testant l'approvisionnement international",
+      "growthDesc": "Idéal pour les entreprises en croissance avec des besoins d'approvisionnement réguliers",
+      "enterpriseDesc": "Solution complète pour les opérations à grande échelle",
+      "oneTimeFee": "frais unique",
+      "totalOrderValue": "de la valeur totale de la commande",
+      "after5Consolidations": "après 5+ consolidations",
+      "bankTransferFees": "+ frais de virement bancaire s'appliquent",
+      "volumeDiscounting": "remise sur volume disponible",
       "singleConsolidatedShipmentFeature": "Expédition consolidée unique",
       "supplierPaymentHandling": "Gestion des paiements fournisseurs",
       "singleBillOfLadingFeature": "Connaissement unique",
-      "documentationSupport": "Support de documentation",
+      "documentationSupport": "Support documentation",
       "multipleConsolidatedShipments": "Expéditions consolidées multiples",
       "digitalProcurementDashboard": "Tableau de bord d'approvisionnement numérique",
       "realTimeTracking": "Suivi en temps réel",
       "preferredShippingRates": "Tarifs d'expédition préférentiels",
       "paymentHandlingProtection": "Gestion et protection des paiements",
-      "volumeDiscountPricing": "Tarification avec remise sur volume",
+      "volumeDiscountPricing": "Tarification à remise sur volume",
       "priorityConsolidation": "Consolidation prioritaire",
-      "customizedShippingSchedule": "Planning d'expédition personnalisé",
+      "customizedShippingSchedule": "Calendrier d'expédition personnalisé",
       "advancedAnalyticsReporting": "Analyses et rapports avancés",
       "warehouseStorageOptions": "Options de stockage d'entrepôt",
-      "strategicSourcingAssistance": "Assistance au sourcing stratégique",
+      "strategicSourcingAssistance": "Assistance à l'approvisionnement stratégique",
 
       // Features  
       "importConsolidation": "Consolidation d'Importation Turque Simplifiée",
@@ -288,10 +287,7 @@ const resources = {
       
       // How It Works Section
       "simpleProcess": "Processus Simple",
-      "howItWorksDesc": "Notre processus rationalisé rend l'approvisionnement et l'expédition depuis la Turquie simples grâce à une technologie de pointe et un support expert.",
-      
-      // Pricing Section
-      "transparentPricing": "Tarification transparente qui évolue avec les besoins de votre entreprise."
+      "howItWorksDesc": "Notre processus rationalisé rend l'approvisionnement et l'expédition depuis la Turquie simples grâce à une technologie de pointe et un support expert."
     }
   },
   tr: {
@@ -352,32 +348,33 @@ const resources = {
 
       // Pricing Section
       "choosePlan": "Planınızı Seçin",
+      "transparentPricing": "İş ihtiyaçlarınızla birlikte ölçeklenen şeffaf fiyatlandırma.",
       "starter": "Başlangıç",
       "growth": "Büyüme",
       "enterprise": "Kurumsal",
-      "oneTimeFee": "Tek seferlik ücret",
-      "totalOrderValue": "Toplam sipariş değerinin",
-      "after5Consolidations": "Ayda 5 konsolidasyon sonrası",
-      "starterDesc": "Türk tedarik zinciri hizmetlerini keşfeden ilk kez kullanıcılar için mükemmel",
-      "growthDesc": "Düzenli sevkiyatları olan büyüyen işletmeler için en popüler seçeneğimiz",
-      "enterpriseDesc": "Yüksek hacimli uluslararası nakliye ihtiyaçları olan işletmeler için",
-      "bankTransferFees": "+ Banka transfer ücretleri",
-      "volumeDiscounting": "Ayda 5 konsolidasyon sonrası hacim bazlı indirim",
+      "starterDesc": "Uluslararası tedariki test eden küçük işletmeler için mükemmel",
+      "growthDesc": "Düzenli tedarik ihtiyaçları olan büyüyen şirketler için ideal",
+      "enterpriseDesc": "Büyük ölçekli operasyonlar için kapsamlı çözüm",
+      "oneTimeFee": "tek seferlik ücret",
+      "totalOrderValue": "toplam sipariş değerinin",
+      "after5Consolidations": "5+ konsolidasyon sonrası",
+      "bankTransferFees": "+ banka transfer ücretleri uygulanır",
+      "volumeDiscounting": "hacim indirimi mevcut",
       "singleConsolidatedShipmentFeature": "Tek konsolide sevkiyat",
-      "supplierPaymentHandling": "Tedarikçi ödeme işleme",
-      "singleBillOfLadingFeature": "Tek Konşimento",
-      "documentationSupport": "Belgelendirme desteği",
-      "multipleConsolidatedShipments": "Birden fazla konsolide sevkiyat",
-      "digitalProcurementDashboard": "Dijital tedarik panosu",
+      "supplierPaymentHandling": "Tedarikçi ödeme yönetimi",
+      "singleBillOfLadingFeature": "Tek konşimento",
+      "documentationSupport": "Dokümantasyon desteği",
+      "multipleConsolidatedShipments": "Çoklu konsolide sevkiyatlar",
+      "digitalProcurementDashboard": "Dijital tedarik paneli",
       "realTimeTracking": "Gerçek zamanlı takip",
       "preferredShippingRates": "Tercihli nakliye oranları",
-      "paymentHandlingProtection": "Ödeme işleme ve koruma",
-      "volumeDiscountPricing": "Hacim indirimli fiyatlandırma",
+      "paymentHandlingProtection": "Ödeme yönetimi ve koruma",
+      "volumeDiscountPricing": "Hacim indirim fiyatlandırması",
       "priorityConsolidation": "Öncelikli konsolidasyon",
-      "customizedShippingSchedule": "Özelleştirilmiş sevkiyat programı",
+      "customizedShippingSchedule": "Özelleştirilmiş nakliye programı",
       "advancedAnalyticsReporting": "Gelişmiş analitik ve raporlama",
       "warehouseStorageOptions": "Depo depolama seçenekleri",
-      "strategicSourcingAssistance": "Stratejik kaynak temin yardımı",
+      "strategicSourcingAssistance": "Stratejik tedarik yardımı",
 
       // Features
       "importConsolidation": "Türk İthalat Konsolidasyonu Basitleştirildi", 
@@ -433,10 +430,7 @@ const resources = {
       
       // How It Works Section
       "simpleProcess": "Basit Süreç",
-      "howItWorksDesc": "Modern teknolojimiz ve uzman desteğimizle Türkiye'den kaynak bulma ve nakliye sürecimiz zahmetsizdir.",
-      
-      // Pricing Section
-      "transparentPricing": "İş ihtiyaçlarınızla birlikte ölçeklenen şeffaf fiyatlandırma."
+      "howItWorksDesc": "Modern teknolojimiz ve uzman desteğimizle Türkiye'den kaynak bulma ve nakliye sürecimiz zahmetsizdir."
     }
   }
 };

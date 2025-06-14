@@ -130,9 +130,6 @@ const Footer = () => {
                 {t('madeWith')}
               </span>
               <span className="text-red-500">♥</span>
-              <span className="text-gray-500 text-sm ml-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                {t('inIstanbul')}
-              </span>
             </div>
           </div>
         </div>

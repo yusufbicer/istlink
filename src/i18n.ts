@@ -135,6 +135,13 @@ const resources = {
       "postNotFound": "Post Not Found",
       "blogPostNotExist": "The blog post you're looking for doesn't exist.",
       
+      // Category translations
+      "General": "General",
+      "Supply Chain": "Supply Chain",
+      "E-commerce": "E-commerce", 
+      "Logistics": "Logistics",
+      "International Trade": "International Trade",
+      
       "navigation": "Navigation",
       "stayUpdated": "Stay Updated",
       "stayUpdatedDesc": "Get the latest updates on supply chain optimization and international trade insights.",
@@ -302,6 +309,13 @@ const resources = {
       "postNotFound": "Post Non Trouvé",
       "blogPostNotExist": "L'article de blog que vous recherchez n'existe pas.",
       
+      // Category translations
+      "General": "Général",
+      "Supply Chain": "Chaîne d'Approvisionnement",
+      "E-commerce": "E-commerce", 
+      "Logistics": "Logistique",
+      "International Trade": "Commerce International",
+      
       "navigation": "Navigation",
       "stayUpdated": "Restez Informé",
       "stayUpdatedDesc": "Recevez les dernières mises à jour sur l'optimisation de la chaîne d'approvisionnement et les insights du commerce international.",
@@ -467,6 +481,13 @@ const resources = {
       "share": "Paylaş",
       "postNotFound": "Yazı Bulunamadı",
       "blogPostNotExist": "Aradığınız blog yazısı mevcut değil.",
+      
+      // Category translations
+      "General": "Genel",
+      "Supply Chain": "Tedarik Zinciri",
+      "E-commerce": "E-ticaret", 
+      "Logistics": "Lojistik",
+      "International Trade": "Uluslararası Ticaret",
       
       "navigation": "Navigasyon",
       "stayUpdated": "Güncel Kalın",

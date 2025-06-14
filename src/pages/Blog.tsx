@@ -180,7 +180,7 @@ const Blog = () => {
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                     }`}
                   >
-                    {category}
+                    {t(category)}
                   </button>
                 ))}
               </div>
@@ -221,7 +221,7 @@ const Blog = () => {
                         className="w-full h-48 object-cover"
                       />
                       <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                        {post.category}
+                        {t(post.category)}
                       </span>
                     </div>
                   )}

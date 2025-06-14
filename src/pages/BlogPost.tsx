@@ -224,7 +224,7 @@ const BlogPost = () => {
               <div className="max-w-3xl mx-auto">
                 <Separator className="my-8" />
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="bg-gray-50 hover:bg-gray-100">{post.category}</Badge>
+                  <Badge variant="outline" className="bg-gray-50 hover:bg-gray-100">{t(post.category)}</Badge>
                 </div>
               </div>
             </div>

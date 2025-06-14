@@ -162,13 +162,13 @@ const Index = () => {
                   </h3>
                 </div>
                 
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                <div className="space-y-4 text-center">
+                  <div className="flex flex-col items-center">
+                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mb-2">
                       <span className="text-red-500 text-sm">×</span>
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <div className="font-medium text-gray-900 text-sm mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                         Multiple separate shipments
                       </div>
                       <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -177,12 +177,12 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-start">
-                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                  <div className="flex flex-col items-center">
+                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mb-2">
                       <span className="text-red-500 text-sm">×</span>
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <div className="font-medium text-gray-900 text-sm mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                         Complex documentation management
                       </div>
                       <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -191,12 +191,12 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-start">
-                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                  <div className="flex flex-col items-center">
+                    <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mb-2">
                       <span className="text-red-500 text-sm">×</span>
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <div className="font-medium text-gray-900 text-sm mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                         Individual payment handling
                       </div>
                       <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -241,13 +241,13 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                <div className="space-y-4 text-center">
+                  <div className="flex flex-col items-center">
+                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mb-2">
                       <CheckCircle className="h-3 w-3 text-emerald-500" />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <div className="font-medium text-gray-900 text-sm mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                         Single consolidated shipment
                       </div>
                       <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -256,12 +256,12 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-start">
-                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                  <div className="flex flex-col items-center">
+                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mb-2">
                       <CheckCircle className="h-3 w-3 text-emerald-500" />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <div className="font-medium text-gray-900 text-sm mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                         Streamlined documentation
                       </div>
                       <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -270,12 +270,12 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-start">
-                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                  <div className="flex flex-col items-center">
+                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center mb-2">
                       <CheckCircle className="h-3 w-3 text-emerald-500" />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                      <div className="font-medium text-gray-900 text-sm mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                         Protected payment system
                       </div>
                       <div className="text-xs text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

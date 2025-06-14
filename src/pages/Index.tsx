@@ -348,45 +348,40 @@ const Index = () => {
               </p>
             </div>
             
-            {/* Mobile: Clear Pricing Cards */}
+            {/* Mobile: Compact Pricing Cards */}
             {isMobile ? (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {pricingPlans.map((plan, index) => {
                   const PlanIcon = plan.icon;
                   return (
-                    <div key={index} className={`bg-white rounded-xl p-4 border-2 ${plan.borderColor} shadow-sm`}>
-                      <div className="text-center mb-3">
-                        <div className={`${plan.iconBg} w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-2`}>
-                          <PlanIcon className={`h-5 w-5 ${plan.iconColor}`} />
-                        </div>
-                        <h3 className="font-bold text-lg text-gray-900 mb-1">{plan.name}</h3>
-                        <div className="mb-2">
-                          <span className="text-2xl font-bold text-gray-900">{plan.price}</span>
-                          <div className="text-sm text-gray-600">{plan.period}</div>
+                    <div key={index} className={`bg-white rounded-lg p-3 border-2 ${plan.borderColor} shadow-sm`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center">
+                          <div className={`${plan.iconBg} w-8 h-8 rounded-lg flex items-center justify-center mr-3`}>
+                            <PlanIcon className={`h-4 w-4 ${plan.iconColor}`} />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-sm text-gray-900">{plan.name}</h3>
+                            <span className="text-lg font-bold text-gray-900">{plan.price}</span>
+                          </div>
                         </div>
                       </div>
                       
-                      <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                        <p className="text-sm text-gray-700 text-center font-medium">
-                          {index === 0 && "One-time fee for single consolidation service"}
-                          {index === 1 && "2% fee charged on your total order value to suppliers"}
-                          {index === 2 && "1.5% fee after 5+ consolidations on order value"}
+                      <div className="bg-blue-50 rounded-md p-2 mb-2">
+                        <p className="text-xs text-blue-700 text-center font-medium">
+                          {index === 0 && "One-time fee for single consolidation"}
+                          {index === 1 && "2% fee on total order value to suppliers"}
+                          {index === 2 && "1.5% fee after 5+ consolidations"}
                         </p>
                       </div>
                       
-                      <div className="text-xs text-gray-600 space-y-2">
-                        <div className="font-semibold text-gray-800 mb-1">What's included:</div>
-                        {plan.features.slice(0, 3).map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-start">
-                            <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
-                            <span>{feature}</span>
+                      <div className="grid grid-cols-1 gap-1">
+                        {plan.features.slice(0, 4).map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-start text-xs text-gray-600">
+                            <div className="w-1 h-1 bg-blue-600 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+                            <span className="leading-tight">{feature}</span>
                           </div>
                         ))}
-                        {plan.features.length > 3 && (
-                          <div className="text-center pt-1">
-                            <span className="text-blue-600 font-medium">+{plan.features.length - 3} more features</span>
-                          </div>
-                        )}
                       </div>
                     </div>
                   );

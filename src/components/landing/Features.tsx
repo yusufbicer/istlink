@@ -116,10 +116,10 @@ const Features = () => {
           <span className="inline-block py-1 px-3 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Features
           </span>
-          <h2 className="text-3xl md:text-4xl font-semibold mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Turkish Import Consolidation Made Simple
           </h2>
-          <p className="text-sm md:text-xl text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <p className="text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Bundle multiple Turkish supplier orders into one shipment with single payment and documentation.
           </p>
         </div>

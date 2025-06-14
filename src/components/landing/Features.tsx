@@ -16,7 +16,7 @@ const Features = () => {
       description: t('consolidatedShippingDesc'),
       color: "bg-blue-50 border-blue-200",
       iconColor: "text-blue-600 bg-blue-100",
-      footnote: "Save up to 40% on shipping costs"
+      footnote: "saveShippingCosts"
     },
     {
       icon: TruckIcon,
@@ -24,7 +24,7 @@ const Features = () => {
       description: t('singleBillOfLadingDesc'),
       color: "bg-green-50 border-green-200",
       iconColor: "text-green-600 bg-green-100",
-      footnote: "Reduces documentation by 70%"
+      footnote: "reduceDocumentation"
     },
     {
       icon: CreditCardIcon,
@@ -32,7 +32,7 @@ const Features = () => {
       description: t('centralizedPaymentsDesc'),
       color: "bg-purple-50 border-purple-200",
       iconColor: "text-purple-600 bg-purple-100",
-      footnote: "One payment for all suppliers"
+      footnote: "onePaymentAllSuppliers"
     },
     {
       icon: FileTextIcon,
@@ -40,7 +40,7 @@ const Features = () => {
       description: t('simplifiedDocumentationDesc'),
       color: "bg-amber-50 border-amber-200",
       iconColor: "text-amber-600 bg-amber-100",
-      footnote: "Digital-first approach"
+      footnote: "digitalFirstApproach"
     },
     {
       icon: GlobeIcon,
@@ -48,7 +48,7 @@ const Features = () => {
       description: t('globalComplianceDesc'),
       color: "bg-cyan-50 border-cyan-200",
       iconColor: "text-cyan-600 bg-cyan-100",
-      footnote: "150+ countries supported"
+      footnote: "countriesSupported"
     },
     {
       icon: UsersIcon,
@@ -56,7 +56,7 @@ const Features = () => {
       description: t('supplierManagementDesc'),
       color: "bg-pink-50 border-pink-200",
       iconColor: "text-pink-600 bg-pink-100",
-      footnote: "Unlimited supplier network"
+      footnote: "unlimitedSupplierNetwork"
     },
     {
       icon: ShieldCheck,
@@ -64,7 +64,7 @@ const Features = () => {
       description: t('deliveryGuaranteeDesc'),
       color: "bg-indigo-50 border-indigo-200",
       iconColor: "text-indigo-600 bg-indigo-100",
-      footnote: "99.5% on-time delivery rate"
+      footnote: "onTimeDeliveryRate"
     }
   ];
 
@@ -128,7 +128,7 @@ const Features = () => {
                 </div>
                 <h3 className="text-base font-semibold mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
                 <p className="text-gray-600 text-xs mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
-                <div className="text-xs text-gray-500 italic">{feature.footnote}</div>
+                <div className="text-xs text-gray-500 font-medium">{t(feature.footnote)}</div>
               </div>
             ))}
           </div>
@@ -179,8 +179,8 @@ const Features = () => {
                     {feature.description}
                   </p>
                   
-                  <div className="text-xs text-gray-500 italic font-medium">
-                    {feature.footnote}
+                  <div className="text-xs text-gray-500 font-medium">
+                    {t(feature.footnote)}
                   </div>
                   
                   {/* Add extra content for some cards to create height variation */}
@@ -188,7 +188,7 @@ const Features = () => {
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       <div className="flex items-center text-xs text-gray-500">
                         <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-                        <span>Most Popular</span>
+                        <span>{t('mostPopularFeature')}</span>
                       </div>
                     </div>
                   )}
@@ -197,7 +197,7 @@ const Features = () => {
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       <div className="flex items-center text-xs text-gray-500">
                         <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-                        <span>Essential Feature</span>
+                        <span>{t('essentialFeature')}</span>
                       </div>
                     </div>
                   )}
@@ -207,7 +207,7 @@ const Features = () => {
                       <div className="bg-white/50 rounded-lg p-3 mt-3">
                         <div className="flex items-center text-xs text-gray-600">
                           <div className="w-2 h-2 bg-indigo-400 rounded-full mr-2"></div>
-                          <span>Premium Support Included</span>
+                          <span>{t('premiumSupportIncluded')}</span>
                         </div>
                       </div>
                     </div>

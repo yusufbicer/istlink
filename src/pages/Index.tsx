@@ -358,7 +358,7 @@ const Index = () => {
                   {pricingPlans.map((plan, index) => {
                     const PlanIcon = plan.icon;
                     return (
-                      <TabsContent key={index} value={plan.name.toLowerCase()}>
+                      <TabsContent key={index} value={index === 0 ? 'starter' : index === 1 ? 'growth' : 'enterprise'}>
                         <div className={`bg-white rounded-lg border-2 ${plan.borderColor} shadow-sm overflow-hidden relative`}>
                           <div className="p-5">
                             <div className={`w-10 h-10 ${plan.iconBg} rounded-lg flex items-center justify-center mb-3 mx-auto`}>

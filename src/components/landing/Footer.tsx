@@ -110,12 +110,12 @@ const Footer = () => {
               
               {/* Legal Links */}
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-4">
-                <a href="#" className="text-gray-500 hover:text-gray-700 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                <button className="text-gray-500 hover:text-gray-700 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   {t('privacyPolicy')}
-                </a>
-                <a href="#" className="text-gray-500 hover:text-gray-700 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                </button>
+                <button className="text-gray-500 hover:text-gray-700 transition-colors text-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                   {t('termsOfService')}
-                </a>
+                </button>
               </div>
             </div>
           </div>

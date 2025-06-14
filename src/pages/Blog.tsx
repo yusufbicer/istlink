@@ -64,6 +64,21 @@ const Blog = () => {
     }
   };
 
+  // Helper function to format date
+  const getFormattedDate = (dateString: string) => {
+    return format(new Date(dateString), 'MMM d, yyyy');
+  };
+
+  // Helper function to format reading time
+  const getFormattedReadTime = (readTime: string) => {
+    const match = readTime.match(/(\d+)/);
+    if (match) {
+      const number = match[1];
+      return `${number} ${t('minRead')}`;
+    }
+    return readTime;
+  };
+
   // Check if user is admin
   const isAdmin = user?.role === 'admin';
 
@@ -255,16 +270,16 @@ const Blog = () => {
                       </span>
                     </div>
                     
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center">
-                        <CalendarDays className="w-4 h-4 mr-1" />
-                        {format(new Date(post.created_at), 'MMM d, yyyy')}
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {post.read_time}
-                      </div>
-                    </div>
+                     <div className="flex items-center justify-between text-sm text-gray-500">
+                       <div className="flex items-center">
+                         <CalendarDays className="w-4 h-4 mr-1" />
+                         {getFormattedDate(post.created_at)}
+                       </div>
+                       <div className="flex items-center">
+                         <Clock className="w-4 h-4 mr-1" />
+                         {getFormattedReadTime(post.read_time)}
+                       </div>
+                     </div>
                     
                     <div className="mt-5 pt-5 border-t border-gray-100 flex justify-between items-center">
                       <Link 

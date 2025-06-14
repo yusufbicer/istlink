@@ -111,8 +111,12 @@ const resources = {
 
       // BlogPreview
       "latestInsights": "Latest Insights",
-      "stayUpdatedWithTrends": "Stay updated with supply chain trends and best practices",
-      "viewAllArticles": "View all articles",
+      "stayUpdatedWithTrends": "Stay updated with the latest trends in global procurement",
+      "viewAllArticles": "View All Articles",
+      "readMore": "Read More",
+      "publishedOn": "Published on",
+      "blogNotFound": "Blog post not found",
+      "backToBlog": "Back to Blog",
       "navigation": "Navigation",
       "stayUpdated": "Stay Updated",
       "stayUpdatedDesc": "Get the latest updates on supply chain optimization and international trade insights.",
@@ -256,8 +260,12 @@ const resources = {
 
       // BlogPreview
       "latestInsights": "Dernières Perspectives",
-      "stayUpdatedWithTrends": "Restez à jour avec les tendances de la chaîne d'approvisionnement",
-      "viewAllArticles": "Voir tous les articles",
+      "stayUpdatedWithTrends": "Restez à jour avec les dernières tendances de l'approvisionnement mondial",
+      "viewAllArticles": "Voir Tous les Articles",
+      "readMore": "Lire Plus",
+      "publishedOn": "Publié le",
+      "blogNotFound": "Article de blog non trouvé",
+      "backToBlog": "Retour au Blog",
       "navigation": "Navigation",
       "stayUpdated": "Restez Informé",
       "stayUpdatedDesc": "Recevez les dernières mises à jour sur l'optimisation de la chaîne d'approvisionnement et les insights du commerce international.",
@@ -400,8 +408,12 @@ const resources = {
 
       // BlogPreview
       "latestInsights": "Son Görüşler",
-      "stayUpdatedWithTrends": "Tedarik zinciri trendleri ve en iyi uygulamaları hakkında güncel kalın",
-      "viewAllArticles": "Tüm makaleleri görüntüle",
+      "stayUpdatedWithTrends": "Küresel tedarik alanındaki en son trendler hakkında güncel kalın",
+      "viewAllArticles": "Tüm Makaleleri Görüntüle",
+      "readMore": "Devamını Oku",
+      "publishedOn": "Yayın tarihi",
+      "blogNotFound": "Blog yazısı bulunamadı",
+      "backToBlog": "Blog'a Dön",
       "navigation": "Navigasyon",
       "stayUpdated": "Güncel Kalın",
       "stayUpdatedDesc": "Tedarik zinciri optimizasyonu ve uluslararası ticaret içgörüleri hakkında en son güncellemeleri alın.",

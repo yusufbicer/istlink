@@ -10,7 +10,13 @@ import { useTranslation } from 'react-i18next';
 interface BlogPost {
   id: string;
   title: string;
+  title_en?: string;
+  title_tr?: string;
+  title_fr?: string;
   excerpt: string | null;
+  excerpt_en?: string;
+  excerpt_tr?: string;
+  excerpt_fr?: string;
   created_at: string;
   slug: string;
   image_url: string | null;
@@ -21,7 +27,32 @@ const BlogPreview = () => {
   const isMobile = useIsMobile();
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Helper function to get translated content
+  const getTranslatedContent = (post: BlogPost, field: 'title' | 'excerpt') => {
+    const currentLang = i18n.language;
+    
+    if (field === 'title') {
+      switch (currentLang) {
+        case 'tr':
+          return post.title_tr || post.title;
+        case 'fr':
+          return post.title_fr || post.title;
+        default:
+          return post.title_en || post.title;
+      }
+    } else {
+      switch (currentLang) {
+        case 'tr':
+          return post.excerpt_tr || post.excerpt;
+        case 'fr':
+          return post.excerpt_fr || post.excerpt;
+        default:
+          return post.excerpt_en || post.excerpt;
+      }
+    }
+  };
 
   useEffect(() => {
     fetchLatestBlogPosts();
@@ -31,7 +62,15 @@ const BlogPreview = () => {
     try {
       const { data, error } = await supabase
         .from('blog_posts')
-        .select('id, title, excerpt, created_at, slug, image_url, published')
+        .select(`
+          id, 
+          title, title_en, title_tr, title_fr,
+          excerpt, excerpt_en, excerpt_tr, excerpt_fr,
+          created_at, 
+          slug, 
+          image_url, 
+          published
+        `)
         .eq('published', true)
         .order('created_at', { ascending: false })
         .limit(3);
@@ -81,11 +120,11 @@ const BlogPreview = () => {
                   )}
                   <div className="p-4 flex-grow">
                     <h3 className="font-semibold text-sm text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                      {post.title}
+                      {getTranslatedContent(post, 'title')}
                     </h3>
-                    {post.excerpt && (
+                    {getTranslatedContent(post, 'excerpt') && (
                       <p className="text-xs text-gray-600 mb-2 line-clamp-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                        {post.excerpt}
+                        {getTranslatedContent(post, 'excerpt')}
                       </p>
                     )}
                     <div className="flex items-center justify-between">
@@ -118,11 +157,11 @@ const BlogPreview = () => {
                 )}
                 <div className="p-4">
                   <h3 className="font-semibold text-sm text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                    {post.title}
+                    {getTranslatedContent(post, 'title')}
                   </h3>
-                  {post.excerpt && (
+                  {getTranslatedContent(post, 'excerpt') && (
                     <p className="text-xs text-gray-600 mb-3 line-clamp-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                      {post.excerpt}
+                      {getTranslatedContent(post, 'excerpt')}
                     </p>
                   )}
                   <div className="flex items-center justify-between">

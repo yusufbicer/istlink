@@ -16,14 +16,23 @@ export type Database = {
           author_name: string
           category: string
           content: string
+          content_en: string | null
+          content_fr: string | null
+          content_tr: string | null
           created_at: string
           excerpt: string | null
+          excerpt_en: string | null
+          excerpt_fr: string | null
+          excerpt_tr: string | null
           id: string
           image_url: string | null
           published: boolean
           read_time: string
           slug: string
           title: string
+          title_en: string | null
+          title_fr: string | null
+          title_tr: string | null
           updated_at: string
         }
         Insert: {
@@ -32,14 +41,23 @@ export type Database = {
           author_name?: string
           category?: string
           content: string
+          content_en?: string | null
+          content_fr?: string | null
+          content_tr?: string | null
           created_at?: string
           excerpt?: string | null
+          excerpt_en?: string | null
+          excerpt_fr?: string | null
+          excerpt_tr?: string | null
           id?: string
           image_url?: string | null
           published?: boolean
           read_time?: string
           slug: string
           title: string
+          title_en?: string | null
+          title_fr?: string | null
+          title_tr?: string | null
           updated_at?: string
         }
         Update: {
@@ -48,14 +66,23 @@ export type Database = {
           author_name?: string
           category?: string
           content?: string
+          content_en?: string | null
+          content_fr?: string | null
+          content_tr?: string | null
           created_at?: string
           excerpt?: string | null
+          excerpt_en?: string | null
+          excerpt_fr?: string | null
+          excerpt_tr?: string | null
           id?: string
           image_url?: string | null
           published?: boolean
           read_time?: string
           slug?: string
           title?: string
+          title_en?: string | null
+          title_fr?: string | null
+          title_tr?: string | null
           updated_at?: string
         }
         Relationships: []

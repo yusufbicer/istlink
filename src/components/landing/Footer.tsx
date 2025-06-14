@@ -20,7 +20,7 @@ const Footer = () => {
               <BundleistLogo size="lg" />
               <div className="ml-4">
                 <div className="flex items-baseline">
-                  <span className="font-bold text-2xl text-emerald-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>bundle</span>
+                  <span className="font-bold text-2xl text-emerald-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Bundle</span>
                   <span className="font-bold text-2xl text-blue-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>ist</span>
                 </div>
                 <p className="text-xs text-gray-700 mt-1 font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

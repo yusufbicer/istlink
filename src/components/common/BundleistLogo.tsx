@@ -15,67 +15,68 @@ const BundleistLogo = ({ size = 'md', className = '' }: BundleistLogoProps) => {
   return (
     <div className={`${sizeClasses[size]} ${className}`}>
       <svg
-        viewBox="0 0 120 120"
+        viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Elegant modern B logo */}
+        {/* Premium minimalist B logo */}
         <g>
-          {/* Outer ring with gradient */}
+          {/* Subtle outer glow */}
           <circle 
-            cx="60" 
-            cy="60" 
-            r="50" 
-            stroke="url(#ringGradient)" 
-            strokeWidth="2" 
+            cx="50" 
+            cy="50" 
+            r="45" 
+            stroke="url(#glowGradient)" 
+            strokeWidth="1" 
             fill="none"
-            opacity="0.15"
+            opacity="0.1"
           />
           
-          {/* Main B letterform - modern geometric design */}
+          {/* Clean geometric B with perfect proportions */}
           <path
-            d="M35 30 L35 90 L65 90 C75 90 83 82 83 72 C83 66 80 61 75 58.5 C79 56 82 51 82 45 C82 35 74 30 65 30 L35 30 Z M42 37 L63 37 C68 37 72 41 72 45 C72 49 68 53 63 53 L42 53 L42 37 Z M42 60 L65 60 C70 60 75 64 75 70 C75 76 70 80 65 80 L42 80 L42 60 Z"
+            d="M25 20 L25 80 L55 80 C63 80 70 74 70 66 C70 61 67.5 57 64 55 C67 53 69 49 69 44 C69 36 63 20 54 20 L25 20 Z M32 27 L53 27 C57.5 27 61 30 61 34 C61 38 57.5 41 53 41 L32 41 L32 27 Z M32 48 L55 48 C59.5 48 63 51 63 55 C63 59 59.5 62 55 62 L32 62 L32 48 Z"
             fill="url(#primaryGradient)"
+            className="drop-shadow-sm"
           />
           
-          {/* Subtle highlight on the B */}
+          {/* Premium highlight effect */}
           <path
-            d="M42 37 L63 37 C68 37 72 41 72 45 C72 46.5 71.5 47.8 70.5 48.8 L42 48.8 L42 37 Z"
-            fill="url(#highlightGradient)"
-            opacity="0.3"
+            d="M32 27 L53 27 C57.5 27 61 30 61 34 C61 35.2 60.6 36.3 59.9 37.2 L32 37.2 L32 27 Z"
+            fill="url(#shineGradient)"
+            opacity="0.4"
           />
           
-          {/* Modern accent dots */}
-          <circle cx="90" cy="45" r="2" fill="url(#accentGradient)" opacity="0.8" />
-          <circle cx="95" cy="52" r="1.5" fill="url(#accentGradient)" opacity="0.6" />
-          <circle cx="88" cy="58" r="1" fill="url(#accentGradient)" opacity="0.4" />
+          {/* Elegant connecting elements */}
+          <circle cx="73" cy="38" r="1.8" fill="url(#accentGradient)" opacity="0.9" />
+          <circle cx="76" cy="43" r="1.2" fill="url(#accentGradient)" opacity="0.7" />
+          <circle cx="74" cy="48" r="0.8" fill="url(#accentGradient)" opacity="0.5" />
         </g>
         
         <defs>
-          {/* Primary gradient for the B */}
+          {/* Primary sophisticated gradient */}
           <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#0EA5E9" />
-            <stop offset="50%" stopColor="#3B82F6" />
-            <stop offset="100%" stopColor="#6366F1" />
+            <stop offset="0%" stopColor="#059669" />
+            <stop offset="40%" stopColor="#0891b2" />
+            <stop offset="100%" stopColor="#1d4ed8" />
           </linearGradient>
           
-          {/* Ring gradient */}
-          <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#06B6D4" />
-            <stop offset="100%" stopColor="#8B5CF6" />
+          {/* Subtle glow effect */}
+          <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#34d399" />
+            <stop offset="100%" stopColor="#3b82f6" />
           </linearGradient>
           
-          {/* Highlight gradient */}
-          <linearGradient id="highlightGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#FFFFFF" />
-            <stop offset="100%" stopColor="#F1F5F9" />
+          {/* Premium shine effect */}
+          <linearGradient id="shineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="100%" stopColor="#f8fafc" />
           </linearGradient>
           
-          {/* Accent gradient */}
+          {/* Refined accent gradient */}
           <radialGradient id="accentGradient" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#10B981" />
-            <stop offset="100%" stopColor="#059669" />
+            <stop offset="0%" stopColor="#22c55e" />
+            <stop offset="100%" stopColor="#16a34a" />
           </radialGradient>
         </defs>
       </svg>

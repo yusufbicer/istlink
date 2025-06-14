@@ -143,47 +143,47 @@ const Index = () => {
         </section>
         
         {/* Comparison Section */}
-        <section className={`${isMobile ? "py-8" : "py-16"} bg-gray-50`}>
+        <section className={`${isMobile ? "py-6" : "py-16"} bg-gray-50`}>
           <div className="container mx-auto px-6">
-            <div className="text-center max-w-4xl mx-auto mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <div className={`text-center max-w-4xl mx-auto ${isMobile ? "mb-6" : "mb-12"}`}>
+              <h2 className={`${isMobile ? "text-xl" : "text-3xl md:text-4xl"} font-bold ${isMobile ? "mb-3" : "mb-6"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 {t('comparisonTitle')}
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <p className={`${isMobile ? "text-sm" : "text-lg"} text-gray-600 max-w-2xl mx-auto`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                 {t('comparisonSubtitle')}
               </p>
             </div>
             
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className={`grid grid-cols-1 lg:grid-cols-2 ${isMobile ? "gap-4" : "gap-8"}`}>
                 {/* Traditional Approach */}
-                <div className="bg-white rounded-2xl p-8 shadow-lg border border-red-100 relative">
+                <div className={`bg-white rounded-2xl ${isMobile ? "p-4" : "p-8"} shadow-lg border border-red-100 relative`}>
                   {/* Header with icon */}
-                  <div className="flex items-center justify-between mb-6">
+                  <div className={`flex items-center justify-between ${isMobile ? "mb-4" : "mb-6"}`}>
                     <div className="flex items-center">
-                      <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mr-4">
-                        <AlertCircle className="h-6 w-6 text-red-500" />
+                      <div className={`${isMobile ? "w-8 h-8" : "w-12 h-12"} bg-red-100 rounded-xl flex items-center justify-center ${isMobile ? "mr-3" : "mr-4"}`}>
+                        <AlertCircle className={`${isMobile ? "h-4 w-4" : "h-6 w-6"} text-red-500`} />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <h3 className={`${isMobile ? "text-lg" : "text-xl"} font-bold text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('traditionalImports')}
                         </h3>
-                        <p className="text-sm text-red-500 font-medium">{t('fragmentedComplex')}</p>
+                        <p className={`${isMobile ? "text-xs" : "text-sm"} text-red-500 font-medium`}>{t('fragmentedComplex')}</p>
                       </div>
                     </div>
                   </div>
                   
                   {/* Problems list */}
-                  <div className="space-y-4 mb-8">
+                  <div className={`${isMobile ? "space-y-2 mb-4" : "space-y-4 mb-8"}`}>
                     <div className="flex items-start">
                       <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                         <span className="text-red-500 text-sm font-bold">×</span>
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`font-semibold text-gray-900 ${isMobile ? "mb-0.5 text-sm" : "mb-1"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('multipleShipments')}
                         </div>
-                        <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('multipleShipmentsDesc')}
                         </div>
                       </div>
@@ -194,10 +194,10 @@ const Index = () => {
                         <span className="text-red-500 text-sm font-bold">×</span>
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`font-semibold text-gray-900 ${isMobile ? "mb-0.5 text-sm" : "mb-1"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('complexDocumentation')}
                         </div>
-                        <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('complexDocumentationDesc')}
                         </div>
                       </div>
@@ -208,10 +208,10 @@ const Index = () => {
                         <span className="text-red-500 text-sm font-bold">×</span>
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`font-semibold text-gray-900 ${isMobile ? "mb-0.5 text-sm" : "mb-1"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('paymentRisks')}
                         </div>
-                        <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('paymentRisksDesc')}
                         </div>
                       </div>
@@ -219,55 +219,55 @@ const Index = () => {
                   </div>
                   
                   {/* Bottom stats */}
-                  <div className="border-t border-gray-100 pt-6">
-                    <div className="grid grid-cols-3 gap-4 text-center">
+                  <div className={`border-t border-gray-100 ${isMobile ? "pt-3" : "pt-6"}`}>
+                    <div className={`grid grid-cols-3 ${isMobile ? "gap-2" : "gap-4"} text-center`}>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-red-500 mb-1">5%</div>
-                        <div className="text-xs text-gray-600">{t('responseRate')}</div>
+                        <div className={`${isMobile ? "text-lg" : "text-2xl"} font-bold text-red-500 mb-1`}>5%</div>
+                        <div className={`${isMobile ? "text-[10px]" : "text-xs"} text-gray-600`}>{t('responseRate')}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-red-500 mb-1">80%</div>
-                        <div className="text-xs text-gray-600">{t('delays')}</div>
+                        <div className={`${isMobile ? "text-lg" : "text-2xl"} font-bold text-red-500 mb-1`}>80%</div>
+                        <div className={`${isMobile ? "text-[10px]" : "text-xs"} text-gray-600`}>{t('delays')}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-red-500 mb-1">0%</div>
-                        <div className="text-xs text-gray-600">{t('protection')}</div>
+                        <div className={`${isMobile ? "text-lg" : "text-2xl"} font-bold text-red-500 mb-1`}>0%</div>
+                        <div className={`${isMobile ? "text-[10px]" : "text-xs"} text-gray-600`}>{t('protection')}</div>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 {/* Smart Consolidation */}
-                <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-blue-200 relative">
+                <div className={`bg-white rounded-2xl ${isMobile ? "p-4" : "p-8"} shadow-lg border-2 border-blue-200 relative`}>
                   {/* Header with icon */}
-                  <div className="flex items-center justify-between mb-6">
+                  <div className={`flex items-center justify-between ${isMobile ? "mb-4" : "mb-6"}`}>
                     <div className="flex items-center">
-                      <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                        <CheckCircle className="h-6 w-6 text-blue-600" />
+                      <div className={`${isMobile ? "w-8 h-8" : "w-12 h-12"} bg-blue-100 rounded-xl flex items-center justify-center ${isMobile ? "mr-3" : "mr-4"}`}>
+                        <CheckCircle className={`${isMobile ? "h-4 w-4" : "h-6 w-6"} text-blue-600`} />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <h3 className={`${isMobile ? "text-lg" : "text-xl"} font-bold text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('bundleistSolution')}
                         </h3>
-                        <p className="text-sm text-blue-600 font-medium">{t('smartConsolidated')}</p>
+                        <p className={`${isMobile ? "text-xs" : "text-sm"} text-blue-600 font-medium`}>{t('smartConsolidated')}</p>
                       </div>
                     </div>
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                    <div className={`bg-gradient-to-r from-blue-500 to-purple-500 text-white ${isMobile ? "px-2 py-0.5 text-[10px]" : "px-3 py-1 text-xs"} rounded-full font-medium`}>
                       {t('recommended')}
                     </div>
                   </div>
                   
                   {/* Benefits list */}
-                  <div className="space-y-4 mb-8">
+                  <div className={`${isMobile ? "space-y-2 mb-4" : "space-y-4 mb-8"}`}>
                     <div className="flex items-start">
                       <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                         <CheckCircle className="h-4 w-4 text-blue-600" />
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`font-semibold text-gray-900 ${isMobile ? "mb-0.5 text-sm" : "mb-1"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('singleConsolidatedShipment')}
                         </div>
-                        <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('singleConsolidatedShipmentDesc')}
                         </div>
                       </div>
@@ -278,10 +278,10 @@ const Index = () => {
                         <CheckCircle className="h-4 w-4 text-blue-600" />
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`font-semibold text-gray-900 ${isMobile ? "mb-0.5 text-sm" : "mb-1"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('streamlinedDocumentation')}
                         </div>
-                        <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('streamlinedDocumentationDesc')}
                         </div>
                       </div>
@@ -292,10 +292,10 @@ const Index = () => {
                         <CheckCircle className="h-4 w-4 text-blue-600" />
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`font-semibold text-gray-900 ${isMobile ? "mb-0.5 text-sm" : "mb-1"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('securePaymentHandling')}
                         </div>
-                        <div className="text-sm text-gray-600" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                        <div className={`${isMobile ? "text-xs" : "text-sm"} text-gray-600`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                           {t('securePaymentHandlingDesc')}
                         </div>
                       </div>
@@ -303,19 +303,19 @@ const Index = () => {
                   </div>
                   
                   {/* Bottom stats */}
-                  <div className="border-t border-blue-100 pt-6">
-                    <div className="grid grid-cols-3 gap-4 text-center">
+                  <div className={`border-t border-blue-100 ${isMobile ? "pt-3" : "pt-6"}`}>
+                    <div className={`grid grid-cols-3 ${isMobile ? "gap-2" : "gap-4"} text-center`}>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600 mb-1">15x</div>
-                        <div className="text-xs text-gray-600">{t('fasterProcess')}</div>
+                        <div className={`${isMobile ? "text-lg" : "text-2xl"} font-bold text-blue-600 mb-1`}>15x</div>
+                        <div className={`${isMobile ? "text-[10px]" : "text-xs"} text-gray-600`}>{t('fasterProcess')}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600 mb-1">65%</div>
-                        <div className="text-xs text-gray-600">{t('costSavings')}</div>
+                        <div className={`${isMobile ? "text-lg" : "text-2xl"} font-bold text-blue-600 mb-1`}>65%</div>
+                        <div className={`${isMobile ? "text-[10px]" : "text-xs"} text-gray-600`}>{t('costSavings')}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600 mb-1">100%</div>
-                        <div className="text-xs text-gray-600">{t('protected')}</div>
+                        <div className={`${isMobile ? "text-lg" : "text-2xl"} font-bold text-blue-600 mb-1`}>100%</div>
+                        <div className={`${isMobile ? "text-[10px]" : "text-xs"} text-gray-600`}>{t('protected')}</div>
                       </div>
                     </div>
                   </div>

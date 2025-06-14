@@ -51,7 +51,7 @@ const Hero = () => {
             }`}
           >
             <span className="inline-block py-2 px-4 text-xs md:text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-4 md:mb-6 border border-blue-200 shadow-sm" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              ✨ Smart Export Consolidation Solutions
+              ✨ {t('smartExportConsolidation')}
             </span>
           </div>
           
@@ -62,7 +62,7 @@ const Hero = () => {
             style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
             <span className="block mb-2 font-bold">
-              Turkish Supply Chain Complexity,
+              {t('turkishSupplyChainComplexity')}
             </span>
             <span className="block relative h-8 md:h-12 lg:h-16 xl:h-20 overflow-hidden">
               <span 
@@ -88,18 +88,7 @@ const Hero = () => {
             }`}
           >
             <p className="text-gray-800 leading-relaxed px-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-              Transform fragmented Turkish supplier purchases into a{' '}
-              <span className="font-bold text-gray-900">
-                single, streamlined shipment
-              </span>. 
-              Buy from multiple Turkish suppliers with{' '}
-              <span className="font-bold text-gray-900">
-                one payment, one contract, one Bill of Lading
-              </span>{' '}
-              and{' '}
-              <span className="font-bold text-gray-900">
-                one shipment
-              </span>.
+              {t('heroDescription')}
             </p>
           </div>
           
@@ -110,7 +99,7 @@ const Hero = () => {
           >
             <Button asChild size="default" className="px-6 py-2 text-sm font-medium bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-lg" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               <a href="https://cal.com/yusuf-bicer-8ytuyg" target="_blank" rel="noopener noreferrer">
-                <MessageSquare className="mr-2 h-4 w-4" /> Talk to Our Team
+                <MessageSquare className="mr-2 h-4 w-4" /> {t('talkToOurTeam')}
               </a>
             </Button>
           </div>

@@ -349,7 +349,7 @@ const Blog = () => {
                     {t('wantToStayUpdated')}
                   </h3>
                   <p className={`text-blue-100 ${isMobile ? 'text-sm mb-4' : 'text-base md:text-lg mb-6'} max-w-xl mx-auto`}>
-                    Get exclusive insights, industry trends, and expert analysis delivered directly to your inbox.
+                    {t('exclusiveInsightsDesc')}
                   </p>
                   <Link 
                     to="/early-access"

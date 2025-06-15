@@ -90,8 +90,8 @@ const Hero = () => {
                     </div>
                   </div>
                   
-                  {isMobile ? (
-                    <div className="bg-white text-slate-800 p-2">
+                   {isMobile ? (
+                    <div className="bg-white text-slate-800 p-3">
                       {/* Logo, Navigation Icons, and User Controls */}
                       <div className="flex items-center justify-between mb-1.5 py-1 bg-slate-50 rounded-lg border border-slate-200 px-2">
                         <div className="flex items-center">

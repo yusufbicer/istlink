@@ -91,14 +91,14 @@ const Header = () => {
             <LanguageSwitcher />
             {user ? (
               <Button 
-                className={`bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-4 text-sm rounded-md' : 'px-6 rounded-lg'}`}
+                className={`bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-3 text-xs rounded-md' : 'px-6 rounded-lg'}`}
                 onClick={() => handleNavigate('/admin/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className={`bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-4 text-sm rounded-md' : 'px-6 rounded-lg'}`}
+                className={`bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-3 text-xs rounded-md' : 'px-6 rounded-lg'}`}
                 onClick={() => handleNavigate('/early-access')}
               >
                 {t('getStarted')}

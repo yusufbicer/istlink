@@ -30,9 +30,16 @@ const Header = () => {
   // Smooth scroll function for anchor links
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    
+    // Check if we're on the homepage
+    if (window.location.pathname === '/') {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to homepage with the section anchor
+      navigate(`/#${id}`);
     }
   };
 

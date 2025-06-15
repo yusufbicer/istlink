@@ -126,8 +126,8 @@ const Features = () => {
                     {React.createElement(feature.icon, { className: "w-4 h-4" })}
                   </div>
                 </div>
-                <h3 className="text-sm font-semibold mb-1 bg-red-100" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
-                <p className="text-gray-600 text-xs mb-2 bg-blue-100" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
+                <h3 className="text-sm font-semibold mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.title}</h3>
+                <p className="text-gray-600 text-xs mb-2" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{feature.description}</p>
                 <div className="mt-3 pt-2 border-t border-gray-200/50">
                   <div className="text-xs text-gray-500 font-medium">{t(feature.footnote)}</div>
                 </div>

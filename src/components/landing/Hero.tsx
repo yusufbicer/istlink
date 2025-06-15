@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Activity, GitMerge, Truck, Package, Users, Bell, FileText, CheckCircle, Clock, DollarSign, Home, Cog, Book, Star } from 'lucide-react';
+import { MessageSquare, Activity, GitMerge, Truck, Package, Users, Bell, FileText, CheckCircle, Clock, DollarSign } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BundleistLogo from '@/components/common/BundleistLogo';
 import { useTranslation } from 'react-i18next';
@@ -108,21 +108,18 @@ const Hero = () => {
                       </div>
                       
                       {/* Tiny Navigation Icons */}
-                      <div className="flex justify-center space-x-4 mb-1.5 py-1 bg-slate-50 rounded-lg border border-slate-200">
-                        <button className="flex flex-col items-center p-1.5 rounded-md bg-blue-600 text-white">
-                          <Home className="h-3 w-3" />
+                      <div className="flex justify-center space-x-3 mb-1.5 py-1 bg-slate-50 rounded-lg border border-slate-200">
+                        <button className="flex flex-col items-center p-1.5 rounded-md bg-blue-600 text-white text-xs">
+                          📊
                         </button>
-                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors">
-                          <Star className="h-3 w-3" />
+                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                          📦
                         </button>
-                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors">
-                          <Activity className="h-3 w-3" />
+                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                          🔗
                         </button>
-                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors">
-                          <Book className="h-3 w-3" />
-                        </button>
-                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors">
-                          <Cog className="h-3 w-3" />
+                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                          👥
                         </button>
                       </div>
                       

@@ -54,7 +54,7 @@ const Header = () => {
           {/* Desktop Navigation - Improved tablet spacing */}
           <div className="hidden md:flex items-center">
             {/* Enhanced navigation with better tablet spacing */}
-            <div className={`flex ${isTablet ? 'space-x-1 mx-4' : 'space-x-2'} bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-2 py-1.5 shadow-lg`}>
+            <div className={`flex ${isTablet ? 'space-x-1 mx-2' : 'space-x-2'} bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-2 py-1.5 shadow-lg`}>
               <button 
                 onClick={() => scrollToSection('features')}
                 className={`relative ${isTablet ? 'text-xs px-3 py-2' : 'text-sm px-4 py-2.5'} font-medium text-gray-800 hover:text-emerald-600 transition-all duration-300 group rounded-full hover:bg-white/80 hover:shadow-md transform hover:scale-105`}
@@ -87,18 +87,18 @@ const Header = () => {
           </div>
 
           {/* CTA Buttons - Improved tablet spacing */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className={`hidden md:flex items-center ${isTablet ? 'space-x-2' : 'space-x-4'}`}>
             <LanguageSwitcher />
             {user ? (
               <Button 
-                className={`bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-3 text-xs rounded-md' : 'px-6 rounded-lg'}`}
+                className={`bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-2 py-1 text-xs rounded-md h-8' : 'px-6 rounded-lg'}`}
                 onClick={() => handleNavigate('/admin/dashboard')}
               >
                 Dashboard
               </Button>
             ) : (
               <Button 
-                className={`bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-3 text-xs rounded-md' : 'px-6 rounded-lg'}`}
+                className={`bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 font-medium border-0 ${isTablet ? 'px-2 py-1 text-xs rounded-md h-8' : 'px-6 rounded-lg'}`}
                 onClick={() => handleNavigate('/early-access')}
               >
                 {t('getStarted')}

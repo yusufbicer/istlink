@@ -47,8 +47,8 @@ const Header = () => {
     }`}>
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
-          <Link to="/" className={`flex items-center ${isMobile ? '-ml-8' : isTablet ? '-ml-12' : '-ml-4'}`}>
-            <BundleistLogo size={isMobile ? "sm" : isTablet ? "xxs" : "md"} showText={true} />
+          <Link to="/" className={`flex items-center ${isMobile ? '-ml-12' : isTablet ? '-ml-16' : '-ml-6'}`}>
+            <BundleistLogo size={isMobile ? "xs" : isTablet ? "xxs" : "md"} showText={true} />
           </Link>
 
           {/* Desktop Navigation - Improved tablet spacing */}
@@ -87,7 +87,7 @@ const Header = () => {
           </div>
 
           {/* CTA Buttons - Improved tablet spacing */}
-          <div className={`hidden md:flex items-center ${isTablet ? 'space-x-1' : 'space-x-4'}`}>
+          <div className={`hidden md:flex items-center ${isTablet ? 'space-x-0.5' : 'space-x-4'}`}>
             <LanguageSwitcher />
             {user ? (
               <Button 

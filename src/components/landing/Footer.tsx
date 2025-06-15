@@ -22,9 +22,8 @@ const Footer = () => {
           
           {/* Brand Section */}
           <div className={`${isMobile ? "" : "pr-8"}`}>
-            <div className={`${isMobile ? "mb-4" : "mb-6"} flex items-center`}>
+            <div className={`${isMobile ? "mb-4" : "mb-6"}`}>
               <BundleistLogo size={isMobile ? "xs" : "sm"} showText={true} />
-              <span className="ml-2 text-lg">🇹🇷</span>
             </div>
             
             <p className={`text-gray-600 ${isMobile ? "mb-4 text-sm" : "mb-6"} max-w-md leading-relaxed`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

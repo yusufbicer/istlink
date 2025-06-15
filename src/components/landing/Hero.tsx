@@ -95,7 +95,9 @@ const Hero = () => {
                       {/* Logo, Navigation Icons, and User Controls */}
                       <div className="flex items-center justify-between mb-1.5 py-1 bg-slate-50 rounded-lg border border-slate-200 px-2">
                         <div className="flex items-center">
-                          <BundleistLogo size="xxs" showText={false} />
+                          <div className="w-6 h-6 flex items-center justify-center">
+                            <BundleistLogo size="xxs" showText={false} />
+                          </div>
                         </div>
                         
                         <div className="flex space-x-3">

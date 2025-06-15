@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 import { CalendarDays, Clock, ChevronRight, Plus } from "lucide-react";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, PaginationEllipsis } from "@/components/ui/pagination";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
@@ -41,9 +42,12 @@ const Blog = () => {
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
   const { user } = useAuth();
   const { t, i18n } = useTranslation();
   const isMobile = useIsMobile();
+
+  const POSTS_PER_PAGE = isMobile ? 6 : 9;
 
   // Helper function to get translated content
   const getTranslatedContent = (post: BlogPost, field: 'title' | 'excerpt') => {
@@ -106,6 +110,7 @@ const Blog = () => {
     } else {
       setFilteredPosts(blogPosts.filter(post => post.category === activeCategory));
     }
+    setCurrentPage(1); // Reset to first page when category changes
   }, [activeCategory, blogPosts]);
 
   const fetchBlogPosts = async () => {
@@ -127,6 +132,17 @@ const Blog = () => {
 
   // Get unique categories from blog posts
   const categories = Array.from(new Set(blogPosts.map(post => post.category)));
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  const endIndex = startIndex + POSTS_PER_PAGE;
+  const currentPosts = filteredPosts.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   if (isLoading) {
     return (
@@ -244,8 +260,9 @@ const Blog = () => {
                 )}
               </div>
             ) : (
-              <div className={`grid grid-cols-1 ${isMobile ? 'gap-4' : 'md:grid-cols-2 lg:grid-cols-3 gap-8'} max-w-7xl mx-auto`}>
-                {filteredPosts.map((post, index) => (
+              <>
+                <div className={`grid grid-cols-1 ${isMobile ? 'gap-4' : 'md:grid-cols-2 lg:grid-cols-3 gap-8'} max-w-7xl mx-auto`}>
+                  {currentPosts.map((post, index) => (
                   <article 
                     key={post.id}
                     className={`group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-200/50 hover:border-blue-200 shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 ${
@@ -344,8 +361,66 @@ const Blog = () => {
                       </div>
                     </div>
                   </article>
-                ))}
-              </div>
+                  ))}
+                </div>
+
+                {/* Elegant Pagination */}
+                {totalPages > 1 && (
+                  <div className={`flex justify-center ${isMobile ? 'mt-6' : 'mt-12'}`}>
+                    <Pagination className="mx-auto">
+                      <PaginationContent className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-200/50 px-2 py-1">
+                        {currentPage > 1 && (
+                          <PaginationItem>
+                            <PaginationPrevious 
+                              onClick={() => handlePageChange(currentPage - 1)}
+                              className={`${isMobile ? 'text-xs px-2' : 'text-sm px-3'} hover:bg-blue-50 hover:text-blue-700 transition-colors duration-300 cursor-pointer`}
+                            />
+                          </PaginationItem>
+                        )}
+                        
+                        {/* Page Numbers */}
+                        {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                          let pageNum;
+                          if (totalPages <= 5) {
+                            pageNum = i + 1;
+                          } else if (currentPage <= 3) {
+                            pageNum = i + 1;
+                          } else if (currentPage >= totalPages - 2) {
+                            pageNum = totalPages - 4 + i;
+                          } else {
+                            pageNum = currentPage - 2 + i;
+                          }
+                          
+                          return (
+                            <PaginationItem key={pageNum}>
+                              <PaginationLink
+                                onClick={() => handlePageChange(pageNum)}
+                                isActive={currentPage === pageNum}
+                                className={`${isMobile ? 'w-8 h-8 text-xs' : 'w-10 h-10 text-sm'} cursor-pointer transition-all duration-300 ${
+                                  currentPage === pageNum 
+                                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md' 
+                                    : 'hover:bg-blue-50 hover:text-blue-700'
+                                }`}
+                              >
+                                {pageNum}
+                              </PaginationLink>
+                            </PaginationItem>
+                          );
+                        })}
+                        
+                        {currentPage < totalPages && (
+                          <PaginationItem>
+                            <PaginationNext 
+                              onClick={() => handlePageChange(currentPage + 1)}
+                              className={`${isMobile ? 'text-xs px-2' : 'text-sm px-3'} hover:bg-blue-50 hover:text-blue-700 transition-colors duration-300 cursor-pointer`}
+                            />
+                          </PaginationItem>
+                        )}
+                      </PaginationContent>
+                    </Pagination>
+                  </div>
+                )}
+              </>
             )}
             
             {/* Enhanced Newsletter CTA */}

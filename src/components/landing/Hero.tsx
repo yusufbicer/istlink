@@ -93,9 +93,6 @@ const Hero = () => {
                   {isMobile ? (
                     <div className="bg-white text-slate-800 p-2">
                       <div className="flex items-center justify-between mb-1.5">
-                        <div className="flex items-center">
-                          <BundleistLogo size="xxs" className="mr-2" showText={false} />
-                        </div>
                         <div className="flex items-center space-x-1">
                           <div className="relative">
                             <Bell className="h-3 w-3 text-slate-600" />
@@ -107,20 +104,25 @@ const Hero = () => {
                         </div>
                       </div>
                       
-                      {/* Tiny Navigation Icons */}
-                      <div className="flex justify-center space-x-3 mb-1.5 py-1 bg-slate-50 rounded-lg border border-slate-200">
-                        <button className="flex flex-col items-center p-1.5 rounded-md bg-blue-600 text-white text-xs">
-                          📊
-                        </button>
-                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
-                          📦
-                        </button>
-                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
-                          🔗
-                        </button>
-                        <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
-                          👥
-                        </button>
+                      {/* Logo and Navigation Icons */}
+                      <div className="flex items-center justify-between mb-1.5 py-1 bg-slate-50 rounded-lg border border-slate-200 px-2">
+                        <div className="flex items-center">
+                          <BundleistLogo size="xxs" showText={false} />
+                        </div>
+                        <div className="flex space-x-3">
+                          <button className="flex flex-col items-center p-1.5 rounded-md bg-blue-600 text-white text-xs">
+                            📊
+                          </button>
+                          <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                            📦
+                          </button>
+                          <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                            🔗
+                          </button>
+                          <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                            👥
+                          </button>
+                        </div>
                       </div>
                       
                       {/* Live Activity Banner */}

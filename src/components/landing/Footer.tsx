@@ -22,7 +22,7 @@ const Footer = () => {
           
           {/* Brand Section */}
           <div className={`${isMobile ? "" : "pr-8"}`}>
-            <div className={`flex items-center ${isMobile ? "mb-4" : "mb-6"}`}>
+            <div className={`flex items-center ${isMobile ? "mb-4" : "mb-6"} bg-yellow-100`}>
               <BundleistLogo size={isMobile ? "xs" : "sm"} showText={true} />
             </div>
             
@@ -49,7 +49,7 @@ const Footer = () => {
 
           {/* Newsletter & CTA */}
           <div className={`${isMobile ? "" : "pl-8"}`}>
-            <h3 className={`font-semibold ${isMobile ? "mb-3 text-base" : "mb-6 text-lg"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <h3 className={`font-semibold ${isMobile ? "mb-3 text-base" : "mb-6 text-lg"} text-gray-900 bg-green-100`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('stayUpdated')}
             </h3>
             <p className={`text-gray-600 ${isMobile ? "mb-4 text-sm" : "mb-6"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

@@ -263,9 +263,16 @@ const Blog = () => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent group-hover:from-black/30 transition-all duration-300"></div>
                         <div className={`absolute ${isMobile ? 'top-2 right-2' : 'top-4 right-4'}`}>
-                          <span className={`inline-flex items-center ${isMobile ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-xs'} bg-white/95 backdrop-blur-sm text-blue-700 rounded-full font-medium border border-blue-200/50 shadow-sm`}>
-                            {t(post.category)}
-                          </span>
+                          <div className="flex gap-2">
+                            <span className={`inline-flex items-center ${isMobile ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-xs'} bg-white/95 backdrop-blur-sm text-blue-700 rounded-full font-medium border border-blue-200/50 shadow-sm`}>
+                              {t(post.category)}
+                            </span>
+                            {post.content_type === 'industry_news' && (
+                              <span className={`inline-flex items-center ${isMobile ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-xs'} bg-orange-100 text-orange-700 rounded-full font-medium border border-orange-200 shadow-sm`}>
+                                {t('industryNews')}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
                     )}

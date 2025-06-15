@@ -43,8 +43,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/early-access" element={<EarlyAccess />} />
-      <Route path="/blog" element={<BlogAndNews />} />
-      <Route path="/blog-old" element={<Blog />} />
+      <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/blog/editor" element={
         <AdminRoute>

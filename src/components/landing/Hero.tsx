@@ -92,23 +92,12 @@ const Hero = () => {
                   
                   {isMobile ? (
                     <div className="bg-white text-slate-800 p-2">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <div className="flex items-center space-x-1">
-                          <div className="relative">
-                            <Bell className="h-3 w-3 text-slate-600" />
-                            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
-                          </div>
-                          <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-700 font-medium">
-                            J
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Logo and Navigation Icons */}
+                      {/* Logo, Navigation Icons, and User Controls */}
                       <div className="flex items-center justify-between mb-1.5 py-1 bg-slate-50 rounded-lg border border-slate-200 px-2">
                         <div className="flex items-center">
                           <BundleistLogo size="xxs" showText={false} />
                         </div>
+                        
                         <div className="flex space-x-3">
                           <button className="flex flex-col items-center p-1.5 rounded-md bg-blue-600 text-white text-xs">
                             📊
@@ -122,6 +111,16 @@ const Hero = () => {
                           <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
                             👥
                           </button>
+                        </div>
+                        
+                        <div className="flex items-center space-x-1">
+                          <div className="relative">
+                            <Bell className="h-3 w-3 text-slate-600" />
+                            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+                          </div>
+                          <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-700 font-medium">
+                            J
+                          </div>
                         </div>
                       </div>
                       

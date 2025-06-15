@@ -143,12 +143,12 @@ const Features = () => {
               // Different heights and content for masonry effect
               const cardVariants = [
                 { height: 'h-auto', padding: 'p-4', iconSize: 'w-10 h-10', textSize: 'text-lg' },
-                { height: 'h-auto', padding: 'p-6', iconSize: 'w-12 h-12', textSize: 'text-xl' },
-                { height: 'h-auto', padding: 'p-5', iconSize: 'w-11 h-11', textSize: 'text-lg' },
-                { height: 'h-auto', padding: 'p-4', iconSize: 'w-10 h-10', textSize: 'text-base' },
                 { height: 'h-auto', padding: 'p-6', iconSize: 'w-12 h-12', textSize: 'text-lg' },
                 { height: 'h-auto', padding: 'p-5', iconSize: 'w-11 h-11', textSize: 'text-lg' },
-                { height: 'h-auto', padding: 'p-4', iconSize: 'w-10 h-10', textSize: 'text-base' }
+                { height: 'h-auto', padding: 'p-4', iconSize: 'w-10 h-10', textSize: 'text-lg' },
+                { height: 'h-auto', padding: 'p-6', iconSize: 'w-12 h-12', textSize: 'text-lg' },
+                { height: 'h-auto', padding: 'p-5', iconSize: 'w-11 h-11', textSize: 'text-lg' },
+                { height: 'h-auto', padding: 'p-4', iconSize: 'w-10 h-10', textSize: 'text-lg' }
               ];
               
               const variant = cardVariants[index];
@@ -174,10 +174,7 @@ const Features = () => {
                     {feature.title}
                   </h3>
                   
-                  <p className={`text-gray-600 leading-relaxed mb-3 ${
-                    variant.textSize === 'text-xl' ? 'text-base' : 
-                    variant.textSize === 'text-lg' ? 'text-sm' : 'text-sm'
-                  }`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  <p className={`text-gray-600 leading-relaxed mb-3 text-sm`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                     {feature.description}
                   </p>
                   

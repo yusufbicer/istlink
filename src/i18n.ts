@@ -120,14 +120,24 @@ const resources = {
       
       // Blog Page
       "ourBlog": "Our Blog",
+      "insightsAndNews": "Insights & News",
       "insightsOnCrossBorderCommerce": "Insights on Cross-Border Commerce",
       "expertAnalysisDesc": "Expert analysis, industry trends, and practical tips for optimizing your Turkish supply chain.",
       "createNewPost": "Create New Post",
+      "createNewContent": "Create New Content",
       "allPosts": "All Posts",
       "noBlogPostsYet": "No blog posts published yet.",
+      "noNewsYet": "No news articles yet",
       "createFirstPost": "Create First Post",
+      "createFirstNews": "Create First News",
       "readArticle": "Read Article",
       "edit": "Edit",
+      
+      // Content types
+      "contentType": "Content Type",
+      "blogPost": "Blog Post",
+      "industryNews": "Industry News",
+      "blogPosts": "Blog Posts",
       "wantToStayUpdated": "Want to stay updated with our latest insights?",
       "exclusiveInsightsDesc": "Get exclusive insights, industry trends, and expert analysis delivered directly to your inbox.",
       "subscribeToNewsletterBtn": "Subscribe to Our Newsletter",

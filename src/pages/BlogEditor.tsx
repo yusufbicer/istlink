@@ -44,6 +44,7 @@ const formSchema = z.object({
   category: z.string().min(1, {
     message: "Category is required.",
   }),
+  content_type: z.enum(["blog_post", "industry_news"]).default("blog_post"),
   author_name: z.string().min(2, {
     message: "Author name must be at least 2 characters.",
   }),
@@ -121,6 +122,7 @@ const BlogEditor = () => {
           form.setValue("content_tr", data.content_tr || "");
           form.setValue("content_fr", data.content_fr || "");
           form.setValue("category", data.category);
+          form.setValue("content_type", (data.content_type === "industry_news" ? "industry_news" : "blog_post") as "blog_post" | "industry_news");
           form.setValue("author_name", data.author_name || "");
           form.setValue("image_url", data.image_url || "");
         } catch (error) {
@@ -165,6 +167,7 @@ const BlogEditor = () => {
         excerpt_tr: values.excerpt_tr || null,
         excerpt_fr: values.excerpt_fr || null,
         category: values.category,
+        content_type: values.content_type || 'blog_post',
         author_id: user.id,
         author_name: values.author_name,
         image_url: values.image_url || null,
@@ -333,19 +336,41 @@ const BlogEditor = () => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. Supply Chain, E-commerce, Logistics" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g. Supply Chain, E-commerce, Logistics" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="content_type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Content Type</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option value="blog_post">Blog Post</option>
+                        <option value="industry_news">Industry News</option>
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             
             <FormField
               control={form.control}

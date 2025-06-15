@@ -19,6 +19,7 @@ export type Database = {
           content_en: string | null
           content_fr: string | null
           content_tr: string | null
+          content_type: string
           created_at: string
           excerpt: string | null
           excerpt_en: string | null
@@ -44,6 +45,7 @@ export type Database = {
           content_en?: string | null
           content_fr?: string | null
           content_tr?: string | null
+          content_type?: string
           created_at?: string
           excerpt?: string | null
           excerpt_en?: string | null
@@ -69,6 +71,7 @@ export type Database = {
           content_en?: string | null
           content_fr?: string | null
           content_tr?: string | null
+          content_type?: string
           created_at?: string
           excerpt?: string | null
           excerpt_en?: string | null

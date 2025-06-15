@@ -32,6 +32,7 @@ interface BlogPost {
   author_avatar: string | null;
   slug: string;
   published: boolean;
+  content_type: 'blog_post' | 'industry_news';
 }
 
 const Blog = () => {
@@ -116,7 +117,7 @@ const Blog = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setBlogPosts(data || []);
+      setBlogPosts((data || []) as BlogPost[]);
     } catch (error) {
       // Silent error handling for production
     } finally {

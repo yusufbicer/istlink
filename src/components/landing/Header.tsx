@@ -47,7 +47,7 @@ const Header = () => {
     }`}>
       <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
-          <Link to="/" className={`flex items-center ${isMobile ? '-ml-6' : isTablet ? '-ml-8' : ''}`}>
+          <Link to="/" className={`flex items-center ${isMobile ? '-ml-8' : isTablet ? '-ml-12' : '-ml-4'}`}>
             <BundleistLogo size={isMobile ? "sm" : isTablet ? "xxs" : "md"} showText={true} />
           </Link>
 

@@ -18,11 +18,11 @@ const Footer = () => {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className={`container mx-auto ${isMobile ? "px-4 py-6" : "px-6 py-16"}`}>
-        <div className={`grid grid-cols-1 lg:grid-cols-2 ${isMobile ? "gap-6" : "gap-8 lg:gap-12"}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-2 ${isMobile ? "gap-6" : "gap-8 lg:gap-12 items-start"}`}>
           
           {/* Brand Section */}
           <div className={`${isMobile ? "" : "pr-8"}`}>
-            <div className={`flex items-center ${isMobile ? "mb-4" : "mb-6"}`}>
+            <div className={`flex items-baseline ${isMobile ? "mb-4" : "mb-6"}`}>
               <BundleistLogo size={isMobile ? "xs" : "sm"} showText={true} />
             </div>
             
@@ -48,8 +48,8 @@ const Footer = () => {
           </div>
 
           {/* Newsletter & CTA */}
-          <div className={`${isMobile ? "" : "pl-8"}`}>
-            <h3 className={`font-semibold ${isMobile ? "mb-3 text-base" : "mb-6 text-lg"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <div className={`${isMobile ? "" : "pl-8 flex flex-col justify-start"}`}>
+            <h3 className={`font-semibold ${isMobile ? "mb-3 text-base" : "mb-6 text-lg leading-none"} text-gray-900`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
               {t('stayUpdated')}
             </h3>
             <p className={`text-gray-600 ${isMobile ? "mb-4 text-sm" : "mb-6"}`} style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>

@@ -32,50 +32,50 @@ const HowItWorks = () => {
   const steps: Step[] = [
     {
       icon: Search,
-      title: "Find Your Suppliers",
-      description: "Find your suppliers, get your proforma invoices and send them all to our team for review and processing.",
+      title: t('findSuppliers'),
+      description: t('findSuppliersDesc'),
       color: "text-blue-600",
       bgGradient: "from-blue-50 to-blue-100"
     },
     {
       icon: ShieldCheck,
-      title: "Supplier Verification",
-      description: "Our team will verify your suppliers and after confirmation we will sign a master contract to act on your behalf.",
+      title: t('supplierVerification'),
+      description: t('supplierVerificationDesc'),
       color: "text-emerald-600",
       bgGradient: "from-emerald-50 to-emerald-100"
     },
     {
       icon: CreditCard,
-      title: "Payment Processing",
-      description: "We will handle all your order payments on behalf of you from your account balance with complete transparency.",
+      title: t('paymentProcessing'),
+      description: t('paymentProcessingDesc'),
       color: "text-purple-600",
       bgGradient: "from-purple-50 to-purple-100"
     },
     {
       icon: PackagePlus,
-      title: "Order Consolidation",
-      description: "Our team will receive and verify all your orders, then combine them into a single optimized shipment.",
+      title: t('orderConsolidation'),
+      description: t('orderConsolidationDesc'),
       color: "text-amber-600",
       bgGradient: "from-amber-50 to-amber-100"
     },
     {
       icon: ClipboardCheck,
-      title: "Documentation Simplified",
-      description: "We handle all export paperwork, customs forms, and create a single bill of lading for your consolidated shipment.",
+      title: t('documentationSimplified'),
+      description: t('documentationSimplifiedDesc'),
       color: "text-indigo-600",
       bgGradient: "from-indigo-50 to-indigo-100"
     },
     {
       icon: ShipIcon,
-      title: "Global Shipping",
-      description: "Your consolidated order is shipped to your destination with real-time tracking and updates.",
+      title: t('globalShipping'),
+      description: t('globalShippingDesc'),
       color: "text-cyan-600",
       bgGradient: "from-cyan-50 to-cyan-100"
     },
     {
       icon: MapPin,
-      title: "Easy Delivery",
-      description: "Receive your multiple orders as a single shipment, saving time and reducing customs complexity.",
+      title: t('easyDelivery'),
+      description: t('easyDeliveryDesc'),
       color: "text-pink-600",
       bgGradient: "from-pink-50 to-pink-100"
     }

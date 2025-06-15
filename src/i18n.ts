@@ -163,21 +163,21 @@ const resources = {
       "locationIstanbul": "Istanbul, Turkey",
       "dashboardAlt": "Bundleist Dashboard Interface",
       
-      // Features Section
-      "findSuppliers": "Find Suppliers",
-      "findSuppliersDesc": "Search and connect with verified Turkish suppliers for your specific product needs",
+      // How It Works Steps
+      "findSuppliers": "Find Your Suppliers",
+      "findSuppliersDesc": "Find your suppliers, get your proforma invoices and send them all to our team for review and processing.",
       "supplierVerification": "Supplier Verification", 
-      "supplierVerificationDesc": "We vet suppliers to ensure reliability and quality standards for your business",
+      "supplierVerificationDesc": "Our team will verify your suppliers and after confirmation we will sign a master contract to act on your behalf.",
       "paymentProcessing": "Payment Processing",
-      "paymentProcessingDesc": "Secure payment processing through our platform with transaction protection",
+      "paymentProcessingDesc": "We will handle all your order payments on behalf of you from your account balance with complete transparency.",
       "orderConsolidation": "Order Consolidation",
-      "orderConsolidationDesc": "Combine multiple supplier orders into one cost-effective shipment",
+      "orderConsolidationDesc": "Our team will receive and verify all your orders, then combine them into a single optimized shipment.",
       "documentationSimplified": "Documentation Simplified",
-      "documentationSimplifiedDesc": "We handle all export/import documents for hassle-free processing",
+      "documentationSimplifiedDesc": "We handle all export paperwork, customs forms, and create a single bill of lading for your consolidated shipment.",
       "globalShipping": "Global Shipping", 
-      "globalShippingDesc": "Efficient shipping worldwide through our established logistics network",
+      "globalShippingDesc": "Your consolidated order is shipped to your destination with real-time tracking and updates.",
       "easyDelivery": "Easy Delivery",
-      "easyDeliveryDesc": "Track and receive your consolidated shipment at your destination",
+      "easyDeliveryDesc": "Receive your multiple orders as a single shipment, saving time and reducing customs complexity.",
       
       // Footnotes for features
       "saveShippingCosts": "Save up to 40% on shipping costs",
@@ -383,21 +383,21 @@ const resources = {
       "contactEmail": "bundleist@gmail.com",
       "locationIstanbul": "Istanbul, Turquie",
       
-      // Features Section
-      "findSuppliers": "Trouver des Fournisseurs",
-      "findSuppliersDesc": "Recherchez et connectez-vous avec des fournisseurs turcs vérifiés pour vos besoins spécifiques",
+      // How It Works Steps
+      "findSuppliers": "Trouvez Vos Fournisseurs",
+      "findSuppliersDesc": "Trouvez vos fournisseurs, obtenez vos factures proforma et envoyez-les toutes à notre équipe pour examen et traitement.",
       "supplierVerification": "Vérification des Fournisseurs",
-      "supplierVerificationDesc": "Nous sélectionnons les fournisseurs pour garantir fiabilité et normes de qualité",
+      "supplierVerificationDesc": "Notre équipe vérifiera vos fournisseurs et après confirmation, nous signerons un contrat cadre pour agir en votre nom.",
       "paymentProcessing": "Traitement des Paiements",
-      "paymentProcessingDesc": "Traitement sécurisé des paiements via notre plateforme avec protection des transactions",
+      "paymentProcessingDesc": "Nous gérerons tous vos paiements de commandes en votre nom à partir de votre solde de compte avec une transparence complète.",
       "orderConsolidation": "Consolidation des Commandes",
-      "orderConsolidationDesc": "Regroupez plusieurs commandes de fournisseurs en un seul envoi économique",
+      "orderConsolidationDesc": "Notre équipe recevra et vérifiera toutes vos commandes, puis les combinera en un seul envoi optimisé.",
       "documentationSimplified": "Documentation Simplifiée",
-      "documentationSimplifiedDesc": "Nous gérons tous les documents d'exportation/importation pour un traitement sans tracas",
+      "documentationSimplifiedDesc": "Nous gérons toute la paperasse d'exportation, les formulaires douaniers et créons un seul connaissement pour votre envoi consolidé.",
       "globalShipping": "Expédition Mondiale",
-      "globalShippingDesc": "Expédition efficace dans le monde entier via notre réseau logistique établi",
+      "globalShippingDesc": "Votre commande consolidée est expédiée vers votre destination avec suivi en temps réel et mises à jour.",
       "easyDelivery": "Livraison Facile",
-      "easyDeliveryDesc": "Suivez et recevez votre envoi consolidé à votre destination",
+      "easyDeliveryDesc": "Recevez vos multiples commandes comme un seul envoi, économisant du temps et réduisant la complexité douanière.",
       
       // Footnotes for features
       "saveShippingCosts": "Économisez jusqu'à 40% sur les coûts d'expédition",
@@ -603,21 +603,21 @@ const resources = {
       "contactEmail": "bundleist@gmail.com",
       "locationIstanbul": "İstanbul, Türkiye",
       
-      // Features Section
-      "findSuppliers": "Tedarikçi Bul",
-      "findSuppliersDesc": "Belirli ürün ihtiyaçlarınız için doğrulanmış Türk tedarikçilerini arayın ve bağlantı kurun",
+      // How It Works Steps
+      "findSuppliers": "Tedarikçilerinizi Bulun",
+      "findSuppliersDesc": "Tedarikçilerinizi bulun, proforma faturalarınızı alın ve hepsini inceleme ve işleme için ekibimize gönderin.",
       "supplierVerification": "Tedarikçi Doğrulaması",
-      "supplierVerificationDesc": "İşiniz için güvenilirlik ve kalite standartlarını sağlamak için tedarikçileri inceleriz",
+      "supplierVerificationDesc": "Ekibimiz tedarikçilerinizi doğrulayacak ve onaydan sonra sizin adınıza hareket etmek için ana sözleşme imzalayacağız.",
       "paymentProcessing": "Ödeme İşlemleri",
-      "paymentProcessingDesc": "İşlem koruması ile platformumuz üzerinden güvenli ödeme işleme",
-      "orderConsolidation": "Sipariş Birleştirme",
-      "orderConsolidationDesc": "Birden fazla tedarikçi siparişini tek, uygun maliyetli gönderide birleştirin",
+      "paymentProcessingDesc": "Hesap bakiyenizden tüm sipariş ödemelerinizi sizin adınıza tam şeffaflıkla yöneteceğiz.",
+      "orderConsolidation": "Sipariş Konsolidasyonu",
+      "orderConsolidationDesc": "Ekibimiz tüm siparişlerinizi alacak ve doğrulayacak, ardından bunları tek optimize edilmiş sevkiyatta birleştirecek.",
       "documentationSimplified": "Basitleştirilmiş Dokümantasyon",
-      "documentationSimplifiedDesc": "Sorunsuz işleme için tüm ihracat/ithalat belgelerini yönetiriz",
+      "documentationSimplifiedDesc": "Tüm ihracat evraklarını, gümrük formlarını yönetiriz ve konsolide sevkiyatınız için tek konşimento oluştururuz.",
       "globalShipping": "Küresel Nakliye",
-      "globalShippingDesc": "Kurulmuş lojistik ağımız aracılığıyla dünya çapında verimli nakliye",
+      "globalShippingDesc": "Konsolide siparişiniz gerçek zamanlı takip ve güncellemelerle hedefinize sevk edilir.",
       "easyDelivery": "Kolay Teslimat",
-      "easyDeliveryDesc": "Birleştirilmiş gönderinizi takip edin ve varış noktanızda teslim alın",
+      "easyDeliveryDesc": "Birden fazla siparişinizi tek sevkiyat olarak alın, zaman tasarrufu yapın ve gümrük karmaşıklığını azaltın.",
       
       // Footnotes for features
       "saveShippingCosts": "Nakliye maliyetlerinde %40'a kadar tasarruf",

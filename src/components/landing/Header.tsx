@@ -59,6 +59,7 @@ const Header = () => {
         <nav className="flex items-center justify-between">
           <Link to="/" className={`flex items-center ${isMobile ? '-ml-8' : isTablet ? '-ml-6' : '-ml-4'}`}>
             <BundleistLogo size={isMobile ? "sm" : isTablet ? "sm" : "md"} showText={true} />
+            <span className="ml-1 text-lg">🇹🇷</span>
           </Link>
 
           {/* Desktop Navigation - Improved tablet spacing */}

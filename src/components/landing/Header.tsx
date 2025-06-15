@@ -33,10 +33,13 @@ const Header = () => {
     
     // Check if we're on the homepage
     if (window.location.pathname === '/') {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      // Small delay to ensure mobile menu closes first
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     } else {
       // Navigate to homepage with the section anchor
       navigate(`/#${id}`);

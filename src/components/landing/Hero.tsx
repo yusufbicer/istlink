@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Activity, GitMerge, Truck, Package, Users, Bell, FileText, CheckCircle, Clock, DollarSign, Ship, MapPin, Calendar } from 'lucide-react';
+import { MessageSquare, Activity, GitMerge, Truck, Package, Users, Bell, FileText, CheckCircle, Clock, DollarSign } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BundleistLogo from '@/components/common/BundleistLogo';
 import { useTranslation } from 'react-i18next';
@@ -76,282 +75,532 @@ const Hero = () => {
             </Button>
           </div>
         
-          <div className={`mt-3 md:mt-4 relative mx-auto max-w-6xl transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-            <div className="relative overflow-hidden rounded-lg shadow-2xl">
-              <div className="bg-gray-800 p-0.5 rounded-lg">
+          <div className={`mt-3 md:mt-4 relative mx-auto max-w-4xl transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+            <div className="relative overflow-hidden rounded-lg shadow-lg">
+              <div className="bg-slate-800 p-0.5 rounded-lg">
                 <div className="rounded-lg overflow-hidden bg-white border-0">
-                  <div className="relative bg-gray-100 px-3 pt-2 pb-1.5 flex items-center rounded-t-lg">
-                    <div className="flex space-x-1.5 absolute left-4">
-                      <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                  <div className="relative bg-slate-100 px-2 pt-1.5 pb-1 flex items-center rounded-t-lg">
+                    <div className="flex space-x-1 absolute left-3">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                     </div>
                     <div className="mx-auto">
-                      <div className="h-4 w-64 bg-gray-200 rounded-full"></div>
+                      <div className="h-3 w-48 bg-slate-200 rounded-full"></div>
                     </div>
                   </div>
                   
-                  {isMobile ? (
-                    <div className="bg-white text-gray-800 p-3">
-                      {/* Mobile Header */}
-                      <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-100">
+                   {isMobile ? (
+                    <div className="bg-white text-slate-800 p-3">
+                      {/* Logo, Navigation Icons, and User Controls */}
+                      <div className="flex items-center justify-between mb-1.5 py-1 bg-slate-50 rounded-lg border border-slate-200 px-2">
                         <div className="flex items-center">
-                          <BundleistLogo size="xs" showText={true} />
+                          <div className="w-8 h-8 flex items-center justify-center">
+                            <BundleistLogo size="xs" showText={false} />
+                          </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <Bell className="h-4 w-4 text-gray-600" />
-                          <div className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-xs text-white font-medium">M</div>
+                        
+                        <div className="flex space-x-3">
+                          <button className="flex flex-col items-center p-1.5 rounded-md bg-blue-600 text-white text-xs">
+                            📊
+                          </button>
+                          <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                            📦
+                          </button>
+                          <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                            🔗
+                          </button>
+                          <button className="flex flex-col items-center p-1.5 rounded-md hover:bg-slate-200 text-slate-600 transition-colors text-xs">
+                            👥
+                          </button>
                         </div>
-                      </div>
-
-                      {/* Welcome Section */}
-                      <div className="mb-3">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h2 className="text-lg font-bold text-gray-900">Welcome, Maria</h2>
-                          <span className="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">Pro</span>
-                        </div>
-                      </div>
-
-                      {/* Metric Cards */}
-                      <div className="grid grid-cols-2 gap-2 mb-4">
-                        <div className="bg-gradient-to-r from-red-400 to-red-500 p-3 rounded-lg text-white">
-                          <div className="text-xs opacity-90 mb-1">REVENUE</div>
-                          <div className="text-lg font-bold">$142,850</div>
-                        </div>
-                        <div className="bg-gradient-to-r from-green-400 to-green-500 p-3 rounded-lg text-white">
-                          <div className="text-xs opacity-90 mb-1">ORDERS</div>
-                          <div className="text-lg font-bold">847</div>
-                        </div>
-                        <div className="bg-gradient-to-r from-purple-400 to-purple-500 p-3 rounded-lg text-white">
-                          <div className="text-xs opacity-90 mb-1">PENDING</div>
-                          <div className="text-lg font-bold">23</div>
-                        </div>
-                        <div className="bg-gradient-to-r from-blue-400 to-blue-500 p-3 rounded-lg text-white">
-                          <div className="text-xs opacity-90 mb-1">SHIPMENTS</div>
-                          <div className="text-lg font-bold">156</div>
+                        
+                        <div className="flex items-center space-x-1">
+                          <div className="relative">
+                            <Bell className="h-3 w-3 text-slate-600" />
+                            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+                          </div>
+                          <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-700 font-medium">
+                            J
+                          </div>
                         </div>
                       </div>
-
-                      {/* Active Consolidation */}
-                      <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 mb-3">
-                        <div className="flex items-center mb-2">
-                          <GitMerge className="h-4 w-4 text-blue-600 mr-2" />
-                          <span className="text-sm font-semibold text-blue-800">Active Consolidations</span>
+                      
+                      {/* Live Activity Banner */}
+                      <div className="bg-gradient-to-r from-blue-50 to-slate-50 p-1.5 rounded-lg border border-blue-200 mb-1.5">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse mr-1.5"></div>
+                            <span className="text-xs font-medium text-blue-700">
+                              {i18n.language === 'tr' ? 'Canlı Konsolidasyon' : i18n.language === 'fr' ? 'Consolidation en Direct' : 'Live Consolidation'}
+                            </span>
+                          </div>
+                          <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
+                            {i18n.language === 'tr' ? 'Aktif' : i18n.language === 'fr' ? 'Actif' : 'Active'}
+                          </span>
                         </div>
-                        <div className="bg-white p-2 rounded border">
+                      </div>
+                      
+                      {/* Active Consolidation with Suppliers */}
+                      <div className="bg-slate-50 p-1.5 rounded-lg border border-slate-200 shadow-sm mb-1.5">
+                        <div className="flex justify-between items-center mb-1">
+                          <div className="flex items-center">
+                            <GitMerge className="h-2.5 w-2.5 text-slate-600 mr-1" />
+                            <span className="text-xs font-medium">IST-CON-2025-041</span>
+                          </div>
+                          <span className="text-xs bg-slate-100 text-slate-700 px-1 py-0.5 rounded-full font-medium">
+                            {i18n.language === 'tr' ? '%75 Dolu' : i18n.language === 'fr' ? '75% Plein' : '75% Full'}
+                          </span>
+                        </div>
+                        <div className="bg-white p-1.5 rounded border border-slate-200">
                           <div className="flex justify-between items-center mb-1">
-                            <span className="font-medium text-sm">istanbul-hamburg</span>
-                            <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded">Processing</span>
+                            <div>
+                              <div className="text-xs font-medium">Istanbul → Matadi</div>
+                              <div className="text-[10px] text-slate-600 font-medium">
+                                {i18n.language === 'tr' ? 'Kalkış: 15 Nis 2025' : i18n.language === 'fr' ? 'Départ: 15 Avr 2025' : 'Departure: Apr 15, 2025'}
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-xs font-medium text-slate-700">$47,850</div>
+                              <div className="text-[10px] text-slate-500">
+                                {i18n.language === 'tr' ? 'Toplam Değer' : i18n.language === 'fr' ? 'Valeur Totale' : 'Total Value'}
+                              </div>
+                            </div>
                           </div>
-                          <div className="text-xs text-gray-600 mb-1">Container: 40ft</div>
-                          <div className="text-xs text-gray-500">ETA: 15.08.2025</div>
+                          <div className="grid grid-cols-3 gap-1 text-center">
+                            <div className="text-[10px]">
+                              <div className="font-bold">28</div>
+                              <div className="text-slate-500">
+                                {i18n.language === 'tr' ? 'Sipariş' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
+                              </div>
+                            </div>
+                            <div className="text-[10px]">
+                              <div className="font-bold">4</div>
+                              <div className="text-slate-500">
+                                {i18n.language === 'tr' ? 'Tedarikçi' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
+                              </div>
+                            </div>
+                            <div className="text-[10px]">
+                              <div className="font-bold">75%</div>
+                              <div className="text-slate-500">
+                                {i18n.language === 'tr' ? 'Dolu' : i18n.language === 'fr' ? 'Rempli' : 'Filled'}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                      {/* Orders Waiting */}
-                      <div className="bg-orange-50 p-3 rounded-lg border border-orange-200 mb-3">
-                        <div className="flex items-center mb-2">
-                          <Package className="h-4 w-4 text-orange-600 mr-2" />
-                          <span className="text-sm font-semibold text-orange-800">Orders Awaiting</span>
-                        </div>
-                        <div className="bg-white p-2 rounded border">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="font-medium text-sm">textile-order-#4521</span>
-                            <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded">Ready</span>
+                      {/* Suppliers Overview */}
+                      <div className="bg-slate-50 p-1.5 rounded-lg border border-slate-200 shadow-sm mb-1.5">
+                        <div className="flex justify-between items-center mb-1">
+                          <div className="flex items-center">
+                            <Users className="h-2.5 w-2.5 text-slate-600 mr-1" />
+                            <span className="text-xs font-medium">
+                              {i18n.language === 'tr' ? 'Aktif Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs Actifs' : 'Active Suppliers'}
+                            </span>
                           </div>
-                          <div className="text-xs text-gray-600 mb-1">From: Bursa Supplier</div>
-                          <div className="text-xs text-gray-500">Value: $12,400</div>
+                        </div>
+                        <div className="space-y-0.5">
+                          <div className="bg-white p-1 rounded border border-slate-100 flex justify-between items-center">
+                            <div>
+                              <div className="text-xs font-medium">
+                                {i18n.language === 'tr' ? 'Tekstil Plus Ltd' : i18n.language === 'fr' ? 'Textile Plus Ltée' : 'Textile Plus Ltd'}
+                              </div>
+                              <div className="text-[9px] text-slate-500">
+                                {i18n.language === 'tr' ? '12 sipariş • $18,200' : i18n.language === 'fr' ? '12 commandes • $18,200' : '12 orders • $18,200'}
+                              </div>
+                            </div>
+                            <div className="flex items-center">
+                              <CheckCircle className="h-2.5 w-2.5 text-emerald-600 mr-0.5" />
+                              <span className="text-[9px] text-emerald-600">
+                                {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="bg-white p-1 rounded border border-slate-100 flex justify-between items-center">
+                            <div>
+                              <div className="text-xs font-medium">
+                                {i18n.language === 'tr' ? 'Makine Şirketi' : i18n.language === 'fr' ? 'Société de Machines' : 'Machinery Co'}
+                              </div>
+                              <div className="text-[9px] text-slate-500">
+                                {i18n.language === 'tr' ? '8 sipariş • $15,420' : i18n.language === 'fr' ? '8 commandes • $15,420' : '8 orders • $15,420'}
+                              </div>
+                            </div>
+                            <div className="flex items-center">
+                              <CheckCircle className="h-2.5 w-2.5 text-emerald-600 mr-0.5" />
+                              <span className="text-[9px] text-emerald-600">
+                                {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="bg-white p-1 rounded border border-slate-100 flex justify-between items-center">
+                            <div>
+                              <div className="text-xs font-medium">
+                                {i18n.language === 'tr' ? 'Oto Parça A.Ş.' : i18n.language === 'fr' ? 'Pièces Auto Inc' : 'Auto Parts Inc'}
+                              </div>
+                              <div className="text-[9px] text-slate-500">
+                                {i18n.language === 'tr' ? '5 sipariş • $9,630' : i18n.language === 'fr' ? '5 commandes • $9,630' : '5 orders • $9,630'}
+                              </div>
+                            </div>
+                            <div className="flex items-center">
+                              <Clock className="h-2.5 w-2.5 text-amber-500 mr-0.5" />
+                              <span className="text-[9px] text-amber-600">
+                                {i18n.language === 'tr' ? 'İşleniyor' : i18n.language === 'fr' ? 'Traitement' : 'Processing'}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="bg-white p-1 rounded border border-slate-100 flex justify-between items-center">
+                            <div>
+                              <div className="text-xs font-medium">
+                                {i18n.language === 'tr' ? 'Kimyasal Çözümler' : i18n.language === 'fr' ? 'Solutions Chimiques' : 'Chemical Solutions'}
+                              </div>
+                              <div className="text-[9px] text-slate-500">
+                                {i18n.language === 'tr' ? '3 sipariş • $4,600' : i18n.language === 'fr' ? '3 commandes • $4,600' : '3 orders • $4,600'}
+                              </div>
+                            </div>
+                            <div className="flex items-center">
+                              <CheckCircle className="h-2.5 w-2.5 text-emerald-600 mr-0.5" />
+                              <span className="text-[9px] text-emerald-600">
+                                {i18n.language === 'tr' ? 'Ödendi' : i18n.language === 'fr' ? 'Payé' : 'Paid'}
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-
-                      {/* Your Shipments */}
-                      <div className="bg-green-50 p-3 rounded-lg border border-green-200">
-                        <div className="flex items-center mb-2">
-                          <Ship className="h-4 w-4 text-green-600 mr-2" />
-                          <span className="text-sm font-semibold text-green-800">Recent Shipments</span>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="bg-white p-2 rounded border flex justify-between items-center">
-                            <div>
-                              <div className="font-medium text-xs">ankara-london</div>
-                              <div className="text-xs text-gray-500">Delivered</div>
-                            </div>
-                            <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">✓</span>
+                      
+                      {/* Recent Activities & Notifications */}
+                      <div className="bg-slate-50 rounded-lg border border-slate-200 p-1.5 shadow-sm">
+                        <div className="flex justify-between items-center mb-1">
+                          <div className="flex items-center">
+                            <Activity className="h-2.5 w-2.5 text-slate-600 mr-1" />
+                            <span className="text-xs font-medium">
+                              {i18n.language === 'tr' ? 'Son Aktiviteler' : i18n.language === 'fr' ? 'Activité Récente' : 'Recent Activity'}
+                            </span>
                           </div>
-                          <div className="bg-white p-2 rounded border flex justify-between items-center">
-                            <div>
-                              <div className="font-medium text-xs">izmir-paris</div>
-                              <div className="text-xs text-gray-500">In Transit</div>
+                          <span className="px-1 py-0.5 bg-amber-100 text-amber-700 text-[9px] rounded-full font-medium">
+                            {i18n.language === 'tr' ? '3 Yeni' : i18n.language === 'fr' ? '3 Nouveau' : '3 New'}
+                          </span>
+                        </div>
+                        <div className="space-y-0.5">
+                          <div className="bg-white p-1 rounded border border-slate-100 flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5"></div>
+                              <div>
+                                <div className="text-[10px] font-medium">
+                                  {i18n.language === 'tr' ? 'Ödeme alındı - Tekstil Plus' : i18n.language === 'fr' ? 'Paiement reçu - Textile Plus' : 'Payment received - Textile Plus'}
+                                </div>
+                                <div className="text-[9px] text-slate-500">
+                                  {i18n.language === 'tr' ? '2 dakika önce' : i18n.language === 'fr' ? 'Il y a 2 minutes' : '2 min ago'}
+                                </div>
+                              </div>
                             </div>
-                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">📦</span>
+                            <span className="text-[9px] text-emerald-600 font-medium">$18,200</span>
+                          </div>
+                          <div className="bg-white p-1 rounded border border-slate-100 flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></div>
+                              <div>
+                                <div className="text-[10px] font-medium">
+                                  {i18n.language === 'tr' ? 'Yeni sipariş eklendi' : i18n.language === 'fr' ? 'Nouvelle commande ajoutée' : 'New order added'}
+                                </div>
+                                <div className="text-[9px] text-slate-500">
+                                  {i18n.language === 'tr' ? '5 dakika önce' : i18n.language === 'fr' ? 'Il y a 5 minutes' : '5 min ago'}
+                                </div>
+                              </div>
+                            </div>
+                            <span className="text-[9px] text-slate-600 font-medium">+4 items</span>
+                          </div>
+                          <div className="bg-white p-1 rounded border border-slate-100 flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-1.5"></div>
+                              <div>
+                                <div className="text-[10px] font-medium">
+                                  {i18n.language === 'tr' ? 'Sevkiyat güncellendi' : i18n.language === 'fr' ? 'Expédition mise à jour' : 'Shipment updated'}
+                                </div>
+                                <div className="text-[9px] text-slate-500">
+                                  {i18n.language === 'tr' ? '12 dakika önce' : i18n.language === 'fr' ? 'Il y a 12 minutes' : '12 min ago'}
+                                </div>
+                              </div>
+                            </div>
+                            <span className="text-[9px] text-slate-600 font-medium">75% full</span>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    // Desktop Dashboard
-                    <div className="bg-white text-gray-800 p-4">
-                      {/* Header with Navigation - Made fully visible and more compact */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-4">
-                          <BundleistLogo size="sm" showText={true} />
-                          <div className="flex items-center space-x-1">
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-1">📊</span> Dashboard
-                            </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-1">📋</span> Orders
-                            </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-1">🔗</span> Consolidations
-                            </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-1">🚢</span> Shipments
-                            </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-1">👥</span> Suppliers
-                            </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-1">💳</span> Payments
-                            </button>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <Bell className="h-5 w-5 text-gray-600" />
-                          <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-sm text-white font-medium">M</div>
-                          <span className="text-sm text-gray-700">Sign Out</span>
-                        </div>
-                      </div>
-
-                      {/* Welcome Section - More compact */}
-                      <div className="mb-4">
-                        <div className="flex items-center gap-3 mb-1">
-                          <h1 className="text-xl font-bold text-gray-900">Welcome, Maria</h1>
-                          <span className="bg-blue-500 text-white text-sm px-3 py-1 rounded-full font-medium">Pro</span>
-                        </div>
-                      </div>
-
-                      {/* Metric Cards - More compact */}
-                      <div className="grid grid-cols-5 gap-3 mb-6">
-                        <div className="bg-gradient-to-r from-red-400 to-red-500 p-4 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-xs opacity-90 mb-1 font-medium">REVENUE</div>
-                            <div className="text-xl font-bold">$142,850</div>
-                          </div>
-                          <div className="absolute top-2 right-2 opacity-20">
-                            <DollarSign className="h-6 w-6" />
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-r from-green-400 to-green-500 p-4 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-xs opacity-90 mb-1 font-medium">ORDERS</div>
-                            <div className="text-xl font-bold">847</div>
-                          </div>
-                          <div className="absolute top-2 right-2 opacity-20">
-                            <Package className="h-6 w-6" />
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-r from-purple-400 to-purple-500 p-4 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-xs opacity-90 mb-1 font-medium">PENDING</div>
-                            <div className="text-xl font-bold">23</div>
-                          </div>
-                          <div className="absolute top-2 right-2 opacity-20">
-                            <Clock className="h-6 w-6" />
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-r from-blue-400 to-blue-500 p-4 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-xs opacity-90 mb-1 font-medium">SHIPMENTS</div>
-                            <div className="text-xl font-bold">156</div>
-                          </div>
-                          <div className="absolute top-2 right-2 opacity-20">
-                            <Ship className="h-6 w-6" />
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-r from-pink-400 to-pink-500 p-4 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-xs opacity-90 mb-1 font-medium">SUPPLIERS</div>
-                            <div className="text-xl font-bold">28</div>
-                          </div>
-                          <div className="absolute top-2 right-2 opacity-20">
-                            <Users className="h-6 w-6" />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Main Content Grid - More compact */}
-                      <div className="grid grid-cols-3 gap-4">
-                        {/* Active Consolidations */}
-                        <div className="bg-blue-50 p-3 rounded-xl border border-blue-200">
-                          <div className="flex items-center mb-2">
-                            <GitMerge className="h-4 w-4 text-blue-600 mr-2" />
-                            <span className="font-semibold text-blue-800 text-sm">Active Consolidations</span>
-                          </div>
-                          <div className="bg-white p-3 rounded-lg border border-blue-100">
-                            <div className="flex justify-between items-center mb-2">
-                              <span className="font-semibold text-sm">istanbul-hamburg</span>
-                              <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">Processing</span>
-                            </div>
-                            <div className="text-xs text-gray-600 mb-1">Container: 40ft Standard</div>
-                            <div className="text-xs text-gray-500 mb-2">ETA: 15.08.2025</div>
-                            <div className="grid grid-cols-2 gap-2 text-center text-xs">
-                              <div>
-                                <div className="font-semibold">78%</div>
-                                <div className="text-gray-500">Volume</div>
+                     // Desktop dashboard with creative consolidation view
+                     <div className="bg-white text-slate-800 p-3">
+                       <div className="flex items-center justify-between mb-2.5">
+                         <div className="flex items-center space-x-3">
+                           <BundleistLogo size="sm" showText={true} />
+                           <div className="flex items-center space-x-2">
+                              <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                                <span className="mr-1">📊</span>
+                                {i18n.language === 'tr' ? 'Dashboard' : i18n.language === 'fr' ? 'Tableau de bord' : 'Dashboard'}
+                              </button>
+                             <button className="text-slate-600 hover:text-slate-800 px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                               <span className="mr-1">📦</span>
+                               {i18n.language === 'tr' ? 'Siparişler' : i18n.language === 'fr' ? 'Commandes' : 'Orders'}
+                             </button>
+                             <button className="text-slate-600 hover:text-slate-800 px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                               <span className="mr-1">🔗</span>
+                               {i18n.language === 'tr' ? 'Konsolidasyonlar' : i18n.language === 'fr' ? 'Consolidations' : 'Consolidations'}
+                             </button>
+                             <button className="text-slate-600 hover:text-slate-800 px-3 py-1.5 rounded-md text-xs font-medium flex items-center">
+                               <span className="mr-1">👥</span>
+                               {i18n.language === 'tr' ? 'Tedarikçiler' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
+                             </button>
+                           </div>
+                         </div>
+                         <div className="flex items-center space-x-2">
+                           <div className="relative">
+                             <Bell className="h-4 w-4 text-slate-600" />
+                             <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                           </div>
+                           <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-sm text-slate-700 font-medium">
+                             J
+                           </div>
+                         </div>
+                       </div>
+                       
+                       {/* Live Activity Banner */}
+                       <div className="bg-gradient-to-r from-blue-50 to-slate-50 p-2 rounded-lg border border-blue-200 mb-2.5">
+                         <div className="flex items-center justify-between">
+                           <div className="flex items-center">
+                             <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse mr-2"></div>
+                              <span className="text-sm font-medium text-blue-700">
+                                {i18n.language === 'tr' ? 'Canlı Konsolidasyon Aktivitesi' : i18n.language === 'fr' ? 'Activité de Consolidation en Direct' : 'Live Consolidation Activity'}
+                              </span>
+                           </div>
+                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">
+                              IST-CON-2025-041 {i18n.language === 'tr' ? 'Aktif' : i18n.language === 'fr' ? 'Actif' : 'Active'}
+                            </span>
+                         </div>
+                       </div>
+                       
+                       <div className="grid grid-cols-12 gap-2">
+                         {/* Active Consolidation Overview */}
+                         <div className="col-span-8 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                           <div className="flex justify-between items-center mb-2">
+                             <div className="flex items-center">
+                               <GitMerge className="h-4 w-4 text-slate-600 mr-1.5" />
+                                <span className="font-medium text-slate-700 text-sm">
+                                  {i18n.language === 'tr' ? 'Aktif Konsolidasyon' : i18n.language === 'fr' ? 'Consolidation Active' : 'Active Consolidation'}: IST-CON-2025-041
+                                </span>
+                             </div>
+                              <span className="px-2 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-full font-medium">
+                                {i18n.language === 'tr' ? '%75 Dolu' : i18n.language === 'fr' ? '75% Plein' : '75% Filled'}
+                              </span>
+                           </div>
+                           
+                           <div className="bg-white p-2.5 rounded-lg border border-slate-100 mb-2">
+                             <div className="grid grid-cols-4 gap-3 mb-2.5">
+                               <div className="text-center">
+                                 <div className="text-lg font-bold text-slate-700">28</div>
+                                  <div className="text-xs text-slate-500">
+                                    {i18n.language === 'tr' ? 'Toplam Sipariş' : i18n.language === 'fr' ? 'Commandes Totales' : 'Total Orders'}
+                                  </div>
+                                </div>
+                                <div className="text-center">
+                                  <div className="text-lg font-bold text-slate-700">4</div>
+                                  <div className="text-xs text-slate-500">
+                                    {i18n.language === 'tr' ? 'Tedarikçi' : i18n.language === 'fr' ? 'Fournisseurs' : 'Suppliers'}
+                                  </div>
+                                </div>
+                                <div className="text-center">
+                                  <div className="text-lg font-bold text-slate-700">$47,850</div>
+                                  <div className="text-xs text-slate-500">
+                                    {i18n.language === 'tr' ? 'Toplam Değer' : i18n.language === 'fr' ? 'Valeur Totale' : 'Total Value'}
+                                  </div>
+                                </div>
+                                <div className="text-center">
+                                  <div className="text-lg font-bold text-slate-700">
+                                    {i18n.language === 'tr' ? '15 Nis' : i18n.language === 'fr' ? '15 Avr' : 'Apr 15'}
+                                  </div>
+                                  <div className="text-xs text-slate-500">
+                                    {i18n.language === 'tr' ? 'Kalkış' : i18n.language === 'fr' ? 'Départ' : 'Departure'}
+                                  </div>
+                               </div>
+                             </div>
+                             
+                             <div className="mb-2">
+                               <div className="flex justify-between text-xs mb-1">
+                                  <span className="text-slate-500">
+                                    {i18n.language === 'tr' ? 'Konteyner Alanı (40ft)' : i18n.language === 'fr' ? 'Espace Conteneur (40ft)' : 'Container Space (40ft)'}
+                                  </span>
+                                  <span className="font-medium">
+                                    {i18n.language === 'tr' ? '%75 Dolu' : i18n.language === 'fr' ? '75% Plein' : '75% Filled'}
+                                  </span>
+                               </div>
+                               <div className="w-full bg-slate-200 h-2 rounded-full">
+                                 <div className="bg-slate-600 h-full rounded-full" style={{width: '75%'}}></div>
+                               </div>
+                             </div>
+                             
+                             <div className="text-xs text-slate-600">
+                                <span className="font-medium">
+                                  {i18n.language === 'tr' ? 'Rota:' : i18n.language === 'fr' ? 'Route:' : 'Route:'}
+                                </span> {i18n.language === 'tr' ? 'İstanbul Depo → Matadi Limanı, DRC' : i18n.language === 'fr' ? 'Entrepôt Istanbul → Port de Matadi, RDC' : 'Istanbul Warehouse → Matadi Port, DRC'}
+                             </div>
+                           </div>
+                           
+                           {/* Suppliers in this consolidation */}
+                           <div className="grid grid-cols-2 gap-2">
+                              <div className="bg-white p-2 rounded-lg border border-slate-100">
+                                <div className="flex justify-between items-center mb-1">
+                                   <div className="font-medium text-xs">
+                                     {i18n.language === 'tr' ? 'Tekstil Plus Ltd' : i18n.language === 'fr' ? 'Textile Plus Ltée' : 'Textile Plus Ltd'}
+                                   </div>
+                                   <CheckCircle className="h-3 w-3 text-emerald-600" />
+                                 </div>
+                                <div className="text-xs text-slate-500 mb-1">
+                                  {i18n.language === 'tr' ? '12 sipariş • $18,200' : i18n.language === 'fr' ? '12 commandes • $18,200' : '12 orders • $18,200'}
+                                </div>
+                                <div className="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full inline-block">
+                                  {i18n.language === 'tr' ? 'Ödeme Tamamlandı' : i18n.language === 'fr' ? 'Paiement Terminé' : 'Payment Complete'}
+                                </div>
+                             </div>
+                             
+                              <div className="bg-white p-2 rounded-lg border border-slate-100">
+                                <div className="flex justify-between items-center mb-1">
+                                   <div className="font-medium text-xs">
+                                     {i18n.language === 'tr' ? 'Makine Şirketi' : i18n.language === 'fr' ? 'Société de Machines' : 'Machinery Co'}
+                                   </div>
+                                   <CheckCircle className="h-3 w-3 text-emerald-600" />
+                                 </div>
+                                <div className="text-xs text-slate-500 mb-1">
+                                  {i18n.language === 'tr' ? '8 sipariş • $15,420' : i18n.language === 'fr' ? '8 commandes • $15,420' : '8 orders • $15,420'}
+                                </div>
+                                <div className="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full inline-block">
+                                  {i18n.language === 'tr' ? 'Ödeme Tamamlandı' : i18n.language === 'fr' ? 'Paiement Terminé' : 'Payment Complete'}
+                                </div>
+                             </div>
+                             
+                              <div className="bg-white p-2 rounded-lg border border-slate-100">
+                                <div className="flex justify-between items-center mb-1">
+                                   <div className="font-medium text-xs">
+                                     {i18n.language === 'tr' ? 'Oto Parça A.Ş.' : i18n.language === 'fr' ? 'Pièces Auto Inc' : 'Auto Parts Inc'}
+                                   </div>
+                                   <Clock className="h-3 w-3 text-amber-500" />
+                                 </div>
+                                <div className="text-xs text-slate-500 mb-1">
+                                  {i18n.language === 'tr' ? '5 sipariş • $9,630' : i18n.language === 'fr' ? '5 commandes • $9,630' : '5 orders • $9,630'}
+                                </div>
+                                <div className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full inline-block">
+                                  {i18n.language === 'tr' ? 'Ödeme İşleniyor' : i18n.language === 'fr' ? 'Traitement du Paiement' : 'Processing Payment'}
+                                </div>
+                             </div>
+                             
+                              <div className="bg-white p-2 rounded-lg border border-slate-100">
+                                <div className="flex justify-between items-center mb-1">
+                                   <div className="font-medium text-xs">
+                                     {i18n.language === 'tr' ? 'Kimyasal Çözümler' : i18n.language === 'fr' ? 'Solutions Chimiques' : 'Chemical Solutions'}
+                                   </div>
+                                   <CheckCircle className="h-3 w-3 text-emerald-600" />
+                                 </div>
+                                <div className="text-xs text-slate-500 mb-1">
+                                  {i18n.language === 'tr' ? '3 sipariş • $4,600' : i18n.language === 'fr' ? '3 commandes • $4,600' : '3 orders • $4,600'}
+                                </div>
+                                <div className="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full inline-block">
+                                  {i18n.language === 'tr' ? 'Ödeme Tamamlandı' : i18n.language === 'fr' ? 'Paiement Terminé' : 'Payment Complete'}
+                                </div>
+                             </div>
+                           </div>
+                         </div>
+                         
+                         {/* Recent Activity & Notifications */}
+                         <div className="col-span-4 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                           <div className="flex justify-between items-center mb-2">
+                             <div className="flex items-center">
+                               <Activity className="h-3 w-3 text-blue-600 mr-1.5" />
+                                <span className="font-medium text-slate-700 text-sm">
+                                  {i18n.language === 'tr' ? 'Canlı Aktivite' : i18n.language === 'fr' ? 'Activité en Direct' : 'Live Activity'}
+                                </span>
                               </div>
-                              <div>
-                                <div className="font-semibold">82%</div>
-                                <div className="text-gray-500">Weight</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Orders Awaiting Consolidation */}
-                        <div className="bg-orange-50 p-3 rounded-xl border border-orange-200">
-                          <div className="flex items-center mb-2">
-                            <Package className="h-4 w-4 text-orange-600 mr-2" />
-                            <span className="font-semibold text-orange-800 text-sm">Orders Awaiting</span>
-                          </div>
-                          <div className="bg-white p-3 rounded-lg border border-orange-100">
-                            <div className="flex justify-between items-center mb-2">
-                              <span className="font-semibold text-sm">textile-order-#4521</span>
-                              <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">Ready</span>
-                            </div>
-                            <div className="text-xs text-gray-600 mb-1">Supplier: Bursa Textiles Co.</div>
-                            <div className="text-xs text-gray-500 mb-2">Value: $12,400</div>
-                            <div className="text-xs text-blue-600 cursor-pointer hover:underline">Add to Consolidation →</div>
-                          </div>
-                        </div>
-
-                        {/* Your Shipments */}
-                        <div className="bg-green-50 p-3 rounded-xl border border-green-200">
-                          <div className="flex items-center mb-2">
-                            <Ship className="h-4 w-4 text-green-600 mr-2" />
-                            <span className="font-semibold text-green-800 text-sm">Recent Shipments</span>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="bg-white p-2 rounded-lg border border-green-100">
-                              <div className="flex justify-between items-center mb-1">
-                                <span className="font-semibold text-sm">ankara-london</span>
-                                <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Delivered</span>
-                              </div>
-                              <div className="text-xs text-gray-600 mb-1">Carrier: Maersk Line</div>
-                              <div className="text-xs text-gray-500">Delivered: 12.07.2025</div>
-                            </div>
-                            <div className="bg-white p-2 rounded-lg border border-green-100">
-                              <div className="flex justify-between items-center mb-1">
-                                <span className="font-semibold text-sm">izmir-paris</span>
-                                <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">In Transit</span>
-                              </div>
-                              <div className="text-xs text-gray-600 mb-1">Carrier: CMA CGM</div>
-                              <div className="text-xs text-gray-500">ETA: 18.08.2025</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                              <span className="px-1.5 py-0.5 bg-amber-100 text-amber-700 text-xs rounded-full font-medium">
+                                {i18n.language === 'tr' ? '5 Yeni' : i18n.language === 'fr' ? '5 Nouveau' : '5 New'}
+                              </span>
+                           </div>
+                           
+                           <div className="space-y-1.5">
+                             <div className="bg-white p-2 rounded-lg border border-slate-100">
+                               <div className="flex items-center mb-0.5">
+                                 <FileText className="h-3 w-3 text-emerald-600 mr-1.5" />
+                                  <span className="text-xs font-medium">
+                                    {i18n.language === 'tr' ? 'BOL Oluşturuldu' : i18n.language === 'fr' ? 'BOL Généré' : 'BOL Generated'}
+                                  </span>
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                  {i18n.language === 'tr' ? 'Konişmento #BL-041-2025 oluşturuldu' : i18n.language === 'fr' ? 'Connaissement #BL-041-2025 créé' : 'Bill of Lading #BL-041-2025 created'}
+                                </div>
+                                <div className="text-xs text-slate-400 mt-0.5">
+                                  {i18n.language === 'tr' ? '3 saat önce' : i18n.language === 'fr' ? 'Il y a 3 heures' : '3 hours ago'}
+                                </div>
+                             </div>
+                             
+                             <div className="bg-white p-2 rounded-lg border border-slate-100">
+                               <div className="flex items-center mb-0.5">
+                                 <DollarSign className="h-3 w-3 text-blue-600 mr-1.5" />
+                                  <span className="text-xs font-medium">
+                                    {i18n.language === 'tr' ? 'Ödeme İşlendi' : i18n.language === 'fr' ? 'Paiement Traité' : 'Payment Processed'}
+                                  </span>
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                  {i18n.language === 'tr' ? '$18,200 Tekstil Plus Ltd\'ye' : i18n.language === 'fr' ? '$18,200 à Textile Plus Ltée' : '$18,200 to Textile Plus Ltd'}
+                                </div>
+                                <div className="text-xs text-slate-400 mt-0.5">
+                                  {i18n.language === 'tr' ? '8 saat önce' : i18n.language === 'fr' ? 'Il y a 8 heures' : '8 hours ago'}
+                                </div>
+                             </div>
+                             
+                             <div className="bg-white p-2 rounded-lg border border-slate-100">
+                               <div className="flex items-center mb-0.5">
+                                 <Package className="h-3 w-3 text-slate-600 mr-1.5" />
+                                  <span className="text-xs font-medium">
+                                    {i18n.language === 'tr' ? 'Yeni Siparişler Eklendi' : i18n.language === 'fr' ? 'Nouvelles Commandes Ajoutées' : 'New Orders Added'}
+                                  </span>
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                  {i18n.language === 'tr' ? 'Oto Parça A.Ş.\'den 5 sipariş' : i18n.language === 'fr' ? '5 commandes de Pièces Auto Inc' : '5 orders from Auto Parts Inc'}
+                                </div>
+                                <div className="text-xs text-slate-400 mt-0.5">
+                                  {i18n.language === 'tr' ? '2 gün önce' : i18n.language === 'fr' ? 'Il y a 2 jours' : '2 days ago'}
+                                </div>
+                             </div>
+                             
+                             <div className="bg-white p-2 rounded-lg border border-slate-100">
+                               <div className="flex items-center mb-0.5">
+                                 <CheckCircle className="h-3 w-3 text-emerald-600 mr-1.5" />
+                                  <span className="text-xs font-medium">
+                                    {i18n.language === 'tr' ? 'Belgeler Tamamlandı' : i18n.language === 'fr' ? 'Documentation Complète' : 'Documentation Complete'}
+                                  </span>
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                  {i18n.language === 'tr' ? 'Tüm ihracat belgeleri doğrulandı' : i18n.language === 'fr' ? 'Tous les docs d\'export vérifiés' : 'All export docs verified'}
+                                </div>
+                                <div className="text-xs text-slate-400 mt-0.5">
+                                  {i18n.language === 'tr' ? '1 hafta önce' : i18n.language === 'fr' ? 'Il y a 1 semaine' : '1 week ago'}
+                                </div>
+                             </div>
+                             
+                             <div className="bg-white p-2 rounded-lg border border-slate-100">
+                               <div className="flex items-center mb-0.5">
+                                 <Truck className="h-3 w-3 text-amber-600 mr-1.5" />
+                                  <span className="text-xs font-medium">
+                                    {i18n.language === 'tr' ? 'Depoya Varış' : i18n.language === 'fr' ? 'Arrivée Entrepôt' : 'Warehouse Arrival'}
+                                  </span>
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                  {i18n.language === 'tr' ? 'Makine Şirketi\'nden 12 paket' : i18n.language === 'fr' ? '12 colis de Société de Machines' : '12 packages from Machinery Co'}
+                                </div>
+                                <div className="text-xs text-slate-400 mt-0.5">
+                                  {i18n.language === 'tr' ? '3 hafta önce' : i18n.language === 'fr' ? 'Il y a 3 semaines' : '3 weeks ago'}
+                                </div>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
                   )}
                 </div>
               </div>

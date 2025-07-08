@@ -76,7 +76,7 @@ const Hero = () => {
             </Button>
           </div>
         
-          <div className={`mt-3 md:mt-4 relative mx-auto max-w-7xl transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+          <div className={`mt-3 md:mt-4 relative mx-auto max-w-6xl transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
             <div className="relative overflow-hidden rounded-lg shadow-2xl">
               <div className="bg-gray-800 p-0.5 rounded-lg">
                 <div className="rounded-lg overflow-hidden bg-white border-0">
@@ -100,36 +100,35 @@ const Hero = () => {
                         </div>
                         <div className="flex items-center space-x-2">
                           <Bell className="h-4 w-4 text-gray-600" />
-                          <div className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-xs text-white font-medium">E</div>
+                          <div className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-xs text-white font-medium">M</div>
                         </div>
                       </div>
 
                       {/* Welcome Section */}
                       <div className="mb-3">
                         <div className="flex items-center gap-2 mb-1">
-                          <h2 className="text-lg font-bold text-gray-900">Welcome, Eric Robert</h2>
-                          <span className="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">Growth</span>
+                          <h2 className="text-lg font-bold text-gray-900">Welcome, Maria</h2>
+                          <span className="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">Pro</span>
                         </div>
-                        <p className="text-sm text-gray-600">Here's a quick summary of your account</p>
                       </div>
 
                       {/* Metric Cards */}
                       <div className="grid grid-cols-2 gap-2 mb-4">
                         <div className="bg-gradient-to-r from-red-400 to-red-500 p-3 rounded-lg text-white">
-                          <div className="text-xs opacity-90 mb-1">BALANCE</div>
-                          <div className="text-lg font-bold">$-58,604.19</div>
+                          <div className="text-xs opacity-90 mb-1">REVENUE</div>
+                          <div className="text-lg font-bold">$142,850</div>
                         </div>
                         <div className="bg-gradient-to-r from-green-400 to-green-500 p-3 rounded-lg text-white">
-                          <div className="text-xs opacity-90 mb-1">SHIPMENTS</div>
-                          <div className="text-lg font-bold">4</div>
+                          <div className="text-xs opacity-90 mb-1">ORDERS</div>
+                          <div className="text-lg font-bold">847</div>
                         </div>
                         <div className="bg-gradient-to-r from-purple-400 to-purple-500 p-3 rounded-lg text-white">
-                          <div className="text-xs opacity-90 mb-1">ORDERS IN PROGRESS</div>
-                          <div className="text-lg font-bold">4</div>
+                          <div className="text-xs opacity-90 mb-1">PENDING</div>
+                          <div className="text-lg font-bold">23</div>
                         </div>
                         <div className="bg-gradient-to-r from-blue-400 to-blue-500 p-3 rounded-lg text-white">
-                          <div className="text-xs opacity-90 mb-1">ACTIVE CONSOLIDATIONS</div>
-                          <div className="text-lg font-bold">1</div>
+                          <div className="text-xs opacity-90 mb-1">SHIPMENTS</div>
+                          <div className="text-lg font-bold">156</div>
                         </div>
                       </div>
 
@@ -141,11 +140,27 @@ const Hero = () => {
                         </div>
                         <div className="bg-white p-2 rounded border">
                           <div className="flex justify-between items-center mb-1">
-                            <span className="font-medium text-sm">sezy</span>
-                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">Planning</span>
+                            <span className="font-medium text-sm">istanbul-hamburg</span>
+                            <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded">Processing</span>
                           </div>
-                          <div className="text-xs text-gray-600 mb-1">ist-boston</div>
-                          <div className="text-xs text-gray-500">Departs: 10.08.2025</div>
+                          <div className="text-xs text-gray-600 mb-1">Container: 40ft</div>
+                          <div className="text-xs text-gray-500">ETA: 15.08.2025</div>
+                        </div>
+                      </div>
+
+                      {/* Orders Waiting */}
+                      <div className="bg-orange-50 p-3 rounded-lg border border-orange-200 mb-3">
+                        <div className="flex items-center mb-2">
+                          <Package className="h-4 w-4 text-orange-600 mr-2" />
+                          <span className="text-sm font-semibold text-orange-800">Orders Awaiting</span>
+                        </div>
+                        <div className="bg-white p-2 rounded border">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="font-medium text-sm">textile-order-#4521</span>
+                            <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded">Ready</span>
+                          </div>
+                          <div className="text-xs text-gray-600 mb-1">From: Bursa Supplier</div>
+                          <div className="text-xs text-gray-500">Value: $12,400</div>
                         </div>
                       </div>
 
@@ -153,204 +168,185 @@ const Hero = () => {
                       <div className="bg-green-50 p-3 rounded-lg border border-green-200">
                         <div className="flex items-center mb-2">
                           <Ship className="h-4 w-4 text-green-600 mr-2" />
-                          <span className="text-sm font-semibold text-green-800">Your Shipments</span>
+                          <span className="text-sm font-semibold text-green-800">Recent Shipments</span>
                         </div>
                         <div className="space-y-2">
                           <div className="bg-white p-2 rounded border flex justify-between items-center">
                             <div>
-                              <div className="font-medium text-xs">newy</div>
+                              <div className="font-medium text-xs">ankara-london</div>
                               <div className="text-xs text-gray-500">Delivered</div>
                             </div>
-                            <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">Track →</span>
+                            <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">✓</span>
                           </div>
                           <div className="bg-white p-2 rounded border flex justify-between items-center">
                             <div>
-                              <div className="font-medium text-xs">slimx</div>
-                              <div className="text-xs text-gray-500">Delivered</div>
+                              <div className="font-medium text-xs">izmir-paris</div>
+                              <div className="text-xs text-gray-500">In Transit</div>
                             </div>
-                            <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">Track →</span>
+                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">📦</span>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
                     // Desktop Dashboard
-                    <div className="bg-white text-gray-800 p-6">
-                      {/* Header with Navigation */}
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center space-x-6">
+                    <div className="bg-white text-gray-800 p-4">
+                      {/* Header with Navigation - Made fully visible and more compact */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-4">
                           <BundleistLogo size="sm" showText={true} />
                           <div className="flex items-center space-x-1">
-                            <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-2">📊</span> Dashboard
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-1">📊</span> Dashboard
                             </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-2">📋</span> Orders
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-1">📋</span> Orders
                             </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-2">🔗</span> Consolidations
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-1">🔗</span> Consolidations
                             </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-2">🚢</span> Shipments
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-1">🚢</span> Shipments
                             </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-2">👥</span> Suppliers
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-1">👥</span> Suppliers
                             </button>
-                            <button className="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-lg text-sm font-medium flex items-center">
-                              <span className="mr-2">💳</span> Payments
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-1">💳</span> Payments
                             </button>
                           </div>
                         </div>
                         <div className="flex items-center space-x-3">
                           <Bell className="h-5 w-5 text-gray-600" />
-                          <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-sm text-white font-medium">E</div>
+                          <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-sm text-white font-medium">M</div>
                           <span className="text-sm text-gray-700">Sign Out</span>
                         </div>
                       </div>
 
-                      {/* Welcome Section */}
-                      <div className="mb-6">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h1 className="text-2xl font-bold text-gray-900">Welcome, Eric Robert</h1>
-                          <span className="bg-blue-500 text-white text-sm px-3 py-1 rounded-full font-medium">Growth</span>
-                        </div>
-                        <p className="text-gray-600">Here's a quick summary of your account</p>
-                      </div>
-
-                      {/* Metric Cards */}
-                      <div className="grid grid-cols-5 gap-4 mb-8">
-                        <div className="bg-gradient-to-r from-red-400 to-red-500 p-6 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-sm opacity-90 mb-2 font-medium">BALANCE</div>
-                            <div className="text-2xl font-bold">$-58,604.19</div>
-                          </div>
-                          <div className="absolute top-3 right-3 opacity-20">
-                            <DollarSign className="h-8 w-8" />
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-r from-green-400 to-green-500 p-6 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-sm opacity-90 mb-2 font-medium">SHIPMENTS</div>
-                            <div className="text-2xl font-bold">4</div>
-                          </div>
-                          <div className="absolute top-3 right-3 opacity-20">
-                            <Ship className="h-8 w-8" />
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-r from-purple-400 to-purple-500 p-6 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-sm opacity-90 mb-2 font-medium">ORDERS IN PROGRESS</div>
-                            <div className="text-2xl font-bold">4</div>
-                          </div>
-                          <div className="absolute top-3 right-3 opacity-20">
-                            <Package className="h-8 w-8" />
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-r from-blue-400 to-blue-500 p-6 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-sm opacity-90 mb-2 font-medium">ACTIVE CONSOLIDATIONS</div>
-                            <div className="text-2xl font-bold">1</div>
-                          </div>
-                          <div className="absolute top-3 right-3 opacity-20">
-                            <GitMerge className="h-8 w-8" />
-                          </div>
-                        </div>
-                        <div className="bg-gradient-to-r from-pink-400 to-pink-500 p-6 rounded-xl text-white relative overflow-hidden">
-                          <div className="relative z-10">
-                            <div className="text-sm opacity-90 mb-2 font-medium">SUPPLIERS</div>
-                            <div className="text-2xl font-bold">3</div>
-                          </div>
-                          <div className="absolute top-3 right-3 opacity-20">
-                            <Users className="h-8 w-8" />
-                          </div>
+                      {/* Welcome Section - More compact */}
+                      <div className="mb-4">
+                        <div className="flex items-center gap-3 mb-1">
+                          <h1 className="text-xl font-bold text-gray-900">Welcome, Maria</h1>
+                          <span className="bg-blue-500 text-white text-sm px-3 py-1 rounded-full font-medium">Pro</span>
                         </div>
                       </div>
 
-                      {/* Main Content Grid */}
-                      <div className="grid grid-cols-3 gap-6">
+                      {/* Metric Cards - More compact */}
+                      <div className="grid grid-cols-5 gap-3 mb-6">
+                        <div className="bg-gradient-to-r from-red-400 to-red-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">REVENUE</div>
+                            <div className="text-xl font-bold">$142,850</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <DollarSign className="h-6 w-6" />
+                          </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-green-400 to-green-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">ORDERS</div>
+                            <div className="text-xl font-bold">847</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <Package className="h-6 w-6" />
+                          </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-purple-400 to-purple-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">PENDING</div>
+                            <div className="text-xl font-bold">23</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <Clock className="h-6 w-6" />
+                          </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-blue-400 to-blue-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">SHIPMENTS</div>
+                            <div className="text-xl font-bold">156</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <Ship className="h-6 w-6" />
+                          </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-pink-400 to-pink-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">SUPPLIERS</div>
+                            <div className="text-xl font-bold">28</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <Users className="h-6 w-6" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Main Content Grid - More compact */}
+                      <div className="grid grid-cols-3 gap-4">
                         {/* Active Consolidations */}
-                        <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-                          <div className="flex items-center mb-3">
-                            <GitMerge className="h-5 w-5 text-blue-600 mr-2" />
-                            <span className="font-semibold text-blue-800">Active Consolidations</span>
+                        <div className="bg-blue-50 p-3 rounded-xl border border-blue-200">
+                          <div className="flex items-center mb-2">
+                            <GitMerge className="h-4 w-4 text-blue-600 mr-2" />
+                            <span className="font-semibold text-blue-800 text-sm">Active Consolidations</span>
                           </div>
-                          <div className="bg-white p-4 rounded-lg border border-blue-100">
-                            <div className="flex justify-between items-center mb-3">
-                              <span className="font-semibold">sezy</span>
-                              <span className="text-sm bg-orange-100 text-orange-700 px-2 py-1 rounded-full">Planning</span>
+                          <div className="bg-white p-3 rounded-lg border border-blue-100">
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="font-semibold text-sm">istanbul-hamburg</span>
+                              <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">Processing</span>
                             </div>
-                            <div className="text-sm text-gray-600 mb-1">ist-boston</div>
-                            <div className="text-sm text-gray-500 mb-3">Departs: 10.08.2025</div>
-                            <div className="grid grid-cols-2 gap-4 text-center text-sm">
+                            <div className="text-xs text-gray-600 mb-1">Container: 40ft Standard</div>
+                            <div className="text-xs text-gray-500 mb-2">ETA: 15.08.2025</div>
+                            <div className="grid grid-cols-2 gap-2 text-center text-xs">
                               <div>
-                                <div className="font-semibold">0.0%</div>
+                                <div className="font-semibold">78%</div>
                                 <div className="text-gray-500">Volume</div>
                               </div>
                               <div>
-                                <div className="font-semibold">0.0%</div>
+                                <div className="font-semibold">82%</div>
                                 <div className="text-gray-500">Weight</div>
                               </div>
                             </div>
-                            <div className="text-xs text-gray-400 mt-2">Container: 40ft Standard</div>
                           </div>
                         </div>
 
                         {/* Orders Awaiting Consolidation */}
-                        <div className="bg-orange-50 p-4 rounded-xl border border-orange-200">
-                          <div className="flex items-center mb-3">
-                            <Package className="h-5 w-5 text-orange-600 mr-2" />
-                            <span className="font-semibold text-orange-800">Orders Awaiting Consolidation</span>
+                        <div className="bg-orange-50 p-3 rounded-xl border border-orange-200">
+                          <div className="flex items-center mb-2">
+                            <Package className="h-4 w-4 text-orange-600 mr-2" />
+                            <span className="font-semibold text-orange-800 text-sm">Orders Awaiting</span>
                           </div>
-                          <div className="flex items-center justify-center h-32 text-gray-400">
-                            <div className="text-center">
-                              <Package className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                              <p className="text-sm">No pending orders</p>
+                          <div className="bg-white p-3 rounded-lg border border-orange-100">
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="font-semibold text-sm">textile-order-#4521</span>
+                              <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">Ready</span>
                             </div>
+                            <div className="text-xs text-gray-600 mb-1">Supplier: Bursa Textiles Co.</div>
+                            <div className="text-xs text-gray-500 mb-2">Value: $12,400</div>
+                            <div className="text-xs text-blue-600 cursor-pointer hover:underline">Add to Consolidation →</div>
                           </div>
                         </div>
 
                         {/* Your Shipments */}
-                        <div className="bg-green-50 p-4 rounded-xl border border-green-200">
-                          <div className="flex items-center mb-3">
-                            <Ship className="h-5 w-5 text-green-600 mr-2" />
-                            <span className="font-semibold text-green-800">Your Shipments</span>
+                        <div className="bg-green-50 p-3 rounded-xl border border-green-200">
+                          <div className="flex items-center mb-2">
+                            <Ship className="h-4 w-4 text-green-600 mr-2" />
+                            <span className="font-semibold text-green-800 text-sm">Recent Shipments</span>
                           </div>
-                          <div className="space-y-3">
-                            <div className="bg-white p-3 rounded-lg border border-green-100">
-                              <div className="flex justify-between items-center mb-2">
-                                <span className="font-semibold text-sm">Consolidation: newy</span>
+                          <div className="space-y-2">
+                            <div className="bg-white p-2 rounded-lg border border-green-100">
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="font-semibold text-sm">ankara-london</span>
                                 <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Delivered</span>
                               </div>
-                              <div className="text-xs text-gray-600 mb-1">Carrier: maersk</div>
-                              <div className="text-xs text-gray-500 mb-2">Shipped: 08.07.2025</div>
-                              <div className="flex justify-between">
-                                <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded">Track Shipment →</span>
-                                <span className="text-xs text-gray-600">Consolidated Shipment</span>
-                              </div>
+                              <div className="text-xs text-gray-600 mb-1">Carrier: Maersk Line</div>
+                              <div className="text-xs text-gray-500">Delivered: 12.07.2025</div>
                             </div>
-                            <div className="bg-white p-3 rounded-lg border border-green-100">
-                              <div className="flex justify-between items-center mb-2">
-                                <span className="font-semibold text-sm">Consolidation: slimx</span>
-                                <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Delivered</span>
+                            <div className="bg-white p-2 rounded-lg border border-green-100">
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="font-semibold text-sm">izmir-paris</span>
+                                <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">In Transit</span>
                               </div>
-                              <div className="text-xs text-gray-600 mb-1">Carrier: msc</div>
-                              <div className="text-xs text-gray-500 mb-2">Shipped: 07.07.2025</div>
-                              <div className="flex justify-between">
-                                <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded">Track Shipment →</span>
-                                <span className="text-xs text-gray-600">Consolidated Shipment</span>
-                              </div>
-                            </div>
-                            <div className="bg-white p-3 rounded-lg border border-green-100">
-                              <div className="flex justify-between items-center mb-2">
-                                <span className="font-semibold text-sm">Consolidation: mbxy</span>
-                                <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Delivered</span>
-                              </div>
-                              <div className="text-xs text-gray-600 mb-1">Carrier: msc</div>
-                              <div className="text-xs text-gray-500 mb-2">Shipped: 08.07.2025</div>
-                              <div className="flex justify-between">
-                                <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded">Track Shipment →</span>
-                                <span className="text-xs text-gray-600">Consolidated Shipment</span>
-                              </div>
+                              <div className="text-xs text-gray-600 mb-1">Carrier: CMA CGM</div>
+                              <div className="text-xs text-gray-500">ETA: 18.08.2025</div>
                             </div>
                           </div>
                         </div>

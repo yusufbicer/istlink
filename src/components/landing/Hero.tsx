@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { MessageSquare, TrendingUp, Package, Truck, Users, Settings, Search, Bell, ChevronDown } from 'lucide-react';
+import { MessageSquare, Activity, GitMerge, Truck, Package, Users, Bell, FileText, CheckCircle, Clock, DollarSign, Ship, MapPin, Calendar } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BundleistLogo from '@/components/common/BundleistLogo';
 import { useTranslation } from 'react-i18next';
@@ -76,219 +76,283 @@ const Hero = () => {
             </Button>
           </div>
         
-          <div className={`mt-6 md:mt-8 relative mx-auto max-w-5xl transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-            <div className="relative overflow-hidden rounded-xl shadow-2xl border border-gray-200/50">
-              <div className="bg-white p-0 rounded-xl">
-                {/* Modern Dashboard Design */}
-                <div className="bg-white text-slate-800">
-                  {/* Top Navigation Bar */}
-                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-white">
-                    <div className="flex items-center space-x-6">
-                      <BundleistLogo size="sm" showText={true} />
-                      <nav className="hidden md:flex items-center space-x-1">
-                        <button className="px-3 py-1.5 text-sm font-medium text-white bg-emerald-500 rounded-lg flex items-center space-x-2">
-                          <span>🏠</span>
-                          <span>Dashboard</span>
-                        </button>
-                        <button className="px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg flex items-center space-x-2">
-                          <span>📦</span>
-                          <span>Orders</span>
-                        </button>
-                        <button className="px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg flex items-center space-x-2">
-                          <span>🔗</span>
-                          <span>Consolidations</span>
-                        </button>
-                      </nav>
+          <div className={`mt-3 md:mt-4 relative mx-auto max-w-7xl transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+            <div className="relative overflow-hidden rounded-lg shadow-2xl">
+              <div className="bg-gray-800 p-0.5 rounded-lg">
+                <div className="rounded-lg overflow-hidden bg-white border-0">
+                  <div className="relative bg-gray-100 px-3 pt-2 pb-1.5 flex items-center rounded-t-lg">
+                    <div className="flex space-x-1.5 absolute left-4">
+                      <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-400"></div>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="relative">
-                        <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 h-3.5 w-3.5 text-gray-400" />
-                        <input
-                          type="text"
-                          placeholder="Search..."
-                          className="pl-8 pr-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        />
-                      </div>
-                      <div className="relative">
-                        <Bell className="h-4 w-4 text-gray-600" />
-                        <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full flex items-center justify-center">
-                          <span className="text-xs text-white font-bold">3</span>
-                        </div>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-medium">
-                        JD
-                      </div>
+                    <div className="mx-auto">
+                      <div className="h-4 w-64 bg-gray-200 rounded-full"></div>
                     </div>
                   </div>
+                  
+                  {isMobile ? (
+                    <div className="bg-white text-gray-800 p-3">
+                      {/* Mobile Header */}
+                      <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-100">
+                        <div className="flex items-center">
+                          <BundleistLogo size="xs" showText={true} />
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Bell className="h-4 w-4 text-gray-600" />
+                          <div className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-xs text-white font-medium">J</div>
+                        </div>
+                      </div>
 
-                  {/* Welcome Section */}
-                  <div className="px-4 py-2.5 bg-gradient-to-r from-blue-50 to-indigo-50">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h1 className="text-lg font-bold text-gray-900">Welcome, John Doe - Batch #A247</h1>
-                        <p className="text-gray-600 mt-0.5 text-sm">Here's what's happening with your shipments today.</p>
+                      {/* Welcome Section */}
+                      <div className="mb-3">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h2 className="text-lg font-bold text-gray-900">Welcome, John Smith</h2>
+                          <span className="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">Pro</span>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  {/* Stats Cards */}
-                  <div className="px-4 py-3">
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
-                      <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-2.5 rounded-xl text-white">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-medium opacity-90">BALANCE</span>
-                          <div className="w-2 h-2 bg-white rounded-full opacity-60"></div>
+                      {/* Metric Cards */}
+                      <div className="grid grid-cols-2 gap-2 mb-4">
+                        <div className="bg-gradient-to-r from-emerald-400 to-emerald-500 p-3 rounded-lg text-white">
+                          <div className="text-xs opacity-90 mb-1">REVENUE</div>
+                          <div className="text-lg font-bold">$124,680</div>
                         </div>
-                        <div className="text-lg font-bold">$145,340.50</div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-2.5 rounded-xl text-white">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-medium opacity-90">SHIPMENTS</span>
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                        <div className="bg-gradient-to-r from-blue-400 to-blue-500 p-3 rounded-lg text-white">
+                          <div className="text-xs opacity-90 mb-1">ORDERS</div>
+                          <div className="text-lg font-bold">387</div>
                         </div>
-                        <div className="text-lg font-bold">2</div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-2.5 rounded-xl text-white">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-medium opacity-90">ORDERS IN PROGRESS</span>
-                          <div className="w-2 h-2 bg-white rounded-full opacity-60"></div>
+                        <div className="bg-gradient-to-r from-purple-400 to-purple-500 p-3 rounded-lg text-white">
+                          <div className="text-xs opacity-90 mb-1">PENDING</div>
+                          <div className="text-lg font-bold">12</div>
                         </div>
-                        <div className="text-lg font-bold">6</div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-2.5 rounded-xl text-white">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-medium opacity-90">ACTIVE CONSOLIDATIONS</span>
-                          <div className="w-2 h-2 bg-white rounded-full opacity-60"></div>
+                        <div className="bg-gradient-to-r from-orange-400 to-orange-500 p-3 rounded-lg text-white">
+                          <div className="text-xs opacity-90 mb-1">PROCESSING</div>
+                          <div className="text-lg font-bold">5</div>
                         </div>
-                        <div className="text-lg font-bold">1</div>
                       </div>
-                      
-                      <div className="bg-gradient-to-br from-pink-500 to-pink-600 p-2.5 rounded-xl text-white">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-medium opacity-90">SUPPLIERS</span>
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                        </div>
-                        <div className="text-lg font-bold">4</div>
-                      </div>
-                    </div>
 
-                    {/* Main Content Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-                      {/* Active Consolidations */}
-                      <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-sm font-semibold text-blue-900 flex items-center">
-                            <Package className="mr-2 h-4 w-4" />
-                            Active Consolidations
-                          </h3>
+                      {/* Active Operations */}
+                      <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 mb-3">
+                        <div className="flex items-center mb-2">
+                          <GitMerge className="h-4 w-4 text-blue-600 mr-2" />
+                          <span className="text-sm font-semibold text-blue-800">Active Operations</span>
                         </div>
-                        
+                        <div className="bg-white p-2 rounded border">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="font-medium text-sm">Operation Alpha</span>
+                            <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded">In Progress</span>
+                          </div>
+                          <div className="text-xs text-gray-600 mb-1">Istanbul → New York</div>
+                          <div className="text-xs text-gray-500">Departure: Dec 15, 2024</div>
+                        </div>
+                      </div>
+
+                      {/* Recent Deliveries */}
+                      <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+                        <div className="flex items-center mb-2">
+                          <Ship className="h-4 w-4 text-green-600 mr-2" />
+                          <span className="text-sm font-semibold text-green-800">Recent Deliveries</span>
+                        </div>
                         <div className="space-y-2">
-                          <div className="bg-white p-2.5 rounded-lg border border-blue-200">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-blue-800 text-sm">phoenix-europe</span>
-                              <span className="px-2 py-0.5 text-xs bg-blue-100 text-blue-700 rounded-full">Planning</span>
+                          <div className="bg-white p-2 rounded border flex justify-between items-center">
+                            <div>
+                              <div className="font-medium text-xs">Project Beta</div>
+                              <div className="text-xs text-gray-500">Completed</div>
                             </div>
-                            <p className="text-xs text-gray-600 mb-1">istanbul → hamburg</p>
-                            <p className="text-xs text-gray-500">Departs: 28.12.2025</p>
-                            <div className="mt-1.5 grid grid-cols-2 gap-2 text-xs">
+                            <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">View →</span>
+                          </div>
+                          <div className="bg-white p-2 rounded border flex justify-between items-center">
+                            <div>
+                              <div className="font-medium text-xs">Project Gamma</div>
+                              <div className="text-xs text-gray-500">Completed</div>
+                            </div>
+                            <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">View →</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    // Desktop Dashboard
+                    <div className="bg-white text-gray-800 p-4">
+                      {/* Header with Navigation */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-6">
+                          <BundleistLogo size="sm" showText={true} />
+                          <div className="flex items-center space-x-1">
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-2">📊</span> Overview
+                            </button>
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-2">📋</span> Orders
+                            </button>
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-2">🔗</span> Operations
+                            </button>
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-2">🚢</span> Logistics
+                            </button>
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-2">👥</span> Partners
+                            </button>
+                            <button className="text-gray-600 hover:text-gray-800 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center">
+                              <span className="mr-2">💳</span> Finance
+                            </button>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <Bell className="h-5 w-5 text-gray-600" />
+                          <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-sm text-white font-medium">J</div>
+                          <span className="text-sm text-gray-700">Sign Out</span>
+                        </div>
+                      </div>
+
+                      {/* Welcome Section */}
+                      <div className="mb-4">
+                        <div className="flex items-center gap-3 mb-1">
+                          <h1 className="text-xl font-bold text-gray-900">Welcome back, John Smith</h1>
+                          <span className="bg-blue-500 text-white text-sm px-3 py-1 rounded-full font-medium">Pro</span>
+                        </div>
+                      </div>
+
+                      {/* Metric Cards */}
+                      <div className="grid grid-cols-5 gap-3 mb-6">
+                        <div className="bg-gradient-to-r from-emerald-400 to-emerald-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">REVENUE</div>
+                            <div className="text-xl font-bold">$124,680</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <DollarSign className="h-6 w-6" />
+                          </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-blue-400 to-blue-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">ORDERS</div>
+                            <div className="text-xl font-bold">387</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <Package className="h-6 w-6" />
+                          </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-purple-400 to-purple-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">PENDING</div>
+                            <div className="text-xl font-bold">12</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <Clock className="h-6 w-6" />
+                          </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-orange-400 to-orange-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">PROCESSING</div>
+                            <div className="text-xl font-bold">5</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <Activity className="h-6 w-6" />
+                          </div>
+                        </div>
+                        <div className="bg-gradient-to-r from-pink-400 to-pink-500 p-4 rounded-xl text-white relative overflow-hidden">
+                          <div className="relative z-10">
+                            <div className="text-xs opacity-90 mb-1 font-medium">PARTNERS</div>
+                            <div className="text-xl font-bold">24</div>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-20">
+                            <Users className="h-6 w-6" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Main Content Grid */}
+                      <div className="grid grid-cols-3 gap-4">
+                        {/* Active Operations */}
+                        <div className="bg-blue-50 p-3 rounded-xl border border-blue-200">
+                          <div className="flex items-center mb-2">
+                            <GitMerge className="h-4 w-4 text-blue-600 mr-2" />
+                            <span className="font-semibold text-blue-800 text-sm">Active Operations</span>
+                          </div>
+                          <div className="bg-white p-3 rounded-lg border border-blue-100">
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="font-semibold text-sm">Operation Alpha</span>
+                              <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">In Progress</span>
+                            </div>
+                            <div className="text-xs text-gray-600 mb-1">Istanbul → New York</div>
+                            <div className="text-xs text-gray-500 mb-2">Departure: Dec 15, 2024</div>
+                            <div className="grid grid-cols-2 gap-3 text-center text-xs">
                               <div>
-                                <span className="text-gray-500">Volume: </span>
-                                <span className="font-medium">58%</span>
+                                <div className="font-semibold">68.5%</div>
+                                <div className="text-gray-500">Progress</div>
                               </div>
                               <div>
-                                <span className="text-gray-500">Weight: </span>
-                                <span className="font-medium">62%</span>
+                                <div className="font-semibold">32.1%</div>
+                                <div className="text-gray-500">Load</div>
                               </div>
                             </div>
-                            <p className="text-xs text-gray-500 mt-1">Container: 40ft High Cube</p>
+                            <div className="text-xs text-gray-400 mt-1">Container: 40ft Standard</div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Orders Awaiting Consolidation */}
-                      <div className="bg-orange-50 rounded-lg p-3 border border-orange-100">
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-sm font-semibold text-orange-900 flex items-center">
-                            <TrendingUp className="mr-2 h-4 w-4" />
-                            Orders Awaiting
-                          </h3>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <div className="bg-white p-2.5 rounded-lg border border-orange-200">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-orange-800 text-sm">textile equipment</span>
-                              <span className="px-2 py-0.5 text-xs bg-orange-100 text-orange-700 rounded-full">Ready</span>
-                            </div>
-                            <p className="text-xs text-gray-600">Supplier: metro textiles</p>
-                            <p className="text-xs text-gray-500">Value: $32,400</p>
+                        {/* Pending Tasks */}
+                        <div className="bg-orange-50 p-3 rounded-xl border border-orange-200">
+                          <div className="flex items-center mb-2">
+                            <Clock className="h-4 w-4 text-orange-600 mr-2" />
+                            <span className="font-semibold text-orange-800 text-sm">Pending Tasks</span>
                           </div>
-                          
-                          <div className="bg-white p-2.5 rounded-lg border border-orange-200">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-orange-800 text-sm">furniture parts</span>
-                              <span className="px-2 py-0.5 text-xs bg-orange-100 text-orange-700 rounded-full">Ready</span>
+                          <div className="space-y-2">
+                            <div className="bg-white p-2 rounded-lg border border-orange-100">
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="font-semibold text-xs">Document Review</span>
+                                <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">Due Today</span>
+                              </div>
+                              <div className="text-xs text-gray-600">Project Beta Documentation</div>
                             </div>
-                            <p className="text-xs text-gray-600">Supplier: ankara furniture</p>
-                            <p className="text-xs text-gray-500">Value: $15,750</p>
+                            <div className="bg-white p-2 rounded-lg border border-orange-100">
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="font-semibold text-xs">Quality Check</span>
+                                <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">Urgent</span>
+                              </div>
+                              <div className="text-xs text-gray-600">Incoming Shipment #2847</div>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Your Shipments */}
-                      <div className="bg-emerald-50 rounded-lg p-3 border border-emerald-100">
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-sm font-semibold text-emerald-900 flex items-center">
-                            <Truck className="mr-2 h-4 w-4" />
-                            Your Shipments
-                          </h3>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <div className="bg-white p-2.5 rounded-lg border border-emerald-200">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-emerald-800 text-sm">Consolidation: atlas</span>
-                              <span className="px-2 py-0.5 text-xs bg-emerald-100 text-emerald-700 rounded-full">Delivered</span>
-                            </div>
-                            <p className="text-xs text-gray-600">Carrier: express logistics</p>
-                            <p className="text-xs text-gray-500">Delivered: 15.12.2025</p>
-                            <div className="mt-1 flex items-center space-x-4">
-                              <button className="text-xs text-emerald-600 hover:text-emerald-800">Track →</button>
-                            </div>
+                        {/* Recent Deliveries */}
+                        <div className="bg-green-50 p-3 rounded-xl border border-green-200">
+                          <div className="flex items-center mb-2">
+                            <Ship className="h-4 w-4 text-green-600 mr-2" />
+                            <span className="font-semibold text-green-800 text-sm">Recent Deliveries</span>
                           </div>
-                          
-                          <div className="bg-white p-2.5 rounded-lg border border-emerald-200">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-emerald-800 text-sm">Consolidation: mercury</span>
-                              <span className="px-2 py-0.5 text-xs bg-emerald-100 text-emerald-700 rounded-full">In Transit</span>
+                          <div className="space-y-2">
+                            <div className="bg-white p-2 rounded-lg border border-green-100">
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="font-semibold text-xs">Project Beta</span>
+                                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Delivered</span>
+                              </div>
+                              <div className="text-xs text-gray-600 mb-1">Carrier: FastShip Express</div>
+                              <div className="text-xs text-gray-500 mb-1">Completed: Dec 8, 2024</div>
+                              <div className="flex justify-between">
+                                <span className="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded">Track Details →</span>
+                                <span className="text-xs text-gray-600">Standard Service</span>
+                              </div>
                             </div>
-                            <p className="text-xs text-gray-600">Carrier: ocean freight</p>
-                            <p className="text-xs text-gray-500">Shipped: 22.12.2025</p>
-                            <div className="mt-1 flex items-center space-x-4">
-                              <button className="text-xs text-emerald-600 hover:text-emerald-800">Track →</button>
+                            <div className="bg-white p-2 rounded-lg border border-green-100">
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="font-semibold text-xs">Project Gamma</span>
+                                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Delivered</span>
+                              </div>
+                              <div className="text-xs text-gray-600 mb-1">Carrier: Global Logistics</div>
+                              <div className="text-xs text-gray-500 mb-1">Completed: Dec 5, 2024</div>
+                              <div className="flex justify-between">
+                                <span className="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded">Track Details →</span>
+                                <span className="text-xs text-gray-600">Express Service</span>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    {/* Live Activity */}
-                    <div className="bg-gray-50 rounded-lg p-2.5 border border-gray-200">
-                      <h3 className="text-xs font-semibold text-gray-900 mb-1.5 flex items-center">
-                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                        Live Activity
-                      </h3>
-                      <div className="text-xs text-gray-600 space-y-0.5">
-                        <p>• Payment processed for Order #INV-3521 - $18,650</p>
-                        <p>• New supplier inquiry from "istanbul ceramics"</p>
-                        <p>• Consolidation "phoenix-europe" capacity updated to 58%</p>
-                      </div>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>

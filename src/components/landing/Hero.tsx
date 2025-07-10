@@ -76,13 +76,13 @@ const Hero = () => {
             </Button>
           </div>
         
-          <div className={`mt-6 md:mt-8 relative mx-auto max-w-6xl transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+          <div className={`mt-6 md:mt-8 relative mx-auto max-w-5xl transition-all duration-1000 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
             <div className="relative overflow-hidden rounded-xl shadow-2xl border border-gray-200/50">
               <div className="bg-white p-0 rounded-xl">
                 {/* Modern Dashboard Design */}
                 <div className="bg-white text-slate-800">
                   {/* Top Navigation Bar */}
-                  <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-white">
+                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-white">
                     <div className="flex items-center space-x-6">
                       <BundleistLogo size="sm" showText={true} />
                       <nav className="hidden md:flex items-center space-x-1">
@@ -122,153 +122,153 @@ const Hero = () => {
                   </div>
 
                   {/* Welcome Section */}
-                  <div className="px-4 py-3 bg-gradient-to-r from-blue-50 to-indigo-50">
+                  <div className="px-4 py-2.5 bg-gradient-to-r from-blue-50 to-indigo-50">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h1 className="text-xl font-bold text-gray-900">Welcome, John Doe - Batch #A247</h1>
+                        <h1 className="text-lg font-bold text-gray-900">Welcome, John Doe - Batch #A247</h1>
                         <p className="text-gray-600 mt-0.5 text-sm">Here's what's happening with your shipments today.</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Stats Cards */}
-                  <div className="px-4 py-4">
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
-                      <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-xl text-white">
+                  <div className="px-4 py-3">
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
+                      <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-2.5 rounded-xl text-white">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs font-medium opacity-90">BALANCE</span>
                           <div className="w-2 h-2 bg-white rounded-full opacity-60"></div>
                         </div>
-                        <div className="text-xl font-bold">$125,340.50</div>
+                        <div className="text-lg font-bold">$145,340.50</div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-xl text-white">
+                      <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-2.5 rounded-xl text-white">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs font-medium opacity-90">SHIPMENTS</span>
                           <div className="w-2 h-2 bg-white rounded-full"></div>
                         </div>
-                        <div className="text-xl font-bold">2</div>
+                        <div className="text-lg font-bold">2</div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-3 rounded-xl text-white">
+                      <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-2.5 rounded-xl text-white">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs font-medium opacity-90">ORDERS IN PROGRESS</span>
                           <div className="w-2 h-2 bg-white rounded-full opacity-60"></div>
                         </div>
-                        <div className="text-xl font-bold">8</div>
+                        <div className="text-lg font-bold">6</div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-3 rounded-xl text-white">
+                      <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-2.5 rounded-xl text-white">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs font-medium opacity-90">ACTIVE CONSOLIDATIONS</span>
                           <div className="w-2 h-2 bg-white rounded-full opacity-60"></div>
                         </div>
-                        <div className="text-xl font-bold">1</div>
+                        <div className="text-lg font-bold">1</div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-pink-500 to-pink-600 p-3 rounded-xl text-white">
+                      <div className="bg-gradient-to-br from-pink-500 to-pink-600 p-2.5 rounded-xl text-white">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs font-medium opacity-90">SUPPLIERS</span>
                           <div className="w-2 h-2 bg-white rounded-full"></div>
                         </div>
-                        <div className="text-xl font-bold">6</div>
+                        <div className="text-lg font-bold">4</div>
                       </div>
                     </div>
 
                     {/* Main Content Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
                       {/* Active Consolidations */}
-                      <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
-                        <div className="flex items-center justify-between mb-3">
-                          <h3 className="text-base font-semibold text-blue-900 flex items-center">
+                      <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-sm font-semibold text-blue-900 flex items-center">
                             <Package className="mr-2 h-4 w-4" />
                             Active Consolidations
                           </h3>
                         </div>
                         
-                        <div className="space-y-3">
-                          <div className="bg-white p-3 rounded-lg border border-blue-200">
-                            <div className="flex items-center justify-between mb-2">
-                              <span className="font-medium text-blue-800">atlas-europe</span>
-                              <span className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded-full">Planning</span>
+                        <div className="space-y-2">
+                          <div className="bg-white p-2.5 rounded-lg border border-blue-200">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-medium text-blue-800 text-sm">phoenix-europe</span>
+                              <span className="px-2 py-0.5 text-xs bg-blue-100 text-blue-700 rounded-full">Planning</span>
                             </div>
-                            <p className="text-sm text-gray-600 mb-1">ist-hamburg</p>
-                            <p className="text-sm text-gray-500">Departs: 22.12.2025</p>
-                            <div className="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <p className="text-xs text-gray-600 mb-1">istanbul → hamburg</p>
+                            <p className="text-xs text-gray-500">Departs: 28.12.2025</p>
+                            <div className="mt-1.5 grid grid-cols-2 gap-2 text-xs">
                               <div>
                                 <span className="text-gray-500">Volume: </span>
-                                <span className="font-medium">42%</span>
+                                <span className="font-medium">58%</span>
                               </div>
                               <div>
                                 <span className="text-gray-500">Weight: </span>
-                                <span className="font-medium">38%</span>
+                                <span className="font-medium">62%</span>
                               </div>
                             </div>
-                            <p className="text-xs text-gray-500 mt-2">Container: 40ft High Cube</p>
+                            <p className="text-xs text-gray-500 mt-1">Container: 40ft High Cube</p>
                           </div>
                         </div>
                       </div>
 
                       {/* Orders Awaiting Consolidation */}
-                      <div className="bg-orange-50 rounded-lg p-4 border border-orange-100">
-                        <div className="flex items-center justify-between mb-3">
-                          <h3 className="text-base font-semibold text-orange-900 flex items-center">
+                      <div className="bg-orange-50 rounded-lg p-3 border border-orange-100">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-sm font-semibold text-orange-900 flex items-center">
                             <TrendingUp className="mr-2 h-4 w-4" />
                             Orders Awaiting
                           </h3>
                         </div>
                         
                         <div className="space-y-2">
-                          <div className="bg-white p-3 rounded-lg border border-orange-200">
+                          <div className="bg-white p-2.5 rounded-lg border border-orange-200">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-orange-800">industrial machinery</span>
-                              <span className="px-2 py-1 text-xs bg-orange-100 text-orange-700 rounded-full">Ready</span>
+                              <span className="font-medium text-orange-800 text-sm">textile equipment</span>
+                              <span className="px-2 py-0.5 text-xs bg-orange-100 text-orange-700 rounded-full">Ready</span>
                             </div>
-                            <p className="text-sm text-gray-600">Supplier: atlas manufacturing</p>
-                            <p className="text-sm text-gray-500">Value: $24,800</p>
+                            <p className="text-xs text-gray-600">Supplier: metro textiles</p>
+                            <p className="text-xs text-gray-500">Value: $32,400</p>
                           </div>
                           
-                          <div className="bg-white p-3 rounded-lg border border-orange-200">
+                          <div className="bg-white p-2.5 rounded-lg border border-orange-200">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-orange-800">automotive parts</span>
-                              <span className="px-2 py-1 text-xs bg-orange-100 text-orange-700 rounded-full">Ready</span>
+                              <span className="font-medium text-orange-800 text-sm">furniture parts</span>
+                              <span className="px-2 py-0.5 text-xs bg-orange-100 text-orange-700 rounded-full">Ready</span>
                             </div>
-                            <p className="text-sm text-gray-600">Supplier: euro automotive</p>
-                            <p className="text-sm text-gray-500">Value: $18,950</p>
+                            <p className="text-xs text-gray-600">Supplier: ankara furniture</p>
+                            <p className="text-xs text-gray-500">Value: $15,750</p>
                           </div>
                         </div>
                       </div>
 
                       {/* Your Shipments */}
-                      <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
-                        <div className="flex items-center justify-between mb-3">
-                          <h3 className="text-base font-semibold text-emerald-900 flex items-center">
+                      <div className="bg-emerald-50 rounded-lg p-3 border border-emerald-100">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-sm font-semibold text-emerald-900 flex items-center">
                             <Truck className="mr-2 h-4 w-4" />
                             Your Shipments
                           </h3>
                         </div>
                         
                         <div className="space-y-2">
-                          <div className="bg-white p-3 rounded-lg border border-emerald-200">
+                          <div className="bg-white p-2.5 rounded-lg border border-emerald-200">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-emerald-800">Consolidation: phoenix</span>
-                              <span className="px-2 py-1 text-xs bg-emerald-100 text-emerald-700 rounded-full">Delivered</span>
+                              <span className="font-medium text-emerald-800 text-sm">Consolidation: atlas</span>
+                              <span className="px-2 py-0.5 text-xs bg-emerald-100 text-emerald-700 rounded-full">Delivered</span>
                             </div>
-                            <p className="text-sm text-gray-600">Carrier: global express</p>
-                            <p className="text-sm text-gray-500">Shipped: 18.11.2025</p>
-                            <div className="mt-2 flex items-center space-x-4">
+                            <p className="text-xs text-gray-600">Carrier: express logistics</p>
+                            <p className="text-xs text-gray-500">Delivered: 15.12.2025</p>
+                            <div className="mt-1 flex items-center space-x-4">
                               <button className="text-xs text-emerald-600 hover:text-emerald-800">Track →</button>
                             </div>
                           </div>
                           
-                          <div className="bg-white p-3 rounded-lg border border-emerald-200">
+                          <div className="bg-white p-2.5 rounded-lg border border-emerald-200">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium text-emerald-800">Consolidation: delta</span>
-                              <span className="px-2 py-1 text-xs bg-emerald-100 text-emerald-700 rounded-full">In Transit</span>
+                              <span className="font-medium text-emerald-800 text-sm">Consolidation: mercury</span>
+                              <span className="px-2 py-0.5 text-xs bg-emerald-100 text-emerald-700 rounded-full">In Transit</span>
                             </div>
-                            <p className="text-sm text-gray-600">Carrier: maritime logistics</p>
-                            <p className="text-sm text-gray-500">Shipped: 05.12.2025</p>
-                            <div className="mt-2 flex items-center space-x-4">
+                            <p className="text-xs text-gray-600">Carrier: ocean freight</p>
+                            <p className="text-xs text-gray-500">Shipped: 22.12.2025</p>
+                            <div className="mt-1 flex items-center space-x-4">
                               <button className="text-xs text-emerald-600 hover:text-emerald-800">Track →</button>
                             </div>
                           </div>
@@ -277,15 +277,15 @@ const Hero = () => {
                     </div>
 
                     {/* Live Activity */}
-                    <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                      <h3 className="text-sm font-semibold text-gray-900 mb-2 flex items-center">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                    <div className="bg-gray-50 rounded-lg p-2.5 border border-gray-200">
+                      <h3 className="text-xs font-semibold text-gray-900 mb-1.5 flex items-center">
+                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 animate-pulse"></div>
                         Live Activity
                       </h3>
-                      <div className="text-xs text-gray-600 space-y-1">
-                        <p>• Payment processed for Order #INV-2847 - $12,450</p>
-                        <p>• New supplier inquiry from "premium textiles"</p>
-                        <p>• Consolidation "atlas-europe" capacity updated to 42%</p>
+                      <div className="text-xs text-gray-600 space-y-0.5">
+                        <p>• Payment processed for Order #INV-3521 - $18,650</p>
+                        <p>• New supplier inquiry from "istanbul ceramics"</p>
+                        <p>• Consolidation "phoenix-europe" capacity updated to 58%</p>
                       </div>
                     </div>
                   </div>
